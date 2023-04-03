@@ -1,0 +1,39 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Publish Docs
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: [ self-hosted, aks-gha-runners ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install and Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: gh-pages
+          folder: .vuepress/dist
+          token: ${{ secrets.GITHUB_PAGES_TOKEN }}
+
+
