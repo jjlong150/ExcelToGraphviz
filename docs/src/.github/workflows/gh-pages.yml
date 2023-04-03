@@ -3,14 +3,14 @@
 
 name: Publish Docs
 
-on:
+on: 
   push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
     - main
-
+    
 permissions:
   contents: write
 
@@ -34,4 +34,4 @@ jobs:
         with:
           branch: gh-pages
           folder: .vuepress/dist
-          token: ${{ secrets.GITHUB_PAGES_TOKEN }}
+          token: ${{ secrets.DEPLOYMENT_TOKEN }}
