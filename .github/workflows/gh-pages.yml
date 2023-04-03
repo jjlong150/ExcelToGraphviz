@@ -23,11 +23,11 @@ jobs:
           export NODE_OPTIONS=--openssl-legacy-provider
           npm ci
           npm run docs:build
-          ls /home/runner/work/ExcelToGraphviz/ExcelToGraphviz
+          ls -al /home/runner/work/ExcelToGraphviz/ExcelToGraphviz
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.DEPLOYMENT_TOKEN}}
           BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
