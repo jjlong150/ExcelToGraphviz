@@ -33,7 +33,7 @@ module.exports = {
   themeConfig: {
     repo: "",
     editLinks: false,
-    docsDir: "docs/src",
+    docsDir: "docs",
     editLinkText: "",
     lastUpdated: false,
     nav: [
