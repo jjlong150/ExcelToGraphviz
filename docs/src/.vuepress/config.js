@@ -6,7 +6,7 @@ module.exports = {
    */
   title: "Excel to Graphviz",
   description: "Excel to Graphviz Relationship Visualizer",
-  base: "/ExcelToGraphviz/docs/src/",
+  base: "/ExcelToGraphviz/docs/",
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
