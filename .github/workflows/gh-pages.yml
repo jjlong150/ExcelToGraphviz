@@ -22,10 +22,10 @@ jobs:
           export NODE_OPTIONS=--openssl-legacy-provider
           npm ci
           npm run docs:build
-          ls -al /home/runner/work/ExcelToGraphviz/ExcelToGraphviz/docs/.vuepress/dist
+          ls -al /home/runner/work/ExcelToGraphviz/ExcelToGraphviz/docs/.vuepress/dist/src
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           BRANCH: gh-pages
-          FOLDER: docs/.vuepress/dist
+          FOLDER: docs/.vuepress/dist/src
