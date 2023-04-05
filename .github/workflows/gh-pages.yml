@@ -1,4 +1,4 @@
-name: Build and Deploy 2
+name: Build and Deploy
 on:
   push:
     branches:
@@ -9,23 +9,17 @@ on:
 
 permissions:
   contents: write
-
+  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@master
 
-      - name: Install and Build 🔧
-        run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
-          npm ci
-          npm run docs:build
-          ls -al /home/runner/work/ExcelToGraphviz/ExcelToGraphviz/docs/.vuepress/dist/src
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          BRANCH: gh-pages
-          FOLDER: docs/.vuepress/dist/src
+    - name: Build and Deploy
+      uses: testthedocs/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
+        BUILD_DIR: test/build/ # The folder, the action should deploy.
+        BUILD_SCRIPT: npm install && npm run-script build # The build script the action should run prior to deploying.
