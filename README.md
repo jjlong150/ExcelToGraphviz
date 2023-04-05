@@ -27,8 +27,8 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
   </div>
 
   <div class="feature" id="terminology">
-    <h2><a href="./terminology">Visualization Terminology</a></h2>
-    <p>Graph Theory terminology used throughout this site</p>
+    <h2><a href="./terminology">Terminology</a></h2>
+    <p>Visualization terminology used throughout this site</p>
   </div>
 </div>
 
