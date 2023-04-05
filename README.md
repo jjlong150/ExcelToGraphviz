@@ -17,18 +17,32 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
   </div>
 
   <div class="feature" id="install-win">
-    <h2><a href="./install-win">Windows Installation</a></h2>
+    <h2><a href="./install-win">Installation</a></h2>
     <p>Instructions for installing prerequisite software on Microsoft Window</p>
-  </div>
-
-  <div class="feature" id="install-mac">
-    <h2><a href="./install-mac">Mac OS Installation</a></h2>
-    <p>Instructions for installing prerequisite software on Mac OS</p>
   </div>
 
   <div class="feature" id="terminology">
     <h2><a href="./terminology">Terminology</a></h2>
     <p>Visualization terminology used throughout this site</p>
   </div>
-</div>
 
+  <div class="feature" id="workbook">
+    <h2><a href="./workbook">Workbook Structure</a></h2>
+    <p>Descriptions of the spreadsheet features</p>
+  </div>
+
+  <div class="feature" id="first">
+    <h2><a href="./first">First Graph</a></h2>
+    <p>Creating your first graph</p>
+  </div>
+
+  <div class="feature" id="create">
+    <h2><a href="./create">Creating Graphviz Graphs</a></h2>
+    <p>Examples of how to create different Graphviz graphs</p>
+  </div>
+
+  <div class="feature" id="thirdparty">
+    <h2><a href="./thirdparty">Third-Party Notices</a></h2>
+    <p>Acknowledgement of other open source used in the creation of this spreadsheet</p>
+  </div>
+</div>

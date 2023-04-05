@@ -39,10 +39,10 @@ module.exports = {
     lastUpdated: false,
     nav: [
       { text: "Overview", link: "/overview/" },
-      { text: "Windows Install", link: "/install-win/" },
-      { text: "Mac OS Install", link: "/install-mac/" },
+      { text: "Installallation", link: "/install-win/" },
       { text: "Terminology", link: "/terminology/" },
-    ],
+      { text: "Notices", link: "/thirdparty/" },
+        ],
     lastUpdated: "Last Updated",
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
     editLinks: true,
