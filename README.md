@@ -64,6 +64,16 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>Customize overarching settings which control the workbook</p>
   </div>
 
+  <div class="feature" id="sql">
+    <h2><a href="./sql">Using SQL</a></h2>
+    <p>How to use SQL statements to fetch data from other spreadsheets</p>
+  </div>
+
+  <div class="feature" id="source">
+    <h2><a href="./source">Viewing DOT Source</a></h2>
+    <p>See the DOT source code created for generating the graph</p>
+  </div>
+
   <div class="feature" id="acknowledge">
     <h2><a href="./acknowledge">Acknowledgements</a></h2>
     <p>Copright, License, and Third-Party Notice information</p>
