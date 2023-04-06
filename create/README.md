@@ -50,7 +50,7 @@ Any time you save a copy of the spreadsheet using `File` -> `Save As` and change
 
 ## Graph Construction Basic Concepts
 
-### `data` Worksheet Columns
+### `'data'` Worksheet Columns
 
 For our first example, we will make the simplest graph possible with the tool. This graph will be a directed graph from a node named 'a' to a node named 'b'. To do so we must enter the edge information into the `data` Worksheet. The `data` Worksheet has 10 columns:
 

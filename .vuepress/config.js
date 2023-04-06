@@ -27,6 +27,15 @@ module.exports = {
   ],
 
   /**
+   * Display line numbers whenever code is dissplayed
+   *
+   * https://v1.vuepress.vuejs.org/guide/markdown.html#line-numbers
+   */
+  markdown: {
+    lineNumbers: true,
+  },
+
+  /**
    * Theme configuration, here is the default theme configuration for VuePress.
    *
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
@@ -43,13 +52,13 @@ module.exports = {
       { text: "Terminology", link: "/terminology/" },
       { text: "Notices", link: "/thirdparty/" },
     ],
-    lastUpdated: "Last Updated",
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
-    editLinks: true,
-    editLinkText: "Help us improve this page!",
     sidebar: "auto",
     logo: "/hero.png",
-    footer: "MIT Licensed | Copyright © 2017-2023 Jeffrey J. Long",
+    // default value is true. Set it to false to hide next page links on all pages
+    nextLinks: true,
+    // default value is true. Set it to false to hide prev page links on all pages
+    prevLinks: true,
   },
   head: [["link", { rel: "icon", href: "/favicon.ico" }]],
   plugins: [

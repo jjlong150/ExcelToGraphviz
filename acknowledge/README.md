@@ -1,8 +1,46 @@
-# Third-Party Notices #
+# Acknowledgements
 
-**Excel to Graphviz Relationship Visualizer** uses third-party libraries or other resources that may be distributed under licenses different than the one from this software. In the event that I accidentally failed to list a required notice, please bring it to my attention.
+## Copyright
 
-## Graphviz ##
+Copyright © 2015-2023, Jeffrey J. Long. All rights reserved.
+
+Written and published by **Jeffrey J. Long**
+
+Published at: <https://sourceforge.net/projects/relationship-visualizer/>
+
+Contact the author at [Relationship.Visualizer@gmail.com](mailto:Relationship.Visualizer@gmail.com)
+
+## License
+
+This program is free software; you can redistribute it and/or modify it under the terms of the [MIT License](https://github.com/jjlong150/ExcelToGraphviz/blob/main/LICENSE).
+
+**MIT LICENSE**
+
+Copyright (c) 2015-2023 Jeffrey Long
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Collaborators
+
+The author, Jeffrey Long, extends special thanks to:
+
+- Martin James - _Original Inspiration and mentor_
+- Kyle Tuft, Roland Chee, Matthias Roth, William Lee - _Ideas/suggestions_
+- Ron de Bruin - _Indispensable VBA tutorials on_ [_Excel Automation_](https://www.rondebruin.nl/index.htm)_, and_ [_Mac Excel Automation_](https://macexcel.com/)
+- Paul Kelly - [_Excel Macro Mastery_](https://www.youtube.com/user/KKWin31/about?app=desktop) _YouTube videos on how to improve VBA performance_
+- Arek Czak - _Polish language translations_
+- Bart Broodcoorens - _Provided idea and collaboration on SQL cluster/subcluster enhancements. Provided idea, JavaScript code, and collaboration for SVG post-processing_
+- Stack Overflow - _Provided solutions to so many problems_
+
+## Third-Party Notices
+
+**Excel to Graphviz Relationship Visualizer** uses third-party libraries or other resources that may be distributed under licenses different than the one from this software. In the event that I accidentally failed to list a required notice, [please bring it to my attention](mailto:relationship.visualizer@gmail.com).
+
+### Graphviz
 
 <http://www.graphviz.org>
 
@@ -14,7 +52,7 @@ Date: 26 February 2022
 
 License: Graphviz is free software licensed under the [Eclipse Public License (EPL) v1.0](https://graphviz.org/license/)
 
-## Shell and Wait ##
+### Shell and Wait
 
 [Shell and Wait](http://www.cpearson.com/excel/ShellAndWait.aspx)
 
@@ -26,7 +64,7 @@ Copyright © 2018, Charles H. Pearson
 
 License: All of the formulas and VBA code are explicitly granted to the Public Domain.
 
-## Brewer Color Schemes ##
+### Brewer Color Schemes
 
 Apache-Style Software License for ColorBrewer software and ColorBrewer Color Schemes, Version 1.1
 
@@ -37,7 +75,7 @@ Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The Pennsylvania State Uni
 
     The end-user documentation included with the redistribution, if any, must include the following acknowledgment:
 
-    *This product includes color specifications and designs developed by Cynthia Brewer (* [*http://colorbrewer.org/*](http://colorbrewer.org/) *).*
+    _This product includes color specifications and designs developed by Cynthia Brewer (_ [_http://colorbrewer.org/_](http://colorbrewer.org/) _)._
 
     Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments normally appear.
 
@@ -46,7 +84,7 @@ Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The Pennsylvania State Uni
 
     THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL CYNTHIA BREWER, MARK HARROWER, OR THE PENNSYLVANIA STATE UNIVERSITY BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-## VBA-JSON ##
+### VBA-JSON
 
 [VBA-JSON - Version: 2.3.1](https://github.com/VBA-tools/VBA-JSON/)
 
@@ -56,7 +94,7 @@ Copyright © 2016, Tim Hall
 
 License: VBA-JSON is free software licensed under the [MIT License](https://github.com/VBA-tools/VBA-JSON/blob/master/LICENSE)
 
-## VBA-Dictionary ##
+### VBA-Dictionary
 
 [VBA-Dictionary - Version: 1.4.1](https://github.com/VBA-tools/VBA-Dictionary)
 
@@ -66,7 +104,7 @@ Copyright © 2016, Tim Hall
 
 License: VBA-Dictionary is free software licensed under the [MIT License](https://github.com/VBA-tools/VBA-JSON/blob/master/LICENSE)
 
-## VBA Stopwatch ##
+### VBA Stopwatch
 
 [VBA Stopwatch](https://github.com/hubisan/excel-vba-stopwatch.cls)
 
@@ -76,7 +114,7 @@ Copyright © 2016, Daniel Hubmann
 
 License: VBA-Dictionary is free software licensed under the [MIT License](https://github.com/hubisan/excel-vba-stopwatch.cls/blob/master/LICENSE)
 
-## Office RibbonX Editor##
+### Office RibbonX Editor
 
 [Office RibbonX Editor - Version: 1.7.1 - 23 August 2020](https://github.com/fernandreu/office-ribbonx-editor)
 
@@ -86,7 +124,7 @@ Copyright © 2019-2020, Fernando Andreu
 
 Office RibbonX Editor is free software licensed under the [MIT License](https://github.com/VBA-tools/VBA-JSON/blob/master/LICENSE)
 
-## Rubberduck - Version: 2.5.0.5244 - 21 December 2019 ##
+### Rubberduck
 
 [Rubberduck - Version: 2.5.0.5244 - 21 December 2019](https://rubberduckvba.com/)
 

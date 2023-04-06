@@ -1,3 +1,9 @@
+---
+footer: Copyright (c) 2017-2023 Jeffrey J. Long
+prev: /
+next: /install-win/
+---
+
 # Overview
 
 ## Foreword
@@ -10,8 +16,8 @@
 
 Individuals often ask to be shown the "big picture", that broad, overall perspective of a problem or situation. So much so that related common clichés or adages have found their way into our vocabulary.
 
--   *"A picture is worth a thousand words"* refers to the notion that a complex idea can be conveyed with just a single still image. It also aptly characterizes one of the main goals of visualization, namely making it possible to absorb large amounts of data quickly.
--   *"He/she can't see the forest for the trees"* refers to the inability to discern an overall pattern from a mass of detail; or to see the broader, more general situation.
+- _"A picture is worth a thousand words"_ refers to the notion that a complex idea can be conveyed with just a single still image. It also aptly characterizes one of the main goals of visualization, namely making it possible to absorb large amounts of data quickly.
+- _"He/she can't see the forest for the trees"_ refers to the inability to discern an overall pattern from a mass of detail; or to see the broader, more general situation.
 
 If big picture views are so valued, then why are they so uncommon? The simple answer is that big picture views are hard to produce. Think of it this way, it is much easier to read a map than it is to draw a map. Often, we are drowning in volumes of data, and drawing diagrams is a difficult and time consuming task.
 
@@ -21,7 +27,7 @@ The Relationship Visualizer tool was inspired by the work of Martin F. James, an
 
 I hope you find this tool useful.
 
-*Jeff Long*
+_Jeff Long_
 
 [Relationship.Visualizer@gmail.com](mailto:Relationship.Visualizer@gmail.com)
 
@@ -33,9 +39,9 @@ It can be difficult to see the breadth of relationships because either the infor
 
 Let's look at a simple example. The states in the United States of America are related through the borders they share.
 
--   Michigan shares a border with Ohio, Indiana, and Wisconsin.
--   Wisconsin shares a border with Illinois, Iowa, Minnesota, and Michigan.
--   And so on…
+- Michigan shares a border with Ohio, Indiana, and Wisconsin.
+- Wisconsin shares a border with Illinois, Iowa, Minnesota, and Michigan.
+- And so on…
 
 In businesses throughout the world people like to step up to white boards and draw these relationships as shape and lines because it is simple to represent the concept, and as the old adages says "a picture is worth a thousand words". Using the examples above, the pictures of the border relationships described above is graphed as follows:
 
@@ -74,39 +80,3 @@ By releasing the mental paradigm of where shape and line placements should occur
 The Relationship Visualizer is not primarily an interactive tool. Given very high-level instructions, it will draw the relationship diagrams for you, considering all the low-level details such as the optimal placement of shapes and the lines that connect them. Though you have a large choice of customization options and can control the final output in many ways, it is not at all easy to force DOT to produce exactly what you want, down to the pixel. If you want to control every single pixel in your diagram, or if you are an artistic person who likes to draw free hand, then this tool is not for you.
 
 This tool is intended for the person who wants the visualization performed with the minimum effort and without caring too much about the details of how the diagram was produced.
-
-## Copyright ##
-
-Copyright © 2015-2023, Jeffrey J. Long. All rights reserved.
-
-Written and published by **Jeffrey J. Long**
-
-Published at: <https://sourceforge.net/projects/relationship-visualizer/>
-
-Contact the author at [Relationship.Visualizer@gmail.com](mailto:Relationship.Visualizer@gmail.com)
-
-## License ##
-
-This program is free software; you can redistribute it and/or modify it under the terms of the [MIT License](https://github.com/jjlong150/ExcelToGraphviz/blob/main/LICENSE).
-
-**MIT LICENSE**
-
-Copyright (c) 2015-2023 Jeffrey Long
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-## Acknowledgements ##
-
-Special thanks extended to:
--   Martin James - *Original Inspiration and mentor*
--   Kyle Tuft, Roland Chee, Matthias Roth, William Lee - *Ideas/suggestions*
--   Ron de Bruin - *Indispensable VBA tutorials on* [*Excel Automation*](https://www.rondebruin.nl/index.htm)*, and* [*Mac Excel Automation*](https://macexcel.com/)
--   Paul Kelly - [*Excel Macro Mastery*](https://www.youtube.com/user/KKWin31/about?app=desktop) *YouTube videos on how to improve VBA performance*
--   Arek Czak - *Polish language translations*
--   Bart Broodcoorens - *Provided idea and collaboration on SQL cluster/subcluster enhancements. Provided idea, JavaScript code, and collaboration for SVG post-processing*
--   Stack Overflow - *solutions to so many problems*
-
