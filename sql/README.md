@@ -129,7 +129,6 @@ The first SQL statement on row 2 selects the column "ISO" to represent the Item 
 The SQL is written as follows:
 
 ```sql
-
 SELECT [ISO]       as [Item],
        [ISO]       as [Label],
        [Country]   as [External Label],
@@ -137,7 +136,6 @@ SELECT [ISO]       as [Item],
 FROM  [countries\$]
 WHERE [ISO] IS NOT NULL
 ORDER BY [Country] ASC
-
 ```
 
 The second SQL statement on row 3 will extract the 7 seven unique continent names from the list of countries by using the DISTINCT clause. The continent name will be used as the Item ID as well as the node label. A style name of "Continent" will be used for all the rows.
@@ -145,14 +143,11 @@ The second SQL statement on row 3 will extract the 7 seven unique continent name
 The SQL is written as follows:
 
 ```sql
-
 SELECT DISTINCT [Continent] as [Item],
                 [Continent] as [Label],
                 'Continent' as [Style Name]
 FROM [countries\$]
 ORDER BY [Continent]
-
-
 ```
 
 The third SQL statement on row 4 creates edge relationship rows by selecting the ISO value as the Item ID, and the "Neighbors" column as the `Related Item` value. The "Neighbors" column in the source worksheet contains comma-delimited ISO values which are neighboring countries to that row. The Relationship Visualizer has built-in logic to expand the comma-delimited list into multiple relationships. No style name is provided, so the default edge style will be used. Note that on the WHERE clause the directive "IS NOT NULL" has been added. This clause causes the query to skip rows with empty cells, as there are no values with which to express relationships.
@@ -160,12 +155,10 @@ The third SQL statement on row 4 creates edge relationship rows by selecting the
 The SQL is written as follows:
 
 ```sql
-
 SELECT [ISO]       as [Item],
        [Neighbors] as [Related Item]
 FROM   [countries\$]
 WHERE [Neighbors] IS NOT NULL
-
 ```
 
 The fourth SQL statement on row 5 is used to group countries by continent. It creates edge relationships by placing the Continent name as the Item ID, and the ISO country code in the `Related Item` column. The style name is specified as "ContinentToCountry".
@@ -173,13 +166,11 @@ The fourth SQL statement on row 5 is used to group countries by continent. It cr
 The SQL is written as follows:
 
 ```sql
-
 SELECT [Continent]          as [Item],
        [ISO]                as [Related Item],
        'ContinentToCountry' as [Style Name]
 FROM [countries\$]
 WHERE [ISO] IS NOT NULL
-
 ```
 
 Each of these queries have to specify the name of the workbook against which the SQL is to run. This information is contained in column C. There are three ways the file name may be specified.
