@@ -25,7 +25,7 @@ jobs:
           npm run build
           ls -al /home/runner/work/ExcelToGraphviz/ExcelToGraphviz/.vuepress/dist
 
-      - name: Deploy 🚀
+      - name: Deploy  🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           BRANCH: gh-pages
