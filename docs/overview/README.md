@@ -1,7 +1,7 @@
 ---
 footer: Copyright (c) 2017-2023 Jeffrey J. Long
 prev: /
-next: /install-win/
+next: /install/
 ---
 
 # Overview
@@ -77,6 +77,6 @@ By releasing the mental paradigm of where shape and line placements should occur
 
 ## Caveats
 
-The Relationship Visualizer is not primarily an interactive tool. Given very high-level instructions, it will draw the relationship diagrams for you, considering all the low-level details such as the optimal placement of shapes and the lines that connect them. Though you have a large choice of customization options and can control the final output in many ways, it is not at all easy to force DOT to produce exactly what you want, down to the pixel. If you want to control every single pixel in your diagram, or if you are an artistic person who likes to draw free hand, then this tool is not for you.
+Given very high-level instructions, the Relationship Visualizer will draw graphs for you, considering all the low-level details such as the optimal placement of shapes and the lines that connect them. Though you have a large choice of customization options and can control the final output in many ways, it is not at all easy to force DOT to produce exactly what you want, down to the pixel. If you want to control every single pixel in your diagram, or if you are an artistic person who likes to draw free hand, then this tool is not for you.
 
 This tool is intended for the person who wants the visualization performed with the minimum effort and without caring too much about the details of how the diagram was produced.

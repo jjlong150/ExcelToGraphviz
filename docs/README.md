@@ -7,7 +7,7 @@ actionText: Get Started →
 actionLink: /overview/
 footer: MIT License - Copyright (c) 2017-2023 Jeffrey J. Long
 prev: false
-next: /install-win/
+next: /install/
 ---
 
 ::: warning 🚧👷👷‍♀️ Under Construction
@@ -60,8 +60,8 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
   </div>
 
   <div class="feature" id="settings">
-    <h2><a href="./settings">Changing Master Settings</a></h2>
-    <p>Customize overarching settings which control the workbook</p>
+    <h2><a href="./settings">Workbook Settings</a></h2>
+    <p>Customize the overall settings which control the workbook</p>
   </div>
 
   <div class="feature" id="sql">
