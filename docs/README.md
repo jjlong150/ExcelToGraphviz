@@ -59,14 +59,9 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>How to get started creating Graphviz graphs</p>
   </div>
 
-  <div class="feature" id="settings">
-    <h2><a href="./settings">Workbook Settings</a></h2>
-    <p>Customize the overall settings which control the workbook</p>
-  </div>
-
-  <div class="feature" id="sql">
-    <h2><a href="./sql">Using SQL</a></h2>
-    <p>How to use SQL statements to fetch data from other spreadsheets</p>
+  <div class="feature" id="advanced">
+    <h2><a href="./advanced">Advanced Topics</a></h2>
+    <p>Features and tips for creating more elaborate graphs</p>
   </div>
 
   <div class="feature" id="source">
@@ -74,13 +69,23 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>See the DOT source code created for generating the graph</p>
   </div>
 
+  <div class="feature" id="sql">
+    <h2><a href="./sql">Using SQL</a></h2>
+    <p>How to use SQL statements to fetch data from other spreadsheets</p>
+  </div>
+
   <div class="feature" id="exchange">
     <h2><a href="./exchange">Exchanging Data</a></h2>
     <p>Export and Import text-based workbook contents for source control or sharing</p>
   </div>
 
+  <div class="feature" id="settings">
+    <h2><a href="./settings">Workbook Settings</a></h2>
+    <p>Customize the overall settings which control the workbook</p>
+  </div>
+
   <div class="feature" id="acknowledge">
     <h2><a href="./acknowledge">Acknowledgements</a></h2>
-    <p>Copright, License, and Third-Party Notice information</p>
+    <p>Thank You, and Third-Party Notice information</p>
   </div>
 </div>
