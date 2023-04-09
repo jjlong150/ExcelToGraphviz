@@ -47,10 +47,7 @@ module.exports = {
     editLinkText: "",
     lastUpdated: false,
     nav: [
-      { text: "Overview", link: "/overview/" },
-      { text: "Installallation", link: "/install-win/" },
-      { text: "Terminology", link: "/terminology/" },
-      { text: "Notices", link: "/thirdparty/" },
+      { text: "About...", link: "/about/" },
     ],
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
     sidebar: "auto",
