@@ -59,6 +59,11 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>How to get started creating Graphviz graphs</p>
   </div>
 
+  <div class="feature" id="tutorial">
+    <h2><a href="./tutorial">Visualizing Relationships</a></h2>
+    <p>Depict relationships and add meaningful elements of style</p>
+  </div>
+
   <div class="feature" id="advanced">
     <h2><a href="./advanced">Advanced Topics</a></h2>
     <p>Features and tips for creating more elaborate graphs</p>
