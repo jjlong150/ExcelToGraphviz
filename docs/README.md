@@ -64,9 +64,14 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>Depict relationships and add meaningful elements of style</p>
   </div>
 
+  <div class="feature" id="publish">
+    <h2><a href="./publish">Publishing Graphs</a></h2>
+    <p>How to save graphs as stand-alone files</p>
+  </div>
+
   <div class="feature" id="advanced">
     <h2><a href="./advanced">Advanced Topics</a></h2>
-    <p>Features and tips for creating more elaborate graphs</p>
+    <p>Graphviz features and tips for creating more elaborate graphs</p>
   </div>
 
   <div class="feature" id="source">
