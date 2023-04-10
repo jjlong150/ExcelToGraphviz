@@ -2,7 +2,7 @@
 home: true
 heroText: Excel to Graphviz
 heroImage: /hero.png
-tagline: See the Relationships
+tagline:
 actionText: Get Started →
 actionLink: /overview/
 footer: MIT License - Copyright (c) 2017-2023 Jeffrey J. Long
@@ -16,7 +16,7 @@ This [site](https://jjlong150.github.io/ExcelToGraphviz/) is **under constructio
 
 :::
 
-The **Relationship Visualizer** is a macro-enabled **Microsoft Excel** spreadsheet that facilitates the collection of relationship information. It works in conjunction with **Graphviz**, which is open-source graph visualization software. Graphviz's strength is the ability to generate diagrams programmatically. To fulfill this aim, Graphviz uses a simple but powerful graph description language known as DOT.
+The **Relationship Visualizer** is a macro-enabled **Microsoft Excel** spreadsheet that facilitates the collection of relationship information. It works in conjunction with **Graphviz**, which is open-source graph visualization software. Graphviz's strength is the ability to generate diagrams programmatically. To fulfill this aim, Graphviz uses a simple but powerful graph description language known as **DOT**.
 
 The Relationship Visualizer removes much of the burden of understanding the DOT language. It allows you to express relationships through text in Excel rows and columns. Macros in the spreadsheet write the row and column data in DOT format into a text file, and then invoke Graphviz to read the text file and interpret the commands to create the graph. The resulting Graph is then displayed within Excel.
 
@@ -64,6 +64,11 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>Depict relationships and add meaningful elements of style</p>
   </div>
 
+  <div class="feature" id="views">
+    <h2><a href="./views">Creating Views</a></h2>
+    <p>Graph different views from a common data set</p>
+  </div>
+
   <div class="feature" id="publish">
     <h2><a href="./publish">Publishing Graphs</a></h2>
     <p>How to save graphs as stand-alone files</p>
@@ -96,6 +101,6 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
 
   <div class="feature" id="acknowledge">
     <h2><a href="./acknowledge">Acknowledgements</a></h2>
-    <p>Thank You, and Third-Party Notice information</p>
+    <p>Gratitude and Third-Party Notice information</p>
   </div>
 </div>
