@@ -10,11 +10,13 @@ prev: false
 next: /install/
 ---
 
+<!--
 ::: warning 🚧👷👷‍♀️ Under Construction
 
 This [site](https://jjlong150.github.io/ExcelToGraphviz/) is **under construction** and is not production-ready. Expect errors and frequent change.
 
 :::
+-->
 
 The **Relationship Visualizer** is a macro-enabled **Microsoft Excel** spreadsheet that facilitates the collection of relationship information. It works in conjunction with **Graphviz**, which is open-source graph visualization software. Graphviz's strength is the ability to generate diagrams programmatically. To fulfill this aim, Graphviz uses a simple but powerful graph description language known as **DOT**.
 

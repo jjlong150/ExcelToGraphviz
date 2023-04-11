@@ -30,15 +30,16 @@ Pressing `Refresh Graph` produces the following graph:
 ![](../media/b7ac4f8c715385f1c64c2c7af465f0b0.png)
 
 A slightly more complex example is to create a HTML table. In this example, the table contains one row with two cells:
-`
-<<table>
 
+```
+<<table>
   <tr>
     <td>Cell 1</td>
     <td>Cell 2</td>
   </tr>
 </table>>
-`
+```
+
 Using it to represent a node named 'c', the 'data' worksheet appears as:
 
 ![](../media/ebaeb3c116a73f90e8e7d94927e0341c.png)
