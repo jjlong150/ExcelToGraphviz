@@ -1,6 +1,11 @@
+---
+prev: /install/
+next: /workbook/
+---
+
 # Visualization Terminology
 
-In mathematics and computer science, *graph theory* is the study of graphs, which are mathematical structures used to model pairwise relations between objects.
+In mathematics and computer science, _graph theory_ is the study of graphs, which are mathematical structures used to model pairwise relations between objects.
 
 The terms described in this chapter are used throughout the rest of this manual to explain how to construct visualizations. These terms have their roots in graph theory and/or the Graphviz tool.
 
@@ -146,7 +151,7 @@ circular layout, after Six and Tollis 99, Kauffman and Wiese 02. This is suitabl
 
 ### osage
 
-The *osage* layout algorithm is for large undirected graphed with multiple subgraphs. It separates the graph into "levels" (clusters) and lays out each level in a rectangle. The rectangles are then packed together. Within each rectangle, the subgraph/cluster is laid out.
+The _osage_ layout algorithm is for large undirected graphed with multiple subgraphs. It separates the graph into "levels" (clusters) and lays out each level in a rectangle. The rectangles are then packed together. Within each rectangle, the subgraph/cluster is laid out.
 
 ![](../media/66804945ad6e5a0df74965c2cac96fdc.png)
 
@@ -158,7 +163,7 @@ The patchwork layout engine draws the graph as a squarified treemap. The cluster
 
 ### sfdp
 
-Multiscale version of *fdp* for the layout of large graphs.
+Multiscale version of _fdp_ for the layout of large graphs.
 
 ![](../media/546176879a8673a33c1cc29038dc53ec.png)
 
@@ -167,8 +172,3 @@ Multiscale version of *fdp* for the layout of large graphs.
 Radial layouts, after Graham Wills 97. Nodes are placed on concentric circles depending their distance from a given root node.
 
 ![](../media/8dff9fd7bf86eadcdbb3c4c4854085c6.png)
-
-
-
-
-

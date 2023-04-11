@@ -1,3 +1,8 @@
+---
+prev: /settings/
+next: /about/
+---
+
 # Acknowledgements
 
 ## Thank You

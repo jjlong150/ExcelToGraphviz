@@ -39,9 +39,9 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
     <p>Foreward and Introduction</p>
   </div>
 
-  <div class="feature" id="install-win">
-    <h2><a href="./install-win">Installation Instructions</a></h2>
-    <p>Instructions for installing prerequisite software on Microsoft Windows</p>
+  <div class="feature" id="install">
+    <h2><a href="./install">Installation Instructions</a></h2>
+    <p>Instructions for installing on Microsoft Windows or Mac OS</p>
   </div>
 
   <div class="feature" id="terminology">

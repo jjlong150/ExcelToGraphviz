@@ -1,3 +1,8 @@
+---
+prev: /advanced/
+next: /sql/
+---
+
 # Viewing DOT Source Code
 
 The Relationship Visualizer is intended to remove the need to learn the DOT language but still create Graphviz graphs. It can, however, also be a very useful tool for learning the DOT language. This chapter will explain how you can access the DOT source code which is generated from the Excel worksheets and passed to the Graphviz layout engine. These capabilities allow you to graph relationships, and then see the underlying code.
@@ -8,8 +13,8 @@ The Relationship Visualizer contains a worksheet named `source` which shows the 
 
 The `source` worksheet is hidden by default. To expose the `source` worksheet select the `source` button on the `Graphviz` tab.
 
-|![](../media/af15bb34ce96ea2061d42285932815f5.png)|
-|--------------------------------------------------|
+| ![](../media/af15bb34ce96ea2061d42285932815f5.png) |
+| -------------------------------------------------- |
 
 Click on the `source` worksheet to make it the active worksheet. The `Source` ribbon tab is activated whenever the `source` worksheet is activated. It appears as follows:
 
@@ -25,13 +30,12 @@ When we switch back to the `source` worksheet the Graphviz source code appears a
 
 ![](../media/b95bc3f5809944b487ffc7c3ebbef11c.png)
 
-
 ## The `Source` Ribbon Tab
 
 Now that you understand the basics of viewing Graphviz source code, let us look at the features contained in the `Source` ribbon tab. The `Source` ribbon tab is activated whenever the `source` worksheet is activated. It appears as follows:
 
-|![](../media/1dcb8a6d93d84489ad64bbeae5ddee23.png)|
-|--------------------------------------------------|
+| ![](../media/1dcb8a6d93d84489ad64bbeae5ddee23.png) |
+| -------------------------------------------------- |
 
 It contains the following major groups:
 
@@ -42,15 +46,15 @@ It contains the following major groups:
 
 ### Source
 
-|![](../media/718e638165569029a2834528313ca6d0.png)|
-|--------------------------------------------------|
+| ![](../media/718e638165569029a2834528313ca6d0.png) |
+| -------------------------------------------------- |
 
-| Label       | Control Type  | Description                                                                                                                                                                                              |
-| ----------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Save Source | Button        | Saves the Graphviz source code displayed on the `source` worksheet to a file.                                                                                                                            |
+| Label       | Control Type  | Description                                                                                                                                                                                                                        |
+| ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Save Source | Button        | Saves the Graphviz source code displayed on the `source` worksheet to a file.                                                                                                                                                      |
 | Create      | Button        | Creates the Graphviz source code from the information in the `data` worksheet without invoking Graphviz to render a graph. This action is useful if you have modified the DOT source and want to restore it to its original state. |
-| Reset       | Button        | Clears all data on the source worksheet, but leaves the headings.                                                                                                                                        |
-| Indent      | Dropdown List | Number of spaces equaling a tab indentation                                                                                                                                                              |
+| Reset       | Button        | Clears all data on the source worksheet, but leaves the headings.                                                                                                                                                                  |
+| Indent      | Dropdown List | Number of spaces equaling a tab indentation                                                                                                                                                                                        |
 
 ### Clipboard
 
@@ -75,7 +79,7 @@ It contains the following major groups:
 | Graph to File      | Button       | Graphs the Graphviz data on the source worksheet using the settings on the `Graphviz` ribbon tab and writes the graph to a file. All the restrictions noted for the `Refresh Graph` button apply to this action as well.                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ::: tip
-You can modify the DOT source code on this worksheet, and update the graph using the visualize buttons. 
+You can modify the DOT source code on this worksheet, and update the graph using the visualize buttons.
 :::
 
 ::: warning
@@ -84,30 +88,30 @@ Changes to the DOT source code are not reflected on the `data` worksheet. Any ch
 
 ### Web Resources
 
-| ![](../media/272fb95bc3d8bd18ff2b2298723f6589.png)  |
-|   -------------------------------------------------- |
+| ![](../media/272fb95bc3d8bd18ff2b2298723f6589.png) |
+| -------------------------------------------------- |
 
-The `Web Resources` group dynamically supports six buttons which can launch the user's default browser and display a web page. Button text, tool tips, and the URL are specified in the `settings` worksheet. The worksheet as distributed contains links to Graphviz documentation and online Graphviz rendering tools. 
+The `Web Resources` group dynamically supports six buttons which can launch the user's default browser and display a web page. Button text, tool tips, and the URL are specified in the `settings` worksheet. The worksheet as distributed contains links to Graphviz documentation and online Graphviz rendering tools.
 
 The default settings are:
 
-| # | Label            | Control Type | Description                                                                                                                                             |
-|-| ---------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|1| [Graphviz Attributes](https://graphviz.org/doc/info/attrs.html)   | Button       | Describes the attributes used by various Graphviz tools. |
-|2| [Pocket Reference](http://graphs.grevian.org/graph) | Button       | An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.                                                          |
-|3| [Graphviz Online](http://dreampuf.github.io/GraphvizOnline/) | Button       | Online Graphviz editor with syntax highlighting.                                                                                                        |
-|4| [Sketchviz](https://sketchviz.com/new)| Button       | Online Graphviz editor which creates the graph as if it were sketched by hand. 
-|5| [Graphviz Fiddle](http://stamm-wilbrandt.de/GraphvizFiddle/)   | Button       | Graphviz Fiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt. |
-|6| [Dot to Ascii](https://dot-to-ascii.ggerganov.com/)   | Button       | Renders Graphviz diagrams as ascii art.|
+| #   | Label                                                           | Control Type | Description                                                                                                                                             |
+| --- | --------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | [Graphviz Attributes](https://graphviz.org/doc/info/attrs.html) | Button       | Describes the attributes used by various Graphviz tools.                                                                                                |
+| 2   | [Pocket Reference](http://graphs.grevian.org/graph)             | Button       | An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.                                                          |
+| 3   | [Graphviz Online](http://dreampuf.github.io/GraphvizOnline/)    | Button       | Online Graphviz editor with syntax highlighting.                                                                                                        |
+| 4   | [Sketchviz](https://sketchviz.com/new)                          | Button       | Online Graphviz editor which creates the graph as if it were sketched by hand.                                                                          |
+| 5   | [Graphviz Fiddle](http://stamm-wilbrandt.de/GraphvizFiddle/)    | Button       | Graphviz Fiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt. |
+| 6   | [Dot to Ascii](https://dot-to-ascii.ggerganov.com/)             | Button       | Renders Graphviz diagrams as ascii art.                                                                                                                 |
 
 The values associated with these buttons can be changed to suit your own preferences. These links are located in the `settings` worksheet in the `Ribbon Options` location, in the `Source` tab
 
 | ![](../media/0b68f0d48b59aaabb0bc2f22bbd08195.png) |
-|   -------------------------------------------------- |
+| -------------------------------------------------- |
 
 ## Interactive Graphviz over the Internet
 
-There are many public web sites which will allow you to interactively edit DOT code in a browser window and see the corresponding graph. 
+There are many public web sites which will allow you to interactively edit DOT code in a browser window and see the corresponding graph.
 
 Sites you can explore include:
 

@@ -1,3 +1,8 @@
+---
+prev: /source/
+next: /exchange/
+---
+
 # Using SQL to Import Data from other Excel Spreadsheets
 
 Have you ever wished that you could graph data that resides in some other spreadsheet? Do you have spreadsheets which change frequently, and thus need frequent re-graphing? The Relationship Visualizer provides a powerful solution which lets you write Structured Query Language (SQL) statements which can pull in your data from other worksheets in an easily repeatable manner.

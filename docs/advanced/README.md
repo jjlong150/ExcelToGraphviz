@@ -1,3 +1,8 @@
+---
+prev: /publish/
+next: /source/
+---
+
 # Advanced Topics
 
 This section describes several miscellaneous features in the Relationship Visualizer that can be used to create more elaborate graphs.
@@ -6,11 +11,11 @@ This section describes several miscellaneous features in the Relationship Visual
 
 Graphviz has a feature where if the value of a label attribute for nodes, edges, clusters, or graphs is given as an HTML string that is delimited by `<`...`>`, the label is interpreted as an HTML description. At their simplest, such labels can describe multiple lines of variously aligned text as provided by ordinary string labels. More generally, the label can specify a table like those provided by HTML, with different graphical attributes at each level.
 
-The features and syntax supported by these labels are modeled on HTML. However, there are many aspects that are relevant to Graphviz labels that are not in HTML and, conversely, HTML allows various constructs which are meaningless in Graphviz. The Graphviz creators generally refer to these labels as `HTML-Like Labels` but the reader is warned that these labels are not HTML. 
+The features and syntax supported by these labels are modeled on HTML. However, there are many aspects that are relevant to Graphviz labels that are not in HTML and, conversely, HTML allows various constructs which are meaningless in Graphviz. The Graphviz creators generally refer to these labels as `HTML-Like Labels` but the reader is warned that these labels are not HTML.
 
 The grammar which Graphviz will accept is fully described at: [https://www.graphviz.org/doc/info/shapes.html\#html](https://www.graphviz.org/doc/info/shapes.html#html)
 
-A basic HTML label can be constructed as text between `<font>` and `</font>` elements, then wrapped in the `<` and `>` delimiters as described above. 
+A basic HTML label can be constructed as text between `<font>` and `</font>` elements, then wrapped in the `<` and `>` delimiters as described above.
 
 For example, a label can be constructed as:
 
@@ -27,6 +32,7 @@ Pressing `Refresh Graph` produces the following graph:
 A slightly more complex example is to create a HTML table. In this example, the table contains one row with two cells:
 `
 <<table>
+
   <tr>
     <td>Cell 1</td>
     <td>Cell 2</td>
@@ -59,7 +65,7 @@ Graphviz has a built-in behavior where if a default attribute is defined using a
 
 The Relationship Visualizer also supports this capability by reserving the values "graph", "node", and "edge" as keywords in the `Item` column of the 'data' worksheet. Appropriate syntax statements are added to the DOT source code to put the styles defined by the values in the `Style Name` and `Attributes` columns into effect (when these columns are enabled on the 'settings' worksheet) when these keywords are detected.
 
-In the following example, nodes have been defined with an Item ID of 'a' through 'h". On row 5 a *node* statement has been placed with an `Attributes` definition which changes the font color to red (the node statement has conditional formatting which changes the cell background color and changes the font to bold italic to differentiate the keyword from ordinary data). All nodes from that point forward are rendered with a red font. This continues until a second *node* statement is encountered on row 10 that resets the font color to a null string, which tells Graphviz to resume using the default value.
+In the following example, nodes have been defined with an Item ID of 'a' through 'h". On row 5 a _node_ statement has been placed with an `Attributes` definition which changes the font color to red (the node statement has conditional formatting which changes the cell background color and changes the font to bold italic to differentiate the keyword from ordinary data). All nodes from that point forward are rendered with a red font. This continues until a second _node_ statement is encountered on row 10 that resets the font color to a null string, which tells Graphviz to resume using the default value.
 
 ![](../media/4ef7e7631be4d525a4d28f8871d927b7.png)
 
@@ -89,9 +95,9 @@ Let's reproduce the diagram below which can be found at: <http://stackoverflow.c
 
 Let's start by putting the 'graph', 'node' and 'edge' keyword features described in the previous section into a tangible example. In rows 4-6 below each keyword is specified along with style formatting for each object. These statements are not required to connect clusters, but are illustrative of the keyword feature which was just described, and will help visually distinguish elements of the graph. For graphs, nodes, and edges set the `Attributes` cells with the following formatting information:
 
--   *Graph*: fontname="Arial" fontsize="12" fontcolor="red"
--   *Node*: fontname="Arial"
--   *Edge*: fontname="Arial" fontsize="8" decorate="true" color="blue"
+- _Graph_: fontname="Arial" fontsize="12" fontcolor="red"
+- _Node_: fontname="Arial"
+- _Edge_: fontname="Arial" fontsize="8" decorate="true" color="blue"
 
 The spreadsheet should look as follows:
 
@@ -154,7 +160,7 @@ This graph is almost the same as the graph from the Internet we are trying to du
 Press the `Refresh Graph` button and the graph now appears as the graph on the left; the graph we are duplicating is on the right:
 
 | ![](../media/946dada8e36d723484e4a444f081507a.png) Generated by Relationship Visualizer | ![enter image description here](../media/38bac697f7b7f2cc647c1bd17a12298e.png) <http://i.stack.imgur.com/Ka0t2.png> |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 
 The graph was purposely left with blue edges and a slightly smaller font size to differentiate it enough from the target graph to show it was not the original image but kept similar enough to show the goal was met.
 
@@ -240,13 +246,13 @@ shape="polygon" regular="Yes"
 
 **Polygon Skew** - Positive values skew top of polygon to right; negative values skew the top of the polygon to the left.
 
-*Positive Skew*
+_Positive Skew_
 
 ![](../media/6e7d19776d7acf3824922dd1fa3743cd.png) ![](../media/dc4cfbe9033894c44f26b7011d5ccdc4.png)
 
 shape="polygon" skew="1" regular="No"
 
-*Negative Skew*
+_Negative Skew_
 
 ![](../media/c4b344b1b54c83a2fe2ebdd5b57ccb77.png) ![](../media/1bc5be00cf87ddb3b4899d29550a465e.png)
 
@@ -254,13 +260,13 @@ shape="polygon" skew="-1" regular="No"
 
 **Polygon Distortion** - Positive values cause top part of the polygon to be larger than bottom; negative values do the opposite.
 
-*Positive Distortion*
+_Positive Distortion_
 
 ![](../media/ad42c3bc93b78627c6ad8c49e2ff1835.png) ![](../media/d3a16d0b5a88e15e39c7af65c7b96df1.png)
 
 shape="polygon" distortion="1" regular="No"
 
-*Negative Distortion*
+_Negative Distortion_
 
 ![](../media/c3a60f67f68f3bcd01954cb9281d8bf8.png) ![](../media/6b48aeeda4f98ec38d07b5c4f4ff5f15.png)
 
@@ -269,12 +275,12 @@ shape="polygon" distortion="-1" regular="No"
 **Combining Skew with Distortion**
 
 | ![](../media/131fde8d0c21cbde937f364e790d1251.png) | ![](../media/cf4e5073a7590e1b3aaa95805918337d.png) | ![](../media/3e48a62a8c4e79fcd6db37bef589d1bf.png) |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| Skew -1, Distortion 1                           | Skew 0, Distortion 1                            | Skew 1, Distortion 1                            |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Skew -1, Distortion 1                              | Skew 0, Distortion 1                               | Skew 1, Distortion 1                               |
 | ![](../media/e89d2bd25615a593144342db8bc4cd95.png) | ![](../media/085340ed0d232965f7cf3bfd96545943.png) | ![](../media/b902f48209f1013c10632a421a6028d3.png) |
-| Skew -1, Distortion 0                           | Skew 0, Distortion 0                            | Skew 1, Distortion 0                            |
+| Skew -1, Distortion 0                              | Skew 0, Distortion 0                               | Skew 1, Distortion 0                               |
 | ![](../media/1af1b897c26ed637e15a9837381b48e3.png) | ![](../media/8b96cb5b58691ead550f6659056cb5e9.png) | ![](../media/1c8348e5974113e435f37510ec0553f8.png) |
-| Skew -1, Distortion -1                          | Skew 0, Distortion -1                           | Skew 1, Distortion -1                           |
+| Skew -1, Distortion -1                             | Skew 0, Distortion -1                              | Skew 1, Distortion -1                              |
 
 **Number of Sides** - Number of polygon sides.
 
@@ -355,7 +361,7 @@ Assume you have several edge relationships defined as follows:
 Pressing the `Refresh Graph` button, the graph appears as:
 
 | ![](../media/d7a4cde94943bc529c961c7e5c894b92.png) ordering="in" | ![](../media/a32db80c779d71851d9319af65db97e3.png) ordering="out" |
-| ------------------------------------------------------------- | -------------------------------------------------------------- |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------- |
 
 ### Placing a Label at the Head or Tail of an Edge
 
@@ -397,7 +403,7 @@ Creates the following graph:
 
 ![](../media/90edf33f0960fff213f53a8639277e0e.png)
 
-**Note:** *The nodes have blank labels to make the illustration of edges coming from or going to the center of the node easier to see. Enabling the 'Nodes' graph option 'When the `Label` column is blank…' '…use blank for the node label" on the `Graphviz` ribbon tab is required to achieve this effect.*
+**Note:** _The nodes have blank labels to make the illustration of edges coming from or going to the center of the node easier to see. Enabling the 'Nodes' graph option 'When the `Label` column is blank…' '…use blank for the node label" on the `Graphviz` ribbon tab is required to achieve this effect._
 
 ![](../media/46537ed18a2ab0998b1c613966aa18ca.png)
 
@@ -439,12 +445,9 @@ labelfontname="Arial" labelfontsize="8" labelfontcolor="Blue"
 
 `labelfontname="Arial" labelfontsize="8" labelfontcolor="Blue"`
 
-  
-
-
 **Edge Head Port** - Indicates where on the head node to attach the head of the edge. In the default case, the edge is aimed towards the center of the node, and then clipped at the node boundary.
 
-If a compass point is used, it must have the form "n", "ne", "e", "se", "s", "sw", "w", "nw", "c", "*". This specification modifies the edge placement to aim for the corresponding compass point on the port or, in the second form where no port name is supplied, on the node itself. The compass point "c" specifies the center of the node or port. The compass point "*" specifies that an appropriate side of the port adjacent to the exterior of the node should be used, if such exists. Otherwise, the center is used. If no compass point is used with a port name, the default value is "_".
+If a compass point is used, it must have the form "n", "ne", "e", "se", "s", "sw", "w", "nw", "c", "_". This specification modifies the edge placement to aim for the corresponding compass point on the port or, in the second form where no port name is supplied, on the node itself. The compass point "c" specifies the center of the node or port. The compass point "_" specifies that an appropriate side of the port adjacent to the exterior of the node should be used, if such exists. Otherwise, the center is used. If no compass point is used with a port name, the default value is "\_".
 
 ![](../media/c95b15302b40b1b8de2dba65904a38ba.png) Appears As: ![](../media/9761139853713845c282cc6de415edaf.png)
 
@@ -452,12 +455,9 @@ If a compass point is used, it must have the form "n", "ne", "e", "se", "s", "sw
 
 `labelfontname="Arial" labelfontsize="8" labelfontcolor="Blue"`
 
-  
-
-
 **Edge Tail Port** - Indicates where on the tail node to attach the tail of the edge.
 
-If a compass point is used, it must have the form "n", "ne", "e", "se", "s", "sw", "w", "nw", "c", "*". This specification modifies the edge placement to aim for the corresponding compass point on the port or, in the second form where no port name is supplied, on the node itself. The compass point "c" specifies the center of the node or port. The compass point "*" specifies that an appropriate side of the port adjacent to the exterior of the node should be used, if such exists. Otherwise, the center is used. If no compass point is used with a port name, the default value is "_".
+If a compass point is used, it must have the form "n", "ne", "e", "se", "s", "sw", "w", "nw", "c", "_". This specification modifies the edge placement to aim for the corresponding compass point on the port or, in the second form where no port name is supplied, on the node itself. The compass point "c" specifies the center of the node or port. The compass point "_" specifies that an appropriate side of the port adjacent to the exterior of the node should be used, if such exists. Otherwise, the center is used. If no compass point is used with a port name, the default value is "\_".
 
 ![](../media/52950a49b2df611060bed2131269abbe.png) Appears as: ![](../media/9c7559d33c6e09fe77a9644cca7559a8.png)
 
@@ -480,4 +480,3 @@ Creates the following graph:
 An alternate method is to check the "Rotate 90 counterclockwise" option from the Graph Options on the Graphviz tab.
 
 ![](../media/761f2489be7ed0141fdd656808167276.png)
-

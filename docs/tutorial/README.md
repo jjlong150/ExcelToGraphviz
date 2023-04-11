@@ -1,3 +1,8 @@
+---
+prev: /create/
+next: /views/
+---
+
 # Creating Relationship Visualizations
 
 ## Introduction
@@ -18,14 +23,14 @@ Set in Milwaukee, Wisconsin, the series revolves around teenager Richie Cunningh
 
 Restating this information in terms of relationships:
 
--   **Howard Cunningham** ("Mr. C") is the husband of Marion, Father of Richie, Father of Joanie, Landlord of Fonzie, and a Customer of Fonzie's auto repair garage
--   **Marion Cunningham** ("Mrs. C") is the wife of Howard, Mother of Richie, Mother of Joanie
--   **Richard Cunningham** ("Richie") is the son of Howard, son of Marion, brother of Joanie, and friend of Fonzie, Ralph, and Potsie
--   **Joanie Cunningham** ("Shortcakes") is the daughter of Howard, daughter of Marion, sister of Richie, and eventually the wife of Chachi
--   **Ralph Malph** ("Hector") is a friend of Richie, Potsie, and Fonzie
--   **Warren Weber** ("Potsie") is a friend of Richie, Ralph, and Fonzie
--   **Arthur Fonzarelli** ("Fonzie", "The Fonz") is a friend of Richie, Ralph, and Potsie; a tenant of Howard, Howard's auto mechanic, and a cousin of Chachi
--   **Charles Arcola** ("Chachi") is a cousin of Fonzie, and eventually becomes Joanie's husband.
+- **Howard Cunningham** ("Mr. C") is the husband of Marion, Father of Richie, Father of Joanie, Landlord of Fonzie, and a Customer of Fonzie's auto repair garage
+- **Marion Cunningham** ("Mrs. C") is the wife of Howard, Mother of Richie, Mother of Joanie
+- **Richard Cunningham** ("Richie") is the son of Howard, son of Marion, brother of Joanie, and friend of Fonzie, Ralph, and Potsie
+- **Joanie Cunningham** ("Shortcakes") is the daughter of Howard, daughter of Marion, sister of Richie, and eventually the wife of Chachi
+- **Ralph Malph** ("Hector") is a friend of Richie, Potsie, and Fonzie
+- **Warren Weber** ("Potsie") is a friend of Richie, Ralph, and Fonzie
+- **Arthur Fonzarelli** ("Fonzie", "The Fonz") is a friend of Richie, Ralph, and Potsie; a tenant of Howard, Howard's auto mechanic, and a cousin of Chachi
+- **Charles Arcola** ("Chachi") is a cousin of Fonzie, and eventually becomes Joanie's husband.
 
 Collecting this information into an Excel spreadsheet table, it would look as follows:
 
@@ -49,11 +54,11 @@ When you press the `Refresh Graph` button, you will see a graph such as:
 
 **Step 3** - Create the edges. Copy into the Relationship Visualizer spreadsheet:
 
--   the "Name" values in Column A into the `Item` column B
--   the "Kind of Relationship" values in Column C into the `Label` column C
--   the "Relationship To" values in Column D into the `Related Item` E
+- the "Name" values in Column A into the `Item` column B
+- the "Kind of Relationship" values in Column C into the `Label` column C
+- the "Relationship To" values in Column D into the `Related Item` E
 
-    Your data should now look as follows:
+  Your data should now look as follows:
 
 ![](../media/8989dad3a4e67c17db5dfdbb90c39596.png)
 
@@ -152,7 +157,6 @@ Leave the `Color Scheme` setting as blank for now. When the `Color Scheme` setti
 
 ![](../media/f4beb25185f8fc3e45636c3e051127fa.png)
 
-
 ::: warning Why does it take so long for the Style Desinger tab to load?
 A drawback of having 656 color choices to choose from is that the X11 color scheme slows the loading of the ribbon. Dropdown list images such as the color scheme gallery images are stored in the spreadsheet, but Microsoft Excel requires using image files from the file system for dynamic lists such as the color names. A 20x20 pixel preview image for each color in a color scheme is created for the dropdown color lists the first time a color scheme is selected using color information in the “HELP - colors” worksheet cells. The status bar is updated as this process occurs to let you know that Excel is not frozen.
 
@@ -214,16 +218,16 @@ Another set of dynamic changes occur as two additional choices 'Type' and 'Angle
 The differences are illustrated below:
 
 | ![](../media/baf05735f55db985b7c765d62d66dc18.png) | ![](../media/fecfcef52161396b28ccb71f361d8e15.png) |
-| ----------------------------------------------- | ----------------------------------------------- |
-| **Gradient Type: filled**                       | **Gradient Type: radial**                       |
+| -------------------------------------------------- | -------------------------------------------------- |
+| **Gradient Type: filled**                          | **Gradient Type: radial**                          |
 
 Changing the Gradient Angle moves the angle of the gradient fill. For linear fills, the colors transform along a line specified by the angle and the center of the object. For radial fills, a value of zero causes the colors to transform radially from the center; for non-zero values, the colors transform from a point near the object's periphery as specified by the value.
 
 If you change the Gradient Angle to 180 degrees, the preview images now appear as:
 
 | ![](../media/63afcb48c0a388bc528e966256b39c0d.png) | ![](../media/45591bb063c300b4782fd7b99deeb9f0.png) |
-| ----------------------------------------------- | ----------------------------------------------- |
-| **Gradient Type: filled, Gradient Angle: 180**  | **Gradient Type: radial, Gradient Angle: 180**  |
+| -------------------------------------------------- | -------------------------------------------------- |
+| **Gradient Type: filled, Gradient Angle: 180**     | **Gradient Type: radial, Gradient Angle: 180**     |
 
 For our Happy Days example, we do not want to use Gradient Fills as they will not add much visual impact to this example. Delete "yellow" from the 'Gradient Fill Color:' choice. Notice that the preview image reverts to the solid 'skyblue' background, and the options for Gradient Type, and Gradient Angle have disappeared. The preview image now looks as follows:
 
@@ -277,26 +281,26 @@ The default `styles` worksheet appears as follows:
 
 The columns are as follows:
 
--   Column A - The **Indicator** column. It allows you to place a "\#" character to denote a comment. It can be used to comment out the style, so it is excluded from the renderings.
--   Column B - The **Style** column. This column is where you specify the Style name.
--   Column C - The **Format** column. This column is where you paste the style definitions created on the `style designer` worksheet to create the visual definition for any graph elements which get associated with this style in the `data` worksheet.
--   Column D - The **Style Type** column. This column must have a value of `node`, `edge`, `subgraph-open`, `subgraph-close`, `keyword`, or `native`. This string value tells the macros inside the Relationship Visualizer how to interpret the row and convert it into DOT language commands.
--   Column E and beyond - The view switch columns. These columns are used for creating views of the data. It must contain a `Yes` or `No` value to indicate if the style should be included in the graph. This column's use is discussed in [Creating Views](#creating-views). All spreadsheets created from the Relationship Visualizer Excel template will have the Column E heading row set to `All Styles`, with `yes` values set for the style switches. This means that all styles should be included in the graphs when Column E controls the view.
+- Column A - The **Indicator** column. It allows you to place a "\#" character to denote a comment. It can be used to comment out the style, so it is excluded from the renderings.
+- Column B - The **Style** column. This column is where you specify the Style name.
+- Column C - The **Format** column. This column is where you paste the style definitions created on the `style designer` worksheet to create the visual definition for any graph elements which get associated with this style in the `data` worksheet.
+- Column D - The **Style Type** column. This column must have a value of `node`, `edge`, `subgraph-open`, `subgraph-close`, `keyword`, or `native`. This string value tells the macros inside the Relationship Visualizer how to interpret the row and convert it into DOT language commands.
+- Column E and beyond - The view switch columns. These columns are used for creating views of the data. It must contain a `Yes` or `No` value to indicate if the style should be included in the graph. This column's use is discussed in [Creating Views](#creating-views). All spreadsheets created from the Relationship Visualizer Excel template will have the Column E heading row set to `All Styles`, with `yes` values set for the style switches. This means that all styles should be included in the graphs when Column E controls the view.
 
 ### Add to Styles
 
-Now that you understand the purpose of the `styles` worksheet, let's add in the style definition we just created for the Cunningham family. Select the *Add to `styles`* button to transfer the style to the `styles` worksheet.
+Now that you understand the purpose of the `styles` worksheet, let's add in the style definition we just created for the Cunningham family. Select the _Add to `styles`_ button to transfer the style to the `styles` worksheet.
 
 ![](../media/e6ed38549621c142e1864a3168d12f07.png)
 
--   **Step 1** - A row has been inserted at the bottom of the list within the range marked by the dark border so that the style name is contained within the named range and will appear in the dropdown list of style choices on the `data` worksheet. The `Style Name` cell is selected, and you may type over the temporary name (e.g., *Node style 21*) which has been assigned.
+- **Step 1** - A row has been inserted at the bottom of the list within the range marked by the dark border so that the style name is contained within the named range and will appear in the dropdown list of style choices on the `data` worksheet. The `Style Name` cell is selected, and you may type over the temporary name (e.g., _Node style 21_) which has been assigned.
 
 ![](../media/5ff25f6582c5e450bcfc105c77db426b.png)
 
--   **Step 2** - Type "Cunningham Family" as the "Style Name" name
--   **Step 3** - Observe that the style definition has been copied from the `Style Designer`.
--   **Step 4** - Observe that the "Style Type" value has been set to "node"
--   **Step 5** - Observe that the switches in the remaining columns are all set to "yes".
+- **Step 2** - Type "Cunningham Family" as the "Style Name" name
+- **Step 3** - Observe that the style definition has been copied from the `Style Designer`.
+- **Step 4** - Observe that the "Style Type" value has been set to "node"
+- **Step 5** - Observe that the switches in the remaining columns are all set to "yes".
 
 The 'styles" worksheet should now look as follows:
 
@@ -328,8 +332,8 @@ Press the `Refresh Graph` button and the relationship graph now appears as:
 
 This change has made it very easy to see who the members of the Cunningham family are. Without repeating the details, let's create two more node styles called "Fonzarelli Family" and "Friends". Their styles look as follows:
 
-| Style             | Format                                                                                                                                                                       | Preview                                         |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Style             | Format                                                                                                                                                                       | Preview                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | Fonzarelli Family | shape="rect" color="red" fillcolor="lightpink" fixedsize="True" fontcolor="black" fontname="Arial" fontsize="10" style="rounded,filled" height="0.50" width="2.00"           | ![](../media/97f527a8757b167ab4b4eb0930595966.png) |
 | Friends           | shape="rect" color="darkorange" fillcolor="lemonchiffon" fixedsize="True" fontcolor="black" fontname="Arial" fontsize="10" style="rounded,filled" height="0.50" width="2.00" | ![](../media/7ba004e359e621deee92c23bd9a753f4.png) |
 
@@ -337,9 +341,9 @@ After creating new rows, pasting the style definitions into the `styles` workshe
 
 ![](../media/80266cb2828c12576dea737bd54e73fa.png)
 
-Returning to the `data` worksheet, Arthur Fonzarelli and Charles Arcola are members of the Fonzarelli Family so associate that style with their names. 
+Returning to the `data` worksheet, Arthur Fonzarelli and Charles Arcola are members of the Fonzarelli Family so associate that style with their names.
 
-Ralph Malph, and Warren Weber are friends of the Cunningham and the Fonzarelli families, so associate the "Friends" style with them. 
+Ralph Malph, and Warren Weber are friends of the Cunningham and the Fonzarelli families, so associate the "Friends" style with them.
 
 The `data` worksheet now appears as:
 
@@ -351,7 +355,7 @@ Press the `Refresh Graph` button and the relationship graph now appears as:
 
 ## Edge styling
 
-Edges can have styles just as we have seen for nodes. If we return to the `style designer` worksheet and change the design mode Element to "Edge", we can create edge style definitions using the same method we used for nodes. 
+Edges can have styles just as we have seen for nodes. If we return to the `style designer` worksheet and change the design mode Element to "Edge", we can create edge style definitions using the same method we used for nodes.
 
 Press the `Reset` button to clear all style values carried over from the node definitions and change the Label Text to "Spouse".
 
@@ -361,14 +365,14 @@ Let us create edge relationships definitions for the relationships "spouse", "pa
 
 For the "Spouse" definition:
 
--   Set `Edge Style` to blank
+- Set `Edge Style` to blank
 
 ![](../media/c5bc375df5619d7d8792319fd64fe8b8.png)
 
--   Set `Edge Color 1` to `blue`
--   Set `Edge Font Name:` to `Arial`
--   Set `Edge Font Size:` to `10` points
--   Set `Edge Font Color:` to `blue`
+- Set `Edge Color 1` to `blue`
+- Set `Edge Font Name:` to `Arial`
+- Set `Edge Font Size:` to `10` points
+- Set `Edge Font Color:` to `blue`
 
 The preview image of the edge now appears as:
 
@@ -383,11 +387,12 @@ You can specify different fonts, colors and other options by choosing the 'Head+
 ![](../media/eedcb89268de2bcba3e7c61a06eec6ff.png)
 
 ### Arrowheads
+
 Arrowheads are another popular option for edges, and Graphviz provides a robust set of choices. You may stack arrowhead choices to build custom arrowheads. The Relationship Visualizer ribbon provides up to 3 arrowheads. When you specify the first arrowhead, a new dropdown list will appear. Likewise, after specifying a second arrowhead, a 3rd dropdown list will appear.
 
 ![](../media/92acab87ecdd911fa179c3c0107e13e4.png)
 
-Each change generates the "Edge" Format' string and renders a sample graph showing how the edge will look based upon the *Layout Engine* and *Splines* settings on the `settings` worksheet. Note that the appearance may change due to how the layout engines render splines, head ports, and tail ports. For more information on these settings, see the section [Graph Options](#graph-options).
+Each change generates the "Edge" Format' string and renders a sample graph showing how the edge will look based upon the _Layout Engine_ and _Splines_ settings on the `settings` worksheet. Note that the appearance may change due to how the layout engines render splines, head ports, and tail ports. For more information on these settings, see the section [Graph Options](#graph-options).
 
 ### Add to `styles`
 
@@ -397,12 +402,12 @@ The `styles` worksheet should now look as follows:
 
 ![](../media/1b878ec4398638f70bae1cea2e3d5cf0.png)
 
-Without repeating all the details, let us create three more node styles called "Parent Child", "Friend", and "Business Associate". 
+Without repeating all the details, let us create three more node styles called "Parent Child", "Friend", and "Business Associate".
 
 The edge styles definitions and previews look as follows:
 
-| Style              | Format                                                                                     | Preview                                         |
-| ------------------ | ------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| Style              | Format                                                                                 | Preview                                            |
+| ------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | Parent Child       | `style="solid" color="darkgreen" fontcolor="darkgreen" fontname="Arial" fontsize="10"` | ![](../media/91cc277737802f38a0a34258fea97fef.png) |
 | Friend Of          | `style="dashed" color="deeppink" fontcolor="deeppink" fontname="Arial" fontsize="10"`  | ![](../media/c9836ddc29f2c9529b1910a044189c21.png) |
 | Business Associate | `style="dotted" color="red" fontcolor="red" fontname="Arial" fontsize="10"`            | ![](../media/3407f0c471190d5a30fa66dfd5b7c90a.png) |
@@ -425,8 +430,8 @@ Press the `Refresh Graph` button and the relationship graph now appears as:
 
 Now we begin to visualize the various types of relationships. We can also see that there are still a few rows remaining that do not have styles assigned. These rows represent the "Sister", "Brother", and "Cousin" relationships. These relationships are drawn in the default Graphviz style. We need to go back and create a "Sibling", and a "Cousins" edge style. Using the previous method, define two additional edge styles to look as follows:
 
-| Style   | Format                                                                                                            | Preview                                         |
-| ------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Style   | Format                                                                                                            | Preview                                            |
+| ------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | Sibling | style="solid" color="purple" fontcolor="purple" fontname="Arial" fontsize="10"                                    | ![](../media/0008b47642cf7bc57a444c5567b61b07.png) |
 | Cousin  | style="solid" color="chocolate4" arrowtail=`dot` dir="both" fontcolor="chocolate4" fontname="Arial" fontsize="10" | ![](../media/ef5f5e49399674129ef0786c242a03be.png) |
 
@@ -460,7 +465,7 @@ At this point, it is up to an interested reader to divide the relationships to l
 
 ## Modifying the style of individual elements
 
-There may be times when you want to embellish the style of a single node or an edge. The introduction to this manual described how to determine the route between two states. Perhaps you want to show the shortest route in a different color, make the lines thicker, or use a different style. 
+There may be times when you want to embellish the style of a single node or an edge. The introduction to this manual described how to determine the route between two states. Perhaps you want to show the shortest route in a different color, make the lines thicker, or use a different style.
 
 The Relationship Visualizer has capabilities to support this requirement.
 
@@ -482,7 +487,7 @@ If the `Attributes` column is hidden, make it visible by selecting it from the `
 
 The **Happy Days** introduction mentioned that Fonzie emerged as the star of the television show. In this case, it might be useful to use a 'star' shape to identify his node.
 
-Use the `Style Designer` to define a 2-inch by 2-inch star. 
+Use the `Style Designer` to define a 2-inch by 2-inch star.
 
 Next, instead of adding the format to the `styles` worksheet, copy the format to the clipboard.
 
@@ -490,11 +495,11 @@ Next, instead of adding the format to the `styles` worksheet, copy the format to
 
 Find the row with Fonzie's name (row 8) and paste the style attributes
 
-``` dot
+```dot
 shape="star" height="2.0" width="2.0" fixedsize="true"
 ```
 
-within the `Attributes` column on his row. 
+within the `Attributes` column on his row.
 
 The height and width are changed to make the star a little larger than the other nodes, and the fixedsize attribute tells Graphviz to make the star exactly 2.0 x 2.0 inches (i.e., do not grow or shrink the star based upon the size of the label).
 
@@ -514,11 +519,11 @@ The `DOT` layout engine supports the cluster concept described previously in thi
 
 The Relationship Visualizer allows you to denote the start of a cluster with open brace `{` and close brace `}` characters in the `Item` column. The `Label`, `Style Name`, and `Attributes` columns all work for clusters as was previously described for nodes and edges.
 
-In the previous graph Richie Cunningham is located at the bottom of the graph, while the other members of his family are at the top of the graph. We would like to group all the members of the Cunningham family together, so let's add an open brace `{` above their rows with a label of "Cunningham Family", and a close brace `}` below the row of the last Cunningham family member. We will also group the Fonzarelli family members and group the Friends. 
+In the previous graph Richie Cunningham is located at the bottom of the graph, while the other members of his family are at the top of the graph. We would like to group all the members of the Cunningham family together, so let's add an open brace `{` above their rows with a label of "Cunningham Family", and a close brace `}` below the row of the last Cunningham family member. We will also group the Fonzarelli family members and group the Friends.
 
 To make the data more readable, we will also add comments by placing a `#` character in Column A, and comment text in the `Item` cells
 
-The spreadsheet now appears as: 
+The spreadsheet now appears as:
 
 ![](../media/cee3d9ea8609013486ab06e1940082b0.png)
 
@@ -554,11 +559,11 @@ Labels are processed to convert Excel-style carriage returns into Graphviz-style
 
 For example, the Graphviz statements which will depict Howard and Marion Cunningham on a common plane, and Richie and Joanie Cunningham on a separate, yet common plane are:
 
-``` dot
+```dot
 {rank="same"; "Howard"; "Marion";}
 ```
 
-``` dot
+```dot
 {rank="same"; "Richie"; "Joanie";}
 ```
 
@@ -586,7 +591,7 @@ Switch to the `settings` worksheet and locate the "Image Path:" setting in the '
 
 ![](../media/6c9b1c72a6c130a6ee8b4410456ac9b9.png)
 
-Your settings should appear like this: 
+Your settings should appear like this:
 
 ![](../media/5917de49831274d8adc04972405be847.png)
 
@@ -632,7 +637,7 @@ Note that the image is full sized, and centered in the default oval shape.
 
 For Ralph, we will add these attributes:
 
-``` dot
+```dot
 image="Ralph_Malph.jpg" imagescale="True" imagepos="ml"
 ```
 
@@ -640,7 +645,7 @@ image="Ralph_Malph.jpg" imagescale="True" imagepos="ml"
 
 and for Potsie we will add:
 
-``` dot
+```dot
 image="Potsie_Weber.jpg" imagescale="True" imagepos="ml"
 ```
 
@@ -681,7 +686,6 @@ Notice that the cluster are gone, as `circo` does not support clusters. Now repe
 Now return to the original layout by selecting the `dot` algorithm. Once again the diagram appears as:
 
 ![](../media/38b68eb35996aac3f6feba44d7939898.png)
-
 
 ### Change layout direction
 
@@ -746,7 +750,7 @@ These actions have allowed us to transform the
 visualization from this default graph:
 
 | ![](../media/5274879ef3c93087b0441379f4052cee.png) | to this style-based depiction: ![](../media/8946974f2dc763d63776e4cc67e32d2b.png) |
-| ----------------------------------------------- | ------------------------------------------------------------------------------ |
+| -------------------------------------------------- | --------------------------------------------------------------------------------- |
 
 and finally, this style-based depiction with row and graph option refinements:
 

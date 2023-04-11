@@ -1,3 +1,8 @@
+---
+prev: /views/
+next: /advanced/
+---
+
 # Publishing Graphs
 
 One of the powers of the Relationship Visualizer is that you can collect large amounts of data and let it and Graphviz determine how to graph it efficiently. Graphs with lots of data tend to grow large; much larger than can easily be viewed in Excel. You may also want to print them, and you will need a tool such as Adobe Acrobat Reader that will provide the means to zoom in and out on the graph, and poster print the diagram using multiple sheets of paper.

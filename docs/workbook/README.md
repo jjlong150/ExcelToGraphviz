@@ -1,3 +1,8 @@
+---
+prev: /terminology/
+next: /create/
+---
+
 # Workbook Structure
 
 ## Overview

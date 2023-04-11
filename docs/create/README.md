@@ -1,3 +1,8 @@
+---
+prev: /workbook/
+next: /tutorial/
+---
+
 # Creating Graphs
 
 If you have made it this far in this manual, Congratulations. We are past all the software installation steps, graph theory discussions, and definitions. It is time to have some fun and create some simple diagrams.

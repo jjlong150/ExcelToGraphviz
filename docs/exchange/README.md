@@ -1,11 +1,16 @@
+---
+prev: /sql/
+next: /settings/
+---
+
 # Exchanging Data
 
 There are several drawbacks of using an Excel workbook with macros as your Graphviz IDE.
 
--   The primary drawback is that the data and the macro code live together in the same file. As new versions of the spreadsheet get published with new features it has always been a chore to copy existing data spanning several worksheets, and all the ribbon settings from the old version to the new version.
--   Another drawback is that an Excel Workbook is actually a zip file internally. With the file being a binary file, it is not conducive to checking into version control software such as Git, or for performing a diff on to see what has changed between versions.
--   Sharing services such as [Pastebin](https://pastebin.com/) provide an easy mechanism for sharing content and examples, but they require text files.
--   Finally, VBA macro-enabled workbooks are not always trusted by people, or email systems. People trying to share the workbook over email often learn that the email system has stripped the attachment from the email due to the presence of macros.
+- The primary drawback is that the data and the macro code live together in the same file. As new versions of the spreadsheet get published with new features it has always been a chore to copy existing data spanning several worksheets, and all the ribbon settings from the old version to the new version.
+- Another drawback is that an Excel Workbook is actually a zip file internally. With the file being a binary file, it is not conducive to checking into version control software such as Git, or for performing a diff on to see what has changed between versions.
+- Sharing services such as [Pastebin](https://pastebin.com/) provide an easy mechanism for sharing content and examples, but they require text files.
+- Finally, VBA macro-enabled workbooks are not always trusted by people, or email systems. People trying to share the workbook over email often learn that the email system has stripped the attachment from the email due to the presence of macros.
 
 It became apparent that a text-based representation of the data, styles, and settings was needed. The features to support exporting and importing the spreadsheet data comprise the `Exchange` workbook tab. There is not an associated worksheet since data exchange is focused on the internal contents of the workbook.
 
@@ -18,45 +23,45 @@ Let's look at an existing spreadsheet and see how we can export it from one spre
 The `Exchange` ribbon tab appears as follows, and is organized as illustrated
 
 | ![](../media/bddf27390423201e36b72341e87823e5.png) |
-| ------------------------------------------- |
+| -------------------------------------------------- |
 
--   `Export JSON` - Writes contents out to JSON file
--   `Import JSON` - Reads JSON file, and restores data to workbook
--   `Graphing Options` - Include options chosen in the ribbons and `settings` worksheet
--   `Workbook Metadata` - Include information such as user, Excel version, etc.
--   `Worksheet Layouts` - Include information on how the workbook is organized
--   `'data' Worksheet` - Include the contents of the `data` worksheet
-    -   Export
-        -   `Include row number` - Include the row number of where the data was located
-        -   `Include row height` - Include the height of the row
-        -   `Include row visibility` - Include information which tells if the row was visible or hidden
-    -   Import
-        -   `Append` - When importing, append the data if existing data exists
-        -   `Replace` - When importing, ignore any data and replace the contents
--   `'styles' Worksheet` - Include the contents of the `styles` worksheet
-    -   Export
-        -   `Include row number` - Include the row number of where the data was located
-        -   `Include row height` - Include the height of the row
-        -   `Include row visibility` - Include information which tells if the row was visible or hidden
-    -   Import
-        -   `Append` - When importing, append the data if existing data exists
-        -   `Replace` - When importing, ignore any data and replace the contents
--   `'sql' - Worksheet` Include the contents of the `sql` worksheet
-    -   Export
-        -   `Include row number` - Include the row number of where the data was located
-        -   `Include row height` - Include the height of the row
-        -   `Include row visibility` -Include information which tells if the row was visible or hidden
-    -   Import
-        -   `Append` - When importing, append the data if existing data exists
-        -   `Replace` - When importing, ignore any data and replace the contents
--   `'svg' - Worksheet` Include the contents of the `svg` worksheet
-    -   Export
-        -   `Include row number` - Include the row number of where the data was located
-        -   `Include row height` - Include the height of the row
-        -   `Include row visibility` -Include information which tells if the row was visible or hidden
-    -   Import
-        -   `Append` - When importing, append the data if existing data exists
-        -   `Replace` - When importing, ignore any data and replace the contents
+- `Export JSON` - Writes contents out to JSON file
+- `Import JSON` - Reads JSON file, and restores data to workbook
+- `Graphing Options` - Include options chosen in the ribbons and `settings` worksheet
+- `Workbook Metadata` - Include information such as user, Excel version, etc.
+- `Worksheet Layouts` - Include information on how the workbook is organized
+- `'data' Worksheet` - Include the contents of the `data` worksheet
+  - Export
+    - `Include row number` - Include the row number of where the data was located
+    - `Include row height` - Include the height of the row
+    - `Include row visibility` - Include information which tells if the row was visible or hidden
+  - Import
+    - `Append` - When importing, append the data if existing data exists
+    - `Replace` - When importing, ignore any data and replace the contents
+- `'styles' Worksheet` - Include the contents of the `styles` worksheet
+  - Export
+    - `Include row number` - Include the row number of where the data was located
+    - `Include row height` - Include the height of the row
+    - `Include row visibility` - Include information which tells if the row was visible or hidden
+  - Import
+    - `Append` - When importing, append the data if existing data exists
+    - `Replace` - When importing, ignore any data and replace the contents
+- `'sql' - Worksheet` Include the contents of the `sql` worksheet
+  - Export
+    - `Include row number` - Include the row number of where the data was located
+    - `Include row height` - Include the height of the row
+    - `Include row visibility` -Include information which tells if the row was visible or hidden
+  - Import
+    - `Append` - When importing, append the data if existing data exists
+    - `Replace` - When importing, ignore any data and replace the contents
+- `'svg' - Worksheet` Include the contents of the `svg` worksheet
+  - Export
+    - `Include row number` - Include the row number of where the data was located
+    - `Include row height` - Include the height of the row
+    - `Include row visibility` -Include information which tells if the row was visible or hidden
+  - Import
+    - `Append` - When importing, append the data if existing data exists
+    - `Replace` - When importing, ignore any data and replace the contents
 
 ## Exporting Relationship Visualizer Data to JSON format
 
@@ -71,7 +76,7 @@ Here are example snippets of exported workbook contents:
 | ![](../media/exchange_graphing_options.png) |
 | ------------------------------------------- |
 
-``` json
+```json
 {
     "settings": {
         "data": {
@@ -101,9 +106,9 @@ Here are example snippets of exported workbook contents:
 ### Workbook Metadata
 
 | ![](../media/exchange_workbook_metadata.png) |
-| ------------------------------------------- |
+| -------------------------------------------- |
 
-``` json
+```json
 {
   "metadata": {
     "name": "E2GXF",
@@ -115,16 +120,16 @@ Here are example snippets of exported workbook contents:
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
     "filename": "Relationship Visualizer.xlsm"
-  },
+  }
 }
 ```
 
 ### Worksheet Layouts
 
 | ![](../media/exchange_worksheet_layouts.png) |
-| ------------------------------------------- |
+| -------------------------------------------- |
 
-``` json
+```json
 {
     "layouts": {
         "data": {
@@ -186,9 +191,9 @@ Here are example snippets of exported workbook contents:
 #### 'data' Worksheet
 
 | ![](../media/exchange_data_worksheet.png) |
-| ------------------------------------------- |
+| ----------------------------------------- |
 
-``` json
+```json
   "content": {
     "data": [
       {
@@ -256,7 +261,7 @@ Here are example snippets of exported workbook contents:
 | ![](../media/exchange_styles_worksheet.png) |
 | ------------------------------------------- |
 
-``` json
+```json
 {
   "content": {
     "styles": [
@@ -299,9 +304,9 @@ Here are example snippets of exported workbook contents:
 #### 'sql' Worksheet
 
 | ![](../media/exchange_sql_worksheet.png) |
-| ------------------------------------------- |
+| ---------------------------------------- |
 
-``` json
+```json
     "content": {
         "sql": [
             {
@@ -371,9 +376,9 @@ Here are example snippets of exported workbook contents:
 #### 'svg' Worksheet
 
 | ![](../media/exchange_sql_worksheet.png) |
-| ------------------------------------------- |
+| ---------------------------------------- |
 
-``` json
+```json
 {
     "content": {
         "svg": [
@@ -406,12 +411,10 @@ Here are example snippets of exported workbook contents:
             --- SNIP ---
 ```
 
-
 Make the selections of the data you wish to export, and press the `Export JSON` button
 
 | ![](../media/bddf27390423201e36b72341e87823e5.png) |
-| ------------------------------------------- |
-
+| -------------------------------------------------- |
 
 You will be prompted to specify the name of a JSON file that the data should be written to. Enter a file name and press the `Save` button.
 
@@ -432,7 +435,7 @@ To import a JSON file, start by choosing the sections which you want included. J
 A key difference for importing worksheets comes via the import option dropdown lists.
 
 | ![](../media/exchange_import_options.png) |
-| ------------------------------------------- |
+| ----------------------------------------- |
 
 `data`, `styles`, `sql`, and `svg` worksheets choices have Import of Append and Replace.
 
@@ -446,7 +449,7 @@ For example, assume a husband and wife each prepare a family tree of their ances
 Once you have selected your Import, press the `Import JSON` button.
 
 | ![](../media/exchange_import_json.png) |
-| ------------------------------------------- |
+| -------------------------------------- |
 
 You will be prompted to **Choose an Excel to Graphviz data exchange file**
 
@@ -455,4 +458,3 @@ You will be prompted to **Choose an Excel to Graphviz data exchange file**
 Select the file and press the `OK` button. The data will be imported (which may take several seconds). If the `Automatic Refresh` checkbox on the Graphviz tab is checked, the Relationship Visualizer will graph the data to the worksheet, otherwise press the `Refresh Graph` button to see the graph.
 
 ![](../media/aa15bddb7bbdcca777cc1a4a8787596d.png)
-

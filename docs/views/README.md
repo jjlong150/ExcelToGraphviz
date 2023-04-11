@@ -1,3 +1,8 @@
+---
+prev: /tutorial/
+next: /publish/
+---
+
 # Creating Views
 
 ## Introduction
