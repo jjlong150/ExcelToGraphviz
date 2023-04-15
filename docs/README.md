@@ -2,7 +2,7 @@
 home: true
 heroText: Excel to Graphviz
 heroImage: /hero.png
-tagline:
+tagline: 
 actionText: Get Started →
 actionLink: /overview/
 footer: MIT License - Copyright (c) 2017-2023 Jeffrey J. Long
