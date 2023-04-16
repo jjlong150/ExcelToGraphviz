@@ -45,33 +45,44 @@ Let's look at a simple example. The states in the United States of America are r
 
 In businesses throughout the world people like to step up to white boards and draw these relationships as shape and lines because it is simple to represent the concept, and as the old adages says "a picture is worth a thousand words". Using the examples above, the pictures of the border relationships described above is graphed as follows:
 
-![](../media/081d777dcae8dab7c587419879c93d01.png)
+|![](../media/081d777dcae8dab7c587419879c93d01.png)|
+|---------------------|
 
 and
 
-![](../media/1a959d5c9c58221f357de2d4073b7d89.png)
+|![](../media/1a959d5c9c58221f357de2d4073b7d89.png)|
+|---------------------|
 
 As the number of relationships grow, people tend to abandon the pictures, and revert to collecting the information in lists. Microsoft Excel is an excellent tool for this task, and people find it easy to use. To capture the state border relationships in this example, one only needs two columns in Excel, a column containing the name of the state, and another column containing the name of the state which it borders. It only takes a small amount of time to collect the information for all 50 states in a table such as:
 
-![](../media/2dee9ff79785021d814c368cd9818724.png)
+|![](../media/2dee9ff79785021d814c368cd9818724.png)|
+|---------------------|
 
 Contrast entering information into Excel with illustrating the state border relationships for all 50 states in a drawing. Most people would agree that it would be a tedious, time-consuming task. First you would need to have access to a drawing tool such as Visio. Next you would need to create 50 shapes to depict each of the states. You would then need to connect all the shapes with lines, and finally you would need to arrange the shapes to optimize the drawing so that shapes are spaced evenly, and the lines do not cross over one another. Each time you move a shape it will require moving other shapes and lines until a crisp, balanced view is created. Most people are not willing devote the time necessary to create such a drawing when the information can be collected in Excel in a fraction of the time.
 
-While collecting the information in Excel might be expedient, some problems are easier to solve using a picture. If we were give the question "What is the least number of states you must pass through to get from Michigan to California, and what are the names of those states?" the answer can be found in the Excel table data, but it won't be easy. Getting the answer however will take many, many enumerations, jumping from row to row.
+While collecting the information in Excel might be expedient, some problems are easier to solve using a picture. If we were give the question **"What is the least number of states you must pass through to get from Michigan to California, and what are the names of those states?"** the answer can be found in the Excel table data, but it won't be easy. Getting the answer however will take many, many enumerations, jumping from row to row.
 
 The easier way to solve this problem is to see the information in a graph and walk the connections with your finger. Your eyes will scan ahead to see the shortest routes, and you can count which path leads to the lowest number.
 
 The Relationship Visualizer gives you the ability to use the ease of collecting relationship information as a list within Excel and draw relationship graphs within seconds. Copying the data from the table above into the Relationship Visualizer and asking it to generate a graph turns the data into the following visual information:
 
-![](../media/5ac2fb99682840f6b7097e4f5447edf2.gif)
+|![](../media/usa.png)|
+|---------------------|
 
 From here we can begin to determine that the route which connects Michigan and California through the least number of borders would occur approximately along a straight line from Michigan to California. This line is depicted by the blue arrow drawn on the graph below.
 
-![](../media/5ac2fb99682840f6b7097e4f5447edf2.gif)We can draw orange arrows on this graph to depict a route which answers the question "What is the least number of states you must pass through to get from Michigan to California?" Our eyes quickly tell us that six states are least number of states that must be crossed.
+|![](../media/united_states_routes.png)|
+|---------------------|
 
-The graph shows us that there are multiple answers to the question "and what are the names of those states?" The answer we have drawn in orange arrows is "Wisconsin, Iowa, Nebraska, Wyoming, Utah, and Nevada", however scanning the graph visually we can see there are alternate portions of the route which keeps the number of states at 6, but directs you through different states. These segments are depicted by the green, red, and purple arrows.
+We can draw orange lines on this graph to depict a route which answers the question **"What is the least number of states you must pass through to get from Michigan to California?"** Our eyes quickly tell us that six states are least number of states that must be crossed.
 
-A common thought when viewing a graph such as the one above is that it does not resemble the way that the United States are laid out geographically on a map. That is true. In this case, it the graph appears somewhat as an inverted version of the USA, with Maine's location in the Southwest, while geographically it is in the Northeast. The reason for this depiction is that the Graphviz graphing engine does not know anything about geography. It builds the graph from the relationships and lays them out in a manner which most efficiently utilizes the diagram space so that collisions between the shapes and lines is minimized.
+The graph shows us that there are multiple answers to the question "and what are the names of those states?" The answer we have drawn in orange lines is "Wisconsin, Iowa, Nebraska, Wyoming, Utah, and Nevada", however scanning the graph visually we can see there are alternate portions of the route which keeps the number of states at 6, but directs you through different states. These segments are depicted by the green, red, and purple lines.
+
+::: warning Why doesn't the graph resemble the map?
+A common thought when viewing a graph such as the one above is that it does not resemble the way that the United States are laid out geographically on a map. That is true. In this case, it the graph appears somewhat as an inverted version of the USA, with Florida's location in the North Central, while geographically it is in the Southeast. 
+
+The reason for this depiction is that the Graphviz graphing engine does not know anything about geography. It builds the graph from the relationships and lays them out in a manner which most efficiently utilizes the diagram space so that collisions between the shapes and lines is minimized.
+:::
 
 By releasing the mental paradigm of where shape and line placements should occur you will reap the benefit of rapid visualizations. Give the Relationship Visualizer a bunch of simple **'A' is related to 'B'** statements, and it will give back a big-picture graphical depiction of the data.
 
