@@ -62,8 +62,8 @@ The Relationship Visualizer removes much of the burden of understanding the DOT 
   </div>
 
   <div class="feature" id="tutorial">
-    <h2><a href="./tutorial">Visualizing Relationships</a></h2>
-    <p>Depict relationships and add meaningful elements of style</p>
+    <h2><a href="./tutorial">Adding Style</a></h2>
+    <p>Add meaningful elements of style to your Graphviz graphs</p>
   </div>
 
   <div class="feature" id="views">

@@ -3,13 +3,11 @@ prev: /create/
 next: /views/
 ---
 
-# Creating Relationship Visualizations
+# Adding Style
 
 ## Introduction
 
-In the previous chapter, we saw how to use the basic features to create graphs. Now we will turn our attention to showing how to depict relationships and add meaningful elements of style to the nodes and edges that help distinguish the relationships.
-
-The introduction section of this manual showed the power of using state border relationships to convert a list in Excel into a graph connecting the states. This was possible because there were individual rows for each state and the state it borders. This is a common way to represent data in Excel and assumes there is an implied relationship from one column to another column. The relationship is typically described in the column heading. Since many spreadsheets collect data in this manner, they can all lend themselves to graphing. For example, spreadsheets containing organization chart information, lists of software installed on computers or the completion status and due dates of business projects, or team member and their skills can all be depicted.
+In the previous topic, we saw how to use the basic features to create graphs. Now we will turn our attention to showing how to depict relationships and add meaningful elements of style to the nodes and edges that help distinguish the relationships.
 
 Readers of this manual work in different industries, so the example we will use is not industry specific. This example uses the relationships between family and friends that should resonate across all readers. For this example, I am using the fictional Cunningham family from the 1970's television program Happy Days.
 
