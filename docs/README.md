@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: Excel to Graphviz
-heroImage: /hero.png
+heroImage: /hero.gif
 tagline: 
 actionText: Get Started →
 actionLink: /overview/

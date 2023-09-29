@@ -51,7 +51,7 @@ module.exports = {
     ],
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
     sidebar: "auto",
-    logo: "/hero.png",
+    logo: "/logo.png",
     // default value is true. Set it to false to hide next page links on all pages
     nextLinks: true,
     // default value is true. Set it to false to hide prev page links on all pages
