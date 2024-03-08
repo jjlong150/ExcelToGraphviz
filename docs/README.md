@@ -10,7 +10,7 @@ prev: false
 next: /install/
 ---
 
-The **Relationship Visualizer** is a **Microsoft Excel** spreadsheet that helps collect relationship information. It works with **Graphviz**, an open-source graph visualization software that generates diagrams programmatically using the DOT language. The Relationship Visualizer simplifies understanding the DOT language by allowing relationships to be expressed through text in Excel rows and columns. Macros in the spreadsheet write data in DOT format, which Graphviz interprets, and then displays the graph created.
+**Relationship Visualizer** is a Microsoft Excel spreadsheet that uses [Graphviz](https://graphviz.org/) to generate graph diagrams from textual relationships. It includes tools for creating elements of style and saving them to a style sheet, executing SQL queries, displaying the DOT source, and adding animation code to SVG graphs. It supports English, French, German, Italian, and Polish languages.
 
 <center>
 
