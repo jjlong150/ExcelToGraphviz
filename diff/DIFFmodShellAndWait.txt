@@ -1,0 +1,8 @@
+﻿174a175
+> ' Does not work with cmd
+177,178c178,179
+<         ShellAndWait = ShellAndWaitResult.Failure
+<         Exit Function
+---
+> '        ShellAndWait = ShellAndWaitResult.Failure
+> '        Exit Function
