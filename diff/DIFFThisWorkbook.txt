@@ -1,0 +1,22 @@
+﻿11d10
+< 
+14a14
+> 'MR Change
+19a20
+> 
+21a23,24
+>     'MR Change
+>     SettingsSheet.Range(SETTINGS_GV_PATH).Value = "node_modules\.bin\"
+35a39,40
+>         'MR Change
+>     gvPath = ThisWorkbook.path & "\" & gvPath
+39c44,45
+<         engine = FindFileOnPath("dot.exe")
+---
+>         'MR Change
+>         engine = FindFileOnPath("dot-wasm.cmd")
+51c57,58
+<         gvPath = gvPath & "dot.exe"
+---
+>                 'MR Change
+>         gvPath = gvPath & "dot-wasm.cmd"
