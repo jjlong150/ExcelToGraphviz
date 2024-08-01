@@ -28,7 +28,8 @@
 `style designer` Worksheet
 - Moved the gradient fill color dropdown beneath the primary fill color dropdown. `Gradient Fill` options now appear only after a second fill color is selected.
 - Cached the `Gray*` preview images under the names `Gray*` and `Grey*` for the `X11` color scheme, resulting in 100 less images being loaded into memory. The 15% reduction from 656 to 556 cached images provides performance and memory use improvements.
-- Made improvements to the `dot` source code which gets created to generate the preview images.
+- Added a new group of controls for defining `packmode` attributes. These controls are only visible when the layout on the `Graphviz` tab is set to `osage`, and the design mode on the `style designer` tab is set to cluster. The controls make it easy to specify the maximum number of components (subclusters or nodes) per row/column, row-major vs. column-major layout, shape alignments, and activation of user-defined sorting.
+- Made improvements to the `dot` source code which generates the preview images.
 
 `svg` Worksheet
 - Added a **new** pop-up form which allows editing the contents of a cell containing a large replacement string. Replacement strings can grow beyond Excel's capabilities to display as a row. This form allows you to see the entire contents of the cell, and edit it. It also makes splitting post-processing directives across multiple rows unnecessary.
