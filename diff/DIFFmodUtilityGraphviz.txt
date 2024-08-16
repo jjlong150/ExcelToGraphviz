@@ -1,0 +1,38 @@
+﻿7a8,30
+> 'MR Change
+> 
+> 
+> Public Sub ConvertFile(ByVal diagramFile As String, ByVal outputFormat As String)
+>     Dim wsh As Worksheet
+>     Dim shp As Shape
+>     Dim fil As Variant
+>     Dim cho As ChartObject
+>     Dim fso As Object
+>     Set fso = VBA.CreateObject("Scripting.FileSystemObject")
+>     'quatsch
+>     Call fso.CopyFile(diagramFile, diagramFile & ".svg", True)
+>     Set shp = InsertPicture(diagramFile & ".svg", ActiveSheet.Range("BA1"), False, True)
+>     Set wsh = ActiveSheet
+>     Set cho = wsh.ChartObjects.Add(Left:=shp.Left, Top:=shp.Top, Width:=shp.Width, height:=shp.height)
+>     shp.Copy
+>     cho.Select
+>     ActiveChart.Paste
+>     ActiveChart.Export filename:=diagramFile, FilterName:=outputFormat
+>     cho.Delete
+>     shp.Delete
+>     Set shp = Nothing
+> End Sub
+33c56,57
+<     graphvizCommand = SettingsSheet.Range(SETTINGS_GV_PATH).Value & graphEngine & " " & AddQuotes(filenameGraphviz) & " -T" & outputFormat & " -o " & AddQuotes(diagramFile) & " " & commandLineParameters
+---
+> ' MR Change
+>     graphvizCommand = AddQuotes(ThisWorkbook.path & "\" & SettingsSheet.Range(SETTINGS_GV_PATH).Value & "dot-wasm.cmd") & " -K " & graphEngine & " " & AddQuotes(filenameGraphviz) & " -T svg > " & AddQuotes(diagramFile) & " " & commandLineParameters
+37a62,69
+>     If outputFormat <> "svg" Then
+>     ConvertFile diagramFile, outputFormat
+>     End If
+>     
+>     
+>     
+>     
+>     
