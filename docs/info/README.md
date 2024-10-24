@@ -1,12 +1,12 @@
 # Info Worksheet
 
-## The `Info` Worksheet
+## The `info` Worksheet
 
-The `Info` worksheet is reached from the `Help` section of the [Launchpad](../launchpad/) ribbon tab.
+The `info` worksheet is reached from the `Help` section of the [Launchpad](../launchpad/) ribbon tab.
 
 ![](./launchpad-ribbon-tab-info-button.png)
 
-The `Info` worksheet provides information about the spreadsheet, the internal technology incorporated into the tool, and the associated Open Source licenses and [acknowledgements](../acknowledge/) required to reuse the Open Source components in a license-compliant manner.
+The `info` worksheet provides information about the spreadsheet, the internal technology incorporated into the tool, and the associated Open Source licenses and [acknowledgements](../acknowledge/) required to reuse the Open Source components in a license-compliant manner.
 
 ![](./info-worksheet.png)
 
