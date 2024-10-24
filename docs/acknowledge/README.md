@@ -15,6 +15,7 @@ The author, Jeffrey Long, extends special thanks to:
 - Paul Kelly - [_Excel Macro Mastery_](https://www.youtube.com/user/KKWin31/about?app=desktop) _YouTube videos on how to improve VBA performance_
 - Arek Czak - _Polish language translations_
 - Bart Broodcoorens - _Provided idea and collaboration on SQL cluster/subcluster enhancements. Provided idea, JavaScript code, and collaboration for SVG post-processing_
+- Christos Samaras - _Authored VBA code to run a Windows command and return messages written to stdOut. Upon request, he kindly updated the code to also capture stdErr messages._
 - Stack Overflow - _Provided solutions to so many problems_
 
 ## Third-Party Notices
@@ -27,7 +28,7 @@ The author, Jeffrey Long, extends special thanks to:
 
 Written By: [Graphviz Project Contributors](http://www.graphviz.org/credits/)
 
-Version: 3.0.0 (20220226.1711)
+Version: 3.0.0 (20220226.1711) and above
 
 Date: 26 February 2022
 
@@ -114,3 +115,13 @@ Written By: [Mathieu Guindon](https://rubberduckvba.com/About)
 Copyright © 2020 [Rubberduck Project Contributors](https://rubberduckvba.com/Attributions)
 
 Rubberduck is free software licensed under the [GPL-3.0 License](https://github.com/rubberduck-vba/Rubberduck/blob/next/LICENSE)
+
+### Execute And Capture
+
+[ExecuteAndCapture](https://myengineeringworld.net/2020/01/call-csharp-console-app-vba.html#ExecuteAndCapture)
+
+Written By: [Christos Samaras](https://myengineeringworld.net/2011/05/welcome.html)
+
+Copyright © 2020-2024, Christos Samaras
+
+Office RibbonX Editor is free software licensed under the *MIT License*
