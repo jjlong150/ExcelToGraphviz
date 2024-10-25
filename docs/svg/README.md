@@ -1,18 +1,20 @@
 # Post-processing SVG Files
 
+## What is SVG?
+
 **SVG** stands for Scalable Vector Graphics. It’s an XML-based format for describing two-dimensional vector graphics. SVG images can scale infinitely without losing quality, making them perfect for web design, logos, and illustrations. They're lightweight and support interactivity and animation.
 
 Graphviz has the ability to create `SVG` output, and it is one of the output formats available for use with the `Graph to File` feature.
 
 The Relationship Visualizer provides the ability to post-process the file to perform find and replace actions against the XML in the SVG file. One use of this capability is to insert Javascript routines for animating clusters, nodes and edges.
 
-This diagram illustrates a Graphviz graph published as SVG with animation added.
+The animated GIF image below contains a screen capture of a Graphviz graph published as SVG with animation added via post-processing.
 
 | ![](./animated-svg.gif) |
 | ----------------------- |
 
 
-## The `SVG` Worksheet
+## The `svg` Worksheet
 
 The `svg` worksheet is reached from the `Post-processing` section of the [Launchpad](../launchpad/) ribbon tab.
 
