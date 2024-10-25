@@ -20,7 +20,7 @@ Click on the `source` worksheet to make it the active worksheet. The `Source` ri
 
 ![](../media/e76a4b42d37f2dec78adf5d235f87186.png)
 
-YThe image above shows the default DOT code when the `data` worksheet does not contain any content. As you create a graph the source worksheet will update.
+The image above shows the default DOT code when the `data` worksheet does not contain any content. As you create a graph the source worksheet will update.
 
 Switch to the `data` worksheet and build a graph. Consider the following example:
 
