@@ -4,17 +4,20 @@
 
 The `info` worksheet is reached from the `Help` section of the [Launchpad](../launchpad/) ribbon tab.
 
-![](./launchpad-ribbon-tab-info-button.png)
+| ![](./launchpad-ribbon-tab-info-button.png) |
+| ------------------------------------------- |
 
 The `info` worksheet provides information about the spreadsheet, the internal technology incorporated into the tool, and the associated Open Source licenses and [acknowledgements](../acknowledge/) required to reuse the Open Source components in a license-compliant manner.
 
-![](./info-worksheet.png)
+| ![](./info-worksheet.png) |
+| ------------------------- |
 
 ## The `Info` Ribbon Tab
 
 The `Info` ribbon tab is activated whenever the `Info` worksheet is activated. It appears as follows:
 
-![](./info-ribbon-tab.png)
+| ![](./info-ribbon-tab.png) |
+| -------------------------- |
 
 It contains the following major groups:
 
@@ -40,7 +43,7 @@ The `Repositories` section provides web links to the **official** web pages and 
 
 ::: warning
 
-At this time there are no sanctioned clones of these repositories. Cloned copies, however, have been found on the internet. If you obtained your copy of the Relationship Visualizer from someplace other than these sites you may be running an out-of-date version, or a potentially security-compromised version. 
+At this time, there are no author-sanctioned clones of these repositories. However, cloned copies have been found on the internet. If you obtained your copy of the Relationship Visualizer from somewhere other than the sites these buttons link to, you may be running an out-of-date or potentially security-compromised version.
 
 :::
 
@@ -67,13 +70,13 @@ If you would like to learn more about the author of this tool and website you ma
 | ![](./info-ribbon-tab-donate.png) |
 | -------------------------------------------------- |
 
-**Excel to Graphviz / Relationship Visualizer** is provided as free software. It does, however, cost the author money in Microsoft Office licenses, DNS charges, and Windows and Mac equipment to provide this free software (in addition to his time). 
+Excel to Graphviz / Relationship Visualizer is **free** software. However, it does cost the author personal money and time to provide this software for free.
 
-If you would like to show your appreciation for this free tool, you can make a monetary contribution through the **Buy Me A Coffee** website.
+If you would like to show your appreciation for this **free** tool, you can buy the author a coffee through the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website.
 
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Donate | Button        | Provides a link to the **Buy Me A Coffee** web site where you can make a monetary contribution to the author to show your appreciation for this free software and awesome web site. |
+| Donate | Button        | Provides a link to the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website where you can show your appreciation to the author for this free software and awesome web site. |
 
 ### Help
 
