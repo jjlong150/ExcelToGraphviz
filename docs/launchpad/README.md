@@ -15,7 +15,7 @@ The `Launchpad` tab appears as follows on Microsoft Windows:
 
 The `Launchpad` tab appears as follows on macOS:
 
-| ![]() |
+| ![](./launchpad-ribbon-macos.png) |
 | --------------------------- |
 
 It groups the worksheets into the following sections:
