@@ -47,6 +47,24 @@ module.exports = {
     editLinkText: "",
     lastUpdated: false,
     nav: [
+      {
+        text: "Download",
+        items: [
+          { text: "- Graphviz", link: "https://graphviz.org/download/" },
+          {
+            text: "- Relationship Visualizer", link: "https://sourceforge.net/projects/relationship-visualizer/",
+          },
+        ],
+      },      {
+        text: "Install",
+        items: [
+          { text: "- Microsoft Windows", link: "/install-win/" },
+          {
+            text: "- macOS", link: "/install-mac/",
+          },
+        ],
+      },
+      { text: "Donate", link: "https://buymeacoffee.com/exceltographviz"},
       { text: "About...", link: "/about/" },
     ],
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
