@@ -74,7 +74,7 @@ Microsoft does not provide the libraries needed to execute SQL statements on Mac
 
 The `svg` worksheet provides capabilities to perform find and replace commands against graphs published in Scalable Vector Grapics (SVG) format. The find and replace statements act as post-processing commands which allow you to do things such as insert Javascript code to make the graphs dynamic.
 
-This worksheet is described in the section **TBD**.
+This worksheet is described in the section [Post-processing SVG Files](../svg/).
 
 |![](../media/worksheet_svg.png)|
 |-------------------------------|
