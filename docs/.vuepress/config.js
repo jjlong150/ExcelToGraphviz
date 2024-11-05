@@ -55,7 +55,8 @@ module.exports = {
             text: "- Relationship Visualizer", link: "https://sourceforge.net/projects/relationship-visualizer/",
           },
         ],
-      },      {
+      },      
+      {
         text: "Install",
         items: [
           { text: "- Microsoft Windows", link: "/install-win/" },
@@ -64,8 +65,62 @@ module.exports = {
           },
         ],
       },
-      { text: "Donate", link: "https://buymeacoffee.com/exceltographviz"},
-      { text: "About...", link: "/about/" },
+      {
+        text: "Worksheets",
+        items: [
+          { text: "Data",
+            items: [
+              { text: "- data", link: "/create/#the-data-worksheet" },
+              { text: "- graph", link: "/create/#graph-to-worksheet" },
+            ],
+          },
+          { text: "Style",
+            items: [
+              { text: "- style designer", link: "/tutorial/#the-style-designer-ribbon-tab" },
+              { text: "- styles", link: "/styles/" },      
+            ],
+          },
+          { text: "Data Exchange",
+            items: [
+              { text: "- sql", link: "/sql/" },
+              { text: "- json", link: "/exchange/" },      
+            ],
+          }, 
+          { text: "Post-processing",
+            items: [
+              { text: "- svg", link: "/svg/" },
+            ],
+          }, 
+          { text: "Graphviz dot",
+            items: [
+              { text: "- source", link: "/source/" },
+              { text: "- console", link: "/console/" },      
+              { text: "- attributes", link: "/workbook/#help-attributes-worksheet" },     
+              { text: "- colors", link: "/workbook/#help-colors-worksheet" },     
+              { text: "- shapes", link: "/workbook/#help-shapes-worksheet" },     
+            ],
+          }, 
+          { text: "Maintenance",
+            items: [
+              { text: "- diagnostics", link: "/diagnostics/" },
+              { text: "- lists", link: "/lists/" },      
+              { text: "- settings", link: "/settings/" },      
+            ],
+          }, 
+          { text: "Information",
+            items: [
+              { text: "- info", link: "/info/" },  
+            ],
+          }, 
+        ],
+      },
+      { text: "About...", 
+        items: [
+          { text: "- About Excel to Graphviz", link: "/about/" },
+          { text: "- Acknowledgements", link: "/acknowledge/" },
+          { text: "- Donate", link: "https://buymeacoffee.com/exceltographviz"},
+        ]
+      },
     ],
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
     sidebar: "auto",
@@ -78,6 +133,7 @@ module.exports = {
   head: [["link", { rel: "icon", href: "/favicon.ico" }]],
   plugins: [
     ["@vuepress/active-header-links"],
+    ["vuepress-plugin-simple-analytics"],
     [
       "vuepress-plugin-container",
       {
