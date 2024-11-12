@@ -51,6 +51,7 @@
 - Made improvements to the `dot` source code which generates the preview images. 
   - Cluster previews now show 7 nodes so the effects of `packmode` attibutes are visible.
   - Edge previews now provide language translations of "HEAD" and "TAIL" labels
+- Added emoji and symbol fonts to the list of fonts.
   
 `styles` Worksheet
 - Added a **new** ribbon tab for the `styles` worksheet.
