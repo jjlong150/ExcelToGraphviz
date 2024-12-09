@@ -6,88 +6,320 @@ next: /install/
 
 # Overview
 
-## Foreword
-
-**Relationships** are the way in which two or more concepts, objects, or people are connected.
-
-**Visualization** is any technique for creating images, diagrams, or animations to communicate a message. Visualization through visual imagery has been an effective way to communicate both abstract and concrete ideas since the dawn of man. Examples from history include cave paintings, Egyptian hieroglyphs, Greek geometry, and Leonardo da Vinci's revolutionary methods of technical drawing for engineering and scientific purposes.
-
-![](../media/8b176479a31fcfd1638b99a3824f2f95.png)
-
-Individuals often ask to be shown the "big picture", that broad, overall perspective of a problem or situation. So much so that related common clichés or adages have found their way into our vocabulary.
-
-- _"A picture is worth a thousand words"_ refers to the notion that a complex idea can be conveyed with just a single still image. It also aptly characterizes one of the main goals of visualization, namely making it possible to absorb large amounts of data quickly.
-- _"He/she can't see the forest for the trees"_ refers to the inability to discern an overall pattern from a mass of detail; or to see the broader, more general situation.
-
-If big picture views are so valued, then why are they so uncommon? The simple answer is that big picture views are hard to produce. Think of it this way, it is much easier to read a map than it is to draw a map. Often, we are drowning in volumes of data, and drawing diagrams is a difficult and time consuming task.
-
-The **Relationship Visualizer for Excel** tool described in this manual derived from personal work to solve this conundrum. A philosophy of breaking a complex situation into descriptions of its simplest relationships guided the solution. Since people are comfortable collecting data in Microsoft Excel, it made for the ideal data entry tool. Finally, pairing Microsoft Excel with the free, open-source graphing engine Graphviz facilitated converting the data in spreadsheets into graphs and views providing alternate perspectives.
-
-The Relationship Visualizer tool was inspired by the work of Martin F. James, and his visualization tool **Lego™ Charts for Excel** which you can learn about and obtain at <http://sourceforge.net/projects/legocharts/> . Martin's tool is a brilliant piece of work and makes an excellent companion for the Relationship Visualizer.
-
-I hope you find this tool useful.
-
-_Jeff Long_
-
-[Relationship.Visualizer@gmail.com](mailto:Relationship.Visualizer@gmail.com)
-
 ## Introduction
 
-Everything around us has relationships. These relationships can be between two or more concepts, objects, people, etc. Relationships describe the state of being connected. For example, an apple is related to an apple tree; an apple tree is related to an orchard; an orchard is related to a plot of land; a plot of land is related to an owner as well as a geographical location.
+The **Relationship Visualizer** lets you easily collect relationship information in Excel and quickly create relationship graphs.
 
-It can be difficult to see the breadth of relationships because either the information about the connections is spread across many people and sources, or the volume of information makes the challenge of depicting the relationships too daunting. The Relationship Visualizer makes it easy to capture relationships using language and see the relationships in pictures using graphs.
+It automatically draws relationship diagrams from high-level instructions, handling details like shape placement and connecting lines. While it offers many customization options, it’s not designed for precise, pixel-perfect control. If you need exact placement or like to draw freehand, this tool might not be suitable for you.
 
-Let's look at a simple example. The states in the United States of America are related through the borders they share.
+This tool is perfect for those who want quick visualizations with minimal effort and aren't concerned with detailed placement. Just provide simple 'A is related to B' statements, and the *Relationship Visualizer* will generate a comprehensive graphical depiction of the data.
 
-- Michigan shares a border with Ohio, Indiana, and Wisconsin.
-- Wisconsin shares a border with Illinois, Iowa, Minnesota, and Michigan.
-- And so on…
+The *Relationship Visualizer* can be thought of as an Integrated Development Environment (IDE) for creating Graphviz graphs, utilizing Excel as its tool framework. It offers comprehensive facilities for modeling, writing, testing, debugging, and managing Graphviz code efficiently within a tabbed, worksheet-based interface.
 
-In businesses throughout the world people like to step up to white boards and draw these relationships as shape and lines because it is simple to represent the concept, and as the old adages says "a picture is worth a thousand words". Using the examples above, the pictures of the border relationships described above is graphed as follows:
+The best way to showcase the capabilities of the *Relationship Visualizer* is through visual examples.
 
-|![](../media/081d777dcae8dab7c587419879c93d01.png)|
-|---------------------|
+## Visualize Relationships
 
-and
+### Collect Data
 
-|![](../media/1a959d5c9c58221f357de2d4073b7d89.png)|
-|---------------------|
+The `data` worksheet is where you construct your relationships to be graphed.
 
-As the number of relationships grow, people tend to abandon the pictures, and revert to collecting the information in lists. Microsoft Excel is an excellent tool for this task, and people find it easy to use. To capture the state border relationships in this example, one only needs two columns in Excel, a column containing the name of the state, and another column containing the name of the state which it borders. It only takes a small amount of time to collect the information for all 50 states in a table such as:
+The following image shows the well-known graph from the [Graphviz](https://graphviz.org/) home page as reconstructed using the Relationship Visualizer.
 
-|![](../media/2dee9ff79785021d814c368cd9818724.png)|
-|---------------------|
+| ![](./graphviz_classic_example.png) |
+| -------------------------------------------------- |
 
-Contrast entering information into Excel with illustrating the state border relationships for all 50 states in a drawing. Most people would agree that it would be a tedious, time-consuming task. First you would need to have access to a drawing tool such as Visio. Next you would need to create 50 shapes to depict each of the states. You would then need to connect all the shapes with lines, and finally you would need to arrange the shapes to optimize the drawing so that shapes are spaced evenly, and the lines do not cross over one another. Each time you move a shape it will require moving other shapes and lines until a crisp, balanced view is created. Most people are not willing devote the time necessary to create such a drawing when the information can be collected in Excel in a fraction of the time.
+In real life, large data-driven graphs can be constructed easily by simply supplying two columns of data, as shown below:
 
-While collecting the information in Excel might be expedient, some problems are easier to solve using a picture. If we were give the question **"What is the least number of states you must pass through to get from Michigan to California, and what are the names of those states?"** the answer can be found in the Excel table data, but it won't be easy. Getting the answer however will take many, many enumerations, jumping from row to row.
+| ![](./large_graph_no_style.png) |
+| -------------------------------------------------- |
 
-The easier way to solve this problem is to see the information in a graph and walk the connections with your finger. Your eyes will scan ahead to see the shortest routes, and you can count which path leads to the lowest number.
+### Display Graphs
 
-The Relationship Visualizer gives you the ability to use the ease of collecting relationship information as a list within Excel and draw relationship graphs within seconds. Copying the data from the table above into the Relationship Visualizer and asking it to generate a graph turns the data into the following visual information:
+The *Relationship Visualizer* leverages Excel's zoom in/zoom out, and scrolling capabilities to display graphis in a `graph` worksheet.
 
-|![](../media/usa.png)|
-|---------------------|
+|![](./large_graph_no_style_zoom_out.png) |
+| -------------------------------------------------- |
 
-From here we can begin to determine that the route which connects Michigan and California through the least number of borders would occur approximately along a straight line from Michigan to California. This line is depicted by the blue arrow drawn on the graph below.
+Here you can play with various options in the Ribbon Tab above to see different Graphviz interpretations of the data. The image below changes the orientation of the image above from "Left to Right", to "Top to Bottom".
 
-|![](../media/united_states_routes.png)|
-|---------------------|
+| ![](./large_graph_no_style_zoom_out_tb.png) |
+| -------------------------------------------------- |
 
-We can draw orange lines on this graph to depict a route which answers the question **"What is the least number of states you must pass through to get from Michigan to California?"** Our eyes quickly tell us that six states are least number of states that must be crossed.
+You can also use change the Graphviz graphing attributes with the click of a button and see the effect on your graph. In the following graph the type of edges has been changed from `splines`, to `ortho`
 
-The graph shows us that there are multiple answers to the question "and what are the names of those states?" The answer we have drawn in orange lines is "Wisconsin, Iowa, Nebraska, Wyoming, Utah, and Nevada", however scanning the graph visually we can see there are alternate portions of the route which keeps the number of states at 6, but directs you through different states. These segments are depicted by the green, red, and purple lines.
+| ![](./large_graph_no_style_zoom_out_tb_ortho.png) |
+| -------------------------------------------------- |
 
-::: warning Why doesn't the graph resemble the map?
-A common thought when viewing a graph such as the one above is that it does not resemble the way that the United States are laid out geographically on a map. That is true. In this case, it the graph appears somewhat as an inverted version of the USA, with Florida's location in the North Central, while geographically it is in the Southeast. 
+### Design Styles
 
-The reason for this depiction is that the Graphviz graphing engine does not know anything about geography. It builds the graph from the relationships and lays them out in a manner which most efficiently utilizes the diagram space so that collisions between the shapes and lines is minimized.
-:::
+The *Relationship Visualizer* makes it easy to create combinations of Graphviz style attributes which can be applied to nodes, edges, or clusters. It provides a `style designer` worksheet to define the styles, and a `styles` worksheet to provide a gallery of styles which can be selected for a given row on the `data` worksheet (similar to CSS on HTML).
 
-By releasing the mental paradigm of where shape and line placements should occur you will reap the benefit of rapid visualizations. Give the Relationship Visualizer a bunch of simple **'A' is related to 'B'** statements, and it will give back a big-picture graphical depiction of the data.
+Here the `style designer` is being used to create a style of edge which is dark green (Green4) in color, and does not have an arrow head.
 
-## Caveats
+| ![](./style_designer_edge.png) |
+| -------------------------------------------------- |
 
-Given very high-level instructions, the Relationship Visualizer will draw graphs for you, considering all the low-level details such as the optimal placement of shapes and the lines that connect them. Though you have a large choice of customization options and can control the final output in many ways, it is not at all easy to force DOT to produce exactly what you want, down to the pixel. If you want to control every single pixel in your diagram, or if you are an artistic person who likes to draw free hand, then this tool is not for you.
+[Learn more...](../tutorial/#using-the-style-designer-worksheet)
 
-This tool is intended for the person who wants the visualization performed with the minimum effort and without caring too much about the details of how the diagram was produced.
+### Save Styles
+The Green Line on the London Underground is the "District" line. We click the `Add to 'styles'` button. On the `styles` worksheet the format string is saved on a row named **District** along with a preview image showing what the format string looks like.
+
+Notice that Style Names have been created for each of the subway lines, and set to their designated color. We will see them used just ahead.
+
+| ![](./styles_worksheet.png) |
+| -------------------------------------------------- |
+
+Cluster and node formats are created in similar fashion. This image shows the other elements which have been defined to depict the London Underground. For example, stations are depicted with a square shape, and interchanges are depicted by a circle.
+
+| ![](./styles_worksheet_nodes.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../styles/)
+
+### Apply Styles
+
+Styles are applied to data rows via a `Style Name` column on the `data` worksheet. Style Names selected from a dropdown list populated with the names on the `styles` worksheet.
+
+In the image below each subway line is now depicted in its assigned colors, and shapes imply if a stop is a regular station, or an interchange.
+
+| ![](./styles_applied.png) |
+| -------------------------------------------------- |
+
+### Cluster Elements
+
+The *Relationship Visualizer* lets you easily cluster nodes by adding rows containing `{` and `}` at the start and end of the cluster respectively. Clusters can have assigned styles, and clusters may contain other clusters.
+
+This graph depicts different areas of London, and the postal districts in which the stations are located.
+
+| ![](./clusters.png) |
+| -------------------------------------------------- |
+
+### Split Data into Views
+
+The *Relationship Visualizer* allows you to have multiple views of the same data by enabling or disabling styles on the `styles` worksheet. It generates graphs that include only the elements of the enabled styles.
+
+In this example the `styles` worksheet modified to have one column per subway line, which only enables the styles for that subway line.
+
+| ![](./view_columns.png) |
+| -------------------------------------------------- |
+
+The column names appear in a `View` dropdown list on the `Graphviz` tab. Selecting a view name redraws the graph to include only the styles where a value of yes is present in that column.
+
+In the image below, selecting the "DLR" subway line from the `View` dropdown highlights the areas of London served by the DLR and its stations, while filtering out the rest of the London Underground.
+
+
+| ![](./dlr_view.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../views/)
+
+## Import Data Using SQL
+
+Typically, Excel data worksheets are created manually or exported from other applications. With the Relationship Visualizer, creating large graphs from these datasets is straightforward, as it supports importing data from other workbooks using SQL.
+
+In our London Underground example, we have a `London Underground Data.xlsx` workbook containing two worksheets.
+
+- A `London tube lines` worksheet details which stations connect on each tube line.
+-  A `London stations` worksheet provides detailed information on each underground station.
+ 
+They appear as follows:
+
+| ![](./london_tube_lines_xlsx.png) |
+| -------------------------------------------------- |
+| ![](./london_tube_stations_xslx.png) |
+
+
+We write a SQL statement to extract data for **edge** relationships:
+
+```
+SELECT [From Station] AS [Item], [To Station] AS [Related Item], [Tube Line] AS [Style Name]
+FROM   [London tube lines$]
+```
+
+And we write a SQL statement to extract data for **nodes**.
+
+```
+SELECT [Station] AS [Item], [Station] AS [Label], [Station Type] AS [Style Name]
+FROM   [London stations$]
+```
+
+The `sql` worksheet in the *Relationship Visualizer* appears as:
+
+| ![](./sql_edges_and_nodes.png) |
+| -------------------------------------------------- |
+
+Pressing a button executes the SQL statements, which import the data and map it to the appropriate columns for visualization. It really is that simple!
+
+[Learn more...](../sql/)
+
+## Publish Graphs
+
+### Graph to File
+
+Once you have created a graph to your satisfaction, a push of a button creates the graph as an external file. 
+
+You can publish graphs in the following formats: `bmp`, `gif`, `jpg`, `pdf`, `png`, `ps`, `svg`, `tiff`, `json`, `dot`
+
+### All Views to File
+
+You can publish a single graph, or use the `All views to file` button to automatically cycle through all the view names, publishing each view as its own file. In this example, Windows Explorer displays the results after all the various London Underground lines have been published as graphs.
+
+| ![](./file_explorer.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../publish/)
+
+## SVG Features
+
+**SVG**, or Scalable Vector Graphics, is an XML-based file format used for creating and displaying vector images that are scalable to any size without losing quality.
+
+### Add Tooltips
+
+The *Relationship Visualizer* provides a tooltips column where you can provide information to be added to the graph to be displayed when a cluster, node, or edge has the mouse hover over it.
+
+In this example, we see a graph of the DLR Line exported in SVG format. When hovering over the Star Lane station, a pop-up displays its village, district, postal code, latitude, and longitude.
+
+| ![](./svg_tooltip.png) |
+| -------------------------------------------------- |
+
+### Post-Process SVG's XML
+
+The *Relationship Visualizer* provides simple post-processing support via a worksheet which can perform find/replace actions against the XML content. Out of the box the *Relationship Visualizer* can post-process SVG to insert JavaScript routines for add animation capabilities. 
+
+The `svg` worksheet containing the find/replace strings appears as follows:
+
+| ![](./svg_postprocess.png) |
+| -------------------------------------------------- |
+
+After post-processing (triggered by graphing to a file), we see that buttons have been added to the SVG file.
+
+| ![](./svg_animation_added.png) |
+| -------------------------------------------------- |
+
+And in the animation below, we see how clicking a node triggers an animation to enlarge the node, and animate the edge connections from the node.
+
+| ![](./svg_animation.gif) |
+| -------------------------------------------------- |
+
+[Learn more...](../svg/)
+
+## Graphviz Runtime Aids
+
+The *Relationship Visualizer* includes worksheets designed to help you use Graphviz effectively.
+
+### View `dot` Source Code
+
+The *Relationship Visualizer* includes a `source` worksheet that displays the dot source code generated from the data on the `data` worksheet.
+
+You can save this source code to a file or copy it to the clipboard for use in an external Graphviz tool. Links to multiple external Graphviz websites are also provided.
+
+An example appears as follows:
+
+| ![](./view_source.png) |
+| -------------------------------------------------- |
+
+A pop-up source window can be launched, enabling you to view the source while simultaneously examining your data or graph. Below is an example of the source displayed in the pop-up window.
+
+| ![](./view_source_popup.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../source/)
+
+### View `dot` Command-line Messages
+
+`dot` is the Graphviz command-line program that the *Relationship Visualizer* utilizes to generate graphs. A `console` worksheet is available, which can be activated to display the output of the `dot` command.
+
+In the example below, `dot` has been executed in `verbose` mode. The `console` worksheet displays `dot`'s diagnostic messages. Notably, the node warnings indicate that two nodes have very long labels exceeding the fixed width of the shape used to depict stations.
+
+| ![](./console.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../console/)
+
+## Graphviz Help
+
+The *Relationship Visualizer* contains three help worksheets to help you learn some of the many options Graphviz provides. 
+
+### Attributes
+
+The `HELP - attributes` worksheet provides a list of the `dot` attributes along with columns which can be filtered by layout (dot, fdp, etc.), and attribute type (node, edge, graph).
+
+| ![](./help_attributes.png) |
+| -------------------------------------------------- |
+
+### Colors
+
+The `HELP - colors` worksheet provides a visual reference of all the color schemes and colors which Graphviz supports.
+
+| ![](./help_colors.png) |
+| -------------------------------------------------- |
+
+### Shapes
+
+The `HELP - shapes` worksheet provides a visual reference of all the node shapes which Graphviz supports.
+
+| ![](./help_shapes.png) |
+| -------------------------------------------------- |
+
+## Internationalization
+
+The *Relationship Visualizer* supports multiple languages, and measurement units.
+
+### Languages
+
+The *Relationship Visualizer* provides the following language translations:
+- English (UK)
+- English (US)
+- French
+- German
+- Italian
+- Polish
+
+Simply pick your desired language from the `Launchpad` ribbon tab.
+
+| ![](./launchpad_language.png) |
+| -------------------------------------------------- |
+
+For example, changing the language to Polski (Polish) makes the `Launchpad` ribbon tab appears as:
+
+
+| ![](./launchpad_language_polski.png) |
+| -------------------------------------------------- |
+
+Translations were performed by machine and may contain minor errors. Fortunately, all language translations are contained in worksheets. From the `Launchpad`, you can unhide the appropriate worksheet and edit the translation as needed.
+
+| ![](./language_polski.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../launchpad/)
+
+### Measurement Units
+
+Graphviz uses inches as its unit of measurement for shapes. The `Launchpad` will let you choose Metric units for `style designer` dropdown lists. When `Metric Units` are chosen, measurements in dropdown lists are presented in centimeters, and converted to inches when passed to `dot'.
+
+## JSON Data Exchange
+
+The *Relationship Visualizer* provides capabilities to generate a text-based representation of the data, styles, and settings in a JSON format. The features supporting the export and import of spreadsheet data are found in the `Exchange` workbook tab.
+
+| ![](./data_exchange.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../exchange/)
+
+## Diagnostics
+
+The *Relationship Visualizer* includes a diagnostics worksheet that provides essential information on software versions and directory paths, useful for troubleshooting and addressing questions.
+
+| ![](./diagnostics_worksheet.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../diagnostics/)
+
+## Info
+
+The *Relationship Visualizer* includes an `info` worksheet that provides details about the spreadsheet, the internal technology incorporated into the tool, and the associated open-source licenses and acknowledgements needed to reuse the open-source components in a license-compliant manner.
+| ![](./info_worksheet.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../info/)
