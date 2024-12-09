@@ -8,15 +8,7 @@ next: /install/
 
 ## Introduction
 
-The **Relationship Visualizer** lets you easily collect relationship information in Excel and quickly create relationship graphs.
-
-It automatically draws relationship diagrams from high-level instructions, handling details like shape placement and connecting lines. While it offers many customization options, it’s not designed for precise, pixel-perfect control. If you need exact placement or like to draw freehand, this tool might not be suitable for you.
-
-This tool is perfect for those who want quick visualizations with minimal effort and aren't concerned with detailed placement. Just provide simple 'A is related to B' statements, and the *Relationship Visualizer* will generate a comprehensive graphical depiction of the data.
-
-The *Relationship Visualizer* can be thought of as an Integrated Development Environment (IDE) for creating Graphviz graphs, utilizing Excel as its tool framework. It offers comprehensive facilities for modeling, writing, testing, debugging, and managing Graphviz code efficiently within a tabbed, worksheet-based interface.
-
-The best way to showcase the capabilities of the *Relationship Visualizer* is through visual examples.
+The **Relationship Visualizer** allows you to effortlessly collect relationship information in Excel and rapidly create relationship graphs. The most effective way to demonstrate its capabilities is through visual examples.
 
 ## Visualize Relationships
 
