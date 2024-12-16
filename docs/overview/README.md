@@ -14,14 +14,7 @@ The **Relationship Visualizer** allows you to effortlessly collect relationship 
 
 ### Collect Data
 
-The `data` worksheet is where you construct your relationships to be graphed.
-
-The following image shows the well-known graph from the [Graphviz](https://graphviz.org/) home page as reconstructed using the Relationship Visualizer.
-
-| ![](./graphviz_classic_example.png) |
-| -------------------------------------------------- |
-
-In real life, large data-driven graphs can be constructed easily by simply supplying two columns of data, as shown below:
+The `data` worksheet is where you construct your relationships to be graphed. Large data-driven graphs can be constructed easily by simply supplying two columns of data, as shown below:
 
 | ![](./large_graph_no_style.png) |
 | -------------------------------------------------- |
@@ -33,15 +26,42 @@ The *Relationship Visualizer* leverages Excel's zoom in/zoom out, and scrolling 
 |![](./large_graph_no_style_zoom_out.png) |
 | -------------------------------------------------- |
 
-Here you can play with various options in the Ribbon Tab above to see different Graphviz interpretations of the data. The image below changes the orientation of the image above from "Left to Right", to "Top to Bottom".
+### Choose Graph Options
 
-| ![](./large_graph_no_style_zoom_out_tb.png) |
+The *Relationship Visualizer* enhances Excel's menu bar and provides all its User Interface controls through Excel's Fluent UI Ribbon tabs. Each control offers robust screen tips, providing helpful information when you hover the mouse over it.
+
+Here is the screen tip displayed when the mouse hovers over the `Output Order` control.
+
+| ![](./graphviz_ribbon_output_order.png) |
 | -------------------------------------------------- |
 
-You can also use change the Graphviz graphing attributes with the click of a button and see the effect on your graph. In the following graph the type of edges has been changed from `splines`, to `ortho`
+Changing Graphviz options in the Ribbon Tab allows for different Graphviz interpretations of the data. Let's explore examples of *Graph Direction* and *Edge Appearance*.
 
-| ![](./large_graph_no_style_zoom_out_tb_ortho.png) |
-| -------------------------------------------------- |
+- **Graph Direction**
+
+    Graph direction can be selected from a dropdown list. Choices include `Top to Botton`, `Bottom to Top`, `Left to Right`, and `Right to Left`.
+
+    | ![](./graphviz_ribbon_rankdir.png) |
+    | -------------------------------------------------- |
+
+    Here we see the direction of the previous graph has changed from `Left to Right`, to `Top to Bottom`.
+
+    | ![](./large_graph_no_style_zoom_out_tb.png) |
+    | -------------------------------------------------- |
+
+- **Edge Appearance**
+
+    You can select how edges are drawn from the `Splines` dropdown list. Options include `compound`, `curved`, `line`, `None`, `ortho`, `polyline`, `spline`, `true`, and `false`.
+
+    | ![](./graphviz_ribbon_splines.png) |
+    | -------------------------------------------------- |
+
+    This images shows the previous graph with the edges changed from `splines`, to `ortho`
+
+    | ![](./large_graph_no_style_zoom_out_tb_ortho.png) |
+    | -------------------------------------------------- |
+
+[Learn more...](../workbook/#fluent-ui-ribbon-tabs)
 
 ### Design Styles
 
@@ -55,6 +75,7 @@ Here the `style designer` is being used to create a style of edge which is dark 
 [Learn more...](../tutorial/#using-the-style-designer-worksheet)
 
 ### Save Styles
+
 The Green Line on the London Underground is the "District" line. We click the `Add to 'styles'` button. On the `styles` worksheet the format string is saved on a row named **District** along with a preview image showing what the format string looks like.
 
 Notice that Style Names have been created for each of the subway lines, and set to their designated color. We will see them used just ahead.
