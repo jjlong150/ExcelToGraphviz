@@ -1,5 +1,5 @@
 ---
-prev: /workbook/
+prev: /install/
 next: /tutorial/
 ---
 

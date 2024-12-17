@@ -118,7 +118,7 @@ module.exports = {
         items: [
           { text: "- About Excel to Graphviz", link: "/about/" },
           { text: "- Acknowledgements", link: "/acknowledge/" },
-          { text: "- Donate", link: "https://buymeacoffee.com/exceltographviz"},
+          { text: "- Donate ☕", link: "https://buymeacoffee.com/exceltographviz"},
         ]
       },
     ],

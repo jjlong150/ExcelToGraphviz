@@ -1,6 +1,6 @@
 ---
 prev: /install/
-next: /terminology/
+next: /create/
 ---
 
 # Microsoft Windows Installation Instructions

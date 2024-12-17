@@ -1,6 +1,6 @@
 ---
 prev: /
-next: /terminology/
+next: /create/
 ---
 
 # Installation Instructions

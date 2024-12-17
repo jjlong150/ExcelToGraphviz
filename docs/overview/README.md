@@ -1,14 +1,12 @@
 ---
-footer: Copyright (c) 2017-2023 Jeffrey J. Long
+footer: Copyright © 2017-2024 Jeffrey J. Long
 prev: /
 next: /install/
 ---
 
 # Overview
 
-## Introduction
-
-The **Relationship Visualizer** allows you to effortlessly collect relationship information in Excel and rapidly create relationship graphs. The most effective way to demonstrate its capabilities is through visual examples.
+The *Relationship Visualizer* allows you to effortlessly collect relationship information in Microsoft Excel and rapidly create relationship graphs. The most effective way to demonstrate its capabilities is through visual examples.
 
 ## Visualize Relationships
 
