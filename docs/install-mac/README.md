@@ -5,7 +5,7 @@ next: /terminology/
 
 # macOS Installation Instructions
 
-## TLDR Instructions
+## Brief Instructions
 
 Perform these steps to install **Excel to Graphviz** on **macOS**
 
@@ -53,7 +53,7 @@ Perform these steps to install **Excel to Graphviz** on **macOS**
     `Relationship Visualizer.xlsm`
 
 11. Enable macros, and grant permissions when prompted
-12. Optional - Save the file as a template for creating future spreadsheets.
+12. Save the file as a template for creating future spreadsheets.
 
 ## Detailed Instructions
 
@@ -171,7 +171,7 @@ Excel to Graphviz performs its work using VBA macros. When you launch the file, 
 | ![](./enable-macros.png) |
 | ------- |
 
-### Optional - Save `Relationship Visualizer.xlsm` as a template.
+### Save `Relationship Visualizer.xlsm` as a template.
 
 Once you enable the macros, the full spreadsheet appears as:
 
