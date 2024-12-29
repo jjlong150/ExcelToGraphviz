@@ -125,7 +125,60 @@ In the image below, selecting the "DLR" subway line from the `View` dropdown hig
 
 [Learn more...](../views/)
 
-## Import Data Using SQL
+## Publish Graphs
+
+### Graph to File
+
+Once you have created a graph to your satisfaction, a push of a button creates the graph as an external file. 
+
+You can publish graphs in the following formats: `bmp`, `gif`, `jpg`, `pdf`, `png`, `ps`, `svg`, `tiff`, `json`, `dot`
+
+### All Views to File
+
+You can publish a single graph, or use the `All views to file` button to automatically cycle through all the view names, publishing each view as its own file. In this example, Windows Explorer displays the results after all the various London Underground lines have been published as graphs.
+
+| ![](./file_explorer.png) |
+| -------------------------------------------------- |
+
+[Learn more...](../publish/)
+
+## Enhance SVG Output
+
+**SVG**, or Scalable Vector Graphics, is an XML-based file format used for creating and displaying vector images that are scalable to any size without losing quality.
+
+### Add Tooltips
+
+The *Relationship Visualizer* provides a tooltips column where you can provide information to be added to the graph to be displayed when a cluster, node, or edge has the mouse hover over it.
+
+In this example, we see a graph of the DLR Line exported in SVG format. When hovering over the Star Lane station, a pop-up displays its village, district, postal code, latitude, and longitude.
+
+| ![](./svg_tooltip.png) |
+| -------------------------------------------------- |
+
+### Add Animation
+
+The *Relationship Visualizer* provides simple post-processing support via a worksheet which can perform find/replace actions against the XML content. Out of the box the *Relationship Visualizer* can post-process SVG to insert JavaScript routines for add animation capabilities. 
+
+The `svg` worksheet containing the find/replace strings appears as follows:
+
+| ![](./svg_postprocess.png) |
+| -------------------------------------------------- |
+
+After post-processing (triggered by graphing to a file), we see that buttons have been added to the SVG file.
+
+| ![](./svg_animation_added.png) |
+| -------------------------------------------------- |
+
+And in the animation below, we see how clicking a node triggers an animation to enlarge the node, and animate the edge connections from the node.
+
+| ![](./svg_animation.gif) |
+| -------------------------------------------------- |
+
+[Learn more...](../svg/)
+
+## Exchange Information
+
+### Import Spreadsheet Data Using SQL
 
 Typically, Excel data worksheets are created manually or exported from other applications. With the Relationship Visualizer, creating large graphs from these datasets is straightforward, as it supports importing data from other workbooks using SQL.
 
@@ -164,62 +217,20 @@ Pressing a button executes the SQL statements, which import the data and map it 
 
 [Learn more...](../sql/)
 
-## Publish Graphs
+### Export to JSON / Import from JSON
 
-### Graph to File
+The *Relationship Visualizer* provides capabilities to generate a text-based representation of the data, styles, and settings in a JSON format. The features supporting the export and import of spreadsheet data are found in the `Exchange` workbook tab.
 
-Once you have created a graph to your satisfaction, a push of a button creates the graph as an external file. 
-
-You can publish graphs in the following formats: `bmp`, `gif`, `jpg`, `pdf`, `png`, `ps`, `svg`, `tiff`, `json`, `dot`
-
-### All Views to File
-
-You can publish a single graph, or use the `All views to file` button to automatically cycle through all the view names, publishing each view as its own file. In this example, Windows Explorer displays the results after all the various London Underground lines have been published as graphs.
-
-| ![](./file_explorer.png) |
+| ![](./data_exchange.png) |
 | -------------------------------------------------- |
 
-[Learn more...](../publish/)
+[Learn more...](../exchange/)
 
-## SVG Features
-
-**SVG**, or Scalable Vector Graphics, is an XML-based file format used for creating and displaying vector images that are scalable to any size without losing quality.
-
-### Add Tooltips
-
-The *Relationship Visualizer* provides a tooltips column where you can provide information to be added to the graph to be displayed when a cluster, node, or edge has the mouse hover over it.
-
-In this example, we see a graph of the DLR Line exported in SVG format. When hovering over the Star Lane station, a pop-up displays its village, district, postal code, latitude, and longitude.
-
-| ![](./svg_tooltip.png) |
-| -------------------------------------------------- |
-
-### Post-Process SVG's XML
-
-The *Relationship Visualizer* provides simple post-processing support via a worksheet which can perform find/replace actions against the XML content. Out of the box the *Relationship Visualizer* can post-process SVG to insert JavaScript routines for add animation capabilities. 
-
-The `svg` worksheet containing the find/replace strings appears as follows:
-
-| ![](./svg_postprocess.png) |
-| -------------------------------------------------- |
-
-After post-processing (triggered by graphing to a file), we see that buttons have been added to the SVG file.
-
-| ![](./svg_animation_added.png) |
-| -------------------------------------------------- |
-
-And in the animation below, we see how clicking a node triggers an animation to enlarge the node, and animate the edge connections from the node.
-
-| ![](./svg_animation.gif) |
-| -------------------------------------------------- |
-
-[Learn more...](../svg/)
-
-## Graphviz Runtime Aids
+## Learn the Graphviz `dot` Language
 
 The *Relationship Visualizer* includes worksheets designed to help you use Graphviz effectively.
 
-### View `dot` Source Code
+### View/Save `dot` Source Code
 
 The *Relationship Visualizer* includes a `source` worksheet that displays the dot source code generated from the data on the `data` worksheet.
 
@@ -237,6 +248,29 @@ A pop-up source window can be launched, enabling you to view the source while si
 
 [Learn more...](../source/)
 
+### Learn `dot` Attributes
+
+The `HELP - attributes` worksheet provides a list of the `dot` attributes along with columns which can be filtered by layout (dot, fdp, etc.), and attribute type (node, edge, graph).
+
+| ![](./help_attributes.png) |
+| -------------------------------------------------- |
+
+### Learn Colors
+
+The `HELP - colors` worksheet provides a visual reference of all the color schemes and colors which Graphviz supports.
+
+| ![](./help_colors.png) |
+| -------------------------------------------------- |
+
+### Learn Shapes
+
+The `HELP - shapes` worksheet provides a visual reference of all the node shapes which Graphviz supports.
+
+| ![](./help_shapes.png) |
+| -------------------------------------------------- |
+
+## Diagnose Problems
+
 ### View `dot` Command-line Messages
 
 `dot` is the Graphviz command-line program that the *Relationship Visualizer* utilizes to generate graphs. A `console` worksheet is available, which can be activated to display the output of the `dot` command.
@@ -248,36 +282,20 @@ In the example below, `dot` has been executed in `verbose` mode. The `console` w
 
 [Learn more...](../console/)
 
-## Graphviz Help
+### View Diagnostic Information
 
-The *Relationship Visualizer* contains three help worksheets to help you learn some of the many options Graphviz provides. 
+The *Relationship Visualizer* includes a diagnostics worksheet that provides essential information on software versions and directory paths, useful for troubleshooting and addressing questions.
 
-### Attributes
-
-The `HELP - attributes` worksheet provides a list of the `dot` attributes along with columns which can be filtered by layout (dot, fdp, etc.), and attribute type (node, edge, graph).
-
-| ![](./help_attributes.png) |
+| ![](./diagnostics_worksheet.png) |
 | -------------------------------------------------- |
 
-### Colors
-
-The `HELP - colors` worksheet provides a visual reference of all the color schemes and colors which Graphviz supports.
-
-| ![](./help_colors.png) |
-| -------------------------------------------------- |
-
-### Shapes
-
-The `HELP - shapes` worksheet provides a visual reference of all the node shapes which Graphviz supports.
-
-| ![](./help_shapes.png) |
-| -------------------------------------------------- |
+[Learn more...](../diagnostics/)
 
 ## Internationalization
 
 The *Relationship Visualizer* supports multiple languages, and measurement units.
 
-### Languages
+### Set Your Language
 
 The *Relationship Visualizer* provides the following language translations:
 - English (UK)
@@ -298,6 +316,8 @@ For example, changing the language to Polski (Polish) makes the `Launchpad` ribb
 | ![](./launchpad_language_polski.png) |
 | -------------------------------------------------- |
 
+### Edit Language Translations
+
 Translations were performed by machine and may contain minor errors. Fortunately, all language translations are contained in worksheets. From the `Launchpad`, you can unhide the appropriate worksheet and edit the translation as needed.
 
 | ![](./language_polski.png) |
@@ -305,32 +325,30 @@ Translations were performed by machine and may contain minor errors. Fortunately
 
 [Learn more...](../launchpad/)
 
-### Measurement Units
+### Set Measurement Units
 
 Graphviz uses inches as its unit of measurement for shapes. The `Launchpad` will let you choose Metric units for `style designer` dropdown lists. When `Metric Units` are chosen, measurements in dropdown lists are presented in centimeters, and converted to inches when passed to `dot'.
 
-## JSON Data Exchange
+## Information and Acknowledgements
 
-The *Relationship Visualizer* provides capabilities to generate a text-based representation of the data, styles, and settings in a JSON format. The features supporting the export and import of spreadsheet data are found in the `Exchange` workbook tab.
-
-| ![](./data_exchange.png) |
-| -------------------------------------------------- |
-
-[Learn more...](../exchange/)
-
-## Diagnostics
-
-The *Relationship Visualizer* includes a diagnostics worksheet that provides essential information on software versions and directory paths, useful for troubleshooting and addressing questions.
-
-| ![](./diagnostics_worksheet.png) |
-| -------------------------------------------------- |
-
-[Learn more...](../diagnostics/)
-
-## Info
+### `info` Worksheet
 
 The *Relationship Visualizer* includes an `info` worksheet that provides details about the spreadsheet, the internal technology incorporated into the tool, and the associated open-source licenses and acknowledgements needed to reuse the open-source components in a license-compliant manner.
+
 | ![](./info_worksheet.png) |
 | -------------------------------------------------- |
 
 [Learn more...](../info/)
+
+### About...
+
+Copyright, Author, Repositories, and License information are available on this website [here](../about/).
+
+### Thank You
+
+Special thanks to key contributors are acknowledged on this website [here](../acknowledge/README.md#thank-you) as well as in the `info` worksheet.
+
+### Third-Party Notices
+
+Open-source licenses and acknowledgements required to reuse the open-source components in a license-compliant manner are available on this website [here](../acknowledge/README.md#third-party-notices) as well as in the `info` worksheet.
+
