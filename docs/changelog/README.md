@@ -1,5 +1,20 @@
 # Change Log
 
+## Version 7.1.0
+
+Fixed a bug that caused Excel to freeze when Graphviz wrote more than 4096 bytes of message output:
+
+- The *Relationship Visualizer* spreadsheet uses the `ExecuteAndCapture` routine to run Graphviz's `dot` command and capture any `dot` output messages.
+- `ExecuteAndCapture` reads messages via an interprocess pipe with a fixed size of 4096 bytes.
+- `dot` paused after writing 4096 bytes of messages, waiting for `ExecuteAndCapture` to read and clear the data from the pipe before resuming.
+- `ExecuteAndCapture` was paused, waiting for `dot` to finish before reading any data from the pipe.
+
+This resulted in a deadlock. To eliminate the deadlock:
+
+- `ExecuteAndCapture` now monitors the execution of `dot` in real-time, instead of waiting for it to complete.
+- `ExecuteAndCapture` periodically checks the pipe for data. Any data found is read and removed from the pipe.
+- `dot` is now able to pause and resume as needed until graph generation is complete and all messages are captured.
+
 ## Version 7.0.0
 
 ### Worksheet Changes
