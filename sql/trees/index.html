@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Using SQL - Trees | Excel to Graphviz</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="--- home: true heroText: Excel to Graphviz heroImage: /exceltographiz.png tagline: See the relationships">
+    
+    <link rel="preload" href="/assets/css/0.styles.85f14a5c.css" as="style"><link rel="preload" href="/assets/js/app.a9ece07a.js" as="script"><link rel="preload" href="/assets/js/6.56d8a82c.js" as="script"><link rel="preload" href="/assets/js/21.8ad48c9e.js" as="script"><link rel="prefetch" href="/assets/js/10.34530d7b.js"><link rel="prefetch" href="/assets/js/11.ad3516e7.js"><link rel="prefetch" href="/assets/js/12.c9b08f43.js"><link rel="prefetch" href="/assets/js/13.80873021.js"><link rel="prefetch" href="/assets/js/14.bb96f413.js"><link rel="prefetch" href="/assets/js/15.15502396.js"><link rel="prefetch" href="/assets/js/16.ce4b5f51.js"><link rel="prefetch" href="/assets/js/17.ae66d3ed.js"><link rel="prefetch" href="/assets/js/18.3ab39743.js"><link rel="prefetch" href="/assets/js/19.97ee2370.js"><link rel="prefetch" href="/assets/js/2.c0411b3f.js"><link rel="prefetch" href="/assets/js/20.14e67c27.js"><link rel="prefetch" href="/assets/js/22.a47fe2c2.js"><link rel="prefetch" href="/assets/js/23.47a0c243.js"><link rel="prefetch" href="/assets/js/24.77054a2a.js"><link rel="prefetch" href="/assets/js/25.0edc43a5.js"><link rel="prefetch" href="/assets/js/26.fbd71990.js"><link rel="prefetch" href="/assets/js/27.681ee3fa.js"><link rel="prefetch" href="/assets/js/28.ab70f5a2.js"><link rel="prefetch" href="/assets/js/29.e881c098.js"><link rel="prefetch" href="/assets/js/3.eed96731.js"><link rel="prefetch" href="/assets/js/30.69d2164e.js"><link rel="prefetch" href="/assets/js/31.b9db2cb9.js"><link rel="prefetch" href="/assets/js/32.e6c76160.js"><link rel="prefetch" href="/assets/js/33.e9bcde0d.js"><link rel="prefetch" href="/assets/js/34.9e12eb82.js"><link rel="prefetch" href="/assets/js/35.267d5a44.js"><link rel="prefetch" href="/assets/js/36.00fbaddf.js"><link rel="prefetch" href="/assets/js/4.3cb71bd2.js"><link rel="prefetch" href="/assets/js/5.29b59b55.js"><link rel="prefetch" href="/assets/js/7.5f2ce4e7.js"><link rel="prefetch" href="/assets/js/8.6cf181e6.js"><link rel="prefetch" href="/assets/js/9.a3f20ba8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.85f14a5c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Excel to Graphviz" class="logo"> <span class="site-name can-hide">Excel to Graphviz</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Download" class="dropdown-title"><span class="title">Download</span> <span class="arrow down"></span></button> <button type="button" aria-label="Download" class="mobile-dropdown-title"><span class="title">Download</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://graphviz.org/download/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  - Graphviz
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://sourceforge.net/projects/relationship-visualizer/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  - Relationship Visualizer
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Install" class="dropdown-title"><span class="title">Install</span> <span class="arrow down"></span></button> <button type="button" aria-label="Install" class="mobile-dropdown-title"><span class="title">Install</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/install-win/" class="nav-link">
+  - Microsoft Windows
+</a></li><li class="dropdown-item"><!----> <a href="/install-mac/" class="nav-link">
+  - macOS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Worksheets" class="dropdown-title"><span class="title">Worksheets</span> <span class="arrow down"></span></button> <button type="button" aria-label="Worksheets" class="mobile-dropdown-title"><span class="title">Worksheets</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Data
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/create/#the-data-worksheet" class="nav-link">
+  - data
+</a></li><li class="dropdown-subitem"><a href="/create/#graph-to-worksheet" class="nav-link">
+  - graph
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Style
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tutorial/#the-style-designer-ribbon-tab" class="nav-link">
+  - style designer
+</a></li><li class="dropdown-subitem"><a href="/styles/" class="nav-link">
+  - styles
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Data Exchange
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/sql/" class="nav-link router-link-active">
+  - sql
+</a></li><li class="dropdown-subitem"><a href="/exchange/" class="nav-link">
+  - json
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Post-processing
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/svg/" class="nav-link">
+  - svg
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Graphviz dot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/" class="nav-link">
+  - source
+</a></li><li class="dropdown-subitem"><a href="/console/" class="nav-link">
+  - console
+</a></li><li class="dropdown-subitem"><a href="/workbook/#help-attributes-worksheet" class="nav-link">
+  - attributes
+</a></li><li class="dropdown-subitem"><a href="/workbook/#help-colors-worksheet" class="nav-link">
+  - colors
+</a></li><li class="dropdown-subitem"><a href="/workbook/#help-shapes-worksheet" class="nav-link">
+  - shapes
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Maintenance
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/diagnostics/" class="nav-link">
+  - diagnostics
+</a></li><li class="dropdown-subitem"><a href="/lists/" class="nav-link">
+  - lists
+</a></li><li class="dropdown-subitem"><a href="/settings/" class="nav-link">
+  - settings
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Information
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/info/" class="nav-link">
+  - info
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="About..." class="dropdown-title"><span class="title">About...</span> <span class="arrow down"></span></button> <button type="button" aria-label="About..." class="mobile-dropdown-title"><span class="title">About...</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  - About Excel to Graphviz
+</a></li><li class="dropdown-item"><!----> <a href="/acknowledge/" class="nav-link">
+  - Acknowledgements
+</a></li><li class="dropdown-item"><!----> <a href="https://buymeacoffee.com/exceltographviz" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  - Donate ☕
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Download" class="dropdown-title"><span class="title">Download</span> <span class="arrow down"></span></button> <button type="button" aria-label="Download" class="mobile-dropdown-title"><span class="title">Download</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://graphviz.org/download/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  - Graphviz
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://sourceforge.net/projects/relationship-visualizer/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  - Relationship Visualizer
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Install" class="dropdown-title"><span class="title">Install</span> <span class="arrow down"></span></button> <button type="button" aria-label="Install" class="mobile-dropdown-title"><span class="title">Install</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/install-win/" class="nav-link">
+  - Microsoft Windows
+</a></li><li class="dropdown-item"><!----> <a href="/install-mac/" class="nav-link">
+  - macOS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Worksheets" class="dropdown-title"><span class="title">Worksheets</span> <span class="arrow down"></span></button> <button type="button" aria-label="Worksheets" class="mobile-dropdown-title"><span class="title">Worksheets</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Data
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/create/#the-data-worksheet" class="nav-link">
+  - data
+</a></li><li class="dropdown-subitem"><a href="/create/#graph-to-worksheet" class="nav-link">
+  - graph
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Style
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tutorial/#the-style-designer-ribbon-tab" class="nav-link">
+  - style designer
+</a></li><li class="dropdown-subitem"><a href="/styles/" class="nav-link">
+  - styles
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Data Exchange
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/sql/" class="nav-link router-link-active">
+  - sql
+</a></li><li class="dropdown-subitem"><a href="/exchange/" class="nav-link">
+  - json
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Post-processing
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/svg/" class="nav-link">
+  - svg
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Graphviz dot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/" class="nav-link">
+  - source
+</a></li><li class="dropdown-subitem"><a href="/console/" class="nav-link">
+  - console
+</a></li><li class="dropdown-subitem"><a href="/workbook/#help-attributes-worksheet" class="nav-link">
+  - attributes
+</a></li><li class="dropdown-subitem"><a href="/workbook/#help-colors-worksheet" class="nav-link">
+  - colors
+</a></li><li class="dropdown-subitem"><a href="/workbook/#help-shapes-worksheet" class="nav-link">
+  - shapes
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Maintenance
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/diagnostics/" class="nav-link">
+  - diagnostics
+</a></li><li class="dropdown-subitem"><a href="/lists/" class="nav-link">
+  - lists
+</a></li><li class="dropdown-subitem"><a href="/settings/" class="nav-link">
+  - settings
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Information
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/info/" class="nav-link">
+  - info
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="About..." class="dropdown-title"><span class="title">About...</span> <span class="arrow down"></span></button> <button type="button" aria-label="About..." class="mobile-dropdown-title"><span class="title">About...</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  - About Excel to Graphviz
+</a></li><li class="dropdown-item"><!----> <a href="/acknowledge/" class="nav-link">
+  - Acknowledgements
+</a></li><li class="dropdown-item"><!----> <a href="https://buymeacoffee.com/exceltographviz" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  - Donate ☕
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Using SQL - Trees</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sql/trees/#introduction" class="sidebar-link">Introduction</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#scenario" class="sidebar-link">Scenario</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#use-case-1-graph-everything" class="sidebar-link">Use Case 1 - Graph Everything</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#use-case-2-forward-search-from-a-node" class="sidebar-link">Use Case 2 - Forward Search from a Node</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#use-case-3-forward-search-from-a-node-with-max-depth" class="sidebar-link">Use Case 3 - Forward Search from a Node, with Max Depth</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#use-case-4-backward-search-from-a-node" class="sidebar-link">Use Case 4 - Backward Search from a Node</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#use-case-5-backward-search-from-a-node-with-max-depth" class="sidebar-link">Use Case 5 - Backward Search from a Node, with Max Depth</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#use-case-6-combining-queries-to-highlight-edges" class="sidebar-link">Use Case 6 - Combining Queries to Highlight Edges</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/sql/trees/#sample-content" class="sidebar-link">Sample Content</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="using-sql-trees"><a href="#using-sql-trees" class="header-anchor">#</a> Using SQL - Trees</h1> <h2 id="introduction"><a href="#introduction" class="header-anchor">#</a> Introduction</h2> <p><em>Relationship Visualizer</em> Version 7.2 added support for recursive SQL queries, enabling the creation of hierarchies such as organization charts and connected data paths.</p> <p>The candidate dataset should include the following key columns which define relationships, allowing hierarchical traversal.</p> <ul><li>A parent node.</li> <li>A child node.</li></ul> <p>A recursive query consists of 2 parts:</p> <ol><li><em>Anchor the Base Case</em>: Define the starting point for recursion (e.g., the top-level parent in the hierarchy, like the CEO).</li> <li><em>Define the Recursive Member</em>: Specify how to recursively join results back to the table to construct subsequent levels.</li></ol> <p>Four new keywords have been defined to enable recursive queries:</p> <ul><li><p><code>TREE QUERY</code> - Passed as a literal string, the presence of <code>TREE QUERY</code> in the SQL result set tells the SQL engine to execute the associated SQL recursively.</p> <p>The SQL <strong>must</strong> contain the symbolic value <code>''{WHERE VALUE}''</code> which will be replaced as each node is traversed with the value of the current node.</p> <p>Note that since <code>TREE QUERY</code> is passed as a literal string, any strings in the SQL which would normally be specified with <code>'</code> delimiters must be escaped as <code>''</code>.</p></li> <li><p><code>WHERE VALUE</code> provides the value which anchors the base case. For example, in an organization chart it could be the ID of the CEO. For a subway line, it could be the starting subway station.</p></li> <li><p><code>WHERE COLUMN</code> - Specifies the name of the column which defines the recursive member. It is the name of the column containing the value which should be searched next. For example, in an organization chart it could be column name of the column containing the ID of the employee's manager.</p></li> <li><p><code>MAX DEPTH</code> - Specifies an <strong>optional</strong> integer value which specifies the maximum number of branches preceding, or following the node specified by <code>WHERE VALUE</code>. For example, <code>3 AS [MAX DEPTH]</code> says to constrain the search to 3 edge ranks which follow a node (<a href="/sql/trees/#use-case-3---forward-search-from-a-node-with-max-depth">Use Case 3</a>), or 3 edge ranks which precede a node (<a href="/sql/trees/#use-case-4---backward-search-from-a-node">Use Case 4</a>), depending upon the direction of the search.</p></li></ul> <h2 id="scenario"><a href="#scenario" class="header-anchor">#</a> Scenario</h2> <p>Assume you have an Excel workbook with a worksheet named <code>Routes</code> containing 2 columns listing nodes in random order. The columns specify which node is the next node (i.e. <code>From Node</code> -&gt; <code>To Node</code>).</p> <p>The data appears as:</p> <p><img src="/assets/img/exampledata.f31fd91c.png" alt=""></p> <h2 id="use-case-1-graph-everything"><a href="#use-case-1-graph-everything" class="header-anchor">#</a> Use Case 1 - Graph Everything</h2> <p>The simplest way to graph this data is to use the following SQL query:</p> <div class="language-SQL line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token punctuation">[</span><span class="token keyword">From</span> Node<span class="token punctuation">]</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span>ITEM<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token keyword">To</span> Node<span class="token punctuation">]</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span>RELATED ITEM<span class="token punctuation">]</span> <span class="token keyword">FROM</span> <span class="token punctuation">[</span>Routes$<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/uc1.16296f2e.png" alt=""></p> <p>The issue with this query is that it only displays the entire graph and cannot be used to extract a subset tree. Lets resolve the issue by using a Tree Query.</p> <h2 id="use-case-2-forward-search-from-a-node"><a href="#use-case-2-forward-search-from-a-node" class="header-anchor">#</a> Use Case 2 - Forward Search from a Node</h2> <p>This recursive query specifies a <strong>START</strong> node. It will show all the branches which flow from node <code>A0</code>.</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">SELECT</span> 
+  <span class="token string">'SELECT [To Node], [From Node] AS [ITEM], [To Node] AS [RELATED ITEM]
+     FROM [Routes$] WHERE [From Node] = ''{WHERE VALUE}'''</span> 
+              <span class="token keyword">AS</span> <span class="token punctuation">[</span>TREE QUERY<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'A0'</span>        <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">VALUE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'To Node'</span>   <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">COLUMN</span><span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><img src="/assets/img/uc2.afaa4b9c.png" alt=""></p> <p>Notice that this graph looks very similar to the graph in Use Case 1, however nodes <code>A15</code> and <code>A16</code> are not present as there are no branches originating from node <code>A0</code> which connect to <code>A15</code> or <code>A16</code>.</p> <h2 id="use-case-3-forward-search-from-a-node-with-max-depth"><a href="#use-case-3-forward-search-from-a-node-with-max-depth" class="header-anchor">#</a> Use Case 3 - Forward Search from a Node, with Max Depth</h2> <p>This query specifies a <strong>START</strong> node. It will show <strong>up to 3 levels</strong> of branches which flow from node <code>A0</code> (i.e. root node + 3 branches).</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">SELECT</span> 
+  <span class="token string">'SELECT [To Node], [From Node] AS [ITEM], [To Node] AS [RELATED ITEM]
+     FROM [Routes$] WHERE [From Node] = ''{WHERE VALUE}'''</span> 
+              <span class="token keyword">AS</span> <span class="token punctuation">[</span>TREE QUERY<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'A0'</span>        <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">VALUE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'To Node'</span>   <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">COLUMN</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token number">3</span>           <span class="token keyword">AS</span> <span class="token punctuation">[</span>MAX DEPTH<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><img src="/assets/img/uc3.11f6ded4.png" alt=""></p> <p>Notice that the tree stops after 3 levels of branches originating from node <code>A0</code> have been recursed.</p> <h2 id="use-case-4-backward-search-from-a-node"><a href="#use-case-4-backward-search-from-a-node" class="header-anchor">#</a> Use Case 4 - Backward Search from a Node</h2> <p>This query specifies an <strong>END</strong> node. It will show <strong>all</strong> the branches which flow to node <code>A9</code>.</p> <p>Notice that this query is changed from Use Case 3 to use <code>[To Node]</code> in the base case portion of the query <code>WHERE [From Node] = ''{WHERE VALUE}''</code> and set <code>From Node</code> as the <code>WHERE COLUMN</code> as the recursive member.</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">SELECT</span> 
+  <span class="token string">'SELECT [From Node], [From Node] AS [ITEM], [To Node] AS [RELATED ITEM]
+     FROM [Routes$] WHERE [To Node] = ''{WHERE VALUE}'''</span> 
+              <span class="token keyword">AS</span> <span class="token punctuation">[</span>TREE QUERY<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'A9'</span>        <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">VALUE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'From Node'</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">COLUMN</span><span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><img src="/assets/img/uc4.17f60638.png" alt=""></p> <p>Notice in this Use Case the graph stops when node <code>A9</code> is reached. In this example node <code>A16</code> is present because it connects directly to node <code>A9</code>. Nodes <code>A6</code>, <code>A7</code>, and <code>A8</code> are not present as those routes never connect to node <code>A9</code>.</p> <h2 id="use-case-5-backward-search-from-a-node-with-max-depth"><a href="#use-case-5-backward-search-from-a-node-with-max-depth" class="header-anchor">#</a> Use Case 5 - Backward Search from a Node, with Max Depth</h2> <p>This query specifies an <strong>END</strong> node, and the <code>[MAX DEPTH]</code> parameter. It will show <strong>up to 3 levels</strong> of branches which precede and flow to node <code>A9</code> (i.e. 3 branches + final node).</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">SELECT</span> 
+  <span class="token string">'SELECT [From Node], [From Node] AS [ITEM], [To Node] AS [RELATED ITEM]
+     FROM [Routes$] WHERE [To Node] = ''{WHERE VALUE}'''</span> 
+              <span class="token keyword">AS</span> <span class="token punctuation">[</span>TREE QUERY<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'A9'</span>        <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">VALUE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'From Node'</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">COLUMN</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token number">3</span>           <span class="token keyword">AS</span> <span class="token punctuation">[</span>MAX DEPTH<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><img src="/assets/img/uc5.2752beda.png" alt=""></p> <p>Notice in this Use Case that 3 levels of branches preceding node <code>A9</code> are present. The connection between node <code>A1</code> and <code>A4</code> is not present because the <code>MAX DEPTH</code> limit was reached with node <code>A1</code>, therefore <code>A1</code> was not recursed to determine its connections.</p> <h2 id="use-case-6-combining-queries-to-highlight-edges"><a href="#use-case-6-combining-queries-to-highlight-edges" class="header-anchor">#</a> Use Case 6 - Combining Queries to Highlight Edges</h2> <p>This Use Case shows how you can highlight edges in a graph by recursing nodes and applying style attributes. It combines the examples above to show the entire graph. It then shows 3 levels of routes leading to node <code>A9</code> in blue, and 3 levels of routes departing node <code>A9</code> in red.</p> <p><em>Note: the <code>strict</code> edge option on the <code>Graphviz</code> ribbon tab is enabled to prevent duplicate edges from being drawn.</em></p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token comment">-- Step 1 - Get all the routes</span>
+
+<span class="token keyword">SELECT</span> <span class="token punctuation">[</span><span class="token keyword">From</span> Node<span class="token punctuation">]</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span>ITEM<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token keyword">To</span> Node<span class="token punctuation">]</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span>RELATED ITEM<span class="token punctuation">]</span> <span class="token keyword">FROM</span> <span class="token punctuation">[</span>Routes$<span class="token punctuation">]</span>
+
+<span class="token comment">-- Step 2 - Recurse 3 branches of nodes which converge on node A9. </span>
+<span class="token comment">-- Change the edge color to blue</span>
+
+<span class="token keyword">SELECT</span> 
+  <span class="token string">'SELECT [From Node], [From Node] AS [ITEM], [To Node] AS [RELATED ITEM], 
+     ''color=blue'' as [Attributes]
+     FROM [Routes$] WHERE [To Node] = ''{WHERE VALUE}'''</span> 
+              <span class="token keyword">AS</span> <span class="token punctuation">[</span>TREE QUERY<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'A9'</span>        <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">VALUE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'From Node'</span> <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">COLUMN</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token number">3</span>           <span class="token keyword">AS</span> <span class="token punctuation">[</span>MAX DEPTH<span class="token punctuation">]</span>
+
+<span class="token comment">-- Step 3 - Recurse 3 branches of nodes which branch out from node A9. </span>
+<span class="token comment">-- Change the edge color to red</span>
+
+<span class="token keyword">SELECT</span> 
+  <span class="token string">'SELECT [To Node], [From Node] AS [ITEM], [To Node] AS [RELATED ITEM], 
+     ''color=red'' AS [Attributes]
+     FROM [Routes$] WHERE [From Node] = ''{WHERE VALUE}'''</span> 
+              <span class="token keyword">AS</span> <span class="token punctuation">[</span>TREE QUERY<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'A9'</span>        <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">VALUE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token string">'To Node'</span>   <span class="token keyword">AS</span> <span class="token punctuation">[</span><span class="token keyword">WHERE</span> <span class="token keyword">COLUMN</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token number">3</span>           <span class="token keyword">AS</span> <span class="token punctuation">[</span>MAX DEPTH<span class="token punctuation">]</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><p><img src="/assets/img/uc6.39419c42.png" alt=""></p> <h2 id="sample-content"><a href="#sample-content" class="header-anchor">#</a> Sample Content</h2> <p>The files used in these examples are contained in the <code>\Relationship Visualizer\samples\12 - Using SQL - Trees</code> directory in the zip file download.</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.a9ece07a.js" defer></script><script src="/assets/js/6.56d8a82c.js" defer></script><script src="/assets/js/21.8ad48c9e.js" defer></script>
+  </body>
+</html>
