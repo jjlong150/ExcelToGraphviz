@@ -1,5 +1,5 @@
 ---
-prev: /
+prev: /download/
 next: /create/
 ---
 
