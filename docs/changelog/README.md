@@ -1,5 +1,33 @@
 # Change Log
 
+## Version 7.2.0
+
+`sql` Worksheet
+
+- Added support for recursive SQL queries, enabling the creation of hierarchies such as organization charts and connected data paths.
+
+  - A candidate dataset should include a pair of related columns that enable hierarchical traversal. For example:
+    - The columns `employee id` and `manager id` in a business organization contain the relationship between an employee, and the manager they report to. 
+    - The columns `station` and `next station` in a subway map contain the point-to-point destinations of subway stations on a given subway line. 
+
+  - New SQL conventions provide the ability to:
+    - *Anchor the Base Case* - where you define the starting point (such as the top-level parent in a hierarchy).
+    - *Define the Recursive Member* - where you specify how to recursively connect results to construct subsequent levels.
+
+  - Explore the updated sample workbooks for practical examples:
+    - `12 - Using SQL - Trees` - Shows how to traverse any node-to-node structure by starting at a node and iterating through either its connected predecessor nodes, or connected successor nodes.
+    - `13 - Using SQL - Organization Charts` - Shows how to build a complete organization chart, or extract a branch of an organization chart.
+
+`settings` Worksheet
+
+- Four new values have been added to the `settings` worksheet under the `sql` tab, as additional keywords for recursive SQL queries. These values provide flexibility, allowing the keywords to be customized for use in non-English languages.
+
+`style designer` Worksheet
+- Resolved a screen flicker issue on the `style designer` worksheet that occurred during the initial creation of color images for ribbon dropdown lists.
+
+`ExecuteAndCapture` Module
+- Conducted *RubberduckVBA* code inspections across the entire codebase. Implemented improvements to the `ExecuteAndCapture` module based on its recommendations.
+
 ## Version 7.1.0
 
 Fixed a bug that caused Excel to freeze when Graphviz wrote more than 4096 bytes of message output:
