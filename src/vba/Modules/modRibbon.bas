@@ -66,7 +66,7 @@ ErrorHandler:
 End Sub
 
 Public Sub ribbon_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
-    Select Case control.id
+    Select Case control.ID
         Case RIBBON_TAB_STYLE_DESIGNER
             visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_STYLE_DESIGNER)
         Case RIBBON_TAB_STYLES
@@ -146,19 +146,19 @@ End Sub
 ' Ribbon Callbacks for prefixed ribbon buttons
 
 Public Sub button_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetSettingBoolean(control.id & BUTTON_SUFFIX_VISIBLE)
+    returnedVal = GetSettingBoolean(control.ID & BUTTON_SUFFIX_VISIBLE)
 End Sub
 
 Public Sub button_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = SettingsSheet.Range(control.id & BUTTON_SUFFIX_TEXT).value
+    returnedVal = SettingsSheet.Range(control.ID & BUTTON_SUFFIX_TEXT).value
 End Sub
 
 Public Sub button_getScreentip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = SettingsSheet.Range(control.id & BUTTON_SUFFIX_SCREENTIP).value
+    returnedVal = SettingsSheet.Range(control.ID & BUTTON_SUFFIX_SCREENTIP).value
 End Sub
 
 Public Sub button_getSupertip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = SettingsSheet.Range(control.id & BUTTON_SUFFIX_SUPERTIP).value
+    returnedVal = SettingsSheet.Range(control.ID & BUTTON_SUFFIX_SUPERTIP).value
 End Sub
 
 ' ===========================================================================

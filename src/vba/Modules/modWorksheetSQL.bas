@@ -321,17 +321,19 @@ Private Function executeSQL(ByRef context As sqlContext, _
     On Error GoTo executeSQLError
     
     Dim connectionObject As Object  ' Connection
-    Dim recordSetObject As Object   ' Record Set
-    
+    Dim rsQueryResults As Object   ' Record Set
+    Dim rsRecursionResults As Object
+    Dim rsMergedResults As Object
+        
     Dim fileExtension As String
     Dim provider As String
     Dim properties As String
     
-    executeSQL = GetMessage("msgboxSqlStatusSuccess")
+    Dim recordCnt As Long
+    recordCnt = 0
 
     ' Determine the connection string settings based upon the file extension
     ' of the file we will executed the query against
-    
     fileExtension = Right$(FilePath, Len(FilePath) - InStrRev(FilePath, "."))
   
     Select Case LCase$(fileExtension)
@@ -371,38 +373,27 @@ Private Function executeSQL(ByRef context As sqlContext, _
     ' Define a recordset for a SQL SELECT statement using late binding
     ' as we do not know which version of Excel this spreadsheet
     ' will be running on
-    Set recordSetObject = CreateObject("ADODB.Recordset")
+    Set rsQueryResults = CreateObject("ADODB.Recordset")
     
     ' Execute the SQL SELECT query
-    recordSetObject.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenForwardOnly, LockType:=LockTypeEnum.adLockOptimistic, options:=CommandTypeEnum.adCmdText
-    
-    Dim recordCnt As Long
-    recordCnt = 0
-
-    If Not recordSetObject.EOF Then
-        ' Determine if the query specified clusters and/or subclusters
-        Dim hasCluster As Boolean
-        hasCluster = HasField(recordSetObject, context.fields.Cluster)
+    rsQueryResults.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenForwardOnly, LockType:=LockTypeEnum.adLockOptimistic, options:=CommandTypeEnum.adCmdText
         
-        Dim hasSubcluster As Boolean
-        hasSubcluster = HasField(recordSetObject, context.fields.subcluster)
+    ' Execute any recursion query passed in the SQL SELECT
+    RecursiveSearch connectionObject, context, rsQueryResults, rsRecursionResults
     
-        ' Work the four possible combinations to emit the clustered or unclustered results
-        If hasCluster Then
-            If hasSubcluster Then
-                ProcessClusterYesSubclusterYes context, recordSetObject, row, recordCnt
-            Else
-                ProcessClusterYesSubclusterNo context, recordSetObject, row, recordCnt
-            End If
-        Else
-            If hasSubcluster Then
-                ProcessClusterNoSubclusterYes context, recordSetObject, row, recordCnt
-            Else
-                ProcessClusterNoSubclusterNo context, recordSetObject, row, recordCnt
-            End If
-        End If
+    If rsRecursionResults Is Nothing Then
+        ' No recursion query was run, emit the results of the primary query
+        MapResultsToDataWorksheet context, rsQueryResults, row, recordCnt
+    Else
+        ' A set of recursive queries was executed. We have to merge the results
+        ' of the primary query, and recursive queries into a single set of
+        ' results so that cluster and subclusters are honored across all the
+        ' queries.
+        MergeRecordsets rsQueryResults, rsRecursionResults, rsMergedResults
+        MapResultsToDataWorksheet context, rsMergedResults, row, recordCnt
     End If
-    
+
+    ' Return success status in local language
     executeSQL = GetMessage("msgboxSqlStatusSuccess")
     
 executeSQLError:
@@ -416,11 +407,27 @@ executeSQLError:
     
     On Error Resume Next
     
-    ' Close the record set
-    If Not recordSetObject Is Nothing Then
-        If recordSetObject.state = ObjectStateEnum.adStateOpen Then
-            recordSetObject.Close
-            Set recordSetObject = Nothing
+    ' Close the rsQueryResults record set
+    If Not rsQueryResults Is Nothing Then
+        If rsQueryResults.state = ObjectStateEnum.adStateOpen Then
+            rsQueryResults.Close
+            Set rsQueryResults = Nothing
+        End If
+    End If
+    
+    ' Close the rsRecursionResults record set
+    If Not rsRecursionResults Is Nothing Then
+        If rsRecursionResults.state = ObjectStateEnum.adStateOpen Then
+            rsRecursionResults.Close
+            Set rsRecursionResults = Nothing
+        End If
+    End If
+    
+    ' Close the rsMergedResults record set
+    If Not rsMergedResults Is Nothing Then
+        If rsMergedResults.state = ObjectStateEnum.adStateOpen Then
+            rsMergedResults.Close
+            Set rsMergedResults = Nothing
         End If
     End If
     
@@ -435,6 +442,168 @@ executeSQLError:
     On Error GoTo 0
 
 End Function
+
+Private Sub RecursiveSearch(ByRef connectionObject As Object, _
+                                  ByRef context As sqlContext, _
+                                  ByVal rsQueryResults As Object, _
+                                  ByRef rsRecursionResults As Object)
+    
+    If rsQueryResults.EOF Then Exit Sub
+    If Not HasField(rsQueryResults, context.fields.treeQuery) Then Exit Sub
+    
+    Dim recursionSql As String
+    Dim whereValue As String
+    Dim whereColumn As String
+    
+    ' Extract the query and parameters. Exit if not provided
+    recursionSql = GetFieldValueString(rsQueryResults, context.fields.treeQuery)
+    If recursionSql = vbNullString Then Exit Sub
+    
+    whereValue = GetFieldValueString(rsQueryResults, context.fields.whereValue)
+    If whereValue = vbNullString Then Exit Sub
+    
+    whereColumn = GetFieldValueString(rsQueryResults, context.fields.whereColumn)
+    If whereColumn = vbNullString Then Exit Sub
+    
+    ' Create a collection to track what has been searched, so we
+    ' don't fall into an infinite loop.
+    Dim searchedIDs As Object
+    Set searchedIDs = CreateObject("Scripting.Dictionary")
+    
+    ' Place limits on how many recursive calls can be made
+    Dim maxDepth As Long
+    maxDepth = GetFieldValueLong(rsQueryResults, context.fields.maxDepth)
+    
+    If maxDepth = 0 Then
+        maxDepth = 100
+    End If
+    
+    Dim currentDepth As Long
+    currentDepth = 0
+    
+    ' Execute SQL recursively until all branches of the tree are followed
+    PerformRecursiveSearch connectionObject, context, recursionSql, whereValue, whereColumn, currentDepth, maxDepth, rsRecursionResults, searchedIDs
+    
+End Sub
+  
+Private Function GetFieldValueString(ByVal recordSet As Object, ByRef fieldName As String) As String
+    If HasField(recordSet, fieldName) Then
+        GetFieldValueString = Trim$(CStr(recordSet.fields(fieldName).value))
+    Else
+        GetFieldValueString = vbNullString
+    End If
+End Function
+
+Private Function GetFieldValueLong(ByVal recordSet As Object, ByRef fieldName As String) As Long
+    On Error GoTo ErrorHandler
+    If HasField(recordSet, fieldName) Then
+        GetFieldValueLong = CLng(recordSet.fields(fieldName).value)
+    Else
+        GetFieldValueLong = 0
+    End If
+    Exit Function
+    
+ErrorHandler:
+    GetFieldValueLong = 0
+End Function
+
+Private Sub PerformRecursiveSearch(ByRef connectionObject As Object, ByRef context As sqlContext, ByVal sqlStatement As String, ByRef whereValue As String, ByVal whereColumn As String, ByVal depth As Long, ByVal maxDepth As Long, ByRef recursionRecordSet As Object, ByRef searchedIDs As Object)
+
+    ' Base case: if 'whereValue' value was already searched, exit the function to avoid loop
+    If WasAlreadySearched(whereValue, searchedIDs) Then Exit Sub
+    
+    ' Impose a limit on how many levels of the tree can be recursed
+    Dim currentDepth As Long
+    currentDepth = depth + 1
+    If currentDepth > maxDepth Then Exit Sub
+    
+    ' Expand placeholders in the query with actual values
+    Dim query As String
+    query = replace(sqlStatement, "{" & context.fields.whereValue & "}", whereValue)
+    
+    ' Add current ID to the list of searched IDs
+    AddToSearchedList whereValue, searchedIDs
+    
+    ' Create a record set with the results of this query.
+    ' These results will get merged into the full recursion recordset.
+    Dim rsQueryResults As Object
+    Set rsQueryResults = CreateObject("ADODB.Recordset")
+    rsQueryResults.Open query, connectionObject, 1, 1
+
+    ' If combinedRS is Nothing, initialize it with the structure of the first recordset
+    If recursionRecordSet Is Nothing Then
+        Set recursionRecordSet = CreateObject("ADODB.Recordset")
+        Dim fieldNumber As Long
+        
+        ' Create fields in the combined recordset
+        For fieldNumber = 0 To rsQueryResults.fields.count - 1
+            recursionRecordSet.fields.Append rsQueryResults.fields(fieldNumber).name, rsQueryResults.fields(fieldNumber).Type, rsQueryResults.fields(fieldNumber).DefinedSize
+        Next fieldNumber
+        recursionRecordSet.Open
+    End If
+
+    ' Loop through each record, adding the results to the recursion recordset
+    Do While Not rsQueryResults.EOF
+        recursionRecordSet.AddNew
+        For fieldNumber = 0 To rsQueryResults.fields.count - 1
+            recursionRecordSet.fields(fieldNumber).value = rsQueryResults.fields(fieldNumber).value
+        Next fieldNumber
+        recursionRecordSet.Update
+        
+        ' Recursively call the function for the current value pair
+        PerformRecursiveSearch connectionObject, context, sqlStatement, rsQueryResults.fields(whereColumn).value, _
+                               whereColumn, currentDepth, maxDepth, recursionRecordSet, searchedIDs
+        rsQueryResults.MoveNext
+    Loop
+
+    ' Close the recordset
+    rsQueryResults.Close
+    Set rsQueryResults = Nothing
+End Sub
+
+Private Sub AddToSearchedList(ByRef rowId As Variant, ByVal searchedIDs As Object)
+    ' Add the ID to the dictionary
+    searchedIDs.Add CStr(rowId), True
+End Sub
+
+Private Function WasAlreadySearched(ByRef rowId As Variant, ByVal searchedIDs As Object) As Boolean
+    ' Check if the ID is already in the dictionary
+    WasAlreadySearched = searchedIDs.Exists(CStr(rowId))
+End Function
+
+Private Sub MapResultsToDataWorksheet(ByRef context As sqlContext, _
+                                      ByVal rsQueryResults As Object, _
+                                      ByRef row As Long, _
+                                      ByRef recordCnt As Long)
+                                      
+    If rsQueryResults.EOF Then Exit Sub
+    
+    ' Determine if the query specified clusters and/or subclusters
+    Dim hasCluster As Boolean
+    hasCluster = HasField(rsQueryResults, context.fields.Cluster)
+    
+    Dim hasSubcluster As Boolean
+    hasSubcluster = HasField(rsQueryResults, context.fields.subcluster)
+
+    ' Ensure the recordset is at the beginning
+    rsQueryResults.movefirst
+    
+    ' Work the four possible combinations to emit the clustered or unclustered results
+    If hasCluster Then
+        If hasSubcluster Then
+            ProcessClusterYesSubclusterYes context, rsQueryResults, row, recordCnt
+        Else
+            ProcessClusterYesSubclusterNo context, rsQueryResults, row, recordCnt
+        End If
+    Else
+        If hasSubcluster Then
+            ProcessClusterNoSubclusterYes context, rsQueryResults, row, recordCnt
+        Else
+            ProcessClusterNoSubclusterNo context, rsQueryResults, row, recordCnt
+        End If
+    End If
+
+End Sub
   
 Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
                                            ByVal recordSetObject As Object, _
@@ -468,7 +637,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
 
         EmitClusterOpen clusterRecord, context.dataLayout, row, context.fields.clusterPlaceholder, clusterCnt
         If clusterRecord.subclusters.count = 0 Then ' Results do not need to be grouped in subclusters
-            recordSetObject.MoveFirst
+            recordSetObject.movefirst
             Do While recordSetObject.EOF = False
                 If recordSetObject.fields(context.fields.Cluster).value = CStr(clusterKey) Then
                     recordCnt = recordCnt + 1
@@ -485,7 +654,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
             For Each subclusterKey In clusterRecord.subclusters.Keys()
                 ' Create a row to start the subcluster
                 Set subclusterRecord = clusterRecord.subclusters.Item(subclusterKey)
-                recordSetObject.MoveFirst
+                recordSetObject.movefirst
     
                 subclusterCnt = subclusterCnt + 1
                 EmitClusterOpen subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
@@ -500,7 +669,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
                 EmitClusterClose subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
     
                 ' Iterate through the query results again for the nodes which are not part of the subcluster
-                recordSetObject.MoveFirst
+                recordSetObject.movefirst
                 Do While recordSetObject.EOF = False
                     If recordSetObject.fields(context.fields.Cluster).value = CStr(clusterKey) And IsNull(recordSetObject.fields(context.fields.subcluster).value) Then
                         recordCnt = recordCnt + 1
@@ -515,14 +684,14 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
     Next
     
     ' Handle case where cluster has no data, but subcluster does specify data
-    recordSetObject.MoveFirst
+    recordSetObject.movefirst
     Dim orphanClusterList As Dictionary
     Set orphanClusterList = GetOrphanSubClusterInfo(recordSetObject, context.fields)
     subclusterCnt = 0
 
     For Each subclusterKey In orphanClusterList.Keys()
         Set subclusterRecord = orphanClusterList.Item(subclusterKey)
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         subclusterCnt = subclusterCnt + 1
         EmitClusterOpen subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
         Do While recordSetObject.EOF = False
@@ -537,7 +706,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
     Next
 
     ' Handle case where query specified cluster and subcluster, but the data row is null for these columns
-    recordSetObject.MoveFirst
+    recordSetObject.movefirst
     Do While recordSetObject.EOF = False
         If IsNull(recordSetObject.fields(context.fields.Cluster)) And IsNull(recordSetObject.fields(context.fields.subcluster)) Then
             recordCnt = recordCnt + 1
@@ -567,7 +736,7 @@ Private Sub ProcessClusterYesSubclusterNo(ByRef context As sqlContext, _
         Set clusterRecord = clusterList.Item(CStr(clusterKey))
 
         EmitClusterOpen clusterRecord, context.dataLayout, row, context.fields.clusterPlaceholder, clusterCnt
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         Do While recordSetObject.EOF = False
             If recordSetObject.fields(context.fields.Cluster).value = CStr(clusterKey) Then
                 recordCnt = recordCnt + 1
@@ -580,7 +749,7 @@ Private Sub ProcessClusterYesSubclusterNo(ByRef context As sqlContext, _
     Next
     
     ' Emit the records which are not in a cluster
-    recordSetObject.MoveFirst
+    recordSetObject.movefirst
     Do While recordSetObject.EOF = False
         If IsNull(recordSetObject.fields(context.fields.Cluster).value) Then
             recordCnt = recordCnt + 1
@@ -610,7 +779,7 @@ Private Sub ProcessClusterNoSubclusterYes(ByRef context As sqlContext, _
         Set subclusterRecord = subclusterList.Item(CStr(subclusterKey))
 
         EmitClusterOpen subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         Do While recordSetObject.EOF = False
             If recordSetObject.fields(context.fields.subcluster).value = CStr(subclusterKey) Then
                 recordCnt = recordCnt + 1
@@ -623,7 +792,7 @@ Private Sub ProcessClusterNoSubclusterYes(ByRef context As sqlContext, _
     Next
 
     ' Handle case where query specified subcluster, but the subcluster column data is null
-    recordSetObject.MoveFirst
+    recordSetObject.movefirst
     Do While recordSetObject.EOF = False
         If IsNull(recordSetObject.fields(context.fields.subcluster)) Then
             recordCnt = recordCnt + 1
@@ -638,7 +807,7 @@ Private Sub ProcessClusterNoSubclusterNo(ByRef context As sqlContext, _
                                          ByVal recordSetObject As Object, _
                                          ByRef row As Long, _
                                          ByRef recordCnt As Long)
-    recordSetObject.MoveFirst
+    recordSetObject.movefirst
     Do While recordSetObject.EOF = False
         recordCnt = recordCnt + 1
         EmitRow context, recordSetObject, row, recordCnt
@@ -659,7 +828,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, ByRef fields As
     Dim clusterAttributes As String
     
     If Not recordSetObject.EOF Then
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         Do While recordSetObject.EOF = False
             clusterLabel = vbNullString
             clusterStyleName = vbNullString
@@ -707,7 +876,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, ByRef fields As
             End If
             recordSetObject.MoveNext
         Loop
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
     End If
     
     Set GetClusterInfo = clusters
@@ -725,7 +894,7 @@ Private Function GetSubclusterInfo(ByVal recordSetObject As Object, ByRef fields
     Dim subclusterAttributes As String
     
     If Not recordSetObject.EOF Then
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         Do While recordSetObject.EOF = False
             subclusterLabel = vbNullString
             subclusterStyleName = vbNullString
@@ -773,7 +942,7 @@ Private Function GetSubclusterInfo(ByVal recordSetObject As Object, ByRef fields
             End If
             recordSetObject.MoveNext
         Loop
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
     End If
     
     Set GetSubclusterInfo = subclusters
@@ -794,7 +963,7 @@ Private Function GetSubClusterInfoForCluster(ByVal recordSetObject As Object, By
     position = 0
     
     If Not recordSetObject.EOF Then
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         Do While recordSetObject.EOF = False
             If recordSetObject.fields(fields.Cluster).value = clusterName Then
                 clusterLabel = vbNullString
@@ -840,7 +1009,7 @@ Private Function GetSubClusterInfoForCluster(ByVal recordSetObject As Object, By
             End If
             recordSetObject.MoveNext
         Loop
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
     End If
     
     Set GetSubClusterInfoForCluster = clusters
@@ -859,7 +1028,7 @@ Private Function GetOrphanSubClusterInfo(ByVal recordSetObject As Object, ByRef 
     Dim subclusterAttributes As String
     
     If Not recordSetObject.EOF Then
-        recordSetObject.MoveFirst
+        recordSetObject.movefirst
         Do While recordSetObject.EOF = False
             If IsNull(recordSetObject.fields(fields.Cluster)) And Not IsNull(recordSetObject.fields(fields.subcluster)) Then
                 subclusterLabel = vbNullString

@@ -356,6 +356,11 @@ Public Const SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_TOOLTIP As String = "SqlFieldNam
 Public Const SETTINGS_SQL_FIELD_NAME_SPLIT_LENGTH As String = "SqlFieldNameSplitLength"
 Public Const SETTINGS_SQL_FIELD_NAME_LINE_ENDING As String = "SqlFieldNameLineEnding"
 
+Public Const SETTINGS_SQL_FIELD_NAME_TREE_QUERY As String = "SqlFieldNameTreeQuery"
+Public Const SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN As String = "SqlFieldNameWhereColumn"
+Public Const SETTINGS_SQL_FIELD_NAME_WHERE_VALUE As String = "SqlFieldNameWhereValue"
+Public Const SETTINGS_SQL_FIELD_NAME_MAX_DEPTH As String = "SqlFieldNameMaxDepth"
+
 ' Controls what to import/export
 Public Const SETTINGS_TOOLS_EXCHANGE_DATA_WORKSHEET As String = "ExchangeDataWorksheet"
 Public Const SETTINGS_TOOLS_EXCHANGE_STYLES_WORKSHEET As String = "ExchangeStylesWorksheet"
@@ -687,6 +692,10 @@ Public Const JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_PLACEHOLDER As String = "su
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_RECORDSET_PLACEHOLDER As String = "recordsetPlaceholder"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_SPLIT_LENGTH As String = "splitLength"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_LINE_ENDING As String = "lineEnding"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_TREE_QUERY As String = "treeQuery"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN As String = "whereColumn"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_WHERE_VALUE As String = "whereValue"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_MAX_DEPTH As String = "maxDepth"
 
 Public Const JSON_SETTINGS_SQL_FILTER_COLUMN As String = "filterColumn"
 Public Const JSON_SETTINGS_SQL_FILTER_VALUE As String = "filterValue"

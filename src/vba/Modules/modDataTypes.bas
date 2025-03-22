@@ -251,6 +251,10 @@ Public Type sqlFieldName
     filterValue As String
     splitLength As String
     lineEnding As String
+    treeQuery As String
+    whereColumn As String
+    whereValue As String
+    maxDepth As String
 End Type
 
 ' Working variables for row data on the "svg" worksheet

@@ -333,7 +333,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub language_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
-    label = GetLabel(control.id)
+    label = GetLabel(control.ID)
 End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
@@ -422,21 +422,21 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub translations_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
-    Dim id As String
-    id = replace(control.id, "-", "_")  ' Excel won't let you have a hyphen in a cell name
-    SettingsSheet.Range(id).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
-    If SettingsSheet.Range(id).value = TOGGLE_SHOW Then
-        ActiveWorkbook.Sheets.[_Default](control.id).visible = True
-        ActiveWorkbook.Sheets.[_Default](control.id).Activate
+    Dim ID As String
+    ID = replace(control.ID, "-", "_")  ' Excel won't let you have a hyphen in a cell name
+    SettingsSheet.Range(ID).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
+    If SettingsSheet.Range(ID).value = TOGGLE_SHOW Then
+        ActiveWorkbook.Sheets.[_Default](control.ID).visible = True
+        ActiveWorkbook.Sheets.[_Default](control.ID).Activate
     Else
-        ActiveWorkbook.Sheets.[_Default](control.id).visible = False
+        ActiveWorkbook.Sheets.[_Default](control.ID).visible = False
     End If
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub translations_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    Dim id As String
-    id = replace(control.id, "-", "_")  ' Excel won't let you have a hyphen in a cell name
-    pressed = GetSettingBoolean(id)
+    Dim ID As String
+    ID = replace(control.ID, "-", "_")  ' Excel won't let you have a hyphen in a cell name
+    pressed = GetSettingBoolean(ID)
 End Sub
 

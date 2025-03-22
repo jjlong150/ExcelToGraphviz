@@ -133,6 +133,11 @@ Public Function GetSettingsForSqlFields() As sqlFieldName
     
     GetSettingsForSqlFields.filterColumn = Trim$(SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value)
     GetSettingsForSqlFields.filterValue = Trim$(SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value)
+    
+    GetSettingsForSqlFields.treeQuery = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_TREE_QUERY).value)
+    GetSettingsForSqlFields.whereColumn = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN).value)
+    GetSettingsForSqlFields.whereValue = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_WHERE_VALUE).value)
+    GetSettingsForSqlFields.maxDepth = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_MAX_DEPTH).value)
 End Function
 
 Public Function GetSettingsForSvgWorksheet() As svgWorksheet
@@ -376,7 +381,7 @@ Public Sub DisplaySqlOptions(ByVal isVisible As Boolean)
     Dim rowTo As Long
     
     rowFrom = SettingsSheet.Range(SETTINGS_SQL_COL_COMMENT).row - 1
-    rowTo = SettingsSheet.Range(SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET).row + 1
+    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_MAX_DEPTH).row + 1
 #If Mac Then
     DisplayTabRows False, rowFrom, rowTo
     SettingsSheet.Shapes.Range("enabledTabSqlWorksheet").visible = False

@@ -41,13 +41,13 @@ End Sub
 '@Ignore ParameterNotUsed
 Public Sub extCode_onAction(ByVal control As IRibbonControl)
     Dim subroutine As String
-    subroutine = SettingsSheet.Range(control.id & BUTTON_SUFFIX_SUB).value
+    subroutine = SettingsSheet.Range(control.ID & BUTTON_SUFFIX_SUB).value
     Application.Run subroutine
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub extCode_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Not (SettingsSheet.Range(control.id & BUTTON_SUFFIX_SUB).value = vbNullString)
+    returnedVal = Not (SettingsSheet.Range(control.ID & BUTTON_SUFFIX_SUB).value = vbNullString)
 End Sub
 
 ' ===========================================================================
@@ -68,12 +68,12 @@ End Sub
 ' Buttons which invoke web hyperlinks
 '@Ignore ParameterNotUsed
 Public Sub extWeb_onAction(ByVal control As IRibbonControl)
-    ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range(control.id & BUTTON_SUFFIX_URL).value, NewWindow:=True
+    ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range(control.ID & BUTTON_SUFFIX_URL).value, NewWindow:=True
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub extWeb_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Not (SettingsSheet.Range(control.id & BUTTON_SUFFIX_URL).value = vbNullString)
+    returnedVal = Not (SettingsSheet.Range(control.ID & BUTTON_SUFFIX_URL).value = vbNullString)
 End Sub
 
 ' ===========================================================================

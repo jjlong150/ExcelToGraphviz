@@ -12,15 +12,15 @@ Option Explicit
 '@Ignore ParameterNotUsed
 Public Sub showColumn_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     ClearWorksheetGraphs
-    SettingsSheet.Range(control.id).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
-    ShowHideDataColumn (control.id)
+    SettingsSheet.Range(control.ID).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
+    ShowHideDataColumn (control.ID)
     AutoDraw
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub showColumn_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    ShowHideDataColumn (control.id)
-    returnedVal = GetSettingBoolean(control.id)
+    ShowHideDataColumn (control.ID)
+    returnedVal = GetSettingBoolean(control.ID)
 End Sub
 
 Public Sub ShowHideDataColumn(ByVal columnId As String)
@@ -820,7 +820,7 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub overlap_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value = control.id
+    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value = control.ID
 End Sub
 
 

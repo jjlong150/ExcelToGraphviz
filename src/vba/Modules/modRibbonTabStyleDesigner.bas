@@ -171,11 +171,11 @@ Private Sub color_getItemImage(ByVal control As IRibbonControl, ByVal index As L
     scheme = colorScheme
     
     If index = 0 Then   ' Determine the default color for the attribute
-        If control.id = RIBBON_CTL_FILL_COLOR Then
+        If control.ID = RIBBON_CTL_FILL_COLOR Then
             interiorColor = 16777215
             colorName = COLOR_WHITE
             scheme = COLOR_SCHEME_X11
-        ElseIf control.id = RIBBON_CTL_GRADIENT_FILL_COLOR Then
+        ElseIf control.ID = RIBBON_CTL_GRADIENT_FILL_COLOR Then
             ' The default gradient fill will be white if fill color has not been set
             ' been set, otherwise make the default gradient fill the same as the fill color
             If StyleDesignerSheet.Range(DESIGNER_FILL_COLOR).value = vbNullString Then
@@ -214,7 +214,7 @@ Private Sub color_getItemImage(ByVal control As IRibbonControl, ByVal index As L
     Set image = LoadPicture(imageFile)
 
     If image Is Nothing Then    ' the image does not exist, create one
-        UpdateStatusBar replace(GetMessage("statusbarCreateImage"), "{colorScheme}", scheme) & " " & colorName
+        Application.StatusBar = replace(GetMessage("statusbarCreateImage"), "{colorScheme}", scheme) & " " & colorName
        
         ' Get the RGB color for this color scheme index
         If index > 0 Then
@@ -310,22 +310,22 @@ Private Sub color_getItemCount(ByVal control As IRibbonControl, ByRef count As V
     
     ' Hack to disable loading the hidden dropdowns
     If StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_NODE Or StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_CLUSTER Then
-        If control.id = RIBBON_CTL_EDGE_COLOR1 Or control.id = RIBBON_CTL_EDGE_COLOR2 Or control.id = RIBBON_CTL_EDGE_COLOR3 Or control.id = RIBBON_CTL_EDGE_LABEL_FONT_COLOR Then
+        If control.ID = RIBBON_CTL_EDGE_COLOR1 Or control.ID = RIBBON_CTL_EDGE_COLOR2 Or control.ID = RIBBON_CTL_EDGE_COLOR3 Or control.ID = RIBBON_CTL_EDGE_LABEL_FONT_COLOR Then
             count = 0
         End If
         
-        If control.id = RIBBON_CTL_GRADIENT_FILL_COLOR And IsEmpty(StyleDesignerSheet.Range(DESIGNER_FILL_COLOR)) Then
+        If control.ID = RIBBON_CTL_GRADIENT_FILL_COLOR And IsEmpty(StyleDesignerSheet.Range(DESIGNER_FILL_COLOR)) Then
             count = 0
         End If
         
     ElseIf StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_EDGE Then
-        If control.id = RIBBON_CTL_FILL_COLOR Or control.id = RIBBON_CTL_GRADIENT_FILL_COLOR Or control.id = RIBBON_CTL_BORDER_COLOR Then
+        If control.ID = RIBBON_CTL_FILL_COLOR Or control.ID = RIBBON_CTL_GRADIENT_FILL_COLOR Or control.ID = RIBBON_CTL_BORDER_COLOR Then
             count = 0
-        ElseIf control.id = RIBBON_CTL_EDGE_COLOR2 Then
+        ElseIf control.ID = RIBBON_CTL_EDGE_COLOR2 Then
             If IsEmpty(StyleDesignerSheet.Range(DESIGNER_EDGE_COLOR_1)) Then
                 count = 0
             End If
-        ElseIf control.id = RIBBON_CTL_EDGE_COLOR3 Then
+        ElseIf control.ID = RIBBON_CTL_EDGE_COLOR3 Then
             If IsEmpty(StyleDesignerSheet.Range(DESIGNER_EDGE_COLOR_2)) Then
                 count = 0
             End If
@@ -333,9 +333,9 @@ Private Sub color_getItemCount(ByVal control As IRibbonControl, ByRef count As V
     End If
     
     If count > 0 Then
-        Application.StatusBar = LocalizeGetString(control.id, LOCALE_COL_LABEL_VERBOSE)
+        Application.StatusBar = LocalizeGetString(control.ID, LOCALE_COL_LABEL_VERBOSE)
         If IsProgressIndicatorNeeded() Then
-            ShowProgressIndicator LocalizeGetString(control.id, LOCALE_COL_LABEL_VERBOSE)
+            ShowProgressIndicator LocalizeGetString(control.ID, LOCALE_COL_LABEL_VERBOSE)
         End If
     End If
 End Sub
@@ -428,7 +428,7 @@ Private Sub fontName_getItemCount(ByVal control As IRibbonControl, ByRef count A
     
     ' Hack to disable loading the font which will not be displayed
     If StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_NODE Or StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_CLUSTER Then
-        If control.id = RIBBON_CTL_LABEL_FONT_NAME Then
+        If control.ID = RIBBON_CTL_LABEL_FONT_NAME Then
             count = 0
         End If
     End If
@@ -437,7 +437,7 @@ Private Sub fontName_getItemCount(ByVal control As IRibbonControl, ByRef count A
     fontCount = count
     
     If count > 0 Then
-        ShowProgressIndicator LocalizeGetString(control.id, LOCALE_COL_LABEL_VERBOSE)
+        ShowProgressIndicator LocalizeGetString(control.ID, LOCALE_COL_LABEL_VERBOSE)
     End If
 End Sub
 
@@ -497,7 +497,7 @@ Private Sub fontName_getItemImage(ByVal control As IRibbonControl, ByVal index A
     Set image = LoadPicture(imageFile)
 
     If image Is Nothing Then    ' the image does not exist, create one
-        UpdateStatusBar replace(GetMessage("statusbarCreateFontImage"), "{fontName}", fontName)
+        Application.StatusBar = replace(GetMessage("statusbarCreateFontImage"), "{fontName}", fontName)
         
         If fontName_createItemImage(fontName, imageFile, outputFormat) Then
             Set image = LoadPicture(imageFile)
@@ -2462,15 +2462,15 @@ End Sub
 
 
 Public Sub ribbon_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetLabel(control.id)
+    returnedVal = GetLabel(control.ID)
 End Sub
 
 Public Sub ribbon_getScreenTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetScreentip(control.id)
+    returnedVal = GetScreentip(control.ID)
 End Sub
 
 Public Sub ribbon_getSuperTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetSupertip(control.id)
+    returnedVal = GetSupertip(control.ID)
 End Sub
 
 Private Function getFontList() As Variant
@@ -2481,14 +2481,14 @@ Private Function getFontList() As Variant
     ' The list of fonts on Windows is availble through a menu control
     Dim tmpFontList As CommandBarControl
     On Error Resume Next
-    Set tmpFontList = Application.CommandBars.Item("Formatting").FindControl(id:=1728)
+    Set tmpFontList = Application.CommandBars.Item("Formatting").FindControl(ID:=1728)
     On Error GoTo 0
     
     'If Font control is missing, create it on a temporary CommandBar
     If tmpFontList Is Nothing Then
         Dim tmpCommandBar As Variant
         Set tmpCommandBar = Application.CommandBars.Add
-        Set tmpFontList = tmpCommandBar.Controls.Add(id:=1728)
+        Set tmpFontList = tmpCommandBar.Controls.Add(ID:=1728)
         tmpCommandBar.Delete
     End If
     
@@ -2862,7 +2862,7 @@ End Sub
 Public Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     If StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_CLUSTER And _
         SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LAYOUT_OSAGE Then
-        Select Case control.id
+        Select Case control.ID
             Case RIBBON_CTL_CLUSTER_MARGIN
                 visible = Not GetCellBoolean(StyleDesignerSheet.name, DESIGNER_NODE_METRIC)
             Case RIBBON_CTL_CLUSTER_MARGIN_MM
@@ -2879,11 +2879,11 @@ Public Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef v
     End If
 End Sub
 
-Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
-    If control.id = RIBBON_CTL_CLUSTER_MARGIN Then
-        StyleDesignerSheet.Range(DESIGNER_CLUSTER_MARGIN).value = Mid$(id, Len("margin_") + 1)
+Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, ID As String, ByVal index As Integer)
+    If control.ID = RIBBON_CTL_CLUSTER_MARGIN Then
+        StyleDesignerSheet.Range(DESIGNER_CLUSTER_MARGIN).value = Mid$(ID, Len("margin_") + 1)
     Else
-        StyleDesignerSheet.Range(DESIGNER_CLUSTER_MARGIN).value = Mid$(id, Len("mmmargin_") + 1)
+        StyleDesignerSheet.Range(DESIGNER_CLUSTER_MARGIN).value = Mid$(ID, Len("mmmargin_") + 1)
     End If
     RenderPreview
 End Sub
@@ -2894,7 +2894,7 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    If control.id = RIBBON_CTL_CLUSTER_MARGIN Then
+    If control.ID = RIBBON_CTL_CLUSTER_MARGIN Then
         itemID = "margin_" & StyleDesignerSheet.Range(DESIGNER_CLUSTER_MARGIN).value
     Else
         itemID = "mmmargin_" & StyleDesignerSheet.Range(DESIGNER_CLUSTER_MARGIN).value
@@ -2902,8 +2902,8 @@ Public Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRe
 End Sub
 
 
-Public Sub clusterPackmode_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
-    StyleDesignerSheet.Range(DESIGNER_CLUSTER_PACKMODE).value = Mid$(id, Len("packmode_") + 1)
+Public Sub clusterPackmode_onAction(ByVal control As IRibbonControl, ID As String, ByVal index As Integer)
+    StyleDesignerSheet.Range(DESIGNER_CLUSTER_PACKMODE).value = Mid$(ID, Len("packmode_") + 1)
     InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_TOP
     InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_BOTTOM
     InvalidateRibbonControl RIBBON_CTL_ARRAY_JUSTIFY_LEFT
@@ -2921,8 +2921,8 @@ Public Sub clusterPackmode_GetSelectedItemID(ByVal control As IRibbonControl, By
     itemID = "packmode_" & StyleDesignerSheet.Range(DESIGNER_CLUSTER_PACKMODE).value
 End Sub
 
-Public Sub arraySplit_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
-    StyleDesignerSheet.Range(DESIGNER_CLUSTER_ARRAY_SPLIT).value = Mid$(id, Len("arraySplit_") + 1)
+Public Sub arraySplit_onAction(ByVal control As IRibbonControl, ID As String, ByVal index As Integer)
+    StyleDesignerSheet.Range(DESIGNER_CLUSTER_ARRAY_SPLIT).value = Mid$(ID, Len("arraySplit_") + 1)
     RenderPreview
 End Sub
 

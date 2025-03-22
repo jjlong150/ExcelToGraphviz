@@ -1,6 +1,6 @@
 Attribute VB_Name = "modExecuteAndCapture"
 '@Folder("Open Source")
-'@IgnoreModule UseMeaningfulName, HungarianNotation, VariableNotAssigned, IntegerDataType, DefaultMemberRequired, UnassignedVariableUsage
+'@IgnoreModule AssignmentNotUsed, UseMeaningfulName, HungarianNotation, VariableNotAssigned, IntegerDataType, DefaultMemberRequired, UnassignedVariableUsage
 
 Option Explicit
 
@@ -317,9 +317,9 @@ Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String
 End Sub
 
 #If Win64 Then
-Function ReadPipe(hPipe As LongPtr) As String
+Private Function ReadPipe(ByVal hPipe As LongPtr) As String
 #Else
-Function ReadPipe(hPipe As Long) As String
+Private Function ReadPipe(ByVal hPipe As Long) As String
 #End If
 
     Dim peeked As Boolean
@@ -348,9 +348,5 @@ Function ReadPipe(hPipe As Long) As String
 End Function
 
 #End If
-
-
-
-
 
 

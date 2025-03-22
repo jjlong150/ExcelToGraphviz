@@ -654,6 +654,11 @@ Private Function GetSettingsDictionarySql() As Dictionary
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_SPLIT_LENGTH, fields.splitLength
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_LINE_ENDING, fields.lineEnding
     
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_TREE_QUERY, fields.treeQuery
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN, fields.whereColumn
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_WHERE_VALUE, fields.whereValue
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_MAX_DEPTH, fields.maxDepth
+    
     dictionaryObj.Add JSON_SETTINGS_SQL_FILTER_COLUMN, fields.filterColumn
     dictionaryObj.Add JSON_SETTINGS_SQL_FILTER_VALUE, fields.filterValue
    
