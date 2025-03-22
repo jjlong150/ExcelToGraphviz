@@ -1,0 +1,2785 @@
+<!-- Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved. -->
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="ribbon_onLoad">
+	<ribbon startFromScratch="false">
+		<tabs>
+            <tab id="worksheetsTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="worksheetsTab">
+                <group id="worksheetsGroupStyles" getLabel="ribbon_getLabel" imageMso="ShapeStylesGallery">
+					<toggleButton id="toggleStyleDesigner" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableDesign" size="large" onAction="toggleStyleDesigner_onAction" getPressed="toggleStyleDesigner_getPressed"/>
+					<toggleButton id="toggleStyles"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShapeStylesGallery" size="large" onAction="toggleStyles_onAction" getPressed="toggleStyles_getPressed"/>
+				</group>
+                <group id="worksheetsGroupData" getLabel="ribbon_getLabel" imageMso="TableExportMenu" autoScale="true">
+					<toggleButton id="toggleSqlSheet"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AdpViewSqlPane" size="large" onAction="toggleSql_onAction"      getPressed="toggleSql_getPressed" getVisible="sql_getVisible"/>
+					<toggleButton id="toggleExchange"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ZoomOnePage"    size="large" onAction="toggleExchange_onAction" getPressed="toggleExchange_getPressed"/>
+				</group>
+                <group id="worksheetsGroupPostprocess" getLabel="ribbon_getLabel" imageMso="ReplaceDialog" autoScale="true">
+					<toggleButton id="toggleSvgSheet"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ReplaceDialog"  size="large" onAction="toggleSvg_onAction"    getPressed="toggleSvg_getPressed"/>
+				</group>
+                <group id="worksheetsGroupDebugging" getLabel="ribbon_getLabel" imageMso="FileVersionHistory" autoScale="true">
+					<toggleButton id="toggleSourceSheet"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileVersionHistory"      size="large" onAction="toggleSource_onAction" getPressed="toggleSource_getPressed"/>
+					<toggleButton id="toggleConsoleSheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SlideMasterMasterLayout" size="large" onAction="toggleConsole_onAction" getPressed="toggleConsole_getPressed" getVisible="toggleConsole_getVisible"/>
+					<separator id="worksheetsSeparator04"/>
+					<toggleButton id="helpAttributes" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableInsertExcel" size="large" onAction="helpAttributes_onAction" getPressed="helpAttributes_getPressed"/>
+					<toggleButton id="helpColors"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="large" onAction="helpColors_onAction" getPressed="helpColors_getPressed"/>
+					<toggleButton id="helpShapes"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="StopAnimation" size="large" onAction="helpShapes_onAction" getPressed="helpShapes_getPressed"/>
+				</group>
+                <group id="worksheetsGroupMaintenance" getLabel="ribbon_getLabel" imageMso="ReadingViewToolsMenu" autoScale="true">
+					<toggleButton id="toggleDiagnostics" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AutoSummaryToolsMenu" size="large" onAction="toggleDiagnostics_onAction" getPressed="toggleDiagnostics_getPressed"/>
+					<toggleButton id="toggleLists"       getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Bullets"              size="large" onAction="toggleLists_onAction"       getPressed="toggleLists_getPressed"/>
+ 					<toggleButton id="toggleSettings"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ReadingViewToolsMenu" size="large" onAction="toggleSettings_onAction" getPressed="toggleSettings_getPressed"/>
+                </group>
+                <group id="worksheetsGroupTranslations" getLabel="ribbon_getLabel" imageMso="SetLanguage" autoScale="true">
+					<toggleButton id="locale_de-DE" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="locale_de-DE" onAction="translations_onAction" getPressed="translations_getPressed"/>
+					<toggleButton id="locale_en-GB" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="locale_en-GB" onAction="translations_onAction" getPressed="translations_getPressed"/>
+					<toggleButton id="locale_en-US" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="locale_en-US" onAction="translations_onAction" getPressed="translations_getPressed"/>
+					<toggleButton id="locale_fr-FR" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="locale_fr-FR" onAction="translations_onAction" getPressed="translations_getPressed"/>
+					<toggleButton id="locale_it-IT" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="locale_it-IT" onAction="translations_onAction" getPressed="translations_getPressed"/>
+					<toggleButton id="locale_pl-PL" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="locale_pl-PL" onAction="translations_onAction" getPressed="translations_getPressed"/>
+				</group>
+				<group id="worksheetsGroupLocale" getLabel="ribbon_getLabel" imageMso="ConferenceMeetNow">
+					<dropDown id="language" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" image="SetLanguage16x16" getSupertip="ribbon_getSuperTip" onAction="language_onAction" getSelectedItemID="language_getSelectedItemID">
+						<item id="language_de-DE" image="locale_de-DE" label="Deutsch"/>
+						<item id="language_en-GB" image="locale_en-GB" label="English (UK)"/>
+						<item id="language_en-US" image="locale_en-US" label="English (US)"/>
+						<item id="language_fr-FR" image="locale_fr-FR" label="Français"/>
+						<item id="language_it-IT" image="locale_it-IT" label="Italiano"/>
+						<item id="language_pl-PL" image="locale_pl-PL" label="Polski"/>
+					</dropDown>
+					<checkBox id="languageVerbose" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="languageVerbose_onAction" getPressed="languageVerbose_getPressed" getVisible="language_getVisible"/>
+				    <checkBox id="nodeMetric"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="nodeMetric_onAction"      getPressed="nodeMetric_getPressed"/>
+				</group>
+				<group id="worksheetsGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<toggleButton id="toggleAbout" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Info" size="large" onAction="toggleAbout_onAction" getPressed="toggleAbout_getPressed"/>
+					<separator id="worksheetsSeparator05"/>
+					<button id="worksheetsHelp"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="worksheetsHelp_onAction"/>
+				</group>
+            </tab>
+   			<tab id="graphvizTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="graphvizTab">
+				<group id="graphvizGroup1" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
+					<button id="graphToWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="refreshgraph" size="large" onAction="graphToWorksheet_onAction" getEnabled="graphToWorksheet_getEnabled"/>
+					<separator id="Separator00"/>
+					<checkBox id="graphAuto" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="graphAuto_onAction" getPressed="graphAuto_getPressed"/>
+					<dropDown id="scaleImage" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="DrawingCanvasScale" onAction="scaleImage_onAction" sizeString="graph" getSelectedItemID="scaleImage_getSelectedItemID">
+						<item id="zoom_100" label="100%"/>
+						<item id="zoom_75" label="75%"/>
+						<item id="zoom_50" label="50%"/>
+						<item id="zoom_25" label="25%"/>
+					</dropDown>
+					<menu id="deleteDropDown" getLabel="ribbon_getLabel" imageMso="ClearGrid">
+						<button id="clearWorksheetGraphs" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="erase" onAction="clearWorksheetGraphs_onAction"/>
+						<button id="clearData" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableDelete" onAction="clearData_onAction"/>
+					</menu>
+					<separator id="Separator00a"/>
+					<dropDown id="yesNoView" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="yesNoView_onAction" getItemCount="yesNoView_getItemCount" getItemLabel="yesNoView_getItemLabel" getSelectedItemIndex="yesNoView_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="imageFormat" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="imageFormat_onAction" sizeString="graph" getSelectedItemID="imageFormat_getSelectedItemID">
+						<item id="img_bmp" label="bmp"/>
+						<item id="img_gif" label="gif"/>
+						<item id="img_png" label="png"/>
+						<item id="img_jpg" label="jpg"/>
+						<item id="img_svg" label="svg"/>
+					</dropDown>
+					<dropDown id="graphWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="graph" onAction="graphWorksheet_onAction" getItemCount="graphWorksheet_getItemCount" getSelectedItemIndex="graphWorksheet_getSelectedItemIndex" getItemLabel="graphWorksheet_getItemLabel">
+					</dropDown>
+				</group>
+				<group id="graphvizGroup2" getLabel="ribbon_getLabel" imageMso="PublishToPdfOrEdoc">
+					<button id="graphToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="graphtofile" size="large" onAction="graphToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+					<separator id="Separator04"/>
+					<button id="graphAllViewsToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="allviewstofile" size="large" onAction="graphAllViewsToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+					<separator id="Separator05"/>
+					<button id="getDir" getLabel="getDir_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileOpen" size="normal" onAction="getDir_onAction"/>
+					<box id="filenameBox" boxStyle="horizontal">
+						<editBox id="filePrefix" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onChange="filePrefix_onChange" getText="filePrefix_getText"/>
+						<labelControl id="dotLabel" label="."/>
+						<dropDown id="fileFormat" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" showLabel="false" onAction="fileFormat_onAction" sizeString="json" getSelectedItemID="fileFormat_getSelectedItemID">
+							<item id="ff_bmp" label="bmp"/>
+							<item id="ff_gif" label="gif"/>
+							<item id="ff_jpg" label="jpg"/>
+							<item id="ff_pdf" label="pdf"/>
+							<item id="ff_png" label="png"/>
+							<item id="ff_ps" label="ps"/>
+							<item id="ff_svg" label="svg"/>
+							<item id="ff_tiff" label="tiff"/>
+							<item id="ff_json" label="json"/>
+							<item id="ff_dot" label="dot"/>
+						</dropDown>
+					</box>
+					<menu id="fileNameOptions" getLabel="ribbon_getLabel">
+						<checkBox id="addTimestamp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="addTimestamp_onAction" getPressed="addTimestamp_getPressed"/>
+						<checkBox id="addOptions" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="addOptions_onAction" getPressed="addOptions_getPressed"/>
+					</menu>
+				</group>
+				<group id="graphvizGroup4" getLabel="ribbon_getLabel" imageMso="CreateClassModule">
+					<dropDown id="layoutEngine" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="layoutEngine_onAction" sizeString="xxxxxxxxxx" getSelectedItemID="layoutEngine_getSelectedItemID">
+						<item id="circo" image="layout_circo" label="circo"/>
+						<item id="dot" image="layout_dot" label="dot"/>
+						<item id="fdp" image="layout_fdp" label="fdp"/>
+						<item id="neato" image="layout_neato" label="neato"/>
+						<item id="osage" image="layout_osage" label="osage"/>
+						<item id="patchwork" image="layout_patchwork" label="patchwork"/>
+						<item id="sfdp" image="layout_sfdp" label="sfdp"/>
+						<item id="twopi" image="layout_twopi" label="twopi"/>
+					</dropDown>
+					<dropDown id="splines" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" sizeString="xxxxxxxxxx" getSelectedItemID="splines_getSelectedItemID">
+						<item id="splines_" image="spline_default" label=" "/>
+						<item id="splines_compound" image="spline_compound" label="compound"/>
+						<item id="splines_curved" image="spline_curved" label="curved"/>
+						<item id="splines_line" image="spline_line" label="line"/>
+						<item id="splines_none" image="spline_none" label="none"/>
+						<item id="splines_ortho" image="spline_ortho" label="ortho"/>
+						<item id="splines_polyline" image="spline_polyline" label="polyline"/>
+						<item id="splines_spline" image="spline_spline" label="spline"/>
+						<item id="splines_true" image="spline_true" label="true"/>
+						<item id="splines_false" image="spline_false" label="false"/>
+					</dropDown>
+					<checkBox id="directed" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="directed_getVisible" onAction="directed_onAction" getPressed="directed_getPressed"/>
+					<separator id="algsep0" getVisible="algsep0_getVisible"/>
+					<dropDown id="outputorder" sizeString="xxxxxxxxxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="outputorder_getVisible" onAction="outputorder_onAction" getSelectedItemID="outputorder_getSelectedItemID">
+						<item id="outputorder_" label=" "/>
+						<item id="outputorder_nodesfirst" label="nodesfirst"/>
+						<item id="outputorder_edgesfirst" label="edgesfirst"/>
+						<item id="outputorder_breadthfirst" label="breadthfirst"/>
+					</dropDown>
+					<dropDown id="overlap" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="overlap_getVisible" onAction="overlap_onAction" sizeString="xxxxxxxxxx" getSelectedItemID="overlap_getSelectedItemID">
+						<item id="overlap_" label=" "/>
+						<item id="overlap_compress" label="compress"/>
+						<item id="overlap_prism" label="prism"/>
+						<item id="overlap_scale" label="scale"/>
+						<item id="overlap_scalexy" label="scalexy"/>
+						<item id="overlap_voronoi" label="voronoi"/>
+					</dropDown>
+					<dropDown id="layoutDirection" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="layoutDirection_getVisible" onAction="layoutDirection_onAction" sizeString="xxxxxxxxxx" getSelectedItemID="layoutDirection_getSelectedItemID">
+						<item id="rankdir_" image="rankdir_tb" label=" "/>
+						<item id="rankdir_TB" image="rankdir_tb" label="TB"/>
+						<item id="rankdir_BT" image="rankdir_bt" label="BT"/>
+						<item id="rankdir_LR" image="rankdir_lr" label="LR"/>
+						<item id="rankdir_RL" image="rankdir_rl" label="RL"/>
+					</dropDown>
+					<dropDown id="ordering" sizeString="xxxxxxxxxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="ordering_getVisible" onAction="ordering_onAction" getSelectedItemID="ordering_getSelectedItemID">
+						<item id="ordering_" label=" "/>
+						<item id="ordering_in" label="in"/>
+						<item id="ordering_out" label="out"/>
+					</dropDown>
+					<separator id="algsep1" getVisible="algsep1_getVisible"/>
+					<dropDown id="mode" sizeString="xxxxxxxxxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="mode_getVisible" onAction="mode_onAction" getSelectedItemID="mode_getSelectedItemID">
+						<item id="mode_" label=" "/>
+						<item id="mode_major" label="major"/>
+						<item id="mode_KK" label="KK"/>
+						<item id="mode_hier" label="hier"/>
+						<item id="mode_ipsep" label="ipsep"/>
+						<item id="mode_spring" label="spring"/>
+						<item id="mode_maxent" label="maxent"/>
+					</dropDown>
+					<dropDown id="model" sizeString="xxxxxxxxxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="model_getVisible" onAction="model_onAction" getSelectedItemID="model_getSelectedItemID">
+						<item id="model_" label=" "/>
+						<item id="model_circuit" label="circuit"/>
+						<item id="model_subset" label="subset"/>
+						<item id="model_mds" label="mds"/>
+					</dropDown>
+					<dropDown id="smoothing" sizeString="xxxxxxxxxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="smoothing_getVisible" onAction="smoothing_onAction" getSelectedItemID="smoothing_getSelectedItemID">
+						<item id="smoothing_" label=" "/>
+						<item id="smoothing_none" label="none"/>
+						<item id="smoothing_avg_dist" label="avg_dist"/>
+						<item id="smoothing_graph_dist" label="graph_dist"/>
+						<item id="smoothing_power_dist" label="power_dist"/>
+						<item id="smoothing_rng" label="rng"/>
+						<item id="smoothing_spring" label="spring"/>
+						<item id="smoothing_triangle" label="triangle"/>
+					</dropDown>
+					<separator id="algsep2" getVisible="algsep2_getVisible"/>
+					<dropDown id="dim" sizeString="xxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="dim_getVisible" onAction="dim_onAction" getSelectedItemID="dim_getSelectedItemID">
+						<item id="dim_" label=" "/>
+						<item id="dim_2" label="2"/>
+						<item id="dim_3" label="3"/>
+						<item id="dim_4" label="4"/>
+						<item id="dim_5" label="5"/>
+						<item id="dim_6" label="6"/>
+						<item id="dim_7" label="7"/>
+						<item id="dim_8" label="8"/>
+						<item id="dim_9" label="9"/>
+						<item id="dim_10" label="10"/>
+					</dropDown>
+					<dropDown id="dimen" sizeString="xxx" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="dimen_getVisible" onAction="dimen_onAction" getSelectedItemID="dimen_getSelectedItemID">
+						<item id="dimen_" label=" "/>
+						<item id="dimen_2" label="2"/>
+						<item id="dimen_3" label="3"/>
+						<item id="dimen_4" label="4"/>
+						<item id="dimen_5" label="5"/>
+						<item id="dimen_6" label="6"/>
+						<item id="dimen_7" label="7"/>
+						<item id="dimen_8" label="8"/>
+						<item id="dimen_9" label="9"/>
+						<item id="dimen_10" label="10"/>
+					</dropDown>
+					<checkBox id="clusterrank" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="clusterrank_onAction" getPressed="clusterrank_getPressed" getVisible="clusterrank_getVisible"/>
+					<checkBox id="newrank" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="newrank_onAction" getPressed="newrank_getPressed" getVisible="newrank_getVisible"/>
+					<checkBox id="compound" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="compound_onAction" getPressed="compound_getPressed" getVisible="compound_getVisible"/>
+				</group>
+				<group id="graphvizGroup100" getLabel="ribbon_getLabel" imageMso="SmartArtOrganizationChartMenu" autoScale="true">
+					<menu id="graphMenu" getLabel="ribbon_getLabel" image="graph_normal" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip">
+						<menuSeparator id="graphMenu3" getTitle="ribbon_getLabel"/>
+						<checkBox id="center"           getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="center_onAction"           getPressed="center_getPressed"/>
+						<checkBox id="forceLabels"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="forceLabels_onAction"      getPressed="forceLabels_getPressed"/>
+						<checkBox id="rotate"           getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="rotate_onAction"           getPressed="rotate_getPressed"/>
+						<checkBox id="transparent"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="transparent_onAction"      getPressed="transparent_getPressed"/>
+						<checkBox id="includeImagePath" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeImagePath_onAction" getPressed="includeImagePath_getPressed"/>
+					</menu>
+					<menu id="nodeMenu" getLabel="ribbon_getLabel" image="node_oval">
+						<menuSeparator id="nodeMenu3" getTitle="ribbon_getLabel"/>
+						<checkBox id="includeOrphanNodes" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeOrphanNodes_onAction" getPressed="includeOrphanNodes_getPressed"/>
+						<menuSeparator id="nodeMenu1" getTitle="ribbon_getLabel"/>
+						<checkBox id="showNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeLabels_onAction" getPressed="showNodeLabels_getPressed"/>
+						<checkBox id="showNodeXLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeXLabels_onAction" getPressed="showNodeXLabels_getPressed"/>
+						<menuSeparator id="nodeMenu2" getTitle="ribbon_getLabel"/>
+						<menu id="blankNodeLabelMenu" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ActiveXTextBox">
+							<checkBox id="blankNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankNodeLabels_onAction" getPressed="blankNodeLabels_getPressed"/>
+							<checkBox id="defaultNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="defaultNodeLabels_onAction" getPressed="defaultNodeLabels_getPressed"/>
+						</menu>
+					</menu>
+					<menu id="edgeMenu" getLabel="ribbon_getLabel" image="edge_normal">
+						<menuSeparator id="graphMenu2" getTitle="ribbon_getLabel"/>
+						<checkBox id="strict" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="strict_onAction" getPressed="strict_getPressed"/>
+						<checkBox id="concentrate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="concentrate_onAction" getPressed="concentrate_getPressed"/>
+						<menuSeparator id="edgeMenu3" getTitle="ribbon_getLabel"/>
+						<checkBox id="includeOrphanEdges" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeOrphanEdges_onAction" getPressed="includeOrphanEdges_getPressed"/>
+						<checkBox id="showPorts" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showPorts_onAction" getPressed="showPorts_getPressed"/>
+						<menuSeparator id="edgeMenu1" getTitle="ribbon_getLabel"/>
+						<checkBox id="showEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeLabels_onAction" getPressed="showEdgeLabels_getPressed"/>
+						<checkBox id="showEdgeXLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeXLabels_onAction" getPressed="showEdgeXLabels_getPressed"/>
+						<checkBox id="showEdgeHeadLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeHeadLabels_onAction" getPressed="showEdgeHeadLabels_getPressed"/>
+						<checkBox id="showEdgeTailLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeTailLabels_onAction" getPressed="showEdgeTailLabels_getPressed"/>
+						<menuSeparator id="edgeMenu2" getTitle="ribbon_getLabel"/>
+						<menu id="blankEdgeLabelMenu" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TextEffectTracking">
+							<checkBox id="blankEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankEdgeLabels_onAction" getPressed="blankEdgeLabels_getPressed"/>
+							<checkBox id="defaultEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="defaultEdgeLabels_onAction" getPressed="defaultEdgeLabels_getPressed"/>
+						</menu>
+					</menu>
+                </group>
+				<group id="graphvizGroup101" getLabel="ribbon_getLabel" imageMso="GroupAdpQueryTools" autoScale="true">
+					<checkBox id="useDefinedStyles" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="useDefinedStyles_onAction" getPressed="useDefinedStyles_getPressed"/>
+					<checkBox id="useExtraStyles" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="useExtraStyles_onAction" getPressed="useExtraStyles_getPressed"/>
+					<menu id="dataMenu" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="showhidecolumns">
+						<checkBox id="ShowComment" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowItem" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowTailLabel" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowLabel" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowOutsideLabel" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowHeadLabel" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowTooltip" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowIsRelatedToItem" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowStyle" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowExtraStyleAttributes" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowMessages" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+					</menu>
+                </group>
+				<group id="graphvizGroupDebug" getLabel="ribbon_getLabel" imageMso="GroupAddins" autoScale="true">
+					<checkBox id="toggleDebugLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="toggleDebugLabels_onAction"       getPressed="toggleDebugLabels_getPressed"/>
+					<checkBox id="keepGvFile"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="keepGvFile_onAction"              getPressed="keepGvFile_getPressed"/>
+					<button   id="clearMessages"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableStyleClear" onAction="clearMessages_onAction"/>
+				</group>
+				<group id="graphvizGroup13" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="graphvizHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="graphvizHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="stylesTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible">
+				<group id="stylesGroup1" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
+					<button id="stylesPreview"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="refreshgraph"          size="large" onAction="stylesPreview_onAction"/>
+					<button id="stylesPreviewAll" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShapeStylesGallery" size="large" onAction="stylesPreviewAll_onAction"/>
+					<button id="stylesClear"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Clear"              size="large" onAction="stylesClear_onAction"/>
+				</group>
+				<group id="stylesGroup2" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
+				    <editBox id="stylesSuffixBegin" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXX" onChange="stylesSuffixBegin_onChange" getText="stylesSuffixBegin_getText"/>
+				    <editBox id="stylesSuffixEnd"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXX" onChange="stylesSuffixEnd_onChange"   getText="stylesSuffixEnd_getText"/>
+				</group>						
+				<group id="stylesGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="stylesHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="stylesHelp_onAction"/>
+				</group>
+			</tab>
+    		<tab id="styleDesignerTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="styleDesignerTab">
+				<group id="designerGroupDesignMode" getLabel="ribbon_getLabel" imageMso="ModuleInsert"  autoScale="true">
+					<toggleButton id="designModeNode" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="node_oval" size="normal" onAction="designModeNode_onAction" getPressed="designModeNode_getPressed"/>
+					<toggleButton id="designModeEdge" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="edge_normal" size="normal" onAction="designModeEdge_onAction" getPressed="designModeEdge_getPressed"/>
+					<toggleButton id="designModeCluster" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="cluster_normal" size="normal" onAction="designModeCluster_onAction" getPressed="designModeCluster_getPressed"/>
+				</group>
+				<group id="designerFormatString" getLabel="ribbon_getLabel" imageMso="ModuleInsert">
+					<button id="saveToStylesWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="addtostyles" size="normal" onAction="saveToStylesWorksheet_onAction" getEnabled="saveToStylesWorksheet_getEnabled"/>
+					<button id="copyToClipboard" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Copy" size="normal" onAction="copyToClipboard_onAction" getEnabled="copyToClipboard_getEnabled"/>
+					<button id="clearStyleRibbon" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="erase" size="normal" onAction="clearStyleRibbon_onAction"/>
+				</group>
+				<group id="designerGroupColorScheme" getLabel="ribbon_getLabel" imageMso="ViewBackToColorView">
+					<gallery id="colorScheme" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" itemHeight="8" columns="6" showItemLabel="false" onAction="colorScheme_onAction" getSelectedItemID="colorScheme_getSelectedItemID">
+						<!-- First block of 6 colors -->
+						<item id="cs_" label="default" image="X11"/>
+						<item id="cs_X11" label="X11" image="X11"/>
+						<item id="cs_SVG" label="SVG" image="SVG"/>
+						<item id="cs_x01" label=" " image="csblank96x36"/>
+						<item id="cs_x02" label=" " image="csblank96x36"/>
+						<item id="cs_x03" label=" " image="csblank96x36"/>
+						<item id="cs_blues3" label="blues3" image="blues3"/>
+						<item id="cs_greens3" label="greens3" image="greens3"/>
+						<item id="cs_greys3" label="greys3" image="greys3"/>
+						<item id="cs_oranges3" label="oranges3" image="oranges3"/>
+						<item id="cs_purples3" label="purples3" image="purples3"/>
+						<item id="cs_reds3" label="reds3" image="reds3"/>
+						<item id="cs_blues4" label="blues4" image="blues4"/>
+						<item id="cs_greens4" label="greens4" image="greens4"/>
+						<item id="cs_greys4" label="greys4" image="greys4"/>
+						<item id="cs_oranges4" label="oranges4" image="oranges4"/>
+						<item id="cs_purples4" label="purples4" image="purples4"/>
+						<item id="cs_reds4" label="reds4" image="reds4"/>
+						<item id="cs_blues5" label="blues5" image="blues5"/>
+						<item id="cs_greens5" label="greens5" image="greens5"/>
+						<item id="cs_greys5" label="greys5" image="greys5"/>
+						<item id="cs_oranges5" label="oranges5" image="oranges5"/>
+						<item id="cs_purples5" label="purples5" image="purples5"/>
+						<item id="cs_reds5" label="reds5" image="reds5"/>
+						<item id="cs_blues6" label="blues6" image="blues6"/>
+						<item id="cs_greens6" label="greens6" image="greens6"/>
+						<item id="cs_greys6" label="greys6" image="greys6"/>
+						<item id="cs_oranges6" label="oranges6" image="oranges6"/>
+						<item id="cs_purples6" label="purples6" image="purples6"/>
+						<item id="cs_reds6" label="reds6" image="reds6"/>
+						<item id="cs_blues7" label="blues7" image="blues7"/>
+						<item id="cs_greens7" label="greens7" image="greens7"/>
+						<item id="cs_greys7" label="greys7" image="greys7"/>
+						<item id="cs_oranges7" label="oranges7" image="oranges7"/>
+						<item id="cs_purples7" label="purples7" image="purples7"/>
+						<item id="cs_reds7" label="reds7" image="reds7"/>
+						<item id="cs_blues8" label="blues8" image="blues8"/>
+						<item id="cs_greens8" label="greens8" image="greens8"/>
+						<item id="cs_greys8" label="greys8" image="greys8"/>
+						<item id="cs_oranges8" label="oranges8" image="oranges8"/>
+						<item id="cs_purples8" label="purples8" image="purples8"/>
+						<item id="cs_reds8" label="reds8" image="reds8"/>
+						<item id="cs_blues9" label="blues9" image="blues9"/>
+						<item id="cs_greens9" label="greens9" image="greens9"/>
+						<item id="cs_greys9" label="greys9" image="greys9"/>
+						<item id="cs_oranges9" label="oranges9" image="oranges9"/>
+						<item id="cs_purples9" label="purples9" image="purples9"/>
+						<item id="cs_reds9" label="reds9" image="reds9"/>
+						<!-- Second block of 6 colors -->
+						<item id="cs_pubu3" label="pubu3" image="pubu3"/>
+						<item id="cs_bugn3" label="bugn3" image="bugn3"/>
+						<item id="cs_gnbu3" label="gnbu3" image="gnbu3"/>
+						<item id="cs_orrd3" label="orrd3" image="orrd3"/>
+						<item id="cs_bupu3" label="bupu3" image="bupu3"/>
+						<item id="cs_pubugn3" label="pubugn3" image="pubugn3"/>
+						<item id="cs_pubu4" label="pubu4" image="pubu4"/>
+						<item id="cs_bugn4" label="bugn4" image="bugn4"/>
+						<item id="cs_gnbu4" label="gnbu4" image="gnbu4"/>
+						<item id="cs_orrd4" label="orrd4" image="orrd4"/>
+						<item id="cs_bupu4" label="bupu4" image="bupu4"/>
+						<item id="cs_pubugn4" label="pubugn4" image="pubugn4"/>
+						<item id="cs_pubu5" label="pubu5" image="pubu5"/>
+						<item id="cs_bugn5" label="bugn5" image="bugn5"/>
+						<item id="cs_gnbu5" label="gnbu5" image="gnbu5"/>
+						<item id="cs_orrd5" label="orrd5" image="orrd5"/>
+						<item id="cs_bupu5" label="bupu5" image="bupu5"/>
+						<item id="cs_pubugn5" label="pubugn5" image="pubugn5"/>
+						<item id="cs_pubu6" label="pubu6" image="pubu6"/>
+						<item id="cs_bugn6" label="bugn6" image="bugn6"/>
+						<item id="cs_gnbu6" label="gnbu6" image="gnbu6"/>
+						<item id="cs_orrd6" label="orrd6" image="orrd6"/>
+						<item id="cs_bupu6" label="bupu6" image="bupu6"/>
+						<item id="cs_pubugn6" label="pubugn6" image="pubugn6"/>
+						<item id="cs_pubu7" label="pubu7" image="pubu7"/>
+						<item id="cs_bugn7" label="bugn7" image="bugn7"/>
+						<item id="cs_gnbu7" label="gnbu7" image="gnbu7"/>
+						<item id="cs_orrd7" label="orrd7" image="orrd7"/>
+						<item id="cs_bupu7" label="bupu7" image="bupu7"/>
+						<item id="cs_pubugn7" label="pubugn7" image="pubugn7"/>
+						<item id="cs_pubu8" label="pubu8" image="pubu8"/>
+						<item id="cs_bugn8" label="bugn8" image="bugn8"/>
+						<item id="cs_gnbu8" label="gnbu8" image="gnbu8"/>
+						<item id="cs_orrd8" label="orrd8" image="orrd8"/>
+						<item id="cs_bupu8" label="bupu8" image="bupu8"/>
+						<item id="cs_pubugn8" label="pubugn8" image="pubugn8"/>
+						<item id="cs_pubu9" label="pubu9" image="pubu9"/>
+						<item id="cs_bugn9" label="bugn9" image="bugn9"/>
+						<item id="cs_gnbu9" label="gnbu9" image="gnbu9"/>
+						<item id="cs_orrd9" label="orrd9" image="orrd9"/>
+						<item id="cs_bupu9" label="bupu9" image="bupu9"/>
+						<item id="cs_pubugn9" label="pubugn9" image="pubugn9"/>
+						<!-- Third block of 6 colors -->
+						<item id="cs_ylgnbu3" label="ylgnbu3" image="ylgnbu3"/>
+						<item id="cs_ylgn3" label="ylgn3" image="ylgn3"/>
+						<item id="cs_ylorbr3" label="ylorbr3" image="ylorbr3"/>
+						<item id="cs_ylorrd3" label="ylorrd3" image="ylorrd3"/>
+						<item id="cs_purd3" label="purd3" image="purd3"/>
+						<item id="cs_rdpu3" label="rdpu3" image="rdpu3"/>
+						<item id="cs_ylgnbu4" label="ylgnbu4" image="ylgnbu4"/>
+						<item id="cs_ylgn4" label="ylgn4" image="ylgn4"/>
+						<item id="cs_ylorbr4" label="ylorbr4" image="ylorbr4"/>
+						<item id="cs_ylorrd4" label="ylorrd4" image="ylorrd4"/>
+						<item id="cs_purd4" label="purd4" image="purd4"/>
+						<item id="cs_rdpu4" label="rdpu4" image="rdpu4"/>
+						<item id="cs_ylgnbu5" label="ylgnbu5" image="ylgnbu5"/>
+						<item id="cs_ylgn5" label="ylgn5" image="ylgn5"/>
+						<item id="cs_ylorbr5" label="ylorbr5" image="ylorbr5"/>
+						<item id="cs_ylorrd5" label="ylorrd5" image="ylorrd5"/>
+						<item id="cs_purd5" label="purd5" image="purd5"/>
+						<item id="cs_rdpu5" label="rdpu5" image="rdpu5"/>
+						<item id="cs_ylgnbu6" label="ylgnbu6" image="ylgnbu6"/>
+						<item id="cs_ylgn6" label="ylgn6" image="ylgn6"/>
+						<item id="cs_ylorbr6" label="ylorbr6" image="ylorbr6"/>
+						<item id="cs_ylorrd6" label="ylorrd6" image="ylorrd6"/>
+						<item id="cs_purd6" label="purd6" image="purd6"/>
+						<item id="cs_rdpu6" label="rdpu6" image="rdpu6"/>
+						<item id="cs_ylgnbu7" label="ylgnbu7" image="ylgnbu7"/>
+						<item id="cs_ylgn7" label="ylgn7" image="ylgn7"/>
+						<item id="cs_ylorbr7" label="ylorbr7" image="ylorbr7"/>
+						<item id="cs_ylorrd7" label="ylorrd7" image="ylorrd7"/>
+						<item id="cs_purd7" label="purd7" image="purd7"/>
+						<item id="cs_rdpu7" label="rdpu7" image="rdpu7"/>
+						<item id="cs_ylgnbu8" label="ylgnbu8" image="ylgnbu8"/>
+						<item id="cs_ylgn8" label="ylgn8" image="ylgn8"/>
+						<item id="cs_ylorbr8" label="ylorbr8" image="ylorbr8"/>
+						<item id="cs_ylorrd8" label="ylorrd8" image="ylorrd8"/>
+						<item id="cs_purd8" label="purd8" image="purd8"/>
+						<item id="cs_rdpu8" label="rdpu8" image="rdpu8"/>
+						<item id="cs_ylgnbu9" label="ylgnbu9" image="ylgnbu9"/>
+						<item id="cs_ylgn9" label="ylgn9" image="ylgn9"/>
+						<item id="cs_ylorbr9" label="ylorbr9" image="ylorbr9"/>
+						<item id="cs_ylorrd9" label="ylorrd9" image="ylorrd9"/>
+						<item id="cs_purd9" label="purd9" image="purd9"/>
+						<item id="cs_rdpu9" label="rdpu9" image="rdpu9"/>
+						<!-- Fourth block of 6 colors -->
+						<item id="cs_brbg3" label="brbg3" image="brbg3"/>
+						<item id="cs_piyg3" label="piyg3" image="piyg3"/>
+						<item id="cs_prgn3" label="prgn3" image="prgn3"/>
+						<item id="cs_puor3" label="puor3" image="puor3"/>
+						<item id="cs_rdbu3" label="rdbu3" image="rdbu3"/>
+						<item id="cs_rdgy3" label="rdgy3" image="rdgy3"/>
+						<item id="cs_brbg4" label="brbg4" image="brbg4"/>
+						<item id="cs_piyg4" label="piyg4" image="piyg4"/>
+						<item id="cs_prgn4" label="prgn4" image="prgn4"/>
+						<item id="cs_puor4" label="puor4" image="puor4"/>
+						<item id="cs_rdbu4" label="rdbu4" image="rdbu4"/>
+						<item id="cs_rdgy4" label="rdgy4" image="rdgy4"/>
+						<item id="cs_brbg5" label="brbg5" image="brbg5"/>
+						<item id="cs_piyg5" label="piyg5" image="piyg5"/>
+						<item id="cs_prgn5" label="prgn5" image="prgn5"/>
+						<item id="cs_puor5" label="puor5" image="puor5"/>
+						<item id="cs_rdbu5" label="rdbu5" image="rdbu5"/>
+						<item id="cs_rdgy5" label="rdgy5" image="rdgy5"/>
+						<item id="cs_brbg6" label="brbg6" image="brbg6"/>
+						<item id="cs_piyg6" label="piyg6" image="piyg6"/>
+						<item id="cs_prgn6" label="prgn6" image="prgn6"/>
+						<item id="cs_puor6" label="puor6" image="puor6"/>
+						<item id="cs_rdbu6" label="rdbu6" image="rdbu6"/>
+						<item id="cs_rdgy6" label="rdgy6" image="rdgy6"/>
+						<item id="cs_brbg7" label="brbg7" image="brbg7"/>
+						<item id="cs_piyg7" label="piyg7" image="piyg7"/>
+						<item id="cs_prgn7" label="prgn7" image="prgn7"/>
+						<item id="cs_puor7" label="puor7" image="puor7"/>
+						<item id="cs_rdbu7" label="rdbu7" image="rdbu7"/>
+						<item id="cs_rdgy7" label="rdgy7" image="rdgy7"/>
+						<item id="cs_brbg8" label="brbg8" image="brbg8"/>
+						<item id="cs_piyg8" label="piyg8" image="piyg8"/>
+						<item id="cs_prgn8" label="prgn8" image="prgn8"/>
+						<item id="cs_puor8" label="puor8" image="puor8"/>
+						<item id="cs_rdbu8" label="rdbu8" image="rdbu8"/>
+						<item id="cs_rdgy8" label="rdgy8" image="rdgy8"/>
+						<item id="cs_brbg9" label="brbg9" image="brbg9"/>
+						<item id="cs_piyg9" label="piyg9" image="piyg9"/>
+						<item id="cs_prgn9" label="prgn9" image="prgn9"/>
+						<item id="cs_puor9" label="puor9" image="puor9"/>
+						<item id="cs_rdbu9" label="rdbu9" image="rdbu9"/>
+						<item id="cs_rdgy9" label="rdgy9" image="rdgy9"/>
+						<item id="cs_brbg10" label="brbg10" image="brbg10"/>
+						<item id="cs_piyg10" label="piyg10" image="piyg10"/>
+						<item id="cs_prgn10" label="prgn10" image="prgn10"/>
+						<item id="cs_puor10" label="puor10" image="puor10"/>
+						<item id="cs_rdbu10" label="rdbu10" image="rdbu10"/>
+						<item id="cs_rdgy10" label="rdgy10" image="rdgy10"/>
+						<item id="cs_brbg11" label="brbg11" image="brbg11"/>
+						<item id="cs_piyg11" label="piyg11" image="piyg11"/>
+						<item id="cs_prgn11" label="prgn11" image="prgn11"/>
+						<item id="cs_puor11" label="puor11" image="puor11"/>
+						<item id="cs_rdbu11" label="rdbu11" image="rdbu11"/>
+						<item id="cs_rdgy11" label="rdgy11" image="rdgy11"/>
+						<!-- Fifth block of 6 colors -->
+						<item id="cs_rdylbu3" label="rdylbu3" image="rdylbu3"/>
+						<item id="cs_rdylgn3" label="rdylgn3" image="rdylgn3"/>
+						<item id="cs_spectral3" label="spectral3" image="spectral3"/>
+						<item id="cs_pastel13" label="pastel13" image="pastel13"/>
+						<item id="cs_pastel23" label="pastel23" image="pastel23"/>
+						<item id="cs_accent3" label="accent3" image="accent3"/>
+						<item id="cs_rdylbu4" label="rdylbu4" image="rdylbu4"/>
+						<item id="cs_rdylgn4" label="rdylgn4" image="rdylgn4"/>
+						<item id="cs_spectral4" label="spectral4" image="spectral4"/>
+						<item id="cs_pastel14" label="pastel14" image="pastel14"/>
+						<item id="cs_pastel24" label="pastel24" image="pastel24"/>
+						<item id="cs_accent4" label="accent4" image="accent4"/>
+						<item id="cs_rdylbu5" label="rdylbu5" image="rdylbu5"/>
+						<item id="cs_rdylgn5" label="rdylgn5" image="rdylgn5"/>
+						<item id="cs_spectral5" label="spectral5" image="spectral5"/>
+						<item id="cs_pastel15" label="pastel15" image="pastel15"/>
+						<item id="cs_pastel25" label="pastel25" image="pastel25"/>
+						<item id="cs_accent5" label="accent5" image="accent5"/>
+						<item id="cs_rdylbu6" label="rdylbu6" image="rdylbu6"/>
+						<item id="cs_rdylgn6" label="rdylgn6" image="rdylgn6"/>
+						<item id="cs_spectral6" label="spectral6" image="spectral6"/>
+						<item id="cs_pastel16" label="pastel16" image="pastel16"/>
+						<item id="cs_pastel26" label="pastel26" image="pastel26"/>
+						<item id="cs_accent6" label="accent6" image="accent6"/>
+						<item id="cs_rdylbu7" label="rdylbu7" image="rdylbu7"/>
+						<item id="cs_rdylgn7" label="rdylgn7" image="rdylgn7"/>
+						<item id="cs_spectral7" label="spectral7" image="spectral7"/>
+						<item id="cs_pastel17" label="pastel17" image="pastel17"/>
+						<item id="cs_pastel27" label="pastel27" image="pastel27"/>
+						<item id="cs_accent7" label="accent7" image="accent7"/>
+						<item id="cs_rdylbu8" label="rdylbu8" image="rdylbu8"/>
+						<item id="cs_rdylgn8" label="rdylgn8" image="rdylgn8"/>
+						<item id="cs_spectral8" label="spectral8" image="spectral8"/>
+						<item id="cs_pastel18" label="pastel18" image="pastel18"/>
+						<item id="cs_pastel28" label="pastel28" image="pastel28"/>
+						<item id="cs_accent8" label="accent8" image="accent8"/>
+						<item id="cs_rdylbu9" label="rdylbu9" image="rdylbu9"/>
+						<item id="cs_rdylgn9" label="rdylgn9" image="rdylgn9"/>
+						<item id="cs_spectral9" label="spectral9" image="spectral9"/>
+						<item id="cs_pastel19" label="pastel19" image="pastel19"/>
+						<item id="cs_x04" label=" " image="csblank"/>
+						<item id="cs_x05" label=" " image="csblank"/>
+						<item id="cs_rdylbu10" label="rdylbu10" image="rdylbu10"/>
+						<item id="cs_rdylgn10" label="rdylgn10" image="rdylgn10"/>
+						<item id="cs_spectral10" label="spectral10" image="spectral10"/>
+						<item id="cs_x06" label=" " image="csblank"/>
+						<item id="cs_x07" label=" " image="csblank"/>
+						<item id="cs_x08" label=" " image="csblank"/>
+						<item id="cs_rdylbu11" label="rdylbu11" image="rdylbu11"/>
+						<item id="cs_rdylgn11" label="rdylgn11" image="rdylgn11"/>
+						<item id="cs_spectral11" label="spectral11" image="spectral11"/>
+						<item id="cs_x09" label=" " image="csblank"/>
+						<item id="cs_x10" label=" " image="csblank"/>
+						<item id="cs_x11" label=" " image="csblank"/>
+						<!-- Sixth block of 6 colors -->
+						<item id="cs_dark23" label="dark23" image="dark23"/>
+						<item id="cs_set13" label="set13" image="set13"/>
+						<item id="cs_set23" label="set23" image="set23"/>
+						<item id="cs_set33" label="set33" image="set33"/>
+						<item id="cs_paired3" label="paired3" image="paired3"/>
+						<item id="cs_x12" label=" " image="csblank"/>
+						<item id="cs_dark24" label="dark24" image="dark24"/>
+						<item id="cs_set14" label="set14" image="set14"/>
+						<item id="cs_set24" label="set24" image="set24"/>
+						<item id="cs_set34" label="set34" image="set34"/>
+						<item id="cs_paired4" label="paired4" image="paired4"/>
+						<item id="cs_x13" label=" " image="csblank"/>
+						<item id="cs_dark25" label="dark25" image="dark25"/>
+						<item id="cs_set15" label="set15" image="set15"/>
+						<item id="cs_set25" label="set25" image="set25"/>
+						<item id="cs_set35" label="set35" image="set35"/>
+						<item id="cs_paired5" label="paired5" image="paired5"/>
+						<item id="cs_x14" label=" " image="csblank"/>
+						<item id="cs_dark26" label="dark26" image="dark26"/>
+						<item id="cs_set16" label="set16" image="set16"/>
+						<item id="cs_set26" label="set26" image="set26"/>
+						<item id="cs_set36" label="set36" image="set36"/>
+						<item id="cs_paired6" label="paired6" image="paired6"/>
+						<item id="cs_x15" label=" " image="csblank"/>
+						<item id="cs_dark27" label="dark27" image="dark27"/>
+						<item id="cs_set17" label="set17" image="set17"/>
+						<item id="cs_set27" label="set27" image="set27"/>
+						<item id="cs_set37" label="set37" image="set37"/>
+						<item id="cs_paired7" label="paired7" image="paired7"/>
+						<item id="cs_x16" label=" " image="csblank"/>
+						<item id="cs_dark28" label="dark28" image="dark28"/>
+						<item id="cs_set18" label="set18" image="set18"/>
+						<item id="cs_set28" label="set28" image="set28"/>
+						<item id="cs_set38" label="set38" image="set38"/>
+						<item id="cs_paired8" label="paired8" image="paired8"/>
+						<item id="cs_x17" label=" " image="csblank"/>
+						<item id="cs_x18" label=" " image="csblank"/>
+						<item id="cs_set19" label="set19" image="set19"/>
+						<item id="cs_x19" label=" " image="csblank"/>
+						<item id="cs_set39" label="set39" image="set39"/>
+						<item id="cs_paired9" label="paired9" image="paired9"/>
+						<item id="cs_x20" label=" " image="csblank"/>
+						<item id="cs_x21" label=" " image="csblank"/>
+						<item id="cs_x22" label=" " image="csblank"/>
+						<item id="cs_x23" label=" " image="csblank"/>
+						<item id="cs_set310" label="set310" image="set310"/>
+						<item id="cs_paired10" label="paired10" image="paired10"/>
+						<item id="cs_x24" label=" " image="csblank"/>
+						<item id="cs_x25" label=" " image="csblank"/>
+						<item id="cs_x26" label=" " image="csblank"/>
+						<item id="cs_x27" label=" " image="csblank"/>
+						<item id="cs_set311" label="set311" image="set311"/>
+						<item id="cs_paired11" label="paired11" image="paired11"/>
+						<item id="cs_x28" label=" " image="csblank"/>
+						<item id="cs_x29" label=" " image="csblank"/>
+						<item id="cs_x30" label=" " image="csblank"/>
+						<item id="cs_x31" label=" " image="csblank"/>
+						<item id="cs_set312" label="set312" image="set312"/>
+						<item id="cs_paired12" label="paired12" image="paired12"/>
+						<item id="cs_x32" label=" " image="csblank"/>
+					</gallery>
+                    <labelControl id="currentColorScheme"    getLabel="currentColorScheme_getLabel"/>
+					<button id="sqlDummyButton6" image="spacer_normal" size="normal" enabled="false" getVisible="mac_getVisible"/>
+				</group>
+				<group id="designerGroupFont" getLabel="ribbon_getLabel" imageMso="ChangeStylesMenu">
+					<dropDown id="fontColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fontColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="fontColor_getImage" getSelectedItemIndex="fontColor_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="fontName" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="fontName_onAction" getItemCount="fontName_getItemCount" getItemImage="fontName_getItemImage" getItemLabel="fontName_getItemLabel" getSelectedItemIndex="fontName_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="fontSize" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="fontSize_onAction" getItemCount="fontSize_getItemCount" getItemLabel="fontSize_getItemLabel" getSelectedItemIndex="fontSize_getSelectedItemIndex">
+					</dropDown>
+					<separator id="fontSeparator"/>
+					<buttonGroup id="buttonGroupFont">
+						<toggleButton id="fontBold" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Bold" onAction="fontBold_onAction" getPressed="fontBold_getPressed"/>
+						<toggleButton id="fontItalic" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Italic" onAction="fontItalic_onAction" getPressed="fontItalic_getPressed"/>
+					</buttonGroup>
+					<buttonGroup id="buttonGroupAlign">
+						<toggleButton id="alignTop" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignTopExcel" onAction="alignTop_onAction" getVisible="designerGroupLabels_getVisible" getPressed="alignTop_getPressed"/>
+						<toggleButton id="alignBottom" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignBottomExcel" onAction="alignBottom_onAction" getVisible="designerGroupLabels_getVisible" getPressed="alignBottom_getPressed"/>
+					</buttonGroup>
+					<buttonGroup id="buttonGroupJustify">
+						<toggleButton id="justifyLeft" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignLeft" onAction="justifyLeft_onAction" getVisible="labelJustification_getVisible" getPressed="justifyLeft_getPressed"/>
+						<toggleButton id="justifyRight" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignRight" onAction="justifyRight_onAction" getVisible="labelJustification_getVisible" getPressed="justifyRight_getPressed"/>
+					</buttonGroup>
+					<separator id="labelStyleSeparator" getVisible="designerGroupEdgeStyle_getVisible"/>
+					<checkBox id="edgeLabelDecorate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeDecorate_onAction" getPressed="edgeDecorate_getPressed" getVisible="designerGroupEdgeStyle_getVisible"/>
+					<checkBox id="edgeLabelFloat" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeLabelFloat_onAction" getPressed="edgeLabelFloat_getPressed" getVisible="designerGroupEdgeStyle_getVisible"/>
+				</group>
+				<group id="designerGroupNodeShape" getLabel="ribbon_getLabel" imageMso="ObjectSendToBack" getVisible="designerGroupNodeShape_getVisible">
+					<dropDown id="nodeShape" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="nodeShape_onAction" getSelectedItemID="nodeShape_getSelectedItemID">
+						<item id="s_" image="shapes_oval" label=" "/>
+						<item id="s_polygon" image="shapes_polygon" label="polygon"/>
+						<item id="s_box" image="shapes_box" label="box"/>
+						<item id="s_rect" image="shapes_rect" label="rect"/>
+						<item id="s_rectangle" image="shapes_rectangle" label="rectangle"/>
+						<item id="s_record" image="shapes_record" label="record"/>
+						<item id="s_Mrecord" image="shapes_Mrecord" label="Mrecord"/>
+						<item id="s_box3d" image="shapes_box3d" label="box3d"/>
+						<item id="s_component" image="shapes_component" label="component"/>
+						<item id="s_circle" image="shapes_circle" label="circle"/>
+						<item id="s_Mcircle" image="shapes_Mcircle" label="Mcircle"/>
+						<item id="s_doublecircle" image="shapes_doublecircle" label="doublecircle"/>
+						<item id="s_ellipse" image="shapes_ellipse" label="ellipse"/>
+						<item id="s_oval" image="shapes_oval" label="oval"/>
+						<item id="s_egg" image="shapes_egg" label="egg"/>
+						<item id="s_cylinder" image="shapes_cylinder" label="cylinder"/>
+						<item id="s_triangle" image="shapes_triangle" label="triangle"/>
+						<item id="s_invtriangle" image="shapes_invtriangle" label="invtriangle"/>
+						<item id="s_square" image="shapes_square" label="square"/>
+						<item id="s_Msquare" image="shapes_Msquare" label="Msquare"/>
+						<item id="s_diamond" image="shapes_diamond" label="diamond"/>
+						<item id="s_Mdiamond" image="shapes_Mdiamond" label="Mdiamond"/>
+						<item id="s_trapezium" image="shapes_trapezium" label="trapezium"/>
+						<item id="s_invtrapezium" image="shapes_invtrapezium" label="invtrapezium"/>
+						<item id="s_house" image="shapes_house" label="house"/>
+						<item id="s_invhouse" image="shapes_invhouse" label="invhouse"/>
+						<item id="s_pentagon" image="shapes_pentagon" label="pentagon"/>
+						<item id="s_hexagon" image="shapes_hexagon" label="hexagon"/>
+						<item id="s_septagon" image="shapes_septagon" label="septagon"/>
+						<item id="s_octagon" image="shapes_octagon" label="octagon"/>
+						<item id="s_doubleoctagon" image="shapes_doubleoctagon" label="doubleoctagon"/>
+						<item id="s_tripleoctagon" image="shapes_tripleoctagon" label="tripleoctagon"/>
+						<item id="s_star" image="shapes_star" label="star"/>
+						<item id="s_plain" image="shapes_plain" label="plain"/>
+						<item id="s_plaintext" image="shapes_plaintext" label="plaintext"/>
+						<item id="s_point" image="shapes_point" label="point"/>
+						<item id="s_none" image="shapes_none" label="none"/>
+						<item id="s_underline" image="shapes_underline" label="underline"/>
+						<item id="s_note" image="shapes_note" label="note"/>
+						<item id="s_tab" image="shapes_tab" label="tab"/>
+						<item id="s_folder" image="shapes_folder" label="folder"/>
+						<item id="s_signature" image="shapes_signature" label="signature"/>
+						<item id="s_cds" image="shapes_cds" label="cds"/>
+						<item id="s_larrow" image="shapes_larrow" label="larrow"/>
+						<item id="s_lpromoter" image="shapes_lpromoter" label="lpromoter"/>
+						<item id="s_rarrow" image="shapes_rarrow" label="rarrow"/>
+						<item id="s_rpromoter" image="shapes_rpromoter" label="rpromoter"/>
+						<item id="s_promoter" image="shapes_promoter" label="promoter"/>
+						<item id="s_terminator" image="shapes_terminator" label="terminator"/>
+						<item id="s_utr" image="shapes_utr" label="utr"/>
+						<item id="s_primersite" image="shapes_primersite" label="primersite"/>
+						<item id="s_restrictionsite" image="shapes_restrictionsite" label="restrictionsite"/>
+						<item id="s_fivepoverhang" image="shapes_fivepoverhang" label="fivepoverhang"/>
+						<item id="s_threepoverhang" image="shapes_threepoverhang" label="threepoverhang"/>
+						<item id="s_noverhang" image="shapes_noverhang" label="noverhang"/>
+						<item id="s_assembly" image="shapes_assembly" label="assembly"/>
+						<item id="s_insulator" image="shapes_insulator" label="insulator"/>
+						<item id="s_ribosite" image="shapes_ribosite" label="ribosite"/>
+						<item id="s_rnastab" image="shapes_rnastab" label="rnastab"/>
+						<item id="s_proteasesite" image="shapes_proteasesite" label="proteasesite"/>
+						<item id="s_proteinstab" image="shapes_proteinstab" label="proteinstab"/>
+					</dropDown>
+					<checkBox id="nodeRegular" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="nodeShape_isPolygon" onAction="regular_onAction" getPressed="regular_getPressed"/>
+					<editBox id="nodeSkew" getLabel="ribbon_getLabel" sizeString="XXXXX" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="nodeShape_isPolygon" onChange="nodeSkew_onChange" getText="nodeSkew_getText"/>
+					<separator id="polygonSeparator" getVisible="nodeShape_isPolygon"/>
+					<dropDown id="nodeSides" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" onAction="nodeSides_onAction" getVisible="nodeShape_isPolygon" getSelectedItemID="nodeSides_getSelectedItemID">
+						<item id="si_" label=" "/>
+						<item id="si_0" label="0"/>
+						<item id="si_1" label="1"/>
+						<item id="si_2" label="2"/>
+						<item id="si_3" label="3"/>
+						<item id="si_4" label="4"/>
+						<item id="si_5" label="5"/>
+						<item id="si_6" label="6"/>
+						<item id="si_7" label="7"/>
+						<item id="si_8" label="8"/>
+						<item id="si_9" label="9"/>
+						<item id="si_10" label="10"/>
+						<item id="si_11" label="11"/>
+						<item id="si_12" label="12"/>
+						<item id="si_13" label="13"/>
+						<item id="si_14" label="14"/>
+						<item id="si_15" label="15"/>
+						<item id="si_16" label="16"/>
+						<item id="si_17" label="17"/>
+						<item id="si_18" label="18"/>
+						<item id="si_19" label="19"/>
+						<item id="si_20" label="20"/>
+					</dropDown>
+					<dropDown id="nodeRotation" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" onAction="nodeRotation_onAction" getVisible="nodeShape_isPolygon" getSelectedItemID="nodeRotation_getSelectedItemID">
+						<item id="r_" label=" "/>
+						<item id="r_0" label="0°"/>
+						<item id="r_1" label="1°"/>
+						<item id="r_2" label="2°"/>
+						<item id="r_3" label="3°"/>
+						<item id="r_4" label="4°"/>
+						<item id="r_5" label="5°"/>
+						<item id="r_6" label="6°"/>
+						<item id="r_7" label="7°"/>
+						<item id="r_8" label="8°"/>
+						<item id="r_9" label="9°"/>
+						<item id="r_10" label="10°"/>
+						<item id="r_11" label="11°"/>
+						<item id="r_12" label="12°"/>
+						<item id="r_13" label="13°"/>
+						<item id="r_14" label="14°"/>
+						<item id="r_15" label="15°"/>
+						<item id="r_16" label="16°"/>
+						<item id="r_17" label="17°"/>
+						<item id="r_18" label="18°"/>
+						<item id="r_19" label="19°"/>
+						<item id="r_20" label="20°"/>
+						<item id="r_21" label="21°"/>
+						<item id="r_22" label="22°"/>
+						<item id="r_23" label="23°"/>
+						<item id="r_24" label="24°"/>
+						<item id="r_25" label="25°"/>
+						<item id="r_26" label="26°"/>
+						<item id="r_27" label="27°"/>
+						<item id="r_28" label="28°"/>
+						<item id="r_29" label="29°"/>
+						<item id="r_30" label="30°"/>
+						<item id="r_31" label="31°"/>
+						<item id="r_32" label="32°"/>
+						<item id="r_33" label="33°"/>
+						<item id="r_34" label="34°"/>
+						<item id="r_35" label="35°"/>
+						<item id="r_36" label="36°"/>
+						<item id="r_37" label="37°"/>
+						<item id="r_38" label="38°"/>
+						<item id="r_39" label="39°"/>
+						<item id="r_40" label="40°"/>
+						<item id="r_41" label="41°"/>
+						<item id="r_42" label="42°"/>
+						<item id="r_43" label="43°"/>
+						<item id="r_44" label="44°"/>
+						<item id="r_45" label="45°"/>
+						<item id="r_46" label="46°"/>
+						<item id="r_47" label="47°"/>
+						<item id="r_48" label="48°"/>
+						<item id="r_49" label="49°"/>
+						<item id="r_50" label="50°"/>
+						<item id="r_51" label="51°"/>
+						<item id="r_52" label="52°"/>
+						<item id="r_53" label="53°"/>
+						<item id="r_54" label="54°"/>
+						<item id="r_55" label="55°"/>
+						<item id="r_56" label="56°"/>
+						<item id="r_57" label="57°"/>
+						<item id="r_58" label="58°"/>
+						<item id="r_59" label="59°"/>
+						<item id="r_60" label="60°"/>
+						<item id="r_61" label="61°"/>
+						<item id="r_62" label="62°"/>
+						<item id="r_63" label="63°"/>
+						<item id="r_64" label="64°"/>
+						<item id="r_65" label="65°"/>
+						<item id="r_66" label="66°"/>
+						<item id="r_67" label="67°"/>
+						<item id="r_68" label="68°"/>
+						<item id="r_69" label="69°"/>
+						<item id="r_70" label="70°"/>
+						<item id="r_71" label="71°"/>
+						<item id="r_72" label="72°"/>
+						<item id="r_73" label="73°"/>
+						<item id="r_74" label="74°"/>
+						<item id="r_75" label="75°"/>
+						<item id="r_76" label="76°"/>
+						<item id="r_77" label="77°"/>
+						<item id="r_78" label="78°"/>
+						<item id="r_79" label="79°"/>
+						<item id="r_80" label="80°"/>
+						<item id="r_81" label="81°"/>
+						<item id="r_82" label="82°"/>
+						<item id="r_83" label="83°"/>
+						<item id="r_84" label="84°"/>
+						<item id="r_85" label="85°"/>
+						<item id="r_86" label="86°"/>
+						<item id="r_87" label="87°"/>
+						<item id="r_88" label="88°"/>
+						<item id="r_89" label="89°"/>
+						<item id="r_90" label="90°"/>
+						<item id="r_91" label="91°"/>
+						<item id="r_92" label="92°"/>
+						<item id="r_93" label="93°"/>
+						<item id="r_94" label="94°"/>
+						<item id="r_95" label="95°"/>
+						<item id="r_96" label="96°"/>
+						<item id="r_97" label="97°"/>
+						<item id="r_98" label="98°"/>
+						<item id="r_99" label="99°"/>
+						<item id="r_100" label="100°"/>
+						<item id="r_101" label="101°"/>
+						<item id="r_102" label="102°"/>
+						<item id="r_103" label="103°"/>
+						<item id="r_104" label="104°"/>
+						<item id="r_105" label="105°"/>
+						<item id="r_106" label="106°"/>
+						<item id="r_107" label="107°"/>
+						<item id="r_108" label="108°"/>
+						<item id="r_109" label="109°"/>
+						<item id="r_110" label="110°"/>
+						<item id="r_111" label="111°"/>
+						<item id="r_112" label="112°"/>
+						<item id="r_113" label="113°"/>
+						<item id="r_114" label="114°"/>
+						<item id="r_115" label="115°"/>
+						<item id="r_116" label="116°"/>
+						<item id="r_117" label="117°"/>
+						<item id="r_118" label="118°"/>
+						<item id="r_119" label="119°"/>
+						<item id="r_120" label="120°"/>
+						<item id="r_121" label="121°"/>
+						<item id="r_122" label="122°"/>
+						<item id="r_123" label="123°"/>
+						<item id="r_124" label="124°"/>
+						<item id="r_125" label="125°"/>
+						<item id="r_126" label="126°"/>
+						<item id="r_127" label="127°"/>
+						<item id="r_128" label="128°"/>
+						<item id="r_129" label="129°"/>
+						<item id="r_130" label="130°"/>
+						<item id="r_131" label="131°"/>
+						<item id="r_132" label="132°"/>
+						<item id="r_133" label="133°"/>
+						<item id="r_134" label="134°"/>
+						<item id="r_135" label="135°"/>
+						<item id="r_136" label="136°"/>
+						<item id="r_137" label="137°"/>
+						<item id="r_138" label="138°"/>
+						<item id="r_139" label="139°"/>
+						<item id="r_140" label="140°"/>
+						<item id="r_141" label="141°"/>
+						<item id="r_142" label="142°"/>
+						<item id="r_143" label="143°"/>
+						<item id="r_144" label="144°"/>
+						<item id="r_145" label="145°"/>
+						<item id="r_146" label="146°"/>
+						<item id="r_147" label="147°"/>
+						<item id="r_148" label="148°"/>
+						<item id="r_149" label="149°"/>
+						<item id="r_150" label="150°"/>
+						<item id="r_151" label="151°"/>
+						<item id="r_152" label="152°"/>
+						<item id="r_153" label="153°"/>
+						<item id="r_154" label="154°"/>
+						<item id="r_155" label="155°"/>
+						<item id="r_156" label="156°"/>
+						<item id="r_157" label="157°"/>
+						<item id="r_158" label="158°"/>
+						<item id="r_159" label="159°"/>
+						<item id="r_160" label="160°"/>
+						<item id="r_161" label="161°"/>
+						<item id="r_162" label="162°"/>
+						<item id="r_163" label="163°"/>
+						<item id="r_164" label="164°"/>
+						<item id="r_165" label="165°"/>
+						<item id="r_166" label="166°"/>
+						<item id="r_167" label="167°"/>
+						<item id="r_168" label="168°"/>
+						<item id="r_169" label="169°"/>
+						<item id="r_170" label="170°"/>
+						<item id="r_171" label="171°"/>
+						<item id="r_172" label="172°"/>
+						<item id="r_173" label="173°"/>
+						<item id="r_174" label="174°"/>
+						<item id="r_175" label="175°"/>
+						<item id="r_176" label="176°"/>
+						<item id="r_177" label="177°"/>
+						<item id="r_178" label="178°"/>
+						<item id="r_179" label="179°"/>
+						<item id="r_180" label="180°"/>
+						<item id="r_181" label="181°"/>
+						<item id="r_182" label="182°"/>
+						<item id="r_183" label="183°"/>
+						<item id="r_184" label="184°"/>
+						<item id="r_185" label="185°"/>
+						<item id="r_186" label="186°"/>
+						<item id="r_187" label="187°"/>
+						<item id="r_188" label="188°"/>
+						<item id="r_189" label="189°"/>
+						<item id="r_190" label="190°"/>
+						<item id="r_191" label="191°"/>
+						<item id="r_192" label="192°"/>
+						<item id="r_193" label="193°"/>
+						<item id="r_194" label="194°"/>
+						<item id="r_195" label="195°"/>
+						<item id="r_196" label="196°"/>
+						<item id="r_197" label="197°"/>
+						<item id="r_198" label="198°"/>
+						<item id="r_199" label="199°"/>
+						<item id="r_200" label="200°"/>
+						<item id="r_201" label="201°"/>
+						<item id="r_202" label="202°"/>
+						<item id="r_203" label="203°"/>
+						<item id="r_204" label="204°"/>
+						<item id="r_205" label="205°"/>
+						<item id="r_206" label="206°"/>
+						<item id="r_207" label="207°"/>
+						<item id="r_208" label="208°"/>
+						<item id="r_209" label="209°"/>
+						<item id="r_210" label="210°"/>
+						<item id="r_211" label="211°"/>
+						<item id="r_212" label="212°"/>
+						<item id="r_213" label="213°"/>
+						<item id="r_214" label="214°"/>
+						<item id="r_215" label="215°"/>
+						<item id="r_216" label="216°"/>
+						<item id="r_217" label="217°"/>
+						<item id="r_218" label="218°"/>
+						<item id="r_219" label="219°"/>
+						<item id="r_220" label="220°"/>
+						<item id="r_221" label="221°"/>
+						<item id="r_222" label="222°"/>
+						<item id="r_223" label="223°"/>
+						<item id="r_224" label="224°"/>
+						<item id="r_225" label="225°"/>
+						<item id="r_226" label="226°"/>
+						<item id="r_227" label="227°"/>
+						<item id="r_228" label="228°"/>
+						<item id="r_229" label="229°"/>
+						<item id="r_230" label="230°"/>
+						<item id="r_231" label="231°"/>
+						<item id="r_232" label="232°"/>
+						<item id="r_233" label="233°"/>
+						<item id="r_234" label="234°"/>
+						<item id="r_235" label="235°"/>
+						<item id="r_236" label="236°"/>
+						<item id="r_237" label="237°"/>
+						<item id="r_238" label="238°"/>
+						<item id="r_239" label="239°"/>
+						<item id="r_240" label="240°"/>
+						<item id="r_241" label="241°"/>
+						<item id="r_242" label="242°"/>
+						<item id="r_243" label="243°"/>
+						<item id="r_244" label="244°"/>
+						<item id="r_245" label="245°"/>
+						<item id="r_246" label="246°"/>
+						<item id="r_247" label="247°"/>
+						<item id="r_248" label="248°"/>
+						<item id="r_249" label="249°"/>
+						<item id="r_250" label="250°"/>
+						<item id="r_251" label="251°"/>
+						<item id="r_252" label="252°"/>
+						<item id="r_253" label="253°"/>
+						<item id="r_254" label="254°"/>
+						<item id="r_255" label="255°"/>
+						<item id="r_256" label="256°"/>
+						<item id="r_257" label="257°"/>
+						<item id="r_258" label="258°"/>
+						<item id="r_259" label="259°"/>
+						<item id="r_260" label="260°"/>
+						<item id="r_261" label="261°"/>
+						<item id="r_262" label="262°"/>
+						<item id="r_263" label="263°"/>
+						<item id="r_264" label="264°"/>
+						<item id="r_265" label="265°"/>
+						<item id="r_266" label="266°"/>
+						<item id="r_267" label="267°"/>
+						<item id="r_268" label="268°"/>
+						<item id="r_269" label="269°"/>
+						<item id="r_270" label="270°"/>
+						<item id="r_271" label="271°"/>
+						<item id="r_272" label="272°"/>
+						<item id="r_273" label="273°"/>
+						<item id="r_274" label="274°"/>
+						<item id="r_275" label="275°"/>
+						<item id="r_276" label="276°"/>
+						<item id="r_277" label="277°"/>
+						<item id="r_278" label="278°"/>
+						<item id="r_279" label="279°"/>
+						<item id="r_280" label="280°"/>
+						<item id="r_281" label="281°"/>
+						<item id="r_282" label="282°"/>
+						<item id="r_283" label="283°"/>
+						<item id="r_284" label="284°"/>
+						<item id="r_285" label="285°"/>
+						<item id="r_286" label="286°"/>
+						<item id="r_287" label="287°"/>
+						<item id="r_288" label="288°"/>
+						<item id="r_289" label="289°"/>
+						<item id="r_290" label="290°"/>
+						<item id="r_291" label="291°"/>
+						<item id="r_292" label="292°"/>
+						<item id="r_293" label="293°"/>
+						<item id="r_294" label="294°"/>
+						<item id="r_295" label="295°"/>
+						<item id="r_296" label="296°"/>
+						<item id="r_297" label="297°"/>
+						<item id="r_298" label="298°"/>
+						<item id="r_299" label="299°"/>
+						<item id="r_300" label="300°"/>
+						<item id="r_301" label="301°"/>
+						<item id="r_302" label="302°"/>
+						<item id="r_303" label="303°"/>
+						<item id="r_304" label="304°"/>
+						<item id="r_305" label="305°"/>
+						<item id="r_306" label="306°"/>
+						<item id="r_307" label="307°"/>
+						<item id="r_308" label="308°"/>
+						<item id="r_309" label="309°"/>
+						<item id="r_310" label="310°"/>
+						<item id="r_311" label="311°"/>
+						<item id="r_312" label="312°"/>
+						<item id="r_313" label="313°"/>
+						<item id="r_314" label="314°"/>
+						<item id="r_315" label="315°"/>
+						<item id="r_316" label="316°"/>
+						<item id="r_317" label="317°"/>
+						<item id="r_318" label="318°"/>
+						<item id="r_319" label="319°"/>
+						<item id="r_320" label="320°"/>
+						<item id="r_321" label="321°"/>
+						<item id="r_322" label="322°"/>
+						<item id="r_323" label="323°"/>
+						<item id="r_324" label="324°"/>
+						<item id="r_325" label="325°"/>
+						<item id="r_326" label="326°"/>
+						<item id="r_327" label="327°"/>
+						<item id="r_328" label="328°"/>
+						<item id="r_329" label="329°"/>
+						<item id="r_330" label="330°"/>
+						<item id="r_331" label="331°"/>
+						<item id="r_332" label="332°"/>
+						<item id="r_333" label="333°"/>
+						<item id="r_334" label="334°"/>
+						<item id="r_335" label="335°"/>
+						<item id="r_336" label="336°"/>
+						<item id="r_337" label="337°"/>
+						<item id="r_338" label="338°"/>
+						<item id="r_339" label="339°"/>
+						<item id="r_340" label="340°"/>
+						<item id="r_341" label="341°"/>
+						<item id="r_342" label="342°"/>
+						<item id="r_343" label="343°"/>
+						<item id="r_344" label="344°"/>
+						<item id="r_345" label="345°"/>
+						<item id="r_346" label="346°"/>
+						<item id="r_347" label="347°"/>
+						<item id="r_348" label="348°"/>
+						<item id="r_349" label="349°"/>
+						<item id="r_350" label="350°"/>
+						<item id="r_351" label="351°"/>
+						<item id="r_352" label="352°"/>
+						<item id="r_353" label="353°"/>
+						<item id="r_354" label="354°"/>
+						<item id="r_355" label="355°"/>
+						<item id="r_356" label="356°"/>
+						<item id="r_357" label="357°"/>
+						<item id="r_358" label="358°"/>
+						<item id="r_359" label="359°"/>
+						<item id="r_360" label="360°"/>
+					</dropDown>
+					<editBox id="nodeDistortion" getLabel="ribbon_getLabel" sizeString="XXXXX" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="nodeShape_isPolygon" onChange="nodeDistortion_onChange" getText="nodeDistortion_getText"/>
+				</group>
+				<group id="designerGroupNodeDimensions" getLabel="ribbon_getLabel" imageMso="SizeToControlWidth" getVisible="designerGroupNodeDimensions_getVisible">
+					<dropDown id="nodeHeight" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXX" onAction="nodeHeight_onAction" getVisible="nodeHeight_getVisible" getSelectedItemID="nodeHeight_getSelectedItemID">
+						<item id="h_" label=" "/>
+						<item id="h_0" label="0&quot;"/>
+						<item id="h_0.0625" label="1/16&quot;"/>
+						<item id="h_0.125" label="1/8&quot;"/>
+						<item id="h_0.1875" label="3/16&quot;"/>
+						<item id="h_0.25" label="1/4&quot;"/>
+						<item id="h_0.3125" label="5/16&quot;"/>
+						<item id="h_0.375" label="3/8&quot;"/>
+						<item id="h_0.4375" label="7/16&quot;"/>
+						<item id="h_0.5" label="1/2&quot;"/>
+						<item id="h_0.5625" label="9/16&quot;"/>
+						<item id="h_0.625" label="5/8&quot;"/>
+						<item id="h_0.6875" label="11/16&quot;"/>
+						<item id="h_0.75" label="3/4&quot;"/>
+						<item id="h_0.8125" label="13/16&quot;"/>
+						<item id="h_0.875" label="7/8&quot;"/>
+						<item id="h_0.9375" label="15/16&quot;"/>
+						<item id="h_1" label="1&quot;"/>
+						<item id="h_1.0625" label="1 1/16&quot;"/>
+						<item id="h_1.125" label="1 1/8&quot;"/>
+						<item id="h_1.1875" label="1 3/16&quot;"/>
+						<item id="h_1.25" label="1 1/4&quot;"/>
+						<item id="h_1.3125" label="1 5/16&quot;"/>
+						<item id="h_1.375" label="1 3/8&quot;"/>
+						<item id="h_1.4375" label="1 7/16&quot;"/>
+						<item id="h_1.5" label="1 1/2&quot;"/>
+						<item id="h_1.5625" label="1 9/16&quot;"/>
+						<item id="h_1.625" label="1 5/8&quot;"/>
+						<item id="h_1.6875" label="1 11/16&quot;"/>
+						<item id="h_1.75" label="1 3/4&quot;"/>
+						<item id="h_1.8125" label="1 13/16&quot;"/>
+						<item id="h_1.875" label="1 7/8&quot;"/>
+						<item id="h_1.9375" label="1 15/16&quot;"/>
+						<item id="h_2" label="2&quot;"/>
+						<item id="h_2.0625" label="2 1/16&quot;"/>
+						<item id="h_2.125" label="2 1/8&quot;"/>
+						<item id="h_2.1875" label="2 3/16&quot;"/>
+						<item id="h_2.25" label="2 1/4&quot;"/>
+						<item id="h_2.3125" label="2 5/16&quot;"/>
+						<item id="h_2.375" label="2 3/8&quot;"/>
+						<item id="h_2.4375" label="2 7/16&quot;"/>
+						<item id="h_2.5" label="2 1/2&quot;"/>
+						<item id="h_2.5625" label="2 9/16&quot;"/>
+						<item id="h_2.625" label="2 5/8&quot;"/>
+						<item id="h_2.6875" label="2 11/16&quot;"/>
+						<item id="h_2.75" label="2 3/4&quot;"/>
+						<item id="h_2.8125" label="2 13/16&quot;"/>
+						<item id="h_2.875" label="2 7/8&quot;"/>
+						<item id="h_2.9375" label="2 15/16&quot;"/>
+						<item id="h_3" label="3&quot;"/>
+						<item id="h_3.0625" label="3 1/16&quot;"/>
+						<item id="h_3.125" label="3 1/8&quot;"/>
+						<item id="h_3.1875" label="3 3/16&quot;"/>
+						<item id="h_3.25" label="3 1/4&quot;"/>
+						<item id="h_3.3125" label="3 5/16&quot;"/>
+						<item id="h_3.375" label="3 3/8&quot;"/>
+						<item id="h_3.4375" label="3 7/16&quot;"/>
+						<item id="h_3.5" label="3 1/2&quot;"/>
+						<item id="h_3.5625" label="3 9/16&quot;"/>
+						<item id="h_3.625" label="3 5/8&quot;"/>
+						<item id="h_3.6875" label="3 11/16&quot;"/>
+						<item id="h_3.75" label="3 3/4&quot;"/>
+						<item id="h_3.8125" label="3 13/16&quot;"/>
+						<item id="h_3.875" label="3 7/8&quot;"/>
+						<item id="h_3.9375" label="3 15/16&quot;"/>
+						<item id="h_4" label="4&quot;"/>
+						<item id="h_4.0625" label="4 1/16&quot;"/>
+						<item id="h_4.125" label="4 1/8&quot;"/>
+						<item id="h_4.1875" label="4 3/16&quot;"/>
+						<item id="h_4.25" label="4 1/4&quot;"/>
+						<item id="h_4.3125" label="4 5/16&quot;"/>
+						<item id="h_4.375" label="4 3/8&quot;"/>
+						<item id="h_4.4375" label="4 7/16&quot;"/>
+						<item id="h_4.5" label="4 1/2&quot;"/>
+						<item id="h_4.5625" label="4 9/16&quot;"/>
+						<item id="h_4.625" label="4 5/8&quot;"/>
+						<item id="h_4.6875" label="4 11/16&quot;"/>
+						<item id="h_4.75" label="4 3/4&quot;"/>
+						<item id="h_4.8125" label="4 13/16&quot;"/>
+						<item id="h_4.875" label="4 7/8&quot;"/>
+						<item id="h_4.9375" label="4 15/16&quot;"/>
+						<item id="h_5" label="5&quot;"/>
+					</dropDown>
+					<dropDown id="nodeHeightMetric" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXX" onAction="nodeHeightMetric_onAction" getVisible="nodeHeightMetric_getVisible" getSelectedItemIndex="nodeHeightMetric_getSelectedItemIndex">
+						<item id="mmh_" label=" "/>
+						<item id="mmh_0" label=" 0 mm"/>
+						<item id="mmh_1" label=" 1 mm"/>
+						<item id="mmh_2" label=" 2 mm"/>
+						<item id="mmh_3" label=" 3 mm"/>
+						<item id="mmh_4" label=" 4 mm"/>
+						<item id="mmh_5" label=" 5 mm"/>
+						<item id="mmh_6" label=" 6 mm"/>
+						<item id="mmh_7" label=" 7 mm"/>
+						<item id="mmh_8" label=" 8 mm"/>
+						<item id="mmh_9" label=" 9 mm"/>
+						<item id="mmh_10" label="10 mm"/>
+						<item id="mmh_11" label="11 mm"/>
+						<item id="mmh_12" label="12 mm"/>
+						<item id="mmh_13" label="13 mm"/>
+						<item id="mmh_14" label="14 mm"/>
+						<item id="mmh_15" label="15 mm"/>
+						<item id="mmh_16" label="16 mm"/>
+						<item id="mmh_17" label="17 mm"/>
+						<item id="mmh_18" label="18 mm"/>
+						<item id="mmh_19" label="19 mm"/>
+						<item id="mmh_20" label="20 mm"/>
+						<item id="mmh_21" label="21 mm"/>
+						<item id="mmh_22" label="22 mm"/>
+						<item id="mmh_23" label="23 mm"/>
+						<item id="mmh_24" label="24 mm"/>
+						<item id="mmh_25" label="25 mm"/>
+						<item id="mmh_26" label="26 mm"/>
+						<item id="mmh_27" label="27 mm"/>
+						<item id="mmh_28" label="28 mm"/>
+						<item id="mmh_29" label="29 mm"/>
+						<item id="mmh_30" label="30 mm"/>
+						<item id="mmh_31" label="31 mm"/>
+						<item id="mmh_32" label="32 mm"/>
+						<item id="mmh_33" label="33 mm"/>
+						<item id="mmh_34" label="34 mm"/>
+						<item id="mmh_35" label="35 mm"/>
+						<item id="mmh_36" label="36 mm"/>
+						<item id="mmh_37" label="37 mm"/>
+						<item id="mmh_38" label="38 mm"/>
+						<item id="mmh_39" label="39 mm"/>
+						<item id="mmh_40" label="40 mm"/>
+						<item id="mmh_41" label="41 mm"/>
+						<item id="mmh_42" label="42 mm"/>
+						<item id="mmh_43" label="43 mm"/>
+						<item id="mmh_44" label="44 mm"/>
+						<item id="mmh_45" label="45 mm"/>
+						<item id="mmh_46" label="46 mm"/>
+						<item id="mmh_47" label="47 mm"/>
+						<item id="mmh_48" label="48 mm"/>
+						<item id="mmh_49" label="49 mm"/>
+						<item id="mmh_50" label="50 mm"/>
+						<item id="mmh_51" label="51 mm"/>
+						<item id="mmh_52" label="52 mm"/>
+						<item id="mmh_53" label="53 mm"/>
+						<item id="mmh_54" label="54 mm"/>
+						<item id="mmh_55" label="55 mm"/>
+						<item id="mmh_56" label="56 mm"/>
+						<item id="mmh_57" label="57 mm"/>
+						<item id="mmh_58" label="58 mm"/>
+						<item id="mmh_59" label="59 mm"/>
+						<item id="mmh_60" label="60 mm"/>
+						<item id="mmh_61" label="61 mm"/>
+						<item id="mmh_62" label="62 mm"/>
+						<item id="mmh_63" label="63 mm"/>
+						<item id="mmh_64" label="64 mm"/>
+						<item id="mmh_65" label="65 mm"/>
+						<item id="mmh_66" label="66 mm"/>
+						<item id="mmh_67" label="67 mm"/>
+						<item id="mmh_68" label="68 mm"/>
+						<item id="mmh_69" label="69 mm"/>
+						<item id="mmh_70" label="70 mm"/>
+						<item id="mmh_71" label="71 mm"/>
+						<item id="mmh_72" label="72 mm"/>
+						<item id="mmh_73" label="73 mm"/>
+						<item id="mmh_74" label="74 mm"/>
+						<item id="mmh_75" label="75 mm"/>
+						<item id="mmh_76" label="76 mm"/>
+						<item id="mmh_77" label="77 mm"/>
+						<item id="mmh_78" label="78 mm"/>
+						<item id="mmh_79" label="79 mm"/>
+						<item id="mmh_80" label="80 mm"/>
+						<item id="mmh_81" label="81 mm"/>
+						<item id="mmh_82" label="82 mm"/>
+						<item id="mmh_83" label="83 mm"/>
+						<item id="mmh_84" label="84 mm"/>
+						<item id="mmh_85" label="85 mm"/>
+						<item id="mmh_86" label="86 mm"/>
+						<item id="mmh_87" label="87 mm"/>
+						<item id="mmh_88" label="88 mm"/>
+						<item id="mmh_89" label="89 mm"/>
+						<item id="mmh_90" label="80 mm"/>
+						<item id="mmh_91" label="91 mm"/>
+						<item id="mmh_92" label="92 mm"/>
+						<item id="mmh_93" label="93 mm"/>
+						<item id="mmh_94" label="94 mm"/>
+						<item id="mmh_95" label="95 mm"/>
+						<item id="mmh_96" label="96 mm"/>
+						<item id="mmh_97" label="97 mm"/>
+						<item id="mmh_98" label="98 mm"/>
+						<item id="mmh_99" label="99 mm"/>
+						<item id="mmh_100" label="100 mm"/>
+					</dropDown>
+					<dropDown id="nodeWidth" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXX" onAction="nodeWidth_onAction" getVisible="nodeWidth_getVisible" getSelectedItemID="nodeWidth_getSelectedItemID">
+						<item id="w_" label=" "/>
+						<item id="w_0" label="0&quot;"/>
+						<item id="w_0.0625" label="1/16&quot;"/>
+						<item id="w_0.125" label="1/8&quot;"/>
+						<item id="w_0.1875" label="3/16&quot;"/>
+						<item id="w_0.25" label="1/4&quot;"/>
+						<item id="w_0.3125" label="5/16&quot;"/>
+						<item id="w_0.375" label="3/8&quot;"/>
+						<item id="w_0.4375" label="7/16&quot;"/>
+						<item id="w_0.5" label="1/2&quot;"/>
+						<item id="w_0.5625" label="9/16&quot;"/>
+						<item id="w_0.625" label="5/8&quot;"/>
+						<item id="w_0.6875" label="11/16&quot;"/>
+						<item id="w_0.75" label="3/4&quot;"/>
+						<item id="w_0.8125" label="13/16&quot;"/>
+						<item id="w_0.875" label="7/8&quot;"/>
+						<item id="w_0.9375" label="15/16&quot;"/>
+						<item id="w_1" label="1&quot;"/>
+						<item id="w_1.0625" label="1 1/16&quot;"/>
+						<item id="w_1.125" label="1 1/8&quot;"/>
+						<item id="w_1.1875" label="1 3/16&quot;"/>
+						<item id="w_1.25" label="1 1/4&quot;"/>
+						<item id="w_1.3125" label="1 5/16&quot;"/>
+						<item id="w_1.375" label="1 3/8&quot;"/>
+						<item id="w_1.4375" label="1 7/16&quot;"/>
+						<item id="w_1.5" label="1 1/2&quot;"/>
+						<item id="w_1.5625" label="1 9/16&quot;"/>
+						<item id="w_1.625" label="1 5/8&quot;"/>
+						<item id="w_1.6875" label="1 11/16&quot;"/>
+						<item id="w_1.75" label="1 3/4&quot;"/>
+						<item id="w_1.8125" label="1 13/16&quot;"/>
+						<item id="w_1.875" label="1 7/8&quot;"/>
+						<item id="w_1.9375" label="1 15/16&quot;"/>
+						<item id="w_2" label="2&quot;"/>
+						<item id="w_2.0625" label="2 1/16&quot;"/>
+						<item id="w_2.125" label="2 1/8&quot;"/>
+						<item id="w_2.1875" label="2 3/16&quot;"/>
+						<item id="w_2.25" label="2 1/4&quot;"/>
+						<item id="w_2.3125" label="2 5/16&quot;"/>
+						<item id="w_2.375" label="2 3/8&quot;"/>
+						<item id="w_2.4375" label="2 7/16&quot;"/>
+						<item id="w_2.5" label="2 1/2&quot;"/>
+						<item id="w_2.5625" label="2 9/16&quot;"/>
+						<item id="w_2.625" label="2 5/8&quot;"/>
+						<item id="w_2.6875" label="2 11/16&quot;"/>
+						<item id="w_2.75" label="2 3/4&quot;"/>
+						<item id="w_2.8125" label="2 13/16&quot;"/>
+						<item id="w_2.875" label="2 7/8&quot;"/>
+						<item id="w_2.9375" label="2 15/16&quot;"/>
+						<item id="w_3" label="3&quot;"/>
+						<item id="w_3.0625" label="3 1/16&quot;"/>
+						<item id="w_3.125" label="3 1/8&quot;"/>
+						<item id="w_3.1875" label="3 3/16&quot;"/>
+						<item id="w_3.25" label="3 1/4&quot;"/>
+						<item id="w_3.3125" label="3 5/16&quot;"/>
+						<item id="w_3.375" label="3 3/8&quot;"/>
+						<item id="w_3.4375" label="3 7/16&quot;"/>
+						<item id="w_3.5" label="3 1/2&quot;"/>
+						<item id="w_3.5625" label="3 9/16&quot;"/>
+						<item id="w_3.625" label="3 5/8&quot;"/>
+						<item id="w_3.6875" label="3 11/16&quot;"/>
+						<item id="w_3.75" label="3 3/4&quot;"/>
+						<item id="w_3.8125" label="3 13/16&quot;"/>
+						<item id="w_3.875" label="3 7/8&quot;"/>
+						<item id="w_3.9375" label="3 15/16&quot;"/>
+						<item id="w_4" label="4&quot;"/>
+						<item id="w_4.0625" label="4 1/16&quot;"/>
+						<item id="w_4.125" label="4 1/8&quot;"/>
+						<item id="w_4.1875" label="4 3/16&quot;"/>
+						<item id="w_4.25" label="4 1/4&quot;"/>
+						<item id="w_4.3125" label="4 5/16&quot;"/>
+						<item id="w_4.375" label="4 3/8&quot;"/>
+						<item id="w_4.4375" label="4 7/16&quot;"/>
+						<item id="w_4.5" label="4 1/2&quot;"/>
+						<item id="w_4.5625" label="4 9/16&quot;"/>
+						<item id="w_4.625" label="4 5/8&quot;"/>
+						<item id="w_4.6875" label="4 11/16&quot;"/>
+						<item id="w_4.75" label="4 3/4&quot;"/>
+						<item id="w_4.8125" label="4 13/16&quot;"/>
+						<item id="w_4.875" label="4 7/8&quot;"/>
+						<item id="w_4.9375" label="4 15/16&quot;"/>
+						<item id="w_5" label="5&quot;"/>
+					</dropDown>
+					<dropDown id="nodeWidthMetric" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXX" onAction="nodeWidthMetric_onAction" getVisible="nodeWidthMetric_getVisible" getSelectedItemIndex="nodeWidthMetric_getSelectedItemIndex">
+						<item id="mmw_" label=" "/>
+						<item id="mmw_0" label=" 0 mm"/>
+						<item id="mmw_1" label=" 1 mm"/>
+						<item id="mmw_2" label=" 2 mm"/>
+						<item id="mmw_3" label=" 3 mm"/>
+						<item id="mmw_4" label=" 4 mm"/>
+						<item id="mmw_5" label=" 5 mm"/>
+						<item id="mmw_6" label=" 6 mm"/>
+						<item id="mmw_7" label=" 7 mm"/>
+						<item id="mmw_8" label=" 8 mm"/>
+						<item id="mmw_9" label=" 9 mm"/>
+						<item id="mmw_10" label="10 mm"/>
+						<item id="mmw_11" label="11 mm"/>
+						<item id="mmw_12" label="12 mm"/>
+						<item id="mmw_13" label="13 mm"/>
+						<item id="mmw_14" label="14 mm"/>
+						<item id="mmw_15" label="15 mm"/>
+						<item id="mmw_16" label="16 mm"/>
+						<item id="mmw_17" label="17 mm"/>
+						<item id="mmw_18" label="18 mm"/>
+						<item id="mmw_19" label="19 mm"/>
+						<item id="mmw_20" label="20 mm"/>
+						<item id="mmw_21" label="21 mm"/>
+						<item id="mmw_22" label="22 mm"/>
+						<item id="mmw_23" label="23 mm"/>
+						<item id="mmw_24" label="24 mm"/>
+						<item id="mmw_25" label="25 mm"/>
+						<item id="mmw_26" label="26 mm"/>
+						<item id="mmw_27" label="27 mm"/>
+						<item id="mmw_28" label="28 mm"/>
+						<item id="mmw_29" label="29 mm"/>
+						<item id="mmw_30" label="30 mm"/>
+						<item id="mmw_31" label="31 mm"/>
+						<item id="mmw_32" label="32 mm"/>
+						<item id="mmw_33" label="33 mm"/>
+						<item id="mmw_34" label="34 mm"/>
+						<item id="mmw_35" label="35 mm"/>
+						<item id="mmw_36" label="36 mm"/>
+						<item id="mmw_37" label="37 mm"/>
+						<item id="mmw_38" label="38 mm"/>
+						<item id="mmw_39" label="39 mm"/>
+						<item id="mmw_40" label="40 mm"/>
+						<item id="mmw_41" label="41 mm"/>
+						<item id="mmw_42" label="42 mm"/>
+						<item id="mmw_43" label="43 mm"/>
+						<item id="mmw_44" label="44 mm"/>
+						<item id="mmw_45" label="45 mm"/>
+						<item id="mmw_46" label="46 mm"/>
+						<item id="mmw_47" label="47 mm"/>
+						<item id="mmw_48" label="48 mm"/>
+						<item id="mmw_49" label="49 mm"/>
+						<item id="mmw_50" label="50 mm"/>
+						<item id="mmw_51" label="51 mm"/>
+						<item id="mmw_52" label="52 mm"/>
+						<item id="mmw_53" label="53 mm"/>
+						<item id="mmw_54" label="54 mm"/>
+						<item id="mmw_55" label="55 mm"/>
+						<item id="mmw_56" label="56 mm"/>
+						<item id="mmw_57" label="57 mm"/>
+						<item id="mmw_58" label="58 mm"/>
+						<item id="mmw_59" label="59 mm"/>
+						<item id="mmw_60" label="60 mm"/>
+						<item id="mmw_61" label="61 mm"/>
+						<item id="mmw_62" label="62 mm"/>
+						<item id="mmw_63" label="63 mm"/>
+						<item id="mmw_64" label="64 mm"/>
+						<item id="mmw_65" label="65 mm"/>
+						<item id="mmw_66" label="66 mm"/>
+						<item id="mmw_67" label="67 mm"/>
+						<item id="mmw_68" label="68 mm"/>
+						<item id="mmw_69" label="69 mm"/>
+						<item id="mmw_70" label="70 mm"/>
+						<item id="mmw_71" label="71 mm"/>
+						<item id="mmw_72" label="72 mm"/>
+						<item id="mmw_73" label="73 mm"/>
+						<item id="mmw_74" label="74 mm"/>
+						<item id="mmw_75" label="75 mm"/>
+						<item id="mmw_76" label="76 mm"/>
+						<item id="mmw_77" label="77 mm"/>
+						<item id="mmw_78" label="78 mm"/>
+						<item id="mmw_79" label="79 mm"/>
+						<item id="mmw_80" label="80 mm"/>
+						<item id="mmw_81" label="81 mm"/>
+						<item id="mmw_82" label="82 mm"/>
+						<item id="mmw_83" label="83 mm"/>
+						<item id="mmw_84" label="84 mm"/>
+						<item id="mmw_85" label="85 mm"/>
+						<item id="mmw_86" label="86 mm"/>
+						<item id="mmw_87" label="87 mm"/>
+						<item id="mmw_88" label="88 mm"/>
+						<item id="mmw_89" label="89 mm"/>
+						<item id="mmw_90" label="80 mm"/>
+						<item id="mmw_91" label="91 mm"/>
+						<item id="mmw_92" label="92 mm"/>
+						<item id="mmw_93" label="93 mm"/>
+						<item id="mmw_94" label="94 mm"/>
+						<item id="mmw_95" label="95 mm"/>
+						<item id="mmw_96" label="96 mm"/>
+						<item id="mmw_97" label="97 mm"/>
+						<item id="mmw_98" label="98 mm"/>
+						<item id="mmw_99" label="99 mm"/>
+						<item id="mmw_100" label="100 mm"/>
+					</dropDown>
+					<dropDown id="nodeFixedSize" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXX" onAction="nodeFixedSize_onAction" getSelectedItemID="nodeFixedSize_getSelectedItemID">
+						<item id="fs_" label=" "/>
+						<item id="fs_true" label="true"/>
+						<item id="fs_false" label="false"/>
+						<item id="fs_shape" label="shape"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupBorders" getLabel="ribbon_getLabel" imageMso="BlackAndWhiteGrayWithWhiteFill" getVisible="designerGroupBorders_getVisible">
+					<dropDown id="borderStyle1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXX" onAction="borderStyle1_onAction" getSelectedItemID="borderStyle1_getSelectedItemID">
+						<item id="bs1_" image="bs_solid" label=" "/>
+						<item id="bs1_bold" image="bs_bold" label="bold"/>
+						<item id="bs1_solid" image="bs_solid" label="solid"/>
+						<item id="bs1_rounded" image="bs_rounded" label="rounded"/>
+						<item id="bs1_diagonals" image="bs_diagonals" label="diagonals"/>
+						<item id="bs1_dashed" image="bs_dashed" label="dashed"/>
+						<item id="bs1_dotted" image="bs_dotted" label="dotted"/>
+						<item id="bs1_invisible" image="bs_invisible" label="invisible"/>
+					</dropDown>
+					<dropDown id="borderStyle2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXX" onAction="borderStyle2_onAction" getSelectedItemID="borderStyle2_getSelectedItemID" getVisible="borderStyle2_getVisible">
+						<item id="bs2_" image="bs_solid" label=" "/>
+						<item id="bs2_bold" image="bs_bold" label="bold"/>
+						<item id="bs2_solid" image="bs_solid" label="solid"/>
+						<item id="bs2_rounded" image="bs_rounded" label="rounded"/>
+						<item id="bs2_diagonals" image="bs_diagonals" label="diagonals"/>
+						<item id="bs2_dashed" image="bs_dashed" label="dashed"/>
+						<item id="bs2_dotted" image="bs_dotted" label="dotted"/>
+						<item id="bs2_invisible" image="bs_invisible" label="invisible"/>
+					</dropDown>
+					<dropDown id="borderStyle3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXX" onAction="borderStyle3_onAction" getSelectedItemID="borderStyle3_getSelectedItemID" getVisible="borderStyle3_getVisible">
+						<item id="bs3_" image="bs_solid" label=" "/>
+						<item id="bs3_bold" image="bs_bold" label="bold"/>
+						<item id="bs3_solid" image="bs_solid" label="solid"/>
+						<item id="bs3_rounded" image="bs_rounded" label="rounded"/>
+						<item id="bs3_diagonals" image="bs_diagonals" label="diagonals"/>
+						<item id="bs3_dashed" image="bs_dashed" label="dashed"/>
+						<item id="bs3_dotted" image="bs_dotted" label="dotted"/>
+						<item id="bs3_invisible" image="bs_invisible" label="invisible"/>
+					</dropDown>
+					<separator id="Separator15"/>
+					<dropDown id="borderColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="borderColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="borderColor_getImage" getSelectedItemIndex="borderColor_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="borderPenWidth" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" getImage="null_getImage" onAction="borderPenWidth_onAction" getSelectedItemID="borderPenWidth_getSelectedItemID">
+						<item id="bw_" image="ew_" label=" "/>
+						<item id="bw_0" image="ew_00" label="0.0"/>
+						<item id="bw_0.5" image="ew_005" label="0.5"/>
+						<item id="bw_1" image="ew_01" label="1.0"/>
+						<item id="bw_2" image="ew_02" label="2.0"/>
+						<item id="bw_3" image="ew_03" label="3.0"/>
+						<item id="bw_4" image="ew_04" label="4.0"/>
+						<item id="bw_5" image="ew_05" label="5.0"/>
+						<item id="bw_6" image="ew_06" label="6.0"/>
+						<item id="bw_7" image="ew_07" label="7.0"/>
+						<item id="bw_8" image="ew_08" label="8.0"/>
+						<item id="bw_9" image="ew_09" label="9.0"/>
+						<item id="bw_10" image="ew_10" label="10.0"/>
+					</dropDown>
+					<dropDown id="borderPeripheries" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" getImage="null_getImage" getVisible="borderPeripheries_getVisible" onAction="borderPeripheries_onAction" getSelectedItemID="borderPeripheries_getSelectedItemID">
+						<item id="p_" image="p_" label=" "/>
+						<item id="p_1" image="p_1" label="1"/>
+						<item id="p_2" image="p_2" label="2"/>
+						<item id="p_3" image="p_3" label="3"/>
+						<item id="p_4" image="p_4" label="4"/>
+						<item id="p_5" image="p_5" label="5"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupFillColor" getLabel="ribbon_getLabel" imageMso="ShapeFillColorPickerClassic" getVisible="designerGroupFillColor_getVisible">
+					<dropDown id="fillColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fillColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="fillColor_getImage" getSelectedItemIndex="fillColor_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="gradientFillColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="gradientFillColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="gradientFillColor_getImage" getSelectedItemIndex="gradientFillColor_getSelectedItemIndex" getVisible="designerGroupGradientFillColor_getVisible">
+					</dropDown>
+				</group>
+				<group id="designerGroupGradientFillColor" getLabel="ribbon_getLabel" imageMso="GradientGallery" getVisible="designerGroupGradientFillColor_getVisible">
+					<dropDown id="gradientFillType"  sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="gradientFillType_onAction" getSelectedItemID="gradientFillType_getSelectedItemID" getVisible="gradientFillType_getVisible">
+						<item id="ft_" image="ft_filled" label=" "/>
+						<item id="ft_filled" image="ft_filled" label="filled"/>
+						<item id="ft_radial" image="ft_radial" label="radial"/>
+					</dropDown>
+					<dropDown id="gradientFillAngle" sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="gradientFillAngle_onAction" getSelectedItemID="gradientFillAngle_getSelectedItemID" getVisible="gradientFillAngle_getVisible">
+						<item id="a_" label=" "/>
+						<item id="a_0" label="0°"/>
+						<item id="a_1" label="1°"/>
+						<item id="a_2" label="2°"/>
+						<item id="a_3" label="3°"/>
+						<item id="a_4" label="4°"/>
+						<item id="a_5" label="5°"/>
+						<item id="a_6" label="6°"/>
+						<item id="a_7" label="7°"/>
+						<item id="a_8" label="8°"/>
+						<item id="a_9" label="9°"/>
+						<item id="a_10" label="10°"/>
+						<item id="a_11" label="11°"/>
+						<item id="a_12" label="12°"/>
+						<item id="a_13" label="13°"/>
+						<item id="a_14" label="14°"/>
+						<item id="a_15" label="15°"/>
+						<item id="a_16" label="16°"/>
+						<item id="a_17" label="17°"/>
+						<item id="a_18" label="18°"/>
+						<item id="a_19" label="19°"/>
+						<item id="a_20" label="20°"/>
+						<item id="a_21" label="21°"/>
+						<item id="a_22" label="22°"/>
+						<item id="a_23" label="23°"/>
+						<item id="a_24" label="24°"/>
+						<item id="a_25" label="25°"/>
+						<item id="a_26" label="26°"/>
+						<item id="a_27" label="27°"/>
+						<item id="a_28" label="28°"/>
+						<item id="a_29" label="29°"/>
+						<item id="a_30" label="30°"/>
+						<item id="a_31" label="31°"/>
+						<item id="a_32" label="32°"/>
+						<item id="a_33" label="33°"/>
+						<item id="a_34" label="34°"/>
+						<item id="a_35" label="35°"/>
+						<item id="a_36" label="36°"/>
+						<item id="a_37" label="37°"/>
+						<item id="a_38" label="38°"/>
+						<item id="a_39" label="39°"/>
+						<item id="a_40" label="40°"/>
+						<item id="a_41" label="41°"/>
+						<item id="a_42" label="42°"/>
+						<item id="a_43" label="43°"/>
+						<item id="a_44" label="44°"/>
+						<item id="a_45" label="45°"/>
+						<item id="a_46" label="46°"/>
+						<item id="a_47" label="47°"/>
+						<item id="a_48" label="48°"/>
+						<item id="a_49" label="49°"/>
+						<item id="a_50" label="50°"/>
+						<item id="a_51" label="51°"/>
+						<item id="a_52" label="52°"/>
+						<item id="a_53" label="53°"/>
+						<item id="a_54" label="54°"/>
+						<item id="a_55" label="55°"/>
+						<item id="a_56" label="56°"/>
+						<item id="a_57" label="57°"/>
+						<item id="a_58" label="58°"/>
+						<item id="a_59" label="59°"/>
+						<item id="a_60" label="60°"/>
+						<item id="a_61" label="61°"/>
+						<item id="a_62" label="62°"/>
+						<item id="a_63" label="63°"/>
+						<item id="a_64" label="64°"/>
+						<item id="a_65" label="65°"/>
+						<item id="a_66" label="66°"/>
+						<item id="a_67" label="67°"/>
+						<item id="a_68" label="68°"/>
+						<item id="a_69" label="69°"/>
+						<item id="a_70" label="70°"/>
+						<item id="a_71" label="71°"/>
+						<item id="a_72" label="72°"/>
+						<item id="a_73" label="73°"/>
+						<item id="a_74" label="74°"/>
+						<item id="a_75" label="75°"/>
+						<item id="a_76" label="76°"/>
+						<item id="a_77" label="77°"/>
+						<item id="a_78" label="78°"/>
+						<item id="a_79" label="79°"/>
+						<item id="a_80" label="80°"/>
+						<item id="a_81" label="81°"/>
+						<item id="a_82" label="82°"/>
+						<item id="a_83" label="83°"/>
+						<item id="a_84" label="84°"/>
+						<item id="a_85" label="85°"/>
+						<item id="a_86" label="86°"/>
+						<item id="a_87" label="87°"/>
+						<item id="a_88" label="88°"/>
+						<item id="a_89" label="89°"/>
+						<item id="a_90" label="90°"/>
+						<item id="a_91" label="91°"/>
+						<item id="a_92" label="92°"/>
+						<item id="a_93" label="93°"/>
+						<item id="a_94" label="94°"/>
+						<item id="a_95" label="95°"/>
+						<item id="a_96" label="96°"/>
+						<item id="a_97" label="97°"/>
+						<item id="a_98" label="98°"/>
+						<item id="a_99" label="99°"/>
+						<item id="a_100" label="100°"/>
+						<item id="a_101" label="101°"/>
+						<item id="a_102" label="102°"/>
+						<item id="a_103" label="103°"/>
+						<item id="a_104" label="104°"/>
+						<item id="a_105" label="105°"/>
+						<item id="a_106" label="106°"/>
+						<item id="a_107" label="107°"/>
+						<item id="a_108" label="108°"/>
+						<item id="a_109" label="109°"/>
+						<item id="a_110" label="110°"/>
+						<item id="a_111" label="111°"/>
+						<item id="a_112" label="112°"/>
+						<item id="a_113" label="113°"/>
+						<item id="a_114" label="114°"/>
+						<item id="a_115" label="115°"/>
+						<item id="a_116" label="116°"/>
+						<item id="a_117" label="117°"/>
+						<item id="a_118" label="118°"/>
+						<item id="a_119" label="119°"/>
+						<item id="a_120" label="120°"/>
+						<item id="a_121" label="121°"/>
+						<item id="a_122" label="122°"/>
+						<item id="a_123" label="123°"/>
+						<item id="a_124" label="124°"/>
+						<item id="a_125" label="125°"/>
+						<item id="a_126" label="126°"/>
+						<item id="a_127" label="127°"/>
+						<item id="a_128" label="128°"/>
+						<item id="a_129" label="129°"/>
+						<item id="a_130" label="130°"/>
+						<item id="a_131" label="131°"/>
+						<item id="a_132" label="132°"/>
+						<item id="a_133" label="133°"/>
+						<item id="a_134" label="134°"/>
+						<item id="a_135" label="135°"/>
+						<item id="a_136" label="136°"/>
+						<item id="a_137" label="137°"/>
+						<item id="a_138" label="138°"/>
+						<item id="a_139" label="139°"/>
+						<item id="a_140" label="140°"/>
+						<item id="a_141" label="141°"/>
+						<item id="a_142" label="142°"/>
+						<item id="a_143" label="143°"/>
+						<item id="a_144" label="144°"/>
+						<item id="a_145" label="145°"/>
+						<item id="a_146" label="146°"/>
+						<item id="a_147" label="147°"/>
+						<item id="a_148" label="148°"/>
+						<item id="a_149" label="149°"/>
+						<item id="a_150" label="150°"/>
+						<item id="a_151" label="151°"/>
+						<item id="a_152" label="152°"/>
+						<item id="a_153" label="153°"/>
+						<item id="a_154" label="154°"/>
+						<item id="a_155" label="155°"/>
+						<item id="a_156" label="156°"/>
+						<item id="a_157" label="157°"/>
+						<item id="a_158" label="158°"/>
+						<item id="a_159" label="159°"/>
+						<item id="a_160" label="160°"/>
+						<item id="a_161" label="161°"/>
+						<item id="a_162" label="162°"/>
+						<item id="a_163" label="163°"/>
+						<item id="a_164" label="164°"/>
+						<item id="a_165" label="165°"/>
+						<item id="a_166" label="166°"/>
+						<item id="a_167" label="167°"/>
+						<item id="a_168" label="168°"/>
+						<item id="a_169" label="169°"/>
+						<item id="a_170" label="170°"/>
+						<item id="a_171" label="171°"/>
+						<item id="a_172" label="172°"/>
+						<item id="a_173" label="173°"/>
+						<item id="a_174" label="174°"/>
+						<item id="a_175" label="175°"/>
+						<item id="a_176" label="176°"/>
+						<item id="a_177" label="177°"/>
+						<item id="a_178" label="178°"/>
+						<item id="a_179" label="179°"/>
+						<item id="a_180" label="180°"/>
+						<item id="a_181" label="181°"/>
+						<item id="a_182" label="182°"/>
+						<item id="a_183" label="183°"/>
+						<item id="a_184" label="184°"/>
+						<item id="a_185" label="185°"/>
+						<item id="a_186" label="186°"/>
+						<item id="a_187" label="187°"/>
+						<item id="a_188" label="188°"/>
+						<item id="a_189" label="189°"/>
+						<item id="a_190" label="190°"/>
+						<item id="a_191" label="191°"/>
+						<item id="a_192" label="192°"/>
+						<item id="a_193" label="193°"/>
+						<item id="a_194" label="194°"/>
+						<item id="a_195" label="195°"/>
+						<item id="a_196" label="196°"/>
+						<item id="a_197" label="197°"/>
+						<item id="a_198" label="198°"/>
+						<item id="a_199" label="199°"/>
+						<item id="a_200" label="200°"/>
+						<item id="a_201" label="201°"/>
+						<item id="a_202" label="202°"/>
+						<item id="a_203" label="203°"/>
+						<item id="a_204" label="204°"/>
+						<item id="a_205" label="205°"/>
+						<item id="a_206" label="206°"/>
+						<item id="a_207" label="207°"/>
+						<item id="a_208" label="208°"/>
+						<item id="a_209" label="209°"/>
+						<item id="a_210" label="210°"/>
+						<item id="a_211" label="211°"/>
+						<item id="a_212" label="212°"/>
+						<item id="a_213" label="213°"/>
+						<item id="a_214" label="214°"/>
+						<item id="a_215" label="215°"/>
+						<item id="a_216" label="216°"/>
+						<item id="a_217" label="217°"/>
+						<item id="a_218" label="218°"/>
+						<item id="a_219" label="219°"/>
+						<item id="a_220" label="220°"/>
+						<item id="a_221" label="221°"/>
+						<item id="a_222" label="222°"/>
+						<item id="a_223" label="223°"/>
+						<item id="a_224" label="224°"/>
+						<item id="a_225" label="225°"/>
+						<item id="a_226" label="226°"/>
+						<item id="a_227" label="227°"/>
+						<item id="a_228" label="228°"/>
+						<item id="a_229" label="229°"/>
+						<item id="a_230" label="230°"/>
+						<item id="a_231" label="231°"/>
+						<item id="a_232" label="232°"/>
+						<item id="a_233" label="233°"/>
+						<item id="a_234" label="234°"/>
+						<item id="a_235" label="235°"/>
+						<item id="a_236" label="236°"/>
+						<item id="a_237" label="237°"/>
+						<item id="a_238" label="238°"/>
+						<item id="a_239" label="239°"/>
+						<item id="a_240" label="240°"/>
+						<item id="a_241" label="241°"/>
+						<item id="a_242" label="242°"/>
+						<item id="a_243" label="243°"/>
+						<item id="a_244" label="244°"/>
+						<item id="a_245" label="245°"/>
+						<item id="a_246" label="246°"/>
+						<item id="a_247" label="247°"/>
+						<item id="a_248" label="248°"/>
+						<item id="a_249" label="249°"/>
+						<item id="a_250" label="250°"/>
+						<item id="a_251" label="251°"/>
+						<item id="a_252" label="252°"/>
+						<item id="a_253" label="253°"/>
+						<item id="a_254" label="254°"/>
+						<item id="a_255" label="255°"/>
+						<item id="a_256" label="256°"/>
+						<item id="a_257" label="257°"/>
+						<item id="a_258" label="258°"/>
+						<item id="a_259" label="259°"/>
+						<item id="a_260" label="260°"/>
+						<item id="a_261" label="261°"/>
+						<item id="a_262" label="262°"/>
+						<item id="a_263" label="263°"/>
+						<item id="a_264" label="264°"/>
+						<item id="a_265" label="265°"/>
+						<item id="a_266" label="266°"/>
+						<item id="a_267" label="267°"/>
+						<item id="a_268" label="268°"/>
+						<item id="a_269" label="269°"/>
+						<item id="a_270" label="270°"/>
+						<item id="a_271" label="271°"/>
+						<item id="a_272" label="272°"/>
+						<item id="a_273" label="273°"/>
+						<item id="a_274" label="274°"/>
+						<item id="a_275" label="275°"/>
+						<item id="a_276" label="276°"/>
+						<item id="a_277" label="277°"/>
+						<item id="a_278" label="278°"/>
+						<item id="a_279" label="279°"/>
+						<item id="a_280" label="280°"/>
+						<item id="a_281" label="281°"/>
+						<item id="a_282" label="282°"/>
+						<item id="a_283" label="283°"/>
+						<item id="a_284" label="284°"/>
+						<item id="a_285" label="285°"/>
+						<item id="a_286" label="286°"/>
+						<item id="a_287" label="287°"/>
+						<item id="a_288" label="288°"/>
+						<item id="a_289" label="289°"/>
+						<item id="a_290" label="290°"/>
+						<item id="a_291" label="291°"/>
+						<item id="a_292" label="292°"/>
+						<item id="a_293" label="293°"/>
+						<item id="a_294" label="294°"/>
+						<item id="a_295" label="295°"/>
+						<item id="a_296" label="296°"/>
+						<item id="a_297" label="297°"/>
+						<item id="a_298" label="298°"/>
+						<item id="a_299" label="299°"/>
+						<item id="a_300" label="300°"/>
+						<item id="a_301" label="301°"/>
+						<item id="a_302" label="302°"/>
+						<item id="a_303" label="303°"/>
+						<item id="a_304" label="304°"/>
+						<item id="a_305" label="305°"/>
+						<item id="a_306" label="306°"/>
+						<item id="a_307" label="307°"/>
+						<item id="a_308" label="308°"/>
+						<item id="a_309" label="309°"/>
+						<item id="a_310" label="310°"/>
+						<item id="a_311" label="311°"/>
+						<item id="a_312" label="312°"/>
+						<item id="a_313" label="313°"/>
+						<item id="a_314" label="314°"/>
+						<item id="a_315" label="315°"/>
+						<item id="a_316" label="316°"/>
+						<item id="a_317" label="317°"/>
+						<item id="a_318" label="318°"/>
+						<item id="a_319" label="319°"/>
+						<item id="a_320" label="320°"/>
+						<item id="a_321" label="321°"/>
+						<item id="a_322" label="322°"/>
+						<item id="a_323" label="323°"/>
+						<item id="a_324" label="324°"/>
+						<item id="a_325" label="325°"/>
+						<item id="a_326" label="326°"/>
+						<item id="a_327" label="327°"/>
+						<item id="a_328" label="328°"/>
+						<item id="a_329" label="329°"/>
+						<item id="a_330" label="330°"/>
+						<item id="a_331" label="331°"/>
+						<item id="a_332" label="332°"/>
+						<item id="a_333" label="333°"/>
+						<item id="a_334" label="334°"/>
+						<item id="a_335" label="335°"/>
+						<item id="a_336" label="336°"/>
+						<item id="a_337" label="337°"/>
+						<item id="a_338" label="338°"/>
+						<item id="a_339" label="339°"/>
+						<item id="a_340" label="340°"/>
+						<item id="a_341" label="341°"/>
+						<item id="a_342" label="342°"/>
+						<item id="a_343" label="343°"/>
+						<item id="a_344" label="344°"/>
+						<item id="a_345" label="345°"/>
+						<item id="a_346" label="346°"/>
+						<item id="a_347" label="347°"/>
+						<item id="a_348" label="348°"/>
+						<item id="a_349" label="349°"/>
+						<item id="a_350" label="350°"/>
+						<item id="a_351" label="351°"/>
+						<item id="a_352" label="352°"/>
+						<item id="a_353" label="353°"/>
+						<item id="a_354" label="354°"/>
+						<item id="a_355" label="355°"/>
+						<item id="a_356" label="356°"/>
+						<item id="a_357" label="357°"/>
+						<item id="a_358" label="358°"/>
+						<item id="a_359" label="359°"/>
+						<item id="a_360" label="360°"/>
+					</dropDown>
+					<dropDown id="gradientFillWeight" sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="gradientFillWeight_onAction" getSelectedItemID="gradientFillWeight_getSelectedItemID" getVisible="gradientFillWeight_getVisible">
+						<item id="gw_"   label=" "/>
+						<item id="gw_1"  label="1%"/>
+						<item id="gw_2"  label="2%"/>
+						<item id="gw_3"  label="3%"/>
+						<item id="gw_4"  label="4%"/>
+						<item id="gw_5"  label="5%"/>
+						<item id="gw_6"  label="6%"/>
+						<item id="gw_7"  label="7%"/>
+						<item id="gw_8"  label="8%"/>
+						<item id="gw_9"  label="9%"/>
+						<item id="gw_10" label="10%"/>
+						<item id="gw_11" label="11%"/>
+						<item id="gw_12" label="12%"/>
+						<item id="gw_13" label="13%"/>
+						<item id="gw_14" label="14%"/>
+						<item id="gw_15" label="15%"/>
+						<item id="gw_16" label="16%"/>
+						<item id="gw_17" label="17%"/>
+						<item id="gw_18" label="18%"/>
+						<item id="gw_19" label="19%"/>
+						<item id="gw_20" label="20%"/>
+						<item id="gw_21" label="21%"/>
+						<item id="gw_22" label="22%"/>
+						<item id="gw_23" label="23%"/>
+						<item id="gw_24" label="24%"/>
+						<item id="gw_25" label="25%"/>
+						<item id="gw_26" label="26%"/>
+						<item id="gw_27" label="27%"/>
+						<item id="gw_28" label="28%"/>
+						<item id="gw_29" label="29%"/>
+						<item id="gw_30" label="30%"/>
+						<item id="gw_31" label="31%"/>
+						<item id="gw_32" label="32%"/>
+						<item id="gw_33" label="33%"/>
+						<item id="gw_34" label="34%"/>
+						<item id="gw_35" label="35%"/>
+						<item id="gw_36" label="36%"/>
+						<item id="gw_37" label="37%"/>
+						<item id="gw_38" label="38%"/>
+						<item id="gw_39" label="39%"/>
+						<item id="gw_40" label="40%"/>
+						<item id="gw_41" label="41%"/>
+						<item id="gw_42" label="42%"/>
+						<item id="gw_43" label="43%"/>
+						<item id="gw_44" label="44%"/>
+						<item id="gw_45" label="45%"/>
+						<item id="gw_46" label="46%"/>
+						<item id="gw_47" label="47%"/>
+						<item id="gw_48" label="48%"/>
+						<item id="gw_49" label="49%"/>
+						<item id="gw_50" label="50%"/>
+						<item id="gw_51" label="51%"/>
+						<item id="gw_52" label="52%"/>
+						<item id="gw_53" label="53%"/>
+						<item id="gw_54" label="54%"/>
+						<item id="gw_55" label="55%"/>
+						<item id="gw_56" label="56%"/>
+						<item id="gw_57" label="57%"/>
+						<item id="gw_58" label="58%"/>
+						<item id="gw_59" label="59%"/>
+						<item id="gw_60" label="60%"/>
+						<item id="gw_61" label="61%"/>
+						<item id="gw_62" label="62%"/>
+						<item id="gw_63" label="63%"/>
+						<item id="gw_64" label="64%"/>
+						<item id="gw_65" label="65%"/>
+						<item id="gw_66" label="66%"/>
+						<item id="gw_67" label="67%"/>
+						<item id="gw_68" label="68%"/>
+						<item id="gw_69" label="69%"/>
+						<item id="gw_70" label="70%"/>
+						<item id="gw_71" label="71%"/>
+						<item id="gw_72" label="72%"/>
+						<item id="gw_73" label="73%"/>
+						<item id="gw_74" label="74%"/>
+						<item id="gw_75" label="75%"/>
+						<item id="gw_76" label="76%"/>
+						<item id="gw_77" label="77%"/>
+						<item id="gw_78" label="78%"/>
+						<item id="gw_79" label="79%"/>
+						<item id="gw_80" label="80%"/>
+						<item id="gw_81" label="81%"/>
+						<item id="gw_82" label="82%"/>
+						<item id="gw_83" label="83%"/>
+						<item id="gw_84" label="84%"/>
+						<item id="gw_85" label="85%"/>
+						<item id="gw_86" label="86%"/>
+						<item id="gw_87" label="87%"/>
+						<item id="gw_88" label="88%"/>
+						<item id="gw_89" label="89%"/>
+						<item id="gw_90" label="90%"/>
+						<item id="gw_91" label="91%"/>
+						<item id="gw_92" label="92%"/>
+						<item id="gw_93" label="93%"/>
+						<item id="gw_94" label="94%"/>
+						<item id="gw_95" label="95%"/>
+						<item id="gw_96" label="96%"/>
+						<item id="gw_97" label="97%"/>
+						<item id="gw_98" label="98%"/>
+						<item id="gw_99" label="99%"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupNodeImage" getLabel="ribbon_getLabel" imageMso="PictureInsertFromFile" getVisible="designerGroupNodeImage_getVisible">
+					<button id="nodeImageChoose" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileOpen" size="normal" onAction="nodeImageChoose_onAction"/>
+					<editBox id="nodeImageName" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onChange="nodeImageName_onChange" getText="nodeImageName_getText"/>
+					<separator id="imagePosSeparator" getVisible="nodeImage_GetVisible"/>
+					<dropDown  id="nodeImageScale"    getVisible="nodeImage_GetVisible" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXXXXXX" onAction="nodeImageScale_onAction" getItemCount="nodeImageScale_getItemCount" getItemLabel="nodeImageScale_getItemLabel" getSelectedItemIndex="nodeImageScale_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="nodeImagePosition"  getVisible="nodeImage_GetVisible" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXX"     onAction="nodeImagePosition_onAction" getSelectedItemID="nodeImagePosition_getSelectedItemID">
+						<item image="imagepos_cc" id="imagepos_" label=" "/>
+						<item image="imagepos_tl" id="imagepos_tl" label="Top Left"/>
+						<item image="imagepos_tc" id="imagepos_tc" label="Top Center"/>
+						<item image="imagepos_tr" id="imagepos_tr" label="Top Right"/>
+						<item image="imagepos_cl" id="imagepos_ml" label="Middle Left"/>
+						<item image="imagepos_cc" id="imagepos_mc" label="Middle Center"/>
+						<item image="imagepos_cr" id="imagepos_mr" label="Middle Right"/>
+						<item image="imagepos_bl" id="imagepos_bl" label="Bottom Left"/>
+						<item image="imagepos_bc" id="imagepos_bc" label="Bottom Center"/>
+						<item image="imagepos_br" id="imagepos_br" label="Bottom Right"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupEdgeStyle" getLabel="ribbon_getLabel" imageMso="OutlineWeightGallery" getVisible="designerGroupEdgeStyle_getVisible">
+					<dropDown id="edgeStyle" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXX" onAction="edgeStyle_onAction" getSelectedItemID="edgeStyle_getSelectedItemID">
+						<item id="es_" image="es_" label=" "/>
+						<item id="es_bold" image="es_bold" label="bold"/>
+						<item id="es_tapered" image="es_tapered" label="tapered"/>
+						<item id="es_solid" image="es_solid" label="solid"/>
+						<item id="es_dashed" image="es_dashed" label="dashed"/>
+						<item id="es_dotted" image="es_dotted" label="dotted"/>
+						<item id="es_invisible" image="es_invisible" label="invisible"/>
+						<item id="es_invis" image="es_invis" label="invis"/>
+					</dropDown>
+					<dropDown id="edgePenWidth" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" onAction="edgePenWidth_onAction" getSelectedItemID="edgePenWidth_getSelectedItemID">
+						<item id="ew_" image="ew_" label=" "/>
+						<item id="ew_0.0" image="ew_00" label="0.0"/>
+						<item id="ew_0.5" image="ew_005" label="0.5"/>
+						<item id="ew_1.0" image="ew_01" label="1.0"/>
+						<item id="ew_2.0" image="ew_02" label="2.0"/>
+						<item id="ew_3.0" image="ew_03" label="3.0"/>
+						<item id="ew_4.0" image="ew_04" label="4.0"/>
+						<item id="ew_5.0" image="ew_05" label="5.0"/>
+						<item id="ew_6.0" image="ew_06" label="6.0"/>
+						<item id="ew_7.0" image="ew_07" label="7.0"/>
+						<item id="ew_8.0" image="ew_08" label="8.0"/>
+						<item id="ew_9.0" image="ew_09" label="9.0"/>
+						<item id="ew_10.0" image="ew_10" label="10.0"/>
+					</dropDown>
+					<dropDown id="edgeWeight" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" onAction="edgeWeight_onAction" getSelectedItemID="edgeWeight_getSelectedItemID">
+						<item id="weight_" label="   "/>
+						<item id="weight_0" label="  0"/>
+						<item id="weight_25" label=" 25"/>
+						<item id="weight_50" label=" 50"/>
+						<item id="weight_75" label=" 75"/>
+						<item id="weight_100" label="100"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupEdgeColors" getLabel="ribbon_getLabel" imageMso="SmartArtChangeColorsGallery" getVisible="designerGroupEdgeColors_getVisible">
+					<dropDown id="edgeColor1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor1_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor1_getImage" getSelectedItemIndex="edgeColor1_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="edgeColor2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor2_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor2_getImage" getSelectedItemIndex="edgeColor2_getSelectedItemIndex" getVisible="edgeColor2_getVisible">
+					</dropDown>
+					<dropDown id="edgeColor3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor3_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor3_getImage" getSelectedItemIndex="edgeColor3_getSelectedItemIndex" getVisible="edgeColor3_getVisible">
+					</dropDown>
+				</group>
+				<group id="designerGroupEdgeArrow" getLabel="ribbon_getLabel" imageMso="ArrowsMore" getVisible="designerGroupEdgeStyle_getVisible">
+					<dropDown id="edgeDirection" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXX" onAction="edgeDirection_onAction" getSelectedItemID="edgeDirection_getSelectedItemID">
+						<item id="ed_" image="ed_" label=" "/>
+						<item id="ed_forward" image="ed_forward" label="forward"/>
+						<item id="ed_back" image="ed_back" label="back"/>
+						<item id="ed_both" image="ed_both" label="both"/>
+						<item id="ed_none" image="ed_none" label="none"/>
+					</dropDown>
+					<dropDown id="edgeArrowSize" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXX" onAction="edgeArrowSize_onAction" getSelectedItemID="edgeArrowSize_getSelectedItemID" getVisible="edgeArrowSize_getVisible">
+						<item id="as_"     image="as_" label=" "/>
+						<item id="as_0"    image="as_000" label="0.00x"/>
+						<item id="as_0.25" image="as_025" label="0.25x"/>
+						<item id="as_0.50" image="as_050" label="0.50x"/>
+						<item id="as_0.75" image="as_075" label="0.75x"/>
+						<item id="as_1"    image="as_100" label="1.00x"/>
+						<item id="as_1.25" image="as_125" label="1.25x"/>
+						<item id="as_1.50" image="as_150" label="1.50x"/>
+						<item id="as_1.75" image="as_175" label="1.75x"/>
+						<item id="as_2"    image="as_200" label="2.00x"/>
+						<item id="as_2.25" image="as_225" label="2.25x"/>
+						<item id="as_2.50" image="as_250" label="2.50x"/>
+						<item id="as_2.75" image="as_275" label="2.75x"/>
+						<item id="as_3"    image="as_300" label="3.00x"/>
+					</dropDown>
+					<button id="arrowDummyButton1" image="spacer_normal" size="normal" enabled="false" getVisible="mac_getVisible"/>
+				</group>
+				<group id="designerGroupEdgeArrowHead" getLabel="ribbon_getLabel" imageMso="LeftArrow2" getVisible="groupArrowHead_getVisible">
+					<dropDown id="edgeArrowHead1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead1_onAction" getSelectedItemID="edgeArrowHead1_getSelectedItemID">
+						<item id="h1_" image="aa_normal" label=" "/>
+						<item id="h1_normal" image="aa_normal" label="normal"/>
+						<item id="h1_lnormal" image="aa_lnormal" label="lnormal"/>
+						<item id="h1_rnormal" image="aa_rnormal" label="rnormal"/>
+						<item id="h1_onormal" image="aa_onormal" label="onormal"/>
+						<item id="h1_olnormal" image="aa_olnormal" label="olnormal"/>
+						<item id="h1_ornormal" image="aa_ornormal" label="ornormal"/>
+						<item id="h1_box" image="aa_box" label="box"/>
+						<item id="h1_lbox" image="aa_lbox" label="lbox"/>
+						<item id="h1_rbox" image="aa_rbox" label="rbox"/>
+						<item id="h1_obox" image="aa_obox" label="obox"/>
+						<item id="h1_olbox" image="aa_olbox" label="olbox"/>
+						<item id="h1_orbox" image="aa_orbox" label="orbox"/>
+						<item id="h1_crow" image="aa_crow" label="crow"/>
+						<item id="h1_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="h1_rcrow" image="aa_rcrow" label="rcrow"/>
+						<item id="h1_diamond" image="aa_diamond" label="diamond"/>
+						<item id="h1_ldiamond" image="aa_ldiamond" label="ldiamond"/>
+						<item id="h1_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						<item id="h1_odiamond" image="aa_odiamond" label="odiamond"/>
+						<item id="h1_oldiamond" image="aa_oldiamond" label="oldiamond"/>
+						<item id="h1_ordiamond" image="aa_ordiamond" label="ordiamond"/>
+						<item id="h1_dot" image="aa_dot" label="dot"/>
+						<item id="h1_odot" image="aa_odot" label="odot"/>
+						<item id="h1_inv" image="aa_inv" label="inv"/>
+						<item id="h1_linv" image="aa_linv" label="linv"/>
+						<item id="h1_rinv" image="aa_rinv" label="rinv"/>
+						<item id="h1_oinv" image="aa_oinv" label="oinv"/>
+						<item id="h1_olinv" image="aa_olinv" label="olinv"/>
+						<item id="h1_orinv" image="aa_orinv" label="orinv"/>
+						<item id="h1_none" image="aa_none" label="none"/>
+						<item id="h1_tee" image="aa_tee" label="tee"/>
+						<item id="h1_ltee" image="aa_ltee" label="ltee"/>
+						<item id="h1_rtee" image="aa_rtee" label="rtee"/>
+						<item id="h1_vee" image="aa_vee" label="vee"/>
+						<item id="h1_lvee" image="aa_lvee" label="lvee"/>
+						<item id="h1_rvee" image="aa_rvee" label="rvee"/>
+						<item id="h1_curve" image="aa_curve" label="curve"/>
+						<item id="h1_lcurve" image="aa_lcurve" label="lcurve"/>
+						<item id="h1_rcurve" image="aa_rcurve" label="rcurve"/>
+						<item id="h1_icurve" image="aa_icurve" label="icurve"/>
+						<item id="h1_licurve" image="aa_licurve" label="licurve"/>
+						<item id="h1_ricurve" image="aa_ricurve" label="ricurve"/>
+					</dropDown>
+					<dropDown id="edgeArrowHead2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead2_onAction" getSelectedItemID="edgeArrowHead2_getSelectedItemID" getVisible="edgeArrowHead2_getVisible">
+						<item id="h2_" label=" "/>
+						<item id="h2_normal" image="aa_normal" label="normal"/>
+						<item id="h2_lnormal" image="aa_lnormal" label="lnormal"/>
+						<item id="h2_rnormal" image="aa_rnormal" label="rnormal"/>
+						<item id="h2_onormal" image="aa_onormal" label="onormal"/>
+						<item id="h2_olnormal" image="aa_olnormal" label="olnormal"/>
+						<item id="h2_ornormal" image="aa_ornormal" label="ornormal"/>
+						<item id="h2_box" image="aa_box" label="box"/>
+						<item id="h2_lbox" image="aa_lbox" label="lbox"/>
+						<item id="h2_rbox" image="aa_rbox" label="rbox"/>
+						<item id="h2_obox" image="aa_obox" label="obox"/>
+						<item id="h2_olbox" image="aa_olbox" label="olbox"/>
+						<item id="h2_orbox" image="aa_orbox" label="orbox"/>
+						<item id="h2_crow" image="aa_crow" label="crow"/>
+						<item id="h2_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="h2_rcrow" image="aa_rcrow" label="rcrow"/>
+						<item id="h2_diamond" image="aa_diamond" label="diamond"/>
+						<item id="h2_ldiamond" image="aa_ldiamond" label="ldiamond"/>
+						<item id="h2_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						<item id="h2_odiamond" image="aa_odiamond" label="odiamond"/>
+						<item id="h2_oldiamond" image="aa_oldiamond" label="oldiamond"/>
+						<item id="h2_ordiamond" image="aa_ordiamond" label="ordiamond"/>
+						<item id="h2_dot" image="aa_dot" label="dot"/>
+						<item id="h2_odot" image="aa_odot" label="odot"/>
+						<item id="h2_inv" image="aa_inv" label="inv"/>
+						<item id="h2_linv" image="aa_linv" label="linv"/>
+						<item id="h2_rinv" image="aa_rinv" label="rinv"/>
+						<item id="h2_oinv" image="aa_oinv" label="oinv"/>
+						<item id="h2_olinv" image="aa_olinv" label="olinv"/>
+						<item id="h2_orinv" image="aa_orinv" label="orinv"/>
+						<item id="h2_none" image="aa_none" label="none"/>
+						<item id="h2_tee" image="aa_tee" label="tee"/>
+						<item id="h2_ltee" image="aa_ltee" label="ltee"/>
+						<item id="h2_rtee" image="aa_rtee" label="rtee"/>
+						<item id="h2_vee" image="aa_vee" label="vee"/>
+						<item id="h2_lvee" image="aa_lvee" label="lvee"/>
+						<item id="h2_rvee" image="aa_rvee" label="rvee"/>
+						<item id="h2_curve" image="aa_curve" label="curve"/>
+						<item id="h2_lcurve" image="aa_lcurve" label="lcurve"/>
+						<item id="h2_rcurve" image="aa_rcurve" label="rcurve"/>
+						<item id="h2_icurve" image="aa_icurve" label="icurve"/>
+						<item id="h2_licurve" image="aa_licurve" label="licurve"/>
+						<item id="h2_ricurve" image="aa_ricurve" label="ricurve"/>
+					</dropDown>
+					<dropDown id="edgeArrowHead3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead3_onAction" getSelectedItemID="edgeArrowHead3_getSelectedItemID" getVisible="edgeArrowHead3_getVisible">
+						<item id="h3_" label=" "/>
+						<item id="h3_normal" image="aa_normal" label="normal"/>
+						<item id="h3_lnormal" image="aa_lnormal" label="lnormal"/>
+						<item id="h3_rnormal" image="aa_rnormal" label="rnormal"/>
+						<item id="h3_onormal" image="aa_onormal" label="onormal"/>
+						<item id="h3_olnormal" image="aa_olnormal" label="olnormal"/>
+						<item id="h3_ornormal" image="aa_ornormal" label="ornormal"/>
+						<item id="h3_box" image="aa_box" label="box"/>
+						<item id="h3_lbox" image="aa_lbox" label="lbox"/>
+						<item id="h3_rbox" image="aa_rbox" label="rbox"/>
+						<item id="h3_obox" image="aa_obox" label="obox"/>
+						<item id="h3_olbox" image="aa_olbox" label="olbox"/>
+						<item id="h3_orbox" image="aa_orbox" label="orbox"/>
+						<item id="h3_crow" image="aa_crow" label="crow"/>
+						<item id="h3_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="h3_rcrow" image="aa_rcrow" label="rcrow"/>
+						<item id="h3_diamond" image="aa_diamond" label="diamond"/>
+						<item id="h3_ldiamond" image="aa_ldiamond" label="ldiamond"/>
+						<item id="h3_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						<item id="h3_odiamond" image="aa_odiamond" label="odiamond"/>
+						<item id="h3_oldiamond" image="aa_oldiamond" label="oldiamond"/>
+						<item id="h3_ordiamond" image="aa_ordiamond" label="ordiamond"/>
+						<item id="h3_dot" image="aa_dot" label="dot"/>
+						<item id="h3_odot" image="aa_odot" label="odot"/>
+						<item id="h3_inv" image="aa_inv" label="inv"/>
+						<item id="h3_linv" image="aa_linv" label="linv"/>
+						<item id="h3_rinv" image="aa_rinv" label="rinv"/>
+						<item id="h3_oinv" image="aa_oinv" label="oinv"/>
+						<item id="h3_olinv" image="aa_olinv" label="olinv"/>
+						<item id="h3_orinv" image="aa_orinv" label="orinv"/>
+						<item id="h3_none" image="aa_none" label="none"/>
+						<item id="h3_tee" image="aa_tee" label="tee"/>
+						<item id="h3_ltee" image="aa_ltee" label="ltee"/>
+						<item id="h3_rtee" image="aa_rtee" label="rtee"/>
+						<item id="h3_vee" image="aa_vee" label="vee"/>
+						<item id="h3_lvee" image="aa_lvee" label="lvee"/>
+						<item id="h3_rvee" image="aa_rvee" label="rvee"/>
+						<item id="h3_curve" image="aa_curve" label="curve"/>
+						<item id="h3_lcurve" image="aa_lcurve" label="lcurve"/>
+						<item id="h3_rcurve" image="aa_rcurve" label="rcurve"/>
+						<item id="h3_icurve" image="aa_icurve" label="icurve"/>
+						<item id="h3_licurve" image="aa_licurve" label="licurve"/>
+						<item id="h3_ricurve" image="aa_ricurve" label="ricurve"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupEdgeArrowTail" getLabel="ribbon_getLabel" imageMso="RightArrow2" getVisible="groupArrowTail_getVisible">
+					<dropDown id="edgeArrowTail1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail1_onAction" getSelectedItemID="edgeArrowTail1_getSelectedItemID">
+						<item id="t1_" image="aa_normal" label=" "/>
+						<item id="t1_normal" image="aa_normal" label="normal"/>
+						<item id="t1_lnormal" image="aa_lnormal" label="lnormal"/>
+						<item id="t1_rnormal" image="aa_rnormal" label="rnormal"/>
+						<item id="t1_onormal" image="aa_onormal" label="onormal"/>
+						<item id="t1_olnormal" image="aa_olnormal" label="olnormal"/>
+						<item id="t1_ornormal" image="aa_ornormal" label="ornormal"/>
+						<item id="t1_box" image="aa_box" label="box"/>
+						<item id="t1_lbox" image="aa_lbox" label="lbox"/>
+						<item id="t1_rbox" image="aa_rbox" label="rbox"/>
+						<item id="t1_obox" image="aa_obox" label="obox"/>
+						<item id="t1_olbox" image="aa_olbox" label="olbox"/>
+						<item id="t1_orbox" image="aa_orbox" label="orbox"/>
+						<item id="t1_crow" image="aa_crow" label="crow"/>
+						<item id="t1_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="t1_rcrow" image="aa_rcrow" label="rcrow"/>
+						<item id="t1_diamond" image="aa_diamond" label="diamond"/>
+						<item id="t1_ldiamond" image="aa_ldiamond" label="ldiamond"/>
+						<item id="t1_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						<item id="t1_odiamond" image="aa_odiamond" label="odiamond"/>
+						<item id="t1_oldiamond" image="aa_oldiamond" label="oldiamond"/>
+						<item id="t1_ordiamond" image="aa_ordiamond" label="ordiamond"/>
+						<item id="t1_dot" image="aa_dot" label="dot"/>
+						<item id="t1_odot" image="aa_odot" label="odot"/>
+						<item id="t1_inv" image="aa_inv" label="inv"/>
+						<item id="t1_linv" image="aa_linv" label="linv"/>
+						<item id="t1_rinv" image="aa_rinv" label="rinv"/>
+						<item id="t1_oinv" image="aa_oinv" label="oinv"/>
+						<item id="t1_olinv" image="aa_olinv" label="olinv"/>
+						<item id="t1_orinv" image="aa_orinv" label="orinv"/>
+						<item id="t1_none" image="aa_none" label="none"/>
+						<item id="t1_tee" image="aa_tee" label="tee"/>
+						<item id="t1_ltee" image="aa_ltee" label="ltee"/>
+						<item id="t1_rtee" image="aa_rtee" label="rtee"/>
+						<item id="t1_vee" image="aa_vee" label="vee"/>
+						<item id="t1_lvee" image="aa_lvee" label="lvee"/>
+						<item id="t1_rvee" image="aa_rvee" label="rvee"/>
+						<item id="t1_curve" image="aa_curve" label="curve"/>
+						<item id="t1_lcurve" image="aa_lcurve" label="lcurve"/>
+						<item id="t1_rcurve" image="aa_rcurve" label="rcurve"/>
+						<item id="t1_icurve" image="aa_icurve" label="icurve"/>
+						<item id="t1_licurve" image="aa_licurve" label="licurve"/>
+						<item id="t1_ricurve" image="aa_ricurve" label="ricurve"/>
+					</dropDown>
+					<dropDown id="edgeArrowTail2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail2_onAction" getSelectedItemID="edgeArrowTail2_getSelectedItemID" getVisible="edgeArrowTail2_getVisible">
+						<item id="t2_" label=" "/>
+						<item id="t2_normal" image="aa_normal" label="normal"/>
+						<item id="t2_lnormal" image="aa_lnormal" label="lnormal"/>
+						<item id="t2_rnormal" image="aa_rnormal" label="rnormal"/>
+						<item id="t2_onormal" image="aa_onormal" label="onormal"/>
+						<item id="t2_olnormal" image="aa_olnormal" label="olnormal"/>
+						<item id="t2_ornormal" image="aa_ornormal" label="ornormal"/>
+						<item id="t2_box" image="aa_box" label="box"/>
+						<item id="t2_lbox" image="aa_lbox" label="lbox"/>
+						<item id="t2_rbox" image="aa_rbox" label="rbox"/>
+						<item id="t2_obox" image="aa_obox" label="obox"/>
+						<item id="t2_olbox" image="aa_olbox" label="olbox"/>
+						<item id="t2_orbox" image="aa_orbox" label="orbox"/>
+						<item id="t2_crow" image="aa_crow" label="crow"/>
+						<item id="t2_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="t2_rcrow" image="aa_rcrow" label="rcrow"/>
+						<item id="t2_diamond" image="aa_diamond" label="diamond"/>
+						<item id="t2_ldiamond" image="aa_ldiamond" label="ldiamond"/>
+						<item id="t2_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						<item id="t2_odiamond" image="aa_odiamond" label="odiamond"/>
+						<item id="t2_oldiamond" image="aa_oldiamond" label="oldiamond"/>
+						<item id="t2_ordiamond" image="aa_ordiamond" label="ordiamond"/>
+						<item id="t2_dot" image="aa_dot" label="dot"/>
+						<item id="t2_odot" image="aa_odot" label="odot"/>
+						<item id="t2_inv" image="aa_inv" label="inv"/>
+						<item id="t2_linv" image="aa_linv" label="linv"/>
+						<item id="t2_rinv" image="aa_rinv" label="rinv"/>
+						<item id="t2_oinv" image="aa_oinv" label="oinv"/>
+						<item id="t2_olinv" image="aa_olinv" label="olinv"/>
+						<item id="t2_orinv" image="aa_orinv" label="orinv"/>
+						<item id="t2_none" image="aa_none" label="none"/>
+						<item id="t2_tee" image="aa_tee" label="tee"/>
+						<item id="t2_ltee" image="aa_ltee" label="ltee"/>
+						<item id="t2_rtee" image="aa_rtee" label="rtee"/>
+						<item id="t2_vee" image="aa_vee" label="vee"/>
+						<item id="t2_lvee" image="aa_lvee" label="lvee"/>
+						<item id="t2_rvee" image="aa_rvee" label="rvee"/>
+						<item id="t2_curve" image="aa_curve" label="curve"/>
+						<item id="t2_lcurve" image="aa_lcurve" label="lcurve"/>
+						<item id="t2_rcurve" image="aa_rcurve" label="rcurve"/>
+						<item id="t2_icurve" image="aa_icurve" label="icurve"/>
+						<item id="t2_licurve" image="aa_licurve" label="licurve"/>
+						<item id="t2_ricurve" image="aa_ricurve" label="ricurve"/>
+					</dropDown>
+					<dropDown id="edgeArrowTail3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail3_onAction" getSelectedItemID="edgeArrowTail3_getSelectedItemID" getVisible="edgeArrowTail3_getVisible">
+						<item id="t3_" label=" "/>
+						<item id="t3_normal" image="aa_normal" label="normal"/>
+						<item id="t3_lnormal" image="aa_lnormal" label="lnormal"/>
+						<item id="t3_rnormal" image="aa_rnormal" label="rnormal"/>
+						<item id="t3_onormal" image="aa_onormal" label="onormal"/>
+						<item id="t3_olnormal" image="aa_olnormal" label="olnormal"/>
+						<item id="t3_ornormal" image="aa_ornormal" label="ornormal"/>
+						<item id="t3_box" image="aa_box" label="box"/>
+						<item id="t3_lbox" image="aa_lbox" label="lbox"/>
+						<item id="t3_rbox" image="aa_rbox" label="rbox"/>
+						<item id="t3_obox" image="aa_obox" label="obox"/>
+						<item id="t3_olbox" image="aa_olbox" label="olbox"/>
+						<item id="t3_orbox" image="aa_orbox" label="orbox"/>
+						<item id="t3_crow" image="aa_crow" label="crow"/>
+						<item id="t3_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="t3_rcrow" image="aa_rcrow" label="rcrow"/>
+						<item id="t3_diamond" image="aa_diamond" label="diamond"/>
+						<item id="t3_ldiamond" image="aa_ldiamond" label="ldiamond"/>
+						<item id="t3_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						<item id="t3_odiamond" image="aa_odiamond" label="odiamond"/>
+						<item id="t3_oldiamond" image="aa_oldiamond" label="oldiamond"/>
+						<item id="t3_ordiamond" image="aa_ordiamond" label="ordiamond"/>
+						<item id="t3_dot" image="aa_dot" label="dot"/>
+						<item id="t3_odot" image="aa_odot" label="odot"/>
+						<item id="t3_inv" image="aa_inv" label="inv"/>
+						<item id="t3_linv" image="aa_linv" label="linv"/>
+						<item id="t3_rinv" image="aa_rinv" label="rinv"/>
+						<item id="t3_oinv" image="aa_oinv" label="oinv"/>
+						<item id="t3_olinv" image="aa_olinv" label="olinv"/>
+						<item id="t3_orinv" image="aa_orinv" label="orinv"/>
+						<item id="t3_none" image="aa_none" label="none"/>
+						<item id="t3_tee" image="aa_tee" label="tee"/>
+						<item id="t3_ltee" image="aa_ltee" label="ltee"/>
+						<item id="t3_rtee" image="aa_rtee" label="rtee"/>
+						<item id="t3_vee" image="aa_vee" label="vee"/>
+						<item id="t3_lvee" image="aa_lvee" label="lvee"/>
+						<item id="t3_rvee" image="aa_rvee" label="rvee"/>
+						<item id="t3_curve" image="aa_curve" label="curve"/>
+						<item id="t3_lcurve" image="aa_lcurve" label="lcurve"/>
+						<item id="t3_rcurve" image="aa_rcurve" label="rcurve"/>
+						<item id="t3_icurve" image="aa_icurve" label="icurve"/>
+						<item id="t3_licurve" image="aa_licurve" label="licurve"/>
+						<item id="t3_ricurve" image="aa_ricurve" label="ricurve"/>
+					</dropDown>
+				</group>
+				<group id="designerGroupHeadTail" getLabel="ribbon_getLabel" imageMso="DiagramReverseClassic" getVisible="designerGroupEdgeStyle_getVisible">
+					<dropDown id="labelFontColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="labelFontColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="labelFontColor_getImage" getSelectedItemIndex="labelFontColor_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="labelFontName" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="labelFontName_onAction" getItemCount="fontName_getItemCount" getItemImage="fontName_getItemImage" getItemLabel="fontName_getItemLabel" getSelectedItemIndex="labelFontName_getSelectedItemIndex">
+					</dropDown>
+					<dropDown id="labelFontSize" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="labelFontSize_onAction" getItemCount="fontSize_getItemCount" getItemLabel="fontSize_getItemLabel" getSelectedItemIndex="labelFontSize_getSelectedItemIndex">
+					</dropDown>
+					<separator id="edgeSpacingSeparator"/>
+					<dropDown id="edgeLabelAngle" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXX" onAction="edgeLabelAngle_onAction" getSelectedItemID="edgeLabelAngle_getSelectedItemID" getVisible="designerGroupEdgeStyle_getVisible">
+						<item id="angle_" label="    "/>
+						<item id="angle_180" label=" 180°"/>
+						<item id="angle_165" label=" 165°"/>
+						<item id="angle_150" label=" 150°"/>
+						<item id="angle_135" label=" 135°"/>
+						<item id="angle_120" label=" 120°"/>
+						<item id="angle_105" label=" 105°"/>
+						<item id="angle_90" label="  90°"/>
+						<item id="angle_75" label="  75°"/>
+						<item id="angle_60" label="  60°"/>
+						<item id="angle_45" label="  45°"/>
+						<item id="angle_30" label="  30°"/>
+						<item id="angle_15" label="  15°"/>
+						<item id="angle_0" label="   0°"/>
+						<item id="angle_-180" label="-180°"/>
+						<item id="angle_-165" label="-165°"/>
+						<item id="angle_-150" label="-150°"/>
+						<item id="angle_-135" label="-135°"/>
+						<item id="angle_-120" label="-120°"/>
+						<item id="angle_-105" label="-105°"/>
+						<item id="angle_-90" label=" -90°"/>
+						<item id="angle_-75" label=" -75°"/>
+						<item id="angle_-60" label=" -60°"/>
+						<item id="angle_-45" label=" -45°"/>
+						<item id="angle_-30" label=" -30°"/>
+						<item id="angle_-15" label=" -15°"/>
+					</dropDown>
+					<dropDown id="edgeLabelDistance" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXX" onAction="edgeLabelDistance_onAction" getSelectedItemID="edgeLabelDistance_getSelectedItemID" getVisible="designerGroupEdgeStyle_getVisible">
+						<item id="distance_"    label="  "/>
+						<item id="distance_0"   label="0.0x"/>
+						<item id="distance_0.5" label="0.5x"/>
+						<item id="distance_1"   label="1.0x"/>
+						<item id="distance_1.5" label="1.5x"/>
+						<item id="distance_2"   label="2.0x"/>
+						<item id="distance_2.5" label="2.5x"/>
+						<item id="distance_3"   label="3.0x"/>
+						<item id="distance_3.5" label="3.5x"/>
+						<item id="distance_4"   label="4.0x"/>
+						<item id="distance_4.5" label="4.5x"/>
+						<item id="distance_5"   label="5.0x"/>
+					</dropDown>
+					<separator id="edgePortSeparator"/>
+					<dropDown id="edgeHeadPort" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="edgeHeadPort_onAction" getSelectedItemID="edgeHeadPort_getSelectedItemID">
+						<item id="hp_" image="hp_default_lr" label=" "/>
+						<item id="hp__" image="hp___lr" label="_"/>
+						<item id="hp_c" image="hp_c_lr" label="c"/>
+						<item id="hp_n" image="hp_n_lr" label="n"/>
+						<item id="hp_nw" image="hp_nw" label="nw"/>
+						<item id="hp_ne" image="hp_ne" label="ne"/>
+						<item id="hp_w" image="hp_w" label="w"/>
+						<item id="hp_e" image="hp_e" label="e"/>
+						<item id="hp_sw" image="hp_sw" label="sw"/>
+						<item id="hp_se" image="hp_se" label="se"/>
+						<item id="hp_s" image="hp_s_lr" label="s"/>
+					</dropDown>
+					<dropDown id="edgeTailPort" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="edgeTailPort_onAction" getSelectedItemID="edgeTailPort_getSelectedItemID">
+						<item id="tp_" image="tp_default_lr" label=" "/>
+						<item id="tp__" image="tp___lr" label="_"/>
+						<item id="tp_c" image="tp_c_lr" label="c"/>
+						<item id="tp_n" image="tp_n_lr" label="n"/>
+						<item id="tp_nw" image="tp_nw" label="nw"/>
+						<item id="tp_ne" image="tp_ne" label="ne"/>
+						<item id="tp_w" image="tp_w" label="w"/>
+						<item id="tp_e" image="tp_e" label="e"/>
+						<item id="tp_sw" image="tp_sw" label="sw"/>
+						<item id="tp_se" image="tp_se" label="se"/>
+						<item id="tp_s" image="tp_s_lr" label="s"/>
+					</dropDown>
+					<separator id="edgeClipSeparator"/>
+					<checkBox id="edgeHeadClip" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeHeadClip_onAction" getPressed="edgeHeadClip_getPressed"/>
+					<checkBox id="edgeTailClip" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeTailClip_onAction" getPressed="edgeTailClip_getPressed"/>
+				</group>
+				<group id="designerGroupPack" getLabel="ribbon_getLabel" imageMso="Help" getVisible="designerGroupPack_getVisible">
+					<dropDown id="clusterMargin" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXX" onAction="clusterMargin_onAction" getSelectedItemID="clusterMargin_getSelectedItemID" getVisible="designerGroupPack_getVisible">
+						<item id="margin_"   label=" "/>
+						<item id="margin_0"  label="0&quot;"/>
+						<item id="margin_9"  label="1/8&quot;"/>
+						<item id="margin_18" label="1/4&quot;"/>
+						<item id="margin_27" label="3/8&quot;"/>
+						<item id="margin_36" label="1/2&quot;"/>
+						<item id="margin_45" label="5/8&quot;"/>
+						<item id="margin_54" label="3/4&quot;"/>
+						<item id="margin_63" label="7/8&quot;"/>
+                        <item id="margin_72" label="1&quot;"/>
+					</dropDown>
+					<dropDown id="clusterMarginMM" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXX" onAction="clusterMargin_onAction" getSelectedItemID="clusterMargin_getSelectedItemID" getVisible="designerGroupPack_getVisible">
+						<item id="mmmargin_"   label=" "/>
+						<item id="mmmargin_0"  label="0&quot;"/>
+						<item id="mmmargin_9"  label="3.175 mm"/>
+						<item id="mmmargin_18" label="6.350 mm"/>
+						<item id="mmmargin_27" label="9.525 mm"/>
+						<item id="mmmargin_36" label="12.700 mm"/>
+						<item id="mmmargin_45" label="15.875 mm"/>
+						<item id="mmmargin_54" label="19.050 mm"/>
+						<item id="mmmargin_63" label="22.225 mm"/>
+                        <item id="mmmargin_72" label="25.400 mm"/>
+					</dropDown>
+					<dropDown id="clusterPackmode" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXX" onAction="clusterPackmode_onAction" getSelectedItemID="clusterPackmode_getSelectedItemID" getVisible="designerGroupPack_getVisible">
+						<item id="packmode_" label=" "/>
+						<item id="packmode_array" label="array"/>
+						<item id="packmode_clust" label="clust"/>
+					</dropDown>
+                    <dropDown id="arraySplit" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="arraySplit_onAction" getSelectedItemID="arraySplit_getSelectedItemID" getVisible="array_getVisible">
+                        <item id="arraySplit_"   label=" "/>
+                        <item id="arraySplit_1"  label="1"/>
+                        <item id="arraySplit_2"  label="2"/>
+                        <item id="arraySplit_3"  label="3"/>
+                        <item id="arraySplit_4"  label="4"/>
+                        <item id="arraySplit_5"  label="5"/>
+                        <item id="arraySplit_6"  label="6"/>
+                        <item id="arraySplit_7"  label="7"/>
+                        <item id="arraySplit_8"  label="8"/>
+                        <item id="arraySplit_9"  label="9"/>
+                        <item id="arraySplit_10" label="10"/>
+                        <item id="arraySplit_11" label="11"/>
+                        <item id="arraySplit_12" label="12"/>
+                        <item id="arraySplit_13" label="13"/>
+                        <item id="arraySplit_14" label="14"/>
+                        <item id="arraySplit_15" label="15"/>
+                        <item id="arraySplit_16" label="16"/>
+                        <item id="arraySplit_17" label="17"/>
+                        <item id="arraySplit_18" label="18"/>
+                        <item id="arraySplit_19" label="19"/>
+                        <item id="arraySplit_20" label="20"/>
+                        <item id="arraySplit_21" label="21"/>
+                        <item id="arraySplit_22" label="22"/>
+                        <item id="arraySplit_23" label="23"/>
+                        <item id="arraySplit_24" label="24"/>
+                        <item id="arraySplit_25" label="25"/>
+                        <item id="arraySplit_26" label="26"/>
+                        <item id="arraySplit_27" label="27"/>
+                        <item id="arraySplit_28" label="28"/>
+                        <item id="arraySplit_29" label="29"/>
+                        <item id="arraySplit_30" label="30"/>
+                        <item id="arraySplit_31" label="31"/>
+                        <item id="arraySplit_32" label="32"/>
+                        <item id="arraySplit_33" label="33"/>
+                        <item id="arraySplit_34" label="34"/>
+                        <item id="arraySplit_35" label="35"/>
+                        <item id="arraySplit_36" label="36"/>
+                        <item id="arraySplit_37" label="37"/>
+                        <item id="arraySplit_38" label="38"/>
+                        <item id="arraySplit_39" label="39"/>
+                        <item id="arraySplit_40" label="40"/>
+                        <item id="arraySplit_41" label="41"/>
+                        <item id="arraySplit_42" label="42"/>
+                        <item id="arraySplit_43" label="43"/>
+                        <item id="arraySplit_44" label="44"/>
+                        <item id="arraySplit_45" label="45"/>
+                        <item id="arraySplit_46" label="46"/>
+                        <item id="arraySplit_47" label="47"/>
+                        <item id="arraySplit_48" label="48"/>
+                        <item id="arraySplit_49" label="49"/>
+                        <item id="arraySplit_50" label="50"/>
+                     </dropDown>
+					<separator id="packSeparator"  getVisible="array_getVisible"/>
+					<buttonGroup id="buttonGroupArrayAlign">
+						<toggleButton id="arrayAlignTop"    getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableCellAlignTop"    onAction="arrayAlignTop_onAction"    getVisible="array_getVisible" getPressed="arrayAlignTop_getPressed"    />
+						<toggleButton id="arrayAlignBottom" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableCellAlignBottom" onAction="arrayAlignBottom_onAction" getVisible="array_getVisible" getPressed="arrayAlignBottom_getPressed"/>
+					</buttonGroup>
+					<buttonGroup id="buttonGroupArrayJustify">
+						<toggleButton id="arrayJustifyLeft"  getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableCellAlignMiddleLeft"  onAction="arrayJustifyLeft_onAction"  getVisible="array_getVisible" getPressed="arrayJustifyLeft_getPressed"  />
+						<toggleButton id="arrayJustifyRight" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableCellAlignMiddleRight" onAction="arrayJustifyRight_onAction" getVisible="array_getVisible" getPressed="arrayJustifyRight_getPressed" />
+					</buttonGroup>
+                    <button id="arrayAlignDummyButton1" image="spacer_normal" size="normal" enabled="false" getVisible="mac_getVisible"/>
+					<separator id="arraySeparator"  getVisible="array_getVisible"/>
+					<checkBox id="arraySort"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="arraySort_onAction"  getPressed="arraySort_getPressed"  getVisible="array_getVisible"/>
+                    <checkBox id="arrayMajor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="arrayMajor_onAction" getPressed="arrayMajor_getPressed" getVisible="array_getVisible"/>
+				</group>
+				<group id="designerGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="designerHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="designerHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="sqlTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="sqlTab">
+				<group id="sqlGroup1" getLabel="ribbon_getLabel" imageMso="ViewsAdpDiagramSqlView">
+					<button id="sqlRun" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AdpVerifySqlSyntax" size="large" onAction="sqlRun_onAction"/>
+					<separator id="sqlSeparator10"/>
+					<button id="sqlClearStatus" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableStyleClear" size="large" onAction="sqlClearStatus_onAction"/>
+				</group>
+				<group id="sqlEditGroup" getLabel="ribbon_getLabel" imageMso="ViewsAdpDiagramSqlView">
+					<button id="sqlEditCell"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FormControlEditBox" size="large" onAction="sqlEditCell_onAction"  getEnabled="sqlEditCell_getEnabled"/>
+					<button id="sqlClipboard"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShowClipboard"      size="large" onAction="sqlClipboard_onAction" getEnabled="sqlEditCell_getEnabled" getVisible="sqlClipboard_getVisible"/>
+				</group>
+				<group id="sqlGroup2" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
+					<button id="sqlGraphToWorksheet"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="refreshgraph"   size="large" onAction="graphToWorksheet_onAction"    getEnabled="graphToWorksheet_getEnabled"/>
+					<button id="sqlGraphToFile"         getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="graphtofile"    size="large" onAction="graphToFile_onAction"         getEnabled="graphToFile_getEnabled"/>
+					<button id="sqlGraphAllViewsToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="allviewstofile" size="large" onAction="graphAllViewsToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+				</group>
+				<group id="sqlGroup3" getLabel="ribbon_getLabel" imageMso="ApplyFilter">
+					<dropDown id="sqlFilterColumn"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlFilterColumn_onAction" getItemCount="sqlFilterColumn_getItemCount" getSelectedItemIndex="sqlFilterColumn_getSelectedItemIndex" getItemLabel="sqlFilterColumn_getItemLabel"/>
+                    <dropDown id="sqlFilterValue"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlFilterValue_onAction"  getItemCount="sqlFilterValue_getItemCount"  getSelectedItemIndex="sqlFilterValue_getSelectedItemIndex"  getItemLabel="sqlFilterValue_getItemLabel" getEnabled="sqlFilterValue_getEnabled"/>
+					<button   id="sqlFilterRefresh" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlFilterRefresh_onAction" imageMso="Refresh" size="normal" getEnabled="sqlFilterRefresh_getEnabled" />
+				</group>
+				<group id="sqlGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="sqlHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="sqlHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="svgTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="svgTab">
+				<group id="svgGroup1" getLabel="ribbon_getLabel" imageMso="ReplaceDialog">
+                    <checkBox id="svgPostprocess"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getPressed="svgPostprocess_getPressed"      onAction="svgPostprocess_onAction"/>
+				</group>
+				<group id="svgEditGroup" getLabel="ribbon_getLabel" imageMso="ReplaceDialog">
+					<button id="svgEditCell"            getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FormControlEditBox" size="large" onAction="svgEditCell_onAction"  getEnabled="svgEditCell_getEnabled"/>
+					<button id="svgClipboard"           getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShowClipboard"      size="large" onAction="svgClipboard_onAction" getEnabled="svgEditCell_getEnabled" getVisible="svgClipboard_getVisible"/>
+				</group>
+				<group id="svgPublishGroup" getLabel="ribbon_getLabel" imageMso="ReplaceDialog">
+					<button id="svgGraphToFile"         getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" size="large" image="graphtofile"    onAction="graphToFile_onAction"         getEnabled="graphToFile_getEnabled"/>
+					<button id="svgGraphAllViewsToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" size="large" image="allviewstofile" onAction="graphAllViewsToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+				</group>
+				<group id="svgGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="svgHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="svgHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="consoleTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="consoleTab">
+				<group id="consoleGroup0" getLabel="ribbon_getLabel" imageMso="ApplicationOptionsDialog">
+					<checkBox id="toggleDebugLogToConsole" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="toggleDebugLogToConsole_onAction" getPressed="toggleDebugLogToConsole_getPressed" getVisible="toggleDebugLogToConsole_getVisible"/>
+					<checkBox id="toggleGraphvizVerbose"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="toggleGraphvizVerbose_onAction"   getPressed="toggleGraphvizVerbose_getPressed"   getVisible="toggleGraphvizVerbose_getVisible"/>
+					<checkBox id="toggleAppendMode"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="toggleAppendMode_onAction"        getPressed="toggleAppendMode_getPressed" />
+				</group>
+				<group id="consoleGroup1" getLabel="ribbon_getLabel" imageMso="FileVersionHistory">
+					<button id="consoleClear"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Clear"         size="large" onAction="consoleClear_onAction" />
+					<button id="consoleSave"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileSave"      size="large" onAction="consoleSave_onAction" />
+					<button id="consoleClipboard" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShowClipboard" size="large" onAction="consoleClipboard_onAction" getVisible="consoleClipboard_getVisible"/>
+				</group>
+				<group id="consoleGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="consoleHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="consoleHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="sourceTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="sourceTab">
+				<group id="sourceGroup1" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
+					<button id="sourceSave"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileSave"    size="large"  onAction="sourceSave_onAction" getEnabled="sourceSave_getEnabled"/>
+					<separator id="Separator313"/>
+					<button id="sourceCreate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Refresh"    size="normal" onAction="sourceCreate_onAction" getEnabled="sourceCreate_getEnabled"/>
+					<button id="sourceClear"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableDelete" size="normal" onAction="sourceClear_onAction"/>
+					<dropDown id="sourceIndent" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="X" onAction="sourceIndent_onAction" getSelectedItemIndex="sourceIndent_getSelectedItemIndex">
+						<item id="indent_0" label="0"/>
+						<item id="indent_1" label="1"/>
+						<item id="indent_2" label="2"/>
+						<item id="indent_3" label="3"/>
+						<item id="indent_4" label="4"/>
+						<item id="indent_5" label="5"/>
+						<item id="indent_6" label="6"/>
+						<item id="indent_7" label="7"/>
+						<item id="indent_8" label="8"/>
+					</dropDown>
+					<separator id="Separator314"/>
+					<button id="debugSource"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ZoomOnePage" size="large"  onAction="debugSource_onAction"/>
+				</group>
+				<group id="sourceGroup2" getLabel="ribbon_getLabel" imageMso="SaveSelectionToTableOfContentsGallery">
+					<button id="sourceCopy" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShowClipboard" size="large" onAction="sourceCopy_onAction" getEnabled="sourceCopy_getEnabled" getVisible="sourceCopy_getVisible"/>
+					<button idMso="Cut"/>
+					<button idMso="Copy"/>
+					<button idMso="Paste"/>
+				</group>
+				<group id="sourceGroup3" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
+					<button id="sourceGraphToWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="refreshgraph" size="large" onAction="sourceGraphToWorksheet_onAction"/>
+					<button id="sourceGraphToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="graphtofile" size="large" onAction="sourceGraphToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+				</group>
+				<group id="sourceGroup4" getLabel="ribbon_getLabel" imageMso="DesignMode">
+					<button id="launchGVEdit" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="DesignMode" size="large" onAction="launchGVEdit_onAction" getEnabled="launchGVEdit_getEnabled" getVisible="launchGVEdit_getVisible"/>
+				</group>
+				<group id="sourceGroup5" getLabel="ribbon_getLabel" imageMso="ViewsFormView" getVisible="source_web_getVisible">
+					<button id="SourceWeb1" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="SourceWeb2" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="SourceWeb3" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="SourceWeb4" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="SourceWeb5" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="SourceWeb6" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+				</group>
+				<group id="sourceGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="sourceHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="sourceHelp_onAction"/>
+				</group>
+			</tab>			
+			<tab id="ExtTab" getVisible="extTab_getVisible" tag="extTab" getLabel="extTab_getLabel">
+				<group id="ExtGroup1" getLabel="extTab_codeGroup_getLabel" imageMso="MacroPlay" getVisible="extTab_codeGroup_getVisible">
+					<button id="ExtCode1" imageMso="MacroPlay" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extCode_onAction" getEnabled="extCode_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtCode2" imageMso="MacroPlay" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extCode_onAction" getEnabled="extCode_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtCode3" imageMso="MacroPlay" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extCode_onAction" getEnabled="extCode_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtCode4" imageMso="MacroPlay" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extCode_onAction" getEnabled="extCode_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtCode5" imageMso="MacroPlay" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extCode_onAction" getEnabled="extCode_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtCode6" imageMso="MacroPlay" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extCode_onAction" getEnabled="extCode_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+				</group>
+				<group id="ExtGroup2" getLabel="extTab_webGroup_getLabel" imageMso="ViewsFormView" getVisible="extTab_webGroup_getVisible">
+					<button id="ExtWeb1" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtWeb2" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtWeb3" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtWeb4" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtWeb5" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+					<button id="ExtWeb6" imageMso="ViewsFormView" size="normal" getVisible="button_getVisible" getLabel="button_getLabel" onAction="extWeb_onAction" getEnabled="extWeb_getEnabled" getScreentip="button_getScreentip" getSupertip="button_getSupertip"/>
+				</group>
+			</tab>
+			<tab id="toolsTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="toolsTab">
+				<group id="toolsGroup01" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ReadingViewToolsMenu">
+					<button id="exportJson" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="export_large" size="large" onAction="exportJson_onAction" getEnabled="exportJson_getEnabled"/>
+					<button id="importJson" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="import_large" size="large" onAction="importJson_onAction" getEnabled="importJson_getEnabled"/>
+					<separator id="exchangeSeparator00"/>
+					<checkBox id="exchageGraphOptions" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeGraphOptions_onAction" getPressed="exchangeGraphOptions_getPressed"/>
+					<checkBox id="exchageMetadata" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeMetadata_onAction" getPressed="exchangeMetadata_getPressed"/>
+					<checkBox id="exchageWorksheetLayouts" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeWorksheetLayouts_onAction" getPressed="exchangeWorksheetLayouts_getPressed"/>
+					<separator id="exchangeSeparator05"/>
+					<checkBox id="exchageData" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeData_onAction" getPressed="exchangeData_getPressed"/>
+					<menu id="exportOptionsData" image="export_normal" getLabel="ribbon_getLabel" getEnabled="exportOptionsData_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="export1" getTitle="ribbon_getLabel"/>
+						<checkBox id="exportDataRowNumber" getLabel="ribbon_getLabel" onAction="exportDataRowNumber_onAction" getPressed="exportDataRowNumber_getPressed"/>
+						<checkBox id="exportDataRowHeight" getLabel="ribbon_getLabel" onAction="exportDataRowHeight_onAction" getPressed="exportDataRowHeight_getPressed"/>
+						<checkBox id="exportDataRowVisible" getLabel="ribbon_getLabel" onAction="exportDataRowVisible_onAction" getPressed="exportDataRowVisible_getPressed"/>
+					</menu>
+					<menu id="importOptionsData" image="import_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsData_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="import1" getTitle="ribbon_getLabel"/>
+						<checkBox id="importDataRowAppend" getLabel="ribbon_getLabel" onAction="importDataRowAppend_onAction" getPressed="importDataRowAppend_getPressed"/>
+						<checkBox id="importDataRowReplace" getLabel="ribbon_getLabel" onAction="importDataRowReplace_onAction" getPressed="importDataRowReplace_getPressed"/>
+					</menu>
+					<separator id="exchangeSeparator10"/>
+					<checkBox id="exchageStyles" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeStyles_onAction" getPressed="exchangeStyles_getPressed"/>
+					<menu id="exportOptionsStyles" image="export_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsStyles_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="export2" getTitle="ribbon_getLabel"/>
+						<checkBox id="exportStylesRowNumber" getLabel="ribbon_getLabel" onAction="exportStylesRowNumber_onAction" getPressed="exportStylesRowNumber_getPressed"/>
+						<checkBox id="exportStylesRowHeight" getLabel="ribbon_getLabel" onAction="exportStylesRowHeight_onAction" getPressed="exportStylesRowHeight_getPressed"/>
+						<checkBox id="exportStylesRowVisible" getLabel="ribbon_getLabel" onAction="exportStylesRowVisible_onAction" getPressed="exportStylesRowVisible_getPressed"/>
+					</menu>
+					<menu id="importOptionsStyles" image="import_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsStyles_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="import2" getTitle="ribbon_getLabel"/>
+						<checkBox id="importStylesRowAppend" getLabel="ribbon_getLabel" onAction="importStylesRowAppend_onAction" getPressed="importStylesRowAppend_getPressed"/>
+						<checkBox id="importStylesRowReplace" getLabel="ribbon_getLabel" onAction="importStylesRowReplace_onAction" getPressed="importStylesRowReplace_getPressed"/>
+					</menu>
+					<separator id="exchangeSeparator15"/>
+					<checkBox id="exchageSql" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeSql_onAction" getPressed="exchangeSql_getPressed" getVisible="sql_getVisible"/>
+					<menu id="exportOptionsSql" getVisible="sql_getVisible" image="export_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsSql_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="export3" getTitle="ribbon_getLabel"/>
+						<checkBox id="exportSqlRowNumber" getVisible="sql_getVisible" getLabel="ribbon_getLabel" onAction="exportSqlRowNumber_onAction" getPressed="exportSqlRowNumber_getPressed"/>
+						<checkBox id="exportSqlRowHeight" getVisible="sql_getVisible" getLabel="ribbon_getLabel" onAction="exportSqlRowHeight_onAction" getPressed="exportSqlRowHeight_getPressed"/>
+						<checkBox id="exportSqlRowVisible" getVisible="sql_getVisible" getLabel="ribbon_getLabel" onAction="exportSqlRowVisible_onAction" getPressed="exportSqlRowVisible_getPressed"/>
+					</menu>
+					<menu id="importOptionsSql" getVisible="sql_getVisible" image="import_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsSql_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="import3" getTitle="ribbon_getLabel"/>
+						<checkBox id="importSqlRowAppend" getVisible="sql_getVisible" getLabel="ribbon_getLabel" onAction="importSqlRowAppend_onAction" getPressed="importSqlRowAppend_getPressed"/>
+						<checkBox id="importSqlRowReplace" getVisible="sql_getVisible" getLabel="ribbon_getLabel" onAction="importSqlRowReplace_onAction" getPressed="importSqlRowReplace_getPressed"/>
+					</menu>
+					<separator id="exchangeSeparator20"/>
+					<checkBox id="exchageSvg" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="exchangeSvg_onAction" getPressed="exchangeSvg_getPressed"/>
+					<menu id="exportOptionsSvg" image="export_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsSvg_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="export4" getTitle="ribbon_getLabel"/>
+						<checkBox id="exportSvgRowNumber" getLabel="ribbon_getLabel" onAction="exportSvgRowNumber_onAction" getPressed="exportSvgRowNumber_getPressed"/>
+						<checkBox id="exportSvgRowHeight" getLabel="ribbon_getLabel" onAction="exportSvgRowHeight_onAction" getPressed="exportSvgRowHeight_getPressed"/>
+						<checkBox id="exportSvgRowVisible" getLabel="ribbon_getLabel" onAction="exportSvgRowVisible_onAction" getPressed="exportSvgRowVisible_getPressed"/>
+					</menu>
+					<menu id="importOptionsSvg" image="import_normal" getLabel="ribbon_getLabel" getEnabled="importOptionsSvg_getEnabled" getScreentip="ribbon_getScreenTip">
+						<menuSeparator id="import4" getTitle="ribbon_getLabel"/>
+						<checkBox id="importSvgRowAppend" getLabel="ribbon_getLabel" onAction="importSvgRowAppend_onAction" getPressed="importSvgRowAppend_getPressed"/>
+						<checkBox id="importSvgRowReplace" getLabel="ribbon_getLabel" onAction="importSvgRowReplace_onAction" getPressed="importSvgRowReplace_getPressed"/>
+					</menu>
+				</group>
+				<group id="toolsGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="toolsHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="toolsHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="diagnosticsTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible">
+				<group id="diagnosticsGroup1" getLabel="ribbon_getLabel" imageMso="AutoSummaryToolsMenu">
+					<button id="diagnosticsRefresh"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="refreshgraph"                   size="large" onAction="diagnosticsRefresh_onAction"/>
+				</group>
+				<group id="diagnosticsGroup2" getLabel="ribbon_getLabel" imageMso="AutoSummaryToolsMenu">
+					<button id="diagnosticsClearColors" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="large" onAction="diagnosticsClearColors_onAction"/>
+					<button id="diagnosticsClearFonts"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FontDialog"                  size="large" onAction="diagnosticsClearFonts_onAction"/>
+				</group>
+				<group id="diagnosticsGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="diagnosticsHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="diagnosticsHelp_onAction"/>
+				</group>
+			</tab>
+			<tab id="aboutTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible">
+				<group id="aboutGroupLegalStuff" getLabel="ribbon_getLabel" >
+                    <labelControl id="msgboxProductTitle"    getLabel="ribbon_getLabel"/>
+                    <labelControl id="AboutLicenseCopyright" getLabel="ribbon_getSuperTip"/>
+                    <labelControl id="AboutLicenseName"      getLabel="ribbon_getSuperTip"/>
+				</group>
+				<group id="aboutGroupResources" getLabel="ribbon_getLabel" >
+					<button id="aboutE2G"          getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="logo32x32" size="large" onAction="aboutE2G_onAction" />
+					<button id="aboutSourceForge"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="sourceforge" size="large" onAction="aboutSourceForge_onAction" />
+					<button id="aboutGitHub"       getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="github" size="large" onAction="aboutGitHub_onAction" />
+				</group>
+				<group id="aboutGroupAuthor" getLabel="ribbon_getLabel" >
+					<button id="aboutAuthorLinkedIn" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="linkedin" size="large" onAction="aboutAuthorLinkedIn_onAction" />
+					<button id="aboutAuthorEmail"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="NewMailMessage" size="large" onAction="aboutAuthorEmail_onAction"/>
+				</group>
+				<group id="aboutGroupDonate" getLabel="ribbon_getLabel" >
+					<button id="aboutBuyMeACoffee" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="buymeacoffee" size="large" onAction="aboutBuyMeACoffee_onAction"/>
+				</group>
+				<group id="aboutGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
+					<button id="aboutHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="aboutHelp_onAction"/>
+				</group>
+			</tab>
+		</tabs>
+	</ribbon>
+</customUI>
