@@ -4,15 +4,42 @@ Attribute VB_Name = "modExecuteAndCapture"
 
 Option Explicit
 
-' Written by Christos Samaras
-' https://myengineeringworld.net/2020/01/call-csharp-console-app-vba.html
-' Copyright 2024, Christos Samaras
-' MIT License
-
-' Modified by Jeffrey Long to convert from Function to Sub calling convention to
-' be able to return two values (using ByRef parameters), add necessary changes
-' to prevent errors on MacOS which does not support these WinAPI functions,
-' and remediate RubberDuckVBA static code analysis messages.
+' ********************************************************************************************
+' Module: modExecuteAndCapture
+' Description: This module contains the `ExecuteAndCapture` function, which uses the `CreateProcessA`
+'              API to execute command-line commands and capture the standard output and error
+'              asynchronously. The function is designed to work on both 32-bit and 64-bit
+'              versions of Excel.
+'
+' Acknowledgements:
+' - Originally based off of "ExecuteAndCapture" Written by Christos Samaras
+'   https://myengineeringworld.net/2020/01/call-csharp-console-app-vba.html
+'   Copyright 2024, Christos Samaras
+'   MIT License
+'
+' - The code has been adapted and refined by Jeffrey Long to address specific issues such as preventing
+'   deadlocks when reading from pipes, handling large output, and ensuring compatibility with different
+'   versions of Excel.
+'   - Modified to convert from Function to Sub calling convention to be able to return two values
+'    (using ByRef parameters).
+'   - Modified to add necessary changes to prevent errors on macOS which does not support the
+'     WinAPI functions used.
+'   - Modified to remediate RubberDuckVBA static code analysis messages.
+'   - Modified to fix a deadlock occurring in original implementation if more than 4096 bytes
+'     was written to standard out, or standard error by the process which was invoked.
+'     In this situation the process would pause waiting for data to be read from
+'     and removed from the pipe before it could write additional data to the pipe. Now the pipes
+'     are read as the process runs, as opposed to when the process completes.
+'
+' - The function utilizes Windows API calls such as `CreateProcessA`, `WaitForSingleObject`,
+'   `CloseHandle`, `ReadFile`, `CreatePipe`, and `PeekNamedPipe` to execute and manage
+'   command-line processes.
+'
+' - Special thanks to the VBA community and various online resources for providing insights
+'   and code snippets related to handling Windows API calls and asynchronous I/O operations
+'   in VBA.
+'
+' ********************************************************************************************
 
 #If Mac Then
     Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String, ByRef stdErr As String)
@@ -23,6 +50,10 @@ Option Explicit
 #Else
 'Declaring the necessary API functions and types based on Excel version.
 #If Win64 Then  'For 64 bit Excel.
+    ' ----------------------------------
+    ' 64-bit Windows API signatures
+    ' ----------------------------------
+
     ' Creates an anonymous pipe, and returns handles to the read and write ends of the pipe.
     ' https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-createpipe
     Public Declare PtrSafe Function CreatePipe Lib "kernel32" (phReadPipe As LongPtr, _
@@ -57,6 +88,14 @@ Option Explicit
     ' Retrieves the termination status of the specified process.
     ' https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getexitcodeprocess
     Public Declare PtrSafe Function GetExitCodeProcess Lib "kernel32" (ByVal hProcess As LongPtr, lpExitCode As Long) As Long
+    
+    ' Copies data from a named or anonymous pipe into a buffer without removing it from the pipe. It also returns information about data in the pipe.
+    ' https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-peeknamedpipe
+    Public Declare PtrSafe Function PeekNamedPipe Lib "kernel32" (ByVal hNamedPipe As LongPtr, ByVal lpBuffer As String, ByVal nBufferSize As Long, ByRef lpBytesRead As Long, ByRef lpTotalBytesAvail As Long, ByRef lpBytesLeftThisMessage As Long) As Long
+    
+    ' ----------------------------------
+    ' 64-bit Data Types
+    ' ----------------------------------
     
     ' Contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.
     ' https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa379560(v=vs.85)
@@ -99,6 +138,10 @@ Option Explicit
     End Type
 
 #Else 'For 32 bit Excel.
+    ' ----------------------------------
+    ' 32-bit Windows API signatures
+    ' ----------------------------------
+
     ' Creates an anonymous pipe, and returns handles to the read and write ends of the pipe.
     ' https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-createpipe
     Public Declare Function CreatePipe Lib "kernel32" (phReadPipe As Long, _
@@ -134,7 +177,14 @@ Option Explicit
     ' https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getexitcodeprocess
     Public Declare Function GetExitCodeProcess Lib "kernel32" (ByVal hProcess As Long, lpExitCode As Long) As Long
     
-    'Types.
+    ' Copies data from a named or anonymous pipe into a buffer without removing it from the pipe. It also returns information about data in the pipe.
+    ' https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-peeknamedpipe
+    Public Declare Function PeekNamedPipe Lib "kernel32" (ByVal hNamedPipe As Long, ByVal lpBuffer As String, ByVal nBufferSize As Long, ByRef lpBytesRead As Long, ByRef lpTotalBytesAvail As Long, ByRef lpBytesLeftThisMessage As Long) As Long
+
+    ' ----------------------------------
+    ' 32-bit Data Types
+    ' ----------------------------------
+    
     ' Contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.
     ' https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa379560(v=vs.85)
     Public Type SECURITY_ATTRIBUTES
@@ -176,29 +226,37 @@ Option Explicit
     End Type
 #End If
 
-'Contants.
+' ----------------------------------
+' Contants
+' ----------------------------------
+
+' StartupInfo constants
 Public Const STARTF_USESHOWWINDOW  As Long = &H1
 Public Const STARTF_USESTDHANDLES  As Long = &H100
 Public Const SW_HIDE               As Integer = 0
-Public Const BUFSIZE               As Long = 1024 * 10
+
+' GetExitProcessCode() constants
 Public Const STILL_ACTIVE As Long = &H103
+
+' ReadFile() constants
+Public Const PIPE_BUFFER_SIZE  As Long = 1024 * 4
 
 Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String, ByRef stdErr As String)
 
+    ' Declare pipe handles
     #If Win64 Then
         Dim hStdOutRead As LongPtr
         Dim hStdOutWrite As LongPtr
         Dim hStdErrRead As LongPtr
         Dim hStdErrWrite As LongPtr
-        Dim hProcess As LongPtr
     #Else
         Dim hStdOutRead As Long
         Dim hStdOutWrite As Long
         Dim hStdErrRead As Long
         Dim hStdErrWrite As Long
-        Dim hProcess As Long
     #End If
         
+    ' Initialize security attributes
     Dim sa As SECURITY_ATTRIBUTES
     With sa
         .nLength = LenB(sa)
@@ -206,7 +264,7 @@ Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String
         .lpSecurityDescriptor = 0
     End With
     
-    'Create pipes for stdout and stderr
+    'Create pipes for standard output and standard error
     If CreatePipe(hStdOutRead, hStdOutWrite, sa, 0) = 0 Then Exit Sub
     If CreatePipe(hStdErrRead, hStdErrWrite, sa, 0) = 0 Then
         CloseHandle hStdOutRead
@@ -214,6 +272,7 @@ Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String
         Exit Sub
     End If
     
+    ' Set up startup info
     Dim si As STARTUPINFO
     With si
         .cb = LenB(si)
@@ -224,64 +283,74 @@ Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String
         .hStdInput = 0
     End With
     
-    Dim sStdOut As String
-    Dim sStdErr As String
-    
+    ' Set up process information
     Dim pi As PROCESS_INFORMATION
     
+    ' Execute the command
     If CreateProcess(vbNullString, CommandLine, ByVal 0&, ByVal 0&, 1, 0&, ByVal 0&, vbNullString, si, pi) Then
-        hProcess = pi.hProcess
+        ' Close the write ends of the pipes
         CloseHandle hStdOutWrite
         CloseHandle hStdErrWrite
         
-        Dim baStdOut(BUFSIZE) As Byte
-        Dim baStdErr(BUFSIZE) As Byte
-        
-        Dim lBytesReadOut As Long
-        Dim lBytesReadErr As Long
-        
+        ' Read output and error during process execution
         Dim lExitCode As Long
-        
         Do
-            ' Read from stdout pipe
-            If ReadFile(hStdOutRead, baStdOut(0), BUFSIZE, lBytesReadOut, ByVal 0&) <> 0 Then
-                If lBytesReadOut > 0 Then
-                    sStdOut = sStdOut & Left$(StrConv(baStdOut(), vbUnicode), lBytesReadOut)
-                End If
-            End If
+            ' Read from standard output pipe
+            stdOut = stdOut & ReadPipe(hStdOutRead)
             
-            ' Read from stderr pipe.
-            If ReadFile(hStdErrRead, baStdErr(0), BUFSIZE, lBytesReadErr, ByVal 0&) <> 0 Then
-                If lBytesReadErr > 0 Then
-                    sStdErr = sStdErr & Left$(StrConv(baStdErr(), vbUnicode), lBytesReadErr)
-                End If
-            End If
-            
+            ' Read from standare error pipe.
+            stdErr = stdErr & ReadPipe(hStdErrRead)
+
             ' Check if process has exited.
-            GetExitCodeProcess hProcess, lExitCode
+            GetExitCodeProcess pi.hProcess, lExitCode
             If lExitCode <> STILL_ACTIVE Then Exit Do
         Loop
         
-        'Read any remaining data.
-        Do While ReadFile(hStdOutRead, baStdOut(0), BUFSIZE, lBytesReadOut, ByVal 0&) <> 0 And lBytesReadOut > 0
-            sStdOut = sStdOut & Left$(StrConv(baStdOut(), vbUnicode), lBytesReadOut)
-        Loop
-        Do While ReadFile(hStdErrRead, baStdErr(0), BUFSIZE, lBytesReadErr, ByVal 0&) <> 0 And lBytesReadErr > 0
-            sStdErr = sStdErr & Left$(StrConv(baStdErr(), vbUnicode), lBytesReadErr)
-        Loop
-        
-        CloseHandle hProcess
+        ' Close handles to process and threads
+        CloseHandle pi.hProcess
         CloseHandle pi.hThread
     End If
     
+    ' Close handles to pipes
     CloseHandle hStdOutRead
     CloseHandle hStdErrRead
-    
-    stdOut = Trim$(sStdOut)
-    stdErr = Trim$(sStdErr)
-    
 End Sub
 
+#If Win64 Then
+Function ReadPipe(hPipe As LongPtr) As String
+#Else
+Function ReadPipe(hPipe As Long) As String
 #End If
+
+    Dim peeked As Boolean
+    Dim bytesAvail As Long
+    Dim bytesRead As Long
+    Dim buffer(PIPE_BUFFER_SIZE) As Byte
+    
+    ' PeekNamedPipe returns information about data in the pipe without removing it from the pipe.
+    peeked = PeekNamedPipe(hPipe, ByVal 0&, 0, ByVal 0&, bytesAvail, ByVal 0&)
+    Do
+        ' Determine if any data was written to the pipe
+        If bytesAvail > 0 Then
+            ' The pipe can only accept a maximum of 4096 bytes from the process, at which point
+            ' the process will pause until data is read & removed from the pipe, allowing the
+            ' process to proceed. Read the pipe in chunks of 4096 bytes.
+            Do
+                bytesRead = 0
+                If ReadFile(hPipe, buffer(0), PIPE_BUFFER_SIZE, bytesRead, ByVal 0&) = 0 Then Exit Do
+                If bytesRead > 0 Then
+                    ReadPipe = ReadPipe & Left$(StrConv(buffer(), vbUnicode), bytesRead)
+                End If
+                peeked = PeekNamedPipe(hPipe, ByVal 0&, 0, ByVal 0&, bytesAvail, ByVal 0&)
+            Loop While bytesRead > 0
+        End If
+    Loop While peeked = True And bytesAvail > 0
+End Function
+
+#End If
+
+
+
+
 
 
