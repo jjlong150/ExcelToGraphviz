@@ -1,0 +1,2478 @@
+{
+  "metadata": {
+    "name": "E2GXF",
+    "type": "Excel to Graphviz Exchange Format",
+    "version": "1.0",
+    "user": "Jeffrey Long",
+    "date": "2024-12-03",
+    "time": "13:40:58",
+    "os": "Windows (64-bit) NT 10.00",
+    "excel": "16.0",
+    "filename": "IT Architecture Nested Views.xlsm"
+  },
+  "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Physical Technology Components"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Physical Technology Components",
+        "styleName": "Physical Technology Component Domain"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Database Server",
+        "styleName": "Physical Technology Component Domain"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 45,
+        "item": "database rdbms",
+        "label": "Relational Database\r\r\r\r\r\u000AMgmt Software\r\r\r\r\r\u000AOracle 11g",
+        "styleName": "component"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 30,
+        "item": "database server os",
+        "label": "Operating System\r\r\r\r\r\u000AAIX v7.1",
+        "styleName": "component"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 30,
+        "item": "database server vm",
+        "label": "Virtual Machine\r\r\r\r\r\u000Apdb1.foobar.com",
+        "styleName": "component"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "item": "database rdbms",
+        "label": "uses",
+        "relatedItem": "database server os",
+        "styleName": "uses"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "item": "database server os",
+        "label": "uses",
+        "relatedItem": "database server vm",
+        "styleName": "uses"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Physical Technology Component Domain End"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Storage Area Network",
+        "styleName": "Physical Technology Component Domain"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 45,
+        "item": "training db",
+        "label": "Training\r\r\r\r\r\u000ADatabase\r\r\r\r\r\u000A(traindb)",
+        "styleName": "database"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 30,
+        "item": "training html",
+        "label": "HTML,\r\r\r\r\r\u000Aimage files",
+        "styleName": "file"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Physical Technology Component Domain End"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "item": "http server",
+        "label": "uses",
+        "relatedItem": "training html",
+        "styleName": "uses"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Web Server",
+        "styleName": "Physical Technology Component Domain"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 30,
+        "item": "http server",
+        "label": "IIS\r\r\r\r\r\u000AHTTP Server",
+        "styleName": "component"
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 45,
+        "item": "http server os",
+        "label": "Operating System\r\r\r\r\r\u000AMicrosoft Windows\r\r\r\r\r\u000AServer 2012 R2",
+        "styleName": "component"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 60,
+        "item": "http server vm",
+        "label": "Virtual Machines\r\r\r\r\r\u000Apweb1.foobar.com\r\r\r\r\r\u000Apweb2.foobar.com\r\r\r\r\r\u000A",
+        "styleName": "component"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "item": "http server",
+        "label": "uses",
+        "relatedItem": "http server os",
+        "styleName": "uses"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "item": "http server os",
+        "label": "uses",
+        "relatedItem": "http server vm",
+        "styleName": "uses"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Physical Technology Component Domain End"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Application Server",
+        "styleName": "Physical Technology Component Domain"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "item": "app server os",
+        "label": "Operating System\r\r\r\r\r\u000AAIX v7.1",
+        "styleName": "component"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 45,
+        "item": "app server ear",
+        "label": "Training Software\r\r\r\r\r\u000AJava App\r\r\r\r\r\u000A(training.ear)",
+        "styleName": "component"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 30,
+        "item": "app server jvm",
+        "label": "Java Virtual Machine\r\r\r\r\r\u000A(ptrainjvm1)",
+        "styleName": "component"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 45,
+        "item": "app server middleware",
+        "label": "Java Application Server\r\r\r\r\r\u000AIBM WebSphere\r\r\r\r\r\u000Av8.5.5",
+        "styleName": "component"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 75,
+        "item": "app server vm",
+        "label": "Virtual Machines\r\r\r\r\r\u000Apapp1.foobar.com\r\r\r\r\r\u000Apapp2.foobar.com\r\r\r\r\r\u000Apapp3.foobar.com\r\r\r\r\r\u000Apapp4.foobar.com",
+        "styleName": "component"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15,
+        "item": "app server ear",
+        "label": "uses",
+        "relatedItem": "app server jvm",
+        "styleName": "uses"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "item": "app server jvm",
+        "label": "uses",
+        "relatedItem": "app server middleware",
+        "styleName": "uses"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "item": "app server middleware",
+        "label": "uses",
+        "relatedItem": "app server os",
+        "styleName": "uses"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "item": "app server os",
+        "label": "uses",
+        "relatedItem": "app server vm",
+        "styleName": "uses"
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Physical Technology Component Domain End"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Physical Application Components"
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Physical Application Components",
+        "styleName": "Physical Application Component Domain"
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 45,
+        "item": "course mgmt system",
+        "label": "Training\r\r\r\r\r\u000ACourse Mgmt\r\r\r\r\r\u000ASystem",
+        "styleName": "component app"
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 45,
+        "item": "training software dynamic",
+        "label": "Training\r\r\r\r\r\u000ASoftware\r\r\r\r\r\u000ADynamic Web Content",
+        "styleName": "component app"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 45,
+        "item": "training software static",
+        "label": "Training\r\r\r\r\r\u000ASoftware\r\r\r\r\r\u000AStatic Web Content",
+        "styleName": "component app"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 45,
+        "item": "course mgmt system",
+        "label": "uses",
+        "relatedItem": "training software dynamic",
+        "styleName": "uses"
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 45,
+        "item": "course mgmt system",
+        "label": "uses",
+        "relatedItem": "training software static",
+        "styleName": "uses"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Logical Application Components"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Logical Application Components",
+        "styleName": "Logical Application Component Domain"
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 45,
+        "item": "financial training course",
+        "label": "Financial\r\r\r\r\r\u000ATraining\r\r\r\r\r\u000ACourse",
+        "styleName": "component logical"
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 45,
+        "item": "compliance training course",
+        "label": "Compliance\r\r\r\r\r\u000ATraining\r\r\r\r\r\u000ACourse",
+        "styleName": "component logical"
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 30,
+        "item": "financial system",
+        "label": "Financial\r\r\r\r\r\u000ASystem",
+        "styleName": "component logical"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Business Services"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Business Services",
+        "styleName": "Business Service Domain"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 30,
+        "item": "employee training",
+        "label": "Employee\r\r\r\r\r\u000ATraining",
+        "styleName": "service"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 30,
+        "item": "staff training",
+        "label": "Staff\r\r\r\r\r\u000ATraining",
+        "styleName": "service"
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 30,
+        "item": "contractor training",
+        "label": "Contractor\r\r\r\r\r\u000ATraining",
+        "styleName": "service"
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "employee training",
+        "label": "uses",
+        "relatedItem": "staff training",
+        "styleName": "uses"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "item": "employee training",
+        "label": "uses",
+        "relatedItem": "contractor training",
+        "styleName": "uses"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Business Service Domain End"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "RELATIONSHIPS - Logical Application Components to Business Service"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "item": "staff training",
+        "label": "uses",
+        "relatedItem": "financial system",
+        "styleName": "uses"
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "item": "staff training",
+        "label": "uses",
+        "relatedItem": "financial training course",
+        "styleName": "uses"
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "staff training",
+        "label": "uses",
+        "relatedItem": "compliance training course",
+        "styleName": "uses"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "item": "contractor training",
+        "label": "uses",
+        "relatedItem": "compliance training course",
+        "styleName": "uses"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Logical Application Component Domain End"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "RELATIONSHIPS - Physical Application Components to Logical Application Components"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "item": "financial training course",
+        "label": "uses",
+        "relatedItem": "course mgmt system",
+        "styleName": "uses"
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "item": "compliance training course",
+        "label": "uses",
+        "relatedItem": "course mgmt system",
+        "styleName": "uses"
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Physical Application Component Domain End"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "RELATIONSHIPS - Physical Technology Components to Physical Application Components"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "item": "app server middleware",
+        "label": "uses",
+        "relatedItem": "database rdbms",
+        "styleName": "uses"
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "item": "database rdbms",
+        "label": "uses",
+        "relatedItem": "training db",
+        "styleName": "uses"
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "item": "course mgmt system",
+        "label": "uses",
+        "relatedItem": "http server",
+        "styleName": "uses"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "http server",
+        "label": "uses",
+        "relatedItem": "training software dynamic",
+        "styleName": "uses"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "item": "http server",
+        "label": "uses",
+        "relatedItem": "training software static",
+        "styleName": "uses"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "item": "training software dynamic",
+        "label": "uses",
+        "relatedItem": "app server ear",
+        "styleName": "uses"
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "item": "training software static",
+        "label": "uses",
+        "relatedItem": "training html",
+        "styleName": "uses"
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "item": "http server",
+        "label": "uses",
+        "relatedItem": "training software static",
+        "styleName": "uses"
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Physical Technology Component Domain End"
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "name": "domain",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "name": "domain end",
+        "type": "subgraph-close",
+        "format": {
+          "labeljust": "left"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "name": "process",
+        "type": "node",
+        "format": {
+          "shape": "rect",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 30,
+        "name": "service",
+        "type": "node",
+        "format": {
+          "shape": "rectangle",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "rounded,filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "name": "component",
+        "type": "node",
+        "format": {
+          "shape": "component",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "name": "component logical",
+        "type": "node",
+        "format": {
+          "shape": "component",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "name": "component app",
+        "type": "node",
+        "format": {
+          "shape": "component",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 30,
+        "name": "Business Service Domain",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "colorscheme": "pastel24",
+          "fillcolor": "1",
+          "fontname": "Arial",
+          "fontsize": "14",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no"
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 30,
+        "name": "Business Service Domain End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no"
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "name": "Logical Application Component Domain",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "colorscheme": "pastel24",
+          "fillcolor": "2",
+          "fontname": "Arial",
+          "fontsize": "14",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "name": "Logical Application Component Domain End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 30,
+        "name": "Physical Application Component Domain",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "colorscheme": "pastel24",
+          "fillcolor": "3",
+          "fontname": "Arial",
+          "fontsize": "14",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 30,
+        "name": "Physical Application Component Domain End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "no",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "name": "Physical Technology Component Domain",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "colorscheme": "pastel24",
+          "fillcolor": "4",
+          "fontname": "Arial",
+          "fontsize": "14",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "name": "Physical Technology Component Domain End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 30,
+        "name": "database",
+        "type": "node",
+        "format": {
+          "shape": "ellipse",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "name": "file",
+        "type": "node",
+        "format": {
+          "shape": "ellipse",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "no",
+          "no",
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 30,
+        "name": "uses",
+        "type": "edge",
+        "format": {
+          "style": "dashed",
+          "color": "maroon",
+          "arrowhead": "onormal",
+          "arrowsize": "1.5",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "name": "input-output",
+        "type": "node",
+        "format": {
+          "shape": "parallelogram",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 30,
+        "name": "decision",
+        "type": "node",
+        "format": {
+          "shape": "diamond",
+          "height": "1.00",
+          "width": "1.50",
+          "fixedsize": "true",
+          "fillcolor": "cornsilk",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15.75
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 95,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 96,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 97,
+        "hidden": false,
+        "height": 15
+      }
+    ],
+    "sql": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "svg": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 12.75,
+        "enabled": false
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "Modify the <svg> element to add an onload() function"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 45,
+        "find": "xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
+        "replace": "xmlns:xlink=\"http://www.w3.org/1999/xlink\" onload=\"makeDraggable(evt)\">\u000A  <!-- NOTE: The graphviz-generated content in this file has been modified by Excel to Graphviz %%[Version]%% -->\u000A"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "find": "%%[Version]%%",
+        "replace": "Version: 6.0.00 (Win + Mac OS)"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "Insert placeholders for stylesheet and script content before the closing </svg> element. These placeholders will be expanded by subsequent rows."
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 210,
+        "find": "</svg>",
+        "replace": "\u000A<!-- Excel to Graphviz - Begin -->\u000A<style>\u000A%%[StyleElements]%%\u000A</style>\u000A<script>\u000A<![CDATA[\u000A%%[makeDraggableSection01]%%\u000A%%[makeDraggableSection02]%%\u000A]]>\u000A</script>\u000A<!-- Excel to Graphviz - End -->\u000A\u000A</svg>"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "The stylesheet is larger than can be shown in an Excel row. Split it into smaller chunks."
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 90,
+        "find": "%%[StyleElements]%%",
+        "replace": "%%[edge node text]%%\r\u000A%%[text-highlight-nodes]%%\r\u000A%%[text-highlight-edges]%%\r\u000A%%[edge-highlight path]%%\t\r\u000A%%[edge-highlight polygon]%%\r\u000A%%[node-highlight polygon]%%"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 135,
+        "find": "%%[edge node text]%%",
+        "replace": "\r\u000A<!-- The first 2 styles are hiding longer description texts on \r\u000A     nodes and edges, that are shown when nodes are clicked -->\r\u000A.edge text{\r\u000A    opacity: 0;\r\u000A}\r\u000A.node text:not(:first-of-type){\r\u000A    opacity: 0;\r\u000A}"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 105,
+        "find": "%%[text-highlight-nodes]%%",
+        "replace": ".text-highlight-nodes text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 10;\r\u000A    font-size: 20px;\r\u000A    font-weight: bold;\r\u000A    fill: black;\r\u000A}"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 105,
+        "find": "%%[text-highlight-edges]%%",
+        "replace": ".text-highlight-edges text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 10;\r\u000A    font-size: 20px;\r\u000A    font-weight: bold;\r\u000A    fill: Indigo;\r\u000A}"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 75,
+        "find": "%%[edge-highlight path]%%",
+        "replace": ".edge-highlight path{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A}"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 75,
+        "find": "%%[edge-highlight polygon]%%",
+        "replace": ".edge-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A}"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 90,
+        "find": "%%[node-highlight polygon]%%",
+        "replace": ".node-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A    z-index:99999;\t\r\u000A}"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "The script code is larger than can be shown in an Excel row. Split the code into smaller chunks."
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 345,
+        "find": "%%[makeDraggableSection01]%%",
+        "replace": "function makeDraggable(evt) {\u000A    var svg = evt.target;\u000A\u000A    svg.addEventListener('mousedown', startDrag);\u000A    svg.addEventListener('mousemove', drag);\u000A    svg.addEventListener('mouseup', endDrag);\u000A    svg.addEventListener('mouseleave', endDrag);\u000A    svg.addEventListener('touchstart', startDrag);\u000A    svg.addEventListener('touchmove', drag);\u000A    svg.addEventListener('touchend', endDrag);\u000A    svg.addEventListener('touchleave', endDrag);\u000A    svg.addEventListener('touchcancel', endDrag);\u000A\u000A    var edges = document.getElementsByClassName('edge');\u000A    for (var i = 0; i < edges.length; i++) {\u000A        edges[i].addEventListener('click', clickEdge);\u000A    }\u000A\u000A    var nodes = document.getElementsByClassName('node');\u000A    for (var i = 0; i < nodes.length; i++) {\u000A        nodes[i].addEventListener('click', clickNode);\u000A    } \u000A"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 120,
+        "find": "%%[makeDraggableSection02]%%",
+        "replace": "%%[getMousePosition]%%\u000A    var selectedElement, offset, transform, nodrag, origmousepos;\u000A%%[startDrag]%%\u000A%%[drag]%%\u000A%%[endDrag]%%\u000A%%[clickEdge]%%\u000A%%[clickNode]%%\u000A}"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 120,
+        "find": "%%[getMousePosition]%%",
+        "replace": "    function getMousePosition(evt) {\r\u000A        var CTM = svg.getScreenCTM();\r\u000A        if (evt.touches) { evt = evt.touches[0]; }\r\u000A            return {\r\u000A                x: (evt.clientX - CTM.e) / CTM.a,\r\u000A                y: (evt.clientY - CTM.f) / CTM.d\r\u000A        };\r\u000A    }"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 315,
+        "find": "%%[startDrag]%%",
+        "replace": "    function startDrag(evt) {\u000A        origmousepos = getMousePosition(evt);\u000A        nodrag=true;\u000A        selectedElement = evt.target.parentElement;\u000A        offset = getMousePosition(evt);\u000A\u000A        // Make sure the first transform on the element is a translate transform\u000A        var transforms = selectedElement.transform.baseVal;\u000A\u000A        if (transforms.length === 0 || transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {\u000A            // Create an transform that translates by (0, 0)\u000A            var translate = svg.createSVGTransform();\u000A            translate.setTranslate(0, 0);\u000A            selectedElement.transform.baseVal.insertItemBefore(translate, 0);\u000A        }\u000A\u000A        // Get initial translation\u000A        transform = transforms.getItem(0);\u000A        offset.x -= transform.matrix.e;\u000A        offset.y -= transform.matrix.f;\u000A    }"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 105,
+        "find": "%%[drag]%%",
+        "replace": "    function drag(evt) {\u000A        if (selectedElement) {\u000A            evt.preventDefault();\u000A            var coord = getMousePosition(evt);\u000A            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);\u000A        }\u000A    }"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 180,
+        "find": "%%[endDrag]%%",
+        "replace": "    function endDrag(evt) {\u000A    <!-- comment out the following line if you wnat drags to stay in place, with this line they snap back to their original position after drag end -->   \u000A\u000A        selectedElement = false;\u000A        transform.setTranslate(0,0);\u000A        var currentmousepos=getMousePosition(evt);\u000A        if (currentmousepos.x===origmousepos.x|currentmousepos.y===origmousepos.y){\u000A            nodrag=true;\u000A        } else {\u000A            nodrag=false;}\u000A        }"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 180,
+        "find": "%%[clickEdge]%%",
+        "replace": "    function clickEdge() {\r\u000A        if (nodrag) {\r\u000A            if (this.classList.contains(\"edge-highlight\")){\r\u000A                this.classList.remove(\"edge-highlight\");\r\u000A                this.classList.remove(\"text-highlight-edges\");\r\u000A            }\r\u000A            else {\r\u000A                this.classList.add(\"edge-highlight\");\r\u000A                this.classList.add(\"text-highlight-edges\");\r\u000A            }\r\u000A        }\t\r\u000A    }"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 409.5,
+        "find": "%%[clickNode]%%",
+        "replace": "    function clickNode() {\r\u000A        \r\u000A        if (nodrag) {\r\u000A            var patroon = new RegExp('^' + this.childNodes[1].textContent + '->|->' +this.childNodes[1].textContent + '$')\r\u000A        \r\u000A            if (this.classList.contains(\"node-highlight\")){\r\u000A                this.classList.remove(\"node-highlight\");\r\u000A                this.classList.remove(\"text-highlight-nodes\");\r\u000A                var edges = document.getElementsByClassName('edge');\r\u000A                for (var i = 0; i < edges.length; i++) {\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\u000A                    edges[i].classList.remove(\"edge-highlight\");\r\u000A                    edges[i].classList.remove(\"text-highlight-edges\");\r\u000A                    } \r\u000A                }\r\u000A            }\r\u000A            else {\r\u000A                this.classList.add(\"node-highlight\");\r\u000A                this.classList.add(\"text-highlight-nodes\");\r\u000A                var edges = document.getElementsByClassName('edge');\r\u000A                for (var i = 0; i < edges.length; i++) {\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\u000A                        edges[i].classList.add(\"edge-highlight\");\r\u000A                        edges[i].classList.add(\"text-highlight-edges\");\r\u000A                    }  \r\u000A                }\r\u000A            }\r\u000A        }\r\u000A    }"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 409.5,
+        "find": "%%[clickNode]%%",
+        "replace": "    function clickNode() {\r\r\u000A        \r\r\u000A        if (nodrag) {\r\r\u000A            var patroon = new RegExp('^' + this.childNodes[1].textContent + '->|->' +this.childNodes[1].textContent + '$')\r\r\u000A        \r\r\u000A            if (this.classList.contains(\"node-highlight\")){\r\r\u000A                this.classList.remove(\"node-highlight\");\r\r\u000A                this.classList.remove(\"text-highlight-nodes\");\r\r\u000A                var edges = document.getElementsByClassName('edge');\r\r\u000A                for (var i = 0; i < edges.length; i++) {\r\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\r\u000A                    edges[i].classList.remove(\"edge-highlight\");\r\r\u000A                    edges[i].classList.remove(\"text-highlight-edges\");\r\r\u000A                    } \r\r\u000A                }\r\r\u000A            }\r\r\u000A            else {\r\r\u000A                this.classList.add(\"node-highlight\");\r\r\u000A                this.classList.add(\"text-highlight-nodes\");\r\r\u000A                var edges = document.getElementsByClassName('edge');\r\r\u000A                for (var i = 0; i < edges.length; i++) {\r\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\r\u000A                        edges[i].classList.add(\"edge-highlight\");\r\r\u000A                        edges[i].classList.add(\"text-highlight-edges\");\r\r\u000A                    }  \r\r\u000A                }\r\r\u000A            }\r\r\u000A        }\r\r\u000A    }"
+      }
+    ]
+  },
+  "settings": {
+    "data": {
+      "graphToWorksheet": {
+        "runMode": "auto",
+        "imageType": "png",
+        "imageWorksheet": "data",
+        "scaleImage": 50
+      },
+      "graphToFile": {
+        "directory": "C:\\rv\\v7.0.00\\Relationship Visualizer\\samples\\04 - IT Architecture",
+        "fileNamePrefix": "Graph",
+        "imageType": "pdf",
+        "appendOptions": false,
+        "appendTimeStamp": false
+      },
+      "layout": {
+        "engine": "dot",
+        "direction": "left to right",
+        "rankdir": "LR",
+        "splines": "spline"
+      },
+      "options": {
+        "graph": {
+          "center": false,
+          "clusterRank": "",
+          "compound": false,
+          "dim": "",
+          "dimen": "",
+          "forceLabels": false,
+          "graphType": "directed",
+          "mode": "",
+          "model": "",
+          "newrank": false,
+          "ordering": "",
+          "orientation": false,
+          "outputOrder": "",
+          "overlap": "",
+          "smoothing": "",
+          "transparentBackground": false
+        },
+        "nodes": {
+          "includeOrphanNodes": true,
+          "includeNodeLabels": true,
+          "includeNodeXLabels": true,
+          "blankNodeLabels": "default"
+        },
+        "edges": {
+          "addStrict": true,
+          "concentrate": false,
+          "includeOrphanEdges": false,
+          "includeEdgeHeadLabels": true,
+          "includeEdgeLabels": true,
+          "includeEdgeXLabels": true,
+          "includeEdgeTailLabels": true,
+          "includeEdgePorts": true,
+          "blankEdgeLabels": "blank"
+        }
+      },
+      "styles": {
+        "selectedViewColumn": "E",
+        "includeStyleFormat": true,
+        "includeExtraAttributes": true,
+        "suffixOpen": "Begin",
+        "suffixClose": "End"
+      },
+      "debug": {
+        "debug": "off",
+        "fileDisposition": "delete"
+      },
+      "columns": {
+        "flag": "show",
+        "item": "show",
+        "label": "show",
+        "outsideLabel": "hide",
+        "tailLabel": "hide",
+        "headLabel": "hide",
+        "relatedItem": "show",
+        "styleName": "show",
+        "extraAttributes": "hide",
+        "message": "show"
+      },
+      "language": {
+        "language": "locale_en-US"
+      }
+    },
+    "graph": {
+      "zoom": 60
+    },
+    "settings": {
+      "additionalGraphOptions": "",
+      "maxSeconds": 60,
+      "pictureName": "",
+      "additionalCmdParameters": ""
+    },
+    "source": {
+      "indent": 4,
+      "buttons": [
+        {
+          "id": "SourceWeb1",
+          "buttonText": "Graphviz Fiddle",
+          "url": "http://stamm-wilbrandt.de/GraphvizFiddle/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "GraphvizFiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb2",
+          "buttonText": "Pocket Reference",
+          "url": "http://graphs.grevian.org/graph",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb3",
+          "buttonText": "Graphviz Online",
+          "url": "http://dreampuf.github.io/GraphvizOnline/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Online Graphviz editor with syntax higlighting.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb4",
+          "visible": "hide"
+        },
+        {
+          "id": "SourceWeb5",
+          "visible": "hide"
+        },
+        {
+          "id": "SourceWeb6",
+          "visible": "hide"
+        }
+      ]
+    },
+    "sql": {
+      "cluster": "cluster",
+      "clusterStyleName": "cluster style name",
+      "clusterAttributes": "cluster attributes",
+      "clusterTooltip": "cluster tooltip",
+      "clusterPlaceholder": "%clc%",
+      "subcluster": "subcluster",
+      "subclusterStyleName": "subcluster style name",
+      "subclusterAttributes": "subcluster attributes",
+      "subclusterTooltip": "subcluster tooltip",
+      "subclusterPlaceholder": "%scc%",
+      "recordsetPlaceholder": "%rsc%",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "filterColumn": "E",
+      "filterValue": "EXAMPLE 01"
+    },
+    "extensions": {
+      "tabName": "Extensions",
+      "customCode": {
+        "groupName": "Custom Code",
+        "buttons": [
+          {
+            "id": "ExtCode1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode6",
+            "visible": "hide"
+          }
+        ]
+      },
+      "webResources": {
+        "groupName": "Web Resources",
+        "buttons": [
+          {
+            "id": "ExtWeb1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb6",
+            "visible": "hide"
+          }
+        ]
+      }
+    }
+  },
+  "layouts": {
+    "data": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.86,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "item",
+          "column": 2,
+          "heading": "Item",
+          "width": 27,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "label",
+          "column": 4,
+          "heading": "Label",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "outsideLabel",
+          "column": 5,
+          "heading": "Outside Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tailLabel",
+          "column": 3,
+          "heading": "Tail Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "headLabel",
+          "column": 6,
+          "heading": "Head Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tooltip",
+          "column": 7,
+          "heading": "Tooltip",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "relatedItem",
+          "column": 8,
+          "heading": "Is Related To Item",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "styleName",
+          "column": 9,
+          "heading": "Style Name",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "extraAttributes",
+          "column": 10,
+          "heading": "Extra Attributes",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "message",
+          "column": 11,
+          "heading": "Messages",
+          "width": 0,
+          "hidden": true,
+          "wrapText": false
+        },
+        {
+          "id": "graphDisplayColumn",
+          "column": 12,
+          "heading": "",
+          "width": 8.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "styles": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 70.5,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "name",
+          "column": 2,
+          "heading": "Style Name",
+          "width": 40.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 3,
+          "heading": "Format",
+          "width": 50.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "type",
+          "column": 4,
+          "heading": "Style Type",
+          "width": 16.57,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view0",
+          "column": 5,
+          "heading": "All Styles",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view1",
+          "column": 6,
+          "heading": "Business",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 7,
+          "heading": "Logical",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view3",
+          "column": 8,
+          "heading": "Business Logical",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view4",
+          "column": 9,
+          "heading": "Business Logical to App",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view5",
+          "column": 10,
+          "heading": "Physical App",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view6",
+          "column": 11,
+          "heading": "Physical Tech",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view7",
+          "column": 12,
+          "heading": "Physical App to Tech",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view8",
+          "column": 13,
+          "heading": "Logical to App to Tech",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view9",
+          "column": 14,
+          "heading": "No Clusters",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        }
+      ],
+      "ranges": [
+        {
+        }
+      ]
+    },
+    "sql": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.86,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "sqlStatement",
+          "column": 2,
+          "heading": "SQL SELECT Statement",
+          "width": 55,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "excelFile",
+          "column": 3,
+          "heading": "Excel data file (.xlsx, .xlsm, .xlsb, or .xls only)",
+          "width": 34.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "status",
+          "column": 4,
+          "heading": "Status",
+          "width": 21.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12.75,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 52.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 177.14,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    },
+    "source": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "lineNumber",
+          "column": 1,
+          "heading": "Line",
+          "width": 6.57,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "source",
+          "column": 2,
+          "heading": "Graphviz Source",
+          "width": 168,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    }
+  }
+}

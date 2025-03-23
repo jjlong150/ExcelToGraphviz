@@ -1,0 +1,3034 @@
+{
+  "metadata": {
+    "name": "E2GXF",
+    "type": "Excel to Graphviz Exchange Format",
+    "version": "1.0",
+    "user": "Jeffrey Long",
+    "date": "2023-05-14",
+    "time": "14:31:27",
+    "os": "Windows (64-bit) NT 10.00",
+    "excel": "16.0",
+    "filename": "FSU KCAD BFA in Illustration.xlsm"
+  },
+  "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Draw a frame around the diagram, including a title"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 75,
+        "item": "{",
+        "label": "Course Roadmap for Kendall College of Art and Design of Ferris State University - Bachelor of Fine Arts in Illustration",
+        "styleName": "Background"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Set some default styles for shapes and lines"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 30,
+        "item": "node",
+        "extraAttributes": {
+          "fontname": "Arial",
+          "fontsize": "10"
+        }
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 30,
+        "item": "edge",
+        "extraAttributes": {
+          "fontname": "Arial",
+          "fontsize": "8"
+        }
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Draw a legend which shows what a given shape refers to"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Legend",
+        "styleName": "Legend"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "item": "GE",
+        "label": "General Education",
+        "styleName": "General Education"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "item": "AH",
+        "label": "Art History",
+        "styleName": "Art History"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "item": "SE",
+        "label": "Studio Elective",
+        "styleName": "Studio Electives"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "item": "SS",
+        "label": "Supportive Studio",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "item": "MS",
+        "label": "Major Studio",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "item": "GE",
+        "relatedItem": "AH",
+        "extraAttributes": {
+          "style": "invis"
+        }
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "item": "AH",
+        "relatedItem": "SE",
+        "extraAttributes": {
+          "style": "invis"
+        }
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "item": "SE",
+        "relatedItem": "SS",
+        "extraAttributes": {
+          "style": "invis"
+        }
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "item": "SS",
+        "relatedItem": "MS",
+        "extraAttributes": {
+          "style": "invis"
+        }
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "item": "}"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "End of Legend"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Supportive Studio"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "item": "KCPA 110",
+        "label": "KCPA 110 - 2-D Design",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "item": "KCSF 111",
+        "label": "KCSF 111 - 3-D Design",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "item": "KCPA 112",
+        "label": "KCPA 112 - Color",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 142",
+        "label": "KCDS 142 - Design Drawing I",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 143",
+        "label": "KCDS 143 - Design Drawing II",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 221",
+        "label": "KCDR 221 - Figure Drawing I",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 222",
+        "label": "KCDR 222 - Figure Drawing II",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "item": "KCDM 241",
+        "label": "KCDM 241 - Introduction to Digital Imaging",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 30,
+        "item": "KCPH 110",
+        "label": "KCPH 110 - Intro to Photo for Non-Majors",
+        "styleName": "Supportive Studio"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Major Studio"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 120",
+        "label": "KCIL 120 - Introduction to Illustration",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 234",
+        "label": "KCIL 234 - Illustration Techniques",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 242",
+        "label": "KCIL 242 - Rendering",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 243",
+        "label": "KCIL 243 - Digital Illustration Painting I",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 252",
+        "label": "KCIL 252 - Watercolor Techniques",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 291",
+        "label": "KCIL 291 - Illustration Painting I",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 305",
+        "label": "KCIL 305 - Illustration Professional Practices",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 323",
+        "label": "KCIL 323 - Illustration Life III",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 324",
+        "label": "KCIL 324 - Illustration Life IV",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 335",
+        "label": "KCIL 335 - Illustration III",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 442",
+        "label": "KCIL 442 - Graphic Design for the Illustrator",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 443",
+        "label": "KCIL 443 - Digital Illustration Painting II",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 30,
+        "item": "KCIL 460",
+        "label": "KCIL 460 - Illustration Portfolio I",
+        "styleName": "Major Studio"
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Art History"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 30,
+        "item": "KCAH 111",
+        "label": "KCAH 111 - Western Art History I",
+        "styleName": "Art History"
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 30,
+        "item": "KCAH 112",
+        "label": "KCAH 112 - Western Art History II",
+        "styleName": "Art History"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "item": "AH Elective I",
+        "label": "Art History Elective I",
+        "styleName": "Art History"
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15,
+        "item": "AH Elective II",
+        "label": "Art History Elective II",
+        "styleName": "Art History"
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "General Education"
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "item": "KCHU 340",
+        "label": "KCHU 340 - Visual Rhetoric",
+        "styleName": "General Education"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "item": "KCHU 121",
+        "label": "KCHU 121- Oral Rhetoric",
+        "styleName": "General Education"
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "item": "KCHU 120",
+        "label": "KCHU 120 - Written Rhetoric",
+        "styleName": "General Education"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "item": "Science Elective",
+        "label": "Science Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "item": "Math Elective",
+        "label": "Math Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "item": "GE Elective 1",
+        "label": "General Education Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "item": "GE Elective 2",
+        "label": "General Education Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "GE Elective 3",
+        "label": "General Education Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 30,
+        "item": "300 GE Elective 1",
+        "label": "300/400 General Education Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 30,
+        "item": "300 GE Elective 2",
+        "label": "300/400 General Education Elective",
+        "styleName": "General Education"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Studio Electives"
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 131",
+        "label": "KCDR 131 - Drawing I",
+        "styleName": "Studio Electives"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 132",
+        "label": "KCDR 132 - Drawing II",
+        "styleName": "Studio Electives"
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "item": "Studio Elective 3",
+        "label": "Studio Elective",
+        "styleName": "Studio Electives"
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "Studio Elective 4",
+        "label": "Studio Elective",
+        "styleName": "Studio Electives"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Prerequisite/co-requisite relationships"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Course Number",
+        "label": "is a prerequisite for course",
+        "relatedItem": "Course Number"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "item": "KCAH 111",
+        "relatedItem": "KCAH 112",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 131",
+        "relatedItem": "KCDR 132",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 131",
+        "label": "or",
+        "relatedItem": "KCDR 221",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 132",
+        "label": "co-requisite",
+        "relatedItem": "KCDR 221",
+        "styleName": "co-requisite"
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 142",
+        "label": "or",
+        "relatedItem": "KCDR 221",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 143",
+        "label": "co-requisite",
+        "relatedItem": "KCDR 221",
+        "styleName": "co-requisite"
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "item": "KCPA 110",
+        "relatedItem": "KCDR 221",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 221",
+        "relatedItem": "KCDR 222",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 142",
+        "relatedItem": "KCDS 143",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 142",
+        "relatedItem": "KCIL 120",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "KCPA 110",
+        "relatedItem": "KCIL 120",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 120",
+        "relatedItem": "KCIL 234",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 234",
+        "relatedItem": "KCIL 242",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "item": "KCPH 110",
+        "relatedItem": "KCIL 242",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 120",
+        "relatedItem": "KCIL 243",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 120",
+        "relatedItem": "KCIL 252",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 234",
+        "relatedItem": "KCIL 252",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDS 143",
+        "relatedItem": "KCIL 291",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 234",
+        "relatedItem": "KCIL 291",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15,
+        "item": "KCPA 112",
+        "relatedItem": "KCIL 291",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDM 241",
+        "relatedItem": "KCIL 305",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 120",
+        "relatedItem": "KCIL 305",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15,
+        "item": "KCDR 222",
+        "relatedItem": "KCIL 323",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 323",
+        "relatedItem": "KCIL 324",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 234",
+        "relatedItem": "KCIL 335",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 323",
+        "relatedItem": "KCIL 335",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 95,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 305",
+        "relatedItem": "KCIL 442",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 96,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 243",
+        "relatedItem": "KCIL 443",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 97,
+        "hidden": false,
+        "height": 15,
+        "item": "KCIL 335",
+        "relatedItem": "KCIL 460",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 98,
+        "hidden": false,
+        "height": 15,
+        "item": "KCHU 120",
+        "relatedItem": "KCHU 340",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 99,
+        "hidden": false,
+        "height": 15,
+        "item": "KCHU 121",
+        "relatedItem": "KCHU 340",
+        "styleName": "prerequisite"
+      },
+      {
+        "row": 100,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "Close outer border"
+      },
+      {
+        "row": 101,
+        "hidden": false,
+        "height": 15,
+        "item": "}"
+      },
+      {
+        "row": 102,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "item": "END OF DATA"
+      },
+      {
+        "row": 103,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 104,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 105,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 106,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 107,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 108,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 109,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 110,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 111,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 112,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 113,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 114,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 115,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 116,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 117,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 118,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 119,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 120,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 121,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 122,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 123,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 124,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 125,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 126,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 127,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 128,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 129,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 130,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 131,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 132,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 133,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 134,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 135,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 136,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 137,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 138,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 139,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 140,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 141,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 142,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 143,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 144,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 145,
+        "hidden": false,
+        "height": 15
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 30,
+        "name": "Border 0 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "2",
+          "fontname": "Calibri Bold",
+          "fontsize": "16",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 0 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 45,
+        "name": "Border 1 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "pastel19",
+          "fillcolor": "9",
+          "fontname": "Calibri Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 1 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 45,
+        "name": "Border 2 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "pastel19",
+          "fillcolor": "8",
+          "fontname": "Calibri Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 2 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 45,
+        "name": "Border 3 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "pastel19",
+          "fillcolor": "7",
+          "fontname": "Calibri Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 3 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 45,
+        "name": "Border 4 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "pastel19",
+          "fillcolor": "6",
+          "fontname": "Calibri Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 4 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 45,
+        "name": "Border 5 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "pastel19",
+          "fillcolor": "5",
+          "fontname": "Calibri Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 5 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 45,
+        "name": "Component",
+        "type": "node",
+        "format": {
+          "shape": "component",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 45,
+        "name": "Decision",
+        "type": "node",
+        "format": {
+          "shape": "diamond",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 45,
+        "name": "Event",
+        "type": "node",
+        "format": {
+          "shape": "rectangle",
+          "height": "0.375",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "rounded,filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 45,
+        "name": "Extract",
+        "type": "node",
+        "format": {
+          "shape": "triangle",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 45,
+        "name": "File",
+        "type": "node",
+        "format": {
+          "shape": "note",
+          "height": "0.75",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 45,
+        "name": "Folder",
+        "type": "node",
+        "format": {
+          "shape": "folder",
+          "height": "0.5",
+          "width": "0.75",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "name": "Flow",
+        "type": "edge",
+        "format": {
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "weight": "10"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Dotted",
+        "type": "edge",
+        "format": {
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "weight": "100",
+          "decorate": "false",
+          "style": "dotted",
+          "arrowhead": "none"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Negative",
+        "type": "edge",
+        "format": {
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "weight": "100",
+          "decorate": "false",
+          "color": "red",
+          "fontcolor": "red"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 45,
+        "name": "Flow - Positive",
+        "type": "edge",
+        "format": {
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "weight": "100",
+          "decorate": "false",
+          "color": "darkgreen",
+          "fontcolor": "darkgreen"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 45,
+        "name": "Input",
+        "type": "node",
+        "format": {
+          "shape": "parallelogram",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "name": "Invisible Edge",
+        "type": "edge",
+        "format": {
+          "style": "invis",
+          "color": "Invis"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 30,
+        "name": "Invisible Point",
+        "type": "node",
+        "format": {
+          "shape": "point",
+          "fillcolor": "Invis",
+          "color": "Invis",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 45,
+        "name": "Manual Operation",
+        "type": "node",
+        "format": {
+          "shape": "invtrapezium",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 45,
+        "name": "Merge",
+        "type": "node",
+        "format": {
+          "shape": "invtriangle",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 45,
+        "name": "Off Page Reference",
+        "type": "node",
+        "format": {
+          "shape": "invhouse",
+          "height": "0.625",
+          "width": "0.625",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 45,
+        "name": "On Page Reference",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.625",
+          "width": "0.625",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 45,
+        "name": "Output",
+        "type": "node",
+        "format": {
+          "shape": "parallelogram",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "name": "Point",
+        "type": "node",
+        "format": {
+          "shape": "point"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 45,
+        "name": "Predefined Process",
+        "type": "node",
+        "format": {
+          "shape": "rectangle",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "diagonals,filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 45,
+        "name": "Preparation",
+        "type": "node",
+        "format": {
+          "shape": "hexagon",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 45,
+        "name": "Process",
+        "type": "node",
+        "format": {
+          "shape": "rect",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 45,
+        "name": "Stop",
+        "type": "node",
+        "format": {
+          "shape": "octagon",
+          "height": "0.75",
+          "width": "0.75",
+          "fixedsize": "True",
+          "color": "Red",
+          "fillcolor": "white",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "name": "Major Studio",
+        "type": "node",
+        "format": {
+          "colorscheme": "reds9",
+          "color": "8",
+          "shape": "rect",
+          "fixedsize": "True",
+          "height": "0.375",
+          "width": "3.00",
+          "penwidth": "2.0",
+          "style": "filled",
+          "fillcolor": "2"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "name": "Supportive Studio",
+        "type": "node",
+        "format": {
+          "colorscheme": "blues9",
+          "color": "9",
+          "shape": "rect",
+          "fixedsize": "True",
+          "height": "0.375",
+          "width": "3.00",
+          "penwidth": "2.0",
+          "style": "filled",
+          "fillcolor": "3"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15,
+        "name": "Studio Electives",
+        "type": "node",
+        "format": {
+          "colorscheme": "purples9",
+          "color": "9",
+          "shape": "rect",
+          "fixedsize": "True",
+          "height": "0.375",
+          "width": "3.00",
+          "penwidth": "2.0",
+          "style": "filled",
+          "fillcolor": "3"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "name": "Art History",
+        "type": "node",
+        "format": {
+          "colorscheme": "greens9",
+          "color": "9",
+          "shape": "rect",
+          "fixedsize": "True",
+          "height": "0.375",
+          "width": "3.00",
+          "penwidth": "2.0",
+          "style": "filled",
+          "fillcolor": "3"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "name": "General Education",
+        "type": "node",
+        "format": {
+          "colorscheme": "oranges9",
+          "color": "9",
+          "shape": "rect",
+          "fixedsize": "True",
+          "height": "0.375",
+          "width": "3.00",
+          "penwidth": "2.0",
+          "style": "filled",
+          "fillcolor": "3"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "name": "co-requisite",
+        "type": "edge",
+        "format": {
+          "style": "dotted"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "name": "prerequisite",
+        "type": "edge",
+        "format": {
+          "style": "solid"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15,
+        "name": "Background",
+        "type": "subgraph-open",
+        "format": {
+          "fontname": "Lucida Sans",
+          "fontsize": "16"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "name": "Legend",
+        "type": "subgraph-open",
+        "format": {
+          "fillcolor": "Moccasin",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes"
+        ]
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15.75
+      }
+    ],
+    "sql": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "svg": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 12.75,
+        "enabled": false
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "Modify the <svg> element to add an onload() function"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 45,
+        "find": "xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
+        "replace": "xmlns:xlink=\"http://www.w3.org/1999/xlink\" onload=\"makeDraggable(evt)\">\u000A  <!-- NOTE: The graphviz-generated content in this file has been modified by Excel to Graphviz %%[Version]%% -->\u000A"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "find": "%%[Version]%%",
+        "replace": "Version: 6.0.00 (Win + Mac OS)"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "Insert placeholders for stylesheet and script content before the closing </svg> element. These placeholders will be expanded by subsequent rows."
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 210,
+        "find": "</svg>",
+        "replace": "\u000A<!-- Excel to Graphviz - Begin -->\u000A<style>\u000A%%[StyleElements]%%\u000A</style>\u000A<script>\u000A<![CDATA[\u000A%%[makeDraggableSection01]%%\u000A%%[makeDraggableSection02]%%\u000A]]>\u000A</script>\u000A<!-- Excel to Graphviz - End -->\u000A\u000A</svg>"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "The stylesheet is larger than can be shown in an Excel row. Split it into smaller chunks."
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 90,
+        "find": "%%[StyleElements]%%",
+        "replace": "%%[edge node text]%%\r\u000A%%[text-highlight-nodes]%%\r\u000A%%[text-highlight-edges]%%\r\u000A%%[edge-highlight path]%%\t\r\u000A%%[edge-highlight polygon]%%\r\u000A%%[node-highlight polygon]%%"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 135,
+        "find": "%%[edge node text]%%",
+        "replace": "\r\u000A<!-- The first 2 styles are hiding longer description texts on \r\u000A     nodes and edges, that are shown when nodes are clicked -->\r\u000A.edge text{\r\u000A    opacity: 0;\r\u000A}\r\u000A.node text:not(:first-of-type){\r\u000A    opacity: 0;\r\u000A}"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 105,
+        "find": "%%[text-highlight-nodes]%%",
+        "replace": ".text-highlight-nodes text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 10;\r\u000A    font-size: 20px;\r\u000A    font-weight: bold;\r\u000A    fill: black;\r\u000A}"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 105,
+        "find": "%%[text-highlight-edges]%%",
+        "replace": ".text-highlight-edges text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 10;\r\u000A    font-size: 20px;\r\u000A    font-weight: bold;\r\u000A    fill: Indigo;\r\u000A}"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 75,
+        "find": "%%[edge-highlight path]%%",
+        "replace": ".edge-highlight path{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A}"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 75,
+        "find": "%%[edge-highlight polygon]%%",
+        "replace": ".edge-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A}"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 90,
+        "find": "%%[node-highlight polygon]%%",
+        "replace": ".node-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A    z-index:99999;\t\r\u000A}"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "The script code is larger than can be shown in an Excel row. Split the code into smaller chunks."
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "enabled": false
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 345,
+        "find": "%%[makeDraggableSection01]%%",
+        "replace": "function makeDraggable(evt) {\u000A    var svg = evt.target;\u000A\u000A    svg.addEventListener('mousedown', startDrag);\u000A    svg.addEventListener('mousemove', drag);\u000A    svg.addEventListener('mouseup', endDrag);\u000A    svg.addEventListener('mouseleave', endDrag);\u000A    svg.addEventListener('touchstart', startDrag);\u000A    svg.addEventListener('touchmove', drag);\u000A    svg.addEventListener('touchend', endDrag);\u000A    svg.addEventListener('touchleave', endDrag);\u000A    svg.addEventListener('touchcancel', endDrag);\u000A\u000A    var edges = document.getElementsByClassName('edge');\u000A    for (var i = 0; i < edges.length; i++) {\u000A        edges[i].addEventListener('click', clickEdge);\u000A    }\u000A\u000A    var nodes = document.getElementsByClassName('node');\u000A    for (var i = 0; i < nodes.length; i++) {\u000A        nodes[i].addEventListener('click', clickNode);\u000A    } \u000A"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 120,
+        "find": "%%[makeDraggableSection02]%%",
+        "replace": "%%[getMousePosition]%%\u000A    var selectedElement, offset, transform, nodrag, origmousepos;\u000A%%[startDrag]%%\u000A%%[drag]%%\u000A%%[endDrag]%%\u000A%%[clickEdge]%%\u000A%%[clickNode]%%\u000A}"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 120,
+        "find": "%%[getMousePosition]%%",
+        "replace": "    function getMousePosition(evt) {\r\u000A        var CTM = svg.getScreenCTM();\r\u000A        if (evt.touches) { evt = evt.touches[0]; }\r\u000A            return {\r\u000A                x: (evt.clientX - CTM.e) / CTM.a,\r\u000A                y: (evt.clientY - CTM.f) / CTM.d\r\u000A        };\r\u000A    }"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 315,
+        "find": "%%[startDrag]%%",
+        "replace": "    function startDrag(evt) {\u000A        origmousepos = getMousePosition(evt);\u000A        nodrag=true;\u000A        selectedElement = evt.target.parentElement;\u000A        offset = getMousePosition(evt);\u000A\u000A        // Make sure the first transform on the element is a translate transform\u000A        var transforms = selectedElement.transform.baseVal;\u000A\u000A        if (transforms.length === 0 || transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {\u000A            // Create an transform that translates by (0, 0)\u000A            var translate = svg.createSVGTransform();\u000A            translate.setTranslate(0, 0);\u000A            selectedElement.transform.baseVal.insertItemBefore(translate, 0);\u000A        }\u000A\u000A        // Get initial translation\u000A        transform = transforms.getItem(0);\u000A        offset.x -= transform.matrix.e;\u000A        offset.y -= transform.matrix.f;\u000A    }"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 105,
+        "find": "%%[drag]%%",
+        "replace": "    function drag(evt) {\u000A        if (selectedElement) {\u000A            evt.preventDefault();\u000A            var coord = getMousePosition(evt);\u000A            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);\u000A        }\u000A    }"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 180,
+        "find": "%%[endDrag]%%",
+        "replace": "    function endDrag(evt) {\u000A    <!-- comment out the following line if you wnat drags to stay in place, with this line they snap back to their original position after drag end -->   \u000A\u000A        selectedElement = false;\u000A        transform.setTranslate(0,0);\u000A        var currentmousepos=getMousePosition(evt);\u000A        if (currentmousepos.x===origmousepos.x|currentmousepos.y===origmousepos.y){\u000A            nodrag=true;\u000A        } else {\u000A            nodrag=false;}\u000A        }"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 180,
+        "find": "%%[clickEdge]%%",
+        "replace": "    function clickEdge() {\r\u000A        if (nodrag) {\r\u000A            if (this.classList.contains(\"edge-highlight\")){\r\u000A                this.classList.remove(\"edge-highlight\");\r\u000A                this.classList.remove(\"text-highlight-edges\");\r\u000A            }\r\u000A            else {\r\u000A                this.classList.add(\"edge-highlight\");\r\u000A                this.classList.add(\"text-highlight-edges\");\r\u000A            }\r\u000A        }\t\r\u000A    }"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 409.5,
+        "find": "%%[clickNode]%%",
+        "replace": "    function clickNode() {\r\u000A        \r\u000A        if (nodrag) {\r\u000A            var patroon = new RegExp('^' + this.childNodes[1].textContent + '->|->' +this.childNodes[1].textContent + '$')\r\u000A        \r\u000A            if (this.classList.contains(\"node-highlight\")){\r\u000A                this.classList.remove(\"node-highlight\");\r\u000A                this.classList.remove(\"text-highlight-nodes\");\r\u000A                var edges = document.getElementsByClassName('edge');\r\u000A                for (var i = 0; i < edges.length; i++) {\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\u000A                    edges[i].classList.remove(\"edge-highlight\");\r\u000A                    edges[i].classList.remove(\"text-highlight-edges\");\r\u000A                    } \r\u000A                }\r\u000A            }\r\u000A            else {\r\u000A                this.classList.add(\"node-highlight\");\r\u000A                this.classList.add(\"text-highlight-nodes\");\r\u000A                var edges = document.getElementsByClassName('edge');\r\u000A                for (var i = 0; i < edges.length; i++) {\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\u000A                        edges[i].classList.add(\"edge-highlight\");\r\u000A                        edges[i].classList.add(\"text-highlight-edges\");\r\u000A                    }  \r\u000A                }\r\u000A            }\r\u000A        }\r\u000A    }"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 409.5,
+        "find": "%%[clickNode]%%",
+        "replace": "    function clickNode() {\r\r\u000A        \r\r\u000A        if (nodrag) {\r\r\u000A            var patroon = new RegExp('^' + this.childNodes[1].textContent + '->|->' +this.childNodes[1].textContent + '$')\r\r\u000A        \r\r\u000A            if (this.classList.contains(\"node-highlight\")){\r\r\u000A                this.classList.remove(\"node-highlight\");\r\r\u000A                this.classList.remove(\"text-highlight-nodes\");\r\r\u000A                var edges = document.getElementsByClassName('edge');\r\r\u000A                for (var i = 0; i < edges.length; i++) {\r\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\r\u000A                    edges[i].classList.remove(\"edge-highlight\");\r\r\u000A                    edges[i].classList.remove(\"text-highlight-edges\");\r\r\u000A                    } \r\r\u000A                }\r\r\u000A            }\r\r\u000A            else {\r\r\u000A                this.classList.add(\"node-highlight\");\r\r\u000A                this.classList.add(\"text-highlight-nodes\");\r\r\u000A                var edges = document.getElementsByClassName('edge');\r\r\u000A                for (var i = 0; i < edges.length; i++) {\r\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)){\r\r\u000A                        edges[i].classList.add(\"edge-highlight\");\r\r\u000A                        edges[i].classList.add(\"text-highlight-edges\");\r\r\u000A                    }  \r\r\u000A                }\r\r\u000A            }\r\r\u000A        }\r\r\u000A    }"
+      }
+    ]
+  },
+  "settings": {
+    "data": {
+      "graphToWorksheet": {
+        "runMode": "manual",
+        "imageType": "png",
+        "imageWorksheet": "graph",
+        "scaleImage": 100
+      },
+      "graphToFile": {
+        "directory": "C:\\rv\\v6.0.00\\Relationship Visualizer\\samples\\03 - Education Roadmap",
+        "fileNamePrefix": "Graph",
+        "imageType": "pdf",
+        "appendOptions": false,
+        "appendTimeStamp": false
+      },
+      "layout": {
+        "engine": "dot",
+        "direction": "left to right",
+        "rankdir": "LR",
+        "splines": "ortho"
+      },
+      "options": {
+        "graph": {
+          "center": false,
+          "clusterRank": "",
+          "compound": false,
+          "dim": "",
+          "dimen": "",
+          "forceLabels": false,
+          "graphType": "directed",
+          "mode": "",
+          "model": "",
+          "newrank": false,
+          "ordering": "",
+          "orientation": false,
+          "outputOrder": "",
+          "overlap": "",
+          "smoothing": "",
+          "transparentBackground": false
+        },
+        "nodes": {
+          "includeOrphanNodes": true,
+          "includeNodeLabels": true,
+          "includeNodeXLabels": true,
+          "blankNodeLabels": "default"
+        },
+        "edges": {
+          "addStrict": true,
+          "concentrate": false,
+          "includeOrphanEdges": true,
+          "includeEdgeHeadLabels": true,
+          "includeEdgeLabels": true,
+          "includeEdgeXLabels": true,
+          "includeEdgeTailLabels": true,
+          "includeEdgePorts": true,
+          "blankEdgeLabels": "blank"
+        }
+      },
+      "styles": {
+        "selectedViewColumn": "E",
+        "includeStyleFormat": true,
+        "includeExtraAttributes": true,
+        "suffixOpen": "Begin",
+        "suffixClose": "End"
+      },
+      "debug": {
+        "debug": "off",
+        "fileDisposition": "delete"
+      },
+      "columns": {
+        "flag": "show",
+        "item": "show",
+        "label": "show",
+        "outsideLabel": "hide",
+        "tailLabel": "hide",
+        "headLabel": "hide",
+        "relatedItem": "show",
+        "styleName": "show",
+        "extraAttributes": "show",
+        "message": "hide"
+      },
+      "language": {
+        "language": "locale_en-US"
+      }
+    },
+    "graph": {
+      "zoom": 70
+    },
+    "settings": {
+      "additionalGraphOptions": "",
+      "maxSeconds": 60,
+      "pictureName": "",
+      "additionalCmdParameters": ""
+    },
+    "source": {
+      "indent": 4,
+      "buttons": [
+        {
+          "id": "SourceWeb1",
+          "buttonText": "Graphviz Fiddle",
+          "url": "http://stamm-wilbrandt.de/GraphvizFiddle/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "GraphvizFiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb2",
+          "buttonText": "Pocket Reference",
+          "url": "http://graphs.grevian.org/graph",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb3",
+          "buttonText": "Graphviz Online",
+          "url": "http://dreampuf.github.io/GraphvizOnline/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Online Graphviz editor with syntax higlighting.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb4",
+          "visible": "hide"
+        },
+        {
+          "id": "SourceWeb5",
+          "visible": "hide"
+        },
+        {
+          "id": "SourceWeb6",
+          "visible": "hide"
+        }
+      ]
+    },
+    "sql": {
+      "cluster": "cluster",
+      "clusterStyleName": "cluster style name",
+      "clusterAttributes": "cluster attributes",
+      "clusterTooltip": "cluster tooltip",
+      "clusterPlaceholder": "%clc%",
+      "subcluster": "subcluster",
+      "subclusterStyleName": "subcluster style name",
+      "subclusterAttributes": "subcluster attributes",
+      "subclusterTooltip": "subcluster tooltip",
+      "subclusterPlaceholder": "%scc%",
+      "recordsetPlaceholder": "%rsc%",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "filterColumn": "E",
+      "filterValue": "EXAMPLE 01"
+    },
+    "extensions": {
+      "tabName": "Extensions",
+      "customCode": {
+        "groupName": "Custom Code",
+        "buttons": [
+          {
+            "id": "ExtCode1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode6",
+            "visible": "hide"
+          }
+        ]
+      },
+      "webResources": {
+        "groupName": "Web Resources",
+        "buttons": [
+          {
+            "id": "ExtWeb1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb6",
+            "visible": "hide"
+          }
+        ]
+      }
+    }
+  },
+  "layouts": {
+    "data": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.86,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "item",
+          "column": 2,
+          "heading": "Item",
+          "width": 27,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "label",
+          "column": 4,
+          "heading": "Label",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "outsideLabel",
+          "column": 5,
+          "heading": "Outside Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tailLabel",
+          "column": 3,
+          "heading": "Tail Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "headLabel",
+          "column": 6,
+          "heading": "Head Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tooltip",
+          "column": 7,
+          "heading": "Tooltip",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "relatedItem",
+          "column": 8,
+          "heading": "Is Related To Item",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "styleName",
+          "column": 9,
+          "heading": "Style Name",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "extraAttributes",
+          "column": 10,
+          "heading": "Extra Attributes",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "message",
+          "column": 11,
+          "heading": "Messages",
+          "width": 0,
+          "hidden": true,
+          "wrapText": false
+        },
+        {
+          "id": "graphDisplayColumn",
+          "column": 12,
+          "heading": "",
+          "width": 8.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "styles": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 42.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "name",
+          "column": 2,
+          "heading": "Style Name",
+          "width": 21,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 3,
+          "heading": "Style Format",
+          "width": 50.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "type",
+          "column": 4,
+          "heading": "Style Type",
+          "width": 16.57,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view0",
+          "column": 5,
+          "heading": "All Styles",
+          "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view1",
+          "column": 6,
+          "heading": "No Clusters",
+          "width": 7.43,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 7,
+          "heading": "No Edges",
+          "width": 7.43,
+          "hidden": false,
+          "wrapText": null
+        }
+      ],
+      "ranges": [
+        {
+        }
+      ]
+    },
+    "sql": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.86,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "sqlStatement",
+          "column": 2,
+          "heading": "SQL SELECT Statement",
+          "width": 55,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "excelFile",
+          "column": 3,
+          "heading": "Excel data file (.xlsx, .xlsm, .xlsb, or .xls only)",
+          "width": 34.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "status",
+          "column": 4,
+          "heading": "Status",
+          "width": 21.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12.75,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 52.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 177.14,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    },
+    "source": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "lineNumber",
+          "column": 1,
+          "heading": "Line",
+          "width": 6.57,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "source",
+          "column": 2,
+          "heading": "Graphviz Source",
+          "width": 168,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    }
+  }
+}
