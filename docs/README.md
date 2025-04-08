@@ -1,22 +1,19 @@
 ---
 home: true
 heroText: Excel to Graphviz
-heroImage: /hero.gif
-tagline: 
+heroImage: /hero.png
+tagline: Turn Excel into Insights
 actionText: Get Started →
 actionLink: /overview/
-footer: MIT License - Copyright © 2017-2024 Jeffrey J. Long
+footer: MIT License - Copyright © 2017-2025 Jeffrey J. Long
 prev: false
 next: /install/
 ---
-
-The **Relationship Visualizer** is a Microsoft Excel spreadsheet that uses [Graphviz](https://graphviz.org/) to generate graph diagrams from Excel data. It includes tools for creating style elements and saving them to a style sheet, executing SQL queries, displaying the Graphviz [DOT Language](https://graphviz.org/doc/info/lang.html) source, and adding animation code to SVG graphs. It runs on Windows and macOS operating systems, and supports English, French, German, Italian, and Polish languages using a tabbed, ribbon interface.
-
-
+Transform your Excel data into stunning Graphviz diagrams with ease! Excel to Graphviz unleashes the power of visual relationships—turn rows and columns into clear, dynamic graphs in seconds. Packed with style tools, SQL support, and multi-language compatibility, it’s your shortcut to insightful visualizations, no coding required.
 <div class="features">
   <div class="feature" id="overview">
     <h2><a href="./overview">Overview</a></h2>
-    <p>Visual examples showcasing <i>Relationship Visualizer</i> features</p>
+    <p>Visual examples showcasing features</p>
   </div>
 
   <div class="feature" id="download">
@@ -26,7 +23,11 @@ The **Relationship Visualizer** is a Microsoft Excel spreadsheet that uses [Grap
 
   <div class="feature" id="install">
     <h2><a href="./install">Install</a></h2>
-    <p>Microsoft Windows and macOS installation instructions</p>
+    <p>Installation instructions</p>
+    <ul>
+      <li><a href="./install-win/">Windows</a></li>
+      <li><a href="./install-mac/">macOS</a></li>
+    </ul>
   </div>
 
   <div class="feature" id="create">
@@ -39,33 +40,33 @@ The **Relationship Visualizer** is a Microsoft Excel spreadsheet that uses [Grap
     <p>Enhance your Graphviz graphs with impactful styling</p>
   </div>
 
-  <div class="feature" id="views">
-    <h2><a href="./views">Create Views</a></h2>
-    <p>Graph various perspectives from one data set</p>
+  <div class="feature" id="sql">
+    <h2><a href="./sql">Use SQL</a></h2>
+    <p>Use SQL to retrieve data from other spreadsheets</p>
   </div>
 </div>  
 
 <div class="features">
+  <div class="feature" id="views">
+    <h2><a href="./views">Create Views</a></h2>
+    <p>Graph various perspectives from one data set</p>
+  </div>
+
   <div class="feature" id="publish">
     <h2><a href="./publish">Publish Graphs</a></h2>
     <p>Save graphs as stand-alone files</p>
   </div>
 
-  <div class="feature" id="advanced">
-    <h2><a href="./advanced">Advanced Topics</a></h2>
-    <p>Graphviz features and tips for crafting complex graphs</p>
-  </div>
-  
   <div class="feature" id="source">
     <h2><a href="./source">View Source</a></h2>
     <p>View the DOT source code used to generate the graph</p>
   </div>
   
-  <div class="feature" id="sql">
-    <h2><a href="./sql">Using SQL</a></h2>
-    <p>Using SQL to retrieve data from other spreadsheets</p>
+  <div class="feature" id="advanced">
+    <h2><a href="./advanced">Advanced Topics</a></h2>
+    <p>Graphviz features and tips for crafting complex graphs</p>
   </div>
-
+  
   <div class="feature" id="exchange">
     <h2><a href="./exchange">Data Exchange</a></h2>
     <p>Export and import workbook contents as text for sharing or version control</p>
@@ -118,13 +119,15 @@ The **Relationship Visualizer** is a Microsoft Excel spreadsheet that uses [Grap
 </div>
 
 <hr/>
+
+Meet **Relationship Visualizer**, an Excel macro-powered spreadsheet that brings your data to life with [Graphviz](https://graphviz.org/) diagrams. Effortlessly craft stunning graphs from your spreadsheets, tweak styles with ease, and save them to a stylesheet. Run SQL queries, peek at the generated `dot` source, or add animations to SVG outputs—all within a sleek, tabbed ribbon interface.
+
+Available on Windows and macOS, it speaks English, French, German, Italian, and Polish. Plus, Excel to Graphviz has earned the prestigious *Community Choice* badge from [SourceForge](https://sourceforge.net/), celebrating over 10,000 downloads as a top-tier open-source gem.
+
 <center>
 <div class="sf-root" data-id="2597714" data-badge="oss-community-choice-white" data-metadata="achievement=oss-community-choice" style="width:96px">
     <a href="https://sourceforge.net/projects/relationship-visualizer/" target="_blank">Excel to Graphviz</a>
 </div>
 <script>(function () {var sc=document.createElement('script');sc.async=true;sc.src='https://b.sf-syn.com/badge_js?sf_id=2597714';var p=document.getElementsByTagName('script')[0];p.parentNode.insertBefore(sc, p);})();
 </script>
-
-*Excel to Graphviz* has earned the prestigious *Community Choice* badge from [SourceForge](https://sourceforge.net/). This recognition is awarded to open-source projects that achieve the significant milestone of 10,000 total downloads.
-
 </center>
