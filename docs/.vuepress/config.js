@@ -118,9 +118,11 @@ module.exports = {
         items: [
           { text: "- About Excel to Graphviz", link: "/about/" },
           { text: "- Acknowledgements", link: "/acknowledge/" },
-          { text: "- Donate ☕", link: "https://buymeacoffee.com/exceltographviz"},
+          { text: "- Change Log", link: "/changelog/" },
+          { text: "- Terminology", link: "/terminology/" },
         ]
       },
+      { text: "Donate ☕", link: "https://buymeacoffee.com/exceltographviz"},
     ],
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
     sidebar: "auto",
