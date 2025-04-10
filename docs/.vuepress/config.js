@@ -122,7 +122,7 @@ module.exports = {
           { text: "- Terminology", link: "/terminology/" },
         ]
       },
-      { text: "Donate ☕", link: "https://buymeacoffee.com/exceltographviz"},
+      { text: "☕", link: "https://buymeacoffee.com/exceltographviz"},
     ],
     docsRepo: "https://github.com/jjlong150/ExcelToGraphviz",
     sidebar: "auto",
