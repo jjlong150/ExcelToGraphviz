@@ -86,7 +86,10 @@
 					<separator id="Separator04"/>
 					<button id="graphAllViewsToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="allviewstofile" size="large" onAction="graphAllViewsToFile_onAction" getEnabled="graphToFile_getEnabled"/>
 					<separator id="Separator05"/>
-					<button id="getDir" getLabel="getDir_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileOpen" size="normal" onAction="getDir_onAction"/>
+					<box id="dirBox" boxStyle="horizontal">
+                        <button id="getDir" getLabel="getDir_getLabel" getVisible="getDir_getVisible" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileOpen" size="normal" onAction="getDir_onAction"/>
+                        <labelControl id="getDirLabel" getLabel="getDirLabel_getLabel"/>
+					</box>
 					<box id="filenameBox" boxStyle="horizontal">
 						<editBox id="filePrefix" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onChange="filePrefix_onChange" getText="filePrefix_getText"/>
 						<labelControl id="dotLabel" label="."/>

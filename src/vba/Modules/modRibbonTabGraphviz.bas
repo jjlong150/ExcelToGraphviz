@@ -246,11 +246,37 @@ End Sub
 ' Callbacks for dirName
 
 '@Ignore ParameterNotUsed
-Public Sub getDir_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
-    label = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
-    If label = vbNullString Then
-        label = GetLabel("getDir")
+Public Sub getDir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+    visible = True
+    
+    Dim dirName As String
+    dirName = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
+    If dirName = vbNullString Then Exit Sub
+
+    ' Validate that the output directory exists
+    If Not DirectoryExists(dirName) Then
+        SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY).value = vbNullString
     End If
+
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub getDir_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+    Dim dirName As String
+    dirName = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
+    If dirName = vbNullString Then
+        label = GetLabel("getDir")
+    Else
+        label = vbNullString
+    End If
+End Sub
+
+' ===========================================================================
+' Callbacks for dirNameLabel
+
+'@Ignore ParameterNotUsed
+Public Sub getDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+    label = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
 End Sub
 
 ' ===========================================================================

@@ -22,10 +22,10 @@ Public Function ChooseDirectory(ByVal startDir As String) As String
     If fileDialogHandle Is Nothing Then
         MsgBox GetMessage("msgboxNoFolderPicker"), vbOKOnly, GetLabel("msgboxNoFolderPicker")
     Else
-        If Trim$(startDir) <> vbNullString Then
-            If DirectoryExists(startDir) Then
-                fileDialogHandle.InitialFileName = startDir
-            End If
+        If Trim$(startDir) = vbNullString Then
+            fileDialogHandle.InitialFileName = ActiveWorkbook.path & "\"
+        Else
+            fileDialogHandle.InitialFileName = Trim$(startDir) & "\"
         End If
     
         '  Get the number of the button chosen

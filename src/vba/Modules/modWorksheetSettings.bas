@@ -7,16 +7,37 @@ Attribute VB_Name = "modWorksheetSettings"
 Option Explicit
 
 Public Sub SelectImageDirectory()
-    Dim directoryName As String
-    
     ' Let the user select a directory
+    Dim directoryName As String
     directoryName = ChooseDirectory(vbNullString)
     
+    If directoryName = vbNullString Then Exit Sub
+    
+    ' Update the cell with the directory name chosen
+    SetCellString SettingsSheet.name, SETTINGS_IMAGE_PATH, directoryName
+End Sub
+
+Public Sub SelectOutputDirectory()
+    ' Let the user select a directory
+    Dim directoryName As String
+    
+    ' Get the directory currently specified
+    directoryName = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
+    
     If directoryName <> vbNullString Then
-        ' Update the cell with the directory name chosen
-        SetCellString SettingsSheet.name, SETTINGS_IMAGE_PATH, directoryName
+        ' Start at a directory which exists
+        If Not DirectoryExists(directoryName) Then
+            directoryName = vbNullString
+        End If
     End If
     
+    ' Bring up the directory picker
+    directoryName = ChooseDirectory(directoryName)
+    
+    If directoryName = vbNullString Then Exit Sub   ' Cancel was chosen
+        
+    ' Update the cell with the directory name chosen
+    SetCellString SettingsSheet.name, SETTINGS_OUTPUT_DIRECTORY, directoryName
 End Sub
 
 Public Function GetSettings(ByVal dataWorksheet As String) As settings

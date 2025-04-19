@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.2.01
+
+- Resolved [Output Directory macro 'Cannot run' #2](https://github.com/jjlong150/ExcelToGraphviz/issues/2) defect.
+
 ## Version 7.2.0
 
 `sql` Worksheet
