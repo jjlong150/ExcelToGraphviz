@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.2.02
+
+- Minor adjustment to comply with Graphviz ID naming rules: wrap ID values in quotes if they don't start with a letter or underscore.
+
 ## Version 7.2.01
 
 - Resolved [Output Directory macro 'Cannot run' #2](https://github.com/jjlong150/ExcelToGraphviz/issues/2) defect.
