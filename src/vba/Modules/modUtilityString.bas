@@ -23,11 +23,61 @@ Public Function AddQuotes(ByVal Text As String) As String
 End Function
 
 Public Function AddQuotesConditionally(ByVal Text As String) As String
-    If Text Like "*[!A-Za-z0-9]*" Then
-        AddQuotesConditionally = Chr$(34) & Text & Chr$(34)
-    Else
+    
+    ' Zero length string, return as-is
+    If Len(Text) = 0 Then
         AddQuotesConditionally = Text
+        Exit Function
     End If
+    
+    ' Single double-quote.
+    If Text = Chr$(34) Then
+        AddQuotesConditionally = Chr$(34) & Chr$(34) & Chr$(34) & Chr$(34)
+        Exit Function
+    End If
+    
+    ' A quote wrapped in quotes, i.e. """
+    If Text = Chr$(34) & Chr$(34) & Chr$(34) Then
+        AddQuotesConditionally = Text & Chr$(34)
+        Exit Function
+    End If
+    
+    ' Determine if the string is already wrapped in quotes.
+    If Len(Text) >= 2 Then
+        ' Left and right side quotes? No action needed
+        If Left$(Text, 1) = Chr$(34) And Right$(Text, 1) = Chr$(34) Then
+            AddQuotesConditionally = Text
+            Exit Function
+        End If
+    
+        ' Right side only? Fix the left side
+        If Right$(Text, 1) = Chr$(34) Then
+            AddQuotesConditionally = Chr$(34) & Text
+            Exit Function
+        End If
+        
+        ' Left side only" Fix the right side
+        If Left$(Text, 1) = Chr$(34) Then
+            AddQuotesConditionally = Text & Chr$(34)
+            Exit Function
+        End If
+    End If
+               
+     ' Does it start with characters other than A-Z, a-z, or _ (underscore)? If so, add quotes
+    If Left$(Text, 1) Like "*[!A-Za-z_]*" Then
+        AddQuotesConditionally = Chr$(34) & Text & Chr$(34)
+        Exit Function
+    End If
+      
+    ' Does it contain characters other than A-Z, a-z, 0-9, or _ (underscore)? If so, add quotes
+    If Text Like "*[!A-Za-z0-9_]*" Then
+        AddQuotesConditionally = Chr$(34) & Text & Chr$(34)
+        Exit Function
+    End If
+    
+    ' Passed all the checks above, return the value as-is
+    AddQuotesConditionally = Text
+
 End Function
 
 Public Function GetStringBetweenDelimiters(ByVal inString As String, ByVal leftDelimiter As String, ByVal rightDelimiter As String) As String
