@@ -1,0 +1,3772 @@
+{
+  "metadata": {
+    "name": "E2GXF",
+    "type": "Excel to Graphviz Exchange Format",
+    "version": "1.0",
+    "user": "Jeffrey Long",
+    "date": "2025-08-27",
+    "time": "10:29:44",
+    "os": "Windows (64-bit) NT 10.00",
+    "excel": "16.0",
+    "filename": "Relationship Visualizer Old.xlsm"
+  },
+  "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Capability Map",
+        "tooltip": "Capability Map",
+        "styleName": "Border 0 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "explore",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Public communication",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 30,
+        "item": "Public communicationPublic website",
+        "label": "Public website",
+        "tooltip": "Communicatin material provided by our company available to the general public"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "onboard",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Customer Activation",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 30,
+        "item": "Customer Activationorder activation system",
+        "label": "order activation system",
+        "tooltip": "Process of identifying and activating a new customer"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 30,
+        "item": "Customer Activationsoftware downloader",
+        "label": "software downloader",
+        "tooltip": "Process of identifying and activating a new customer"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Customer Agreement management",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "item": "Customer Agreement managementorder management system",
+        "label": "order management system",
+        "tooltip": "Process of managing contracts with customers"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 30,
+        "item": "Customer Agreement managementorder approval",
+        "label": "order approval",
+        "tooltip": "Process of managing contracts with customers"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 30,
+        "item": "Customer Agreement managementordering portal",
+        "label": "ordering portal",
+        "tooltip": "Process of managing contracts with customers"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "item": "Customer Agreement managementSalesforce CRM module",
+        "label": "Salesforce CRM module",
+        "tooltip": "Process of managing contracts with customers"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Sales and Relationship management",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "item": "Sales and Relationship managementSalesforce CRM module",
+        "label": "Salesforce CRM module",
+        "tooltip": "The capability to offer products and services to customers, follow up the customer succes and usage."
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "supporting",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Busines process management",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 30,
+        "item": "Busines process managementorder workflow",
+        "label": "order workflow",
+        "tooltip": "Supporting function running multiple types of business processes"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "usage",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Customer communication",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "item": "Customer communicationnotification center",
+        "label": "notification center",
+        "tooltip": "The communication made avalable on our products and services in all phases of onboarding, ordering, activation and usage to specific customers."
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Customer Training & Support",
+        "styleName": "Border 4 Begin"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "item": "Customer Training & SupportCase Handler",
+        "label": "Case Handler",
+        "tooltip": "Training and support provided to customers"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 30,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 0 End"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 45
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 45
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 30
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 45
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 45
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 43.5,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 25.5,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 99.75,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 121.5,
+        "name": "Border 0 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "16",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 0 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 117.75,
+        "name": "Border 1 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "blues9",
+          "fillcolor": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 1 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 117.75,
+        "name": "Border 2 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "greens9",
+          "fillcolor": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 2 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 117.75,
+        "name": "Border 3 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "greys9",
+          "fillcolor": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 3 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 117.75,
+        "name": "Border 4 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "oranges9",
+          "fillcolor": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 4 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 117.75,
+        "name": "Border 5 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "purples9",
+          "fillcolor": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 5 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 117.75,
+        "name": "Border 6 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "1",
+          "colorscheme": "reds9",
+          "fillcolor": "2",
+          "fontname": "Arial Bold",
+          "fontsize": "12",
+          "style": "filled",
+          "margin": "18"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 6 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Component",
+        "type": "node",
+        "format": {
+          "shape": "component",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Decision",
+        "type": "node",
+        "format": {
+          "shape": "diamond",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 45,
+        "name": "Event",
+        "type": "node",
+        "format": {
+          "shape": "rectangle",
+          "height": "0.375",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "rounded,filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Extract",
+        "type": "node",
+        "format": {
+          "shape": "triangle",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 61.5,
+        "name": "File",
+        "type": "node",
+        "format": {
+          "shape": "note",
+          "height": "0.75",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 21.75,
+        "name": "Flow",
+        "type": "edge",
+        "format": {
+          "fontname": "Arial",
+          "fontsize": "10",
+          "arrowsize": "0.5"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Dashed",
+        "type": "edge",
+        "format": {
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "dashed",
+          "arrowsize": "0.5"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Dotted",
+        "type": "edge",
+        "format": {
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "dotted",
+          "arrowsize": "0.5"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Negative",
+        "type": "edge",
+        "format": {
+          "fontname": "Arial",
+          "fontsize": "10",
+          "color": "red",
+          "fontcolor": "red",
+          "arrowsize": "0.5"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Positive",
+        "type": "edge",
+        "format": {
+          "fontname": "Arial",
+          "fontsize": "10",
+          "color": "darkgreen",
+          "fontcolor": "darkgreen",
+          "arrowsize": "0.5"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 43.5,
+        "name": "Folder",
+        "type": "node",
+        "format": {
+          "shape": "folder",
+          "height": "0.5",
+          "width": "0.75",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Input",
+        "type": "node",
+        "format": {
+          "shape": "parallelogram",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 25.5,
+        "name": "Invisible Edge",
+        "type": "edge",
+        "format": {
+          "style": "invis",
+          "color": "Invis"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 30,
+        "name": "Invisible Point",
+        "type": "node",
+        "format": {
+          "shape": "point",
+          "fillcolor": "Invis",
+          "color": "Invis",
+          "style": "filled",
+          "height": "0",
+          "width": "0",
+          "fixedsize": "true",
+          "penwidth": "0"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Manual Operation",
+        "type": "node",
+        "format": {
+          "shape": "invtrapezium",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Merge",
+        "type": "node",
+        "format": {
+          "shape": "invtriangle",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 52.5,
+        "name": "Off Page Reference",
+        "type": "node",
+        "format": {
+          "shape": "invhouse",
+          "height": "0.625",
+          "width": "0.625",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 52.5,
+        "name": "On Page Reference",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.625",
+          "width": "0.625",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Output",
+        "type": "node",
+        "format": {
+          "shape": "parallelogram",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 19.5,
+        "name": "Point",
+        "type": "node",
+        "format": {
+          "shape": "point"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Predefined Process",
+        "type": "node",
+        "format": {
+          "shape": "rectangle",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "diagonals,filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Preparation",
+        "type": "node",
+        "format": {
+          "shape": "hexagon",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Process",
+        "type": "node",
+        "format": {
+          "shape": "rect",
+          "height": "0.75",
+          "width": "1.25",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 30,
+        "name": "Small Circle",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.25",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 43.5,
+        "name": "Medium Circle",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.5",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Large Circle",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.75",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 45,
+        "name": "Small Square",
+        "type": "node",
+        "format": {
+          "shape": "square",
+          "height": "0.25",
+          "width": "0.25",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 43.5,
+        "name": "Medium Square",
+        "type": "node",
+        "format": {
+          "shape": "square",
+          "height": "0.5",
+          "width": "0.5",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Large Square",
+        "type": "node",
+        "format": {
+          "shape": "square",
+          "height": "0.75",
+          "width": "0.75",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 45,
+        "name": "Small Triangle",
+        "type": "node",
+        "format": {
+          "shape": "triangle",
+          "height": "0.25",
+          "width": "0.25",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 43.5,
+        "name": "Medium Triangle",
+        "type": "node",
+        "format": {
+          "shape": "triangle",
+          "height": "0.5",
+          "width": "0.5",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Large Triangle",
+        "type": "node",
+        "format": {
+          "shape": "triangle",
+          "height": "0.75",
+          "width": "0.75",
+          "fixedsize": "True",
+          "style": "filled",
+          "penwidth": "1",
+          "fontname": "Arial",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Stop",
+        "type": "node",
+        "format": {
+          "shape": "octagon",
+          "height": "0.75",
+          "width": "0.75",
+          "fixedsize": "True",
+          "color": "Red",
+          "fillcolor": "white",
+          "fontname": "Arial",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      }
+    ],
+    "sql": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "CAPABILITY MAP",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Capability Map'               as [Label], \u000A  'Capability Map'               as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut2' as [attributes]",
+        "status": "SUCCESS",
+        "filters": [
+          "Capability Map",
+          "Capability Map",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clusters: Yes, Subclusters: Yes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 189,
+        "sqlStatement": "SELECT\u000A  [1.Capability] & [2.Component] as [Item],\u000A  [2.Component]                  as [Label],\u000A  [1.Description]                as [Tooltip],\u000A  [1.Domain]                     as [cluster],\u000A  'Border 2 '                    as [cluster style name],\u000A  [1.Capability]                 as [subcluster],\u000A  'Border 4 '                    as [subcluster style name]      \u000AFROM \u000A  [Capabilities$] AS 1,[Capability Mapping$] AS 2\u000AWHERE\u000A  [1.Capability] = [2.Capability]\u000AORDER BY [1.Domain],[1.Capability]\u000A",
+        "excelFile": "Archdata.xlsx",
+        "status": "SUCCESS",
+        "filters": [
+          "Capability Map",
+          "Capability Map",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Complete the border cluster",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 40.5,
+        "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 0 End' as [style name]",
+        "status": "SUCCESS",
+        "filters": [
+          "Capability Map",
+          "Capability Map",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Generate the graph",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PREVIEW",
+        "status": "SUCCESS",
+        "filters": [
+          "Capability Map",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PUBLISH capability-map",
+        "status": "FILTERED OUT",
+        "filters": [
+          null,
+          "Capability Map",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "COMPONENT OVERVIEW",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "RESET",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Component Overview",
+          "Component Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Component Interface Overview' as [Label], \u000A  'Component Interface Overview' as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut1' as [attributes]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Component Overview",
+          "Component Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clusters: Yes, Subclusters: Yes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 270,
+        "sqlStatement": "SELECT \u000A  [Component]          as [Item],       \u000A  'sortv=%rsc%'        as [attributes],\u000A  [Component]          as [Label],\u000A  [Description]        as [Tooltip],\u000A  [Layer]              as [cluster],\u000A  'Border 6 '          as [cluster style name],\u000A  [Layer]              as [cluster tooltip],\u000A  'sortv=%clc% packmode=array_utr3'     \u000A                       as [cluster attributes],\u000A  [Cluster]            as [subcluster],\u000A  'Border %scc% '      as [subcluster style name],\u000A  [Cluster]            as [subcluster tooltip],\u000A  'sortv=%scc% packmode=array_utr3' \u000A                       as [subcluster attributes] \u000AFROM \u000A  [Components$] \u000AORDER BY \u000A  [Layer Order]     ASC, \u000A  [Cluster] ASC",
+        "excelFile": "Archdata.xlsx",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Component Overview",
+          "Component Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  [from]          as [Item],       \u000A  [to]            as [Related Item],\u000A  [Protocol] &\": \" & [Description]        as [Tooltip]\u000AFROM \u000A  [Interfaces$]",
+        "excelFile": "Archdata.xlsx",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Component Overview",
+          "Component Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Complete the border cluster",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 40.5,
+        "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 0 End' as [style name]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Component Overview",
+          "Component Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Generate the graph",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PREVIEW",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Component Overview",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PUBLISH component-overview",
+        "status": "FILTERED OUT",
+        "filters": [
+          null,
+          "Component Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "DEPLOYMENT OVERVIEW",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "RESET",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Deployment Overview'     as [Label], \u000A  'Deployment Overview'     as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut1' as [attributes]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Internet'     as [Label], \u000A  'Internet'     as [Tooltip], \u000A  'Border 1 Begin'               as [style name], \u000A  'sortv=1 pack=\"12\" packmode=array_ut4' as [attributes]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clusters: Yes, Subclusters: Yes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 256.5,
+        "sqlStatement": "SELECT DISTINCT\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\u000A  [2.Component]                                         as [Label],\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\u000A  'Border 2 '                                           as [cluster style name],\u000A  'sortv=%clc% pack=\"12\" packmode=array_ut2'            as [cluster attributes], \u000A  [1.Node]                                              as [subcluster],\u000A  [1.Description]                                       as [subcluster Tooltip],\u000A  'Border 4 '                                           as [subcluster style name],\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\u000AFROM \u000A  [Nodes$] AS 1,[Deployment$] AS 2\u000AWHERE\u000A  [1.Node] = [2.Node] AND\u000A  [1.Layer]='Internet'\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\u000A",
+        "excelFile": "Archdata.xlsx",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 40.5,
+        "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 1 End' as [style name]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  '{'              as [Item], \u000A  'On Premise'     as [Label], \u000A  'On Premise'     as [Tooltip], \u000A  'Border 1 Begin'               as [style name], \u000A  'sortv=2 pack=\"12\" packmode=array_ut4' as [attributes]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clusters: Yes, Subclusters: Yes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 270,
+        "sqlStatement": "SELECT DISTINCT\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\u000A  [2.Component]                                         as [Label],\u000A  [1.Description]                                       as [Tooltip],\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\u000A  'Border 2 '                                           as [cluster style name],\u000A  'sortv=%clc% pack=\"12\" packmode=array_ut2'            as [cluster attributes], \u000A  [1.Node]                                              as [subcluster],\u000A  [1.Description]                                       as [subcluster Tooltip],\u000A  'Border 4 '                                           as [subcluster style name],\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\u000AFROM \u000A  [Nodes$] AS 1,[Deployment$] AS 2\u000AWHERE\u000A  [1.Node] = [2.Node] AND\u000A  [1.Layer]='On premise'\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\u000A",
+        "excelFile": "Archdata.xlsx",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 40.5,
+        "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 1 End' as [style name]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Complete the border cluster",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Cloud'     as [Label], \u000A  'Cloud'     as [Tooltip], \u000A  'Border 1 Begin'               as [style name], \u000A  'sortv=3 pack=\"12\" packmode=array_ut2' as [attributes]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clusters: Yes, Subclusters: Yes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 270,
+        "sqlStatement": "SELECT DISTINCT\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\u000A  [2.Component]                                         as [Label],\u000A  [1.Description]                                       as [Tooltip],\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\u000A  'Border 2 '                                           as [cluster style name],\u000A  'sortv=%clc% pack=\"12\" packmode=array_ut2'            as [cluster attributes], \u000A  [1.Node]                                              as [subcluster],\u000A  [1.Description]                                       as [subcluster Tooltip],\u000A  'Border 4 '                                           as [subcluster style name],\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\u000AFROM \u000A  [Nodes$] AS 1,[Deployment$] AS 2\u000AWHERE\u000A  [1.Node] = [2.Node] AND\u000A  [1.Layer]='Cloud'\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\u000A",
+        "excelFile": "Archdata.xlsx",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 40.5,
+        "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 1 End' as [style name]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 0 End' as [style name]",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Generate the graph",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PREVIEW",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PUBLISH deployment-overview",
+        "status": "FILTERED OUT",
+        "filters": [
+          null,
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "RESET",
+        "status": "FILTERED OUT",
+        "filters": [
+          "Deployment Overview",
+          "Deployment Overview",
+          "All",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "data": {
+      "graphToWorksheet": {
+        "runMode": "auto",
+        "imageType": "png",
+        "imageWorksheet": "graph",
+        "scaleImage": 100
+      },
+      "graphToFile": {
+        "directory": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
+        "fileNamePrefix": "graph",
+        "imageType": "svg",
+        "appendOptions": false,
+        "appendTimeStamp": false
+      },
+      "layout": {
+        "engine": "osage",
+        "direction": "",
+        "splines": "ortho"
+      },
+      "options": {
+        "graph": {
+          "center": false,
+          "clusterRank": "",
+          "compound": false,
+          "dim": "",
+          "dimen": "",
+          "forceLabels": false,
+          "graphType": "directed",
+          "mode": "",
+          "model": "",
+          "newrank": false,
+          "ordering": "",
+          "orientation": false,
+          "outputOrder": "",
+          "overlap": "",
+          "smoothing": "",
+          "transparentBackground": false,
+          "includeImagePath": false
+        },
+        "nodes": {
+          "includeOrphanNodes": true,
+          "includeNodeLabels": true,
+          "includeNodeXLabels": false,
+          "blankNodeLabels": "default"
+        },
+        "edges": {
+          "addStrict": true,
+          "concentrate": false,
+          "includeOrphanEdges": true,
+          "includeEdgeHeadLabels": true,
+          "includeEdgeLabels": true,
+          "includeEdgeXLabels": true,
+          "includeEdgeTailLabels": true,
+          "includeEdgePorts": true,
+          "blankEdgeLabels": "blank"
+        }
+      },
+      "styles": {
+        "selectedViewColumn": "E",
+        "includeStyleFormat": true,
+        "includeExtraAttributes": true,
+        "suffixOpen": "Begin",
+        "suffixClose": "End"
+      },
+      "debug": {
+        "debug": "off",
+        "fileDisposition": "delete"
+      },
+      "columns": {
+        "flag": "show",
+        "item": "show",
+        "label": "show",
+        "outsideLabel": "hide",
+        "tailLabel": "hide",
+        "headLabel": "hide",
+        "relatedItem": "show",
+        "styleName": "show",
+        "extraAttributes": "show",
+        "message": "hide"
+      },
+      "language": {
+        "language": "locale_en-US"
+      },
+      "console": {
+        "logToConsole": false,
+        "appendConsole": false,
+        "graphvizVerbose": false
+      },
+      "worksheets": {
+        "about": "hide",
+        "attributes": "hide",
+        "colors": "hide",
+        "console": "hide",
+        "diagnostics": "hide",
+        "exchange": "show",
+        "lists": "hide",
+        "locale_de-DE": "hide",
+        "locale_en-GB": "hide",
+        "locale_en-US": "hide",
+        "locale_fr-FR": "hide",
+        "locale_it-IT": "hide",
+        "locale_pl-PL": "hide",
+        "settings": "hide",
+        "shapes": "hide",
+        "source": "hide",
+        "sql": "show",
+        "styleDesigner": "hide",
+        "styles": "hide",
+        "svg": "show"
+      }
+    },
+    "graph": {
+      "zoom": 60
+    },
+    "settings": {
+      "graphvizPath": "",
+      "imagePath": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
+      "additionalGraphOptions": "",
+      "pictureName": "",
+      "additionalCmdParameters": ""
+    },
+    "source": {
+      "indent": 4,
+      "buttons": [
+        {
+          "id": "SourceWeb1",
+          "buttonText": "Graphviz Attributes",
+          "url": "https://graphviz.org/doc/info/attrs.html",
+          "screenTip": "Describes the attributes used by various Graphviz tools",
+          "superTip": "The table gives the name of the attribute, the graph components (node, edge, etc.) which use the attribute and the type of the attribute (strings representing legal values of that type). Where applicable, the table also gives a default value for the attribute, a minimum allowed setting for numeric attributes, and certain restrictions on the use of the attribute.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb2",
+          "buttonText": "Pocket Reference",
+          "url": "http://graphs.grevian.org/graph",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb3",
+          "buttonText": "Graphviz Online",
+          "url": "http://dreampuf.github.io/GraphvizOnline/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Online Graphviz editor with syntax higlighting.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb4",
+          "buttonText": "Sketchviz",
+          "url": "https://sketchviz.com/new",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Renders Graphviz diagrams as if sketched by hand.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb5",
+          "buttonText": "Graphviz Fiddle",
+          "url": "http://stamm-wilbrandt.de/GraphvizFiddle/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "GraphvizFiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb6",
+          "buttonText": "Dot to Ascii",
+          "url": "https://dot-to-ascii.ggerganov.com/",
+          "screenTip": "Renders Graphviz diagrams as ascii art.",
+          "superTip": "Renders Graphviz diagrams as ascii art.",
+          "visible": "show"
+        }
+      ]
+    },
+    "sql": {
+      "cluster": "cluster",
+      "clusterLabel": "",
+      "clusterStyleName": "cluster style name",
+      "clusterAttributes": "cluster attributes",
+      "clusterTooltip": "cluster tooltip",
+      "clusterPlaceholder": "%clc%",
+      "subcluster": "subcluster",
+      "subclusterLabel": "",
+      "subclusterStyleName": "subcluster style name",
+      "subclusterAttributes": "subcluster attributes",
+      "subclusterTooltip": "subcluster tooltip",
+      "subclusterPlaceholder": "%scc%",
+      "recordsetPlaceholder": "%rsc%",
+      "splitLength": "",
+      "lineEnding": "",
+      "filterColumn": "E",
+      "filterValue": "Capability Map"
+    },
+    "extensions": {
+      "tabName": "Extensions",
+      "customCode": {
+        "groupName": "Custom Code",
+        "buttons": [
+          {
+            "id": "ExtCode1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode6",
+            "visible": "hide"
+          }
+        ]
+      },
+      "webResources": {
+        "groupName": "Web Resources",
+        "buttons": [
+          {
+            "id": "ExtWeb1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb6",
+            "visible": "hide"
+          }
+        ]
+      }
+    }
+  },
+  "layouts": {
+    "data": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 30,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "item",
+          "column": 2,
+          "heading": "Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "label",
+          "column": 4,
+          "heading": "Label",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "outsideLabel",
+          "column": 5,
+          "heading": "External Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tailLabel",
+          "column": 3,
+          "heading": "Tail Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "headLabel",
+          "column": 6,
+          "heading": "Head Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tooltip",
+          "column": 7,
+          "heading": "Tooltip",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "relatedItem",
+          "column": 8,
+          "heading": "Related Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "styleName",
+          "column": 9,
+          "heading": "Style Name",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "extraAttributes",
+          "column": 10,
+          "heading": "Attributes",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "message",
+          "column": 11,
+          "heading": "Messages",
+          "width": 0,
+          "hidden": true,
+          "wrapText": false
+        },
+        {
+          "id": "graphDisplayColumn",
+          "column": 12,
+          "heading": "",
+          "width": 8.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "styles": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 58.5,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 43.5,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "name",
+          "column": 2,
+          "heading": "Style Name",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 3,
+          "heading": "Format",
+          "width": 50.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "type",
+          "column": 4,
+          "heading": "Style Type",
+          "width": 16.71,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view0",
+          "column": 5,
+          "heading": "All Styles",
+          "width": 7.43,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view1",
+          "column": 6,
+          "heading": "No Clusters",
+          "width": 7.43,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 7,
+          "heading": "No Edges",
+          "width": 7.43,
+          "hidden": false,
+          "wrapText": null
+        }
+      ],
+      "ranges": [
+        {
+        }
+      ]
+    },
+    "sql": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "sqlStatement",
+          "column": 2,
+          "heading": "SQL SELECT Statement",
+          "width": 95.57,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "excelFile",
+          "column": 3,
+          "heading": "Excel data file (.xlsx, .xlsm, .xlsb, or .xls only)",
+          "width": 47.57,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "status",
+          "column": 4,
+          "heading": "Status",
+          "width": 21.71,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12.75,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 52.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 177.14,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    },
+    "source": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "lineNumber",
+          "column": 1,
+          "heading": "Line",
+          "width": 6.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "source",
+          "column": 2,
+          "heading": "Graphviz Source",
+          "width": 254,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,115 @@
 # Change Log
 
+## Version 8.0.0
+
+### Style Designer
+
+Replaced dropdowns with Ribbon galleries; visual grid-style controls that display selectable items like colors or images for faster, more intuitive style selection.
+- Color galleries now display entire color schemes in a compact, high-speed format.
+- `fontname` previews are shown as a gallery alongside font names, with increased preview size for easier identification. (Note: existing font images may be deleted via the `diagnostics` tab.)
+- Node `shape`, edge `arrowhead`, `arrowtail`, `headport`, and `tailport` choices are now logically grouped for easier selection.
+
+Added RGB Color Picker support
+- Enables color selection using the operating system's native RGB dialog on both Windows and macOS.
+- On macOS, this requires updating the `ExcelToGraphviz.applescript` file to version 3.
+- The picker can be launched independently or preloaded with a color from Graphviz X11, SVG, or Brewer schemes.
+
+Improved preview rendering
+- Updated color and font previews to display selections directly within the Ribbon.
+- Refreshed icons for X11 and SVG color schemes, as well as polygon shape options.
+
+Performance optimizations
+- Faster algorithm (Win OS) to exclude font names which Graphviz converts to 'Arial'.
+- Rewrote string comparisons and concatenations for faster execution.
+- Removed progress bar when loading large color schemes. New speed makes them no longer needed.
+- Images are now pre-cached at workbook open if available; otherwise, they're generated on first use.
+
+Enhanced style saving
+- Labels (`label`, `xlabel`, `headlabel`, `taillabel`) can optionally be saved as part of the style format string which is ideal for edge annotations like protocols or cardinality.
+- Added support for naming styles when saving to the `styles` worksheet.
+- Introduced a prominent `Save` button within the style definition canvas area.
+
+Improved image path handling
+- Automatically extracts relative image paths to improve portability.  
+  Example: If the workbook is in `c:\users\jeff\data\example1\Relationship Visualizer.xlsm` and the image is in `c:\users\jeff\data\example1\images\network.png`, the saved path will be `images\network.png`.
+
+Fixed image deletion issue on low-memory systems
+- Addressed a bug on 32-bit Atom CPUs with 2GB RAM by switching to a more resource-efficient method for deleting preview images.
+
+### Styles
+
+One-click style restoration in Style Designer
+- Select a row on the `styles` worksheet containing a `node`, `edge`, or `cluster` format string, then click the `[...]` button to instantly reset `style designer` to match the saved format.
+
+Auto-refresh preview
+- Saving a style automatically updates the preview image on the `styles` worksheet.
+
+### SQL
+
+Connection pooling added 
+- Implemented in response to a March 2025 Office update that causes ADO connections to take over 12 seconds (previously under 4 milliseconds). See: [Excel ADO connection issue in recent Office 365 update](https://learn.microsoft.com/en-us/answers/questions/5443040/excel-ado-connection-issue-in-recent-office-365-up?forum=msoffice-all&referrer=answers)  
+- Workbook connections are now reused across all SQL statements during a `Run SQL Statements` batch run.  
+- Users can choose to close connections after batch execution or keep them open until manually closed or workbook exit.  
+  Note: Keeping connections open may improve performance but can prevent access to referenced workbooks.
+
+New default data source support 
+- Users can now specify a default data directory and Excel workbook.
+- Managed via new controls in the SQL tab of the Ribbon.
+- Entries in the file name column, and `SET DATA FILE` statements take precedence when resolving conflicts.
+
+SQL editor access
+- Added a `[...]` button next to SQL statements to open the SQL edit form.
+
+New SQL extensions for Graphviz automation 
+- Assume the you have an Excel workbook containing a worksheet named `Alphabet` with a column heading of `letter` with four rows of data with letters A, B, C, and D in the `letter` column. 
+  
+  The following SQL creates nodes `A`, `B`, `C`, `D`:
+
+  ```sql
+  SELECT [letter] AS [Item] from [Alphabet$]
+  ```
+- New *CREATE EDGES* syntax automatically generates edges like `A -> B`, `B -> C`, `C -> D`. 
+
+  ```sql
+  SELECT [letter] AS [Item], TRUE AS [CREATE EDGES] FROM [Alphabet$]
+  ```
+- The new *CREATE RANK* syntax produces subgraphs with a shared rank:
+
+  ```sql
+  SELECT [letter] AS [Item], TRUE AS [CREATE RANK], 'same' AS [RANK] FROM [Alphabet$]
+  ```
+  The SQL above results in one row added to the `data` worksheet with: 
+  - Item = `>`
+  - Label = `{rank="same"; "A"; "B"; "C"; "D";}`
+
+### SVG
+- Added `[...]` button to Find and Replace cells to open the SVG editor form.
+- Updated animation logic in one of the post-processing options to accept `1` or `0` for toggling inclusion of zoom buttons on clusters.
+
+### Miscellaneous
+
+macOS compatibility
+- Fixed Excel version check to compare major and minor versions numerically, resolving a string-compare bug introduced when Excel reached three digits in version 16.100.
+- Revised the `ExcelToGraphviz.applescript` script version check to use integers instead of strings
+  - An alert triggers if installed script version is below 3.
+  - The new RGB color controls are hidden when an outdated script is detected, preventing users from interacting with buttons that would otherwise fail silently.
+
+Optimizations
+- Introduced new constants throughout the codebase to improve clarity and maintainability.
+- Further optimized string concatenation routines for better performance.
+
+JSON Import/Export
+- Updated to support exporting and restoring the new SQL settings.
+
+
+## Version 7.2.02
+### Fixes
+- Enforce Graphviz ID naming rules by wrapping ID values in quotes when they do not begin with a letter or underscore.
+
+## Version 7.2.01
+### Fixes
+- Resolved [Output Directory macro 'Cannot run' #2](https://github.com/jjlong150/ExcelToGraphviz/issues/2) defect.
+
 ## Version 7.2.0
 
 ### Enhancements
