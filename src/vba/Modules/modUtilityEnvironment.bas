@@ -9,7 +9,7 @@ Option Explicit
 Private username As String
 Private tempDir As String
 
-Public Function SearchPathForFile(ByVal filename As String) As Boolean
+Public Function SearchPathForFile(ByVal fileName As String) As Boolean
 
     SearchPathForFile = False
     
@@ -34,7 +34,7 @@ Public Function SearchPathForFile(ByVal filename As String) As Boolean
             End If
             
             ' Determine if the file exists in this directory
-            If FileExists(path & filename) Then
+            If FileExists(path & fileName) Then
                 SearchPathForFile = True
                 Exit For
             End If
@@ -43,7 +43,7 @@ Public Function SearchPathForFile(ByVal filename As String) As Boolean
     
 End Function
 
-Public Function FindFileOnPath(ByVal filename As String) As String
+Public Function FindFileOnPath(ByVal fileName As String) As String
 
     FindFileOnPath = vbNullString
     
@@ -68,8 +68,8 @@ Public Function FindFileOnPath(ByVal filename As String) As String
             End If
             
             ' Determine if the file exists in this directory
-            If FileExists(path & filename) Then
-                FindFileOnPath = path & filename
+            If FileExists(path & fileName) Then
+                FindFileOnPath = path & fileName
                 Exit For
             End If
         End If

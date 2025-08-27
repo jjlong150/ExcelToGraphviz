@@ -30,10 +30,10 @@ Public Function RangeToSubgraphWithRank(ByVal itemIds As Range, ByVal rankType A
     peers = vbNullString
     
     ' Iterate the range of cells
-    Dim Item As Range
-    For Each Item In itemIds.Cells
-        peers = peers & "; " & AddQuotesConditionally(Trim$(Item.value))
-    Next Item
+    Dim item As Range
+    For Each item In itemIds.Cells
+        peers = peers & "; " & AddQuotesConditionally(Trim$(item.value))
+    Next item
     
     ' Build the rank statement
     RangeToSubgraphWithRank = "{rank=" & AddQuotes(rankTypeOut) & peers & ";}"
@@ -71,10 +71,10 @@ Public Function RangeToSubgraph(ByVal itemIds As Range) As String
     peers = vbNullString
     
     ' Iterate the range of cells
-    Dim Item As Range
-    For Each Item In itemIds.Cells
-        peers = peers & "; " & AddQuotes(Trim$(Item.value))
-    Next Item
+    Dim item As Range
+    For Each item In itemIds.Cells
+        peers = peers & "; " & AddQuotes(Trim$(item.value))
+    Next item
     
     ' Build the rank statement
     RangeToSubgraph = "{ " & peers & ";}"
@@ -82,8 +82,8 @@ Public Function RangeToSubgraph(ByVal itemIds As Range) As String
 End Function
 
 'Convenience wrappers
-Public Function Subgraph(ByVal itemIds As Range) As String
-    Subgraph = RangeToSubgraph(itemIds)
+Public Function subgraph(ByVal itemIds As Range) As String
+    subgraph = RangeToSubgraph(itemIds)
 End Function
 
 
@@ -102,7 +102,7 @@ Public Function RangeToHtmlTable(ByVal tableCells As Range) As String
     For rowIndex = 1 To tableCells.rows.count
         htmlLabel = htmlLabel & "<tr>"
         For columnIndex = 1 To tableCells.columns.count
-            htmlLabel = htmlLabel & "<td>" & tableCells.Cells.Item(rowIndex, columnIndex).value & "</td>"
+            htmlLabel = htmlLabel & "<td>" & tableCells.Cells.item(rowIndex, columnIndex).value & "</td>"
         Next columnIndex
         htmlLabel = htmlLabel & "</tr>" & vbNewLine
     Next rowIndex

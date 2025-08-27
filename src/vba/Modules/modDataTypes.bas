@@ -46,7 +46,7 @@ End Type
 
 Public Type DataWorksheetHeadings
     flag As String                               ' Comment indicator ('#') column heading
-    Item As String                               ' Item ID column heading
+    item As String                               ' Item ID column heading
     label As String                              ' Label column heading
     xLabel As String                             ' External Label column heading
     tailLabel As String                          ' Edge Tail Label column heading
@@ -201,7 +201,7 @@ End Type
 ' Working variables for row data on the "data" worksheet, and values derived from the "styles" worksheet
 Public Type dataRow
     comment As String
-    Item As String
+    item As String
     relatedItem As String
     label As String
     xLabel As String
@@ -255,6 +255,9 @@ Public Type sqlFieldName
     whereColumn As String
     whereValue As String
     maxDepth As String
+    closeConnections As Boolean
+    CreateEdges As String
+    CreateRank As String
 End Type
 
 ' Working variables for row data on the "svg" worksheet

@@ -288,8 +288,8 @@ Public Sub fileFormat_onAction(ByVal control As IRibbonControl, ByVal controlId 
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub fileFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "ff_" & SettingsSheet.Range(SETTINGS_FILE_FORMAT).value
+Public Sub fileFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "ff_" & SettingsSheet.Range(SETTINGS_FILE_FORMAT).value
 End Sub
 
 ' ===========================================================================
@@ -362,7 +362,7 @@ Public Sub graphAllViewsToFile_onAction(ByVal control As IRibbonControl)
     
     ' Count the non-empty cells beginning at the first view column
     For col = firstColumn To GetLastColumn(StylesSheet.name, row)
-        columnName = StylesSheet.Cells.Item(row, col)
+        columnName = StylesSheet.Cells.item(row, col)
         If columnName <> vbNullString Then
             nonEmptyCellCount = nonEmptyCellCount + 1
         End If
@@ -457,8 +457,8 @@ Public Sub imageFormat_onAction(ByVal control As IRibbonControl, ByVal controlId
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub imageFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "img_" & SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value
+Public Sub imageFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "img_" & SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value
 End Sub
 
 ' ===========================================================================
@@ -512,8 +512,8 @@ Public Sub layoutDirection_onAction(ByVal control As IRibbonControl, ByVal contr
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub layoutDirection_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "rankdir_" & SettingsSheet.Range(SETTINGS_RANKDIR).value
+Public Sub layoutDirection_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "rankdir_" & SettingsSheet.Range(SETTINGS_RANKDIR).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -549,8 +549,8 @@ Public Sub layoutEngine_onAction(ByVal control As IRibbonControl, ByVal controlI
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub layoutEngine_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
+Public Sub layoutEngine_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
 End Sub
 
 ' ===========================================================================
@@ -661,8 +661,8 @@ Public Sub splines_onAction(ByVal control As IRibbonControl, ByVal controlId As 
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub splines_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "splines_" & SettingsSheet.Range(SETTINGS_SPLINES).value
+Public Sub splines_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "splines_" & SettingsSheet.Range(SETTINGS_SPLINES).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -851,8 +851,8 @@ End Sub
 
 
 '@Ignore ParameterNotUsed
-Public Sub overlap_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "overlap_" & SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value
+Public Sub overlap_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "overlap_" & SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value
 End Sub
 
 ' ===========================================================================
@@ -961,7 +961,7 @@ Public Sub yesNoView_getItemCount(ByVal control As IRibbonControl, ByRef returne
     
     ' Count the non-empty cells beginning at the first view column
     For col = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW) To GetLastColumn(StylesSheet.name, row)
-        columnName = StylesSheet.Cells.Item(row, col)
+        columnName = StylesSheet.Cells.item(row, col)
         If columnName <> vbNullString Then
             itemCount = itemCount + 1
         End If
@@ -982,7 +982,7 @@ End Sub
 ' Callback for yesNoView getItemLabel
 '@Ignore ParameterNotUsed
 Public Sub yesNoView_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef itemLabel As Variant)
-    itemLabel = StylesSheet.Cells.Item(CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_HEADING)), _
+    itemLabel = StylesSheet.Cells.item(CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_HEADING)), _
                             index + GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW))
 End Sub
 
@@ -1029,8 +1029,8 @@ Public Sub scaleImage_onAction(ByVal control As IRibbonControl, ByVal controlId 
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub scaleImage_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "zoom_" & SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value
+Public Sub scaleImage_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "zoom_" & SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value
 End Sub
 
 
@@ -1047,8 +1047,8 @@ Public Sub dim_onAction(ByVal control As IRibbonControl, ByVal controlId As Stri
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub dim_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "dim_" & SettingsSheet.Range(SETTINGS_GRAPH_DIM).value
+Public Sub dim_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "dim_" & SettingsSheet.Range(SETTINGS_GRAPH_DIM).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1075,8 +1075,8 @@ Public Sub dimen_onAction(ByVal control As IRibbonControl, ByVal controlId As St
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub dimen_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "dimen_" & SettingsSheet.Range(SETTINGS_GRAPH_DIMEN).value
+Public Sub dimen_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "dimen_" & SettingsSheet.Range(SETTINGS_GRAPH_DIMEN).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1103,8 +1103,8 @@ Public Sub mode_onAction(ByVal control As IRibbonControl, ByVal controlId As Str
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub mode_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "mode_" & SettingsSheet.Range(SETTINGS_GRAPH_MODE).value
+Public Sub mode_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "mode_" & SettingsSheet.Range(SETTINGS_GRAPH_MODE).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1129,8 +1129,8 @@ Public Sub model_onAction(ByVal control As IRibbonControl, ByVal controlId As St
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub model_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "model_" & SettingsSheet.Range(SETTINGS_GRAPH_MODEL).value
+Public Sub model_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "model_" & SettingsSheet.Range(SETTINGS_GRAPH_MODEL).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1153,8 +1153,8 @@ Public Sub smoothing_onAction(ByVal control As IRibbonControl, ByVal controlId A
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub smoothing_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "smoothing_" & SettingsSheet.Range(SETTINGS_GRAPH_SMOOTHING).value
+Public Sub smoothing_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "smoothing_" & SettingsSheet.Range(SETTINGS_GRAPH_SMOOTHING).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1204,8 +1204,8 @@ Public Sub ordering_onAction(ByVal control As IRibbonControl, ByVal controlId As
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub ordering_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "ordering_" & SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value
+Public Sub ordering_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "ordering_" & SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value
 End Sub
 
 
@@ -1229,8 +1229,8 @@ Public Sub outputorder_onAction(ByVal control As IRibbonControl, ByVal controlId
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub outputorder_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = "outputorder_" & SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value
+Public Sub outputorder_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "outputorder_" & SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value
 End Sub
 
 '@Ignore ParameterNotUsed

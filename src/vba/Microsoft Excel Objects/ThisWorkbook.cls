@@ -7,11 +7,18 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
+' Copyright (c) 2015-2025 Jeffrey J. Long. All rights reserved
 
 '@Folder("Relationship Visualizer.Workbook")
 
 Option Explicit
+
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+#If Not Mac Then
+    ' Release any connections which may have been cached in the connection pool.
+    CleanupConnectionPool
+#End If
+End Sub
 
 Private Sub Workbook_Open()
     Application.Calculation = xlCalculationAutomatic
@@ -51,35 +58,58 @@ Private Sub Workbook_Open()
     End If
 #End If
 
-    ' Check that AppleScriptTask scripts are present
 #If Mac Then
-    Dim msg As String
-    Dim applescriptResult As String
-    Dim currentVersion As String
-    Dim yourVersion As String
-    currentVersion = "1.0"
+    ' Establish the version of "ExcelToGraphviz.applescript" which this spreadsheet requires.
+    Dim currentVersion As Long
+    currentVersion = 3
     
-    yourVersion = RunAppleScriptTask("getVersion", vbNullString)
+    ' Check that AppleScriptTask scripts are present, and retrieve the version number
+    Dim scriptVersion As String
+    scriptVersion = RunAppleScriptTask("getVersion", vbNullString)
     
-    If yourVersion = vbNullString Then
+    If scriptVersion = vbNullString Then
         MsgBox GetMessage("msgboxScriptsNotFound"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
-    ElseIf yourVersion < currentVersion Then
-        msg = GetMessage("msgboxVersionMismatch")
-        msg = replace(msg, "{currentVersion}", currentVersion)
-        msg = replace(msg, "{yourVersion}", yourVersion)
-        MsgBox msg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        SetScriptVersion 0
+    Else
+        ' Save the version number for future reference. AppleScriptTask has slow performance, so
+        ' we want to minimize how often we call it.
+        Dim yourVersion As Long
+        yourVersion = CInt(scriptVersion)
+        SetScriptVersion yourVersion
+        
+        ' Give a warning if an old version of "ExcelToGraphviz.applescript" is installed.
+        If yourVersion < currentVersion Then
+            Dim msg As String
+            msg = GetMessage("msgboxVersionMismatch")
+            msg = replace(msg, "{currentVersion}", CStr(currentVersion))
+            msg = replace(msg, "{yourVersion}", CStr(yourVersion))
+            MsgBox msg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        End If
     End If
 
-    Dim requiredExcelVersion As String
-    requiredExcelVersion = "16.40"
+    ' Check that you are running an version of Excel with VBA support
+    Dim requiredMajor As Long: requiredMajor = 16
+    Dim requiredMinor As Long: requiredMinor = 40
     
-    If Application.version < requiredExcelVersion Then
-        msg = GetMessage("msgboxIncompatibleExcelVersion")
-        msg = replace(msg, "{requiredExcelVersion}", requiredExcelVersion)
-        msg = replace(msg, "{yourExcelVersion}", Application.version)
-        MsgBox msg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    Dim actualVersion As String
+    Dim actualMajor As Long, actualMinor As Long
+    Dim versionParts As Variant
+    
+    actualVersion = Application.version
+    versionParts = split(actualVersion, ".")
+    
+    If UBound(versionParts) >= 1 Then
+        actualMajor = CLng(versionParts(0))
+        actualMinor = CLng(versionParts(1))
+        
+        If (actualMajor < requiredMajor) Or _
+           (actualMajor = requiredMajor And actualMinor < requiredMinor) Then
+            msg = GetMessage("msgboxIncompatibleExcelVersion")
+            msg = replace(msg, "{requiredExcelVersion}", requiredMajor & "." & requiredMinor)
+            msg = replace(msg, "{yourExcelVersion}", actualVersion)
+            MsgBox msg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        End If
     End If
-    
 #End If
 
     ' Create directories where images of colors and fonts can be cached

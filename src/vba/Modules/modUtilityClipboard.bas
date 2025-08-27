@@ -16,11 +16,11 @@ Option Explicit
     Public Declare PtrSafe Function GlobalUnlock Lib "kernel32" (ByVal hMem As LongPtr) As LongPtr
     Public Declare PtrSafe Function GlobalLock Lib "kernel32" (ByVal hMem As LongPtr) As LongPtr
     Public Declare PtrSafe Function GlobalAlloc Lib "kernel32" (ByVal wFlags As Long, ByVal dwBytes As LongPtr) As LongPtr
-    Public Declare PtrSafe Function CloseClipboard Lib "User32" () As Long
-    Public Declare PtrSafe Function OpenClipboard Lib "User32" (ByVal hwnd As LongPtr) As LongPtr
-    Public Declare PtrSafe Function EmptyClipboard Lib "User32" () As Long
+    Public Declare PtrSafe Function CloseClipboard Lib "user32" () As Long
+    Public Declare PtrSafe Function OpenClipboard Lib "user32" (ByVal hwnd As LongPtr) As LongPtr
+    Public Declare PtrSafe Function EmptyClipboard Lib "user32" () As Long
     Public Declare PtrSafe Function lstrcpy Lib "kernel32" (ByVal lpString1 As Any, ByVal lpString2 As Any) As LongPtr
-    Public Declare PtrSafe Function SetClipboardData Lib "User32" (ByVal wFormat As Long, ByVal hMem As LongPtr) As LongPtr
+    Public Declare PtrSafe Function SetClipboardData Lib "user32" (ByVal wFormat As Long, ByVal hMem As LongPtr) As LongPtr
 #Else
     Public Declare Function GlobalUnlock Lib "kernel32" (ByVal hMem As Long) As Long
     Public Declare Function GlobalLock Lib "kernel32" (ByVal hMem As Long) As Long

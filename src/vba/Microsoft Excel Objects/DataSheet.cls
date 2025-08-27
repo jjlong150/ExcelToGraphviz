@@ -53,7 +53,7 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
         If rowType <> TYPE_BLANK_ROW And rowType <> TYPE_GRAPH Then
             ' Paste the dictionary keys into the named range associated with the
             ' Style Name dropdown list
-            ChoicesSheet.Cells.Item(1, 1).Resize(styleNames.count, 1).Value2 = Application.WorksheetFunction.Transpose(styleNames.Keys)
+            ChoicesSheet.Cells.item(1, 1).Resize(styleNames.count, 1).Value2 = Application.WorksheetFunction.Transpose(styleNames.Keys)
             
             ' Adjust the size of the named range to match the number of values
             Dim namedRange As name
@@ -144,11 +144,11 @@ Private Function getMatchingStyles(ByVal rowType As String) As Dictionary
     
     For row = styles.firstRow To styles.lastRow
         '@Ignore EmptyIfBlock
-        If StylesSheet.Cells.Item(row, styles.flagColumn).value = FLAG_COMMENT Then
+        If StylesSheet.Cells.item(row, styles.flagColumn).value = FLAG_COMMENT Then
             ' Comment row, ignore it
-        ElseIf StylesSheet.Cells.Item(row, styles.typeColumn).value = rowType Then
+        ElseIf StylesSheet.Cells.item(row, styles.typeColumn).value = rowType Then
             ' Retrieve the style name
-            styleName = StylesSheet.Cells.Item(row, styles.nameColumn).value
+            styleName = StylesSheet.Cells.item(row, styles.nameColumn).value
 
             If styleName <> vbNullString Then    ' a style name is present
                 ' Add style name to the dictionary if not already present

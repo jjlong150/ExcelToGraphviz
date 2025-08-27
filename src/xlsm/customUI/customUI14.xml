@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved. -->
+<!-- Copyright (c) 2015-2025 Jeffrey J. Long. All rights reserved. -->
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="ribbon_onLoad">
 	<ribbon startFromScratch="false">
 		<tabs>
@@ -19,7 +19,7 @@
 					<toggleButton id="toggleConsoleSheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SlideMasterMasterLayout" size="large" onAction="toggleConsole_onAction" getPressed="toggleConsole_getPressed" getVisible="toggleConsole_getVisible"/>
 					<separator id="worksheetsSeparator04"/>
 					<toggleButton id="helpAttributes" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableInsertExcel" size="large" onAction="helpAttributes_onAction" getPressed="helpAttributes_getPressed"/>
-					<toggleButton id="helpColors"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="large" onAction="helpColors_onAction" getPressed="helpColors_getPressed"/>
+					<toggleButton id="helpColors"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="color_palette" size="large" onAction="helpColors_onAction" getPressed="helpColors_getPressed"/>
 					<toggleButton id="helpShapes"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="StopAnimation" size="large" onAction="helpShapes_onAction" getPressed="helpShapes_getPressed"/>
 				</group>
                 <group id="worksheetsGroupMaintenance" getLabel="ribbon_getLabel" imageMso="ReadingViewToolsMenu" autoScale="true">
@@ -284,6 +284,9 @@
 				</group>
 			</tab>
 			<tab id="stylesTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible">
+				<group id="stylesGroup0" getLabel="ribbon_getLabel" imageMso="TableDesign">
+					<button id="stylesEdit"       getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TableDesign"        size="large" onAction="stylesEdit_onAction" getEnabled="stylesEdit_GetEnabled"/>
+				</group>
 				<group id="stylesGroup1" getLabel="ribbon_getLabel" imageMso="GroupChartLocation">
 					<button id="stylesPreview"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="refreshgraph"          size="large" onAction="stylesPreview_onAction"/>
 					<button id="stylesPreviewAll" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ShapeStylesGallery" size="large" onAction="stylesPreviewAll_onAction"/>
@@ -298,7 +301,7 @@
 				</group>
 			</tab>
     		<tab id="styleDesignerTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="styleDesignerTab">
-				<group id="designerGroupDesignMode" getLabel="ribbon_getLabel" imageMso="ModuleInsert"  autoScale="true">
+				<group id="designerGroupDesignMode" getLabel="ribbon_getLabel" imageMso="ModuleInsert" autoScale="true">
 					<toggleButton id="designModeNode" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="node_oval" size="normal" onAction="designModeNode_onAction" getPressed="designModeNode_getPressed"/>
 					<toggleButton id="designModeEdge" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="edge_normal" size="normal" onAction="designModeEdge_onAction" getPressed="designModeEdge_getPressed"/>
 					<toggleButton id="designModeCluster" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="cluster_normal" size="normal" onAction="designModeCluster_onAction" getPressed="designModeCluster_getPressed"/>
@@ -308,8 +311,8 @@
 					<button id="copyToClipboard" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Copy" size="normal" onAction="copyToClipboard_onAction" getEnabled="copyToClipboard_getEnabled"/>
 					<button id="clearStyleRibbon" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="erase" size="normal" onAction="clearStyleRibbon_onAction"/>
 				</group>
-				<group id="designerGroupColorScheme" getLabel="ribbon_getLabel" imageMso="ViewBackToColorView">
-					<gallery id="colorScheme" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" itemHeight="8" columns="6" showItemLabel="false" onAction="colorScheme_onAction" getSelectedItemID="colorScheme_getSelectedItemID">
+				<group id="designerGroupColorScheme" getLabel="ribbon_getLabel" imageMso="SmartArtChangeColorsGallery">
+					<gallery id="colorScheme" image="color_palette" size="large" getLabel="colorScheme_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" itemHeight="8" columns="6" showItemLabel="false" onAction="colorScheme_onAction" getSelectedItemID="colorScheme_getSelectedItemID">
 						<!-- First block of 6 colors -->
 						<item id="cs_" label="default" image="X11"/>
 						<item id="cs_X11" label="X11" image="X11"/>
@@ -617,57 +620,45 @@
 						<item id="cs_paired12" label="paired12" image="paired12"/>
 						<item id="cs_x32" label=" " image="csblank"/>
 					</gallery>
-                    <labelControl id="currentColorScheme"    getLabel="currentColorScheme_getLabel"/>
-					<button id="sqlDummyButton6" image="spacer_normal" size="normal" enabled="false" getVisible="mac_getVisible"/>
 				</group>
 				<group id="designerGroupFont" getLabel="ribbon_getLabel" imageMso="ChangeStylesMenu">
-					<dropDown id="fontColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fontColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="fontColor_getImage" getSelectedItemIndex="fontColor_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="fontName" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="fontName_onAction" getItemCount="fontName_getItemCount" getItemImage="fontName_getItemImage" getItemLabel="fontName_getItemLabel" getSelectedItemIndex="fontName_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="fontSize" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="fontSize_onAction" getItemCount="fontSize_getItemCount" getItemLabel="fontSize_getItemLabel" getSelectedItemIndex="fontSize_getSelectedItemIndex">
-					</dropDown>
+                    <gallery id="fontColor" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fontColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="fontColor_getImage" getSelectedItemIndex="fontColor_getSelectedItemIndex"></gallery>
+                    <gallery id="fontName" showItemLabel="true" getImage="fontName_getImage" getLabel="fontName_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fontName_onAction" getItemCount="fontName_getItemCount" getItemImage="fontName_getItemImage" getItemLabel="fontName_getItemLabel" getSelectedItemIndex="fontName_getSelectedItemIndex"></gallery>
+                    <dropDown id="fontSize" sizeString="XX" showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fontSize_onAction" getItemCount="fontSize_getItemCount" getItemLabel="fontSize_getItemLabel" getSelectedItemIndex="fontSize_getSelectedItemIndex"></dropDown>
+                    <separator id="fontColorSeparator" getVisible="colorPicker_getVisible"/>
+                    <button id="fontColorPicker"  getVisible="colorPicker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction" />
 					<separator id="fontSeparator"/>
-					<buttonGroup id="buttonGroupFont">
-						<toggleButton id="fontBold" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Bold" onAction="fontBold_onAction" getPressed="fontBold_getPressed"/>
-						<toggleButton id="fontItalic" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Italic" onAction="fontItalic_onAction" getPressed="fontItalic_getPressed"/>
-					</buttonGroup>
-					<buttonGroup id="buttonGroupAlign">
-						<toggleButton id="alignTop" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignTopExcel" onAction="alignTop_onAction" getVisible="designerGroupLabels_getVisible" getPressed="alignTop_getPressed"/>
-						<toggleButton id="alignBottom" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignBottomExcel" onAction="alignBottom_onAction" getVisible="designerGroupLabels_getVisible" getPressed="alignBottom_getPressed"/>
-					</buttonGroup>
-					<buttonGroup id="buttonGroupJustify">
-						<toggleButton id="justifyLeft" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignLeft" onAction="justifyLeft_onAction" getVisible="labelJustification_getVisible" getPressed="justifyLeft_getPressed"/>
-						<toggleButton id="justifyRight" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignRight" onAction="justifyRight_onAction" getVisible="labelJustification_getVisible" getPressed="justifyRight_getPressed"/>
-					</buttonGroup>
+                    <buttonGroup id="buttonGroupFont">
+                        <toggleButton id="fontBold" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Bold" onAction="fontBold_onAction" getPressed="fontBold_getPressed"/>
+                        <toggleButton id="fontItalic" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Italic" onAction="fontItalic_onAction" getPressed="fontItalic_getPressed"/>
+                    </buttonGroup>
+                    <buttonGroup id="buttonGroupAlign">
+                        <toggleButton id="alignTop" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignTopExcel" onAction="alignTop_onAction" getVisible="designerGroupLabels_getVisible" getPressed="alignTop_getPressed"/>
+                        <toggleButton id="alignBottom" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignBottomExcel" onAction="alignBottom_onAction" getVisible="designerGroupLabels_getVisible" getPressed="alignBottom_getPressed"/>
+                    </buttonGroup>
+                    <buttonGroup id="buttonGroupJustify">
+                        <toggleButton id="justifyLeft" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignLeft" onAction="justifyLeft_onAction" getVisible="labelJustification_getVisible" getPressed="justifyLeft_getPressed"/>
+                        <toggleButton id="justifyRight" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="AlignRight" onAction="justifyRight_onAction" getVisible="labelJustification_getVisible" getPressed="justifyRight_getPressed"/>
+                    </buttonGroup>
 					<separator id="labelStyleSeparator" getVisible="designerGroupEdgeStyle_getVisible"/>
-					<checkBox id="edgeLabelDecorate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeDecorate_onAction" getPressed="edgeDecorate_getPressed" getVisible="designerGroupEdgeStyle_getVisible"/>
-					<checkBox id="edgeLabelFloat" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeLabelFloat_onAction" getPressed="edgeLabelFloat_getPressed" getVisible="designerGroupEdgeStyle_getVisible"/>
+                    <checkBox id="edgeLabelDecorate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeDecorate_onAction" getPressed="edgeDecorate_getPressed" getVisible="designerGroupEdgeStyle_getVisible"/>
+                    <checkBox id="edgeLabelFloat" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeLabelFloat_onAction" getPressed="edgeLabelFloat_getPressed" getVisible="designerGroupEdgeStyle_getVisible"/>
 				</group>
 				<group id="designerGroupNodeShape" getLabel="ribbon_getLabel" imageMso="ObjectSendToBack" getVisible="designerGroupNodeShape_getVisible">
-					<dropDown id="nodeShape" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="nodeShape_onAction" getSelectedItemID="nodeShape_getSelectedItemID">
-						<item id="s_" image="shapes_oval" label=" "/>
-						<item id="s_polygon" image="shapes_polygon" label="polygon"/>
-						<item id="s_box" image="shapes_box" label="box"/>
-						<item id="s_rect" image="shapes_rect" label="rect"/>
-						<item id="s_rectangle" image="shapes_rectangle" label="rectangle"/>
-						<item id="s_record" image="shapes_record" label="record"/>
-						<item id="s_Mrecord" image="shapes_Mrecord" label="Mrecord"/>
-						<item id="s_box3d" image="shapes_box3d" label="box3d"/>
-						<item id="s_component" image="shapes_component" label="component"/>
-						<item id="s_circle" image="shapes_circle" label="circle"/>
-						<item id="s_Mcircle" image="shapes_Mcircle" label="Mcircle"/>
-						<item id="s_doublecircle" image="shapes_doublecircle" label="doublecircle"/>
+					<gallery id="nodeShape" showItemLabel="false" imageMso="StopAnimation" size="large" getLabel="nodeShape_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="nodeShape_onAction" getSelectedItemID="nodeShape_getSelectedItemID">
+						<item id="s_" image="shapes_oval" label="default"/>
 						<item id="s_ellipse" image="shapes_ellipse" label="ellipse"/>
 						<item id="s_oval" image="shapes_oval" label="oval"/>
 						<item id="s_egg" image="shapes_egg" label="egg"/>
-						<item id="s_cylinder" image="shapes_cylinder" label="cylinder"/>
+						<item id="s_circle" image="shapes_circle" label="circle"/>
+						<item id="s_box" image="shapes_box" label="box"/>
+						<item id="s_rect" image="shapes_rect" label="rect"/>
+						<item id="s_rectangle" image="shapes_rectangle" label="rectangle"/>
+						<item id="s_box3d" image="shapes_box3d" label="box3d"/>
+						<item id="s_square" image="shapes_square" label="square"/>
 						<item id="s_triangle" image="shapes_triangle" label="triangle"/>
 						<item id="s_invtriangle" image="shapes_invtriangle" label="invtriangle"/>
-						<item id="s_square" image="shapes_square" label="square"/>
-						<item id="s_Msquare" image="shapes_Msquare" label="Msquare"/>
 						<item id="s_diamond" image="shapes_diamond" label="diamond"/>
-						<item id="s_Mdiamond" image="shapes_Mdiamond" label="Mdiamond"/>
 						<item id="s_trapezium" image="shapes_trapezium" label="trapezium"/>
 						<item id="s_invtrapezium" image="shapes_invtrapezium" label="invtrapezium"/>
 						<item id="s_house" image="shapes_house" label="house"/>
@@ -676,22 +667,33 @@
 						<item id="s_hexagon" image="shapes_hexagon" label="hexagon"/>
 						<item id="s_septagon" image="shapes_septagon" label="septagon"/>
 						<item id="s_octagon" image="shapes_octagon" label="octagon"/>
-						<item id="s_doubleoctagon" image="shapes_doubleoctagon" label="doubleoctagon"/>
-						<item id="s_tripleoctagon" image="shapes_tripleoctagon" label="tripleoctagon"/>
-						<item id="s_star" image="shapes_star" label="star"/>
+						<item id="s_polygon" image="shapes_polygon" label="polygon"/>
+						<item id="s_point" image="shapes_point" label="point"/>
 						<item id="s_plain" image="shapes_plain" label="plain"/>
 						<item id="s_plaintext" image="shapes_plaintext" label="plaintext"/>
-						<item id="s_point" image="shapes_point" label="point"/>
-						<item id="s_none" image="shapes_none" label="none"/>
 						<item id="s_underline" image="shapes_underline" label="underline"/>
+						<item id="s_none" image="shapes_none" label="none"/>
+						<item id="s_cylinder" image="shapes_cylinder" label="cylinder"/>
+						<item id="s_component" image="shapes_component" label="component"/>
+						<item id="s_star" image="shapes_star" label="star"/>
 						<item id="s_note" image="shapes_note" label="note"/>
 						<item id="s_tab" image="shapes_tab" label="tab"/>
 						<item id="s_folder" image="shapes_folder" label="folder"/>
 						<item id="s_signature" image="shapes_signature" label="signature"/>
 						<item id="s_cds" image="shapes_cds" label="cds"/>
+						
+						<item id="s_record" image="shapes_record" label="record"/>
+						<item id="s_Mrecord" image="shapes_Mrecord" label="Mrecord"/>
+						<item id="s_Mcircle" image="shapes_Mcircle" label="Mcircle"/>
+						<item id="s_Mdiamond" image="shapes_Mdiamond" label="Mdiamond"/>
+						<item id="s_Msquare" image="shapes_Msquare" label="Msquare"/>
+						<item id="s_doublecircle" image="shapes_doublecircle" label="doublecircle"/>
+						<item id="s_doubleoctagon" image="shapes_doubleoctagon" label="doubleoctagon"/>
+						<item id="s_tripleoctagon" image="shapes_tripleoctagon" label="tripleoctagon"/>
+						
 						<item id="s_larrow" image="shapes_larrow" label="larrow"/>
-						<item id="s_lpromoter" image="shapes_lpromoter" label="lpromoter"/>
 						<item id="s_rarrow" image="shapes_rarrow" label="rarrow"/>
+						<item id="s_lpromoter" image="shapes_lpromoter" label="lpromoter"/>
 						<item id="s_rpromoter" image="shapes_rpromoter" label="rpromoter"/>
 						<item id="s_promoter" image="shapes_promoter" label="promoter"/>
 						<item id="s_terminator" image="shapes_terminator" label="terminator"/>
@@ -707,7 +709,7 @@
 						<item id="s_rnastab" image="shapes_rnastab" label="rnastab"/>
 						<item id="s_proteasesite" image="shapes_proteasesite" label="proteasesite"/>
 						<item id="s_proteinstab" image="shapes_proteinstab" label="proteinstab"/>
-					</dropDown>
+					</gallery>
 					<checkBox id="nodeRegular" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="nodeShape_isPolygon" onAction="regular_onAction" getPressed="regular_getPressed"/>
 					<editBox id="nodeSkew" getLabel="ribbon_getLabel" sizeString="XXXXX" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="nodeShape_isPolygon" onChange="nodeSkew_onChange" getText="nodeSkew_getText"/>
 					<separator id="polygonSeparator" getVisible="nodeShape_isPolygon"/>
@@ -1516,25 +1518,34 @@
 						<item id="bs3_dotted" image="bs_dotted" label="dotted"/>
 						<item id="bs3_invisible" image="bs_invisible" label="invisible"/>
 					</dropDown>
+
 					<separator id="Separator15"/>
-					<dropDown id="borderColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="borderColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="borderColor_getImage" getSelectedItemIndex="borderColor_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="borderPenWidth" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" getImage="null_getImage" onAction="borderPenWidth_onAction" getSelectedItemID="borderPenWidth_getSelectedItemID">
-						<item id="bw_" image="ew_" label=" "/>
-						<item id="bw_0" image="ew_00" label="0.0"/>
-						<item id="bw_0.5" image="ew_005" label="0.5"/>
-						<item id="bw_1" image="ew_01" label="1.0"/>
-						<item id="bw_2" image="ew_02" label="2.0"/>
-						<item id="bw_3" image="ew_03" label="3.0"/>
-						<item id="bw_4" image="ew_04" label="4.0"/>
-						<item id="bw_5" image="ew_05" label="5.0"/>
-						<item id="bw_6" image="ew_06" label="6.0"/>
-						<item id="bw_7" image="ew_07" label="7.0"/>
-						<item id="bw_8" image="ew_08" label="8.0"/>
-						<item id="bw_9" image="ew_09" label="9.0"/>
-						<item id="bw_10" image="ew_10" label="10.0"/>
-					</dropDown>
-					<dropDown id="borderPeripheries" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" getImage="null_getImage" getVisible="borderPeripheries_getVisible" onAction="borderPeripheries_onAction" getSelectedItemID="borderPeripheries_getSelectedItemID">
+                    <gallery   id="borderColor" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="borderColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="borderColor_getImage" getSelectedItemIndex="borderColor_getSelectedItemIndex"></gallery>
+					<button    id="borderDummyButton1"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false"/>
+					<button    id="borderDummyButton2"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false"/>
+
+					<separator id="borderColorSeparator" getVisible="colorPicker_getVisible"/>
+                    <button    id="borderColorPicker"    getVisible="colorPicker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction" />
+					<button    id="borderDummyButton3"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false"/>
+					<button    id="borderDummyButton4"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false"/>
+
+					<separator id="Separator16"/>
+                    <dropDown id="borderPenWidth" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" onAction="borderPenWidth_onAction" getSelectedItemID="borderPenWidth_getSelectedItemID">
+                        <item id="bw_" image="ew_" label=" "/>
+                        <item id="bw_0" image="ew_00" label="0.0"/>
+                        <item id="bw_0.5" image="ew_005" label="0.5"/>
+                        <item id="bw_1" image="ew_01" label="1.0"/>
+                        <item id="bw_2" image="ew_02" label="2.0"/>
+                        <item id="bw_3" image="ew_03" label="3.0"/>
+                        <item id="bw_4" image="ew_04" label="4.0"/>
+                        <item id="bw_5" image="ew_05" label="5.0"/>
+                        <item id="bw_6" image="ew_06" label="6.0"/>
+                        <item id="bw_7" image="ew_07" label="7.0"/>
+                        <item id="bw_8" image="ew_08" label="8.0"/>
+                        <item id="bw_9" image="ew_09" label="9.0"/>
+                        <item id="bw_10" image="ew_10" label="10.0"/>
+                    </dropDown>
+					<dropDown id="borderPeripheries" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXX" getVisible="borderPeripheries_getVisible" onAction="borderPeripheries_onAction" getSelectedItemID="borderPeripheries_getSelectedItemID">
 						<item id="p_" image="p_" label=" "/>
 						<item id="p_1" image="p_1" label="1"/>
 						<item id="p_2" image="p_2" label="2"/>
@@ -1544,18 +1555,22 @@
 					</dropDown>
 				</group>
 				<group id="designerGroupFillColor" getLabel="ribbon_getLabel" imageMso="ShapeFillColorPickerClassic" getVisible="designerGroupFillColor_getVisible">
-					<dropDown id="fillColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fillColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="fillColor_getImage" getSelectedItemIndex="fillColor_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="gradientFillColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="gradientFillColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="gradientFillColor_getImage" getSelectedItemIndex="gradientFillColor_getSelectedItemIndex" getVisible="designerGroupGradientFillColor_getVisible">
-					</dropDown>
+                    <gallery id="fillColor" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="fillColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="fillColor_getImage" getSelectedItemIndex="fillColor_getSelectedItemIndex"></gallery>
+                    <gallery id="gradientFillColor" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="gradientFillColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="gradientFillColor_getImage" getSelectedItemIndex="gradientFillColor_getSelectedItemIndex" getVisible="gradientFillColor_getVisible"></gallery>
+					<button  id="fillColorDummyButton1"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false"/>
+                        
+					<separator id="fillColorSeparator"      getVisible="colorPicker_getVisible"/>			
+                    <button    id="fillColorPicker"         getVisible="colorPicker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction" />
+                    <button    id="gradientFillColorPicker" getVisible="gradientFillColorPicker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction" />
+					<button    id="fillColorDummyButton2"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false"/>
 				</group>
 				<group id="designerGroupGradientFillColor" getLabel="ribbon_getLabel" imageMso="GradientGallery" getVisible="designerGroupGradientFillColor_getVisible">
-					<dropDown id="gradientFillType"  sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="gradientFillType_onAction" getSelectedItemID="gradientFillType_getSelectedItemID" getVisible="gradientFillType_getVisible">
+					<dropDown id="gradientFillType"  sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="gradientFillType_onAction" getSelectedItemID="gradientFillType_getSelectedItemID" getVisible="gradientFillType_getVisible">
 						<item id="ft_" image="ft_filled" label=" "/>
 						<item id="ft_filled" image="ft_filled" label="filled"/>
 						<item id="ft_radial" image="ft_radial" label="radial"/>
 					</dropDown>
-					<dropDown id="gradientFillAngle" sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="gradientFillAngle_onAction" getSelectedItemID="gradientFillAngle_getSelectedItemID" getVisible="gradientFillAngle_getVisible">
+					<dropDown id="gradientFillAngle" sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="gradientFillAngle_onAction" getSelectedItemID="gradientFillAngle_getSelectedItemID" getVisible="gradientFillAngle_getVisible">
 						<item id="a_" label=" "/>
 						<item id="a_0" label="0°"/>
 						<item id="a_1" label="1°"/>
@@ -1919,7 +1934,7 @@
 						<item id="a_359" label="359°"/>
 						<item id="a_360" label="360°"/>
 					</dropDown>
-					<dropDown id="gradientFillWeight" sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="gradientFillWeight_onAction" getSelectedItemID="gradientFillWeight_getSelectedItemID" getVisible="gradientFillWeight_getVisible">
+					<dropDown id="gradientFillWeight" sizeString="XXXX" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="gradientFillWeight_onAction" getSelectedItemID="gradientFillWeight_getSelectedItemID" getVisible="gradientFillWeight_getVisible">
 						<item id="gw_"   label=" "/>
 						<item id="gw_1"  label="1%"/>
 						<item id="gw_2"  label="2%"/>
@@ -2025,11 +2040,12 @@
 				<group id="designerGroupNodeImage" getLabel="ribbon_getLabel" imageMso="PictureInsertFromFile" getVisible="designerGroupNodeImage_getVisible">
 					<button id="nodeImageChoose" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileOpen" size="normal" onAction="nodeImageChoose_onAction"/>
 					<editBox id="nodeImageName" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onChange="nodeImageName_onChange" getText="nodeImageName_getText"/>
+					<checkBox id="nodeImageRelativePath" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="nodeImageRelativePath_onAction" getPressed="nodeImageRelativePath_getPressed"/>
 					<separator id="imagePosSeparator" getVisible="nodeImage_GetVisible"/>
 					<dropDown  id="nodeImageScale"    getVisible="nodeImage_GetVisible" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXXXXXX" onAction="nodeImageScale_onAction" getItemCount="nodeImageScale_getItemCount" getItemLabel="nodeImageScale_getItemLabel" getSelectedItemIndex="nodeImageScale_getSelectedItemIndex">
 					</dropDown>
 					<dropDown id="nodeImagePosition"  getVisible="nodeImage_GetVisible" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXX"     onAction="nodeImagePosition_onAction" getSelectedItemID="nodeImagePosition_getSelectedItemID">
-						<item image="imagepos_cc" id="imagepos_" label=" "/>
+						<item image="imagepos_cc" id="imagepos_"   label="Default"/>
 						<item image="imagepos_tl" id="imagepos_tl" label="Top Left"/>
 						<item image="imagepos_tc" id="imagepos_tc" label="Top Center"/>
 						<item image="imagepos_tr" id="imagepos_tr" label="Top Right"/>
@@ -2076,13 +2092,17 @@
 						<item id="weight_100" label="100"/>
 					</dropDown>
 				</group>
-				<group id="designerGroupEdgeColors" getLabel="ribbon_getLabel" imageMso="SmartArtChangeColorsGallery" getVisible="designerGroupEdgeColors_getVisible">
-					<dropDown id="edgeColor1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor1_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor1_getImage" getSelectedItemIndex="edgeColor1_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="edgeColor2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor2_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor2_getImage" getSelectedItemIndex="edgeColor2_getSelectedItemIndex" getVisible="edgeColor2_getVisible">
-					</dropDown>
-					<dropDown id="edgeColor3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor3_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor3_getImage" getSelectedItemIndex="edgeColor3_getSelectedItemIndex" getVisible="edgeColor3_getVisible">
-					</dropDown>
+				<group id="designerGroupEdgeColors" getLabel="ribbon_getLabel" image="ViewBackToColorView" getVisible="designerGroupEdgeColors_getVisible">
+                    <gallery id="edgeColor1" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor1_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor1_getImage" getSelectedItemIndex="edgeColor1_getSelectedItemIndex">
+                    </gallery>
+                    <gallery id="edgeColor2" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor2_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor2_getImage" getSelectedItemIndex="edgeColor2_getSelectedItemIndex" getVisible="edgeColor2_getVisible">
+                    </gallery>
+                    <gallery id="edgeColor3" showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeColor3_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="edgeColor3_getImage" getSelectedItemIndex="edgeColor3_getSelectedItemIndex" getVisible="edgeColor3_getVisible">
+                    </gallery>
+					<separator id="edgeColorSeparator" getVisible="colorPicker_getVisible"/>
+                    <button id="edgeColor1Picker" getVisible="colorPicker_getVisible"      showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction" />
+                    <button id="edgeColor2Picker" getVisible="edgeColor2Picker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction"/>
+                    <button id="edgeColor3Picker" getVisible="edgeColor3Picker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction"/>
 				</group>
 				<group id="designerGroupEdgeArrow" getLabel="ribbon_getLabel" imageMso="ArrowsMore" getVisible="designerGroupEdgeStyle_getVisible">
 					<dropDown id="edgeDirection" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXX" onAction="edgeDirection_onAction" getSelectedItemID="edgeDirection_getSelectedItemID">
@@ -2111,287 +2131,388 @@
 					<button id="arrowDummyButton1" image="spacer_normal" size="normal" enabled="false" getVisible="mac_getVisible"/>
 				</group>
 				<group id="designerGroupEdgeArrowHead" getLabel="ribbon_getLabel" imageMso="LeftArrow2" getVisible="groupArrowHead_getVisible">
-					<dropDown id="edgeArrowHead1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead1_onAction" getSelectedItemID="edgeArrowHead1_getSelectedItemID">
+					<gallery id="edgeArrowHead1" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead1_onAction" getSelectedItemID="edgeArrowHead1_getSelectedItemID">
 						<item id="h1_" image="aa_normal" label=" "/>
+						<item id="w1_" image="aa_blank" label=" "/>
+						<item id="x1_" image="aa_blank" label=" "/>
+						
+						<item id="h1_none" image="aa_none" label="none"/>						
+						<item id="h1_dot" image="aa_dot" label="dot"/>
+						<item id="h1_odot" image="aa_odot" label="odot"/>
+												
 						<item id="h1_normal" image="aa_normal" label="normal"/>
 						<item id="h1_lnormal" image="aa_lnormal" label="lnormal"/>
 						<item id="h1_rnormal" image="aa_rnormal" label="rnormal"/>
+						
 						<item id="h1_onormal" image="aa_onormal" label="onormal"/>
 						<item id="h1_olnormal" image="aa_olnormal" label="olnormal"/>
 						<item id="h1_ornormal" image="aa_ornormal" label="ornormal"/>
+						
 						<item id="h1_box" image="aa_box" label="box"/>
 						<item id="h1_lbox" image="aa_lbox" label="lbox"/>
 						<item id="h1_rbox" image="aa_rbox" label="rbox"/>
+						
 						<item id="h1_obox" image="aa_obox" label="obox"/>
 						<item id="h1_olbox" image="aa_olbox" label="olbox"/>
 						<item id="h1_orbox" image="aa_orbox" label="orbox"/>
-						<item id="h1_crow" image="aa_crow" label="crow"/>
-						<item id="h1_lcrow" image="aa_lcrow" label="lcrow"/>
-						<item id="h1_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="h1_diamond" image="aa_diamond" label="diamond"/>
 						<item id="h1_ldiamond" image="aa_ldiamond" label="ldiamond"/>
 						<item id="h1_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						
 						<item id="h1_odiamond" image="aa_odiamond" label="odiamond"/>
 						<item id="h1_oldiamond" image="aa_oldiamond" label="oldiamond"/>
 						<item id="h1_ordiamond" image="aa_ordiamond" label="ordiamond"/>
-						<item id="h1_dot" image="aa_dot" label="dot"/>
-						<item id="h1_odot" image="aa_odot" label="odot"/>
+						
 						<item id="h1_inv" image="aa_inv" label="inv"/>
 						<item id="h1_linv" image="aa_linv" label="linv"/>
 						<item id="h1_rinv" image="aa_rinv" label="rinv"/>
+						
 						<item id="h1_oinv" image="aa_oinv" label="oinv"/>
 						<item id="h1_olinv" image="aa_olinv" label="olinv"/>
 						<item id="h1_orinv" image="aa_orinv" label="orinv"/>
-						<item id="h1_none" image="aa_none" label="none"/>
+						
 						<item id="h1_tee" image="aa_tee" label="tee"/>
 						<item id="h1_ltee" image="aa_ltee" label="ltee"/>
 						<item id="h1_rtee" image="aa_rtee" label="rtee"/>
+						
+						<item id="h1_crow" image="aa_crow" label="crow"/>
+						<item id="h1_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="h1_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="h1_vee" image="aa_vee" label="vee"/>
 						<item id="h1_lvee" image="aa_lvee" label="lvee"/>
 						<item id="h1_rvee" image="aa_rvee" label="rvee"/>
+						
 						<item id="h1_curve" image="aa_curve" label="curve"/>
 						<item id="h1_lcurve" image="aa_lcurve" label="lcurve"/>
 						<item id="h1_rcurve" image="aa_rcurve" label="rcurve"/>
+						
 						<item id="h1_icurve" image="aa_icurve" label="icurve"/>
 						<item id="h1_licurve" image="aa_licurve" label="licurve"/>
-						<item id="h1_ricurve" image="aa_ricurve" label="ricurve"/>
-					</dropDown>
-					<dropDown id="edgeArrowHead2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead2_onAction" getSelectedItemID="edgeArrowHead2_getSelectedItemID" getVisible="edgeArrowHead2_getVisible">
-						<item id="h2_" label=" "/>
+						<item id="h1_ricurve" image="aa_ricurve" label="ricurve"/>					
+					</gallery>
+					<gallery id="edgeArrowHead2" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead2_onAction" getSelectedItemID="edgeArrowHead2_getSelectedItemID" getVisible="edgeArrowHead2_getVisible">
+						<item id="h2_" image="aa_blank" label=" "/>
+						<item id="w2_" image="aa_blank" label=" "/>
+						<item id="x2_" image="aa_blank" label=" "/>
+
+						<item id="h2_none" image="aa_none" label="none"/>
+						<item id="h2_dot"  image="aa_dot"  label="dot"/>
+						<item id="h2_odot" image="aa_odot" label="odot"/>
+						
 						<item id="h2_normal" image="aa_normal" label="normal"/>
 						<item id="h2_lnormal" image="aa_lnormal" label="lnormal"/>
 						<item id="h2_rnormal" image="aa_rnormal" label="rnormal"/>
+						
 						<item id="h2_onormal" image="aa_onormal" label="onormal"/>
 						<item id="h2_olnormal" image="aa_olnormal" label="olnormal"/>
 						<item id="h2_ornormal" image="aa_ornormal" label="ornormal"/>
+						
 						<item id="h2_box" image="aa_box" label="box"/>
 						<item id="h2_lbox" image="aa_lbox" label="lbox"/>
 						<item id="h2_rbox" image="aa_rbox" label="rbox"/>
+						
 						<item id="h2_obox" image="aa_obox" label="obox"/>
 						<item id="h2_olbox" image="aa_olbox" label="olbox"/>
 						<item id="h2_orbox" image="aa_orbox" label="orbox"/>
-						<item id="h2_crow" image="aa_crow" label="crow"/>
-						<item id="h2_lcrow" image="aa_lcrow" label="lcrow"/>
-						<item id="h2_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="h2_diamond" image="aa_diamond" label="diamond"/>
 						<item id="h2_ldiamond" image="aa_ldiamond" label="ldiamond"/>
 						<item id="h2_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						
 						<item id="h2_odiamond" image="aa_odiamond" label="odiamond"/>
 						<item id="h2_oldiamond" image="aa_oldiamond" label="oldiamond"/>
 						<item id="h2_ordiamond" image="aa_ordiamond" label="ordiamond"/>
-						<item id="h2_dot" image="aa_dot" label="dot"/>
-						<item id="h2_odot" image="aa_odot" label="odot"/>
+						
 						<item id="h2_inv" image="aa_inv" label="inv"/>
 						<item id="h2_linv" image="aa_linv" label="linv"/>
 						<item id="h2_rinv" image="aa_rinv" label="rinv"/>
+						
 						<item id="h2_oinv" image="aa_oinv" label="oinv"/>
 						<item id="h2_olinv" image="aa_olinv" label="olinv"/>
 						<item id="h2_orinv" image="aa_orinv" label="orinv"/>
-						<item id="h2_none" image="aa_none" label="none"/>
+						
 						<item id="h2_tee" image="aa_tee" label="tee"/>
 						<item id="h2_ltee" image="aa_ltee" label="ltee"/>
 						<item id="h2_rtee" image="aa_rtee" label="rtee"/>
+						
+						<item id="h2_crow" image="aa_crow" label="crow"/>
+						<item id="h2_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="h2_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="h2_vee" image="aa_vee" label="vee"/>
 						<item id="h2_lvee" image="aa_lvee" label="lvee"/>
 						<item id="h2_rvee" image="aa_rvee" label="rvee"/>
+						
 						<item id="h2_curve" image="aa_curve" label="curve"/>
 						<item id="h2_lcurve" image="aa_lcurve" label="lcurve"/>
 						<item id="h2_rcurve" image="aa_rcurve" label="rcurve"/>
+						
 						<item id="h2_icurve" image="aa_icurve" label="icurve"/>
 						<item id="h2_licurve" image="aa_licurve" label="licurve"/>
 						<item id="h2_ricurve" image="aa_ricurve" label="ricurve"/>
-					</dropDown>
-					<dropDown id="edgeArrowHead3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead3_onAction" getSelectedItemID="edgeArrowHead3_getSelectedItemID" getVisible="edgeArrowHead3_getVisible">
-						<item id="h3_" label=" "/>
+					</gallery>
+					<gallery id="edgeArrowHead3" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowHead3_onAction" getSelectedItemID="edgeArrowHead3_getSelectedItemID" getVisible="edgeArrowHead3_getVisible">
+						<item id="h3_" image="aa_blank" label=" "/>
+						<item id="w3_" image="aa_blank" label=" "/>
+						<item id="x3_" image="aa_blank" label=" "/>
+						
+						<item id="h3_none" image="aa_none" label="none"/>
+						<item id="h3_dot"  image="aa_dot"  label="dot"/>
+						<item id="h3_odot" image="aa_odot" label="odot"/>
+						
 						<item id="h3_normal" image="aa_normal" label="normal"/>
 						<item id="h3_lnormal" image="aa_lnormal" label="lnormal"/>
 						<item id="h3_rnormal" image="aa_rnormal" label="rnormal"/>
+						
 						<item id="h3_onormal" image="aa_onormal" label="onormal"/>
 						<item id="h3_olnormal" image="aa_olnormal" label="olnormal"/>
 						<item id="h3_ornormal" image="aa_ornormal" label="ornormal"/>
+						
 						<item id="h3_box" image="aa_box" label="box"/>
 						<item id="h3_lbox" image="aa_lbox" label="lbox"/>
 						<item id="h3_rbox" image="aa_rbox" label="rbox"/>
+						
 						<item id="h3_obox" image="aa_obox" label="obox"/>
 						<item id="h3_olbox" image="aa_olbox" label="olbox"/>
 						<item id="h3_orbox" image="aa_orbox" label="orbox"/>
-						<item id="h3_crow" image="aa_crow" label="crow"/>
-						<item id="h3_lcrow" image="aa_lcrow" label="lcrow"/>
-						<item id="h3_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="h3_diamond" image="aa_diamond" label="diamond"/>
 						<item id="h3_ldiamond" image="aa_ldiamond" label="ldiamond"/>
 						<item id="h3_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						
 						<item id="h3_odiamond" image="aa_odiamond" label="odiamond"/>
 						<item id="h3_oldiamond" image="aa_oldiamond" label="oldiamond"/>
 						<item id="h3_ordiamond" image="aa_ordiamond" label="ordiamond"/>
-						<item id="h3_dot" image="aa_dot" label="dot"/>
-						<item id="h3_odot" image="aa_odot" label="odot"/>
+						
 						<item id="h3_inv" image="aa_inv" label="inv"/>
 						<item id="h3_linv" image="aa_linv" label="linv"/>
 						<item id="h3_rinv" image="aa_rinv" label="rinv"/>
+						
 						<item id="h3_oinv" image="aa_oinv" label="oinv"/>
 						<item id="h3_olinv" image="aa_olinv" label="olinv"/>
 						<item id="h3_orinv" image="aa_orinv" label="orinv"/>
-						<item id="h3_none" image="aa_none" label="none"/>
+						
 						<item id="h3_tee" image="aa_tee" label="tee"/>
 						<item id="h3_ltee" image="aa_ltee" label="ltee"/>
 						<item id="h3_rtee" image="aa_rtee" label="rtee"/>
+						
+						<item id="h3_crow" image="aa_crow" label="crow"/>
+						<item id="h3_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="h3_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="h3_vee" image="aa_vee" label="vee"/>
 						<item id="h3_lvee" image="aa_lvee" label="lvee"/>
 						<item id="h3_rvee" image="aa_rvee" label="rvee"/>
+						
 						<item id="h3_curve" image="aa_curve" label="curve"/>
 						<item id="h3_lcurve" image="aa_lcurve" label="lcurve"/>
 						<item id="h3_rcurve" image="aa_rcurve" label="rcurve"/>
+						
 						<item id="h3_icurve" image="aa_icurve" label="icurve"/>
 						<item id="h3_licurve" image="aa_licurve" label="licurve"/>
 						<item id="h3_ricurve" image="aa_ricurve" label="ricurve"/>
-					</dropDown>
+					</gallery>
 				</group>
 				<group id="designerGroupEdgeArrowTail" getLabel="ribbon_getLabel" imageMso="RightArrow2" getVisible="groupArrowTail_getVisible">
-					<dropDown id="edgeArrowTail1" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail1_onAction" getSelectedItemID="edgeArrowTail1_getSelectedItemID">
+					<gallery id="edgeArrowTail1" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail1_onAction" getSelectedItemID="edgeArrowTail1_getSelectedItemID">
 						<item id="t1_" image="aa_normal" label=" "/>
-						<item id="t1_normal" image="aa_normal" label="normal"/>
+						<item id="y1_" image="aa_blank" label=" "/>
+						<item id="z1_" image="aa_blank" label=" "/>
+						
+						<item id="t1_none" image="aa_none" label="none"/>
+						<item id="t1_dot"  image="aa_dot"  label="dot"/>
+						<item id="t1_odot" image="aa_odot" label="odot"/>
+
+						<item id="t1_normal"  image="aa_normal"  label="normal"/>
 						<item id="t1_lnormal" image="aa_lnormal" label="lnormal"/>
 						<item id="t1_rnormal" image="aa_rnormal" label="rnormal"/>
-						<item id="t1_onormal" image="aa_onormal" label="onormal"/>
+						
+						<item id="t1_onormal"  image="aa_onormal"  label="onormal"/>
 						<item id="t1_olnormal" image="aa_olnormal" label="olnormal"/>
 						<item id="t1_ornormal" image="aa_ornormal" label="ornormal"/>
-						<item id="t1_box" image="aa_box" label="box"/>
+						
+						<item id="t1_box"  image="aa_box"  label="box"/>
 						<item id="t1_lbox" image="aa_lbox" label="lbox"/>
 						<item id="t1_rbox" image="aa_rbox" label="rbox"/>
-						<item id="t1_obox" image="aa_obox" label="obox"/>
+						
+						<item id="t1_obox"  image="aa_obox"  label="obox"/>
 						<item id="t1_olbox" image="aa_olbox" label="olbox"/>
 						<item id="t1_orbox" image="aa_orbox" label="orbox"/>
-						<item id="t1_crow" image="aa_crow" label="crow"/>
-						<item id="t1_lcrow" image="aa_lcrow" label="lcrow"/>
-						<item id="t1_rcrow" image="aa_rcrow" label="rcrow"/>
-						<item id="t1_diamond" image="aa_diamond" label="diamond"/>
+						
+						<item id="t1_diamond"   image="aa_diamond" label="diamond"/>
 						<item id="t1_ldiamond" image="aa_ldiamond" label="ldiamond"/>
 						<item id="t1_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						
 						<item id="t1_odiamond" image="aa_odiamond" label="odiamond"/>
 						<item id="t1_oldiamond" image="aa_oldiamond" label="oldiamond"/>
 						<item id="t1_ordiamond" image="aa_ordiamond" label="ordiamond"/>
-						<item id="t1_dot" image="aa_dot" label="dot"/>
-						<item id="t1_odot" image="aa_odot" label="odot"/>
-						<item id="t1_inv" image="aa_inv" label="inv"/>
+						
+						<item id="t1_inv"  image="aa_inv"  label="inv"/>
 						<item id="t1_linv" image="aa_linv" label="linv"/>
 						<item id="t1_rinv" image="aa_rinv" label="rinv"/>
-						<item id="t1_oinv" image="aa_oinv" label="oinv"/>
+						
+						<item id="t1_oinv"  image="aa_oinv" label="oinv"/>
 						<item id="t1_olinv" image="aa_olinv" label="olinv"/>
 						<item id="t1_orinv" image="aa_orinv" label="orinv"/>
-						<item id="t1_none" image="aa_none" label="none"/>
-						<item id="t1_tee" image="aa_tee" label="tee"/>
+						
+						<item id="t1_tee"  image="aa_tee"  label="tee"/>
 						<item id="t1_ltee" image="aa_ltee" label="ltee"/>
 						<item id="t1_rtee" image="aa_rtee" label="rtee"/>
-						<item id="t1_vee" image="aa_vee" label="vee"/>
+						
+						<item id="t1_crow"  image="aa_crow"  label="crow"/>
+						<item id="t1_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="t1_rcrow" image="aa_rcrow" label="rcrow"/>
+						
+						<item id="t1_vee"  image="aa_vee"  label="vee"/>
 						<item id="t1_lvee" image="aa_lvee" label="lvee"/>
 						<item id="t1_rvee" image="aa_rvee" label="rvee"/>
-						<item id="t1_curve" image="aa_curve" label="curve"/>
+						
+						<item id="t1_curve"  image="aa_curve"  label="curve"/>
 						<item id="t1_lcurve" image="aa_lcurve" label="lcurve"/>
 						<item id="t1_rcurve" image="aa_rcurve" label="rcurve"/>
-						<item id="t1_icurve" image="aa_icurve" label="icurve"/>
+						
+						<item id="t1_icurve"  image="aa_icurve" label="icurve"/>
 						<item id="t1_licurve" image="aa_licurve" label="licurve"/>
 						<item id="t1_ricurve" image="aa_ricurve" label="ricurve"/>
-					</dropDown>
-					<dropDown id="edgeArrowTail2" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail2_onAction" getSelectedItemID="edgeArrowTail2_getSelectedItemID" getVisible="edgeArrowTail2_getVisible">
-						<item id="t2_" label=" "/>
+					</gallery>
+					<gallery id="edgeArrowTail2" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail2_onAction" getSelectedItemID="edgeArrowTail2_getSelectedItemID" getVisible="edgeArrowTail2_getVisible">
+						<item id="t2_" image="aa_blank" label=" "/>
+						<item id="y2_" image="aa_blank" label=" "/>
+						<item id="z2_" image="aa_blank" label=" "/>
+						
+						<item id="t2_none" image="aa_none" label="none"/>
+						<item id="t2_dot"  image="aa_dot"  label="dot"/>
+						<item id="t2_odot" image="aa_odot" label="odot"/>
+
 						<item id="t2_normal" image="aa_normal" label="normal"/>
 						<item id="t2_lnormal" image="aa_lnormal" label="lnormal"/>
 						<item id="t2_rnormal" image="aa_rnormal" label="rnormal"/>
+						
 						<item id="t2_onormal" image="aa_onormal" label="onormal"/>
 						<item id="t2_olnormal" image="aa_olnormal" label="olnormal"/>
 						<item id="t2_ornormal" image="aa_ornormal" label="ornormal"/>
+						
 						<item id="t2_box" image="aa_box" label="box"/>
 						<item id="t2_lbox" image="aa_lbox" label="lbox"/>
 						<item id="t2_rbox" image="aa_rbox" label="rbox"/>
+						
 						<item id="t2_obox" image="aa_obox" label="obox"/>
 						<item id="t2_olbox" image="aa_olbox" label="olbox"/>
 						<item id="t2_orbox" image="aa_orbox" label="orbox"/>
-						<item id="t2_crow" image="aa_crow" label="crow"/>
-						<item id="t2_lcrow" image="aa_lcrow" label="lcrow"/>
-						<item id="t2_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="t2_diamond" image="aa_diamond" label="diamond"/>
 						<item id="t2_ldiamond" image="aa_ldiamond" label="ldiamond"/>
 						<item id="t2_rdiamond" image="aa_rdiamond" label="rdiamond"/>
+						
 						<item id="t2_odiamond" image="aa_odiamond" label="odiamond"/>
 						<item id="t2_oldiamond" image="aa_oldiamond" label="oldiamond"/>
 						<item id="t2_ordiamond" image="aa_ordiamond" label="ordiamond"/>
-						<item id="t2_dot" image="aa_dot" label="dot"/>
-						<item id="t2_odot" image="aa_odot" label="odot"/>
+						
 						<item id="t2_inv" image="aa_inv" label="inv"/>
 						<item id="t2_linv" image="aa_linv" label="linv"/>
 						<item id="t2_rinv" image="aa_rinv" label="rinv"/>
+						
 						<item id="t2_oinv" image="aa_oinv" label="oinv"/>
 						<item id="t2_olinv" image="aa_olinv" label="olinv"/>
 						<item id="t2_orinv" image="aa_orinv" label="orinv"/>
-						<item id="t2_none" image="aa_none" label="none"/>
+						
 						<item id="t2_tee" image="aa_tee" label="tee"/>
 						<item id="t2_ltee" image="aa_ltee" label="ltee"/>
 						<item id="t2_rtee" image="aa_rtee" label="rtee"/>
+						
+						<item id="t2_crow" image="aa_crow" label="crow"/>
+						<item id="t2_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="t2_rcrow" image="aa_rcrow" label="rcrow"/>
+						
 						<item id="t2_vee" image="aa_vee" label="vee"/>
 						<item id="t2_lvee" image="aa_lvee" label="lvee"/>
 						<item id="t2_rvee" image="aa_rvee" label="rvee"/>
+						
 						<item id="t2_curve" image="aa_curve" label="curve"/>
 						<item id="t2_lcurve" image="aa_lcurve" label="lcurve"/>
 						<item id="t2_rcurve" image="aa_rcurve" label="rcurve"/>
+						
 						<item id="t2_icurve" image="aa_icurve" label="icurve"/>
 						<item id="t2_licurve" image="aa_licurve" label="licurve"/>
 						<item id="t2_ricurve" image="aa_ricurve" label="ricurve"/>
-					</dropDown>
-					<dropDown id="edgeArrowTail3" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail3_onAction" getSelectedItemID="edgeArrowTail3_getSelectedItemID" getVisible="edgeArrowTail3_getVisible">
-						<item id="t3_" label=" "/>
-						<item id="t3_normal" image="aa_normal" label="normal"/>
+					</gallery>
+					<gallery id="edgeArrowTail3" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeArrowTail3_onAction" getSelectedItemID="edgeArrowTail3_getSelectedItemID" getVisible="edgeArrowTail3_getVisible">
+						<item id="t3_" image="aa_blank" label=" "/>
+						<item id="y3_" image="aa_blank" label=" "/>
+						<item id="z3_" image="aa_blank" label=" "/>
+						
+						<item id="t3_none" image="aa_none" label="none"/>
+						<item id="t3_dot"  image="aa_dot"  label="dot"/>
+						<item id="t3_odot" image="aa_odot" label="odot"/>
+
+						<item id="t3_normal"  image="aa_normal"  label="normal"/>
 						<item id="t3_lnormal" image="aa_lnormal" label="lnormal"/>
 						<item id="t3_rnormal" image="aa_rnormal" label="rnormal"/>
-						<item id="t3_onormal" image="aa_onormal" label="onormal"/>
+						
+						<item id="t3_onormal"  image="aa_onormal"  label="onormal"/>
 						<item id="t3_olnormal" image="aa_olnormal" label="olnormal"/>
 						<item id="t3_ornormal" image="aa_ornormal" label="ornormal"/>
-						<item id="t3_box" image="aa_box" label="box"/>
+						
+						<item id="t3_box"  image="aa_box"  label="box"/>
 						<item id="t3_lbox" image="aa_lbox" label="lbox"/>
 						<item id="t3_rbox" image="aa_rbox" label="rbox"/>
-						<item id="t3_obox" image="aa_obox" label="obox"/>
+						
+						<item id="t3_obox"  image="aa_obox"  label="obox"/>
 						<item id="t3_olbox" image="aa_olbox" label="olbox"/>
 						<item id="t3_orbox" image="aa_orbox" label="orbox"/>
-						<item id="t3_crow" image="aa_crow" label="crow"/>
-						<item id="t3_lcrow" image="aa_lcrow" label="lcrow"/>
-						<item id="t3_rcrow" image="aa_rcrow" label="rcrow"/>
-						<item id="t3_diamond" image="aa_diamond" label="diamond"/>
+						
+						<item id="t3_diamond"  image="aa_diamond"  label="diamond"/>
 						<item id="t3_ldiamond" image="aa_ldiamond" label="ldiamond"/>
 						<item id="t3_rdiamond" image="aa_rdiamond" label="rdiamond"/>
-						<item id="t3_odiamond" image="aa_odiamond" label="odiamond"/>
+						
+						<item id="t3_odiamond"  image="aa_odiamond"  label="odiamond"/>
 						<item id="t3_oldiamond" image="aa_oldiamond" label="oldiamond"/>
 						<item id="t3_ordiamond" image="aa_ordiamond" label="ordiamond"/>
-						<item id="t3_dot" image="aa_dot" label="dot"/>
-						<item id="t3_odot" image="aa_odot" label="odot"/>
-						<item id="t3_inv" image="aa_inv" label="inv"/>
+						
+						<item id="t3_inv"  image="aa_inv"  label="inv"/>
 						<item id="t3_linv" image="aa_linv" label="linv"/>
 						<item id="t3_rinv" image="aa_rinv" label="rinv"/>
-						<item id="t3_oinv" image="aa_oinv" label="oinv"/>
+						
+						<item id="t3_oinv"  image="aa_oinv"  label="oinv"/>
 						<item id="t3_olinv" image="aa_olinv" label="olinv"/>
 						<item id="t3_orinv" image="aa_orinv" label="orinv"/>
-						<item id="t3_none" image="aa_none" label="none"/>
-						<item id="t3_tee" image="aa_tee" label="tee"/>
+						
+						<item id="t3_tee"  image="aa_tee"  label="tee"/>
 						<item id="t3_ltee" image="aa_ltee" label="ltee"/>
 						<item id="t3_rtee" image="aa_rtee" label="rtee"/>
-						<item id="t3_vee" image="aa_vee" label="vee"/>
+						
+						<item id="t3_crow"  image="aa_crow"  label="crow"/>
+						<item id="t3_lcrow" image="aa_lcrow" label="lcrow"/>
+						<item id="t3_rcrow" image="aa_rcrow" label="rcrow"/>
+						
+						<item id="t3_vee"  image="aa_vee"  label="vee"/>
 						<item id="t3_lvee" image="aa_lvee" label="lvee"/>
 						<item id="t3_rvee" image="aa_rvee" label="rvee"/>
-						<item id="t3_curve" image="aa_curve" label="curve"/>
+						
+						<item id="t3_curve"  image="aa_curve"  label="curve"/>
 						<item id="t3_lcurve" image="aa_lcurve" label="lcurve"/>
 						<item id="t3_rcurve" image="aa_rcurve" label="rcurve"/>
-						<item id="t3_icurve" image="aa_icurve" label="icurve"/>
+						
+						<item id="t3_icurve"  image="aa_icurve"  label="icurve"/>
 						<item id="t3_licurve" image="aa_licurve" label="licurve"/>
 						<item id="t3_ricurve" image="aa_ricurve" label="ricurve"/>
-					</dropDown>
+					</gallery>
 				</group>
 				<group id="designerGroupHeadTail" getLabel="ribbon_getLabel" imageMso="DiagramReverseClassic" getVisible="designerGroupEdgeStyle_getVisible">
-					<dropDown id="labelFontColor" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="labelFontColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="labelFontColor_getImage" getSelectedItemIndex="labelFontColor_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="labelFontName" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="labelFontName_onAction" getItemCount="fontName_getItemCount" getItemImage="fontName_getItemImage" getItemLabel="fontName_getItemLabel" getSelectedItemIndex="labelFontName_getSelectedItemIndex">
-					</dropDown>
-					<dropDown id="labelFontSize" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getImage="null_getImage" onAction="labelFontSize_onAction" getItemCount="fontSize_getItemCount" getItemLabel="fontSize_getItemLabel" getSelectedItemIndex="labelFontSize_getSelectedItemIndex">
-					</dropDown>
-					<separator id="edgeSpacingSeparator"/>
+                    <gallery id="labelFontColor"   showItemLabel="false" getLabel="color_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="labelFontColor_onAction" getItemCount="color_getItemCount" getItemLabel="color_getItemLabel" getItemImage="color_getItemImage" getImage="labelFontColor_getImage" getSelectedItemIndex="labelFontColor_getSelectedItemIndex"></gallery>
+                    <gallery id="labelFontName" showItemLabel="true" getImage="labelFontName_getImage" getLabel="labelFontName_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="labelFontName_onAction" getItemCount="fontName_getItemCount" getItemImage="fontName_getItemImage" getItemLabel="fontName_getItemLabel" getSelectedItemIndex="labelFontName_getSelectedItemIndex"></gallery>
+                    <dropDown id="labelFontSize" sizeString="XX" showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="labelFontSize_onAction" getItemCount="fontSize_getItemCount" getItemLabel="fontSize_getItemLabel" getSelectedItemIndex="labelFontSize_getSelectedItemIndex"></dropDown>
+
+					<separator id="edgeLabelColorSeparator" getVisible="colorPicker_getVisible"/>
+					
+                    <button    id="labelFontColorPicker"    getVisible="colorPicker_getVisible" showLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="SmartArtChangeColorsGallery" size="normal" onAction="colorPicker_onAction" />
+					<button    id="labelFontDummyButton1"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false" />
+					<button    id="labelFontDummyButton2"   getVisible="mac_getVisible" image="spacer_normal" size="normal" enabled="false" />
+
+					<separator id="edgeSpacingSeparator" visible="true"/>
+					
 					<dropDown id="edgeLabelAngle" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXX" onAction="edgeLabelAngle_onAction" getSelectedItemID="edgeLabelAngle_getSelectedItemID" getVisible="designerGroupEdgeStyle_getVisible">
 						<item id="angle_" label="    "/>
 						<item id="angle_180" label=" 180°"/>
@@ -2434,34 +2555,46 @@
 						<item id="distance_4.5" label="4.5x"/>
 						<item id="distance_5"   label="5.0x"/>
 					</dropDown>
-					<separator id="edgePortSeparator"/>
-					<dropDown id="edgeHeadPort" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="edgeHeadPort_onAction" getSelectedItemID="edgeHeadPort_getSelectedItemID">
-						<item id="hp_" image="hp_default_lr" label=" "/>
-						<item id="hp__" image="hp___lr" label="_"/>
-						<item id="hp_c" image="hp_c_lr" label="c"/>
-						<item id="hp_n" image="hp_n_lr" label="n"/>
-						<item id="hp_nw" image="hp_nw" label="nw"/>
-						<item id="hp_ne" image="hp_ne" label="ne"/>
-						<item id="hp_w" image="hp_w" label="w"/>
-						<item id="hp_e" image="hp_e" label="e"/>
-						<item id="hp_sw" image="hp_sw" label="sw"/>
-						<item id="hp_se" image="hp_se" label="se"/>
-						<item id="hp_s" image="hp_s_lr" label="s"/>
-					</dropDown>
-					<dropDown id="edgeTailPort" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="edgeTailPort_onAction" getSelectedItemID="edgeTailPort_getSelectedItemID">
-						<item id="tp_" image="tp_default_lr" label=" "/>
-						<item id="tp__" image="tp___lr" label="_"/>
-						<item id="tp_c" image="tp_c_lr" label="c"/>
-						<item id="tp_n" image="tp_n_lr" label="n"/>
-						<item id="tp_nw" image="tp_nw" label="nw"/>
-						<item id="tp_ne" image="tp_ne" label="ne"/>
-						<item id="tp_w" image="tp_w" label="w"/>
-						<item id="tp_e" image="tp_e" label="e"/>
-						<item id="tp_sw" image="tp_sw" label="sw"/>
-						<item id="tp_se" image="tp_se" label="se"/>
-						<item id="tp_s" image="tp_s_lr" label="s"/>
-					</dropDown>
-					<separator id="edgeClipSeparator"/>
+					    
+					<separator id="edgePortSeparator" visible="true"/>
+					
+					<gallery id="edgeHeadPort" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="edgeHeadPort_onAction" getSelectedItemID="edgeHeadPort_getSelectedItemID">
+						<item id="hp_"   image="hp_default_lr" label=" "/>
+						<item id="hp__"  image="hp___lr"       label="_"/>
+						<item id="xy_"   image="hp_default_rl" label=" "/>
+						
+						<item id="hp_nw" image="hp_nw"   label="nw"/>
+						<item id="hp_n"  image="hp_n_lr" label="n"/>
+						<item id="hp_ne" image="hp_ne"   label="ne"/>
+						
+						<item id="hp_w"  image="hp_w"    label="w"/>
+						<item id="hp_c"  image="hp_c_lr" label="c"/>
+						<item id="hp_e"  image="hp_e"    label="e"/>
+						
+						<item id="hp_sw" image="hp_sw"   label="sw"/>
+						<item id="hp_s"  image="hp_s_lr" label="s"/>
+						<item id="hp_se" image="hp_se"   label="se"/>
+					</gallery>
+					<gallery id="edgeTailPort" columns="3" showItemLabel="false" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XX" onAction="edgeTailPort_onAction" getSelectedItemID="edgeTailPort_getSelectedItemID">
+						<item id="tp_"   image="tp_default_rl" label=" "/>
+						<item id="tp__"  image="tp___lr"       label="_"/>
+						<item id="yx_"   image="tp_default_lr" label=" "/>
+						
+						<item id="tp_nw" image="tp_nw"   label="nw"/>
+						<item id="tp_n"  image="tp_n_lr" label="n"/>
+						<item id="tp_ne" image="tp_ne"   label="ne"/>
+						
+						<item id="tp_w"  image="tp_w"    label="w"/>
+						<item id="tp_c"  image="tp_c_lr" label="c"/>
+						<item id="tp_e"  image="tp_e"    label="e"/>
+						
+						<item id="tp_sw" image="tp_sw"   label="sw"/>
+						<item id="tp_s"  image="tp_s_lr" label="s"/>
+						<item id="tp_se" image="tp_se"   label="se"/>
+					</gallery>
+					    
+					<separator id="edgeClipSeparator" visible="true"/>
+					
 					<checkBox id="edgeHeadClip" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeHeadClip_onAction" getPressed="edgeHeadClip_getPressed"/>
 					<checkBox id="edgeTailClip" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="edgeTailClip_onAction" getPressed="edgeTailClip_getPressed"/>
 				</group>
@@ -2585,6 +2718,21 @@
 					<dropDown id="sqlFilterColumn"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlFilterColumn_onAction" getItemCount="sqlFilterColumn_getItemCount" getSelectedItemIndex="sqlFilterColumn_getSelectedItemIndex" getItemLabel="sqlFilterColumn_getItemLabel"/>
                     <dropDown id="sqlFilterValue"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlFilterValue_onAction"  getItemCount="sqlFilterValue_getItemCount"  getSelectedItemIndex="sqlFilterValue_getSelectedItemIndex"  getItemLabel="sqlFilterValue_getItemLabel" getEnabled="sqlFilterValue_getEnabled"/>
 					<button   id="sqlFilterRefresh" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlFilterRefresh_onAction" imageMso="Refresh" size="normal" getEnabled="sqlFilterRefresh_getEnabled" />
+				</group>
+				<group id="sqlGroupDataFile" getLabel="ribbon_getLabel" imageMso="FileOpen">
+                    <box id="datasourceFolderBox" boxStyle="horizontal">
+                        <button id="datasourceDir" getLabel="datasourceDir_getLabel" getVisible="datasourceDir_getVisible" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="FileOpen" size="normal" onAction="datasourceDir_onAction"/>
+                        <labelControl id="datasourceDirLabel" getLabel="datasourceDirLabel_getLabel"/>
+					</box>
+                    <box id="datasourceFileBox" boxStyle="horizontal">
+					    <button   id="datasourceFileRefresh" showLabel="false" getVisible="datasourceFileRefresh_GetVisible" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="datasourceFileRefresh_onAction" imageMso="Refresh" size="normal"/>
+                        <dropDown id="datasourceFile"        showLabel="false" getVisible="datasourceFile_GetVisible"        getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="datasourceFile_onAction" getItemCount="datasourceFile_getItemCount" getSelectedItemIndex="datasourceFile_getSelectedItemIndex" getItemLabel="datasourceFile_getItemLabel" sizeString="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+					</box>
+					<button id="datasourceReset" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="datasourceReset_GetVisible" imageMso="Clear" size="normal" onAction="datasourceReset_onAction"/>
+				</group>
+				<group id="sqlGroup4" getLabel="ribbon_getLabel" imageMso="ServerRestoreSqlDatabase">
+                    <checkBox id="sqlConnPoolDevMode" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlConnPoolDevMode_onAction" getPressed="sqlConnPoolDevMode_getPressed"/>
+					<button   id="sqlConnPoolReset"   getLabel="sqlConnPoolReset_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="sqlConnPoolReset_onAction"   getEnabled="sqlConnPoolReset_getEnabled" imageMso="ServerRestoreSqlDatabase" size="normal"  />
 				</group>
 				<group id="sqlGroupHelp" getLabel="ribbon_getLabel" imageMso="Help">
 					<button id="sqlHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="Help" size="large" onAction="sqlHelp_onAction"/>

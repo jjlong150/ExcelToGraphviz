@@ -31,8 +31,8 @@ Public Sub DisplaySourceInWorksheet(ByVal dotSource As String)
     row = source.firstRow
 
     ' Create column headings
-    SourceSheet.Cells.Item(source.headingRow, source.lineNumberColumn).value = GetLabel("worksheetSourceLine")
-    SourceSheet.Cells.Item(source.headingRow, source.sourceColumn).value = GetLabel("worksheetSourceGraphvizSource")
+    SourceSheet.Cells.item(source.headingRow, source.lineNumberColumn).value = GetLabel("worksheetSourceLine")
+    SourceSheet.Cells.item(source.headingRow, source.sourceColumn).value = GetLabel("worksheetSourceGraphvizSource")
     
     ' Split entire file into array - lines delimited by LF
     parsedFileData = split(dotSource, vbLf)
@@ -63,7 +63,7 @@ Public Sub ClearSourceWorksheet()
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -82,7 +82,7 @@ Public Sub ClearSourceWorksheet()
     
 End Sub
 
-Public Sub SourceWorksheetToFile(ByVal filename As String)
+Public Sub SourceWorksheetToFile(ByVal fileName As String)
     ' Get the layout of the "source" worksheet
     Dim source As sourceWorksheet
     source = GetSettingsForSourceWorksheet()
@@ -103,7 +103,7 @@ Public Sub SourceWorksheetToFile(ByVal filename As String)
         gvSource = gvSource & SourceSheet.Cells(rowNumber, source.sourceColumn).value & vbLf
     Next rowNumber
     
-    WriteTextToFile gvSource, filename
+    WriteTextToFile gvSource, fileName
     
 #Else
     
@@ -123,11 +123,11 @@ Public Sub SourceWorksheetToFile(ByVal filename As String)
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     For rowNumber = source.firstRow To lastRow
-        utf8Stream.WriteText SourceSheet.Cells.Item(rowNumber, source.sourceColumn).value & vbLf
+        utf8Stream.WriteText SourceSheet.Cells.item(rowNumber, source.sourceColumn).value & vbLf
     Next rowNumber
     
     ' Initialize the object which is used to remove the Byte Order Mark (BOM) from the UTF-8 stream
@@ -141,17 +141,17 @@ Public Sub SourceWorksheetToFile(ByVal filename As String)
     utf8Stream.CopyTo binaryStream
     
     ' Write out UTF-8 data without the BOM
-    binaryStream.SaveToFile filename, SaveOptionsEnum.adSaveCreateOverWrite
+    binaryStream.SaveToFile fileName, SaveOptionsEnum.adSaveCreateOverWrite
 
 EndMacro:
     ' Clean up our objects so we don't get a memory leak
     If Not (utf8Stream Is Nothing) Then
-        If (utf8Stream.state And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then utf8Stream.Close
+        If (utf8Stream.State And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then utf8Stream.Close
         Set utf8Stream = Nothing
     End If
     
     If Not (binaryStream Is Nothing) Then
-        If (binaryStream.state And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then binaryStream.Close
+        If (binaryStream.State And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then binaryStream.Close
         Set binaryStream = Nothing
     End If
 #End If
@@ -170,12 +170,12 @@ Public Sub CopySourceCodeToClipboard()
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     Dim i As Long
     For i = source.firstRow To lastRow
-        dotSource = dotSource & SourceSheet.Cells.Item(i, source.sourceColumn).value
+        dotSource = dotSource & SourceSheet.Cells.item(i, source.sourceColumn).value
     Next i
     
     If ClipBoard_SetData(dotSource) Then
@@ -229,7 +229,7 @@ Public Sub CreateGraphFromSourceToWorksheet()
     ' Display the image
     If FileExists(graphvizObj.DiagramFilename) Then
         '@Ignore VariableNotUsed
-        Dim shapeObject As Shape
+        Dim shapeObject As shape
         '@Ignore AssignmentNotUsed
         Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range("B2"), False, True)
         Set shapeObject = Nothing
@@ -323,7 +323,7 @@ Public Sub UpdateSourceWorksheetLineNumbers()
     
     ' Determine the range of the cells which need to be cleared
     With SourceSheet.UsedRange
-        rowLast = .Cells.Item(.Cells.count).row
+        rowLast = .Cells.item(.Cells.count).row
     End With
 
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -345,11 +345,11 @@ Public Sub UpdateSourceWorksheetLineNumbers()
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     For rowNumber = sourceLayout.firstRow To lastRow
-        SourceSheet.Cells.Item(rowNumber, sourceLayout.lineNumberColumn).value = lineCnt
+        SourceSheet.Cells.item(rowNumber, sourceLayout.lineNumberColumn).value = lineCnt
         lineCnt = lineCnt + 1
     Next rowNumber
 

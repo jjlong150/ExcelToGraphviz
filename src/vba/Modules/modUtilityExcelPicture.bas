@@ -6,10 +6,10 @@ Option Explicit
 
 Public Function InsertPicture(ByVal FName As String, ByVal Where As Range, _
                               Optional ByVal LinkToFile As Boolean = False, _
-                              Optional ByVal SaveWithDocument As Boolean = True) As Shape
+                              Optional ByVal SaveWithDocument As Boolean = True) As shape
    
     'Inserts the picture file FName as link or permanently into Where
-    Dim shapeObject As Shape
+    Dim shapeObject As shape
     With Where
         'Insert in original size
         Set shapeObject = Where.Parent.Shapes.AddPicture( _
@@ -55,45 +55,45 @@ End Sub
 
 '@Ignore ProcedureNotUsed
 Public Sub DeleteCellPictures(ByVal targetSheet As String, ByVal targetCell As String)
-    ' Removes any pictures located within the specified range of cells
+    ' Removes any pictures located within the specified cell
+    ' Revised in v8.0/2025 to handle low-memory Atom-based 32-bit CPU
 
-    Dim shapeObject As String
-    Dim pictureImage As Picture
+    Dim shp As shape
     Dim targetWorksheet As Worksheet
-    'Dim targetRange As Range
 
     Set targetWorksheet = ActiveWorkbook.Sheets.[_Default](targetSheet)
-    'Set targetRange = targetWorksheet.Range(targetCell)
 
-    For Each pictureImage In targetWorksheet.Pictures
-        With pictureImage
-            shapeObject = .TopLeftCell.Address
-        End With
-        If shapeObject = targetCell Then
-            pictureImage.Delete
+    For Each shp In targetWorksheet.Shapes
+        If shp.Type = msoPicture Then
+            If Not shp.TopLeftCell Is Nothing Then
+                If shp.TopLeftCell.Address = targetCell Then
+                    On Error Resume Next
+                    shp.Delete
+                    On Error GoTo 0
+                End If
+            End If
         End If
     Next
-       
+
     Set targetWorksheet = Nothing
-    'Set targetRange = Nothing
-    
 End Sub
 
 Public Sub DeleteAllPictures(ByVal targetSheet As String)
     ' Removes all pictures within a specified worksheet
+    ' Revised in v8.0/2025 to handle low-memory Atom-based 32-bit CPU
 
-    Dim pictureImage As Picture
+    Dim shp As shape
     Dim targetWorksheet As Worksheet
 
     Set targetWorksheet = ActiveWorkbook.Sheets.[_Default](targetSheet)
-    
-    For Each pictureImage In targetWorksheet.Pictures
-        With pictureImage
-            pictureImage.Delete
-        End With
+
+    For Each shp In targetWorksheet.Shapes
+        If shp.Type = msoPicture Then
+            On Error Resume Next
+            shp.Delete
+            On Error GoTo 0
+        End If
     Next
-    
+
     Set targetWorksheet = Nothing
 End Sub
-
-

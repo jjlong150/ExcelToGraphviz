@@ -19,65 +19,15 @@ Public Function StartsWith(ByVal sourceString As String, ByVal startingString As
 End Function
 
 Public Function AddQuotes(ByVal Text As String) As String
-    AddQuotes = Chr$(34) & Text & Chr$(34)
+    AddQuotes = Join(Array(Chr$(34), Text, Chr$(34)), vbNullString)
 End Function
 
 Public Function AddQuotesConditionally(ByVal Text As String) As String
-    
-    ' Zero length string, return as-is
-    If Len(Text) = 0 Then
+    If Text Like "*[!A-Za-z0-9]*" Then
+        AddQuotesConditionally = Join(Array(Chr$(34), Text, Chr$(34)), vbNullString)
+    Else
         AddQuotesConditionally = Text
-        Exit Function
     End If
-    
-    ' Single double-quote.
-    If Text = Chr$(34) Then
-        AddQuotesConditionally = Chr$(34) & Chr$(34) & Chr$(34) & Chr$(34)
-        Exit Function
-    End If
-    
-    ' A quote wrapped in quotes, i.e. """
-    If Text = Chr$(34) & Chr$(34) & Chr$(34) Then
-        AddQuotesConditionally = Text & Chr$(34)
-        Exit Function
-    End If
-    
-    ' Determine if the string is already wrapped in quotes.
-    If Len(Text) >= 2 Then
-        ' Left and right side quotes? No action needed
-        If Left$(Text, 1) = Chr$(34) And Right$(Text, 1) = Chr$(34) Then
-            AddQuotesConditionally = Text
-            Exit Function
-        End If
-    
-        ' Right side only? Fix the left side
-        If Right$(Text, 1) = Chr$(34) Then
-            AddQuotesConditionally = Chr$(34) & Text
-            Exit Function
-        End If
-        
-        ' Left side only" Fix the right side
-        If Left$(Text, 1) = Chr$(34) Then
-            AddQuotesConditionally = Text & Chr$(34)
-            Exit Function
-        End If
-    End If
-               
-     ' Does it start with characters other than A-Z, a-z, or _ (underscore)? If so, add quotes
-    If Left$(Text, 1) Like "*[!A-Za-z_]*" Then
-        AddQuotesConditionally = Chr$(34) & Text & Chr$(34)
-        Exit Function
-    End If
-      
-    ' Does it contain characters other than A-Z, a-z, 0-9, or _ (underscore)? If so, add quotes
-    If Text Like "*[!A-Za-z0-9_]*" Then
-        AddQuotesConditionally = Chr$(34) & Text & Chr$(34)
-        Exit Function
-    End If
-    
-    ' Passed all the checks above, return the value as-is
-    AddQuotesConditionally = Text
-
 End Function
 
 Public Function GetStringBetweenDelimiters(ByVal inString As String, ByVal leftDelimiter As String, ByVal rightDelimiter As String) As String
@@ -115,7 +65,7 @@ End Function
 Public Sub AddNameValue(ByRef styleAttributes As String, ByVal attrName As String, ByVal attrValue As String)
     ' If a value is present, write it out as a name/value pair
     If Trim$(attrName) <> vbNullString Then
-        styleAttributes = styleAttributes & " " & Trim$(attrName) & "=" & attrValue
+        styleAttributes = Join(Array(styleAttributes, " ", Trim$(attrName), "=", attrValue), vbNullString)
     End If
 End Sub
 
@@ -129,10 +79,10 @@ Public Function WrapText(ByVal itemIds As Range, Optional ByVal wrapLength As Lo
     Text = vbNullString
     
     ' Concatenate the range of cell values into one long string
-    Dim Item As Range
-    For Each Item In itemIds.Cells
-        Text = Text & " " & Trim$(Item.value)
-    Next Item
+    Dim item As Range
+    For Each item In itemIds.Cells
+        Text = Text & " " & Trim$(item.value)
+    Next item
     
     ' Split the one long string using the length and lineEnding specified by the caller
     WrapText = SplitText(Text, wrapLength, lineEnding)

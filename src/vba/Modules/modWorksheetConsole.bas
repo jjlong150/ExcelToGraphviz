@@ -11,7 +11,7 @@ Public Sub ClearConsoleWorksheet()
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With ConsoleSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     ' Remove any existing content
@@ -36,7 +36,7 @@ Public Sub DisplayTextOnConsoleWorksheet(ByVal dotCommand As String, ByVal textB
     ' Initialize row counter to first unused row
     Dim row As Long
     With ConsoleSheet.UsedRange
-        row = .Cells.Item(.Cells.count).row
+        row = .Cells.item(.Cells.count).row
     End With
     
     ' Leave some white space between invocations
@@ -54,8 +54,8 @@ Public Sub DisplayTextOnConsoleWorksheet(ByVal dotCommand As String, ByVal textB
 #Else
     commandExecuted = dotCommand
 #End If
-    ConsoleSheet.Cells.Item(row, 1).value = ">"
-    ConsoleSheet.Cells.Item(row, 2).value = commandExecuted
+    ConsoleSheet.Cells.item(row, 1).value = ">"
+    ConsoleSheet.Cells.item(row, 2).value = commandExecuted
     row = row + 2
 
     ' Split the text into an array of lines
@@ -84,12 +84,12 @@ Public Sub CopyConsoleToClipboard()
     
     Dim lastRow As Long
     With ConsoleSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     Dim i As Long
     For i = 1 To lastRow
-        consoleMessage = consoleMessage & ConsoleSheet.Cells.Item(i, 2).value & vbLf
+        consoleMessage = consoleMessage & ConsoleSheet.Cells.item(i, 2).value & vbLf
     Next i
 
     If ClipBoard_SetData(consoleMessage) Then
@@ -101,12 +101,12 @@ Public Sub CopyConsoleToClipboard()
 #End If
 End Sub
 
-Public Sub ConsoleWorksheetToFile(ByVal filename As String)
+Public Sub ConsoleWorksheetToFile(ByVal fileName As String)
 
     Dim rowNumber As Long
     Dim lastRow As Long
     With ConsoleSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
     
 #If Mac Then
@@ -117,7 +117,7 @@ Public Sub ConsoleWorksheetToFile(ByVal filename As String)
         consoleText = consoleText & ConsoleSheet.Cells(rowNumber, 2).value & vbCr
     Next rowNumber
     
-    WriteTextToFile consoleText, filename
+    WriteTextToFile consoleText, fileName
 #Else
     
     ' Output file objects
@@ -135,7 +135,7 @@ Public Sub ConsoleWorksheetToFile(ByVal filename As String)
     utf8Stream.Open
     
     For rowNumber = 1 To lastRow
-        utf8Stream.WriteText ConsoleSheet.Cells.Item(rowNumber, 2).value & vbLf
+        utf8Stream.WriteText ConsoleSheet.Cells.item(rowNumber, 2).value & vbLf
     Next rowNumber
     
     ' Initialize the object which is used to remove the Byte Order Mark (BOM) from the UTF-8 stream
@@ -149,17 +149,17 @@ Public Sub ConsoleWorksheetToFile(ByVal filename As String)
     utf8Stream.CopyTo binaryStream
     
     ' Write out UTF-8 data without the BOM
-    binaryStream.SaveToFile filename, SaveOptionsEnum.adSaveCreateOverWrite
+    binaryStream.SaveToFile fileName, SaveOptionsEnum.adSaveCreateOverWrite
 
 EndMacro:
     ' Clean up our objects so we don't get a memory leak
     If Not (utf8Stream Is Nothing) Then
-        If (utf8Stream.state And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then utf8Stream.Close
+        If (utf8Stream.State And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then utf8Stream.Close
         Set utf8Stream = Nothing
     End If
     
     If Not (binaryStream Is Nothing) Then
-        If (binaryStream.state And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then binaryStream.Close
+        If (binaryStream.State And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then binaryStream.Close
         Set binaryStream = Nothing
     End If
 #End If
@@ -167,17 +167,17 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub SaveConsoleToFile()
-    Dim filename As String
+    Dim fileName As String
     
 #If Mac Then
-    filename = RunAppleScriptTask("getSaveAsFileName", ".txt")
+    fileName = RunAppleScriptTask("getSaveAsFileName", ".txt")
 #Else
-    filename = GetSaveAsFilename("Text Files (*.txt), *txt")
+    fileName = GetSaveAsFilename("Text Files (*.txt), *txt")
 #End If
 
-    If filename <> vbNullString Then
-        ConsoleWorksheetToFile (filename)
-        MsgBox GetMessage("msgboxSavedToFile") & vbNewLine & filename, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    If fileName <> vbNullString Then
+        ConsoleWorksheetToFile (fileName)
+        MsgBox GetMessage("msgboxSavedToFile") & vbNewLine & fileName, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
     End If
 End Sub
 

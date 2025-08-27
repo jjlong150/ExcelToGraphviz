@@ -57,3 +57,32 @@ Public Sub stylesHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLStylesTab").value, NewWindow:=True
 End Sub
 
+' ===========================================================================
+' Callbacks for stylesEdit
+
+'@Ignore ParameterNotUsed
+Public Sub stylesEdit_onAction(ByVal control As IRibbonControl)
+    RestoreStyleDesigner
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub stylesEdit_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+    enabled = False
+
+    If ActiveSheet.name <> StylesSheet.name Then Exit Sub
+    If Not TypeOf Selection Is Range Then Exit Sub
+    If Selection.rows.count <> 1 Then Exit Sub
+
+    Dim row As Long
+    row = Selection.row
+
+    Dim typeCol As Long
+    typeCol = GetSettingColNum(SETTINGS_STYLES_COL_OBJECT_TYPE)
+
+    Dim styleType As String
+    styleType = StylesSheet.Cells(row, typeCol).value
+
+    If Not (styleType = TYPE_NODE Or styleType = TYPE_EDGE Or styleType = TYPE_SUBGRAPH_OPEN) Then Exit Sub
+
+    enabled = True
+End Sub

@@ -23,16 +23,16 @@ Public Sub FindAndReplaceSVG(ByVal svgFileIn As String, ByVal svgFileOut As Stri
     ' Determine the last row with data
     Dim lastRow As Long
     With SvgSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
     
     ' Loop through the data rows of SVG find/replace statements
     Dim row As Long
     For row = svgLayoutRow.firstDataRow To lastRow
-        If SvgSheet.Cells.Item(row, svgLayoutColumn.flagColumn).value <> FLAG_COMMENT Then
+        If SvgSheet.Cells.item(row, svgLayoutColumn.flagColumn).value <> FLAG_COMMENT Then
             svgText = replace(svgText, _
-                SvgSheet.Cells.Item(row, svgLayoutColumn.findColumn).value, _
-                SvgSheet.Cells.Item(row, svgLayoutColumn.replaceColumn).value, _
+                SvgSheet.Cells.item(row, svgLayoutColumn.findColumn).value, _
+                SvgSheet.Cells.item(row, svgLayoutColumn.replaceColumn).value, _
                 1, -1, vbTextCompare)
         End If
         DoEvents
@@ -40,6 +40,11 @@ Public Sub FindAndReplaceSVG(ByVal svgFileIn As String, ByVal svgFileOut As Stri
     
     ' Write the modified string to a file
     WriteTextToFile svgText, svgFileOut
+End Sub
+
+' Used by the "Edit" button that appears on the "Replace" cell
+Public Sub ShowSVGEditForm()
+    CellValueEditForm.show
 End Sub
 
 

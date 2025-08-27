@@ -55,26 +55,26 @@ Public Sub SelectDirectoryToCell(ByVal worksheetName As String, ByVal cellName A
     SetCellString worksheetName, cellName, ChooseDirectory(GetCellString(worksheetName, cellName))
 End Sub
 
-Public Sub ReadFileIntoCell(ByVal worksheetName As String, ByVal cellName As String, ByVal filename As String)
+Public Sub ReadFileIntoCell(ByVal worksheetName As String, ByVal cellName As String, ByVal fileName As String)
 
     ' Clear out any previous data in the cell
     ActiveSheet.Range(cellName).ClearContents
 
     ' Make sure the file exists before attempting to read it
-    If FileExists(filename) Then
+    If FileExists(fileName) Then
         
         ' Obtain a file handle
         Dim fileHandle As Long
         fileHandle = FreeFile()
         
         ' Open the file as binary
-        Open filename For Binary Access Read As #fileHandle
+        Open fileName For Binary Access Read As #fileHandle
 
         Dim stringToHoldFile As String
         
         ' Create a string with enough space to hold the file contents
         '@Ignore AssignmentNotUsed
-        stringToHoldFile = Space(FileLen(filename))
+        stringToHoldFile = Space(FileLen(fileName))
         
         ' Read the entire file into the string
         Get #fileHandle, , stringToHoldFile

@@ -25,7 +25,7 @@ End Sub
 Public Sub CompareTranslationKeys(ByVal masterSheet As String, ByVal sheetToTest As String)
     Dim lastRow As Long
     With LocaleEnUsSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     Dim row As Long
@@ -44,7 +44,7 @@ Public Sub SyncLocaleToMaster(ByVal masterSheet As String, ByVal sheetToSync As 
     ' Determine the lasr row of the master locale
     Dim lastRow As Long
     With LocaleEnUsSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     ' Loop through all the rows in the master, saving the key and row
@@ -71,7 +71,7 @@ Public Sub SyncLocaleToMaster(ByVal masterSheet As String, ByVal sheetToSync As 
     
     For row = 2 To lastRow
         key = GetCell(sheetToSync, row, 1)
-        value = masterDictionary.Item(key)
+        value = masterDictionary.item(key)
         SetCell sheetToSync, row, 6, value
     Next
     
@@ -96,11 +96,11 @@ Public Sub SyncLocaleToMaster(ByVal masterSheet As String, ByVal sheetToSync As 
     Dim dictKey As Variant
     For Each dictKey In masterDictionary.Keys()
         SetCell sheetToSync, row, 1, dictKey    ' Control ID
-        SetCell sheetToSync, row, 2, GetCell(masterSheet, masterDictionary.Item(dictKey), 2) ' Compact Control Labels
-        SetCell sheetToSync, row, 3, GetCell(masterSheet, masterDictionary.Item(dictKey), 3) ' Verbose Control Labels
-        SetCell sheetToSync, row, 4, GetCell(masterSheet, masterDictionary.Item(dictKey), 4) ' Screentip
-        SetCell sheetToSync, row, 5, GetCell(masterSheet, masterDictionary.Item(dictKey), 5) ' Supertip
-        SetCell sheetToSync, row, 6, masterDictionary.Item(dictKey)  ' Master row number
+        SetCell sheetToSync, row, 2, GetCell(masterSheet, masterDictionary.item(dictKey), 2) ' Compact Control Labels
+        SetCell sheetToSync, row, 3, GetCell(masterSheet, masterDictionary.item(dictKey), 3) ' Verbose Control Labels
+        SetCell sheetToSync, row, 4, GetCell(masterSheet, masterDictionary.item(dictKey), 4) ' Screentip
+        SetCell sheetToSync, row, 5, GetCell(masterSheet, masterDictionary.item(dictKey), 5) ' Supertip
+        SetCell sheetToSync, row, 6, masterDictionary.item(dictKey)  ' Master row number
         SetCell sheetToSync, row, 7, "Requires translation"     ' Flag for translation
         row = row + 1
     Next

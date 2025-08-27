@@ -118,7 +118,7 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     ClearSource
 
     ' Expose the view name so it can be used as data in the graph
-    SettingsSheet.Range("ViewNameLabel").value = StylesSheet.Cells.Item(ini.styles.headingRow, ini.styles.selectedViewColumn).value
+    SettingsSheet.Range("ViewNameLabel").value = StylesSheet.Cells.item(ini.styles.headingRow, ini.styles.selectedViewColumn).value
 
     ' View name might be referenced in the graph options, so refresh the value
     ini.graph.options = Trim$(SettingsSheet.Range(SETTINGS_GRAPH_OPTIONS).value)
@@ -158,7 +158,7 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     DisplayTextOnConsoleWorksheet graphvizObj.GraphvizCommand, graphvizObj.GraphvizMessages
         
     '@Ignore VariableNotUsed
-    Dim shapeObject As Shape
+    Dim shapeObject As shape
     Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True)
     
     ' This is a kludgey way to handle the image scaling because VBA does not have a datatype
@@ -224,7 +224,7 @@ Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn A
     For viewColumn = firstViewColumn To lastViewColumn
     
         ' Expose the view name so it can be used as data in the graph
-        SettingsSheet.Range("ViewNameLabel").value = StylesSheet.Cells.Item(ini.styles.headingRow, viewColumn).value
+        SettingsSheet.Range("ViewNameLabel").value = StylesSheet.Cells.item(ini.styles.headingRow, viewColumn).value
         
         ' View name might be referenced in the graph options, so refresh the value
         ini.graph.options = Trim$(SettingsSheet.Range(SETTINGS_GRAPH_OPTIONS).value)
@@ -365,9 +365,9 @@ Public Function GetFilenameBase(ByRef ini As settings, ByVal showStyleColumn As 
     ' Include the view name
     If InStr(fileBase, "%V") Then
         ' Substitute View name for %V
-        fileBase = replace(fileBase, "%V", StylesSheet.Cells.Item(ini.styles.headingRow, showStyleColumn).value)
+        fileBase = replace(fileBase, "%V", StylesSheet.Cells.item(ini.styles.headingRow, showStyleColumn).value)
     Else
-        fileBase = fileBase & " " & StylesSheet.Cells.Item(ini.styles.headingRow, showStyleColumn).value
+        fileBase = fileBase & " " & StylesSheet.Cells.item(ini.styles.headingRow, showStyleColumn).value
     End If
 
     ' Include the worksheet name
@@ -569,18 +569,18 @@ Private Sub ConfirmItemStyleIsValid(ByRef ini As settings, _
                 If styles.Exists(data.styleName) Then ' show this in the diagram
 
                     ' We want data of this style in the output file
-                    data.Item = GetCell(ini.data.worksheetName, row, ini.data.itemColumn)
+                    data.item = GetCell(ini.data.worksheetName, row, ini.data.itemColumn)
                     data.relatedItem = GetCell(ini.data.worksheetName, row, ini.data.isRelatedToItemColumn)
                         
                     ' What type of row is it?
-                    data.styleType = styles.Item(data.styleName).styleType
+                    data.styleType = styles.item(data.styleName).styleType
 
                     If data.styleType = TYPE_NODE Then
 
-                        If data.Item <> vbNullString And UCase$(data.Item) <> KEYWORD_NODE And data.relatedItem = vbNullString Then
+                        If data.item <> vbNullString And UCase$(data.item) <> KEYWORD_NODE And data.relatedItem = vbNullString Then
                         
                             ' There are potentially multiple item IDs, so parse them from the data.item string
-                            itemIdArray = split(data.Item, COMMA)
+                            itemIdArray = split(data.item, COMMA)
                             For arrayIndex = LBound(itemIdArray) To UBound(itemIdArray)
                                 nodeId = RemovePort(itemIdArray(arrayIndex))
                                 If Not nodeIds.Exists(nodeId) Then
@@ -591,9 +591,9 @@ Private Sub ConfirmItemStyleIsValid(ByRef ini As settings, _
 
                     ElseIf data.styleType = TYPE_EDGE Then
 
-                        If data.Item <> vbNullString And UCase$(data.Item) <> KEYWORD_EDGE And data.relatedItem <> vbNullString Then
+                        If data.item <> vbNullString And UCase$(data.item) <> KEYWORD_EDGE And data.relatedItem <> vbNullString Then
                             ' There are potentially multiple item IDs, so parse them from the data.item string
-                            itemIdArray = split(data.Item, COMMA)
+                            itemIdArray = split(data.item, COMMA)
                             For arrayIndex = LBound(itemIdArray) To UBound(itemIdArray)
                                 nodeId = RemovePort(itemIdArray(arrayIndex))
                                 If Not edgeIds.Exists(nodeId) Then
@@ -625,7 +625,7 @@ Private Sub DetermineWhatGraphShouldInclude(ByRef ini As settings, _
                                            ByVal nodeIdsInRelationships As Dictionary)
     Dim data As dataRow
 
-    Dim itemID As String
+    Dim itemId As String
     Dim relatedItemId As String
     
     Dim Items() As String
@@ -652,14 +652,14 @@ Private Sub DetermineWhatGraphShouldInclude(ByRef ini As settings, _
                 If styles.Exists(data.styleName) Then ' this style should be shown in diagram
 
                     ' We want data of this style in the output file
-                    data.Item = GetCell(ini.data.worksheetName, row, ini.data.itemColumn)
+                    data.item = GetCell(ini.data.worksheetName, row, ini.data.itemColumn)
                     data.relatedItem = GetCell(ini.data.worksheetName, row, ini.data.isRelatedToItemColumn)
 
-                    If styles.Item(data.styleName).styleType = TYPE_EDGE Then ' this line is a relationship
+                    If styles.item(data.styleName).styleType = TYPE_EDGE Then ' this line is a relationship
 
-                        If data.Item <> vbNullString And UCase$(data.Item) <> KEYWORD_EDGE And data.relatedItem <> vbNullString Then ' a tail and head are present
+                        If data.item <> vbNullString And UCase$(data.item) <> KEYWORD_EDGE And data.relatedItem <> vbNullString Then ' a tail and head are present
 
-                            Items = split(data.Item, COMMA)
+                            Items = split(data.item, COMMA)
                             relatedItems = split(data.relatedItem, COMMA)
                             
                             For itemIndex = LBound(Items) To UBound(Items)
@@ -669,12 +669,12 @@ Private Sub DetermineWhatGraphShouldInclude(ByRef ini As settings, _
                                     ' as "Is Used" so that we later determine island nodes to exclude
                                     ' from the graph.
                                 
-                                    itemID = RemovePort(Items(itemIndex))
+                                    itemId = RemovePort(Items(itemIndex))
                                     relatedItemId = RemovePort(relatedItems(relatedItemIndex))
 
-                                    If nodeIds.Exists(itemID) And nodeIds.Exists(relatedItemId) Then
-                                        If Not nodeIdsInRelationships.Exists(itemID) Then
-                                            nodeIdsInRelationships.Add itemID, True
+                                    If nodeIds.Exists(itemId) And nodeIds.Exists(relatedItemId) Then
+                                        If Not nodeIdsInRelationships.Exists(itemId) Then
+                                            nodeIdsInRelationships.Add itemId, True
                                         End If
                                 
                                         If Not nodeIdsInRelationships.Exists(relatedItemId) Then
@@ -724,11 +724,11 @@ Private Function ValidateData(ByRef ini As settings, ByVal styles As Dictionary)
                 If styles.Exists(data.styleName) Then ' We want data of this style in the output file
                     
                     ' Look up processing attributes from cached stylesheet information
-                    data.styleType = styles.Item(data.styleName).styleType
+                    data.styleType = styles.item(data.styleName).styleType
                     
                     ' Validate the rows according to object type
                     If data.styleType = TYPE_NODE Then
-                        If data.Item = vbNullString Then
+                        If data.item = vbNullString Then
                             LogError ini, row, GetMessage("errormsgNodeNoItemFound"), errCnt
                         
                         ElseIf data.relatedItem <> vbNullString Then
@@ -737,9 +737,9 @@ Private Function ValidateData(ByRef ini As settings, ByVal styles As Dictionary)
                        
                     ElseIf data.styleType = TYPE_EDGE Then
                         '@Ignore EmptyIfBlock
-                        If UCase$(data.Item) = KEYWORD_EDGE Then
+                        If UCase$(data.item) = KEYWORD_EDGE Then
                             ' No error
-                        ElseIf data.Item = vbNullString Then
+                        ElseIf data.item = vbNullString Then
                             LogError ini, row, GetMessage("errormsgEdgeNoItemFound"), errCnt
                         
                         ElseIf data.relatedItem = vbNullString Then
@@ -771,8 +771,8 @@ Private Function ValidateData(ByRef ini As settings, ByVal styles As Dictionary)
     
 End Function
 
-Private Function isKeyword(ByVal Item As String) As Boolean
-    isKeyword = (UCase$(Item) = KEYWORD_NODE) Or (UCase$(Item) = KEYWORD_EDGE) Or (UCase$(Item) = KEYWORD_GRAPH)
+Private Function isKeyword(ByVal item As String) As Boolean
+    isKeyword = (UCase$(item) = KEYWORD_NODE) Or (UCase$(item) = KEYWORD_EDGE) Or (UCase$(item) = KEYWORD_GRAPH)
 End Function
 
 Private Sub CreateGraphvizSource(ByRef ini As settings, _
@@ -829,15 +829,15 @@ Private Sub CreateGraphvizSource(ByRef ini As settings, _
                 showStyle = styles.Exists(data.styleName)
                 
                 Dim boolKeyword As Boolean
-                boolKeyword = isKeyword(data.Item)
+                boolKeyword = isKeyword(data.item)
                 
                 If showStyle Or boolKeyword Then ' We want data of this style in the output file
                     
                     ' Look up processing attributes from cached stylesheet information
-                    data.styleType = styles.Item(data.styleName).styleType
+                    data.styleType = styles.item(data.styleName).styleType
                     
                     If ini.graph.includeStyleFormat And showStyle Then
-                        data.format = styles.Item(data.styleName).styleFormat
+                        data.format = styles.item(data.styleName).styleFormat
                     Else
                         data.format = vbNullString
                     End If
@@ -850,27 +850,27 @@ Private Sub CreateGraphvizSource(ByRef ini As settings, _
 
                     ' Process the rows according to object type
                     If boolKeyword Then
-                        graphvizSource = graphvizSource & ProcessKeyword(ini, data, indent)
+                        graphvizSource = Join(Array(graphvizSource, ProcessKeyword(ini, data, indent)), vbNullString)
 
                     ElseIf data.styleType = TYPE_NODE Then
-                        graphvizSource = graphvizSource & ProcessNode(ini, data, indent, relationshipIds)
+                        graphvizSource = Join(Array(graphvizSource, ProcessNode(ini, data, indent, relationshipIds)), vbNullString)
 
                     ElseIf data.styleType = TYPE_EDGE Then
-                        graphvizSource = graphvizSource & ProcessEdge(ini, data, indent, nodeIds)
+                        graphvizSource = Join(Array(graphvizSource, ProcessEdge(ini, data, indent, nodeIds)), vbNullString)
 
                     ElseIf data.styleType = TYPE_SUBGRAPH_OPEN Then
-                        graphvizSource = graphvizSource & ProcessSubgraphOpen(ini, data, indent, clusterCnt)
+                        graphvizSource = Join(Array(graphvizSource, ProcessSubgraphOpen(ini, data, indent, clusterCnt)), vbNullString)
                         indent = IncreaseIndent(indent)
                         
                     ElseIf data.styleType = TYPE_SUBGRAPH_CLOSE Then
                         indent = DecreaseIndent(indent)
-                        graphvizSource = graphvizSource & ProcessSubgraphClose(ini, data, indent)
+                        graphvizSource = Join(Array(graphvizSource, ProcessSubgraphClose(ini, data, indent)), vbNullString)
 
                     ElseIf data.styleType = TYPE_KEYWORD Then
                         graphvizSource = graphvizSource & ProcessKeyword(ini, data, indent)
 
                     ElseIf data.styleType = TYPE_NATIVE Then
-                        graphvizSource = graphvizSource & ProcessNative(ini, data, indent)
+                        graphvizSource = Join(Array(graphvizSource, ProcessNative(ini, data, indent)), vbNullString)
 
                     '@Ignore EmptyElseBlock
                     Else
@@ -883,7 +883,7 @@ Private Sub CreateGraphvizSource(ByRef ini As settings, _
 
     ' Write the last dot statement to terminate the dot source file
     indent = DecreaseIndent(indent)
-    graphvizSource = graphvizSource & Space(indent * ini.source.indent) & CLOSE_BRACE & vbNewLine
+    graphvizSource = Join(Array(graphvizSource, Space(indent * ini.source.indent), CLOSE_BRACE, vbNewLine), vbNullString)
 
 End Sub
 
@@ -1057,8 +1057,9 @@ Private Sub ProcessGraphOptions(ByRef graphvizSource As String, ByRef ini As set
         graphvizSource = graphvizSource & spaces & ini.graph.options & vbNewLine
     End If
 End Sub
+
 Private Sub AddAttributeLine(ByRef graphvizSource As String, ByVal spaces As String, ByVal attributeName As String, ByVal attributeValue As String)
-    graphvizSource = graphvizSource & spaces & Trim$(attributeName) & "=" & attributeValue & SEMICOLON & vbNewLine
+    graphvizSource = Join(Array(graphvizSource, spaces, Trim$(attributeName), "=", attributeValue, SEMICOLON, vbNewLine), vbNullString)
 End Sub
 
 Private Function IncreaseIndent(ByVal indent As Long) As Long
@@ -1075,7 +1076,7 @@ End Function
 Public Function GetDataRow(ByRef ini As settings, ByVal worksheetName As String, ByVal row As Long) As dataRow
 
     GetDataRow.comment = GetCell(worksheetName, row, ini.data.flagColumn)
-    GetDataRow.Item = GetCell(worksheetName, row, ini.data.itemColumn)
+    GetDataRow.item = GetCell(worksheetName, row, ini.data.itemColumn)
     GetDataRow.label = GetCell(worksheetName, row, ini.data.labelColumn)
     GetDataRow.xLabel = GetCell(worksheetName, row, ini.data.xLabelColumn)
     GetDataRow.tailLabel = GetCell(worksheetName, row, ini.data.tailLabelColumn)
@@ -1101,16 +1102,16 @@ Private Function CacheEnabledStyles(ByRef ini As settings, ByVal showStyleColumn
     
     For row = ini.styles.firstRow To ini.styles.lastRow
         '@Ignore EmptyIfBlock
-        If StylesSheet.Cells.Item(row, ini.styles.flagColumn).value = FLAG_COMMENT Then
+        If StylesSheet.Cells.item(row, ini.styles.flagColumn).value = FLAG_COMMENT Then
             ' Comment row, ignore it
-        ElseIf StylesSheet.Cells.Item(row, showStyleColumn).value = TOGGLE_YES Then
+        ElseIf StylesSheet.Cells.item(row, showStyleColumn).value = TOGGLE_YES Then
             ' Retrieve the style name
-            styleName = UCase$(StylesSheet.Cells.Item(row, ini.styles.nameColumn).value)
+            styleName = UCase$(StylesSheet.Cells.item(row, ini.styles.nameColumn).value)
 
             If styleName <> vbNullString Then    ' a style name is present
                 If Not dictionaryObj.Exists(styleName) Then ' ignore duplicate style names
-                    Set dictionaryObj.Item(styleName) = GetStyle(StylesSheet.Cells.Item(row, ini.styles.typeColumn), _
-                                                              StylesSheet.Cells.Item(row, ini.styles.formatColumn))
+                    Set dictionaryObj.item(styleName) = GetStyle(StylesSheet.Cells.item(row, ini.styles.typeColumn), _
+                                                              StylesSheet.Cells.item(row, ini.styles.formatColumn))
                 End If
             End If
         End If
@@ -1168,7 +1169,7 @@ Private Function FormatDebugLabel(ByVal row As Long, ByRef data As dataRow) As S
     
     If Not IsLabelHTMLLike(data.label) Then
         If data.styleType = TYPE_EDGE Then
-            debugStr = "(Row: " & row & " " & FormatId(data.Item, True) & "->" & FormatId(data.relatedItem, True) & ")"
+            debugStr = "(Row: " & row & " " & FormatId(data.item, True) & "->" & FormatId(data.relatedItem, True) & ")"
                         
             If data.label = vbNullString Then
                 FormatDebugLabel = debugStr
@@ -1177,7 +1178,7 @@ Private Function FormatDebugLabel(ByVal row As Long, ByRef data As dataRow) As S
             End If
                         
         ElseIf data.styleType = TYPE_NODE Then
-            debugStr = "(Row: " & row & " " & AddQuotes(data.Item) & ")"
+            debugStr = "(Row: " & row & " " & AddQuotes(data.item) & ")"
                             
             If data.label = vbNullString Then
                 FormatDebugLabel = debugStr
@@ -1206,14 +1207,14 @@ Private Function FormatDebugXLabel(ByVal row As Long, ByRef data As dataRow) As 
 
     If Not IsLabelHTMLLike(data.label) Then
         If data.styleType = TYPE_EDGE Then
-            debugStr = "(Row: " & row & " " & AddQuotes(data.Item) & "->" & AddQuotes(data.relatedItem) & ")"
+            debugStr = "(Row: " & row & " " & AddQuotes(data.item) & "->" & AddQuotes(data.relatedItem) & ")"
             
             If data.xLabel <> vbNullString Then
                 FormatDebugXLabel = data.xLabel & NEWLINE & debugStr
             End If
             
         ElseIf data.styleType = TYPE_NODE Then
-            debugStr = "(Row: " & row & " " & AddQuotes(data.Item) & ")"
+            debugStr = "(Row: " & row & " " & AddQuotes(data.item) & ")"
                             
             If data.xLabel <> vbNullString Then
                 FormatDebugXLabel = data.xLabel & NEWLINE & debugStr
@@ -1281,7 +1282,7 @@ End Function
 Private Function ProcessSubgraphOpen(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long, ByRef clusterCnt As Long) As String
 
     Dim subgraphName As String
-    subgraphName = Trim$(GetStringBetweenDelimiters(data.Item, vbNullString, OPEN_BRACE))
+    subgraphName = Trim$(GetStringBetweenDelimiters(data.item, vbNullString, OPEN_BRACE))
                         
     If subgraphName = vbNullString Then          ' No subgraph name supplied
         ' Increment the cluster counter, and use it in the cluster name
@@ -1318,26 +1319,26 @@ End Function
 
 Private Function ProcessNode(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long, ByVal nodesUsedInRelationships As Dictionary) As String
                         
-    Dim Item As String
+    Dim item As String
     Dim Items() As String
     
     Dim graphvizSource As String
     
     Dim arrayIndex As Long
     
-    Item = data.Item
-    Items = split(Item, COMMA)
+    item = data.item
+    Items = split(item, COMMA)
     
     For arrayIndex = LBound(Items) To UBound(Items)
-        data.Item = Trim$(Items(arrayIndex))
+        data.item = Trim$(Items(arrayIndex))
                         
         ' Filter out nodes without node relationships
         If Not ini.graph.includeOrphanNodes Then
-            If nodesUsedInRelationships.Exists(RemovePort(data.Item)) Then
-                graphvizSource = graphvizSource & WriteNode(ini, data, indent)
+            If nodesUsedInRelationships.Exists(RemovePort(data.item)) Then
+                graphvizSource = Join(Array(graphvizSource, WriteNode(ini, data, indent)), vbNullString)
             End If
         Else
-            graphvizSource = graphvizSource & WriteNode(ini, data, indent)
+            graphvizSource = Join(Array(graphvizSource, WriteNode(ini, data, indent)), vbNullString)
         End If
     Next
 
@@ -1346,7 +1347,7 @@ End Function
 
 Private Function ProcessEdge(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long, ByVal definedNodes As Dictionary) As String
                         
-    Dim Item As String
+    Dim item As String
     Dim relatedItem As String
     Dim Items() As String
     Dim relatedItems() As String
@@ -1356,20 +1357,20 @@ Private Function ProcessEdge(ByRef ini As settings, ByRef data As dataRow, ByVal
     Dim itemIndex As Long
     Dim relatedItemIndex As Long
     
-    Item = data.Item
-    Items = split(Item, COMMA)
+    item = data.item
+    Items = split(item, COMMA)
     
     relatedItem = data.relatedItem
     relatedItems = split(relatedItem, COMMA)
     
     For itemIndex = LBound(Items) To UBound(Items)
         For relatedItemIndex = LBound(relatedItems) To UBound(relatedItems)
-            data.Item = Trim$(Items(itemIndex))
+            data.item = Trim$(Items(itemIndex))
             data.relatedItem = Trim$(relatedItems(relatedItemIndex))
             
             ' Filter out relationships without node definitions
             If Not ini.graph.includeOrphanEdges Then
-                If definedNodes.Exists(RemovePort(data.Item)) And definedNodes.Exists(RemovePort(data.relatedItem)) Then
+                If definedNodes.Exists(RemovePort(data.item)) And definedNodes.Exists(RemovePort(data.relatedItem)) Then
                     graphvizSource = graphvizSource & WriteEdge(ini, data, indent)
                 End If
             Else
@@ -1382,7 +1383,7 @@ Private Function ProcessEdge(ByRef ini As settings, ByRef data As dataRow, ByVal
 End Function
 
 Private Function ProcessSubgraphClose(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
-    ProcessSubgraphClose = Space(indent * ini.source.indent) & data.Item & vbNewLine
+    ProcessSubgraphClose = Space(indent * ini.source.indent) & data.item & vbNewLine
 End Function
 
 Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
@@ -1391,7 +1392,7 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
     Dim styleAttributes As String
     
     Dim nodeId As String
-    nodeId = data.Item
+    nodeId = data.item
     
     ' Strip off the port (if specified)
     If InStr(nodeId, ":") > 0 Then
@@ -1423,9 +1424,9 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
     nodeLabel = FormatNodeLabels(ini, data)
     
     If Trim$(styleAttributes & nodeLabel & tooltip) = vbNullString Then
-        WriteNode = Space(indent * ini.source.indent) & AddQuotesConditionally(nodeId) & SEMICOLON & vbNewLine
+        WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), SEMICOLON, vbNewLine), vbNullString)
     Else
-        WriteNode = Space(indent * ini.source.indent) & AddQuotesConditionally(nodeId) & " [ " & Trim$(styleAttributes & nodeLabel) & tooltip & " ];" & vbNewLine
+        WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), " [ ", Trim$(styleAttributes & nodeLabel) & tooltip & " ];", vbNewLine), vbNullString)
     End If
 
 End Function
@@ -1437,14 +1438,14 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
 
     ' Include the extra style attributes if enabled in the settings
     If ini.graph.includeExtraAttributes Then
-        styleAttributes = styleAttributes & " " & data.extraAttrs
+        styleAttributes = Join(Array(styleAttributes, " ", data.extraAttrs), vbNullString)
     End If
 
     ' If output format is SVG, then include the tooltip data
     Dim tooltip As String
     If ini.graph.includeTooltip Then
         If data.tooltip <> vbNullString Then
-            tooltip = " tooltip=" & AddQuotes(ScrubText(data.tooltip))
+            tooltip = Join(Array(" tooltip=", AddQuotes(ScrubText(data.tooltip))), vbNullString)
         End If
     End If
     
@@ -1456,16 +1457,16 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
 
     ' Add the quotes to the id and (optional) port for the item, and the "is related to" item
     Dim tailId As String
-    tailId = FormatId(data.Item, ini.graph.includeEdgePorts)
+    tailId = FormatId(data.item, ini.graph.includeEdgePorts)
     
     Dim headId As String
     headId = FormatId(data.relatedItem, ini.graph.includeEdgePorts)
     
     ' Write out the edge command
     If Trim$(styleAttributes & edgeLabel & tooltip) = vbNullString Then
-        WriteEdge = Space(indent * ini.source.indent) & tailId & " " & ini.graph.edgeOperator & " " & headId & SEMICOLON & vbNewLine
+        WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, SEMICOLON, vbNewLine), vbNullString)
     Else
-        WriteEdge = Space(indent * ini.source.indent) & tailId & " " & ini.graph.edgeOperator & " " & headId & "[ " & Trim$(styleAttributes & edgeLabel) & tooltip & " ];" & vbNewLine
+        WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, "[ ", Trim$(styleAttributes & edgeLabel) & tooltip & " ];", vbNewLine), vbNullString)
     End If
     
 End Function
@@ -1480,23 +1481,23 @@ Private Function ProcessKeyword(ByRef ini As settings, ByRef data As dataRow, By
     styleAttributes = Trim$(data.format)
 
     If ini.graph.includeExtraAttributes Then
-        styleAttributes = Trim$(styleAttributes & " " & data.extraAttrs)
+        styleAttributes = Trim$(Join(Array(styleAttributes, " ", data.extraAttrs), vbNullString))
     End If
 
     Dim labelValue As String
-    If UCase$(data.Item) = KEYWORD_NODE Then
+    If UCase$(data.item) = KEYWORD_NODE Then
         labelValue = FormatNodeLabels(ini, data)
     
-    ElseIf UCase$(data.Item) = KEYWORD_EDGE Then
+    ElseIf UCase$(data.item) = KEYWORD_EDGE Then
         labelValue = FormatEdgeLabels(ini, data)
     
-    ElseIf UCase$(data.Item) = KEYWORD_GRAPH Then
+    ElseIf UCase$(data.item) = KEYWORD_GRAPH Then
         If data.label <> vbNullString Then
-            labelValue = labelValue & " label=" & FormatLabel(data.label)
+            labelValue = Join(Array(labelValue, " label=", FormatLabel(data.label)), vbNullString)
         End If
     End If
         
-    ProcessKeyword = Space(indent * ini.source.indent) & data.Item & "[ " & Trim$(styleAttributes & labelValue) & " ];" & vbNewLine
+    ProcessKeyword = Join(Array(Space(indent * ini.source.indent), data.item, "[ ", Trim$(styleAttributes & labelValue), " ];", vbNewLine), vbNullString)
     
 End Function
 
@@ -1566,11 +1567,11 @@ Public Function GetDataWorksheetName() As String
         Dim data As dataWorksheet
         data = GetSettingsForDataWorksheet(worksheetName)
 
-        If GetCell(worksheetName, data.headingRow, data.itemColumn) <> DataSheet.Cells.Item(data.headingRow, data.itemColumn).value Then
+        If GetCell(worksheetName, data.headingRow, data.itemColumn) <> DataSheet.Cells.item(data.headingRow, data.itemColumn).value Then
             worksheetName = DataSheet.name
-        ElseIf GetCell(worksheetName, data.headingRow, data.labelColumn) <> DataSheet.Cells.Item(data.headingRow, data.labelColumn).value Then
+        ElseIf GetCell(worksheetName, data.headingRow, data.labelColumn) <> DataSheet.Cells.item(data.headingRow, data.labelColumn).value Then
             worksheetName = DataSheet.name
-        ElseIf GetCell(worksheetName, data.headingRow, data.isRelatedToItemColumn) <> DataSheet.Cells.Item(data.headingRow, data.isRelatedToItemColumn).value Then
+        ElseIf GetCell(worksheetName, data.headingRow, data.isRelatedToItemColumn) <> DataSheet.Cells.item(data.headingRow, data.isRelatedToItemColumn).value Then
             worksheetName = DataSheet.name
         End If
     End If

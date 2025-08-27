@@ -659,9 +659,17 @@ Private Function GetSettingsDictionarySql() As Dictionary
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_WHERE_VALUE, fields.whereValue
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_MAX_DEPTH, fields.maxDepth
     
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CREATE_EDGES, fields.CreateEdges
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CREATE_RANK, fields.CreateRank
+    
     dictionaryObj.Add JSON_SETTINGS_SQL_FILTER_COLUMN, fields.filterColumn
     dictionaryObj.Add JSON_SETTINGS_SQL_FILTER_VALUE, fields.filterValue
    
+    dictionaryObj.Add JSON_SETTINGS_SQL_CLOSE_CONNECTIONS, fields.closeConnections
+    
+    dictionaryObj.Add JSON_SETTINGS_SQL_DATASOURCE_DIRECTORY, SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)
+    dictionaryObj.Add JSON_SETTINGS_SQL_DATASOURCE_FILE, SettingsSheet.Range(SETTINGS_DATASOURCE_FILE)
+    
     Set GetSettingsDictionarySql = dictionaryObj
 End Function
 
@@ -764,11 +772,11 @@ Private Function ConvertDataRowToDictionary(ByRef exchange As ExchangeOptions, B
     End If
     
     If exchange.data.row.visible Then
-        dictionaryObj.Add JSON_HIDDEN, DataSheet.rows.Item(row).Hidden
+        dictionaryObj.Add JSON_HIDDEN, DataSheet.rows.item(row).Hidden
     End If
     
     If exchange.data.row.height Then
-        dictionaryObj.Add JSON_HEIGHT, DataSheet.rows.Item(row).height
+        dictionaryObj.Add JSON_HEIGHT, DataSheet.rows.item(row).height
     End If
     
     Dim enabled As Boolean
@@ -777,8 +785,8 @@ Private Function ConvertDataRowToDictionary(ByRef exchange As ExchangeOptions, B
         dictionaryObj.Add JSON_ENABLED, enabled
     End If
     
-    If data.Item <> vbNullString Then
-        dictionaryObj.Add JSON_DATA_ITEM, data.Item
+    If data.item <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_ITEM, data.item
     End If
     
     If data.label <> vbNullString Then
@@ -825,11 +833,11 @@ Private Function ConvertStylesRowToDictionary(ByRef exchange As ExchangeOptions,
     End If
     
     If exchange.styles.row.visible Then
-        dictionaryObj.Add JSON_HIDDEN, StylesSheet.rows.Item(row).Hidden
+        dictionaryObj.Add JSON_HIDDEN, StylesSheet.rows.item(row).Hidden
     End If
     
     If exchange.styles.row.height Then
-        dictionaryObj.Add JSON_HEIGHT, StylesSheet.rows.Item(row).height
+        dictionaryObj.Add JSON_HEIGHT, StylesSheet.rows.item(row).height
     End If
     
     Dim enabled As Boolean
@@ -875,7 +883,7 @@ Private Function ConvertSqlRowToDictionary(ByRef exchange As ExchangeOptions, By
     
     If exchange.sql.row.visible Then
         'dictionaryObj.Add JSON_HIDDEN, ActiveWorkbook.Sheets.[_Default](SqlSheet.name).rows(row).Hidden
-        dictionaryObj.Add JSON_HIDDEN, SqlSheet.rows.Item(row).Hidden
+        dictionaryObj.Add JSON_HIDDEN, SqlSheet.rows.item(row).Hidden
     End If
     
     If exchange.sql.row.height Then
@@ -905,7 +913,7 @@ Private Function ConvertSqlRowToDictionary(ByRef exchange As ExchangeOptions, By
     
     Dim col As Long
     For col = 5 To 26
-        filterItems.Add SqlSheet.Cells.Item(row, col).value
+        filterItems.Add SqlSheet.Cells.item(row, col).value
     Next col
 
     dictionaryObj.Add JSON_SQL_FILTERS, filterItems
@@ -922,11 +930,11 @@ Private Function ConvertSvgRowToDictionary(ByRef exchange As ExchangeOptions, By
     End If
     
     If exchange.svg.row.visible Then
-        dictionaryObj.Add JSON_HIDDEN, SvgSheet.rows.Item(row).Hidden
+        dictionaryObj.Add JSON_HIDDEN, SvgSheet.rows.item(row).Hidden
     End If
     
     If exchange.svg.row.height Then
-        dictionaryObj.Add JSON_HEIGHT, SvgSheet.rows.Item(row).height
+        dictionaryObj.Add JSON_HEIGHT, SvgSheet.rows.item(row).height
     End If
     
     Dim enabled As Boolean
@@ -948,27 +956,27 @@ End Function
 
 Private Function GetStylesRow(ByRef ini As settings, ByVal row As Long) As StylesRow
 
-    GetStylesRow.comment = StylesSheet.Cells.Item(row, ini.styles.flagColumn).value
-    GetStylesRow.styleName = StylesSheet.Cells.Item(row, ini.styles.nameColumn).value
-    GetStylesRow.format = StylesSheet.Cells.Item(row, ini.styles.formatColumn).value
-    GetStylesRow.styleType = StylesSheet.Cells.Item(row, ini.styles.typeColumn).value
+    GetStylesRow.comment = StylesSheet.Cells.item(row, ini.styles.flagColumn).value
+    GetStylesRow.styleName = StylesSheet.Cells.item(row, ini.styles.nameColumn).value
+    GetStylesRow.format = StylesSheet.Cells.item(row, ini.styles.formatColumn).value
+    GetStylesRow.styleType = StylesSheet.Cells.item(row, ini.styles.typeColumn).value
 
 End Function
 
 Private Function GetSqlRow(ByRef ini As settings, ByVal row As Long) As sqlRow
 
-    GetSqlRow.comment = SqlSheet.Cells.Item(row, ini.sql.flagColumn).value
-    GetSqlRow.excelFile = SqlSheet.Cells.Item(row, ini.sql.excelFileColumn).value
-    GetSqlRow.sqlStatement = SqlSheet.Cells.Item(row, ini.sql.sqlStatementColumn).value
-    GetSqlRow.status = SqlSheet.Cells.Item(row, ini.sql.statusColumn).value
+    GetSqlRow.comment = SqlSheet.Cells.item(row, ini.sql.flagColumn).value
+    GetSqlRow.excelFile = SqlSheet.Cells.item(row, ini.sql.excelFileColumn).value
+    GetSqlRow.sqlStatement = SqlSheet.Cells.item(row, ini.sql.sqlStatementColumn).value
+    GetSqlRow.status = SqlSheet.Cells.item(row, ini.sql.statusColumn).value
 
 End Function
 
 Private Function GetSvgRow(ByRef ini As settings, ByVal row As Long) As svgRow
 
-    GetSvgRow.comment = SvgSheet.Cells.Item(row, ini.svg.flagColumn).value
-    GetSvgRow.find = SvgSheet.Cells.Item(row, ini.svg.findColumn).value
-    GetSvgRow.replace = SvgSheet.Cells.Item(row, ini.svg.replaceColumn).value
+    GetSvgRow.comment = SvgSheet.Cells.item(row, ini.svg.flagColumn).value
+    GetSvgRow.find = SvgSheet.Cells.item(row, ini.svg.findColumn).value
+    GetSvgRow.replace = SvgSheet.Cells.item(row, ini.svg.replaceColumn).value
 
 End Function
 
@@ -987,7 +995,7 @@ Private Function GetStylesRowViews(ByRef ini As settings, ByVal row As Long) As 
         i = 0
         ReDim switches(arraySize)
         For col = ini.styles.firstYesNoColumn To lastColumn
-            switches(i) = StylesSheet.Cells.Item(row, col).value
+            switches(i) = StylesSheet.Cells.item(row, col).value
             i = i + 1
         Next col
     End If

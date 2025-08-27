@@ -59,7 +59,7 @@ Public Function GetSettingsForStylesWorksheet() As stylesWorksheet
     GetSettingsForStylesWorksheet.lastRow = CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_LAST))
     If GetSettingsForStylesWorksheet.lastRow = 0 Then
         With StylesSheet.UsedRange
-            GetSettingsForStylesWorksheet.lastRow = .Cells.Item(.Cells.count).row
+            GetSettingsForStylesWorksheet.lastRow = .Cells.item(.Cells.count).row
         End With
     End If
     
@@ -124,7 +124,7 @@ Public Function GetSettingsForSqlWorksheet() As sqlWorksheet
     GetSettingsForSqlWorksheet.headingRow = CLng(SettingsSheet.Range(SETTINGS_SQL_ROW_HEADING))
     GetSettingsForSqlWorksheet.firstRow = CLng(SettingsSheet.Range(SETTINGS_SQL_ROW_FIRST))
     With SqlSheet.UsedRange
-        GetSettingsForSqlWorksheet.lastRow = .Cells.Item(.Cells.count).row
+        GetSettingsForSqlWorksheet.lastRow = .Cells.item(.Cells.count).row
     End With
     GetSettingsForSqlWorksheet.flagColumn = GetSettingColNum(SETTINGS_SQL_COL_COMMENT)
     GetSettingsForSqlWorksheet.sqlStatementColumn = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
@@ -159,13 +159,17 @@ Public Function GetSettingsForSqlFields() As sqlFieldName
     GetSettingsForSqlFields.whereColumn = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN).value)
     GetSettingsForSqlFields.whereValue = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_WHERE_VALUE).value)
     GetSettingsForSqlFields.maxDepth = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_MAX_DEPTH).value)
+    GetSettingsForSqlFields.closeConnections = GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS)
+
+    GetSettingsForSqlFields.CreateEdges = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CREATE_EDGES).value)
+    GetSettingsForSqlFields.CreateRank = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CREATE_RANK).value)
 End Function
 
 Public Function GetSettingsForSvgWorksheet() As svgWorksheet
     GetSettingsForSvgWorksheet.headingRow = svgLayoutRow.headingRow
     GetSettingsForSvgWorksheet.firstRow = svgLayoutRow.firstDataRow
     With SvgSheet.UsedRange
-        GetSettingsForSvgWorksheet.lastRow = .Cells.Item(.Cells.count).row
+        GetSettingsForSvgWorksheet.lastRow = .Cells.item(.Cells.count).row
     End With
     GetSettingsForSvgWorksheet.flagColumn = svgLayoutColumn.flagColumn
     GetSettingsForSvgWorksheet.findColumn = svgLayoutColumn.findColumn
@@ -333,7 +337,7 @@ End Function
 Public Sub DisplayTabRows(ByVal isVisible As Boolean, ByVal rowFrom As Long, ByVal rowTo As Long)
     Dim row As Long
     For row = rowFrom To rowTo
-        SettingsSheet.rows.Item(row).Hidden = Not isVisible
+        SettingsSheet.rows.item(row).Hidden = Not isVisible
     Next row
 End Sub
 

@@ -36,7 +36,7 @@ Public Function ChooseDirectory(ByVal startDir As String) As String
             ' User clicked on CANCEL)
         Else
             ' Set path of directory chosen
-            ChooseDirectory = fileDialogHandle.SelectedItems.Item(1)
+            ChooseDirectory = fileDialogHandle.SelectedItems.item(1)
         End If
     End If
     Set fileDialogHandle = Nothing

@@ -32,28 +32,28 @@ Public Function DirectoryExists(ByVal dirPath As String) As Boolean
     End If
     
 #Else
-    Dim FSO As Object
-    Set FSO = CreateObject("Scripting.FileSystemObject")
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
     
     DirectoryExists = False
     
     If Len(dirPath) > 0 Then
-        If FSO.FolderExists(dirPath) = True Then
+        If fso.FolderExists(dirPath) = True Then
             DirectoryExists = True
         End If
     End If
 
-    Set FSO = Nothing
+    Set fso = Nothing
 #End If
 End Function
 
-Public Function FileExists(ByVal FilePath As String) As Boolean
+Public Function FileExists(ByVal filePath As String) As Boolean
     FileExists = False
 
 #If Mac Then
     '  Use Apple Script to get around sandbox restrictions
     Dim applescriptResult As String
-    applescriptResult = RunAppleScriptTask("doesFileExist", FilePath)
+    applescriptResult = RunAppleScriptTask("doesFileExist", filePath)
 
     If applescriptResult = "true" Then
         FileExists = True
@@ -61,17 +61,17 @@ Public Function FileExists(ByVal FilePath As String) As Boolean
         FileExists = False
     End If
 #Else
-    Dim FSO As Object
+    Dim fso As Object
     
-    Set FSO = CreateObject("Scripting.FileSystemObject")
+    Set fso = CreateObject("Scripting.FileSystemObject")
 
-    If Len(FilePath) > 0 Then
-        If FSO.FileExists(FilePath) = True Then
+    If Len(filePath) > 0 Then
+        If fso.FileExists(filePath) = True Then
             FileExists = True
         End If
     End If
 
-    Set FSO = Nothing
+    Set fso = Nothing
 #End If
 End Function
 
@@ -107,7 +107,7 @@ EndMacro:
 
 End Sub
 
-Public Function ReadFileToString(ByVal filename As String) As String
+Public Function ReadFileToString(ByVal fileName As String) As String
     
 #If Mac Then
     Dim fileNum As Integer
@@ -115,7 +115,7 @@ Public Function ReadFileToString(ByVal filename As String) As String
 
     fileNum = FreeFile()
 
-    Open filename For Input As #fileNum
+    Open fileName For Input As #fileNum
 
     While Not EOF(fileNum)
         Line Input #fileNum, dataLine ' read in data 1 line at a time
@@ -129,7 +129,7 @@ Public Function ReadFileToString(ByVal filename As String) As String
 
     Dim textFile As Object
     
-    Set textFile = fileSystem.OpenTextFile(filename, IOMode:=IOMode.ForReading, format:=FileFormat.TristateFalse)
+    Set textFile = fileSystem.OpenTextFile(fileName, IOMode:=IOMode.ForReading, format:=FileFormat.TristateFalse)
     
     ReadFileToString = textFile.ReadAll
 

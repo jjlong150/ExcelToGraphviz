@@ -16,11 +16,12 @@ End Type
 ''' Button Actions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 '''  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Public Sub RunSQL()
-    
     Dim message As String
-    Dim FilePath As String
+    Dim filePath As String
     
     Dim context As sqlContext
+    
+    Dim connectionObject As Object  ' Connection
     
     ' Get the column layout of the 'data' worksheet
     context.dataLayout = GetSettingsForDataWorksheet(DataSheet.name)
@@ -40,8 +41,13 @@ Public Sub RunSQL()
     ' Determine the last row with data
     Dim lastRow As Long
     With SqlSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
+    
+    ' Disable automatic graph rendering as cells change.
+    Dim runMode As String
+    runMode = SettingsSheet.Range(SETTINGS_RUN_MODE).value
+    SettingsSheet.Range(SETTINGS_RUN_MODE).value = TOGGLE_MANUAL
     
     ' Clear out the info from previous run
     ClearSQLStatus
@@ -52,7 +58,7 @@ Public Sub RunSQL()
     
     ' The column used to filter which SQL statements should be run
     Dim filterColumn As Long
-    If SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value = vbNullString Then
+    If Len(SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value) = 0 Then
         filterColumn = 0
     Else
         filterColumn = GetSettingColNum(SETTINGS_SQL_COL_FILTER)
@@ -65,22 +71,34 @@ Public Sub RunSQL()
     Dim dataFile As String
     
     For sqlRow = context.sqlLayout.firstRow To lastRow
-        FilePath = GetExcelFilePath(sqlRow, context.sqlLayout, dataFile)
-        sqlStatement = Trim$(SqlSheet.Cells.Item(sqlRow, context.sqlLayout.sqlStatementColumn).value)
-        sqlUCase = UCase$(sqlStatement)
-        message = GetMessage("msgboxSqlStatusSuccess")
+        ' Skip initializations if the SQL row is commented out
+        If SqlSheet.Cells.item(sqlRow, context.sqlLayout.flagColumn).value <> FLAG_COMMENT Then
+            ' Establish the full path to the Excel file containing the data
+            filePath = GetExcelFilePath(sqlRow, context.sqlLayout, dataFile)
+            
+            ' Establish connection to the file containing the relational data using
+            ' connection pooling.
+            Set connectionObject = getConnection(filePath)
+            
+            ' Get SQL statement, and convert to upper case
+            sqlStatement = Trim$(SqlSheet.Cells.item(sqlRow, context.sqlLayout.sqlStatementColumn).value)
+            sqlUCase = UCase$(sqlStatement)
+            
+            ' Get default SUCCESS message
+            message = GetMessage("msgboxSqlStatusSuccess")
+        End If
     
-        If SqlSheet.Cells.Item(sqlRow, context.sqlLayout.flagColumn).value = FLAG_COMMENT Then
+        If SqlSheet.Cells.item(sqlRow, context.sqlLayout.flagColumn).value = FLAG_COMMENT Then
             message = GetMessage("msgboxSqlStatusSkipped")
         
-        ElseIf sqlStatement = vbNullString Then
+        ElseIf Len(sqlStatement) = 0 Then
             message = vbNullString
         
         ElseIf Not PassesFilter(sqlRow, filterColumn) Then
             message = GetMessage("msgboxSqlStatusFiltered")
         
         ElseIf sqlUCase = SQL_SET_DATA_FILE Then
-            dataFile = SqlSheet.Cells.Item(sqlRow, context.sqlLayout.excelFileColumn).value
+            dataFile = SqlSheet.Cells.item(sqlRow, context.sqlLayout.excelFileColumn).value
         
         ElseIf sqlUCase = SQL_RESET Then
             ClearDataWorksheet DataSheet.name
@@ -112,25 +130,31 @@ Public Sub RunSQL()
         ElseIf StartsWith(sqlUCase, SQL_PREVIEW) Then
             CreateGraphWorksheet
             
-       ElseIf Not StartsWith(sqlUCase, SQL_SELECT) Then
+        ElseIf Not StartsWith(sqlUCase, SQL_SELECT) Then
             message = GetMessage("msgboxSqlStatusSkipped") & " - " & GetMessage("msgboxSqlMustBeginWithSelect")
         
-        ElseIf Not FileExists(FilePath) Then
+        ElseIf Not FileExists(filePath) Then
             message = GetMessage("msgboxSqlFileNotFound")
-            message = replace(message, "{filePath}", FilePath)
+            message = replace(message, "{filePath}", filePath)
             message = GetMessage("msgboxSqlStatusFailure") & " - " & message
         
         Else
-            message = executeSQL(context, FilePath, sqlStatement, dataRow)
+            message = executeSQL(context, filePath, connectionObject, sqlStatement, dataRow)
         End If
         
         ' Display the status of the SQL query
-        SqlSheet.Cells.Item(sqlRow, context.sqlLayout.statusColumn).value = message
+        SqlSheet.Cells.item(sqlRow, context.sqlLayout.statusColumn).value = message
         
         ' Breathe
         DoEvents
     Next sqlRow
    
+    ' Clean up connection pool if using narrow-scoped pooling, otherwise
+    ' connections will be cleaned up when the workbook is closed.
+    If GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS) Then CleanupConnectionPool
+    
+    ' Restore the run mode setting
+    SettingsSheet.Range(SETTINGS_RUN_MODE).value = runMode
 End Sub
 
 Private Sub PreviewAs(ByVal graphType As String)
@@ -241,7 +265,7 @@ Private Function GetLastViewColumn(ByVal firstColumn As Long) As Long
     ' Count the non-empty cells beginning at the first view column
     nonEmptyCellCount = 0
     For col = firstColumn To GetLastColumn(StylesSheet.name, row)
-        If StylesSheet.Cells.Item(row, col) <> vbNullString Then
+        If StylesSheet.Cells.item(row, col) <> vbNullString Then
             nonEmptyCellCount = nonEmptyCellCount + 1
         End If
     Next col
@@ -260,24 +284,50 @@ Private Sub SetPrefix(ByRef commandStatement As String, ByRef phrase As String)
 End Sub
 
 Private Function GetExcelFilePath(ByVal sqlRow As Long, ByRef sqlLayout As sqlWorksheet, ByVal dataFile As String) As String
-    Dim FilePath As String
-    FilePath = SqlSheet.Cells.Item(sqlRow, sqlLayout.excelFileColumn).value
+    ' Order of precedence is
+    ' 1) filename from current SQL row
+    ' 2) SET DATA FILE filename passed in the dataFile parameter
+    ' 3) Data file from the ribbon values
+    ' 4) Current workbook
     
-    If FilePath = vbNullString Then
-        If Trim$(dataFile) = vbNullString Then
-            FilePath = ActiveWorkbook.FullName
+    ' Get the file from the SQL row
+    Dim filePath As String
+    
+    ' Scenario 1 - filename from the current SQL row
+    filePath = Trim$(SqlSheet.Cells.item(sqlRow, sqlLayout.excelFileColumn).value)
+    If filePath <> vbNullString Then
+        If InStr(filePath, Application.pathSeparator) Then
+            GetExcelFilePath = filePath
         Else
-            If InStr(dataFile, Application.pathSeparator) Then
-                FilePath = dataFile
-            Else
-                FilePath = ActiveWorkbook.path & Application.pathSeparator & Trim$(dataFile)
-            End If
+            GetExcelFilePath = ActiveWorkbook.path & Application.pathSeparator & filePath
         End If
-    ElseIf Not InStr(FilePath, Application.pathSeparator) Then
-        FilePath = ActiveWorkbook.path & Application.pathSeparator & FilePath
+        Exit Function
     End If
-
-    GetExcelFilePath = FilePath
+    
+    ' Scenario 2 - SET DATA FILE filename passed in the dataFile parameter
+    If Trim$(dataFile) <> vbNullString Then
+        If InStr(dataFile, Application.pathSeparator) Then
+            GetExcelFilePath = dataFile
+        Else
+            GetExcelFilePath = ActiveWorkbook.path & Application.pathSeparator & Trim$(dataFile)
+        End If
+        Exit Function
+    End If
+    
+    ' Scenario 3 - Get data file from the ribbon
+    Dim dirName As String
+    dirName = SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)
+    
+    Dim fileName As String
+    fileName = SettingsSheet.Range(SETTINGS_DATASOURCE_FILE)
+    
+    If dirName <> vbNullString And fileName <> vbNullString Then
+        GetExcelFilePath = dirName & Application.pathSeparator & fileName
+        Exit Function
+    End If
+    
+    ' Scenario 4 - Current workbook
+    GetExcelFilePath = ActiveWorkbook.FullName
 End Function
 
 Private Function PassesFilter(ByVal sqlRow As Long, ByVal filterColumn As Long) As Boolean
@@ -285,7 +335,7 @@ Private Function PassesFilter(ByVal sqlRow As Long, ByVal filterColumn As Long) 
     If filterColumn <= 0 Then
         PassesFilter = True
     Else
-        If Trim$(SqlSheet.Cells.Item(sqlRow, filterColumn).value) = SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value Then
+        If Trim$(SqlSheet.Cells.item(sqlRow, filterColumn).value) = SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value Then
             PassesFilter = True
         End If
     End If
@@ -300,7 +350,7 @@ Public Sub ClearSQLStatus()
     
     Dim lastRow As Long
     With SqlSheet.UsedRange
-        lastRow = .Cells.Item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.count).row
     End With
 
     ' Format the range to clear
@@ -314,68 +364,34 @@ End Sub
 ' https://technet.microsoft.com/en-us/library/ee692882.aspx
 
 Private Function executeSQL(ByRef context As sqlContext, _
-                            ByVal FilePath As String, _
+                            ByVal filePath As String, _
+                            ByRef connectionObject As Object, _
                             ByVal sqlStatement As String, _
                             ByRef row As Long) As String
     
     On Error GoTo executeSQLError
     
-    Dim connectionObject As Object  ' Connection
     Dim rsQueryResults As Object   ' Record Set
     Dim rsRecursionResults As Object
     Dim rsMergedResults As Object
         
-    Dim fileExtension As String
-    Dim provider As String
-    Dim properties As String
-    
     Dim recordCnt As Long
     recordCnt = 0
-
-    ' Determine the connection string settings based upon the file extension
-    ' of the file we will executed the query against
-    fileExtension = Right$(FilePath, Len(FilePath) - InStrRev(FilePath, "."))
-  
-    Select Case LCase$(fileExtension)
-    Case "xlsx"
-        provider = "Microsoft.ACE.OLEDB.12.0;"
-        properties = "Excel 12.0 Xml;HDR=YES;"
+   
+    ' A Microsoft bug is causing it to take 12 seconds to get a connection, so provide feedback
+    Application.StatusBar = replace(GetMessage("statusbarSqlEstablishingConnection"), "{filePath}", filePath)
         
-    Case "xlsb"
-        provider = "Microsoft.ACE.OLEDB.12.0;"
-        properties = "Excel 12.0;HDR=YES;"
-        
-    Case "xlsm"
-        provider = "Microsoft.ACE.OLEDB.12.0;"
-        properties = "Excel 12.0 Macro;HDR=YES;"
-        
-    Case "xls"
-        provider = "Microsoft.ACE.OLEDB.12.0;"
-        properties = "Excel 8.0;HDR=YES;"
-        
-    Case Else
-        executeSQL = replace(GetMessage("msgboxSqlFileTypeNotSupported"), "{fileExtension}", fileExtension)
-        Exit Function
-    End Select
-    
-    ' Establish connection to the file containing the relational data using
-    ' late binding as we do not know which version of Excel this spreadsheet
-    ' will be running on
-    Set connectionObject = CreateObject("ADODB.Connection")
-    
-    ' Specify connection options
-    With connectionObject
-        .provider = provider
-        .properties("Extended Properties").value = properties
-        .Open FilePath
-    End With
-    
+    ' Reset status bar now that the connection has been made
+    Application.StatusBar = False
+                
     ' Define a recordset for a SQL SELECT statement using late binding
     ' as we do not know which version of Excel this spreadsheet
     ' will be running on
     Set rsQueryResults = CreateObject("ADODB.Recordset")
     
     ' Execute the SQL SELECT query
+'   recordSetObject.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenForwardOnly, LockType:=LockTypeEnum.adLockOptimistic, options:=CommandTypeEnum.adCmdText
+
     rsQueryResults.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenForwardOnly, LockType:=LockTypeEnum.adLockOptimistic, options:=CommandTypeEnum.adCmdText
         
     ' Execute any recursion query passed in the SQL SELECT
@@ -402,14 +418,18 @@ executeSQLError:
         ' GetMessage will reset the error state, save the message
         Dim errMsg As String
         errMsg = Err.Description
-        executeSQL = GetMessage("msgboxSqlStatusFailure") & " - " & errMsg
+        
+        Dim errNumber As Long
+        errNumber = Err.number
+        
+        executeSQL = GetMessage("msgboxSqlStatusFailure") & " - " & errMsg & vbNewLine & vbNewLine & "Err.Number=" & errNumber & vbNewLine & vbNewLine & "datafile=" & filePath
     End If
     
     On Error Resume Next
     
     ' Close the rsQueryResults record set
     If Not rsQueryResults Is Nothing Then
-        If rsQueryResults.state = ObjectStateEnum.adStateOpen Then
+        If rsQueryResults.State = ObjectStateEnum.adStateOpen Then
             rsQueryResults.Close
             Set rsQueryResults = Nothing
         End If
@@ -417,7 +437,7 @@ executeSQLError:
     
     ' Close the rsRecursionResults record set
     If Not rsRecursionResults Is Nothing Then
-        If rsRecursionResults.state = ObjectStateEnum.adStateOpen Then
+        If rsRecursionResults.State = ObjectStateEnum.adStateOpen Then
             rsRecursionResults.Close
             Set rsRecursionResults = Nothing
         End If
@@ -425,17 +445,9 @@ executeSQLError:
     
     ' Close the rsMergedResults record set
     If Not rsMergedResults Is Nothing Then
-        If rsMergedResults.state = ObjectStateEnum.adStateOpen Then
+        If rsMergedResults.State = ObjectStateEnum.adStateOpen Then
             rsMergedResults.Close
             Set rsMergedResults = Nothing
-        End If
-    End If
-    
-    ' Close the connection
-    If Not connectionObject Is Nothing Then
-        If connectionObject.state = ObjectStateEnum.adStateOpen Then
-            connectionObject.Close
-            Set connectionObject = Nothing
         End If
     End If
     
@@ -457,13 +469,13 @@ Private Sub RecursiveSearch(ByRef connectionObject As Object, _
     
     ' Extract the query and parameters. Exit if not provided
     recursionSql = GetFieldValueString(rsQueryResults, context.fields.treeQuery)
-    If recursionSql = vbNullString Then Exit Sub
+    If Len(recursionSql) = 0 Then Exit Sub
     
     whereValue = GetFieldValueString(rsQueryResults, context.fields.whereValue)
-    If whereValue = vbNullString Then Exit Sub
+    If Len(whereValue) = 0 Then Exit Sub
     
     whereColumn = GetFieldValueString(rsQueryResults, context.fields.whereColumn)
-    If whereColumn = vbNullString Then Exit Sub
+    If Len(whereColumn) = 0 Then Exit Sub
     
     ' Create a collection to track what has been searched, so we
     ' don't fall into an infinite loop.
@@ -578,6 +590,20 @@ Private Sub MapResultsToDataWorksheet(ByRef context As sqlContext, _
                                       
     If rsQueryResults.EOF Then Exit Sub
     
+    ' Determine if the query specified chaining the items
+    If HasField(rsQueryResults, context.fields.CreateEdges) Then
+        CreateEdges context, rsQueryResults, row, recordCnt
+        Exit Sub
+    End If
+    
+    ' Determine if the query is asking to create a subgraph which puts
+    ' all the items on the same rank. Currently this feature does not create separate
+    ' subgraphs for clusters or subclusters (the juice is not worth the squeeze).
+    If HasField(rsQueryResults, context.fields.CreateRank) Then
+        CreateRank context, rsQueryResults, row, recordCnt
+        Exit Sub
+    End If
+
     ' Determine if the query specified clusters and/or subclusters
     Dim hasCluster As Boolean
     hasCluster = HasField(rsQueryResults, context.fields.Cluster)
@@ -586,7 +612,7 @@ Private Sub MapResultsToDataWorksheet(ByRef context As sqlContext, _
     hasSubcluster = HasField(rsQueryResults, context.fields.subcluster)
 
     ' Ensure the recordset is at the beginning
-    rsQueryResults.movefirst
+    rsQueryResults.MoveFirst
     
     ' Work the four possible combinations to emit the clustered or unclustered results
     If hasCluster Then
@@ -624,7 +650,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
         Dim clusterInstance As Cluster
         For Each clusterKey In clusterList.Keys()
             ' Retrieve the "cluster" fields for this key
-            Set clusterInstance = clusterList.Item(clusterKey)
+            Set clusterInstance = clusterList.item(clusterKey)
             ' Add the dictionary of subcluster info to this cluster
             Set clusterInstance.subclusters = GetSubClusterInfoForCluster(recordSetObject, context.fields, CStr(clusterKey))
         Next
@@ -633,11 +659,11 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
     Dim clusterRecord As Cluster
     For Each clusterKey In clusterList.Keys()
         clusterCnt = clusterCnt + 1
-        Set clusterRecord = clusterList.Item(CStr(clusterKey))
+        Set clusterRecord = clusterList.item(CStr(clusterKey))
 
         EmitClusterOpen clusterRecord, context.dataLayout, row, context.fields.clusterPlaceholder, clusterCnt
         If clusterRecord.subclusters.count = 0 Then ' Results do not need to be grouped in subclusters
-            recordSetObject.movefirst
+            recordSetObject.MoveFirst
             Do While recordSetObject.EOF = False
                 If recordSetObject.fields(context.fields.Cluster).value = CStr(clusterKey) Then
                     recordCnt = recordCnt + 1
@@ -653,8 +679,8 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
             Dim subclusterRecord As Cluster
             For Each subclusterKey In clusterRecord.subclusters.Keys()
                 ' Create a row to start the subcluster
-                Set subclusterRecord = clusterRecord.subclusters.Item(subclusterKey)
-                recordSetObject.movefirst
+                Set subclusterRecord = clusterRecord.subclusters.item(subclusterKey)
+                recordSetObject.MoveFirst
     
                 subclusterCnt = subclusterCnt + 1
                 EmitClusterOpen subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
@@ -669,7 +695,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
                 EmitClusterClose subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
     
                 ' Iterate through the query results again for the nodes which are not part of the subcluster
-                recordSetObject.movefirst
+                recordSetObject.MoveFirst
                 Do While recordSetObject.EOF = False
                     If recordSetObject.fields(context.fields.Cluster).value = CStr(clusterKey) And IsNull(recordSetObject.fields(context.fields.subcluster).value) Then
                         recordCnt = recordCnt + 1
@@ -684,14 +710,14 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
     Next
     
     ' Handle case where cluster has no data, but subcluster does specify data
-    recordSetObject.movefirst
+    recordSetObject.MoveFirst
     Dim orphanClusterList As Dictionary
     Set orphanClusterList = GetOrphanSubClusterInfo(recordSetObject, context.fields)
     subclusterCnt = 0
 
     For Each subclusterKey In orphanClusterList.Keys()
-        Set subclusterRecord = orphanClusterList.Item(subclusterKey)
-        recordSetObject.movefirst
+        Set subclusterRecord = orphanClusterList.item(subclusterKey)
+        recordSetObject.MoveFirst
         subclusterCnt = subclusterCnt + 1
         EmitClusterOpen subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
         Do While recordSetObject.EOF = False
@@ -706,7 +732,7 @@ Private Sub ProcessClusterYesSubclusterYes(ByRef context As sqlContext, _
     Next
 
     ' Handle case where query specified cluster and subcluster, but the data row is null for these columns
-    recordSetObject.movefirst
+    recordSetObject.MoveFirst
     Do While recordSetObject.EOF = False
         If IsNull(recordSetObject.fields(context.fields.Cluster)) And IsNull(recordSetObject.fields(context.fields.subcluster)) Then
             recordCnt = recordCnt + 1
@@ -733,10 +759,10 @@ Private Sub ProcessClusterYesSubclusterNo(ByRef context As sqlContext, _
     Dim clusterRecord As Cluster
     For Each clusterKey In clusterList.Keys()
         clusterCnt = clusterCnt + 1
-        Set clusterRecord = clusterList.Item(CStr(clusterKey))
+        Set clusterRecord = clusterList.item(CStr(clusterKey))
 
         EmitClusterOpen clusterRecord, context.dataLayout, row, context.fields.clusterPlaceholder, clusterCnt
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
         Do While recordSetObject.EOF = False
             If recordSetObject.fields(context.fields.Cluster).value = CStr(clusterKey) Then
                 recordCnt = recordCnt + 1
@@ -749,7 +775,7 @@ Private Sub ProcessClusterYesSubclusterNo(ByRef context As sqlContext, _
     Next
     
     ' Emit the records which are not in a cluster
-    recordSetObject.movefirst
+    recordSetObject.MoveFirst
     Do While recordSetObject.EOF = False
         If IsNull(recordSetObject.fields(context.fields.Cluster).value) Then
             recordCnt = recordCnt + 1
@@ -776,10 +802,10 @@ Private Sub ProcessClusterNoSubclusterYes(ByRef context As sqlContext, _
     Dim subclusterRecord As Cluster
     For Each subclusterKey In subclusterList.Keys()
         subclusterCnt = subclusterCnt + 1
-        Set subclusterRecord = subclusterList.Item(CStr(subclusterKey))
+        Set subclusterRecord = subclusterList.item(CStr(subclusterKey))
 
         EmitClusterOpen subclusterRecord, context.dataLayout, row, context.fields.subclusterPlaceholder, subclusterCnt
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
         Do While recordSetObject.EOF = False
             If recordSetObject.fields(context.fields.subcluster).value = CStr(subclusterKey) Then
                 recordCnt = recordCnt + 1
@@ -792,7 +818,7 @@ Private Sub ProcessClusterNoSubclusterYes(ByRef context As sqlContext, _
     Next
 
     ' Handle case where query specified subcluster, but the subcluster column data is null
-    recordSetObject.movefirst
+    recordSetObject.MoveFirst
     Do While recordSetObject.EOF = False
         If IsNull(recordSetObject.fields(context.fields.subcluster)) Then
             recordCnt = recordCnt + 1
@@ -807,13 +833,75 @@ Private Sub ProcessClusterNoSubclusterNo(ByRef context As sqlContext, _
                                          ByVal recordSetObject As Object, _
                                          ByRef row As Long, _
                                          ByRef recordCnt As Long)
-    recordSetObject.movefirst
+    recordSetObject.MoveFirst
     Do While recordSetObject.EOF = False
         recordCnt = recordCnt + 1
         EmitRow context, recordSetObject, row, recordCnt
         row = row + 1
         recordSetObject.MoveNext
     Loop
+End Sub
+
+Private Sub CreateEdges(ByRef context As sqlContext, _
+                         ByVal recordSetObject As Object, _
+                         ByRef row As Long, _
+                         ByRef recordCnt As Long)
+                         
+    If recordSetObject.EOF Then Exit Sub
+
+    Dim item As String
+    Dim relatedItem As String
+    
+    recordSetObject.MoveFirst
+    item = CStr(recordSetObject.fields(context.headings.item).value)
+    
+    recordSetObject.MoveNext
+    Do While recordSetObject.EOF = False
+        relatedItem = CStr(recordSetObject.fields(context.headings.item).value)
+        
+        ' Emit the row
+        recordCnt = recordCnt + 1
+        EmitRow context, recordSetObject, row, recordCnt
+        
+        ' Override the Item and Related Item cells with the previous and current item IDs
+        DataSheet.Cells.item(row, context.dataLayout.itemColumn) = item
+        DataSheet.Cells.item(row, context.dataLayout.isRelatedToItemColumn) = relatedItem
+        
+        ' Advance to the next result
+        item = relatedItem
+        row = row + 1
+        recordSetObject.MoveNext
+    Loop
+End Sub
+
+Private Sub CreateRank(ByRef context As sqlContext, _
+                         ByVal recordSetObject As Object, _
+                         ByRef row As Long, _
+                         ByRef recordCnt As Long)
+                         
+    If recordSetObject.EOF Then Exit Sub
+
+    ' Establish the rank
+    recordSetObject.MoveFirst
+    Dim rank As String
+    rank = LCase$(CStr(recordSetObject.fields("RANK")))
+    
+    ' Collect the node identifiers
+    Dim item As String
+    Dim subgraph As String
+    subgraph = "{ rank=" & AddQuotes(rank) & ";"
+    Do While recordSetObject.EOF = False
+        item = CStr(recordSetObject.fields(context.headings.item).value)
+        subgraph = subgraph & " " & AddQuotes(item) & ";"
+        recordSetObject.MoveNext
+    Loop
+    subgraph = subgraph & " }"
+    
+    ' Emit the row
+    recordCnt = recordCnt + 1
+    DataSheet.Cells.item(row, context.dataLayout.itemColumn) = ">"
+    DataSheet.Cells.item(row, context.dataLayout.labelColumn) = subgraph
+    row = row + 1
 End Sub
 
 Private Function GetClusterInfo(ByVal recordSetObject As Object, ByRef fields As sqlFieldName) As Dictionary
@@ -828,7 +916,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, ByRef fields As
     Dim clusterAttributes As String
     
     If Not recordSetObject.EOF Then
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
         Do While recordSetObject.EOF = False
             clusterLabel = vbNullString
             clusterStyleName = vbNullString
@@ -876,7 +964,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, ByRef fields As
             End If
             recordSetObject.MoveNext
         Loop
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
     End If
     
     Set GetClusterInfo = clusters
@@ -894,7 +982,7 @@ Private Function GetSubclusterInfo(ByVal recordSetObject As Object, ByRef fields
     Dim subclusterAttributes As String
     
     If Not recordSetObject.EOF Then
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
         Do While recordSetObject.EOF = False
             subclusterLabel = vbNullString
             subclusterStyleName = vbNullString
@@ -942,7 +1030,7 @@ Private Function GetSubclusterInfo(ByVal recordSetObject As Object, ByRef fields
             End If
             recordSetObject.MoveNext
         Loop
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
     End If
     
     Set GetSubclusterInfo = subclusters
@@ -963,7 +1051,7 @@ Private Function GetSubClusterInfoForCluster(ByVal recordSetObject As Object, By
     position = 0
     
     If Not recordSetObject.EOF Then
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
         Do While recordSetObject.EOF = False
             If recordSetObject.fields(fields.Cluster).value = clusterName Then
                 clusterLabel = vbNullString
@@ -1009,7 +1097,7 @@ Private Function GetSubClusterInfoForCluster(ByVal recordSetObject As Object, By
             End If
             recordSetObject.MoveNext
         Loop
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
     End If
     
     Set GetSubClusterInfoForCluster = clusters
@@ -1028,7 +1116,7 @@ Private Function GetOrphanSubClusterInfo(ByVal recordSetObject As Object, ByRef 
     Dim subclusterAttributes As String
     
     If Not recordSetObject.EOF Then
-        recordSetObject.movefirst
+        recordSetObject.MoveFirst
         Do While recordSetObject.EOF = False
             If IsNull(recordSetObject.fields(fields.Cluster)) And Not IsNull(recordSetObject.fields(fields.subcluster)) Then
                 subclusterLabel = vbNullString
@@ -1076,24 +1164,24 @@ Private Function GetOrphanSubClusterInfo(ByVal recordSetObject As Object, ByRef 
 End Function
 
 Private Sub EmitClusterOpen(ByVal clusterRecord As Cluster, ByRef dataLayout As dataWorksheet, ByRef row As Long, ByVal findStr As String, ByRef replaceLong As Long)
-    DataSheet.Cells.Item(row, dataLayout.itemColumn) = OPEN_BRACE
-    DataSheet.Cells.Item(row, dataLayout.labelColumn) = clusterRecord.label
-    DataSheet.Cells.Item(row, dataLayout.extraAttributesColumn) = replace(clusterRecord.attributes, findStr, CStr(replaceLong), 1, -1, vbTextCompare)
-    DataSheet.Cells.Item(row, dataLayout.tooltipColumn) = clusterRecord.tooltip
+    DataSheet.Cells.item(row, dataLayout.itemColumn) = OPEN_BRACE
+    DataSheet.Cells.item(row, dataLayout.labelColumn) = clusterRecord.label
+    DataSheet.Cells.item(row, dataLayout.extraAttributesColumn) = replace(clusterRecord.attributes, findStr, CStr(replaceLong), 1, -1, vbTextCompare)
+    DataSheet.Cells.item(row, dataLayout.tooltipColumn) = clusterRecord.tooltip
     
     If clusterRecord.styleName <> vbNullString Then
         ' Append the suffix to the style name
-        DataSheet.Cells.Item(row, dataLayout.styleNameColumn) = replace(clusterRecord.styleName, findStr, CStr(replaceLong), 1, -1, vbTextCompare) & SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_OPEN).value
+        DataSheet.Cells.item(row, dataLayout.styleNameColumn) = replace(clusterRecord.styleName, findStr, CStr(replaceLong), 1, -1, vbTextCompare) & SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_OPEN).value
     End If
     row = row + 1
 End Sub
 
 Private Sub EmitClusterClose(ByVal clusterRecord As Cluster, ByRef dataLayout As dataWorksheet, ByRef row As Long, ByVal findStr As String, ByRef replaceLong As Long)
-    DataSheet.Cells.Item(row, dataLayout.itemColumn) = CLOSE_BRACE
+    DataSheet.Cells.item(row, dataLayout.itemColumn) = CLOSE_BRACE
     
     If clusterRecord.styleName <> vbNullString Then
         ' Append the suffix to the style name
-        DataSheet.Cells.Item(row, dataLayout.styleNameColumn) = replace(clusterRecord.styleName, findStr, CStr(replaceLong), 1, -1, vbTextCompare) & SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_CLOSE).value
+        DataSheet.Cells.item(row, dataLayout.styleNameColumn) = replace(clusterRecord.styleName, findStr, CStr(replaceLong), 1, -1, vbTextCompare) & SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_CLOSE).value
     End If
     row = row + 1
 End Sub
@@ -1127,10 +1215,10 @@ Private Sub EmitRow(ByRef context As sqlContext, ByVal recordSetObject As Object
         
         Select Case LCase$(fieldObject.name)
         Case context.headings.flag
-            DataSheet.Cells.Item(row, context.dataLayout.flagColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.flagColumn) = CStr(fieldObjectValue)
             
-        Case context.headings.Item
-            DataSheet.Cells.Item(row, context.dataLayout.itemColumn) = CStr(fieldObjectValue)
+        Case context.headings.item
+            DataSheet.Cells.item(row, context.dataLayout.itemColumn) = CStr(fieldObjectValue)
             
         Case context.headings.label
             If HasField(recordSetObject, context.fields.splitLength) Then
@@ -1145,9 +1233,9 @@ Private Sub EmitRow(ByRef context As sqlContext, ByVal recordSetObject As Object
                     lineEnding = NEWLINE
                 End If
                 
-                DataSheet.Cells.Item(row, context.dataLayout.labelColumn) = SplitMultilineText(CStr(fieldObjectValue), splitLength, lineEnding)
+                DataSheet.Cells.item(row, context.dataLayout.labelColumn) = SplitMultilineText(CStr(fieldObjectValue), splitLength, lineEnding)
             Else
-                DataSheet.Cells.Item(row, context.dataLayout.labelColumn) = CStr(fieldObjectValue)
+                DataSheet.Cells.item(row, context.dataLayout.labelColumn) = CStr(fieldObjectValue)
             End If
             
         Case context.headings.xLabel
@@ -1163,47 +1251,47 @@ Private Sub EmitRow(ByRef context As sqlContext, ByVal recordSetObject As Object
                     lineEnding = NEWLINE
                 End If
                 
-                DataSheet.Cells.Item(row, context.dataLayout.xLabelColumn) = SplitMultilineText(CStr(fieldObjectValue), splitLength, lineEnding)
+                DataSheet.Cells.item(row, context.dataLayout.xLabelColumn) = SplitMultilineText(CStr(fieldObjectValue), splitLength, lineEnding)
             Else
-                DataSheet.Cells.Item(row, context.dataLayout.xLabelColumn) = CStr(fieldObjectValue)
+                DataSheet.Cells.item(row, context.dataLayout.xLabelColumn) = CStr(fieldObjectValue)
             End If
             
         Case context.headings.tailLabel
-            DataSheet.Cells.Item(row, context.dataLayout.tailLabelColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.tailLabelColumn) = CStr(fieldObjectValue)
             
         Case context.headings.headLabel
-            DataSheet.Cells.Item(row, context.dataLayout.headLabelColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.headLabelColumn) = CStr(fieldObjectValue)
             
         Case context.headings.tooltip
-            DataSheet.Cells.Item(row, context.dataLayout.tooltipColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.tooltipColumn) = CStr(fieldObjectValue)
             
         Case context.headings.isRelatedToItem
-            DataSheet.Cells.Item(row, context.dataLayout.isRelatedToItemColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.isRelatedToItemColumn) = CStr(fieldObjectValue)
             
         Case context.headings.styleName
-            DataSheet.Cells.Item(row, context.dataLayout.styleNameColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.styleNameColumn) = CStr(fieldObjectValue)
             
         Case context.headings.extraAttributes
-            DataSheet.Cells.Item(row, context.dataLayout.extraAttributesColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.extraAttributesColumn) = CStr(fieldObjectValue)
         
         Case context.headings.errorMessage
-            DataSheet.Cells.Item(row, context.dataLayout.errorMessageColumn) = CStr(fieldObjectValue)
+            DataSheet.Cells.item(row, context.dataLayout.errorMessageColumn) = CStr(fieldObjectValue)
         End Select
     Next
 End Sub
 
 Private Function GetSQLWorksheetHeadings(ByRef dataLayout As dataWorksheet) As DataWorksheetHeadings
-    GetSQLWorksheetHeadings.flag = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.flagColumn).value))
-    GetSQLWorksheetHeadings.Item = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.itemColumn).value))
-    GetSQLWorksheetHeadings.label = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.labelColumn).value))
-    GetSQLWorksheetHeadings.xLabel = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.xLabelColumn).value))
-    GetSQLWorksheetHeadings.tailLabel = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.tailLabelColumn).value))
-    GetSQLWorksheetHeadings.headLabel = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.headLabelColumn).value))
-    GetSQLWorksheetHeadings.tooltip = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.tooltipColumn).value))
-    GetSQLWorksheetHeadings.isRelatedToItem = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.isRelatedToItemColumn).value))
-    GetSQLWorksheetHeadings.styleName = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.styleNameColumn).value))
-    GetSQLWorksheetHeadings.extraAttributes = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.extraAttributesColumn).value))
-    GetSQLWorksheetHeadings.errorMessage = Trim$(LCase$(DataSheet.Cells.Item(dataLayout.headingRow, dataLayout.errorMessageColumn).value))
+    GetSQLWorksheetHeadings.flag = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.flagColumn).value))
+    GetSQLWorksheetHeadings.item = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.itemColumn).value))
+    GetSQLWorksheetHeadings.label = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.labelColumn).value))
+    GetSQLWorksheetHeadings.xLabel = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.xLabelColumn).value))
+    GetSQLWorksheetHeadings.tailLabel = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.tailLabelColumn).value))
+    GetSQLWorksheetHeadings.headLabel = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.headLabelColumn).value))
+    GetSQLWorksheetHeadings.tooltip = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.tooltipColumn).value))
+    GetSQLWorksheetHeadings.isRelatedToItem = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.isRelatedToItemColumn).value))
+    GetSQLWorksheetHeadings.styleName = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.styleNameColumn).value))
+    GetSQLWorksheetHeadings.extraAttributes = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.extraAttributesColumn).value))
+    GetSQLWorksheetHeadings.errorMessage = Trim$(LCase$(DataSheet.Cells.item(dataLayout.headingRow, dataLayout.errorMessageColumn).value))
 End Function
 
 

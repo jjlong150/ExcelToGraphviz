@@ -72,7 +72,7 @@ Public Sub WriteTextToUTF8FileFileWithBOM(ByVal textToWrite As String, ByVal fil
 #End If
 End Sub
 
-Public Function ReadUTF8File(ByVal filename As String) As String
+Public Function ReadUTF8File(ByVal fileName As String) As String
 #If Mac Then
     ReadUTF8File = ""
     
@@ -81,7 +81,7 @@ Public Function ReadUTF8File(ByVal filename As String) As String
 
     fileNum = FreeFile()
 
-    Open filename For Input As #fileNum
+    Open fileName For Input As #fileNum
 
     While Not EOF(fileNum)
         Line Input #fileNum, dataLine ' read in data 1 line at a time
@@ -96,7 +96,7 @@ Public Function ReadUTF8File(ByVal filename As String) As String
     
     utf8Stream.Charset = UTF8_CHARSET
     utf8Stream.Open
-    utf8Stream.LoadFromFile filename
+    utf8Stream.LoadFromFile fileName
     
     ' Pass back the file contents
     ReadUTF8File = utf8Stream.ReadText

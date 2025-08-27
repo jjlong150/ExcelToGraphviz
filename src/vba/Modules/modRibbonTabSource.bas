@@ -94,17 +94,17 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub sourceSave_onAction(ByVal control As IRibbonControl)
-    Dim filename As String
+    Dim fileName As String
     
 #If Mac Then
-    filename = RunAppleScriptTask("getSaveAsFileName", GRAPHVIZ_EXTENSION)
+    fileName = RunAppleScriptTask("getSaveAsFileName", GRAPHVIZ_EXTENSION)
 #Else
-    filename = GetSaveAsFilename("Graphviz Files (*.gv), *gv")
+    fileName = GetSaveAsFilename("Graphviz Files (*.gv), *gv")
 #End If
 
-    If filename <> vbNullString Then
-        SourceWorksheetToFile (filename)
-        MsgBox GetMessage("msgboxSavedToFile") & vbNewLine & filename, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    If fileName <> vbNullString Then
+        SourceWorksheetToFile (fileName)
+        MsgBox GetMessage("msgboxSavedToFile") & vbNewLine & fileName, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
     End If
 End Sub
 

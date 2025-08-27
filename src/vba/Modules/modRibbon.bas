@@ -21,6 +21,8 @@ End Property
 Public Sub ribbon_onLoad(ByVal ribbon As IRibbonUI)
     '@Ignore ValueRequired
     myRibbon = ribbon
+    LoadFontImageCache
+    ColorLoadImageCache
     Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ribbon_activateTab"
 End Sub
 
@@ -82,7 +84,11 @@ Public Sub ribbon_getVisible(ByVal control As IRibbonControl, ByRef visible As V
         Case RIBBON_TAB_SOURCE
             visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SOURCE)
         Case RIBBON_TAB_SQL
+#If Mac Then
+            visible = False
+#Else
             visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SQL)
+#End If
         Case RIBBON_TAB_SVG
             visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SVG)
         Case Else

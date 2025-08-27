@@ -96,16 +96,16 @@ Public Sub LocalizeWorksheetData()
     Dim dataWs As dataWorksheet
     dataWs = GetSettingsForDataWorksheet(SettingsSheet.name)
    
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.itemColumn).value = GetLabel(RIBBON_CTL_SHOW_ITEM)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.tailLabelColumn).value = GetLabel(RIBBON_CTL_SHOW_TAIL_LABEL)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.labelColumn).value = GetLabel(RIBBON_CTL_SHOW_LABEL)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.xLabelColumn).value = GetLabel(RIBBON_CTL_SHOW_OUTSIDE_LABEL)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.headLabelColumn).value = GetLabel(RIBBON_CTL_SHOW_HEAD_LABEL)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.tooltipColumn).value = GetLabel(RIBBON_CTL_SHOW_TOOLTIP)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.isRelatedToItemColumn).value = GetLabel(RIBBON_CTL_SHOW_IS_RELATED_TO_ITEM)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.styleNameColumn).value = GetLabel(RIBBON_CTL_SHOW_STYLE)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.extraAttributesColumn).value = GetLabel(RIBBON_CTL_SHOW_EXTRA_STYLE_ATTRIBUTES)
-    DataSheet.Cells.Item(dataWs.headingRow, dataWs.errorMessageColumn).value = GetLabel(RIBBON_CTL_SHOW_MESSAGES)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.itemColumn).value = GetLabel(RIBBON_CTL_SHOW_ITEM)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.tailLabelColumn).value = GetLabel(RIBBON_CTL_SHOW_TAIL_LABEL)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.labelColumn).value = GetLabel(RIBBON_CTL_SHOW_LABEL)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.xLabelColumn).value = GetLabel(RIBBON_CTL_SHOW_OUTSIDE_LABEL)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.headLabelColumn).value = GetLabel(RIBBON_CTL_SHOW_HEAD_LABEL)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.tooltipColumn).value = GetLabel(RIBBON_CTL_SHOW_TOOLTIP)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.isRelatedToItemColumn).value = GetLabel(RIBBON_CTL_SHOW_IS_RELATED_TO_ITEM)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.styleNameColumn).value = GetLabel(RIBBON_CTL_SHOW_STYLE)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.extraAttributesColumn).value = GetLabel(RIBBON_CTL_SHOW_EXTRA_STYLE_ATTRIBUTES)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.errorMessageColumn).value = GetLabel(RIBBON_CTL_SHOW_MESSAGES)
 End Sub
 
 Public Sub LocalizeWorksheetSource()
@@ -114,8 +114,8 @@ Public Sub LocalizeWorksheetSource()
     Dim sourceWs As sourceWorksheet
     sourceWs = GetSettingsForSourceWorksheet
     
-    SourceSheet.Cells.Item(sourceWs.headingRow, sourceWs.lineNumberColumn).value = GetLabel("worksheetSourceLine")
-    SourceSheet.Cells.Item(sourceWs.headingRow, sourceWs.sourceColumn).value = GetLabel("worksheetSourceGraphvizSource")
+    SourceSheet.Cells.item(sourceWs.headingRow, sourceWs.lineNumberColumn).value = GetLabel("worksheetSourceLine")
+    SourceSheet.Cells.item(sourceWs.headingRow, sourceWs.sourceColumn).value = GetLabel("worksheetSourceGraphvizSource")
     
     DotSourceForm.CopyButton.caption = GetLabel("sourceFormCopy")
     DotSourceForm.wordWrapToggle.caption = GetLabel("sourceFormWrapText")
@@ -162,9 +162,9 @@ Public Sub LocalizeWorksheetSql()
     Dim sql As sqlWorksheet
     sql = GetSettingsForSqlWorksheet
     
-    SqlSheet.Cells.Item(sql.headingRow, sql.sqlStatementColumn).value = GetLabel("worksheetSqlSqlSelectStatement")
-    SqlSheet.Cells.Item(sql.headingRow, sql.excelFileColumn).value = GetLabel("worksheetSqlExcelDataFile")
-    SqlSheet.Cells.Item(sql.headingRow, sql.statusColumn).value = GetLabel("worksheetSqlStatus")
+    SqlSheet.Cells.item(sql.headingRow, sql.sqlStatementColumn).value = GetLabel("worksheetSqlSqlSelectStatement")
+    SqlSheet.Cells.item(sql.headingRow, sql.excelFileColumn).value = GetLabel("worksheetSqlExcelDataFile")
+    SqlSheet.Cells.item(sql.headingRow, sql.statusColumn).value = GetLabel("worksheetSqlStatus")
 End Sub
 
 Public Sub LocalizeWorksheetSvg()
@@ -173,8 +173,8 @@ Public Sub LocalizeWorksheetSvg()
     Dim svg As svgWorksheet
     svg = GetSettingsForSvgWorksheet
     
-    SvgSheet.Cells.Item(svg.headingRow, svg.findColumn).value = GetLabel("worksheetSvgFind")
-    SvgSheet.Cells.Item(svg.headingRow, svg.replaceColumn).value = GetLabel("worksheetSvgReplace")
+    SvgSheet.Cells.item(svg.headingRow, svg.findColumn).value = GetLabel("worksheetSvgFind")
+    SvgSheet.Cells.item(svg.headingRow, svg.replaceColumn).value = GetLabel("worksheetSvgReplace")
 End Sub
 
 Private Sub LocalizeWorksheetStyleDesigner()
@@ -184,6 +184,8 @@ Private Sub LocalizeWorksheetStyleDesigner()
     StyleDesignerSheet.Range("TitleStyleDesignerFormatString").value = GetLabel("worksheetStyleDesignerFormatString")
     StyleDesignerSheet.Range("TitleStyleDesignerTailLabelText").value = GetLabel("worksheetStyleDesignerTailLabelText")
     StyleDesignerSheet.Range("TitleStyleDesignerHeadLabelText").value = GetLabel("worksheetStyleDesignerHeadLabelText")
+    StyleDesignerSheet.Range("TitleStyleDesignerStyleNameText").value = GetLabel("worksheetStyleDesignerStyleNameText")
+    StyleDesignerSheet.buttons("StyleDesignerSaveButton").caption = GetLabel("worksheetStyleDesignerSaveButtonText")
 End Sub
 
 Public Sub LocalizeWorksheetStyles()
@@ -233,11 +235,11 @@ Public Function LocalizeGetString(ByVal controlId As String, ByVal col As Long) 
     
     ' Look for the specified key in the set of keys of the selected language
     If localeIds.Exists(controlId) Then
-        row = localeIds.Item(controlId)
+        row = localeIds.item(controlId)
         LocalizeGetString = ActiveWorkbook.Sheets.[_Default](localeWorksheet).Cells(row, col).value
     ElseIf masterIds.Exists(controlId) Then
         ' Key not found in selected language, look in master set of keys
-        row = masterIds.Item(controlId)
+        row = masterIds.item(controlId)
         LocalizeGetString = ActiveWorkbook.Sheets.[_Default](WORKSHEET_LOCALE_MASTER).Cells(row, col).value
     Else
         ' not found in master set either, return the controlId as the value

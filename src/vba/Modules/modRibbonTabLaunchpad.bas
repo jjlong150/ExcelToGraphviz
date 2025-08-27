@@ -97,10 +97,10 @@ End Sub
 Public Sub toggleSource_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SOURCE).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SOURCE).value = TOGGLE_SHOW Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         ClearSource
         ShowSource CreateGraphSource()
-        Application.EnableEvents = True
+        Application.enableEvents = True
         SourceSheet.visible = True
         SourceSheet.Activate
     Else
@@ -343,8 +343,8 @@ Private Sub language_onAction(ByVal control As IRibbonControl, ByVal controlId A
     RefreshRibbon
 End Sub
 
-Public Sub language_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemID As Variant)
-    itemID = replace(SettingsSheet.Range(SETTINGS_LANGUAGE).value, "locale", "language")
+Public Sub language_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = replace(SettingsSheet.Range(SETTINGS_LANGUAGE).value, "locale", "language")
 End Sub
 
 Public Sub language_getVisible(ByVal control As IRibbonControl, ByRef makeVisible As Variant)
