@@ -55,45 +55,48 @@ End Sub
 
 '@Ignore ProcedureNotUsed
 Public Sub DeleteCellPictures(ByVal targetSheet As String, ByVal targetCell As String)
-    ' Removes any pictures located within the specified cell
-    ' Revised in v8.0/2025 to handle low-memory Atom-based 32-bit CPU
+    ' Removes raster and vector images located within the specified cell
+    ' Revised in v8.0.01 to include SVG deletion and maintain Atom CPU compatibility
 
     Dim shp As shape
     Dim targetWorksheet As Worksheet
 
-    Set targetWorksheet = ActiveWorkbook.Sheets.[_Default](targetSheet)
+    Set targetWorksheet = ActiveWorkbook.Sheets(targetSheet)
 
     For Each shp In targetWorksheet.Shapes
-        If shp.Type = msoPicture Then
-            If Not shp.TopLeftCell Is Nothing Then
-                If shp.TopLeftCell.Address = targetCell Then
-                    On Error Resume Next
-                    shp.Delete
-                    On Error GoTo 0
+        Select Case shp.Type
+            Case msoPicture, msoGraphic
+                If Not shp.TopLeftCell Is Nothing Then
+                    If shp.TopLeftCell.Address = targetCell Then
+                        On Error Resume Next
+                        shp.Delete
+                        On Error GoTo 0
+                    End If
                 End If
-            End If
-        End If
+        End Select
     Next
 
     Set targetWorksheet = Nothing
 End Sub
 
 Public Sub DeleteAllPictures(ByVal targetSheet As String)
-    ' Removes all pictures within a specified worksheet
-    ' Revised in v8.0/2025 to handle low-memory Atom-based 32-bit CPU
+    ' Removes all raster and vector images (msoPicture and msoGraphic) from a worksheet
+    ' Revised in v8.0.01 to include SVG deletion and maintain Atom CPU compatibility
 
     Dim shp As shape
     Dim targetWorksheet As Worksheet
 
-    Set targetWorksheet = ActiveWorkbook.Sheets.[_Default](targetSheet)
+    Set targetWorksheet = ActiveWorkbook.Sheets(targetSheet)
 
     For Each shp In targetWorksheet.Shapes
-        If shp.Type = msoPicture Then
-            On Error Resume Next
-            shp.Delete
-            On Error GoTo 0
-        End If
+        Select Case shp.Type
+            Case msoPicture, msoGraphic
+                On Error Resume Next
+                shp.Delete
+                On Error GoTo 0
+        End Select
     Next
 
     Set targetWorksheet = Nothing
 End Sub
+
