@@ -134,7 +134,8 @@ Public Sub PreviewStyleAndAutosize(ByVal styleName As String, ByVal graphvizSour
     '@Ignore VariableNotUsed
     Dim shapeObject As shape
     '@Ignore AssignmentNotUsed
-    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True)
+    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True, _
+                                    "Image showing the rendering of style named " & styleName)
     Set shapeObject = Nothing
               
     ' Resize the row height to hold the image
@@ -272,7 +273,7 @@ Private Function GetStyleNameForRestore(row As Long)
     
     ' If the style is associated with a cluster, trim off the suffix
     If styleType = TYPE_SUBGRAPH_OPEN And EndsWith(styleName, styles.suffixOpen) Then
-        styleName = Left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
+        styleName = left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
     End If
 
     GetStyleNameForRestore = Trim$(styleName)
@@ -322,6 +323,7 @@ Private Sub RestoreStyleDesignerSetting(mode As String, attributeName As String,
         Case GRAPHVIZ_PENWIDTH:       ApplyPenWidthSetting attributeValue, mode
         Case GRAPHVIZ_PERIPHERIES:    StyleDesignerSheet.Range(DESIGNER_BORDER_PERIPHERIES).value = attributeValue
         Case GRAPHVIZ_REGULAR:        StyleDesignerSheet.Range(DESIGNER_NODE_REGULAR).value = attributeValue
+        Case GRAPHVIZ_RADIUS:         StyleDesignerSheet.Range(DESIGNER_EDGE_RADIUS).value = attributeValue
         Case GRAPHVIZ_SHAPE:          StyleDesignerSheet.Range(DESIGNER_NODE_SHAPE).value = attributeValue
         Case GRAPHVIZ_SIDES:          StyleDesignerSheet.Range(DESIGNER_NODE_SIDES).value = attributeValue
         Case GRAPHVIZ_SKEW:           StyleDesignerSheet.Range(DESIGNER_NODE_SKEW).value = attributeValue
@@ -450,17 +452,17 @@ Private Sub ApplyFontNameSettings(ByVal attributeValue As String)
         Case Right$(fullFontName, 11) = "Bold Italic"
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_YES
             StyleDesignerSheet.Range(DESIGNER_FONT_ITALIC).value = TOGGLE_YES
-            baseFontName = Left$(fullFontName, Len(fullFontName) - 12)
+            baseFontName = left$(fullFontName, Len(fullFontName) - 12)
 
         Case Right$(fullFontName, 4) = "Bold"
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_YES
             StyleDesignerSheet.Range(DESIGNER_FONT_ITALIC).value = TOGGLE_NO
-            baseFontName = Left$(fullFontName, Len(fullFontName) - 5)
+            baseFontName = left$(fullFontName, Len(fullFontName) - 5)
 
         Case Right$(fullFontName, 6) = "Italic"
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_NO
             StyleDesignerSheet.Range(DESIGNER_FONT_ITALIC).value = TOGGLE_YES
-            baseFontName = Left$(fullFontName, Len(fullFontName) - 7)
+            baseFontName = left$(fullFontName, Len(fullFontName) - 7)
 
         Case Else
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_NO

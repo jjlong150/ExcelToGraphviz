@@ -339,7 +339,7 @@ Private Function ReadPipe(ByVal hPipe As Long) As String
                 bytesRead = 0
                 If ReadFile(hPipe, buffer(0), PIPE_BUFFER_SIZE, bytesRead, ByVal 0&) = 0 Then Exit Do
                 If bytesRead > 0 Then
-                    ReadPipe = ReadPipe & Left$(StrConv(buffer(), vbUnicode), bytesRead)
+                    ReadPipe = ReadPipe & left$(StrConv(buffer(), vbUnicode), bytesRead)
                 End If
                 peeked = PeekNamedPipe(hPipe, ByVal 0&, 0, ByVal 0&, bytesAvail, ByVal 0&)
             Loop While bytesRead > 0

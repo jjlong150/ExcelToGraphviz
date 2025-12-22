@@ -95,7 +95,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub colorScheme_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    If Left$(itemId, 4) = "cs_x" Then Exit Sub ' Blank gallery image selected
+    If left$(itemId, 4) = "cs_x" Then Exit Sub ' Blank gallery image selected
     
     Dim colorScheme As String
     If index = 0 Then
@@ -1650,7 +1650,7 @@ Private Sub edgeArrowTail1_onAction(ByVal control As IRibbonControl, ByVal itemI
 
     InvalidateRibbonControl RIBBON_CTL_EDGE_ARROW_TAIL2
     InvalidateRibbonControl RIBBON_CTL_EDGE_ARROW_TAIL3
-    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION
+    RefreshControlsEdgeDirection
     RenderPreview
 End Sub
 ' ===========================================================================
@@ -1705,13 +1705,26 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeDirection
 
+Public Sub RefreshControlsEdgeDirection()
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_FORWARD
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_BACK
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_BOTH
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_NONE
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_PLACEHOLDER1
+    InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_PLACEHOLDER1
+End Sub
+
 '@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
+Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     Dim direction As String
-    direction = Mid$(itemId, Len("ed_") + 1)
-
+    If pressed Then
+        direction = Mid$(control.ID, Len("ed_") + 1)
+    Else
+        direction = vbNullString
+    End If
     SaveStyleDesignerSetting DESIGNER_EDGE_DIRECTION, direction
-
+    
     With StyleDesignerSheet
         Select Case direction
             Case vbNullString
@@ -1733,9 +1746,11 @@ Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal itemId
     End With
 
     ' Invalidate affected controls
+    RefreshControlsEdgeDirection
+    
     Dim ctlList As Variant
     ctlList = Array( _
-        RIBBON_CTL_EDGE_ARROW_SIZE, _
+        RIBBON_CTL_EDGE_ARROW_SIZE, RIBBON_CTL_EDGE_ARROW_PLACEHOLDER1, RIBBON_CTL_EDGE_ARROW_PLACEHOLDER2, _
         RIBBON_CTL_EDGE_ARROW_HEAD1, RIBBON_CTL_EDGE_ARROW_HEAD2, RIBBON_CTL_EDGE_ARROW_HEAD3, RIBBON_GRP_EDGE_ARROW_HEAD, _
         RIBBON_CTL_EDGE_ARROW_TAIL1, RIBBON_CTL_EDGE_ARROW_TAIL2, RIBBON_CTL_EDGE_ARROW_TAIL3, RIBBON_GRP_EDGE_ARROW_TAIL, _
         RIBBON_GRP_EDGE_ARROW _
@@ -1748,6 +1763,16 @@ Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal itemId
 
     RenderPreview
 End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub edgeDirection_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = vbNullString And control.ID = "ed_forward" Then
+        pressed = True
+    Else
+        pressed = StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = LCase$(Mid$(control.ID, Len("ed_") + 1))
+    End If
+End Sub
+
 
 '@Ignore ParameterNotUsed
 Public Sub edgeDirection_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
@@ -1934,7 +1959,7 @@ Private Function SplitFilePath(ByVal fullPath As String) As FilePathInfo
     
     Dim info As FilePathInfo
     info.fileName = components(UBound(components))
-    info.directory = Left$(fullPath, Len(fullPath) - Len(info.fileName) - 1)
+    info.directory = left$(fullPath, Len(fullPath) - Len(info.fileName) - 1)
     
     SplitFilePath = info
 End Function
@@ -2046,56 +2071,77 @@ End Function
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeImage_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
-    visible = Not CellIsEmpty(DESIGNER_NODE_IMAGE_NAME)
+    visible = Not CellIsEmpty(DESIGNER_NODE_IMAGE_NAME) And StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
 
 ' ===========================================================================
 ' Callbacks for nodeImagePosition
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub nodeImagePosition_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    SaveSelectedItem itemId, "imagepos_", DESIGNER_NODE_IMAGE_POSITION
+Public Sub RefreshControlsImagePosition()
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_TOP_LEFT
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_MIDDLE_LEFT
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_BOTTOM_LEFT
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_TOP_CENTER
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_MIDDLE_CENTER
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_BOTTOM_CENTER
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_TOP_RIGHT
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_MIDDLE_RIGHT
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_BOTTOM_RIGHT
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub imagepos_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.ID, Len("imagepos_") + 1))
+    Else
+        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = vbNullString
+    End If
+    RefreshControlsImagePosition
     RenderPreview
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub nodeImagePosition_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = GetSelectedItemID("imagepos_", DESIGNER_NODE_IMAGE_POSITION)
+Public Sub imagepos_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.ID, Len("imagepos_") + 1)) Then
+        pressed = True
+    Else
+        pressed = False
+    End If
 End Sub
 
 ' ===========================================================================
-' Callbacks for nodeImageScale
+' Callbacks for imagescale
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub nodeImageScale_getItemCount(ByVal control As IRibbonControl, ByRef listSize As Variant)
-    listSize = ListsSheet.Range(LISTS_IMAGE_SCALE).count + 1
+Public Sub RefreshControlsImageScale()
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE_FALSE
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE_TRUE
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE_HEIGHT
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE_WIDTH
+    InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE_BOTH
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub nodeImageScale_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
-    If index = 0 Then
-        label = vbNullString
+'@Ignore ParameterNotUsed
+Public Sub imagescale_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value = CStr(LCase$(Mid$(control.ID, Len("is_") + 1)))
     Else
-        Dim listId As String
-        listId = "is_" & ListsSheet.Range(LISTS_IMAGE_SCALE).Cells.item(index, 1).Value2
-        label = GetLabel(listId)
+        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value = vbNullString
     End If
-End Sub
-
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub nodeImageScale_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetListIndex(LISTS_IMAGE_SCALE, DESIGNER_NODE_IMAGE_SCALE)
-End Sub
-
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub nodeImageScale_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    If index = 0 Then
-        ClearStyleDesignerSetting DESIGNER_NODE_IMAGE_SCALE
-    Else
-        SaveStyleDesignerSetting DESIGNER_NODE_IMAGE_SCALE, ListsSheet.Range(LISTS_IMAGE_SCALE).Cells.item(index, 1).Value2
-    End If
+    RefreshControlsImageScale
     RenderPreview
 End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub imagescale_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If LCase$(CStr(StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value)) = Mid$(LCase$(CStr(control.ID)), Len("is_") + 1) Then
+        pressed = True
+    Else
+        pressed = False
+    End If
+End Sub
+
 
 ' ===========================================================================
 ' Callbacks for edgeHeadClip
@@ -2219,7 +2265,7 @@ Public Sub ClearStyleDesignerRanges()
     StyleDesignerSheet.Range("FillColor,GradientFillColor,GradientFillType,GradientFillAngle,GradientFillWeight,LabelLocation,LabelJustification,EdgeStyle,EdgeHeadPort,EdgeTailPort,EdgeColor1,EdgeColor2,EdgeColor3").ClearContents
     StyleDesignerSheet.Range("NodeShape,NodeSides,NodeOrientation,NodeRegular,NodeSkew,NodeDistortion,BorderStyle1,BorderStyle2,BorderStyle3").ClearContents
     StyleDesignerSheet.Range("NodeHeight,NodeWidth,NodeFixedSize,EdgeArrowHead1,EdgeArrowHead2,EdgeArrowHead3,EdgeDecorate,EdgeLabelFloat").ClearContents
-    StyleDesignerSheet.Range("EdgeArrowTail1,EdgeArrowTail2,EdgeArrowTail3,EdgeDirection,EdgeArrowSize,EdgeWeight,EdgeLabelAngle,EdgeLabelDistance").ClearContents
+    StyleDesignerSheet.Range("EdgeArrowTail1,EdgeArrowTail2,EdgeArrowTail3,EdgeDirection,EdgeArrowSize,EdgeWeight,EdgeRadius,EdgeLabelAngle,EdgeLabelDistance").ClearContents
     StyleDesignerSheet.Range("EdgePenWidth,NodeImageName,NodeImageScale,NodeImagePosition,EdgeHeadClip,EdgeTailClip,EdgeLabelFontName,EdgeLabelFontSize,EdgeLabelFontColor").ClearContents
     StyleDesignerSheet.Range("FontBold,FontItalic").ClearContents
     StyleDesignerSheet.Range("ClusterMargin,ClusterPackmode,ClusterArrayMajor,ClusterArrayAlign,ClusterArrayJustify,ClusterArraySplit,ClusterArraySort").ClearContents
@@ -2637,7 +2683,7 @@ Private Function getFontList() As Variant
     getFontList = fontList
     Exit Function
 ErrorHandler:
-    MsgBox GetMessage("msgboxNoListOfFonts"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    EmitMessage GetMessage("msgboxNoListOfFonts")
     ReDim fontList(0)
     getFontList = fontList
 #End If
@@ -2940,7 +2986,7 @@ Private Function addToFontList(ByVal fontName As String) As Boolean
     Dim prefix As Variant
     For Each prefix In excludedPrefixes.Keys
         If Len(lowerFontName) >= Len(prefix) Then
-            If Left$(lowerFontName, Len(prefix)) = LCase$(prefix) Then
+            If left$(lowerFontName, Len(prefix)) = LCase$(prefix) Then
                 addToFontList = False
                 Exit Function
             End If
@@ -3288,7 +3334,7 @@ Private Function ColorGetIndex(ByVal cellName As String) As Long
     color = LCase$(StyleDesignerSetting(cellName))
     If Len(color) = 0 Then Exit Function
     
-    If Left$(color, 1) = "#" Then Exit Function
+    If left$(color, 1) = "#" Then Exit Function
      
     Dim index As Long
     index = 0
@@ -3371,7 +3417,7 @@ Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoi
         If Len(Dir(color.imageFile)) = 0 Then
             Kill color.imageFile
             ColorCreateThumbnail = False
-            MsgBox "DEBUG: ColorCreateThumbnail() - 0 byte file detected and deleted - " & color.imageFile
+            EmitMessage "DEBUG: ColorCreateThumbnail() - 0 byte file detected and deleted - " & color.imageFile
         Else
             ColorCreateThumbnail = True
         End If
@@ -3395,7 +3441,7 @@ Private Sub ColorGetOrCreateImage(ByRef color As ColorInfo, ByRef image As Varia
     If Len(color.scheme) = 0 Then Exit Sub
     
     ' Handle colors passed as hex values (e.g. #FF00CC)
-    If Left(color.name, 1) = "#" Then color.scheme = "rgb"
+    If left(color.name, 1) = "#" Then color.scheme = "rgb"
     
     ' Build the cache key
     Dim colorCacheKey As String
@@ -3434,7 +3480,7 @@ Private Sub ColorGetOrCreateImage(ByRef color As ColorInfo, ByRef image As Varia
      
     Application.StatusBar = replace(GetMessage("statusbarCreateImage"), "{colorScheme}", color.scheme) & " " & color.name
     
-    If Left(color.name, 1) = "#" Then
+    If left(color.name, 1) = "#" Then
         color.RGB = ColorHexToRGBLong(color.name)
         color.scheme = "rgb"
     Else
@@ -3514,7 +3560,7 @@ End Function
 Public Function ColorHexToRGBLong(hexColor As String) As Long
     Dim r As Long, g As Long, b As Long
 
-    If Len(hexColor) = 7 And Left(hexColor, 1) = "#" Then
+    If Len(hexColor) = 7 And left(hexColor, 1) = "#" Then
         On Error Resume Next
         r = CLng("&H" & Mid(hexColor, 2, 2))
         g = CLng("&H" & Mid(hexColor, 4, 2))
@@ -3558,6 +3604,8 @@ Private Sub RefreshControlsColor()
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3_PICKER
+    
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_COLOR_SEPARATOR
     
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR_PICKER
@@ -3603,6 +3651,7 @@ Private Sub RefreshControlsColorPicker(ByVal control As IRibbonControl)
         Case RIBBON_CTL_EDGE_LABEL_FONT_COLOR_PICKER
             InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR
     End Select
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_COLOR_SEPARATOR
 End Sub
 
 Private Sub RefreshControlsColorScheme()
@@ -3626,6 +3675,7 @@ Private Sub RefreshControlsColorScheme()
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3_PICKER
     
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_COLOR_SEPARATOR
 End Sub
 
 Private Sub RefreshControlsDesignMode()
@@ -3656,24 +3706,52 @@ Private Sub RefreshControlsDesignMode()
     
     InvalidateRibbonControl RIBBON_CTL_BORDER_COLOR
     
+    InvalidateRibbonControl RIBBON_CTL_FONT_COLOR
+    InvalidateRibbonControl RIBBON_CTL_FONT_NAME
+    
+    InvalidateRibbonControl "radius"
+    
+    RefreshControlsPack
+    RefreshControlsHeadTail
+    RefreshControlsImagePosition
+    RefreshControlsImageScale
+End Sub
+
+Private Sub RefreshControlsHeadTail()
+    InvalidateRibbonControl RIBBON_GRP_EDGE_HEAD_TAIL
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_NAME
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_SIZE
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_COLOR_SEPARATOR
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR_PICKER
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_DUMMY_BUTTON1
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_DUMMY_BUTTON2
+    InvalidateRibbonControl "edgeSpacingSeparator"
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_ANGLE
+    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_DISTANCE
+    InvalidateRibbonControl "edgePortSeparator"
+    InvalidateRibbonControl "edgeHeadPort"
+    InvalidateRibbonControl "edgeTailPort"
+    InvalidateRibbonControl "edgeClipSeparator"
+    InvalidateRibbonControl "edgeHeadClip"
+    InvalidateRibbonControl "edgeTailClip"
+End Sub
+
+Private Sub RefreshControlsPack()
+    InvalidateRibbonControl RIBBON_GRP_PACK
+    InvalidateRibbonControl RIBBON_CTL_CLUSTER_MARGIN
+    InvalidateRibbonControl RIBBON_CTL_CLUSTER_MARGIN_MM
+    InvalidateRibbonControl RIBBON_CTL_CLUSTER_PACKMODE
+    InvalidateRibbonControl RIBBON_CTL_ARRAY_SPLIT
+    InvalidateRibbonControl RIBBON_CTL_PACK_SEPARATOR
     InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_TOP
     InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_BOTTOM
     InvalidateRibbonControl RIBBON_CTL_ARRAY_JUSTIFY_LEFT
     InvalidateRibbonControl RIBBON_CTL_ARRAY_JUSTIFY_RIGHT
-    InvalidateRibbonControl RIBBON_CTL_ARRAY_MAJOR
-    InvalidateRibbonControl RIBBON_CTL_ARRAY_SPLIT
-    InvalidateRibbonControl RIBBON_CTL_ARRAY_SORT
-    InvalidateRibbonControl RIBBON_CTL_PACK_SEPARATOR
+    InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_DUMMY1
     InvalidateRibbonControl RIBBON_CTL_ARRAY_SEPARATOR
-    InvalidateRibbonControl RIBBON_GRP_PACK
-    InvalidateRibbonControl RIBBON_CTL_CLUSTER_PACK
-    InvalidateRibbonControl RIBBON_CTL_CLUSTER_MARGIN
-    InvalidateRibbonControl RIBBON_CTL_CLUSTER_PACKMODE
-    
-    InvalidateRibbonControl RIBBON_CTL_FONT_COLOR
-    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR
-    InvalidateRibbonControl RIBBON_CTL_FONT_NAME
-    InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_NAME
+    InvalidateRibbonControl RIBBON_CTL_ARRAY_SORT
+    InvalidateRibbonControl RIBBON_CTL_ARRAY_MAJOR
 End Sub
 
 Private Sub RefreshControlsPackmode()
@@ -3741,6 +3819,7 @@ Public Sub RefreshStyleDesignerRibbon()
     InvalidateRibbonControl RIBBON_CTL_JUSTIFY_RIGHT
     InvalidateRibbonControl RIBBON_CTL_FONT_NAME
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_NAME
+    RefreshControlsEdgeDirection
 End Sub
 
 Private Sub colorPicker_onAction(ByVal control As IRibbonControl)
@@ -3826,7 +3905,7 @@ Private Function GetRGBColorInCell(cellName As String) As String
     If Len(cellValue) = 0 Then Exit Function
         
     ' Is color in hex, or a value associated with a color scheme?
-    If Left(cellValue, 1) = "#" Then
+    If left(cellValue, 1) = "#" Then
         ' Color is in hex
         GetRGBColorInCell = cellValue
         Exit Function
@@ -3878,3 +3957,44 @@ Private Sub SaveSelectedItem(ByVal itemId As String, ByVal itemIdPrefix As Strin
 End Sub
 
 
+' Helper function to get current zoom value
+Private Function GetCurrentRadius() As Long
+    Dim rawValue As Variant
+    rawValue = StyleDesignerSheet.Range(DESIGNER_EDGE_RADIUS).value
+
+    If IsNumeric(rawValue) Then
+        GetCurrentRadius = CLng(rawValue)
+    Else
+        GetCurrentRadius = 0
+    End If
+End Function
+
+' ===========================================================================
+' Callbacks for radius
+
+'@Ignore ProcedureNotUsed, ParameterNotUsed
+Private Sub radius_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
+    SaveSelectedItem itemId, "radius_", DESIGNER_EDGE_RADIUS
+    InvalidateRibbonControl "radius"
+    RenderPreview
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub radius_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "radius_" & GetRadius()
+End Sub
+
+Public Sub radius_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+    label = GetLabel("radius") & GetRadius()
+End Sub
+
+Private Function GetRadius() As Long
+    Dim rawValue As Variant
+    rawValue = StyleDesignerSheet.Range(DESIGNER_EDGE_RADIUS).value
+    
+    If IsNumeric(rawValue) Then
+        GetRadius = CLng(rawValue)
+    Else
+        GetRadius = 0
+    End If
+End Function

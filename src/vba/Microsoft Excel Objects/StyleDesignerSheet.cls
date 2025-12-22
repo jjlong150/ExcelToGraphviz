@@ -14,7 +14,11 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private Sub Worksheet_Activate()
+#If Mac Then
     Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabStyleDesigner"
+#Else
+    ActivateTabStyleDesigner
+#End If
     RenderPreview
 End Sub
 
@@ -42,17 +46,15 @@ Private Sub Worksheet_Change(ByVal Target As Range)
 
     ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
         Application.enableEvents = False
-        InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE
-        InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POS_SEPARATOR
-        InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION
-
+        RefreshControlsImageScale
+        RefreshControlsImagePosition
     End If
     
 LetsContinue:
     Application.enableEvents = True
     Exit Sub
 Whoa:
-    MsgBox "StyleDesignerSheet " & Err.number & " " & Err.Description, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    EmitMessage "StyleDesignerSheet " & Err.number & " " & Err.Description
     
     Resume LetsContinue
 

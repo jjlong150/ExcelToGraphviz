@@ -4,13 +4,1146 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2025-08-27",
-    "time": "17:31:44",
+    "date": "2025-12-10",
+    "time": "13:55:34",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "Relationship Visualizer - Old.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Executive Branch",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "2"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Department of State",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "3"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "item": "3",
+        "relatedItem": "4"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "item": "3",
+        "relatedItem": "5"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Defense",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "6"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "item": "6",
+        "relatedItem": "7"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "item": "7",
+        "relatedItem": "8"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of the Treasury",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "9"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "item": "9",
+        "relatedItem": "10"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "item": "10",
+        "relatedItem": "11"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Department of Justice",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "12"
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "item": "12",
+        "relatedItem": "13"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "item": "13",
+        "relatedItem": "14"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of the Interior",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "15"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "item": "15",
+        "relatedItem": "16"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "item": "16",
+        "relatedItem": "17"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Agriculture",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "18"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "item": "18",
+        "relatedItem": "19"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "item": "19",
+        "relatedItem": "20"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Commerce",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "21"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "item": "21",
+        "relatedItem": "22"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "item": "22",
+        "relatedItem": "23"
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Department of Labor",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "24"
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "item": "24",
+        "relatedItem": "25"
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "item": "25",
+        "relatedItem": "26"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Health and Human Services",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "27"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "item": "27",
+        "relatedItem": "28"
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "item": "28",
+        "relatedItem": "29"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 45,
+        "item": "{",
+        "label": "Department of Housing and Urban Development",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "30"
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "item": "30",
+        "relatedItem": "31"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "item": "31",
+        "relatedItem": "32"
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Transportation",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "33"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "item": "33",
+        "relatedItem": "34"
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "item": "34",
+        "relatedItem": "35"
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Department of Energy",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "36"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "item": "36",
+        "relatedItem": "37"
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "item": "37",
+        "relatedItem": "38"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Education",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "39"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "item": "39",
+        "relatedItem": "40"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "item": "40",
+        "relatedItem": "41"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Veterans Affairs",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "42"
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "item": "42",
+        "relatedItem": "43"
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "item": "43",
+        "relatedItem": "44"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Department of Homeland Security",
+        "styleName": "Border 2 Begin"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "item": "1",
+        "relatedItem": "45"
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "item": "45",
+        "relatedItem": "46"
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "item": "46",
+        "relatedItem": "47"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 60,
+        "item": "1",
+        "label": "<<b>Joseph Biden</b><BR/><BR/>President of the United<BR/>States>",
+        "styleName": "Department"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 75,
+        "item": "2",
+        "label": "<<b>Kamala Harris</b><BR/><BR/>Vice President of the<BR/>United States>",
+        "styleName": "Department"
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 45,
+        "item": "3",
+        "label": "<<b>Antony Blinken</b><BR/><BR/>Secretary of State>",
+        "styleName": "Department"
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 60,
+        "item": "4",
+        "label": "<<b>Wendy Sherman</b><BR/><BR/>Deputy Secretary of<BR/>State>",
+        "styleName": "Department"
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 90,
+        "item": "5",
+        "label": "<<b>Brian McKeon</b><BR/><BR/>Deputy Secretary of State<BR/>for Management and<BR/>Resources>",
+        "styleName": "Department"
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 45,
+        "item": "6",
+        "label": "<<b>Lloyd Austin</b><BR/><BR/>Secretary of Defense>",
+        "styleName": "Department"
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 60,
+        "item": "7",
+        "label": "<<b>Kathleen Hicks</b><BR/><BR/>Deputy Secretary of<BR/>Defense>",
+        "styleName": "Department"
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 75,
+        "item": "8",
+        "label": "<<b>David Norquist</b><BR/><BR/>Under Secretary of<BR/>Defense (Comptroller)>",
+        "styleName": "Department"
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 60,
+        "item": "9",
+        "label": "<<b>Janet Yellen</b><BR/><BR/>Secretary of the<BR/>Treasury>",
+        "styleName": "Department"
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 60,
+        "item": "10",
+        "label": "<<b>Wally Adeyemo</b><BR/><BR/>Deputy Secretary of the<BR/>Treasury>",
+        "styleName": "Department"
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 90,
+        "item": "11",
+        "label": "<<b>Andy Baukol</b><BR/><BR/>Under Secretary of the<BR/>Treasury for<BR/>International Affairs>",
+        "styleName": "Department"
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 45,
+        "item": "12",
+        "label": "<<b>Merrick Garland</b><BR/><BR/>Attorney General>",
+        "styleName": "Department"
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 60,
+        "item": "13",
+        "label": "<<b>Lisa Monaco</b><BR/><BR/>Deputy Attorney General>",
+        "styleName": "Department"
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 75,
+        "item": "14",
+        "label": "<<b>Vanita Gupta</b><BR/><BR/>Associate Attorney<BR/>General>",
+        "styleName": "Department"
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 60,
+        "item": "15",
+        "label": "<<b>Deb Haaland</b><BR/><BR/>Secretary of the<BR/>Interior>",
+        "styleName": "Department"
+      },
+      {
+        "row": 95,
+        "hidden": false,
+        "height": 60,
+        "item": "16",
+        "label": "<<b>Tommy Beaudreau</b><BR/><BR/>Deputy Secretary of the<BR/>Interior>",
+        "styleName": "Department"
+      },
+      {
+        "row": 96,
+        "hidden": false,
+        "height": 90,
+        "item": "17",
+        "label": "<<b>Shannon Estenoz</b><BR/><BR/>Assistant Secretary for<BR/>Fish and Wildlife and<BR/>Parks>",
+        "styleName": "Department"
+      },
+      {
+        "row": 97,
+        "hidden": false,
+        "height": 60,
+        "item": "18",
+        "label": "<<b>Tom Vilsack</b><BR/><BR/>Secretary of Agriculture>",
+        "styleName": "Department"
+      },
+      {
+        "row": 98,
+        "hidden": false,
+        "height": 60,
+        "item": "19",
+        "label": "<<b>Jewel Bronaugh</b><BR/><BR/>Deputy Secretary of<BR/>Agriculture>",
+        "styleName": "Department"
+      },
+      {
+        "row": 99,
+        "hidden": false,
+        "height": 90,
+        "item": "20",
+        "label": "<<b>Robert Bonnie</b><BR/><BR/>Under Secretary for Farm<BR/>Production and<BR/>Conservation>",
+        "styleName": "Department"
+      },
+      {
+        "row": 100,
+        "hidden": false,
+        "height": 60,
+        "item": "21",
+        "label": "<<b>Gina Raimondo</b><BR/><BR/>Secretary of Commerce>",
+        "styleName": "Department"
+      },
+      {
+        "row": 101,
+        "hidden": false,
+        "height": 60,
+        "item": "22",
+        "label": "<<b>Don Graves</b><BR/><BR/>Deputy Secretary of<BR/>Commerce>",
+        "styleName": "Department"
+      },
+      {
+        "row": 102,
+        "hidden": false,
+        "height": 90,
+        "item": "23",
+        "label": "<<b>Karen Dunn Kelley</b><BR/><BR/>Under Secretary of<BR/>Commerce for Economic<BR/>Affairs>",
+        "styleName": "Department"
+      },
+      {
+        "row": 103,
+        "hidden": false,
+        "height": 45,
+        "item": "24",
+        "label": "<<b>Marty Walsh</b><BR/><BR/>Secretary of Labor>",
+        "styleName": "Department"
+      },
+      {
+        "row": 104,
+        "hidden": false,
+        "height": 60,
+        "item": "25",
+        "label": "<<b>Julie Su</b><BR/><BR/>Deputy Secretary of<BR/>Labor>",
+        "styleName": "Department"
+      },
+      {
+        "row": 105,
+        "hidden": false,
+        "height": 135,
+        "item": "26",
+        "label": "<<b>Al Stewart</b><BR/><BR/>Acting Assistant<BR/>Secretary for<BR/>Administration and<BR/>Management>",
+        "styleName": "Department"
+      },
+      {
+        "row": 106,
+        "hidden": false,
+        "height": 75,
+        "item": "27",
+        "label": "<<b>Xavier Becerra</b><BR/><BR/>Secretary of Health and<BR/>Human Services>",
+        "styleName": "Department"
+      },
+      {
+        "row": 107,
+        "hidden": false,
+        "height": 75,
+        "item": "28",
+        "label": "<<b>Andrea Palm</b><BR/><BR/>Deputy Secretary of<BR/>Health and Human<BR/>Services>",
+        "styleName": "Department"
+      },
+      {
+        "row": 108,
+        "hidden": false,
+        "height": 120,
+        "item": "29",
+        "label": "<<b>Chiquita<BR/>Brooks-LaSure</b><BR/><BR/>Administrator of the<BR/>Centers for Medicare and<BR/>Medicaid Services>",
+        "styleName": "Department"
+      },
+      {
+        "row": 109,
+        "hidden": false,
+        "height": 75,
+        "item": "30",
+        "label": "<<b>Marcia Fudge</b><BR/><BR/>Secretary of Housing and<BR/>Urban Development>",
+        "styleName": "Department"
+      },
+      {
+        "row": 110,
+        "hidden": false,
+        "height": 90,
+        "item": "31",
+        "label": "<<b>Adrianne Todman</b><BR/><BR/>Deputy Secretary of<BR/>Housing and Urban<BR/>Development>",
+        "styleName": "Department"
+      },
+      {
+        "row": 111,
+        "hidden": false,
+        "height": 135,
+        "item": "32",
+        "label": "<<b>Arthur Jemison</b><BR/><BR/>Principal Deputy<BR/>Assistant Secretary for<BR/>Community Planning and<BR/>Development>",
+        "styleName": "Department"
+      },
+      {
+        "row": 112,
+        "hidden": false,
+        "height": 75,
+        "item": "33",
+        "label": "<<b>Pete Buttigieg</b><BR/><BR/>Secretary of<BR/>Transportation>",
+        "styleName": "Department"
+      },
+      {
+        "row": 113,
+        "hidden": false,
+        "height": 90,
+        "item": "34",
+        "label": "<<b>Polly Trottenberg</b><BR/><BR/>Deputy Secretary of<BR/>Transportation>",
+        "styleName": "Department"
+      },
+      {
+        "row": 114,
+        "hidden": false,
+        "height": 105,
+        "item": "35",
+        "label": "<<b>Meera Joshi</b><BR/><BR/>Deputy Administrator of<BR/>the Federal Motor Carrier<BR/>Safety Administration>",
+        "styleName": "Department"
+      },
+      {
+        "row": 115,
+        "hidden": false,
+        "height": 60,
+        "item": "36",
+        "label": "<<b>Jennifer Granholm</b><BR/><BR/>Secretary of Energy>",
+        "styleName": "Department"
+      },
+      {
+        "row": 116,
+        "hidden": false,
+        "height": 60,
+        "item": "37",
+        "label": "<<b>David Turk</b><BR/><BR/>Deputy Secretary of<BR/>Energy>",
+        "styleName": "Department"
+      },
+      {
+        "row": 117,
+        "hidden": false,
+        "height": 75,
+        "item": "38",
+        "label": "<<b>Kathleen Hogan</b><BR/><BR/>Under Secretary for<BR/>Infrastructure>",
+        "styleName": "Department"
+      },
+      {
+        "row": 118,
+        "hidden": false,
+        "height": 60,
+        "item": "39",
+        "label": "<<b>Miguel Cardona</b><BR/><BR/>Secretary of Education>",
+        "styleName": "Department"
+      },
+      {
+        "row": 119,
+        "hidden": false,
+        "height": 60,
+        "item": "40",
+        "label": "<<b>Cindy Marten</b><BR/><BR/>Deputy Secretary of<BR/>Education>",
+        "styleName": "Department"
+      },
+      {
+        "row": 120,
+        "hidden": false,
+        "height": 60,
+        "item": "41",
+        "label": "<<b>James Kvaal</b><BR/><BR/>Under Secretary of<BR/>Education>",
+        "styleName": "Department"
+      },
+      {
+        "row": 121,
+        "hidden": false,
+        "height": 60,
+        "item": "42",
+        "label": "<<b>Denis McDonough</b><BR/><BR/>Secretary of Veterans<BR/>Affairs>",
+        "styleName": "Department"
+      },
+      {
+        "row": 122,
+        "hidden": false,
+        "height": 75,
+        "item": "43",
+        "label": "<<b>Donald Remy</b><BR/><BR/>Deputy Secretary of<BR/>Veterans Affairs>",
+        "styleName": "Department"
+      },
+      {
+        "row": 123,
+        "hidden": false,
+        "height": 75,
+        "item": "44",
+        "label": "<<b>Thomas Murphy</b><BR/><BR/>Acting Under Secretary<BR/>for Benefits>",
+        "styleName": "Department"
+      },
+      {
+        "row": 124,
+        "hidden": false,
+        "height": 75,
+        "item": "45",
+        "label": "<<b>Alejandro<BR/>Mayorkas</b><BR/><BR/>Secretary of Homeland<BR/>Security>",
+        "styleName": "Department"
+      },
+      {
+        "row": 125,
+        "hidden": false,
+        "height": 75,
+        "item": "46",
+        "label": "<<b>John Tien</b><BR/><BR/>Deputy Secretary of<BR/>Homeland Security>",
+        "styleName": "Department"
+      },
+      {
+        "row": 126,
+        "hidden": false,
+        "height": 75,
+        "item": "47",
+        "label": "<<b>Robert Silvers</b><BR/><BR/>Under Secretary for<BR/>Strategy, Policy and<BR/>Plans>",
+        "styleName": "Department"
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 43.5,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 25.5,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 99.75,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 100.5,
+        "name": "Border 0 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "penwidth": "2",
+          "fontname": "Arial"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 0 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 97.5,
+        "name": "Border 1 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "colorscheme": "blues9",
+          "penwidth": "1",
+          "pencolor": "9",
+          "fillcolor": "2",
+          "fontname": "Arial",
+          "fontsize": "12",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 1 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 97.5,
+        "name": "Border 2 Begin",
+        "type": "subgraph-open",
+        "format": {
+          "colorscheme": "greens9",
+          "penwidth": "1",
+          "pencolor": "9",
+          "fillcolor": "2",
+          "fontname": "Arial",
+          "fontsize": "12",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "name": "Border 2 End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Department",
+        "type": "node",
+        "format": {
+          "colorscheme": "greys9",
+          "shape": "rect",
+          "width": "1.5",
+          "height": "0.75",
+          "fixedsize": "True",
+          "fillcolor": "2",
+          "penwidth": "0.5",
+          "fontname": "Arial",
+          "fontsize": "8",
+          "style": "filled",
+          "labelloc": "top"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      }
+    ],
     "sql": [
       {
         "row": 2,
@@ -2503,10 +3636,10 @@
         "graphvizVerbose": false
       },
       "worksheets": {
-        "about": "hide",
+        "about": "show",
         "attributes": "hide",
         "colors": "hide",
-        "console": "hide",
+        "console": "show",
         "diagnostics": "hide",
         "exchange": "show",
         "lists": "hide",
@@ -2530,7 +3663,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts",
+      "imagePath": "C:\\data\\local\\rv\\v8.0.01\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts;C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -2608,8 +3741,11 @@
       "whereColumn": "WHERE COLUMN",
       "whereValue": "WHERE VALUE",
       "maxDepth": "MAX DEPTH",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
       "filterColumn": "F",
-      "filterValue": "Example04"
+      "filterValue": "Example04",
+      "closeConnections": true
     },
     "extensions": {
       "tabName": "Extensions",

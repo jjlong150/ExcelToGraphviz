@@ -249,9 +249,9 @@ ErrorHandler:
             End If
             Set rst = Nothing
         End If
-        MsgBox "Error: " & Err.Description
+        EmitMessage "Error: " & Err.Description
     #Else
-        MsgBox "This operation is not supported on macOS because ADO is not available."
+        EmitMessage "This operation is not supported on macOS because ADO is not available."
     #End If
 End Sub
 

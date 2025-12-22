@@ -46,18 +46,57 @@ Public Sub DisplayTextOnConsoleWorksheet(ByVal dotCommand As String, ByVal textB
         row = row + 2
     End If
         
-    ' Log the command used to invoke Graphviz
-    Dim commandExecuted As String
+    If Trim$(dotCommand) <> vbNullString Then
+        ' Log the command used to invoke Graphviz
+        Dim commandExecuted As String
 #If Mac Then
-    ' dot command is actually specified in the ExcelToGraphviz.applescript file. Fake it for the console
-    commandExecuted = "dot " & dotCommand
+        ' dot command is actually specified in the ExcelToGraphviz.applescript file. Fake it for the console
+        commandExecuted = "dot " & dotCommand
 #Else
-    commandExecuted = dotCommand
+        commandExecuted = dotCommand
 #End If
-    ConsoleSheet.Cells.item(row, 1).value = ">"
-    ConsoleSheet.Cells.item(row, 2).value = commandExecuted
-    row = row + 2
+        ConsoleSheet.Cells.item(row, 1).value = ">"
+        ConsoleSheet.Cells.item(row, 2).value = commandExecuted
+        row = row + 2
+    End If
+    
+    ' Split the text into an array of lines
+    Dim parsedText As Variant
+#If Mac Then
+    parsedText = split(textBlob, vbCr) ' lines are delimited by Carriage Return
+#Else
+    parsedText = split(textBlob, vbLf) ' lines are delimited by Line Feed
+#End If
+    
+    If UBound(parsedText) >= 0 Then
+        ' Transfer the array of lines to the worksheet in one swift action
+        Dim writeToRange As String
+        writeToRange = "B" & row & ":B" & (row + (UBound(parsedText) - LBound(parsedText)))
+        ConsoleSheet.Range(writeToRange).value = Application.Transpose(parsedText)
+    End If
+    
+End Sub
 
+Public Sub LogToConsoleWorksheet(ByVal textBlob As String)
+
+    ' Clear console if not in append mode
+    If Not GetCellBoolean(SettingsSheet.name, SETTINGS_APPEND_CONSOLE) Then
+        ClearConsoleWorksheet
+    End If
+        
+    ' Initialize row counter to first unused row
+    Dim row As Long
+    With ConsoleSheet.UsedRange
+        row = .Cells.item(.Cells.count).row + 1
+    End With
+    
+    ' Leave some white space between invocations
+    'If row = 1 Then
+    '    row = row + 1
+    'Else
+    '    row = row + 2
+    'End If
+    
     ' Split the text into an array of lines
     Dim parsedText As Variant
 #If Mac Then
@@ -177,7 +216,7 @@ Public Sub SaveConsoleToFile()
 
     If fileName <> vbNullString Then
         ConsoleWorksheetToFile (fileName)
-        MsgBox GetMessage("msgboxSavedToFile") & vbNewLine & fileName, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxSavedToFile") & vbNewLine & fileName
     End If
 End Sub
 

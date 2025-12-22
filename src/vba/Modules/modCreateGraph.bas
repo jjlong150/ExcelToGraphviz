@@ -86,7 +86,7 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     ini = GetSettings(GetDataWorksheetName())
 
     If Not WorksheetExists(ini.data.worksheetName) Then
-        MsgBox GetMessage("msgboxNoDataToGraph"), vbOKOnly, , GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxNoDataToGraph")
         Exit Sub
     End If
 
@@ -159,19 +159,13 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
         
     '@Ignore VariableNotUsed
     Dim shapeObject As shape
-    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True)
+    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True, "Graph image created from data worksheet data.")
     
-    ' This is a kludgey way to handle the image scaling because VBA does not have a datatype
-    ' for floating point numbers.
-    If ini.graph.scaleImage = 75 Then
-        ActiveSheet.Pictures(ActiveSheet.Pictures.count).ShapeRange.ScaleHeight 0.75, msoFalse, msoScaleFromTopLeft
-    ElseIf ini.graph.scaleImage = 50 Then
-        ActiveSheet.Pictures(ActiveSheet.Pictures.count).ShapeRange.ScaleHeight 0.5, msoFalse, msoScaleFromTopLeft
-    ElseIf ini.graph.scaleImage = 25 Then
-        ActiveSheet.Pictures(ActiveSheet.Pictures.count).ShapeRange.ScaleHeight 0.25, msoFalse, msoScaleFromTopLeft
-    Else
-        ActiveSheet.Pictures(ActiveSheet.Pictures.count).ShapeRange.ScaleHeight 1, msoFalse, msoScaleFromTopLeft
-    End If
+    ' Scale the graph to the zoom percentage specified
+    Dim scaleFactor As Double
+    scaleFactor = ini.graph.scaleImage / 100
+    ActiveSheet.Pictures(ActiveSheet.Pictures.count).ShapeRange.ScaleHeight scaleFactor, msoFalse, msoScaleFromTopLeft
+    
     If ini.graph.pictureName <> vbNullString Then
         ActiveSheet.Pictures(ActiveSheet.Pictures.count).name = ini.graph.pictureName
     End If
@@ -203,7 +197,7 @@ Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn A
     ini = GetSettings(GetDataWorksheetName())
 
     If Not WorksheetExists(ini.data.worksheetName) Then
-        MsgBox GetMessage("msgboxNoDataToGraph"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxNoDataToGraph")
         Exit Sub
     End If
 
@@ -282,7 +276,7 @@ Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn A
             
             UpdateStatusBarForNSeconds GetMessage("statusbarGraphFilenameIs") & " " & graphvizObj.DiagramFilename, 10
         Else
-            MsgBox GetMessage("msgboxNoGraphCreated"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+            EmitMessage GetMessage("msgboxNoGraphCreated")
         End If
 
         ' Delete the graph source code file if disposition is 'delete'
@@ -306,7 +300,7 @@ Public Function CreateGraphSource() As String
     ini = GetSettings(GetDataWorksheetName())
 
     If Not WorksheetExists(ini.data.worksheetName) Then
-        MsgBox GetMessage("msgboxNoDataToGraph"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxNoDataToGraph")
         Exit Function
     End If
 
@@ -326,13 +320,13 @@ Public Function FileLocationProvided(ByRef ini As settings) As Boolean
     
     ' Validate that the output directory exists
     If Not DirectoryExists(ini.output.directory) Then
-        MsgBox replace(GetMessage("msgboxDirDoesNotExist"), "{dir}", ini.output.directory), vbCritical, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage replace(GetMessage("msgboxDirDoesNotExist"), "{dir}", ini.output.directory), buttons:=vbCritical
         FileLocationProvided = False
     End If
 
     ' Get the base value of the file name
     If ini.output.fileNamePrefix = vbNullString Then
-        MsgBox GetMessage("msgboxPrefixNotSpecified"), vbCritical, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxPrefixNotSpecified"), buttons:=vbCritical
         FileLocationProvided = False
     End If
 
@@ -896,160 +890,152 @@ Private Sub ProcessGraphOptions(ByRef graphvizSource As String, ByRef ini As set
     
     ' Latest Windows version requires you to use DOT.EXE with layout specified as a graph option.
     If ini.graph.layout <> "dot" Then
-        AddAttributeLine graphvizSource, spaces, "layout", ini.graph.layout
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_LAYOUT, ini.graph.layout
     End If
     
     ' Specify how the edges should be drawn and include as the "spline" parameter
     If Trim$(ini.graph.splines) <> vbNullString Then
-        AddAttributeLine graphvizSource, spaces, "splines", ini.graph.splines
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_SPLINES, ini.graph.splines
     End If
     
     ' Make the background transparent if desired
     If ini.graph.transparentBackground Then
-        AddAttributeLine graphvizSource, spaces, "bgcolor", "transparent"
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_BGCOLOR, "transparent"
     End If
     
     If ini.graph.center Then
-        AddAttributeLine graphvizSource, spaces, "center", "true"
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_CENTER, TOGGLE_TRUE
     End If
        
     If ini.graph.concentrate Then
-        AddAttributeLine graphvizSource, spaces, "concentrate", "true"
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_CONCENTRATE, TOGGLE_TRUE
     End If
     
     If ini.graph.forceLabels Then
-        AddAttributeLine graphvizSource, spaces, "forcelabels", "true"
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_FORCELABELS, TOGGLE_TRUE
     End If
     
     ' Specify the directory path where images are located
     If ini.graph.includeGraphImagePath Then
         If ini.graph.imagePath <> vbNullString Then
-            AddAttributeLine graphvizSource, spaces, "imagepath", AddQuotes(ini.graph.imagePath)
+            AddAttributeLine graphvizSource, spaces, GRAPHVIZ_IMAGEPATH, AddQuotes(ini.graph.imagePath)
         End If
     End If
     
     ' Process the graph options which are specific to layout engines
     Select Case ini.graph.layout
         Case LAYOUT_CIRCO
-            If ini.graph.overlap <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "overlap", ini.graph.overlap
-            End If
-
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case LAYOUT_DOT
             If ini.graph.rankdir <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "rankdir", ini.graph.rankdir
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_RANKDIR, ini.graph.rankdir
             End If
 
             If ini.graph.clusterrank <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "clusterrank", ini.graph.clusterrank
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_CLUSTERRANK, ini.graph.clusterrank
             End If
 
             If ini.graph.compound Then
-                AddAttributeLine graphvizSource, spaces, "compound", "true"
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_COMPOUND, TOGGLE_TRUE
             End If
 
             If ini.graph.ordering <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "ordering", ini.graph.ordering
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_ORDERING, ini.graph.ordering
             End If
 
             If ini.graph.newrank Then
-                AddAttributeLine graphvizSource, spaces, "newrank", "true"
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_NEWRANK, TOGGLE_TRUE
             End If
     
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case LAYOUT_FDP
             If ini.graph.layoutDim <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "dim", ini.graph.layoutDim
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_DIM, ini.graph.layoutDim
             End If
 
             If ini.graph.layoutDimen <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "dimen", ini.graph.layoutDimen
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_DIMEN, ini.graph.layoutDimen
             End If
 
             If ini.graph.overlap <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "overlap", ini.graph.overlap
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OVERLAP, ini.graph.overlap
             End If
 
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case LAYOUT_NEATO
             If ini.graph.layoutDim <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "dim", ini.graph.layoutDim
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_DIM, ini.graph.layoutDim
             End If
 
             If ini.graph.layoutDimen <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "dimen", ini.graph.layoutDimen
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_DIMEN, ini.graph.layoutDimen
             End If
             
             If ini.graph.overlap <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "overlap", ini.graph.overlap
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OVERLAP, ini.graph.overlap
             End If
 
             If ini.graph.mode <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "mode", ini.graph.mode
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_MODE, ini.graph.mode
             End If
 
             If ini.graph.model <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "model", ini.graph.model
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_MODEL, ini.graph.model
             End If
 
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case LAYOUT_OSAGE
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case LAYOUT_SFDP
             If ini.graph.layoutDim <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "dim", ini.graph.layoutDim
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_DIM, ini.graph.layoutDim
             End If
 
             If ini.graph.layoutDimen <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "dimen", ini.graph.layoutDimen
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_DIMEN, ini.graph.layoutDimen
             End If
             
             If ini.graph.mode <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "mode", ini.graph.mode
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_MODE, ini.graph.mode
             End If
 
             If ini.graph.overlap <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "overlap", ini.graph.overlap
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OVERLAP, ini.graph.overlap
             End If
 
             If ini.graph.smoothing <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "smoothing", ini.graph.smoothing
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_SMOOTHING, ini.graph.smoothing
             End If
 
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case LAYOUT_TWOPI
-            If ini.graph.overlap <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "overlap", ini.graph.overlap
-            End If
-            
             If Trim$(ini.graph.outputOrder) <> vbNullString Then
-                AddAttributeLine graphvizSource, spaces, "outputorder", ini.graph.outputOrder
+                AddAttributeLine graphvizSource, spaces, GRAPHVIZ_OUTPUTORDER, ini.graph.outputOrder
             End If
             
         Case Else
     End Select
 
     If ini.graph.orientation Then
-        AddAttributeLine graphvizSource, spaces, "rotate", "90"
+        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_ROTATE, "90"
     End If
     
     ' Graph options from the settings worksheet come last to give the ability to override anything above

@@ -6,7 +6,8 @@ Option Explicit
 
 Public Function InsertPicture(ByVal FName As String, ByVal Where As Range, _
                               Optional ByVal LinkToFile As Boolean = False, _
-                              Optional ByVal SaveWithDocument As Boolean = True) As shape
+                              Optional ByVal SaveWithDocument As Boolean = True, _
+                              Optional ByVal AltText As String = vbNullString) As shape
    
     'Inserts the picture file FName as link or permanently into Where
     Dim shapeObject As shape
@@ -16,11 +17,16 @@ Public Function InsertPicture(ByVal FName As String, ByVal Where As Range, _
                           FName, _
                           LinkToFile, _
                           SaveWithDocument, _
-                          .Left, _
-                          .Top, _
+                          .left, _
+                          .top, _
                           -1, _
                           -1)
         shapeObject.Placement = xlMove           ' ( xlFreeFloating | xlMove | xlMoveAndSize )
+        
+        ' Set alternative text if provided
+        If Len(AltText) > 0 Then
+            shapeObject.AlternativeText = AltText
+        End If
     End With
    
     Set InsertPicture = shapeObject

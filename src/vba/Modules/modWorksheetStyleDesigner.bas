@@ -304,7 +304,7 @@ Public Sub PreviewStyle(ByVal graphvizSource As String, ByVal targetCell As Stri
     '@Ignore VariableNotUsed
     Dim shapeObject As shape
     '@Ignore AssignmentNotUsed
-    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True)
+    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True, "Style designer preview image.")
     Set shapeObject = Nothing
                     
     ' Delete the temporary files
@@ -602,6 +602,22 @@ Private Function GetEdgeStyle() As String
     AddAttribute styleAttributes, GRAPHVIZ_DIR, DESIGNER_EDGE_DIRECTION
     AddAttribute styleAttributes, GRAPHVIZ_WEIGHT, DESIGNER_EDGE_WEIGHT
     
+    ' Radius attribute is managed as a number, not a string
+    Dim radius As Long
+    Dim rawValue As Variant
+    
+    rawValue = StyleDesignerSheet.Range(DESIGNER_EDGE_RADIUS).value
+    
+    If IsNumeric(rawValue) Then
+        radius = CLng(rawValue)
+    Else
+        radius = 0
+    End If
+    
+    If radius > 0 Then
+        AddAttribute styleAttributes, GRAPHVIZ_RADIUS, DESIGNER_EDGE_RADIUS
+    End If
+
     ' Label attributes
     AddAttribute styleAttributes, GRAPHVIZ_DECORATE, DESIGNER_EDGE_DECORATE
     AddAttribute styleAttributes, GRAPHVIZ_LABELANGLE, DESIGNER_EDGE_LABEL_ANGLE
@@ -849,7 +865,7 @@ Public Sub SaveToStylesWorksheet()
         ' If the style is CLUSTER we want to add a row for the subgraph-close, as it improves filtering capabilities
         If StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_CLUSTER Then
             If EndsWith(styleName, styles.suffixOpen) Then
-                styleName = Left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
+                styleName = left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
             End If
             StylesSheet.Cells.item(row, styles.nameColumn).value = styleName & " " & styles.suffixOpen
          

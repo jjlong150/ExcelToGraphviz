@@ -1,5 +1,64 @@
 # Change Log
 
+## Version 9.0.0
+
+### UI Visual Refresh
+
+Replaced all [built-in Office Ribbon icons](https://spreadsheet1.com/microsoft-office-excel-ribbon-imagemso-icons-gallery.html) with [Google Material icons](https://fonts.google.com/icons).  
+- Modernized the overall appearance  
+- Improved visual clarity and contrast  
+- Ensured consistent iconography across Windows and macOS  
+
+**Breaking** - Several dropdown lists were redesigned as individual buttons that behave like radio buttons.
+- Graphviz tab: **Zoom**, **Layout**, **Splines**  
+- Style Designer: **Scale**, **Image Position**  
+- Simplifies interaction and reduces misclicks  
+- Enables dedicated tooltip text for every layout, spline mode, and image-position option  
+
+Overall, the refresh makes the Ribbon cleaner and easier to scan at a glance.
+
+### New Features
+
+**Silent Mode / Message Routing**  
+You can now disable message boxes entirely for "run silent" operation, as requested in this [issue](https://github.com/jjlong150/ExcelToGraphviz/issues/3).  
+Errors and notifications can be routed to:  
+- Message boxes  
+- The Excel status bar  
+- The Console worksheet  
+
+These options are controlled via enablement buttons on the **Console** tab, giving users full control over how the tool communicates during interactive or automated operations.
+
+**Support for Graphviz 14.1.0 `radius` Attribute**  
+Graphviz introduced a new `radius` attribute for rounding corners on orthogonal edges.  
+The `Edge` mode of the **Style Designer** tab now includes a Gallery control that visually previews radius values from 0 to 20, making it easy to choose the desired corner roundness.
+
+---
+
+### Improvements
+
+**Breaking** - Image Zoom redesigned
+- Replaced fixed zoom levels (25%, 50%, 75%, 100%)  
+- New range: **5%-150%** in **5% increments**  
+- Controlled via **Zoom In** and **Zoom Out** buttons  
+- Provides finer control and a smoother editing experience  
+
+**Windows Ribbon Performance**  
+Removed the one-second delay when switching Ribbon tabs after selecting a worksheet.  
+- Windows now switches tabs instantly  
+- macOS retains the asynchronous delay to avoid race conditions in Excel's event model  
+
+**Accessibility Cleanup**  
+Resolved all Excel "Accessibility" warnings to ensure a cleaner, more compliant workbook environment.
+
+**Internal Code Quality Enhancements**  
+- Replaced numerous string literals with named constants  
+- Improved maintainability and reduced risk of typos  
+- Strengthened the error-reporting pipeline with locale-aware timestamps, normalized messages, and safer numeric parsing  
+
+## Version 8.0.1
+### Fixes
+- A previous update resolving image deletion on low-memory systems inadvertently disabled SVG removal. This regression has now been corrected. 
+
 ## Version 8.0.0
 
 ### Style Designer

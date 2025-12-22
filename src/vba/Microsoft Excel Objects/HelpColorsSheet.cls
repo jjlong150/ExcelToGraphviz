@@ -14,7 +14,11 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private Sub Worksheet_Activate()
+#If Mac Then
     Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabLaunchpad"
+#Else
+    ActivateTabLaunchpad
+#End If
 End Sub
 
 Private Sub Worksheet_FollowHyperlink(ByVal Target As Hyperlink)

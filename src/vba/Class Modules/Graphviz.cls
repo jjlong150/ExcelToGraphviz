@@ -203,7 +203,7 @@ Public Sub SourceToFile()
 
 WriteFailed:
     If Err.number > 0 Then
-        MsgBox Err.number & " " & Err.Description, vbOKOnly, "Graphviz.SourceToFile()"
+        EmitMessage Err.number & " " & Err.Description, "Graphviz.SourceToFile()"
         Err.Clear
     End If
     

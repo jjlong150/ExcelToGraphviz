@@ -100,12 +100,12 @@ Public Sub RefreshRibbon()
     On Error GoTo ErrorHandler
     If myRibbon Is Nothing Then
         ' This message cannot be localized due to error state.
-        MsgBox "Error refreshing the ribbon. Save and reopen this file."
+        EmitMessage "Error refreshing the ribbon. Save and reopen this file."
     Else
         myRibbon.Invalidate
         If Err.number <> 0 Then
             ' This message cannot be localized due to error state.
-            MsgBox "Lost the Ribbon object. Save this file, close worksbook, and reopen."
+            EmitMessage "Lost the Ribbon object. Save this file, close worksbook, and reopen."
         End If
     End If
 

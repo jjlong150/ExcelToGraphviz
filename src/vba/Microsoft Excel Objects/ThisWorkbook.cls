@@ -29,7 +29,7 @@ Private Sub Workbook_Open()
     
     ' Cache the username (retrieving it causes it to be cached).
     If GetUsername() = vbNullString Then
-        MsgBox GetMessage("msgboxUnableToGetUsername"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxUnableToGetUsername")
     End If
 
     ' Check that Graphviz is installed
@@ -53,7 +53,7 @@ Private Sub Workbook_Open()
         ' See if the full path to dot.exe exists
         gvPath = gvPath & "dot.exe"
         If Not FileExists(gvPath) Then
-            MsgBox replace(GetMessage("msgboxInvalidDotPath"), "{gvPath}", gvPath), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+            EmitMessage replace(GetMessage("msgboxInvalidDotPath"), "{gvPath}", gvPath)
         End If
     End If
 #End If
@@ -68,7 +68,7 @@ Private Sub Workbook_Open()
     scriptVersion = RunAppleScriptTask("getVersion", vbNullString)
     
     If scriptVersion = vbNullString Then
-        MsgBox GetMessage("msgboxScriptsNotFound"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxScriptsNotFound")
         SetScriptVersion 0
     Else
         ' Save the version number for future reference. AppleScriptTask has slow performance, so
@@ -83,7 +83,7 @@ Private Sub Workbook_Open()
             msg = GetMessage("msgboxVersionMismatch")
             msg = replace(msg, "{currentVersion}", CStr(currentVersion))
             msg = replace(msg, "{yourVersion}", CStr(yourVersion))
-            MsgBox msg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+            EmitMessage msg
         End If
     End If
 
@@ -107,7 +107,7 @@ Private Sub Workbook_Open()
             msg = GetMessage("msgboxIncompatibleExcelVersion")
             msg = replace(msg, "{requiredExcelVersion}", requiredMajor & "." & requiredMinor)
             msg = replace(msg, "{yourExcelVersion}", actualVersion)
-            MsgBox msg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+            EmitMessage msg
         End If
     End If
 #End If

@@ -64,7 +64,7 @@ Public Function ShowColorChooser(ByVal colorAsHex As String, Optional ByVal pick
     
     ' Convert hex to RGB
     On Error Resume Next
-    r = CLng("&H" & Left(hexColor, 2))
+    r = CLng("&H" & left(hexColor, 2))
     g = CLng("&H" & Mid(hexColor, 3, 2))
     b = CLng("&H" & Right(hexColor, 2))
     If Err.number <> 0 Then

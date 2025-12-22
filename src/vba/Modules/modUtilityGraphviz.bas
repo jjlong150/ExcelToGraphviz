@@ -10,7 +10,7 @@ Public Sub AlertGraphvizNotFound(ByVal graphEngine As String)
 #If Mac Then
     'TODO Port
 #Else
-    MsgBox replace(GetMessage("msgboxGraphvizNotFound"), "{graphEngine}", graphEngine), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    EmitMessage replace(GetMessage("msgboxGraphvizNotFound"), "{graphEngine}", graphEngine)
 #End If
 End Sub
 

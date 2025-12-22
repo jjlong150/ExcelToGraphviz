@@ -81,8 +81,8 @@ Public Function ClipBoard_SetData(ByRef MyString As String) As Boolean
     End If
 
     'Clear the Clipboard.
-    Dim x As Long
-    x = EmptyClipboard()
+    Dim X As Long
+    X = EmptyClipboard()
 
     'Copy the data to the Clipboard.
     hClipMemory = SetClipboardData(CF_TEXT, hGlobalMemory)
@@ -105,7 +105,7 @@ Public Sub Clipboard_Clear()
     CloseClipboard
     Exit Sub
 ErrorHandler_:
-    MsgBox "Error: " & Err.Description, vbCritical
+    EmitMessage "Error: " & Err.Description, buttons:=vbCritical
 End Sub
 
 

@@ -4,11 +4,11 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2022-12-22",
-    "time": "16:14:22",
+    "date": "2025-12-10",
+    "time": "14:14:27",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "US State Borders.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
     "data": [
@@ -1527,10 +1527,11 @@
       {
         "row": 2,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": "node",
         "type": "node",
         "viewSwitches": [
+          "yes",
           "yes",
           "yes"
         ]
@@ -1538,23 +1539,28 @@
       {
         "row": 3,
         "hidden": false,
-        "height": 15,
+        "height": 25.5,
         "name": "edge",
         "type": "edge",
+        "format": {
+          "radius": "8"
+        },
         "viewSwitches": [
           "yes",
-          "yes"
+          "yes",
+          "no"
         ]
       },
       {
         "row": 4,
         "hidden": false,
-        "height": 15,
+        "height": 100.5,
         "name": "subgraph-open",
         "type": "subgraph-open",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1565,7 +1571,8 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1575,6 +1582,7 @@
         "name": "keyword",
         "type": "keyword",
         "viewSwitches": [
+          "yes",
           "yes",
           "yes"
         ]
@@ -1587,13 +1595,14 @@
         "type": "native",
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 8,
         "hidden": false,
-        "height": 15,
+        "height": 120.75,
         "name": "Border 0 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1604,7 +1613,8 @@
         },
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1615,13 +1625,14 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
         "row": 10,
         "hidden": false,
-        "height": 30,
+        "height": 115.5,
         "name": "Border 1 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1635,7 +1646,8 @@
         },
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1646,13 +1658,14 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
         "row": 12,
         "hidden": false,
-        "height": 30,
+        "height": 115.5,
         "name": "Border 2 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1666,7 +1679,8 @@
         },
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1677,13 +1691,14 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
         "row": 14,
         "hidden": false,
-        "height": 30,
+        "height": 115.5,
         "name": "Border 3 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1697,7 +1712,8 @@
         },
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1708,13 +1724,14 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
         "row": 16,
         "hidden": false,
-        "height": 30,
+        "height": 115.5,
         "name": "Border 4 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1728,7 +1745,8 @@
         },
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1739,13 +1757,14 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
         "row": 18,
         "hidden": false,
-        "height": 30,
+        "height": 115.5,
         "name": "Border 5 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1759,7 +1778,8 @@
         },
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
@@ -1770,13 +1790,14 @@
         "type": "subgraph-close",
         "viewSwitches": [
           "yes",
-          "no"
+          "no",
+          "yes"
         ]
       },
       {
         "row": 20,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Component",
         "type": "node",
         "format": {
@@ -1791,13 +1812,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 21,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Decision",
         "type": "node",
         "format": {
@@ -1812,13 +1834,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 22,
         "hidden": false,
-        "height": 30,
+        "height": 45,
         "name": "Event",
         "type": "node",
         "format": {
@@ -1833,13 +1856,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 23,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Extract",
         "type": "node",
         "format": {
@@ -1854,13 +1878,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 24,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "File",
         "type": "node",
         "format": {
@@ -1875,13 +1900,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 25,
         "hidden": false,
-        "height": 30,
+        "height": 45,
         "name": "Folder",
         "type": "node",
         "format": {
@@ -1896,13 +1922,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 26,
         "hidden": false,
-        "height": 15,
+        "height": 19.5,
         "name": "Flow",
         "type": "edge",
         "format": {
@@ -1911,7 +1938,8 @@
         },
         "viewSwitches": [
           "yes",
-          "yes"
+          "yes",
+          "no"
         ]
       },
       {
@@ -1930,7 +1958,8 @@
         },
         "viewSwitches": [
           "yes",
-          "yes"
+          "yes",
+          "no"
         ]
       },
       {
@@ -1949,7 +1978,8 @@
         },
         "viewSwitches": [
           "yes",
-          "yes"
+          "yes",
+          "no"
         ]
       },
       {
@@ -1968,13 +1998,14 @@
         },
         "viewSwitches": [
           "yes",
-          "yes"
+          "yes",
+          "no"
         ]
       },
       {
         "row": 30,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Input",
         "type": "node",
         "format": {
@@ -1989,13 +2020,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 31,
         "hidden": false,
-        "height": 15,
+        "height": 25.5,
         "name": "Invisible Edge",
         "type": "edge",
         "format": {
@@ -2004,13 +2036,14 @@
         },
         "viewSwitches": [
           "yes",
-          "yes"
+          "yes",
+          "no"
         ]
       },
       {
         "row": 32,
         "hidden": false,
-        "height": 15,
+        "height": 19.5,
         "name": "Invisible Point",
         "type": "node",
         "format": {
@@ -2021,13 +2054,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 33,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Manual Operation",
         "type": "node",
         "format": {
@@ -2042,13 +2076,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 34,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Merge",
         "type": "node",
         "format": {
@@ -2063,13 +2098,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 35,
         "hidden": false,
-        "height": 30,
+        "height": 52.5,
         "name": "Off Page Reference",
         "type": "node",
         "format": {
@@ -2084,13 +2120,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 36,
         "hidden": false,
-        "height": 30,
+        "height": 52.5,
         "name": "On Page Reference",
         "type": "node",
         "format": {
@@ -2105,13 +2142,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 37,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Output",
         "type": "node",
         "format": {
@@ -2126,13 +2164,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 38,
         "hidden": false,
-        "height": 15,
+        "height": 19.5,
         "name": "Point",
         "type": "node",
         "format": {
@@ -2140,13 +2179,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 39,
         "hidden": false,
-        "height": 45,
+        "height": 61.5,
         "name": "Predefined Process",
         "type": "node",
         "format": {
@@ -2161,13 +2201,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 40,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Preparation",
         "type": "node",
         "format": {
@@ -2182,13 +2223,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 41,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Process",
         "type": "node",
         "format": {
@@ -2203,13 +2245,14 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
       },
       {
         "row": 42,
         "hidden": false,
-        "height": 30,
+        "height": 61.5,
         "name": "Stop",
         "type": "node",
         "format": {
@@ -2225,255 +2268,939 @@
         },
         "viewSwitches": [
           "yes",
+          "yes",
           "yes"
         ]
-      },
-      {
-        "row": 43,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 44,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 45,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 46,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 47,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 48,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 49,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 50,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 51,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 52,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 53,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 54,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 55,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 56,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 57,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 58,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 59,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 60,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 61,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 62,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 63,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 64,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 65,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 66,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 67,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 68,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 69,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 70,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 71,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 72,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 73,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 74,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 75,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 76,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 77,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 78,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 79,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 80,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 81,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 82,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 83,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 84,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 85,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 86,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 87,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 88,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 89,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 90,
-        "hidden": false,
-        "height": 15.75
       }
     ],
     "sql": [
       {
         "row": 2,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ]
   },
@@ -2481,12 +3208,12 @@
     "data": {
       "graphToWorksheet": {
         "runMode": "auto",
-        "imageType": "png",
+        "imageType": "svg",
         "imageWorksheet": "graph",
-        "scaleImage": 75
+        "scaleImage": 65
       },
       "graphToFile": {
-        "directory": "",
+        "directory": "C:\\data\\local\\rv\\v9.0.00\\Relationship Visualizer\\samples\\02 - US State Borders",
         "fileNamePrefix": "Graph",
         "imageType": "pdf",
         "appendOptions": false,
@@ -2496,7 +3223,7 @@
         "engine": "neato",
         "direction": "top to bottom",
         "rankdir": "TB",
-        "splines": "line"
+        "splines": "false"
       },
       "options": {
         "graph": {
@@ -2508,14 +3235,15 @@
           "forceLabels": false,
           "graphType": "undirected",
           "mode": "ipsep",
-          "model": "",
+          "model": "subset",
           "newrank": false,
           "ordering": "",
           "orientation": false,
           "outputOrder": "nodesfirst",
-          "overlap": "scalexy",
+          "overlap": "prism",
           "smoothing": "",
-          "transparentBackground": false
+          "transparentBackground": false,
+          "includeImagePath": false
         },
         "nodes": {
           "includeOrphanNodes": true,
@@ -2538,7 +3266,9 @@
       "styles": {
         "selectedViewColumn": "E",
         "includeStyleFormat": true,
-        "includeExtraAttributes": true
+        "includeExtraAttributes": true,
+        "suffixOpen": "Begin",
+        "suffixClose": "End"
       },
       "debug": {
         "debug": "off",
@@ -2558,14 +3288,45 @@
       },
       "language": {
         "language": "locale_en-US"
+      },
+      "console": {
+        "logToConsole": false,
+        "appendConsole": false,
+        "graphvizVerbose": false,
+        "errorToConsole": false,
+        "errorToMessageBox": true,
+        "errorToStatusBar": false
+      },
+      "worksheets": {
+        "about": "show",
+        "attributes": "hide",
+        "colors": "hide",
+        "console": "show",
+        "diagnostics": "hide",
+        "exchange": "show",
+        "lists": "hide",
+        "locale_de-DE": "hide",
+        "locale_en-GB": "hide",
+        "locale_en-US": "hide",
+        "locale_fr-FR": "hide",
+        "locale_it-IT": "hide",
+        "locale_pl-PL": "hide",
+        "settings": "hide",
+        "shapes": "hide",
+        "source": "hide",
+        "sql": "hide",
+        "styleDesigner": "hide",
+        "styles": "show",
+        "svg": "hide"
       }
     },
     "graph": {
-      "zoom": 50
+      "zoom": 100
     },
     "settings": {
-      "additionalGraphOptions": "sep=\"+30,30\"",
-      "maxSeconds": 60,
+      "graphvizPath": "",
+      "imagePath": "C:\\data\\local\\rv\\v9.0.00\\Relationship Visualizer\\samples\\02 - US State Borders",
+      "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
     },
@@ -2609,6 +3370,32 @@
           "visible": "hide"
         }
       ]
+    },
+    "sql": {
+      "cluster": "cluster",
+      "clusterLabel": "cluster label",
+      "clusterStyleName": "cluster style name",
+      "clusterAttributes": "cluster attributes",
+      "clusterTooltip": "cluster tooltip",
+      "clusterPlaceholder": "%clc%",
+      "subcluster": "subcluster",
+      "subclusterLabel": "subcluster label",
+      "subclusterStyleName": "subcluster style name",
+      "subclusterAttributes": "subcluster attributes",
+      "subclusterTooltip": "subcluster tooltip",
+      "subclusterPlaceholder": "%scc%",
+      "recordsetPlaceholder": "%rsc%",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
+      "filterColumn": "",
+      "filterValue": "",
+      "closeConnections": true
     },
     "extensions": {
       "tabName": "Extensions",
@@ -2798,7 +3585,7 @@
         {
           "id": "first",
           "row": 2,
-          "height": 15,
+          "height": 43.5,
           "hidden": false
         }
       ],
@@ -2848,6 +3635,14 @@
           "column": 6,
           "heading": "No Clusters",
           "width": 7.29,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 7,
+          "heading": "No Edges",
+          "width": 5,
           "hidden": false,
           "wrapText": null
         }
@@ -2904,6 +3699,48 @@
           "width": 21.43,
           "hidden": false,
           "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 50.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 149.29,
+          "hidden": false,
+          "wrapText": null
         }
       ]
     },

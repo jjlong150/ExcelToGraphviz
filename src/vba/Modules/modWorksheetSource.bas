@@ -157,6 +157,54 @@ EndMacro:
 #End If
 End Sub
 
+Public Sub StringToFile(ByVal textString As String, ByVal fileName As String)
+#If Mac Then
+    WriteTextToFile textString, fileName
+#Else
+    
+    ' Output file objects
+    Dim utf8Stream As Object
+    Set utf8Stream = CreateObject("ADODB.Stream")
+    If utf8Stream Is Nothing Then GoTo EndMacro
+    
+    Dim binaryStream As Object
+    Set binaryStream = CreateObject("ADODB.Stream")
+    If binaryStream Is Nothing Then GoTo EndMacro
+    
+    ' Initialize the utf8Stream object
+    utf8Stream.Type = StreamTypeEnum.adTypeText
+    utf8Stream.Charset = UTF8_CHARSET
+    utf8Stream.Open
+    
+    utf8Stream.WriteText textString
+    
+    ' Initialize the object which is used to remove the Byte Order Mark (BOM) from the UTF-8 stream
+    binaryStream.Type = StreamTypeEnum.adTypeBinary
+    binaryStream.mode = ConnectModeEnum.adModeReadWrite
+    binaryStream.Open
+
+    ' Position the start of the utf8 stream past the Byte Order Mark (BOM) (i.e. BOM = first 3 bytes)
+    ' and copy the contents to the binary stream
+    utf8Stream.position = 3
+    utf8Stream.CopyTo binaryStream
+    
+    ' Write out UTF-8 data without the BOM
+    binaryStream.SaveToFile fileName, SaveOptionsEnum.adSaveCreateOverWrite
+
+EndMacro:
+    ' Clean up our objects so we don't get a memory leak
+    If Not (utf8Stream Is Nothing) Then
+        If (utf8Stream.State And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then utf8Stream.Close
+        Set utf8Stream = Nothing
+    End If
+    
+    If Not (binaryStream Is Nothing) Then
+        If (binaryStream.State And ObjectStateEnum.adStateOpen) = ObjectStateEnum.adStateOpen Then binaryStream.Close
+        Set binaryStream = Nothing
+    End If
+#End If
+End Sub
+
 Public Sub CopySourceCodeToClipboard()
 #If Not Mac Then
 
@@ -231,10 +279,68 @@ Public Sub CreateGraphFromSourceToWorksheet()
         '@Ignore VariableNotUsed
         Dim shapeObject As shape
         '@Ignore AssignmentNotUsed
-        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range("B2"), False, True)
+        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range("B2"), False, True, "Graph image created from source worksheet data.")
         Set shapeObject = Nothing
     Else
-        MsgBox GetMessage("msgboxNoGraphCreated"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxNoGraphCreated")
+    End If
+
+    ' Delete the temporary files
+    DeleteFile graphvizObj.GraphvizFilename
+    DeleteFile graphvizObj.DiagramFilename
+    
+    ' Clean up objects
+    Set graphvizObj = Nothing
+End Sub
+
+Public Sub VisualizeGraph(dotSource As String)
+    ' Clear the status bar
+    ClearStatusBar
+
+    ' Read in the runtime settings
+    Dim ini As settings
+    ini = GetSettings(DataSheet.name)
+
+    ' Remove any existing graph image from the target worksheet
+    Dim displayDataSheetName As String
+    displayDataSheetName = GraphSheet.name
+            
+    ActiveWorkbook.Sheets.[_Default](displayDataSheetName).Activate
+    DeleteAllPictures displayDataSheetName
+
+    ' Instantiate a new Graphviz object
+    Dim graphvizObj As Graphviz
+    Set graphvizObj = New Graphviz
+
+    ' Build file names
+    graphvizObj.OutputDirectory = GetTempDirectory()
+    graphvizObj.FilenameBase = "RelationshipVisualizer"
+    graphvizObj.GraphFormat = ini.graph.imageTypeWorksheet
+
+    ' Create the '.gv' Graphviz source code file from the source worksheet
+    StringToFile dotSource, graphvizObj.GraphvizFilename
+   
+    ' Convert the Graphviz source code into a diagram
+    graphvizObj.CaptureMessages = ini.console.logToConsole
+    graphvizObj.Verbose = ini.console.graphvizVerbose
+    graphvizObj.CommandLineParameters = ini.CommandLine.parameters
+    graphvizObj.GraphLayout = ini.graph.engine
+    graphvizObj.GraphvizPath = ini.CommandLine.GraphvizPath
+    
+    graphvizObj.RenderGraph
+    
+    ' Display any console output first
+    DisplayTextOnConsoleWorksheet graphvizObj.GraphvizCommand, graphvizObj.GraphvizMessages
+    
+    ' Display the image
+    If FileExists(graphvizObj.DiagramFilename) Then
+        '@Ignore VariableNotUsed
+        Dim shapeObject As shape
+        '@Ignore AssignmentNotUsed
+        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range("B2"), False, True, "Graph image created from source worksheet data.")
+        Set shapeObject = Nothing
+    Else
+        EmitMessage GetMessage("msgboxNoGraphCreated")
     End If
 
     ' Delete the temporary files
@@ -252,7 +358,7 @@ Public Sub CreateGraphFromSourceToFile()
 
     ' Determine output directory, and build file names
     If ini.output.directory = vbNullString Then
-        MsgBox GetMessage("msgboxNoDirectorySpecified"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxNoDirectorySpecified")
         SettingsSheet.Activate
         ActiveSheet.Range("OutputDirectory").Activate
         Exit Sub
@@ -279,7 +385,7 @@ Public Sub CreateGraphFromSourceToFile()
     ' Create the '.gv' Graphviz source code file from the source worksheet
     SourceWorksheetToFile graphvizObj.GraphvizFilename
     If Not FileExists(graphvizObj.GraphvizFilename) Then
-        MsgBox GetMessage("msgboxSourceFileNotFound"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxSourceFileNotFound")
         Set graphvizObj = Nothing
         Exit Sub
     End If
@@ -298,9 +404,9 @@ Public Sub CreateGraphFromSourceToFile()
     
     ' If the diagram file is not there, then Graphviz failed
     If FileExists(graphvizObj.DiagramFilename) Then
-        MsgBox GetMessage("msgboxGraphFilenameIs") & vbNewLine & graphvizObj.DiagramFilename, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxGraphFilenameIs") & vbNewLine & graphvizObj.DiagramFilename
     Else
-        MsgBox GetMessage("msgboxNoGraphCreated"), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxNoGraphCreated")
     End If
 
     ' Delete the command file if disposition is 'delete'

@@ -1,0 +1,25 @@
+DeepL Free Services - Terms of Use
+
+Using the Website
+
+Both private and business use of the DeepL Translator (free) and DeepL Write (free) services (together “Free Services”) are free of charge. However, forwarding our Free Services to third parties for payment is strictly prohibited. DeepL SE is entitled to modify (e.g. reduce, restrict, or expand) its Free Services at all times and at its own discretion. Such modifications shall not affect the validity of the following terms and conditions.
+
+Use of any internal APIs without written permission from DeepL SE is strictly prohibited.
+
+Processing of the submitted Content
+
+When using our Free Services, we reserve the right to process the content you upload (e.g., your texts and documents) and its translation/improvement for a limited period of time to train and improve our neural networks and algorithms. This also applies to adjustments and corrections you make to our translation or improvement suggestions. If you use the glossary feature and enter certain pairs of terms there, this data is only stored locally. Therefore, you cannot use your glossary entries in another browser or on another device. 
+
+We reserve the right to transfer your content to servers of third parties in order to provide our services. These third parties are our data processors and we have concluded a data processing agreement with them so that they may only process the data according to our instructions and not for their own purposes.
+
+Please note that you may not use the Free Services for processing content containing confidential or personal data of any kind. In this context, personal data means any information relating to an identified or identifiable natural person. The provision of content containing confidential and/or personal data is only allowed within a DeepL Pro subscription.
+
+Liability
+
+DeepL SE does not assume any liability for the accuracy of the offered translations or improvements nor for the availability of the service.
+
+Copyright
+
+All rights regarding the software developed to enable these online services, the underlying databases, and all other content are held by DeepL SE insofar as further authors and copyright holders are not explicitly named. DeepL SE does not obtain or assume any copyrights to the translations made by you using the translation service. 
+
+Last update: November 2024

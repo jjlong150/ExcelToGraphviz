@@ -25,11 +25,16 @@ Public Sub ExportData()
         exportIt = False
         
         If FileExists(exportFile) Then  ' File exists. Confirm that it should be overwritten
-            Dim answer As Long
-            answer = MsgBox(replace(GetMessage("msgboxFileAlreadyExists"), "{exportFile}", exportFile), vbYesNo + vbQuestion, GetLabel("msgboxFileAlreadyExists"))
-            
-            If answer = vbYes Then      ' User has confirmed that the file can be overwritten
+            If LCase$(SettingsSheet.Range(SETTINGS_ERROR_TO_MESSAGE_BOX).value) = TOGGLE_NO Then
+                ' User has disabled message boxes, most likely for silent automation. Proceed with overwrite.
                 exportIt = True
+            Else
+                Dim answer As Long
+                answer = MsgBox(replace(GetMessage("msgboxFileAlreadyExists"), "{exportFile}", exportFile), vbYesNo + vbQuestion, GetLabel("msgboxFileAlreadyExists"))
+                
+                If answer = vbYes Then      ' User has confirmed that the file can be overwritten
+                    exportIt = True
+                End If
             End If
         Else                            ' No file exists having this name, proceed
             exportIt = True
@@ -42,7 +47,7 @@ Public Sub ExportData()
 #Else
             WriteTextToUTF8FileFileWithoutBOM GetAllDataAsJson, exportFile
 #End If
-            MsgBox GetMessage("msgboxExportComplete") & vbNewLine & exportFile, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+            EmitMessage GetMessage("msgboxExportComplete") & vbNewLine & exportFile, severity:=esInfo
         End If
     End If
     
@@ -505,6 +510,9 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     consoleOptions.Add JSON_SETTINGS_LOG_TO_CONSOLE, ini.console.logToConsole
     consoleOptions.Add JSON_SETTINGS_APPEND_CONSOLE, ini.console.appendConsole
     consoleOptions.Add JSON_SETTINGS_GRAPHVIZ_VERBOSE, ini.console.graphvizVerbose
+    consoleOptions.Add JSON_SETTINGS_ERROR_TO_CONSOLE, GetSettingBoolean(SETTINGS_ERROR_TO_CONSOLE)
+    consoleOptions.Add JSON_SETTINGS_ERROR_TO_MESSAGE_BOX, GetSettingBoolean(SETTINGS_ERROR_TO_MESSAGE_BOX)
+    consoleOptions.Add JSON_SETTINGS_ERROR_TO_STATUS_BAR, GetSettingBoolean(SETTINGS_ERROR_TO_STATUS_BAR)
     
     ' Show/Hide Columns
     Dim columns As Dictionary

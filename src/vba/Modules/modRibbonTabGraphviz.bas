@@ -6,6 +6,11 @@ Attribute VB_Name = "modRibbonTabGraphviz"
 
 Option Explicit
 
+Private Const MAX_ZOOM As Long = 150
+Private Const MIN_ZOOM As Long = 5
+Private Const ZOOM_STEP As Long = 5
+    
+
 ' ===========================================================================
 ' Callbacks for Show/Hide Labels
 
@@ -223,13 +228,122 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub directed_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
-    SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = Toggle(pressed, TOGGLE_DIRECTED, TOGGLE_UNDIRECTED)
+    If pressed Then
+        If SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED Then
+            SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED
+        Else
+            SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED
+        End If
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED
+    End If
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_TYPE_UNDIRECTED
     AutoDraw
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub directed_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED
+End Sub
+
+' ===========================================================================
+' Callbacks for layout
+
+Private Sub RefreshLayoutGroup()
+    InvalidateRibbonControl RIBBON_CTL_GROUP_LAYOUT
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_CIRCO
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_DOT
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_FDP
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_NEATO
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_OSAGE
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_PATCHWORK
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_SFDP
+    InvalidateRibbonControl RIBBON_CTL_LAYOUT_TWOPI
+End Sub
+
+Private Sub RefreshGraphTypeGroup()
+    InvalidateRibbonControl RIBBON_CTL_GROUP_GRAPH_TYPE
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_TYPE_DIRECTED
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_TYPE_UNDIRECTED
+End Sub
+
+Private Sub RefreshLayoutParametersGroup()
+    InvalidateRibbonControl RIBBON_CTL_ALGORITHM_GROUP
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_MODE
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_MODEL
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_SMOOTHING
+    InvalidateRibbonControl RIBBON_CTL_ALGORITHM_GROUP_SEPARATOR1
+    InvalidateRibbonControl RIBBON_CTL_ALGORITHM_GROUP_SEPARATOR2
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_DIM
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_DIMEN
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_CLUSTER_RANK
+    InvalidateRibbonControl RIBBON_CTL_NEWRANK
+    InvalidateRibbonControl RIBBON_CTL_COMPOUND
+    InvalidateRibbonControl RIBBON_CTL_OVERLAP
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub layout_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LCase$(Mid$(control.ID, Len("layout") + 1))
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LAYOUT_DOT
+    End If
+    
+    OptimizeCode_Begin
+    RefreshLayoutGroup
+    RefreshSplinesGroup
+    RefreshGraphTypeGroup
+    RefreshOutputorderGroup
+    RefreshRankdirGroup
+    RefreshOrderingGroup
+    RefreshLayoutParametersGroup
+    OptimizeCode_End
+    
+    AutoDraw
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub layout_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    Dim layout As String
+    layout = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
+    
+    ' Backward compatibility. Map layout aliases to buttons provided
+    Select Case layout
+        Case "compound": layout = "polyline"
+        Case "splines": layout = "true"
+        Case "line": layout = "false"
+    End Select
+    
+    pressed = layout = LCase$(Mid$(control.ID, Len("layout") + 1))
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub layoutOptions_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+    label = "layout=" & SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
+End Sub
+
+' ===========================================================================
+' Callbacks for undirected
+
+'@Ignore ParameterNotUsed
+Public Sub undirected_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        If SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED Then
+            SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED
+        Else
+            SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED
+        End If
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED
+    End If
+    InvalidateRibbonControl RIBBON_CTL_GRAPH_TYPE_DIRECTED
+    AutoDraw
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub undirected_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -241,6 +355,52 @@ Public Sub directed_getVisible(ByVal control As IRibbonControl, ByRef visible As
             visible = True
     End Select
 End Sub
+
+' ===========================================================================
+' Callbacks for splines
+
+Private Sub RefreshSplinesGroup()
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_COMPOUND
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_CURVED
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_LINE
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_NONE
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_ORTHO
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_POLYLINE
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_SPLINE
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_TRUE
+    InvalidateRibbonControl RIBBON_CTL_SPLINES_FALSE
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub splines_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.ID, Len("spline") + 1))
+    Else
+        SettingsSheet.Range(SETTINGS_SPLINES).value = vbNullString
+    End If
+    RefreshSplinesGroup
+    AutoDraw
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub splines_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+    Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
+        Case LAYOUT_PATCHWORK
+            visible = False
+        Case Else
+            visible = True
+    End Select
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub splines_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If SettingsSheet.Range(SETTINGS_SPLINES).value = vbNullString And control.ID = "splineFalse" Then
+        pressed = True
+    Else
+        pressed = SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.ID, Len("spline") + 1))
+    End If
+End Sub
+
 
 ' ===========================================================================
 ' Callbacks for dirName
@@ -503,54 +663,39 @@ Public Sub keepGvFile_getPressed(ByVal control As IRibbonControl, ByRef pressed 
 End Sub
 
 ' ===========================================================================
-' Callbacks for layoutDirection
+' Callbacks for rankdir
 
 '@Ignore ParameterNotUsed
-Public Sub layoutDirection_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
-    SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(controlId, Len("rankdir_") + 1)
-    AutoDraw
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub layoutDirection_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = "rankdir_" & SettingsSheet.Range(SETTINGS_RANKDIR).value
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub layoutDirection_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Public Sub rankdir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LAYOUT_DOT
 End Sub
 
-' ===========================================================================
-' Callbacks for layoutEngine
-
-'@Ignore ParameterNotUsed
-Public Sub layoutEngine_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
-    SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = controlId
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_CLUSTER_RANK
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_DIM
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_DIMEN
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_MODE
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_MODEL
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_ORDERING
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_OUTPUT_ORDER
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_OVERLAP
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_OVERLAP_MENU
-    InvalidateRibbonControl RIBBON_CTL_GRAPH_SMOOTHING
-    InvalidateRibbonControl RIBBON_CTL_LAYOUT_DIRECTION
-    InvalidateRibbonControl RIBBON_CTL_DIRECTED
-    InvalidateRibbonControl RIBBON_CTL_SPLINES
-    InvalidateRibbonControl RIBBON_CTL_COMPOUND
-    InvalidateRibbonControl RIBBON_CTL_NEWRANK
-    InvalidateRibbonControl "algsep0"
-    InvalidateRibbonControl "algsep1"
-    InvalidateRibbonControl "algsep2"
+Public Sub rankdir_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.ID, Len("rankdir") + 1)
+    Else
+        SettingsSheet.Range(SETTINGS_RANKDIR).value = vbNullString
+    End If
+    RefreshRankdirGroup
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub layoutEngine_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
+Public Sub rankdir_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If SettingsSheet.Range(SETTINGS_RANKDIR).value = vbNullString And control.ID = "rankdirTB" Then
+        pressed = True
+    Else
+        pressed = SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.ID, Len("rankdir") + 1)
+    End If
+End Sub
+
+Private Sub RefreshRankdirGroup()
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_GROUP
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_TB
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_BT
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_LR
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_RL
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_DUMMY1
+    InvalidateRibbonControl RIBBON_CTL_RANKDIR_DUMMY2
 End Sub
 
 ' ===========================================================================
@@ -649,30 +794,6 @@ End Sub
 '@Ignore ParameterNotUsed
 Public Sub showPorts_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_EDGE_PORTS)
-End Sub
-
-' ===========================================================================
-' Callbacks for splines
-
-'@Ignore ParameterNotUsed
-Public Sub splines_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
-    SettingsSheet.Range(SETTINGS_SPLINES).value = Mid$(controlId, Len("splines_") + 1)
-    AutoDraw
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub splines_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = "splines_" & SettingsSheet.Range(SETTINGS_SPLINES).value
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub splines_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
-    Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
-        Case LAYOUT_PATCHWORK
-            visible = False
-        Case Else
-            visible = True
-    End Select
 End Sub
 
 ' ===========================================================================
@@ -818,7 +939,7 @@ End Function
 Public Sub overlap_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_CIRCO
-             visible = True
+             visible = False
         Case LAYOUT_DOT
             visible = False
         Case LAYOUT_FDP
@@ -832,7 +953,7 @@ Public Sub overlap_getVisible(ByVal control As IRibbonControl, ByRef visible As 
         Case LAYOUT_SFDP
             visible = True
         Case LAYOUT_TWOPI
-            visible = True
+            visible = False
         Case Else
             visible = False
     End Select
@@ -1020,22 +1141,65 @@ Private Sub mac_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As
 End Sub
 
 ' ===========================================================================
-' Callbacks for scaleImage
+' Callbacks for graphZoomLevel
+
+Public Sub graphZoomLevel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+    label = GetCurrentZoom() & "%"
+End Sub
+
+' ===========================================================================
+' Callbacks for graphZoomOut
 
 '@Ignore ParameterNotUsed
-Public Sub scaleImage_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
-    SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value = Mid$(controlId, Len("zoom_") + 1)
+Public Sub graphZoomOut_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+    enabled = GetCurrentZoom() > MIN_ZOOM
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub GraphZoomOut_OnAction(ByVal control As IRibbonControl)
+    Dim zoom As Long
+    zoom = SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value - ZOOM_STEP
+    
+    UpdateZoom zoom
+End Sub
+
+' ===========================================================================
+' Callbacks for graphZoomIn
+
+'@Ignore ParameterNotUsed
+Public Sub graphZoomIn_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+    enabled = GetCurrentZoom() < MAX_ZOOM
+End Sub
+
+Public Sub GraphZoomIn_OnAction(ByVal control As IRibbonControl)
+    Dim zoom As Long
+    zoom = SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value + ZOOM_STEP
+    
+    UpdateZoom zoom
+End Sub
+
+' Helper function to update zoom and refresh UI
+Private Sub UpdateZoom(zoom As Long)
+    ' Clamp zoom value within bounds
+    If zoom < MIN_ZOOM Then zoom = MIN_ZOOM
+    If zoom > MAX_ZOOM Then zoom = MAX_ZOOM
+    
+    ' Update zoom value in settings
+    SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value = zoom
+    
+    ' Invalidate ribbon controls
+    InvalidateRibbonControl "graphZoomIn"
+    InvalidateRibbonControl "graphZoomOut"
+    InvalidateRibbonControl "graphZoomLevel"
+    
+    ' Refresh graph
     CreateGraphWorksheetQuickly
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub scaleImage_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = "zoom_" & SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value
-End Sub
-
-
-
-
+' Helper function to get current zoom value
+Private Function GetCurrentZoom() As Long
+    GetCurrentZoom = SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value
+End Function
 
 ' ===========================================================================
 ' Callbacks for dim
@@ -1170,18 +1334,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for clusterrank
 
-' ===========================================================================
-' Callbacks for newrank
-
 '@Ignore ParameterNotUsed
-Public Sub clusterrank_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
-    SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value = Toggle(pressed, vbNullString, "global")
+Public Sub clusterrank_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+    SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value = Mid$(controlId, Len("clusterrank_") + 1)
     AutoDraw
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub clusterrank_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = Not (SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value = "global")
+Public Sub clusterrank_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "clusterrank_" & SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1197,17 +1358,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for ordering
 
-'@Ignore ParameterNotUsed
-Public Sub ordering_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
-    SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = Mid$(controlId, Len("ordering_") + 1)
-    AutoDraw
+Private Sub RefreshOrderingGroup()
+    InvalidateRibbonControl RIBBON_CTL_ORDERING_GROUP
+    InvalidateRibbonControl RIBBON_CTL_ORDERING_IN
+    InvalidateRibbonControl RIBBON_CTL_ORDERING_OUT
+    InvalidateRibbonControl RIBBON_CTL_ORDERING_DUMMY1
 End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub ordering_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = "ordering_" & SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value
-End Sub
-
 
 '@Ignore ParameterNotUsed
 Public Sub ordering_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
@@ -1219,46 +1375,88 @@ Public Sub ordering_getVisible(ByVal control As IRibbonControl, ByRef visible As
     End Select
 End Sub
 
+Public Sub ordering_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = LCase$(Mid$(control.ID, Len("ordering") + 1))
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = vbNullString
+    End If
+    RefreshOrderingGroup
+    AutoDraw
+End Sub
+
+Public Sub ordering_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If LCase$(SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value) = LCase$(Mid$(control.ID, Len("ordering") + 1)) Then
+        pressed = True
+    Else
+        pressed = False
+    End If
+End Sub
+
 ' ===========================================================================
 ' Callbacks for outputorder
 
+Private Sub RefreshOutputorderGroup()
+    InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_GROUP
+    InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_NODES_FIRST
+    InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_EDGES_FIRST
+    InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_BREADTH_FIRST
+End Sub
+
 '@Ignore ParameterNotUsed
-Public Sub outputorder_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
-    SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = Mid$(controlId, Len("outputorder_") + 1)
+Public Sub outputorderBreadthFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    If SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString Then
+        pressed = True
+    Else
+        pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "breadthfirst"
+    End If
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub outputorderBreadthFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "breadthfirst"
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString
+    End If
+    RefreshOutputorderGroup
     AutoDraw
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub outputorder_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = "outputorder_" & SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value
+Public Sub outputorderEdgesFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "edgesfirst"
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub outputorderEdgesFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "edgesfirst"
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString
+    End If
+    RefreshOutputorderGroup
+    AutoDraw
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub outputorderNodesFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "nodesfirst"
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub outputorderNodesFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "nodesfirst"
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString
+    End If
+    RefreshOutputorderGroup
+    AutoDraw
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub outputorder_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
-    Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
-        Case LAYOUT_CIRCO
-             visible = True
-        Case LAYOUT_DOT
-            visible = True
-        Case LAYOUT_FDP
-            visible = True
-        Case LAYOUT_NEATO
-            visible = True
-        Case LAYOUT_OSAGE
-            visible = True
-        Case LAYOUT_PATCHWORK
-            visible = False
-        Case LAYOUT_SFDP
-            visible = True
-        Case LAYOUT_TWOPI
-            visible = True
-        Case Else
-            visible = False
-    End Select
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub algsep0_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_CIRCO
              visible = True
@@ -1289,15 +1487,15 @@ Public Sub algsep1_getVisible(ByVal control As IRibbonControl, ByRef visible As 
         Case LAYOUT_DOT
             visible = True
         Case LAYOUT_FDP
-            visible = True
+            visible = False
         Case LAYOUT_NEATO
-            visible = True
+            visible = False
         Case LAYOUT_OSAGE
             visible = False
         Case LAYOUT_PATCHWORK
             visible = False
         Case LAYOUT_SFDP
-            visible = True
+            visible = False
         Case LAYOUT_TWOPI
             visible = False
         Case Else
@@ -1311,7 +1509,7 @@ Public Sub algsep2_getVisible(ByVal control As IRibbonControl, ByRef visible As 
         Case LAYOUT_CIRCO
              visible = False
         Case LAYOUT_DOT
-            visible = False
+            visible = True
         Case LAYOUT_FDP
             visible = False
         Case LAYOUT_NEATO

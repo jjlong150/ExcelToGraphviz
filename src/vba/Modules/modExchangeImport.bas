@@ -37,8 +37,10 @@ Public Sub ImportData()
     OptimizeCode_End
     
     ' Provide any information messages
-    If returnMessage <> vbNullString Then
-        MsgBox returnMessage, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    If returnMessage = vbNullString Then
+        EmitMessage GetMessage("msgboxImportComplete"), severity:=esInfo
+    Else
+        EmitMessage returnMessage, severity:=esError
     End If
 End Sub
 
@@ -95,7 +97,7 @@ Private Function TryParseJson(ByVal jsonString As String) As Object
 parseExit:
     Dim errorMsg As String
     errorMsg = GetMessage("msgboxCannotImportJSON") & vbNewLine & vbNewLine & Err.Description
-    MsgBox errorMsg, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    EmitMessage errorMsg
     
 End Function
 
@@ -172,7 +174,7 @@ Private Sub ImportMetadata(ByVal dictionaryObj As Dictionary)
             '@Ignore EmptyCaseBlock
             Case JSON_METADATA_FILENAME
             Case Else
-                MsgBox GetMessage("msgboxUnexpectedMetaData") & vbNewLine & vbNewLine & key & "=" & dictionaryObj.item(key), vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+                EmitMessage GetMessage("msgboxUnexpectedMetaData") & vbNewLine & vbNewLine & key & "=" & dictionaryObj.item(key)
         End Select
     Next
     
@@ -491,6 +493,10 @@ Private Sub ImportSettingsData(ByVal dictionaryObj As Dictionary)
         RestoreSetting SETTINGS_LOG_TO_CONSOLE, BooleanToYesNo(section.item(JSON_SETTINGS_LOG_TO_CONSOLE))
         RestoreSetting SETTINGS_APPEND_CONSOLE, BooleanToYesNo(section.item(JSON_SETTINGS_APPEND_CONSOLE))
         RestoreSetting SETTINGS_GRAPHVIZ_VERBOSE, BooleanToYesNo(section.item(JSON_SETTINGS_GRAPHVIZ_VERBOSE))
+        
+        If section.Exists(JSON_SETTINGS_ERROR_TO_CONSOLE) Then RestoreSetting SETTINGS_ERROR_TO_CONSOLE, BooleanToYesNo(section.item(JSON_SETTINGS_ERROR_TO_CONSOLE))
+        If section.Exists(JSON_SETTINGS_ERROR_TO_MESSAGE_BOX) Then RestoreSetting SETTINGS_ERROR_TO_MESSAGE_BOX, BooleanToYesNo(section.item(JSON_SETTINGS_ERROR_TO_MESSAGE_BOX))
+        If section.Exists(JSON_SETTINGS_ERROR_TO_STATUS_BAR) Then RestoreSetting SETTINGS_ERROR_TO_STATUS_BAR, BooleanToYesNo(section.item(JSON_SETTINGS_ERROR_TO_STATUS_BAR))
     End If
 
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_COLUMNS) Then
@@ -905,6 +911,11 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
     Dim dictionaryObj As Dictionary
     Dim firstRow As Long
     
+    ' Prevent automatic processing as data is imported
+    Dim currentRunMode As String
+    currentRunMode = SettingsSheet.Range("RunMode").value
+    SettingsSheet.Range("RunMode").value = "manual"
+    
     ' First possible row = 1
     '@Ignore AssignmentNotUsed
     firstRow = 1
@@ -982,6 +993,10 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
             End Select
         Next
     Next i
+    
+    ' Put RunMode back to its original value.
+    SettingsSheet.Range("RunMode").value = currentRunMode
+
 End Sub
 
 Private Function DictionaryToAttributes(ByVal dictionaryObj As Dictionary) As String

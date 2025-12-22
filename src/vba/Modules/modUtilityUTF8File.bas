@@ -8,7 +8,7 @@ Option Explicit
 
 Public Sub WriteTextToUTF8FileFileWithoutBOM(ByVal textToWrite As String, ByVal fileNameToWriteTo As String)
 #If Mac Then
-    MsgBox "Sub 'WriteTextToUTF8FileFileWithoutBOM' is not supported on MacOS"
+    EmitMessage "Sub 'WriteTextToUTF8FileFileWithoutBOM' is not supported on MacOS"
 #Else
     ' Output file objects
     Dim utf8Stream As Object
@@ -49,7 +49,7 @@ End Sub
 
 Public Sub WriteTextToUTF8FileFileWithBOM(ByVal textToWrite As String, ByVal fileNameToWriteTo As String)
 #If Mac Then
-    MsgBox "Sub 'WriteTextToUTF8FileFileWithBOM' is not supported on MacOS"
+    EmitMessage "Sub 'WriteTextToUTF8FileFileWithBOM' is not supported on MacOS"
 #Else
     ' Output file objects
     Dim utf8Stream As Object

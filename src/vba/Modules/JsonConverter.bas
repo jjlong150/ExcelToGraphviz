@@ -862,7 +862,7 @@ End Sub
 
 Private Function json_BufferToString(ByRef json_Buffer As String, ByVal json_BufferPosition As Long) As String
     If json_BufferPosition > 0 Then
-        json_BufferToString = VBA.Left$(json_Buffer, json_BufferPosition)
+        json_BufferToString = VBA.left$(json_Buffer, json_BufferPosition)
     End If
 End Function
 
@@ -983,7 +983,7 @@ Public Function ParseIso(utc_IsoString As String) As Date
 
             If utc_OffsetIndex > 0 Then
                 utc_HasOffset = True
-                utc_TimeParts = VBA.split(VBA.Left$(utc_Parts(1), utc_OffsetIndex - 1), ":")
+                utc_TimeParts = VBA.split(VBA.left$(utc_Parts(1), utc_OffsetIndex - 1), ":")
                 utc_OffsetParts = VBA.split(VBA.Right$(utc_Parts(1), Len(utc_Parts(1)) - utc_OffsetIndex), ":")
 
                 Select Case UBound(utc_OffsetParts)
@@ -1101,7 +1101,7 @@ Private Function utc_ExecuteInShell(utc_ShellCommand As String) As utc_ShellResu
         utc_Chunk = VBA.Space$(50)
         utc_Read = CLng(utc_fread(utc_Chunk, 1, Len(utc_Chunk) - 1, utc_File))
         If utc_Read > 0 Then
-            utc_Chunk = VBA.Left$(utc_Chunk, CLng(utc_Read))
+            utc_Chunk = VBA.left$(utc_Chunk, CLng(utc_Read))
             utc_ExecuteInShell.utc_Output = utc_ExecuteInShell.utc_Output & utc_Chunk
         End If
     Loop

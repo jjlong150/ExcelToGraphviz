@@ -14,7 +14,11 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private Sub Worksheet_Activate()
+#If Mac Then
     Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabLaunchpad"
+#Else
+    ActivateTabLaunchpad
+#End If
 End Sub
 
 Private Sub Worksheet_Change(ByVal Target As Range)
@@ -115,7 +119,7 @@ LetsContinue:
     Application.enableEvents = True
     Exit Sub
 Whoa:
-    MsgBox Err.number & " " & Err.Description, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+    EmitMessage Err.number & " " & Err.Description
     
     Resume LetsContinue
 

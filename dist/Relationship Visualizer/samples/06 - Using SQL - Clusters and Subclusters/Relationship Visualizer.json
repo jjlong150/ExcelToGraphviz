@@ -4,11 +4,11 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2025-08-27",
-    "time": "16:45:17",
+    "date": "2025-12-10",
+    "time": "15:23:37",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "Relationship VisualizerOld.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
     "data": [
@@ -5554,6 +5554,276 @@
           null,
           null
         ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "svg": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 12.75
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "Modify the <svg> element to add an onload() function. Also include a comment that the SVG has been modified from what Graphviz created."
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 45,
+        "find": "xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
+        "replace": "xmlns:xlink=\"http://www.w3.org/1999/xlink\" onload=\"addInteractivity(evt)\">\u000A  <!-- NOTE: The graphviz-generated content in this file has been modified by Excel to Graphviz %%[Version]%% -->\u000A"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "find": "%%[Version]%%",
+        "replace": "Version: 8.0.00 (Win + macOS)"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "This SVG animation content is from https://github.com/BartBrood/dynamic-SVG-from-Graphviz"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "There is more content to add than can be shown in an Excel row. Use the 'Edit Text' button to see all the text."
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 409.5,
+        "find": "</svg>",
+        "replace": "\r\u000A<!-- Excel to Graphviz - Begin -->\r\u000A<style>\r\u000A\r\u000A<!-- The first 2 styles are hiding longer description texts on \r\u000A     nodes and edges, that are shown when nodes are clicked \r\u000A.edge text{\r\u000A    opacity: 0;\r\u000A}\r\u000A.node text:not(:first-of-type){\r\u000A    opacity: 0;\r\u000A}-->\r\u000A.text-highlight-nodes text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 10;\r\u000A    font-size: 20px;\r\u000A    font-weight: bold;\r\u000A    fill: black;\r\u000A}\r\u000A.text-highlight-edges text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 10;\r\u000A    font-size: 20px;\r\u000A    font-weight: bold;\r\u000A    fill: Indigo;\r\u000A}\r\u000A.edge-highlight path{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A}\t\r\u000A.edge-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A}\r\u000A.node-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A    z-index:99999;\t\r\u000A}\r\u000A.node-highlight ellipse{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A    z-index:99999;\t\r\u000A}\r\u000A.node-highlight path{\r\u000A    opacity: 1;\r\u000A    stroke-width: 10;\r\u000A    stroke: crimson;\r\u000A    z-index:99999;\t\r\u000A}\r\u000A .compass {\r\u000A            fill: #fff;\r\u000A            stroke: #000;\r\u000A            stroke-width: 1;\r\u000A        }\r\u000A .button {\r\u000A            fill: #225EA8;\r\u000A            stroke: #0C2C84;\r\u000A            stroke-width: 0.5;\r\u000A            stroke-miterlimit:6;\r\u000A            stroke-linecap: round;\r\u000A        }\r\u000A .button:hover {\r\u000A            stroke-width: 1;\r\u000A        }\r\u000A .plus-minus {\r\u000A            fill: #fff;\r\u000A            pointer-events: none;\r\u000A        }\r\u000A</style>\r\u000A<script>\r\u000A<![CDATA[\r\u000Afunction addInteractivity(evt) {\r\u000A    \r\u000A\tvar svg = evt.target;\r\u000A    var edges = document.getElementsByClassName('edge');\r\u000A    var nodes = document.getElementsByClassName('node');\r\u000A\tvar clusters = document.getElementsByClassName('cluster');\r\u000A    var selectedElement, offset, transform, nodrag, origmousepos;\r\u000A\r\u000A    svg.addEventListener('mousedown', startDrag);\r\u000A    svg.addEventListener('mousemove', drag);\r\u000A    svg.addEventListener('mouseup', endDrag);\r\u000A    svg.addEventListener('mouseleave', endDrag);\r\u000A    svg.addEventListener('touchstart', startDrag);\r\u000A    svg.addEventListener('touchmove', drag);\r\u000A    svg.addEventListener('touchend', endDrag);\r\u000A    svg.addEventListener('touchleave', endDrag);\r\u000A    svg.addEventListener('touchcancel', endDrag);\r\u000A\r\u000A    for (var i = 0; i < edges.length; i++) {\r\u000A        edges[i].addEventListener('click', clickEdge);\r\u000A    }\r\u000A\r\u000A    for (var i = 0; i < nodes.length; i++) {\r\u000A        nodes[i].addEventListener('click', clickNode);\r\u000A    } \r\u000A   addToggleButtons(evt);\r\u000A    \r\u000A\tfor (var i = 0; i < clusters.length; i++) {\r\u000A        addzoomers(clusters[i]);\r\u000A    } \r\u000A    function getMousePosition(evt) {\r\u000A        var CTM = svg.getScreenCTM();\r\u000A        if (evt.touches) { evt = evt.touches[0]; }\r\u000A            return {\r\u000A                x: (evt.clientX - CTM.e) / CTM.a,\r\u000A                y: (evt.clientY - CTM.f) / CTM.d\r\u000A        };\r\u000A    }\r\u000A       function startDrag(evt) {\r\u000A        origmousepos = getMousePosition(evt);\r\u000A        nodrag=true;\r\u000A        selectedElement = evt.target.parentElement;\r\u000A        if (selectedElement){\r\u000A        offset = getMousePosition(evt);\r\u000A\r\u000A        // Make sure the first transform on the element is a translate transform\r\u000A        var transforms = selectedElement.transform.baseVal;\r\u000A\r\u000A        if (transforms.length === 0 || transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {\r\u000A            // Create an transform that translates by (0, 0)\r\u000A            var translate = svg.createSVGTransform();\r\u000A            translate.setTranslate(0, 0);\r\u000A            selectedElement.transform.baseVal.insertItemBefore(translate, 0);\r\u000A        }\r\u000A\r\u000A        // Get initial translation\r\u000A        transform = transforms.getItem(0);\r\u000A        offset.x -= transform.matrix.e;\r\u000A        offset.y -= transform.matrix.f;\r\u000A\t\t}\r\u000A    }\r\u000A    function drag(evt) {\r\u000A        if (selectedElement) {\r\u000A            evt.preventDefault();\r\u000A            var coord = getMousePosition(evt);\r\u000A            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);\r\u000A        }\r\u000A    }\r\u000A    function endDrag(evt) {\r\u000A    <!-- comment out the following line if you wnat drags to stay in place, with this line they snap back to their original position after drag end -->   \r\u000A//if statement to avoid the header section being affected of the translate (0,0)\r\u000A        if (selectedElement){\r\u000A\t\t\tif (selectedElement.classList.contains('header')){\r\u000A\t\t\t\tselectedElement = false;\r\u000A\t\t\t\t} else {\r\u000A\t\t\t\tselectedElement = false;\r\u000A\t\t\t\ttransform.setTranslate(0,0);\r\u000A\t\t\t\t}\r\u000A\t\t}\t\t\r\u000A\t\tvar currentmousepos=getMousePosition(evt);\r\u000A\t\tif (currentmousepos.x===origmousepos.x|currentmousepos.y===origmousepos.y){\r\u000A\t\t\tnodrag=true;\r\u000A\t\t} else {\r\u000A\t\t\tnodrag=false;\r\u000A\t\t}\r\u000A\t\t\r\u000A\t}\r\u000A    function clickEdge() {\r\u000A        if (nodrag) {\r\u000A            if (this.classList.contains(\"edge-highlight\")){\r\u000A                this.classList.remove(\"edge-highlight\");\r\u000A                this.classList.remove(\"text-highlight-edges\");\r\u000A            }\r\u000A            else {\r\u000A                this.classList.add(\"edge-highlight\");\r\u000A                this.classList.add(\"text-highlight-edges\");\r\u000A                animateEdge(this);\r\u000A            }\r\u000A        }\t\r\u000A    }\r\u000Afunction clickNode() {\r\u000A    if (nodrag) {\r\u000A        var nodeName = this.childNodes[1].textContent;\r\u000A        // Escape special characters in the node name\r\u000A        var nodeNameEscaped = nodeName.replace(/[-[\\]{}()*+!<=:?.\\/\\\\^$|#\\s,]/g, '\\\\$&');\r\u000A\r\u000A        var patroon = new RegExp('^' + nodeNameEscaped + '->|->' + nodeNameEscaped + '$|' + nodeNameEscaped + '--|--' + nodeNameEscaped + '$')\r\u000A\r\u000A        if (this.classList.contains(\"node-highlight\")) {\r\u000A            this.classList.remove(\"node-highlight\");\r\u000A            this.classList.remove(\"text-highlight-nodes\");\r\u000A            var edges = document.getElementsByClassName('edge');\r\u000A            for (var i = 0; i < edges.length; i++) {\r\u000A                if (patroon.test(edges[i].childNodes[1].textContent)) {\r\u000A                    edges[i].classList.remove(\"edge-highlight\");\r\u000A                    edges[i].classList.remove(\"text-highlight-edges\");\r\u000A                }\r\u000A            }\r\u000A        } else {\r\u000A            this.classList.add(\"node-highlight\");\r\u000A            this.classList.add(\"text-highlight-nodes\");\r\u000A            var edges = document.getElementsByClassName('edge');\r\u000A            for (var i = 0; i < edges.length; i++) {\r\u000A                if (patroon.test(edges[i].childNodes[1].textContent)) {\r\u000A                    edges[i].classList.add(\"edge-highlight\");\r\u000A                    edges[i].classList.add(\"text-highlight-edges\");\r\u000A                    animateEdge(edges[i]);\r\u000A                }\r\u000A            }\r\u000A        }\r\u000A    }\r\u000A}\r\u000Afunction animateEdge(edge){\r\u000A\t\tvar path = edge.querySelector('path');\r\u000A\t\tvar polygon = edge.querySelector('polygon');\r\u000A\t\tvar length = path.getTotalLength();\r\u000A\t\t// Clear any previous transition\r\u000A\t\tpath.style.transition = path.style.WebkitTransition = 'none';\r\u000A\t\tif (polygon){polygon.style.transition = polygon.style.WebkitTransition = 'none';};\r\u000A\t\t// Set up the starting positions\r\u000A\t\tpath.style.strokeDasharray = length + ' ' + length;\r\u000A\t\tpath.style.strokeDashoffset = length;\r\u000A\t\tif(polygon){polygon.style.opacity='0';};\r\u000A\t\t// Trigger a layout so styles are calculated & the browser\r\u000A\t\t// picks up the starting position before animating\r\u000A\t\tpath.getBoundingClientRect();\r\u000A\t\t// Define our transition\r\u000A\t\tpath.style.transition = path.style.WebkitTransition =\r\u000A\t\t'stroke-dashoffset 2s ease-in-out';\r\u000A\t\tif (polygon){polygon.style.transition = polygon.style.WebkitTransition =\r\u000A\t\t'fill-opacity 1s ease-in-out 2s';};\r\u000A\t\t// Go!\r\u000A\t\tpath.style.strokeDashoffset = '0';\r\u000A        if (polygon){setTimeout(function(){polygon.style.opacity='1';},2000)};\r\u000A\t}\r\u000A\tfunction addzoomers(cluster){\r\u000A\r\u000A\t\tvar bb = cluster.getBBox();\r\u000A\t\tvar clusterx =  bb.x;\r\u000A\t\tvar clustery =  bb.y;\r\u000A\t\tvar clusterx = clusterx + (bb.width/2);\r\u000A\t\taddzoomer(cluster, clusterx, clustery, cluster.id)\r\u000A\t\treturn;\r\u000A\t}\r\u000A\r\u000A\tfunction addzoomer(cluster, posx, posy, name){\r\u000A\t\t\r\u000A\t\tvar element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');\r\u000A\t\tvar zoomoutname = name + 'zoomout';\r\u000A\t\telement.setAttributeNS(null, 'id', zoomoutname);\r\u000A\t\telement.setAttributeNS(null, 'class', 'button');\r\u000A\t\telement.setAttributeNS(null, 'cx', posx);\r\u000A\t\telement.setAttributeNS(null, 'cy', posy);\r\u000A\t\telement.setAttributeNS(null, 'r', 10);\r\u000A\t\tvar fctname = 'zoomOut()';\r\u000A\t\telement.setAttributeNS(null, 'onclick', fctname );\r\u000A\t\tcluster.appendChild(element);\r\u000A\t\t\r\u000A\t\tvar element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');\r\u000A\t\tvar zoominname = name + 'zoomin';\r\u000A\t\telement.setAttributeNS(null, 'id', zoominname);\r\u000A\t\telement.setAttributeNS(null, 'class', 'button');\r\u000A\t\telement.setAttributeNS(null, 'cx', posx +25);\r\u000A\t\telement.setAttributeNS(null, 'cy', posy);\r\u000A\t\telement.setAttributeNS(null, 'r', 10);\r\u000A\t\tvar fctname = 'zoomIn(\\''+name+'\\')';\r\u000A\t\telement.setAttributeNS(null, 'onclick', fctname );\r\u000A\t\tcluster.appendChild(element);\r\u000A\t\t\r\u000A\t\tvar element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');\r\u000A\t\telement.setAttributeNS(null, 'class', 'plus-minus');\r\u000A\t\telement.setAttributeNS(null, 'x', posx -4);\r\u000A\t\telement.setAttributeNS(null, 'y', posy-1);\r\u000A\t\telement.setAttributeNS(null, 'width', 8);\r\u000A\t\telement.setAttributeNS(null, 'height', 2);\r\u000A\t\tcluster.appendChild(element);\r\u000A\t\t\r\u000A\t\tvar element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');\r\u000A\t\telement.setAttributeNS(null, 'class', 'plus-minus');\r\u000A\t\telement.setAttributeNS(null, 'x', posx +25-4);\r\u000A\t\telement.setAttributeNS(null, 'y', posy-1);\r\u000A\t\telement.setAttributeNS(null, 'width', 8);\r\u000A\t\telement.setAttributeNS(null, 'height', 2);\r\u000A\t\tcluster.appendChild(element);\r\u000A\t\t\r\u000A\t\tvar element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');\r\u000A\t\telement.setAttributeNS(null, 'class', 'plus-minus');\r\u000A\t\telement.setAttributeNS(null, 'x', posx +25-1);\r\u000A\t\telement.setAttributeNS(null, 'y', posy-4);\r\u000A\t\telement.setAttributeNS(null, 'width', 2);\r\u000A\t\telement.setAttributeNS(null, 'height', 8);\r\u000A\t\tcluster.appendChild(element);\r\u000A\r\u000A\t\treturn;\r\u000A\t}\r\u000A}\r\u000Avar svg = document.querySelector('svg');\r\u000Avar viewBox = svg.viewBox.baseVal;\r\u000AallShown=true;\r\u000Afunction zoomIn(cluster) {\r\u000A    svg.setAttributeNS(null, 'preserveAspectRatio', 'xMinYMin meet');\r\u000A    var clusterelem = document.getElementById(cluster);\r\u000A    var r = clusterelem.getBoundingClientRect();\r\u000A    var r2 = clusterelem.getBBox();\r\u000A    var pt = svg.createSVGPoint();\r\u000A    pt.x = r.x;\r\u000A    pt.y = r.y;\r\u000A    pt = pt.matrixTransform(svg.getScreenCTM().inverse());\r\u000A\r\u000A    var startViewBox = {\r\u000A        x: viewBox.x,\r\u000A        y: viewBox.y,\r\u000A        width: viewBox.width,\r\u000A        height: viewBox.height\r\u000A    };\r\u000A\r\u000A    var targetViewBox = {\r\u000A        x: pt.x - 10,\r\u000A        y: pt.y - 10,\r\u000A        width: r2.width + 20,\r\u000A        height: r2.height + 20\r\u000A    };\r\u000A\r\u000A    var animationDuration = 1500; // Adjust the duration as needed\r\u000A    var startTime = performance.now();\r\u000A\r\u000A    function animateZoom(timestamp) {\r\u000A        var elapsed = timestamp - startTime;\r\u000A        var progress = elapsed / animationDuration;\r\u000A\r\u000A        if (progress >= 1) {\r\u000A            viewBox.x = targetViewBox.x;\r\u000A            viewBox.y = targetViewBox.y;\r\u000A            viewBox.width = targetViewBox.width;\r\u000A            viewBox.height = targetViewBox.height;\r\u000A            svg.scrollTop = 0;\r\u000A        } else {\r\u000A            var easeProgress = 1 - Math.pow(1 - progress, 3); // Apply easing for smoother animation\r\u000A\r\u000A            viewBox.x = startViewBox.x + (targetViewBox.x - startViewBox.x) * easeProgress;\r\u000A            viewBox.y = startViewBox.y + (targetViewBox.y - startViewBox.y) * easeProgress;\r\u000A            viewBox.width = startViewBox.width + (targetViewBox.width - startViewBox.width) * easeProgress;\r\u000A            viewBox.height = startViewBox.height + (targetViewBox.height - startViewBox.height) * easeProgress;\r\u000A            svg.scrollTop = svg.scrollTop -(svg.scrollTop * (easeProgress/10));\r\u000A\r\u000A            requestAnimationFrame(animateZoom);\r\u000A        }\r\u000A    }\r\u000A\r\u000A    requestAnimationFrame(animateZoom);\r\u000A}\r\u000Afunction zoomOut(){\r\u000A    var svgrect = svg.getBBox();\r\u000A\t\r\u000A    var startViewBox = {\r\u000A        x: viewBox.x,\r\u000A        y: viewBox.y,\r\u000A        width: viewBox.width,\r\u000A        height: viewBox.height\r\u000A    };\r\u000A\r\u000A    var targetViewBox = {\r\u000A        x: 0,\r\u000A        y: -60,\r\u000A        width: svgrect.width,\r\u000A        height: svgrect.height+60\r\u000A    };\r\u000A\r\u000A    var animationDuration = 1500; // Adjust the duration as needed\r\u000A    var startTime = performance.now();\r\u000A\r\u000A    function animateZoom(timestamp) {\r\u000A        var elapsed = timestamp - startTime;\r\u000A        var progress = elapsed / animationDuration;\r\u000A\r\u000A        if (progress >= 1) {\r\u000A            viewBox.x = targetViewBox.x;\r\u000A            viewBox.y = targetViewBox.y;\r\u000A            viewBox.width = targetViewBox.width;\r\u000A            viewBox.height = targetViewBox.height;\r\u000A            svg.scrollTop = 0;\r\u000A        } else {\r\u000A            var easeProgress = 1 - Math.pow(1 - progress, 3); // Apply easing for smoother animation\r\u000A\r\u000A            viewBox.x = startViewBox.x + (targetViewBox.x - startViewBox.x) * easeProgress;\r\u000A            viewBox.y = startViewBox.y + (targetViewBox.y - startViewBox.y) * easeProgress;\r\u000A            viewBox.width = startViewBox.width + (targetViewBox.width - startViewBox.width) * easeProgress;\r\u000A            viewBox.height = startViewBox.height + (targetViewBox.height - startViewBox.height) * easeProgress;\r\u000A\r\u000A            requestAnimationFrame(animateZoom);\r\u000A        }\r\u000A    }\r\u000A\r\u000A    requestAnimationFrame(animateZoom);\t\r\u000A\r\u000A}\r\u000Afunction addToggleButtons(evt) {\r\u000A  var svg = evt.target;\r\u000A  classArray = [];\r\u000A  currentClassIndex = 0;\r\u000A  \r\u000A  var uniqueClasses = new Set();\r\u000A  var elements = document.getElementsByTagName(\"g\");\r\u000A\r\u000A  for (var i = 0; i < elements.length; i++) {\r\u000A\r\u000A\tvar allclasses = elements[i].getAttribute(\"class\");\r\u000A\tif (allclasses) {\r\u000A\t\tvar classes = allclasses.split(\" \");\r\u000A\t\tfor (var j = 0; j < classes.length; j++) {\r\u000A\t\t  var currentClass = classes[j];\r\u000A\t\t  if (currentClass !== \"graph\" && !uniqueClasses.has(currentClass)) {\r\u000A\t\t\tuniqueClasses.add(currentClass);\r\u000A\t\t\tclassArray.push(currentClass);\r\u000A\t\t  }\r\u000A\t\t}\r\u000A\t}\r\u000A  }\r\u000A  classArray.sort();\r\u000A  \r\u000A  var buttonContainer = document.createElementNS(\"http://www.w3.org/2000/svg\", \"g\");\r\u000A  buttonContainer.setAttribute(\"transform\", \"translate(10, -30)\");\r\u000A  buttonContainer.setAttributeNS(null, 'class', 'header');\r\u000A\r\u000A \r\u000A  var header = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A  header.setAttribute(\"x\", 100);\r\u000A  header.setAttribute(\"y\", -10);\r\u000A  header.setAttribute(\"text-anchor\", \"middle\");\r\u000A  header.setAttribute(\"font-size\", \"15px\");\r\u000A  header.setAttribute(\"fill\", \"black\");\r\u000A  header.textContent = \"Toggle Visibility:\";\r\u000A  \r\u000A  var prevButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A  prevButton.setAttribute(\"x\", 0);\r\u000A  prevButton.setAttribute(\"y\", 0);\r\u000A  prevButton.setAttribute(\"rx\", 5);\r\u000A  prevButton.setAttribute(\"width\", 20);\r\u000A  prevButton.setAttribute(\"height\", 25);\r\u000A  prevButton.setAttribute(\"fill\", \"lightgray\");\r\u000A  prevButton.setAttribute(\"stroke\", \"black\");\r\u000A  prevButton.setAttribute(\"onclick\", \"prevClass()\");\r\u000A  \r\u000A  var prevButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A  prevButtonText.setAttribute(\"id\", \"prevButtonText\");\r\u000A  prevButtonText.setAttribute(\"x\", 10);\r\u000A  prevButtonText.setAttribute(\"y\", 18);\r\u000A  prevButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A  prevButtonText.setAttribute(\"font-size\", \"20px\");\r\u000A  prevButtonText.setAttribute(\"fill\", \"black\");\r\u000A  prevButtonText.setAttribute(\"onclick\", \"prevClass()\");\r\u000A  prevButtonText.textContent = \"<\";\r\u000A  \r\u000A  var nextButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A  nextButton.setAttribute(\"x\", 300);\r\u000A  nextButton.setAttribute(\"y\", 0);\r\u000A  nextButton.setAttribute(\"rx\", 5);\r\u000A  nextButton.setAttribute(\"width\", 20);\r\u000A  nextButton.setAttribute(\"height\", 25);\r\u000A  nextButton.setAttribute(\"fill\", \"lightgray\");\r\u000A  nextButton.setAttribute(\"stroke\", \"black\");\r\u000A  nextButton.setAttribute(\"onclick\", \"nextClass()\");\r\u000A  \r\u000A  var nextButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A  nextButtonText.setAttribute(\"id\", \"nextButtonText\");\r\u000A  nextButtonText.setAttribute(\"x\", 310);\r\u000A  nextButtonText.setAttribute(\"y\", 18);\r\u000A  nextButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A  nextButtonText.setAttribute(\"font-size\", \"20px\");\r\u000A  nextButtonText.setAttribute(\"fill\", \"black\");\r\u000A  nextButtonText.setAttribute(\"onclick\", \"nextClass()\");\r\u000A  nextButtonText.textContent = \">\";\r\u000A\r\u000A  var toggleButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A  toggleButton.setAttribute(\"id\", \"toggleButton\");\r\u000A  toggleButton.setAttribute(\"x\", 30);\r\u000A  toggleButton.setAttribute(\"y\", 0);\r\u000A  toggleButton.setAttribute(\"rx\", 5);\r\u000A  toggleButton.setAttribute(\"width\", 260);\r\u000A  toggleButton.setAttribute(\"height\", 25);\r\u000A  toggleButton.setAttribute(\"fill\", \"#007bbf\");\r\u000A  toggleButton.setAttribute(\"stroke\", \"black\");\r\u000A  toggleButton.setAttribute(\"onclick\", \"toggleVisibility(classArray[currentClassIndex])\");\r\u000A  \r\u000A  var toggleButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A  toggleButtonText.setAttribute(\"id\", \"toggleButtonText\");\r\u000A  toggleButtonText.setAttribute(\"x\", 160);\r\u000A  toggleButtonText.setAttribute(\"y\", 18);\r\u000A  toggleButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A  toggleButtonText.setAttribute(\"font-size\", \"17px\");\r\u000A  toggleButtonText.setAttribute(\"fill\", \"black\");\r\u000A  toggleButtonText.setAttribute(\"onclick\", \"toggleVisibility(classArray[currentClassIndex])\");\r\u000A  toggleButtonText.textContent = classArray[currentClassIndex];\r\u000A\r\u000A  var allButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A  allButton.setAttribute(\"id\", \"allButton\");\r\u000A  allButton.setAttribute(\"x\", 340);\r\u000A  allButton.setAttribute(\"y\", 0);\r\u000A  allButton.setAttribute(\"width\", 150);\r\u000A  allButton.setAttribute(\"height\", 25);\r\u000A  allButton.setAttribute(\"fill\", \"#007bbf\");\r\u000A  allButton.setAttribute(\"stroke\", \"black\");\r\u000A  allButton.setAttribute(\"onclick\", \"toggleAll()\");\r\u000A  \r\u000A  var allButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A  allButtonText.setAttribute(\"id\", \"allButtonText\");\r\u000A  allButtonText.setAttribute(\"x\", 415);\r\u000A  allButtonText.setAttribute(\"y\", 18);\r\u000A  allButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A  allButtonText.setAttribute(\"font-size\", \"20px\");\r\u000A  allButtonText.setAttribute(\"fill\", \"black\");\r\u000A  allButtonText.setAttribute(\"onclick\", \"toggleAll()\");\r\u000A  allButtonText.textContent = \"Hide/show All\";\r\u000A\r\u000A  buttonContainer.appendChild(header);\r\u000A  buttonContainer.appendChild(prevButton);\r\u000A  buttonContainer.appendChild(prevButtonText);\r\u000A  buttonContainer.appendChild(nextButton);\r\u000A  buttonContainer.appendChild(nextButtonText);\r\u000A  buttonContainer.appendChild(toggleButton);\r\u000A  buttonContainer.appendChild(toggleButtonText);\r\u000A  buttonContainer.appendChild(allButton);\r\u000A  buttonContainer.appendChild(allButtonText);\r\u000A  adjustViewBox(svg);\r\u000A  svg.appendChild(buttonContainer);\r\u000A  updateButton();\r\u000A  \r\u000A}\r\u000Afunction nextClass() {\r\u000A  currentClassIndex = (currentClassIndex + 1) % classArray.length;\r\u000A  updateButton();\r\u000A}\r\u000A\r\u000Afunction prevClass() {\r\u000A  currentClassIndex = (currentClassIndex - 1 + classArray.length) % classArray.length;\r\u000A  updateButton();\r\u000A}\r\u000A\r\u000Afunction updateButton() {\r\u000A  var buttonText = document.getElementById(\"toggleButtonText\");\r\u000A  var button = document.getElementById(\"toggleButton\");\r\u000A  buttonText.textContent = classArray[currentClassIndex];\r\u000A  elements=document.getElementsByClassName(classArray[currentClassIndex]);\r\u000A  \r\u000A   if (elements[0].style.visibility === \"hidden\"){\r\u000A\tbutton.setAttribute(\"fill\", \"lightblue\");\r\u000A\t}\r\u000A   else{\r\u000A\tbutton.setAttribute(\"fill\", \"#007bbf\");};\r\u000A   \r\u000A}\r\u000Afunction toggleVisibility(className) {\r\u000A  var elements = document.getElementsByClassName(className);\r\u000A\r\u000A\r\u000A  for (var i = 0; i < elements.length; i++) {\r\u000A    if (elements[i].style.visibility === \"hidden\") {\r\u000A      elements[i].style.visibility = \"visible\";\r\u000A\r\u000A    } else {\r\u000A      elements[i].style.visibility = \"hidden\";\r\u000A    }\r\u000A  }\r\u000A  updateButton();\r\u000A}\r\u000Afunction toggleAll(){\r\u000A  \r\u000A  for (var i = 0; i < classArray.length; i++) {\r\u000A  var elements = document.getElementsByClassName(classArray[i]);\r\u000A  for (var j = 0; j < elements.length; j++) {\r\u000A    if (allShown) {\r\u000A      elements[j].style.visibility = \"hidden\";\r\u000A\r\u000A    } else {\r\u000A      elements[j].style.visibility = \"visible\";\r\u000A    }\r\u000A  }\r\u000A  \r\u000A  }\r\u000A updateButton();\r\u000A//update showall button\r\u000A var button = document.getElementById(\"allButton\");\r\u000A if (allShown){ \r\u000A\tbutton.setAttribute(\"fill\", \"lightblue\");\r\u000A }\r\u000A else{\r\u000A    button.setAttribute(\"fill\", \"#007bbf\");\r\u000A }\r\u000A allShown = !allShown;\r\u000A}\r\u000A\r\u000Afunction adjustViewBox(svg) {\r\u000A  \r\u000A \r\u000A  var viewBoxParts = svg.getAttribute(\"viewBox\").split(\" \");\r\u000A  var newYMin = parseFloat(viewBoxParts[1]) - 60; // Adjust this value as needed\r\u000A  var newYMax = parseFloat(viewBoxParts[3]) + 60; // Adjust this value as needed\r\u000A  var newXMax = Math.max(parseFloat(viewBoxParts[2]),240);\r\u000A  var newViewBox = viewBoxParts[0] + \" \" + newYMin + \" \" + newXMax + \" \" + newYMax;\r\u000A  svg.setAttribute(\"viewBox\", newViewBox);\r\u000A}\r\u000A\r\u000A]]>\r\u000A</script>\r\u000A\r\u000A<!-- Excel to Graphviz - End -->\r\u000A\r\u000A</svg>\r\u000A"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "Alternate styling with left-justified zoom buttons with macOS look. Comment out above, uncomment below to use this version."
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "There is more content to add than can be shown in an Excel row. Use the 'Edit Text' button to see all the text."
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "find": "[AddZoomButtons] shows or hides zoom in/zoom out buttons on every cluster. =1 -> Add the buttons =0 -> Omit the buttons"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 409.5,
+        "enabled": false,
+        "find": "</svg>",
+        "replace": "\r\u000A<!-- Excel to Graphviz - Begin -->\r\u000A<style>\r\u000A.edge text{\r\u000A    opacity: 1 !important;\r\u000A}\r\u000A.node text{\r\u000A    opacity: 1 !important;\r\u000A}\r\u000A.text-highlight-nodes text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 5;\r\u000A    font-weight: bold;\r\u000A}\r\u000A.text-highlight-edges text{\r\u000A    opacity: 1 !important;\r\u000A    stroke-width: 5;\r\u000A    font-weight: bold;\r\u000A}\r\u000A.edge-highlight path{\r\u000A    opacity: 1;\r\u000A    stroke-width: 5;\r\u000A}\t\r\u000A.edge-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 5;\r\u000A}\r\u000A.node-highlight polygon{\r\u000A    opacity: 1;\r\u000A    stroke-width: 5;\r\u000A    z-index:99999;\t\r\u000A}\r\u000A.node-highlight ellipse{\r\u000A    opacity: 1;\r\u000A    stroke-width: 5;\r\u000A    z-index:99999;\t\r\u000A}\r\u000A.node-highlight path{\r\u000A    opacity: 1;\r\u000A    stroke-width: 5;\r\u000A    z-index:99999;\t\r\u000A}\r\u000A.compass {\r\u000A    fill: #fff;\r\u000A    stroke: #000;\r\u000A    stroke-width: 1;\r\u000A}\r\u000A.button-plus {\r\u000A    fill: #34C848;\r\u000A    stroke: #259F38;\r\u000A    stroke-width: 2;\r\u000A    stroke-miterlimit:6;\r\u000A    stroke-linecap: round;\r\u000A}\r\u000A.button-minus {\r\u000A    fill: #FCBC40;\r\u000A    stroke: #DA9F3C;\r\u000A    stroke-width: 2;\r\u000A    stroke-miterlimit:6;\r\u000A    stroke-linecap: round;\r\u000A}\r\u000A.button:hover {\r\u000A    stroke-width: 1;\r\u000A}\r\u000A.plus-minus {\r\u000A    fill: #fff;\r\u000A    pointer-events: none;\r\u000A}\r\u000A\r\u000A</style>\r\u000A<script>\r\u000A<![CDATA[\r\u000Afunction addInteractivity(evt) {\r\u000A    \r\u000A    var addZoomButtons = %%[AddZoomButtons]%%;\r\u000A    var svg = evt.target;\r\u000A    var edges = document.getElementsByClassName('edge');\r\u000A    var nodes = document.getElementsByClassName('node');\r\u000A    var clusters = document.getElementsByClassName('cluster');\r\u000A    var selectedElement, offset, transform, nodrag, origmousepos;\r\u000A\r\u000A    svg.addEventListener('mousedown',   startDrag );\r\u000A    svg.addEventListener('mousemove',   drag      );\r\u000A    svg.addEventListener('mouseup',     endDrag   );\r\u000A    svg.addEventListener('mouseleave',  endDrag   );\r\u000A    svg.addEventListener('touchstart',  startDrag );\r\u000A    svg.addEventListener('touchmove',   drag      );\r\u000A    svg.addEventListener('touchend',    endDrag   );\r\u000A    svg.addEventListener('touchleave',  endDrag   );\r\u000A    svg.addEventListener('touchcancel', endDrag   );\r\u000A\r\u000A    for (var i = 0; i < edges.length; i++) {\r\u000A        edges[i].addEventListener('click', clickEdge);\r\u000A    }\r\u000A\r\u000A    for (var i = 0; i < nodes.length; i++) {\r\u000A        nodes[i].addEventListener('click', clickNode);\r\u000A    } \r\u000A    \r\u000A    addToggleButtons(evt);\r\u000A    \r\u000A    if (addZoomButtons) {\r\u000A        for (var i = 0; i < clusters.length; i++) {\r\u000A            addzoomers(clusters[i]);\r\u000A        }\r\u000A    }\r\u000A    \r\u000A    function getMousePosition(evt) {\r\u000A        var CTM = svg.getScreenCTM();\r\u000A        if (evt.touches) { evt = evt.touches[0]; }\r\u000A            return {\r\u000A                x: (evt.clientX - CTM.e) / CTM.a,\r\u000A                y: (evt.clientY - CTM.f) / CTM.d\r\u000A        };\r\u000A    }\r\u000A\r\u000A    function startDrag(evt) {\r\u000A        origmousepos = getMousePosition(evt);\r\u000A        nodrag=true;\r\u000A        selectedElement = evt.target.parentElement;\r\u000A        if (selectedElement){\r\u000A            offset = getMousePosition(evt);\r\u000A\r\u000A            // Make sure the first transform on the element is a translate transform\r\u000A            var transforms = selectedElement.transform.baseVal;\r\u000A\r\u000A            if (transforms.length === 0 || transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {\r\u000A                // Create an transform that translates by (0, 0)\r\u000A                var translate = svg.createSVGTransform();\r\u000A                translate.setTranslate(0, 0);\r\u000A                selectedElement.transform.baseVal.insertItemBefore(translate, 0);\r\u000A            }\r\u000A\r\u000A            // Get initial translation\r\u000A            transform = transforms.getItem(0);\r\u000A            offset.x -= transform.matrix.e;\r\u000A            offset.y -= transform.matrix.f;\r\u000A        }\r\u000A    }\r\u000A\r\u000A    function drag(evt) {\r\u000A        if (selectedElement) {\r\u000A            evt.preventDefault();\r\u000A            var coord = getMousePosition(evt);\r\u000A            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);\r\u000A        }\r\u000A    }\r\u000A\r\u000A    function endDrag(evt) {\r\u000A        <!-- comment out the following line if you want drags to stay in place, with this line they snap back to their original position after drag end -->   \r\u000A        //if statement to avoid the header section being affected of the translate (0,0)\r\u000A        if (selectedElement){\r\u000A            if (selectedElement.classList.contains('header')){\r\u000A                selectedElement = false;\r\u000A            } else {\r\u000A                selectedElement = false;\r\u000A                transform.setTranslate(0,0);\r\u000A            }\r\u000A        }\t\t\r\u000A        var currentmousepos=getMousePosition(evt);\r\u000A        if (currentmousepos.x===origmousepos.x|currentmousepos.y===origmousepos.y){\r\u000A            nodrag=true;\r\u000A        } else {\r\u000A            nodrag=false;\r\u000A        }\r\u000A    }\r\u000A\r\u000A    function clickEdge() {\r\u000A        if (nodrag) {\r\u000A            if (this.classList.contains(\"edge-highlight\")){\r\u000A                this.classList.remove(\"edge-highlight\");\r\u000A                this.classList.remove(\"text-highlight-edges\");\r\u000A            }\r\u000A            else {\r\u000A                this.classList.add(\"edge-highlight\");\r\u000A                this.classList.add(\"text-highlight-edges\");\r\u000A                animateEdge(this);\r\u000A            }\r\u000A        }\t\r\u000A    }\r\u000A\r\u000A    function clickNode() {\r\u000A        if (nodrag) {\r\u000A            var nodeName = this.childNodes[1].textContent;\r\u000A            // Escape special characters in the node name\r\u000A            var nodeNameEscaped = nodeName.replace(/[-[\\]{}()*+!<=:?.\\/\\\\^$|#\\s,]/g, '\\\\$&');\r\u000A\r\u000A            var patroon = new RegExp('^' + nodeNameEscaped + '->|->' + nodeNameEscaped + '$|' + nodeNameEscaped + '--|--' + nodeNameEscaped + '$')\r\u000A\r\u000A            if (this.classList.contains(\"node-highlight\")) {\r\u000A                this.classList.remove(\"node-highlight\");\r\u000A                this.classList.remove(\"text-highlight-nodes\");\r\u000A                var edges = document.getElementsByClassName('edge');\r\u000A                for (var i = 0; i < edges.length; i++) {\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)) {\r\u000A                        edges[i].classList.remove(\"edge-highlight\");\r\u000A                        edges[i].classList.remove(\"text-highlight-edges\");\r\u000A                    } \r\u000A                }  \r\u000A            } else {\r\u000A                this.classList.add(\"node-highlight\");\r\u000A                this.classList.add(\"text-highlight-nodes\");\r\u000A                var edges = document.getElementsByClassName('edge');\r\u000A                for (var i = 0; i < edges.length; i++) {\r\u000A                    if (patroon.test(edges[i].childNodes[1].textContent)) {\r\u000A                        edges[i].classList.add(\"edge-highlight\");\r\u000A                        edges[i].classList.add(\"text-highlight-edges\");\r\u000A                        animateEdge(edges[i]);\r\u000A                    }\r\u000A                }\r\u000A            } \r\u000A        }\r\u000A    }\r\u000A\r\u000A    function animateEdge(edge){\r\u000A        var path = edge.querySelector('path');\r\u000A        var polygon = edge.querySelector('polygon');\r\u000A        var length = path.getTotalLength();\r\u000A        \r\u000A        // Clear any previous transition\r\u000A        path.style.transition = path.style.WebkitTransition = 'none';\r\u000A        if (polygon){polygon.style.transition = polygon.style.WebkitTransition = 'none';};\r\u000A        \r\u000A        // Set up the starting positions\r\u000A        path.style.strokeDasharray = length + ' ' + length;\r\u000A        path.style.strokeDashoffset = length;\r\u000A        if(polygon){polygon.style.opacity='0';};\r\u000A        \r\u000A        // Trigger a layout so styles are calculated & the browser\r\u000A        // picks up the starting position before animating\r\u000A        path.getBoundingClientRect();\r\u000A        \r\u000A        // Define our transition\r\u000A        path.style.transition = path.style.WebkitTransition =\r\u000A            'stroke-dashoffset 2s ease-in-out';\r\u000A        if (polygon){polygon.style.transition = polygon.style.WebkitTransition =\r\u000A            'fill-opacity 1s ease-in-out 2s';};\r\u000A        // Go!\r\u000A        path.style.strokeDashoffset = '0';\r\u000A        if (polygon){setTimeout(function(){polygon.style.opacity='1';},2000)};\r\u000A    }\r\u000A\r\u000A    function addzoomers(cluster){\r\u000A\r\u000A        var bb = cluster.getBBox();\r\u000A        var clusterx =  bb.x + 15;\r\u000A        var clustery =  bb.y + 15;\r\u000A\t\t\r\u000A        addzoomer(cluster, clusterx, clustery, cluster.id)\r\u000A        return;\r\u000A    }\r\u000A\r\u000A    function addzoomer(cluster, posx, posy, name){\r\u000A\t\t\r\u000A        titleOut = document.createElementNS('http://www.w3.org/2000/svg', \"title\"); \r\u000A        titleOut.textContent = \"Zoom Out\";\r\u000A        \r\u000A        var element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');\r\u000A        var zoomoutname = name + 'zoomout';\r\u000A        element.setAttributeNS(null, 'id', zoomoutname);\r\u000A        element.setAttributeNS(null, 'class', 'button-minus');\r\u000A        element.setAttributeNS(null, 'cx', posx);\r\u000A        element.setAttributeNS(null, 'cy', posy);\r\u000A        element.setAttributeNS(null, 'r', 10);\r\u000A        element.appendChild(titleOut);\r\u000A        \r\u000A        var fctname = 'zoomOut()';\r\u000A        element.setAttributeNS(null, 'onclick', fctname );\r\u000A        cluster.appendChild(element);\r\u000A\t\t\r\u000A        titleIn = document.createElementNS('http://www.w3.org/2000/svg', \"title\"); \r\u000A        titleIn.textContent = \"Zoom In\";\r\u000A        \r\u000A        var element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');\r\u000A        var zoominname = name + 'zoomin';\r\u000A        element.setAttributeNS(null, 'id', zoominname);\r\u000A        element.setAttributeNS(null, 'class', 'button-plus');\r\u000A        element.setAttributeNS(null, 'cx', posx +25);\r\u000A        element.setAttributeNS(null, 'cy', posy);\r\u000A        element.setAttributeNS(null, 'r', 10);\r\u000A        element.appendChild(titleIn);\r\u000A\r\u000A        var fctname = 'zoomIn(\\''+name+'\\')';\r\u000A        element.setAttributeNS(null, 'onclick', fctname );\r\u000A        cluster.appendChild(element);\r\u000A\t\t\r\u000A        var element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');\r\u000A        element.setAttributeNS(null, 'class', 'plus-minus');\r\u000A        element.setAttributeNS(null, 'x', posx -4);\r\u000A        element.setAttributeNS(null, 'y', posy-1);\r\u000A        element.setAttributeNS(null, 'width', 8);\r\u000A        element.setAttributeNS(null, 'height', 2);\r\u000A        cluster.appendChild(element);\r\u000A\t\t\r\u000A        var element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');\r\u000A        element.setAttributeNS(null, 'class', 'plus-minus');\r\u000A        element.setAttributeNS(null, 'x', posx +25-4);\r\u000A        element.setAttributeNS(null, 'y', posy-1);\r\u000A        element.setAttributeNS(null, 'width', 8);\r\u000A        element.setAttributeNS(null, 'height', 2);\r\u000A        cluster.appendChild(element);\r\u000A\t\t\r\u000A        var element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');\r\u000A        element.setAttributeNS(null, 'class', 'plus-minus');\r\u000A        element.setAttributeNS(null, 'x', posx +25-1);\r\u000A        element.setAttributeNS(null, 'y', posy-4);\r\u000A        element.setAttributeNS(null, 'width', 2);\r\u000A        element.setAttributeNS(null, 'height', 8);\r\u000A        cluster.appendChild(element);\r\u000A\r\u000A        return;\r\u000A    }\r\u000A}\r\u000A\r\u000Avar svg = document.querySelector('svg');\r\u000Avar viewBox = svg.viewBox.baseVal;\r\u000AallShown=true;\r\u000A\r\u000Afunction zoomIn(cluster) {\r\u000A    svg.setAttributeNS(null, 'preserveAspectRatio', 'xMinYMin meet');\r\u000A    var clusterelem = document.getElementById(cluster);\r\u000A    var r = clusterelem.getBoundingClientRect();\r\u000A    var r2 = clusterelem.getBBox();\r\u000A    var pt = svg.createSVGPoint();\r\u000A    pt.x = r.x;\r\u000A    pt.y = r.y;\r\u000A    pt = pt.matrixTransform(svg.getScreenCTM().inverse());\r\u000A\r\u000A    var startViewBox = {\r\u000A        x: viewBox.x,\r\u000A        y: viewBox.y,\r\u000A        width: viewBox.width,\r\u000A        height: viewBox.height\r\u000A    };\r\u000A\r\u000A    var targetViewBox = {\r\u000A        x: pt.x - 10,\r\u000A        y: pt.y - 10,\r\u000A        width: r2.width + 20,\r\u000A        height: r2.height + 20\r\u000A    };\r\u000A\r\u000A    var animationDuration = 1500; // Adjust the duration as needed\r\u000A    var startTime = performance.now();\r\u000A\r\u000A    function animateZoom(timestamp) {\r\u000A        var elapsed = timestamp - startTime;\r\u000A        var progress = elapsed / animationDuration;\r\u000A\r\u000A        if (progress >= 1) {\r\u000A            viewBox.x = targetViewBox.x;\r\u000A            viewBox.y = targetViewBox.y;\r\u000A            viewBox.width = targetViewBox.width;\r\u000A            viewBox.height = targetViewBox.height;\r\u000A            svg.scrollTop = 0;\r\u000A        } else {\r\u000A            var easeProgress = 1 - Math.pow(1 - progress, 3); // Apply easing for smoother animation\r\u000A\r\u000A            viewBox.x = startViewBox.x + (targetViewBox.x - startViewBox.x) * easeProgress;\r\u000A            viewBox.y = startViewBox.y + (targetViewBox.y - startViewBox.y) * easeProgress;\r\u000A            viewBox.width = startViewBox.width + (targetViewBox.width - startViewBox.width) * easeProgress;\r\u000A            viewBox.height = startViewBox.height + (targetViewBox.height - startViewBox.height) * easeProgress;\r\u000A            svg.scrollTop = svg.scrollTop -(svg.scrollTop * (easeProgress/10));\r\u000A\r\u000A            requestAnimationFrame(animateZoom);\r\u000A        }\r\u000A    }\r\u000A\r\u000A    requestAnimationFrame(animateZoom);\r\u000A}\r\u000A\r\u000Afunction zoomOut(){\r\u000A    var svgrect = svg.getBBox();\r\u000A\t\r\u000A    var startViewBox = {\r\u000A        x: viewBox.x,\r\u000A        y: viewBox.y,\r\u000A        width: viewBox.width,\r\u000A        height: viewBox.height\r\u000A    };\r\u000A\r\u000A    var targetViewBox = {\r\u000A        x: 0,\r\u000A        y: -60,\r\u000A        width: svgrect.width,\r\u000A        height: svgrect.height+60\r\u000A    };\r\u000A\r\u000A    var animationDuration = 1500; // Adjust the duration as needed\r\u000A    var startTime = performance.now();\r\u000A\r\u000A    function animateZoom(timestamp) {\r\u000A        var elapsed = timestamp - startTime;\r\u000A        var progress = elapsed / animationDuration;\r\u000A\r\u000A        if (progress >= 1) {\r\u000A            viewBox.x = targetViewBox.x;\r\u000A            viewBox.y = targetViewBox.y;\r\u000A            viewBox.width = targetViewBox.width;\r\u000A            viewBox.height = targetViewBox.height;\r\u000A            svg.scrollTop = 0;\r\u000A        } else {\r\u000A            var easeProgress = 1 - Math.pow(1 - progress, 3); // Apply easing for smoother animation\r\u000A\r\u000A            viewBox.x = startViewBox.x + (targetViewBox.x - startViewBox.x) * easeProgress;\r\u000A            viewBox.y = startViewBox.y + (targetViewBox.y - startViewBox.y) * easeProgress;\r\u000A            viewBox.width = startViewBox.width + (targetViewBox.width - startViewBox.width) * easeProgress;\r\u000A            viewBox.height = startViewBox.height + (targetViewBox.height - startViewBox.height) * easeProgress;\r\u000A\r\u000A            requestAnimationFrame(animateZoom);\r\u000A        }\r\u000A    }\r\u000A\r\u000A    requestAnimationFrame(animateZoom);\r\u000A}\r\u000A\r\u000Afunction addToggleButtons(evt) {\r\u000A    var svg = evt.target;\r\u000A    classArray = [];\r\u000A    currentClassIndex = 0;\r\u000A  \r\u000A    var uniqueClasses = new Set();\r\u000A    var elements = document.getElementsByTagName(\"g\");\r\u000A\r\u000A    for (var i = 0; i < elements.length; i++) {\r\u000A        var allclasses = elements[i].getAttribute(\"class\");\r\u000A        if (allclasses) {\r\u000A            var classes = allclasses.split(\" \");\r\u000A            for (var j = 0; j < classes.length; j++) {\r\u000A                var currentClass = classes[j];\r\u000A\t\t  if (currentClass !== \"graph\" && !uniqueClasses.has(currentClass)) {\r\u000A                    uniqueClasses.add(currentClass);\r\u000A                    classArray.push(currentClass);\r\u000A                }\r\u000A            }\r\u000A        }\r\u000A    }\r\u000A    classArray.sort();\r\u000A  \r\u000A    var buttonContainer = document.createElementNS(\"http://www.w3.org/2000/svg\", \"g\");\r\u000A    buttonContainer.setAttribute(\"transform\", \"translate(10, -30)\");\r\u000A    buttonContainer.setAttributeNS(null, 'class', 'header');\r\u000A\r\u000A    <!-- Toggle Visibility label --> \r\u000A    var header = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A    header.setAttribute(\"x\", 40);\r\u000A    header.setAttribute(\"y\", -10);\r\u000A    header.setAttribute(\"text-anchor\", \"middle\");\r\u000A    header.setAttribute(\"font-size\", \"12px\");\r\u000A    header.setAttribute(\"fill\", \"black\");\r\u000A    header.setAttribute(\"font-family\", \"Arial\");\r\u000A    header.textContent = \"Toggle Visibility:\";\r\u000A  \r\u000A    <!-- Previous button -->\r\u000A    var prevButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A    prevButton.setAttribute(\"x\", 0);\r\u000A    prevButton.setAttribute(\"y\", 0);\r\u000A    prevButton.setAttribute(\"rx\", 5);\r\u000A    prevButton.setAttribute(\"width\", 20);\r\u000A    prevButton.setAttribute(\"height\", 25);\r\u000A    prevButton.setAttribute(\"fill\", \"lightgray\");\r\u000A    prevButton.setAttribute(\"stroke\", \"black\");\r\u000A    prevButton.setAttribute(\"onclick\", \"prevClass()\");\r\u000A\r\u000A    <!-- Previous button text --> \r\u000A    var prevButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A    prevButtonText.setAttribute(\"id\", \"prevButtonText\");\r\u000A    prevButtonText.setAttribute(\"x\", 10);\r\u000A    prevButtonText.setAttribute(\"y\", 18);\r\u000A    prevButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A    prevButtonText.setAttribute(\"font-size\", \"12px\");\r\u000A    prevButtonText.setAttribute(\"fill\", \"black\");\r\u000A    prevButtonText.setAttribute(\"onclick\", \"prevClass()\");\r\u000A    prevButtonText.setAttribute(\"font-family\", \"Arial\");\r\u000A    prevButtonText.textContent = \"<\";\r\u000A\r\u000A    <!-- Next button -->\r\u000A    var nextButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A    nextButton.setAttribute(\"x\", 100);\r\u000A    nextButton.setAttribute(\"y\", 0);\r\u000A    nextButton.setAttribute(\"rx\", 5);\r\u000A    nextButton.setAttribute(\"width\", 20);\r\u000A    nextButton.setAttribute(\"height\", 25);\r\u000A    nextButton.setAttribute(\"fill\", \"lightgray\");\r\u000A    nextButton.setAttribute(\"stroke\", \"black\");\r\u000A    nextButton.setAttribute(\"onclick\", \"nextClass()\");\r\u000A  \r\u000A    <!-- Next button text --> \r\u000A    var nextButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A    nextButtonText.setAttribute(\"id\", \"nextButtonText\");\r\u000A    nextButtonText.setAttribute(\"x\", 110);\r\u000A    nextButtonText.setAttribute(\"y\", 18);\r\u000A    nextButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A    nextButtonText.setAttribute(\"font-size\", \"12px\");\r\u000A    nextButtonText.setAttribute(\"fill\", \"black\");\r\u000A    nextButtonText.setAttribute(\"onclick\", \"nextClass()\");\r\u000A    nextButtonText.setAttribute(\"font-family\", \"Arial\");\r\u000A    nextButtonText.textContent = \">\";\r\u000A\r\u000A    <!-- Toggle button -->\r\u000A    var toggleButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A    toggleButton.setAttribute(\"id\", \"toggleButton\");\r\u000A    toggleButton.setAttribute(\"x\", 30);\r\u000A    toggleButton.setAttribute(\"y\", 0);\r\u000A    toggleButton.setAttribute(\"rx\", 5);\r\u000A    toggleButton.setAttribute(\"width\", 60);\r\u000A    toggleButton.setAttribute(\"height\", 25);\r\u000A    toggleButton.setAttribute(\"fill\", \"#007bbf\");\r\u000A    toggleButton.setAttribute(\"stroke\", \"black\");\r\u000A    toggleButton.setAttribute(\"onclick\", \"toggleVisibility(classArray[currentClassIndex])\");\r\u000A  \r\u000A    <!-- Toggle button text -->\r\u000A    var toggleButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A    toggleButtonText.setAttribute(\"id\", \"toggleButtonText\");\r\u000A    toggleButtonText.setAttribute(\"x\", 60);\r\u000A    toggleButtonText.setAttribute(\"y\", 18);\r\u000A    toggleButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A    toggleButtonText.setAttribute(\"font-size\", \"12px\");\r\u000A    toggleButtonText.setAttribute(\"fill\", \"black\");\r\u000A    toggleButtonText.setAttribute(\"onclick\", \"toggleVisibility(classArray[currentClassIndex])\");\r\u000A    toggleButtonText.setAttribute(\"font-family\", \"Arial\");\r\u000A    toggleButtonText.textContent = classArray[currentClassIndex];\r\u000A\r\u000A    <!-- Hide/Show All button -->\r\u000A    var allButton = document.createElementNS(\"http://www.w3.org/2000/svg\", \"rect\");\r\u000A    allButton.setAttribute(\"id\", \"allButton\");\r\u000A    allButton.setAttribute(\"x\", 150);\r\u000A    allButton.setAttribute(\"y\", 0);\r\u000A    allButton.setAttribute(\"rx\", 5);\r\u000A    allButton.setAttribute(\"width\", 100);\r\u000A    allButton.setAttribute(\"height\", 25);\r\u000A    allButton.setAttribute(\"fill\", \"#007bbf\");\r\u000A    allButton.setAttribute(\"stroke\", \"black\");\r\u000A    allButton.setAttribute(\"onclick\", \"toggleAll()\");\r\u000A\r\u000A    <!-- Hide/Show All button text -->  \r\u000A    var allButtonText = document.createElementNS(\"http://www.w3.org/2000/svg\", \"text\");\r\u000A    allButtonText.setAttribute(\"id\", \"allButtonText\");\r\u000A    allButtonText.setAttribute(\"x\", 200);\r\u000A    allButtonText.setAttribute(\"y\", 18);\r\u000A    allButtonText.setAttribute(\"text-anchor\", \"middle\");\r\u000A    allButtonText.setAttribute(\"font-size\", \"12px\");\r\u000A    allButtonText.setAttribute(\"fill\", \"black\");\r\u000A    allButtonText.setAttribute(\"onclick\", \"toggleAll()\");\r\u000A    allButtonText.setAttribute(\"font-family\", \"Arial\");\r\u000A    allButtonText.textContent = \"Hide/Show All\";\r\u000A\r\u000A    <!-- Append all the buttons to the container -->\r\u000A    buttonContainer.appendChild(header);\r\u000A    buttonContainer.appendChild(prevButton);\r\u000A    buttonContainer.appendChild(prevButtonText);\r\u000A    buttonContainer.appendChild(nextButton);\r\u000A    buttonContainer.appendChild(nextButtonText);\r\u000A    buttonContainer.appendChild(toggleButton);\r\u000A    buttonContainer.appendChild(toggleButtonText);\r\u000A    buttonContainer.appendChild(allButton);\r\u000A    buttonContainer.appendChild(allButtonText);\r\u000A    adjustViewBox(svg);\r\u000A    svg.appendChild(buttonContainer);\r\u000A    updateButton();\r\u000A}\r\u000A\r\u000Afunction nextClass() {\r\u000A    currentClassIndex = (currentClassIndex + 1) % classArray.length;\r\u000A    updateButton();\r\u000A}\r\u000A\r\u000Afunction prevClass() {\r\u000A    currentClassIndex = (currentClassIndex - 1 + classArray.length) % classArray.length;\r\u000A    updateButton();\r\u000A}\r\u000A\r\u000Afunction updateButton() { \r\u000A    var buttonText = document.getElementById(\"toggleButtonText\");\r\u000A    var button = document.getElementById(\"toggleButton\");\r\u000A    buttonText.textContent = classArray[currentClassIndex];\r\u000A    elements=document.getElementsByClassName(classArray[currentClassIndex]);\r\u000A  \r\u000A    if (elements[0].style.visibility === \"hidden\"){\r\u000A        button.setAttribute(\"fill\", \"lightblue\");\r\u000A    } else {\r\u000A        button.setAttribute(\"fill\", \"#007bbf\");\r\u000A    };\r\u000A}\r\u000A\r\u000Afunction toggleVisibility(className) {\r\u000A    var elements = document.getElementsByClassName(className);\r\u000A\r\u000A    for (var i = 0; i < elements.length; i++) {\r\u000A        if (elements[i].style.visibility === \"hidden\") {\r\u000A            elements[i].style.visibility = \"visible\";\r\u000A        } else {\r\u000A            elements[i].style.visibility = \"hidden\";\r\u000A        }\r\u000A    }\r\u000A    updateButton();\r\u000A}\r\u000A\r\u000Afunction toggleAll(){\r\u000A    for (var i = 0; i < classArray.length; i++) {\r\u000A        var elements = document.getElementsByClassName(classArray[i]);\r\u000A        for (var j = 0; j < elements.length; j++) {\r\u000A            if (allShown) {\r\u000A                elements[j].style.visibility = \"hidden\";\r\u000A            } else {\r\u000A                elements[j].style.visibility = \"visible\";\r\u000A            }\r\u000A        }\r\u000A    }\r\u000A\r\u000A    updateButton();\r\u000A\r\u000A    //update showall button\r\u000A    var button = document.getElementById(\"allButton\");\r\u000A    if (allShown) { \r\u000A        button.setAttribute(\"fill\", \"lightblue\");\r\u000A    } else {\r\u000A        button.setAttribute(\"fill\", \"#007bbf\");\r\u000A    }\r\u000A\r\u000A    allShown = !allShown;\r\u000A}\r\u000A\r\u000Afunction adjustViewBox(svg) {\r\u000A    var viewBoxParts = svg.getAttribute(\"viewBox\").split(\" \");\r\u000A    var newYMin = parseFloat(viewBoxParts[1]) - 60; // Adjust this value as needed\r\u000A    var newYMax = parseFloat(viewBoxParts[3]) + 60; // Adjust this value as needed\r\u000A    var newXMax = Math.max(parseFloat(viewBoxParts[2]),240);\r\u000A    var newViewBox = viewBoxParts[0] + \" \" + newYMin + \" \" + newXMax + \" \" + newYMax;\r\u000A    svg.setAttribute(\"viewBox\", newViewBox);\r\u000A}\r\u000A\r\u000A]]>\r\u000A</script>\r\u000A<!-- Excel to Graphviz - End -->\r\u000A\r\u000A</svg>\r\u000A"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15.75,
+        "enabled": false,
+        "find": "%%[AddZoomButtons]%%",
+        "replace": "1"
       }
     ]
   },
@@ -5665,7 +5935,7 @@
         "source": "hide",
         "sql": "show",
         "styleDesigner": "hide",
-        "styles": "hide",
+        "styles": "show",
         "svg": "hide"
       }
     },
@@ -5674,7 +5944,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\06 - Using SQL - Clusters and Subclusters",
+      "imagePath": "C:\\data\\local\\rv\\v9.0.00\\Relationship Visualizer\\samples\\06 - Using SQL - Clusters and Subclusters;C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\06 - Using SQL - Clusters and Subclusters",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -5748,8 +6018,15 @@
       "recordsetPlaceholder": "%rsc%",
       "splitLength": "SPLIT LENGTH",
       "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
       "filterColumn": "E",
-      "filterValue": "EXAMPLE 01"
+      "filterValue": "EXAMPLE 01",
+      "closeConnections": true
     },
     "extensions": {
       "tabName": "Extensions",

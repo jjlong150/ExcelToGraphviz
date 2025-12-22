@@ -20,7 +20,7 @@ Public Function ChooseDirectory(ByVal startDir As String) As String
     Set fileDialogHandle = Application.FileDialog(msoFileDialogFolderPicker)
     
     If fileDialogHandle Is Nothing Then
-        MsgBox GetMessage("msgboxNoFolderPicker"), vbOKOnly, GetLabel("msgboxNoFolderPicker")
+        EmitMessage GetMessage("msgboxNoFolderPicker"), GetLabel("msgboxNoFolderPicker")
     Else
         If Trim$(startDir) = vbNullString Then
             fileDialogHandle.InitialFileName = ActiveWorkbook.path & "\"

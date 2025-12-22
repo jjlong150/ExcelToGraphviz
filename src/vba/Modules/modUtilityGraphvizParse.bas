@@ -195,7 +195,7 @@ Private Function ParseArrowheadsRecursive(ByVal currentString As String, _
     
     ' Try each valid arrowhead at the current position
     For Each arrowhead In validArrowheads
-        If Len(arrowhead) > 0 And Left(currentString, Len(arrowhead)) = arrowhead Then
+        If Len(arrowhead) > 0 And left(currentString, Len(arrowhead)) = arrowhead Then
             result(index) = arrowhead
             Dim remainingString As String
             remainingString = Mid(currentString, Len(arrowhead) + 1)

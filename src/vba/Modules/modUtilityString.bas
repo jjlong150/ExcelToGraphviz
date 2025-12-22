@@ -15,7 +15,7 @@ End Function
 Public Function StartsWith(ByVal sourceString As String, ByVal startingString As String) As Boolean
     Dim startLen As Long
     startLen = Len(startingString)
-    StartsWith = (Left$(Trim$(UCase$(sourceString)), startLen) = UCase$(startingString))
+    StartsWith = (left$(Trim$(UCase$(sourceString)), startLen) = UCase$(startingString))
 End Function
 
 Public Function AddQuotes(ByVal Text As String) As String
@@ -39,7 +39,7 @@ Public Function GetStringBetweenDelimiters(ByVal inString As String, ByVal leftD
     
     If Len(outputString) >= Len(leftDelimiter) + Len(rightDelimiter) Then
         If StartsWith(outputString, leftDelimiter) And EndsWith(outputString, rightDelimiter) Then
-            outputString = Left$(outputString, Len(outputString) - Len(rightDelimiter))
+            outputString = left$(outputString, Len(outputString) - Len(rightDelimiter))
             outputString = Right$(outputString, Len(outputString) - Len(leftDelimiter))
             GetStringBetweenDelimiters = outputString
         End If
@@ -165,7 +165,7 @@ Private Function GetTextSegment(ByVal Text As String, ByVal segmentLength As Lon
     
     ' Did text segment end on a full word?
     If Mid$(Text, wrapLength + 1, 1) = " " Then  ' Yes - full word
-        GetTextSegment = Left$(Text, wrapLength)
+        GetTextSegment = left$(Text, wrapLength)
         remainder = Trim$(Mid$(Text, wrapLength + 1))
         Exit Function
     End If
@@ -181,7 +181,7 @@ Private Function GetTextSegment(ByVal Text As String, ByVal segmentLength As Lon
     ' If positionOfSpace > 0 a space " " was found within the desired segment length.
     ' Return the string up to where the space " " was located.
     If positionOfSpace > 0 Then
-        GetTextSegment = Trim$(Left$(Text, positionOfSpace - 1))
+        GetTextSegment = Trim$(left$(Text, positionOfSpace - 1))
         remainder = Trim$(Mid$(Text, positionOfSpace))
         Exit Function
     End If

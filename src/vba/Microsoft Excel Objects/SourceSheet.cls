@@ -15,7 +15,11 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private Sub Worksheet_Activate()
+#If Mac Then
     Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabSource"
+#Else
+    ActivateTabSource
+#End If
     ActiveSheet.Range("A1").Select
 End Sub
 

@@ -28,19 +28,19 @@ Private Sub CopyButton_Click()
 End Sub
 
 Private Sub FontSizeDecrease_Click()
-    If DotSourceForm.dotMultiline.font.Size > 8 Then
-        DotSourceForm.dotMultiline.font.Size = DotSourceForm.dotMultiline.font.Size - 2
+    If DotSourceForm.dotMultiline.Font.Size > 8 Then
+        DotSourceForm.dotMultiline.Font.Size = DotSourceForm.dotMultiline.Font.Size - 2
     End If
     
-    If DotSourceForm.dotMultiline.font.Size < 8 Then
+    If DotSourceForm.dotMultiline.Font.Size < 8 Then
         DotSourceForm.FontSizeDecrease.enabled = False
     End If
 End Sub
 
 Private Sub FontSizeIncrease_Click()
-    DotSourceForm.dotMultiline.font.Size = DotSourceForm.dotMultiline.font.Size + 2
+    DotSourceForm.dotMultiline.Font.Size = DotSourceForm.dotMultiline.Font.Size + 2
     
-    If DotSourceForm.dotMultiline.font.Size > 6 Then
+    If DotSourceForm.dotMultiline.Font.Size > 6 Then
         DotSourceForm.FontSizeDecrease.enabled = True
     End If
 End Sub
@@ -49,13 +49,35 @@ Private Sub UserForm_Activate()
     DotSourceForm.dotMultiline.WordWrap = False
     DotSourceForm.dotMultiline.ScrollBars = fmScrollBarsBoth
     
+    Dim showVisualize As Boolean
+    showVisualize = GetSettingBoolean("SourceVisualizeButton")
+    
+    ' The visualize button can confuse people. Its availability is
+    ' controlled by a toggle on the settings sheet.
+    If showVisualize Then
+        VisualizeButton.caption = GetLabel("graphvizGroup1")
+        DotSourceForm.VisualizeButton.visible = True
+        DotSourceForm.dotMultiline.EnterKeyBehavior = True
+        DotSourceForm.dotMultiline.Locked = False
+    Else
+        DotSourceForm.dotMultiline.EnterKeyBehavior = False
+        DotSourceForm.dotMultiline.Locked = True
+        DotSourceForm.VisualizeButton.visible = False
+    End If
+    
 #If Mac Then
     DotSourceForm.CopyButton.visible = False
 #Else
+    CopyButton.caption = GetLabel("sourceFormCopy")
     DotSourceForm.CopyButton.visible = True
 #End If
 End Sub
 
+Private Sub VisualizeButton_Click()
+    OptimizeCode_Begin
+    VisualizeGraph DotSourceForm.dotMultiline.value
+    OptimizeCode_End
+End Sub
 
 Private Sub wordWrapToggle_Click()
     If DotSourceForm.wordWrapToggle.value = True Then
@@ -66,4 +88,3 @@ Private Sub wordWrapToggle_Click()
         DotSourceForm.dotMultiline.ScrollBars = fmScrollBarsBoth
     End If
 End Sub
-

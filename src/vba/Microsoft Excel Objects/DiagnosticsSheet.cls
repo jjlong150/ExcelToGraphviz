@@ -16,7 +16,11 @@ Option Explicit
 
 Private Sub Worksheet_Activate()
     ReportDiagnostics
+#If Mac Then
     Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabDiagnostics"
+#Else
+    ActivateTabDiagnostics
+#End If
 End Sub
 
 Private Sub Worksheet_Deactivate()

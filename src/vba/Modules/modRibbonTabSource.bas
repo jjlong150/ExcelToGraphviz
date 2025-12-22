@@ -104,7 +104,7 @@ Public Sub sourceSave_onAction(ByVal control As IRibbonControl)
 
     If fileName <> vbNullString Then
         SourceWorksheetToFile (fileName)
-        MsgBox GetMessage("msgboxSavedToFile") & vbNewLine & fileName, vbOKOnly, GetMessage(MSGBOX_PRODUCT_TITLE)
+        EmitMessage GetMessage("msgboxSavedToFile") & vbNewLine & fileName
     End If
 End Sub
 
