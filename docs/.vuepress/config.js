@@ -48,34 +48,41 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: "📥Download",
+        text: "📥",
         items: [
-          { text: "- Graphviz", link: "https://graphviz.org/download/" },
-          {
-            text: "- Relationship Visualizer", link: "https://sourceforge.net/projects/relationship-visualizer/",
+          { text: "Download",
+            items: [
+              { text: "- Graphviz", link: "https://graphviz.org/download/" },
+              { text: "- Relationship Visualizer", link: "https://sourceforge.net/projects/relationship-visualizer/",
+              },
+            ],
           },
         ],
       },      
       {
-        text: "🛠️Install",
+        text: "⚙️",
         items: [
-          { text: "- Microsoft Windows", link: "/install-win/" },
-          {
-            text: "- macOS", link: "/install-mac/",
+          { text: "Installation Instructions",
+            items: [
+              { text: "- Microsoft Windows", link: "/install-win/" },
+              { text: "- macOS", link: "/install-mac/", },
+            ],
           },
         ],
       },
       {
-        text: "🚀Launchpad",
-        link: "/launchpad/",
-      },
-      {
-        text: "📑Worksheets",
+        text: "📘",
         items: [
+          { text: "Workbook",
+            items: [
+              { text: "- Structure", link: "/workbook/" },
+              { text: "- Launchpad", link: "/launchpad/" },
+            ],
+          },
           { text: "Data",
             items: [
               { text: "- data", link: "/create/#the-data-worksheet" },
-              { text: "- graph", link: "/create/#graph-to-worksheet" },
+              //{ text: "- graph", link: "/create/#graph-to-worksheet" },
             ],
           },
           { text: "Style",
@@ -118,13 +125,16 @@ module.exports = {
           }, 
         ],
       },
-      { text: "ℹ️About...", 
+      { text: "ℹ️",
         items: [
-          { text: "- About Excel to Graphviz", link: "/about/" },
-          { text: "- Acknowledgements", link: "/acknowledge/" },
-          { text: "- Change Log", link: "/changelog/" },
-          { text: "- Terminology", link: "/terminology/" },
-          { text: "- Workbook Structure", link: "/workbook/" },
+          { text: "Information",
+            items: [
+              { text: "- About...", link: "/about/" },
+              { text: "- Acknowledgements", link: "/acknowledge/" },
+              { text: "- Terminology", link: "/terminology/" },
+              { text: "- Change Log", link: "/changelog/" },
+            ]
+          },  
         ]
       },
       { text: "☕", link: "https://buymeacoffee.com/exceltographviz"},
