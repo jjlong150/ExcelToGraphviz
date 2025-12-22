@@ -1,15 +1,23 @@
 ---
-prev: /exchange/
-next: /acknowledge/
+prev: /diagnostics/
+next: /info/
 ---
 
 # Changing Master Settings
 
-The 'settings' worksheet is where you can customize overarching settings which control how the graph is created, specify directories containing images to use in the graph, control how long the graphing engine is allowed to run, specify Graphviz command line parameters, and modify the order in which the worksheet columns are laid out. The following sections provide a brief description of the settings:
+The `settings` worksheet is where you can customize overarching settings which control how the graph is created, specify directories containing images to use in the graph, control how long the graphing engine is allowed to run, specify Graphviz command line parameters, and modify the order in which the worksheet columns are laid out. 
+
+The `settings` worksheet is displayed by selecting the **Settings** button on the `Launchpad` ribbon tab. This sheet provides access to the configuration values that control how the Relationship Visualizer operates.
+
+| ![](./launchpad-settings.png) |
+| -------------------------------------------------- |
+
+The following sections provide a brief description of the settings:
 
 ## Graph Options
 
-![](../media/727383a7d791a8f9fa78ae4fda5a81ce.png)
+| ![](../media/727383a7d791a8f9fa78ae4fda5a81ce.png) |
+| -------------------------------------------------- |
 
 These settings control the graph options used to produce the diagrams.
 
@@ -21,9 +29,10 @@ These settings control the graph options used to produce the diagrams.
 
 ## Command Options
 
-The 'Command Line Options' settings allow you to pass parameters to the Graphviz command line programs.
+The `Command Options` settings allow you to pass parameters to the Graphviz command line programs.
 
-![](../media/47412336bbc28afb3aa71193924f8b1d.png)
+| ![](../media/47412336bbc28afb3aa71193924f8b1d.png) |
+| -------------------------------------------------- |
 
 | Setting                                         | Description                                                                                                                                                                                                                                                                                     |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -31,11 +40,14 @@ The 'Command Line Options' settings allow you to pass parameters to the Graphviz
 | Cancel graphing if not complete in \_\_ seconds | The maximum number of seconds the graphing engine can run. If set to 0, no time limit exists.                                                                                                                                                                                                   |
 | Path to dot.exe                                 | The path to the dot executable if Graphviz is not installed/not available via the PATH environment variable.                                                                                                                                                                                    |
 
-## 'data' Worksheet
+## Worksheet Settings
 
-These settings allow you to rearrange the column layout of the 'data' worksheet, and restrict which rows get processed.
+### 'data' Worksheet
 
-![](../media/1d87aef288f339f397a286783b157f6b.png)
+These settings allow you to rearrange the column layout of the [data](../create/README.md#data-worksheet) worksheet, and restrict which rows get processed.
+
+|![](../media/1d87aef288f339f397a286783b157f6b.png) |
+| -------------------------------------------------- |
 
 | Setting                     | Description                                                                                                                                                                                                                                                                                                                                                                                      |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -53,11 +65,12 @@ These settings allow you to rearrange the column layout of the 'data' worksheet,
 | First Row                   | First row of data.                                                                                                                                                                                                                                                                                                                                                                               |
 | Last Row                    | Last row of data definitions. When set to 0 all rows after the First Row containing data are used. First Row and Last Row are useful during graph development for specifying a subset of data to process when the overall amount of data is large.                                                                                                                                               |
 
-## 'source' Worksheet
+### 'source' Worksheet
 
-These settings allow you to rearrange the column layout of the 'source' worksheet.
+These settings allow you to rearrange the column layout of the [source](../source/) worksheet.
 
-![](../media/81d584bfd7b5c3ef312eef447ca3f056.png)
+| ![](../media/81d584bfd7b5c3ef312eef447ca3f056.png) |
+| -------------------------------------------------- |
 
 | Setting                  | Description                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------- |
@@ -67,11 +80,12 @@ These settings allow you to rearrange the column layout of the 'source' workshee
 | First Row                | First row of data.                                                                 |
 | Tab Indent Spaces        | The number of blanks to insert based upon the depth of subgraphs within the graph. |
 
-## 'sql' Worksheet
+### 'sql' Worksheet
 
-These settings allow you to rearrange the column layout of the 'sql' worksheet, and restrict which rows get processed.
+These settings allow you to rearrange the column layout of the [sql](../sql/) worksheet, and restrict which rows get processed.
 
-![](../media/8c7b6632b19e94c8fccfc6bc7bf00861.png)
+| ![](../media/8c7b6632b19e94c8fccfc6bc7bf00861.png) |
+| -------------------------------------------------- |
 
 | Setting                     | Description                                                                                                                                                                       |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -82,11 +96,12 @@ These settings allow you to rearrange the column layout of the 'sql' worksheet, 
 | Heading Row                 | The row containing the column headings                                                                                                                                            |
 | First Row                   | First row of SQL SELECT statements to execute.                                                                                                                                    |
 
-## 'styles' Worksheet
+### 'styles' Worksheet
 
-The ''styles' Worksheet' settings allow you to rearrange the column layout of the 'styles' worksheet, and specify the range of rows to be included in the style collection at run-time.
+The 'styles' Worksheet' settings allow you to rearrange the column layout of the [styles](../styles/) worksheet, and specify the range of rows to be included in the style collection at run-time.
 
-![](../media/e531a6c22e0d737b153e8ded9b23af29.png)
+| ![](../media/e531a6c22e0d737b153e8ded9b23af29.png) |
+| -------------------------------------------------- |
 
 | Setting                    | Description                                                                                                                                                           |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -98,3 +113,53 @@ The ''styles' Worksheet' settings allow you to rearrange the column layout of th
 | Heading Row                | The row which contains the column headings. The heading value of the "Yes/No Switch Column" is included in the graph's file name after the file name prefix.          |
 | First Row                  | First row of style definitions (i.e., where the definitions begin)                                                                                                    |
 | Last Row                   | Last row of style definitions. When set to 0 all rows after the `First Row` containing data are used.                                                                 |
+
+## Ribbon Tab Settings
+### 'Graphviz' Tab
+
+This worksheet stores the selected values from the [Graphviz](../create/README.md#the-graphviz-ribbon-tab) ribbon tab. By saving these settings in a worksheet, the Relationship Visualizer can retain your choices across sessions, ensuring that your preferred layout, styling, and rendering options persist each time you reopen the workbook.
+
+| ![](./settings-graphviz-tab.png) |
+| -------------------------------- |
+
+### 'Source' Tab
+
+This worksheet stores the six web resources that appear as clickable links on the [Source](../source/README.md#the-source-ribbon-tab) ribbon tab. The default URLs are suggestions provided by the Relationship Visualizer’s author, but you are free to replace them with your own preferred resources. Updating the links here ensures that the corresponding buttons on the `Source` tab always open the destinations you choose.
+
+Typical substitutions include links to DOT language references, Graphviz attribute documentation, example galleries, internal documentation pages, or any external resources you find helpful while reviewing or editing the generated source code.
+
+| ![](./settings-source-tab.png) |
+| -------------------------------- |
+
+### 'Extensions' Tab
+
+The `Extensions` worksheet is a seldom‑used but powerful feature designed for expert users. It provides a way to add custom VBA procedures to the workbook and launch them from the Ribbon without needing to understand the details of Ribbon XML or callback authoring. The feature supports up to six custom action buttons and six custom URL links.
+
+A sample workbook demonstrating how to configure and use Extensions is included in the directory of examples.
+
+| ![](./settings-extensions-tab.png) |
+| -------------------------------- |
+
+### 'Exchange' Tab
+
+This worksheet stores the selected values from the [Exchange](../exchange/README.md#the-exchange-ribbon-tab) ribbon tab. By saving these settings in a worksheet, the Relationship Visualizer can retain your choices across sessions, ensuring that your preferred export, import, and workbook options persist each time you reopen the workbook.
+
+| ![](./settings-exchange-tab.png) |
+| -------------------------------- |
+
+## Help Button URLs
+
+The `Help Button URLs` worksheet defines the links used by the **Help** buttons on the various Ribbon tabs. Each row maps a specific Ribbon control to the URL that should open when the user selects its Help button.
+
+This worksheet allows you to manage all Help destinations in one place. Updating a URL here ensures that the corresponding Help button on the Ribbon will always direct users to the correct documentation page, tutorial, or reference material.
+
+| ![](./settings-help-buttons.png) |
+| -------------------------------- |
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

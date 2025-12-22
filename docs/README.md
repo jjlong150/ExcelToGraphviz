@@ -9,7 +9,7 @@ footer: MIT License - Copyright © 2017-2025 Jeffrey J. Long
 prev: false
 next: /install/
 ---
-Transform your Excel data into stunning Graphviz diagrams with ease! Excel to Graphviz unleashes the power of visual relationships—turn rows and columns into clear, dynamic graphs in seconds. Packed with style tools, SQL support, and multi-language compatibility, it’s your shortcut to insightful visualizations, no coding required.
+Transform your Excel data into stunning graph diagrams with ease! Excel to Graphviz unleashes the power of visual relationships. Turn rows and columns into clear, dynamic graphs in seconds. Packed with style tools, SQL support, and multi-language compatibility, it’s your shortcut to insightful visualizations.
 <div class="features">
   <div class="feature" id="overview">
     <h2><a href="./overview">Overview</a></h2>
@@ -43,7 +43,7 @@ Meet **Relationship Visualizer**, an Excel macro-powered spreadsheet that brings
   </div>
 
   <div class="feature" id="tutorial">
-    <h2><a href="./tutorial">Add Style</a></h2>
+    <h2><a href="./designer">Add Style</a></h2>
     <p>Enhance your Graphviz graphs with impactful styling</p>
   </div>
 
@@ -94,9 +94,11 @@ Meet **Relationship Visualizer**, an Excel macro-powered spreadsheet that brings
 <script>(function () {var sc=document.createElement('script');sc.async=true;sc.src='https://b.sf-syn.com/badge_js?sf_id=2597714';var p=document.getElementsByTagName('script')[0];p.parentNode.insertBefore(sc, p);})();
 </script>
 </center>
-<div class="features"> 
-  <div class="feature" id="donate">
-    <h2><a href="https://www.buymeacoffee.com/exceltographviz">Donate</a></h2>
-    <p>Enjoy Excel to Graphviz? Buy me a coffee! ☕</p>
-  </div>
-</div>
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

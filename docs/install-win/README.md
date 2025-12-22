@@ -18,7 +18,7 @@ Steps to Install **Excel to Graphviz** on Microsoft Windows
    - *Register the Plugins:* Run the command `dot -c` to register Graphviz plugins.
    - *Confirm the Installation:* Run the command `dot -V` to verify the Graphviz version.
 
-3. [Download the *Relationship Visualizer* assets](./README.md#download-the-relationship-visualizer-assets) 
+3. [Download the Relationship Visualizer assets](./README.md#download-the-relationship-visualizer-assets) 
    - Obtain `RelationshipVisualizer.zip` from [SourceForge](https://sourceforge.net/projects/relationship-visualizer/).
    - *Optional:* Validate SHA1 and/or MD5 checksums available [here](https://sourceforge.net/projects/relationship-visualizer/files/) against the file downloaded.
 
@@ -263,7 +263,7 @@ Check `Unblock` at the bottom of the `Properties` dialog, click `Apply`, then cl
 
 #### Step 1 - Enable Macros
 
-The *Relationship Visualizer* is a VBA-enabled spreadsheet. If you do not trust VBA, or this download this tool is not for you. The *Relationship Visualizer* requires that Excel is configured to allow macros. You configure Microsoft Excel as follows:
+The Relationship Visualizer is a VBA-enabled spreadsheet. If you do not trust VBA, or this download this tool is not for you. The Relationship Visualizer requires that Excel is configured to allow macros. You configure Microsoft Excel as follows:
 
 From the `File` menu, select `Options` in the lower left corner.
 
@@ -288,9 +288,9 @@ Click 'OK' to close the Trust Center Settings dialog, then click `OK` to close t
 
 #### Step 2 - Open Workbook
 
-In the root directory of the *Relationship Visualizer* distribution there is a macro-enabled Excel spreadsheet named `Relationship Visualizer.xlsm`. Double-click the mouse on the file to launch Excel. 
+In the root directory of the Relationship Visualizer distribution there is a macro-enabled Excel spreadsheet named `Relationship Visualizer.xlsm`. Double-click the mouse on the file to launch Excel. 
 
-If you get the message `SECURITY WARNING Macros have been disabled [Enable Content]` click the `Enable Content` button. Enabling macro support is necessary to use the *Relationship Visualizer* spreadsheet.
+If you get the message `SECURITY WARNING Macros have been disabled [Enable Content]` click the `Enable Content` button. Enabling macro support is necessary to use the Relationship Visualizer spreadsheet.
 
 | ![](./excel_macros_disabled.png) |
 | -------------------------------------------------- |
@@ -306,7 +306,15 @@ Change the file extension from `Excel Macro-Enabled Workbook (*.xlsm)` to `Excel
 
 The file will be automatically stored in your custom office templates directory (This PC > Documents > Custom Office Templates).
 
-If you select `File` from the menu you will now see `Relationship Visualizer` as a choice. You can choose this template any time in the future when you want to create a fresh new copy of the *Relationship Visualizer* spreadsheet.
+If you select `File` from the menu you will now see `Relationship Visualizer` as a choice. You can choose this template any time in the future when you want to create a fresh new copy of the Relationship Visualizer spreadsheet.
 
 | ![](./template_list.png) |
 | -------------------------------------------------- |
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

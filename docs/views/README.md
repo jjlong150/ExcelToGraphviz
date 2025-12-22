@@ -1,5 +1,5 @@
 ---
-prev: /tutorial/
+prev: /sql/syntax/
 next: /publish/
 ---
 
@@ -7,72 +7,112 @@ next: /publish/
 
 ## Introduction
 
-The Relationship Visualize is capable of handling much larger data sets than can be illustrated in this manual. As the data sets get larger it sometimes becomes useful to see just certain portions of the data. The Relationship Visualizer supports views by providing a mechanism on the `styles` worksheet which provides **Yes** or **No** switches to indicate which data styles to include in the graph.
+The Relationship Visualizer is capable of handling much larger data sets than can be easily viewed. As data sets grow, it often becomes useful to focus on specific portions of the information. The Relationship Visualizer supports this by providing view controls on the `styles` worksheet, where **Yes** and **No** switches determine which data styles are included in the graph.
 
 ## Views vs. Layers
 
-In this manual, the term "Views" is meant to represent a redrawing of the graph with just a subset of nodes and edges. Graphviz likes to optimize the layout of the nodes and edges based upon the connections, so often the shapes will move to new locations.
+In Relationship Visualizer terminology, the term **Views** refers to redrawing the graph using only a subset of nodes and edges. Because Graphviz optimizes layout based on the visible connections, the positions of shapes often change when a view is applied.
 
-Contrast "Views" to the term "Layers". Layers are a concept in tools such as Microsoft Visio where shapes can be layered in a manner so that they can be hidden or exposed. In a layered tool, the shapes never change position; they are just visible or invisible. Graphviz also has a concept of layers, but Graphviz layers are outside the scope of this manual.
+This differs from **Layers**, a concept used in tools such as Microsoft Visio, where shapes can be assigned to layers that are simply shown or hidden. In a layered system, shapes do not move; they are merely visible or invisible. Graphviz also supports a concept of layers, but Graphviz layers are outside the scope of this topic.
 
-The Relationship Visualizer spreadsheet's `styles` worksheet specifies two columns for every style definition. One column has the heading **All Styles** where every row containing a style definition contains the value **Yes**, and a column with heading **No Clusters** where any row with style definition of Style Type `subgraph-open` or `subgraph-close` contains the value of **No**.
+The Relationship Visualizer’s `styles` worksheet defines three columns for each style definition. 
+1. The **All Styles** column contains **Yes** for every style definition. 
+2. The **No Clusters** column contains **No** for any style whose Style Type is `subgraph-open` or `subgraph-close`.
+3. The **No Edges** column contains **No** for any style whose Style Type is `edge`.
 
-When the graph is created, any row with a Style having a value of **Yes** is included in the graph, and any row with a Style having a value of **No** is omitted from the graph.
+When the graph is created, any row whose Style value is **Yes** is included in the graph, and any row whose Style value is **No** is omitted.
 
-The column used to make these decisions is specified on the Graphviz tab in the dropdown list named `Graph View`. The **All Styles** column is the default view. Our graph looks like this with **All Styles** selected.
-
-![](../media/515314f3b9d54bc1534192905e6a3c82.png)
+The column used to make these decisions is selected on the Graphviz tab in the `Graph View` dropdown list. The **All Styles** column is the default view. With **All Styles** selected, the graph appears as shown below.
 
 If `Graph View` is changed to **No Clusters** the graph is redrawn and appears as
 
-![](../media/02effcf07a8a27b122d6dd1cf0a39128.png)
 
-## Continuing Our Example with a Custom View
+## Custom View Example
 
-Let us continue our "Happy Days" example. We have built a data set and a graph of the primary characters and their relationships, but what if we want to see a subset graph of just who is married? The way we do that is by defining a column of View switches in the `styles` worksheet, and direct the Relationship Visualizer to create the graph using just the styles enabled in that column.
+The [Overview](../overview/) page shows several illustrations of a graph of the London Underground.
 
-Let us create a view for **Spouse** relationships
+We began by creating edge styles using the official London Underground line colors.
 
-**Step 1** - Switch to the `styles` worksheet.
+| ![](./underground_styles.png) |
+| ----------------------------- |
 
-**Step 2** - Copy Column E with heading **All** to Column G. The `styles` worksheet will appear as follows:
+These styles were applied to a data set of the subway stations and the station‑to‑next‑station relationships that connect each station to the next. The graph of the complete London Underground appears as:
 
-![](../media/c21250fc54351efcacd75d9a0c7c281a.png)
+| ![](./underground_all.png) |
+| ----------------------------- |
 
-**Step 3** - Change the heading in cell G1 to **Spouses** and change all the switches in Column F from **yes** to **no** where the `Style Type` is `edge` EXCEPT for the row with the style named **Spouse**.
+This gives us a full data set and a complete graph, with each connection styled according to its line color. But what if we want to view only a single subway line?
+
+To do this, we define a column of View switches in the `styles` worksheet and instruct the Relationship Visualizer to generate the graph using only the styles enabled in that column.
+
+Let us create a view that restricts the graph to only the **Bakerloo** subway line relationships.
+
+**Step 1** — Switch to the `styles` worksheet.
+
+**Step 2** — Copy Column E (with the heading **All**) and insert the copy as Column F. The `styles` worksheet will then appear as follows:
+
+| ![](./underground_insert_column.png) |
+| ----------------------------- |
+
+**Step 3** — Change the heading in cell F1 to **Bakerloo**, and change all the switches in Column F from **Yes** to **No** for every row where the `Style Type` is `edge`, **except** for the row whose style name is **Bakerloo**.
 
 The `styles` worksheet should now appear as:
 
-![](../media/dd8e7084f84b3960bc04091d2a994e5b.png)
+| ![](./underground_bakerloo.png) |
+| ----------------------------- |
 
-We will also turn off the ability to add Graphviz directives by changing the `native` style's switch from **yes** to **no**. Removing the native directives will cause the rank statements to we discussed earlier to be filtered out.
+**Step 4** — We now need to change a setting on the `Graphviz` ribbon tab so the Relationship Visualizer uses only the styles enabled with **Yes** in Column F. Switch to the `data` worksheet. The `data` worksheet should appear as follows:
 
-![](../media/687146168b8fec47e6b0f1f3c662bdb6.png)
+| ![](./underground_view_dropdown_list.png) |
+| ----------------------------- |
 
-**Step 4** - We now have to change a setting on the `Graphviz` ribbon tab to tell the Relationship Visualizer to use only the styles we have enabled through **yes** settings in column F. Switch to the `data` worksheet. The `data` worksheet should appear as follows:
+**Step 5** — Notice that **Bakerloo** now appears as a value in the dropdown list. The selections in this list are refreshed automatically whenever a new View column is added to the `styles` worksheet.
 
-![](../media/5bc3aada6ff8e5df9cf64f01c62bef50.png)
+Change the selected `View` from **All** to **Bakerloo** on the `Graphviz` ribbon tab.
 
-**Step 5** - Notice that **Spouses** is now a value in the dropdown list. The dropdown selections in this list are updated every time a new View column is added to the `styles` worksheet.
+**Step 6** — Press the `Refresh` button. The new graph for the Bakerloo view does **not** appear as we might expect. All stations are still visible, and most are no longer connected to anything. What gives?
 
-Change the name of the `Graph View` from **No Clusters** to **Spouses** in the `Graphviz` ribbon tab.
 
-![](../media/caa61a391bb362e745bdab8ce5c5416c.png)
+| ![](./underground_bakerloo_island_nodes.png) |
+| ----------------------------- |
 
-**Step 6** - Press the `Refresh Graph` button. The new graph with just the view of the marriage relationships will appear as follows:
+The reason is that we filtered the **edges**, but we did not filter the **nodes**. Every station still has a node style set to **Yes** in the selected View column, so Graphviz dutifully draws all of them. However, because only the Bakerloo edges remain enabled, most stations no longer have any connecting relationships. The result is a graph full of isolated nodes. To fix this, we must also restrict the node styles so that only the stations belonging to the Bakerloo line are included in the view.
 
-![](../media/ed00d5efb71036b34dec7d18fbad5882.png)
-
-As you can see, the other relationship edges are no longer in the graph. Graphviz has moved the nodes around to make the drawing compact. The graph continues to show all the Happy Days characters; regardless of if they do or do not have a marriage relationship.
-
-Sometimes when the amount of data is large, having nodes in the graph without any edges depicting relationships can be distracting. In the example above, we are interested in the marriage relationships, yet Richard Cunningham, Arthur Fonzarelli, Ralph Malph, and Warren Weber are also depicted. The Relationship Visualizer has switches to remove these island nodes when the island nodes serve no purpose in the graph.
+The Relationship Visualizer includes switches that can automatically remove these “island” nodes when they serve no purpose in the graph. When enabled, this option hides any node that has no incoming or outgoing edges in the selected view, ensuring that the resulting graph contains only the stations and relationships relevant to the Bakerloo line.
 
 **Step 7** - Remove the check mark on the `Graphviz` ribbon from the `Nodes` - `Include stand-alone nodes` switch control. This means only include nodes that have an edge connection to another node.
 
-![](../media/05a759dec257442ea5185ae96f28a67f.png)
+| ![](./underground_remove_island_nodes.png) |
+| ----------------------------- |
 
-**Step 8** - Press the `Refresh Graph` button. The graph should now appear as follows:
+**Step 7** — Remove the check mark on the `Graphviz` ribbon from the `Nodes` → `Include stand‑alone nodes` switch. This tells the Relationship Visualizer to include only those nodes that have at least one edge connection to another node.
 
-![](../media/c530ec29e3387861eec95617a0cda65a.png)
+| ![](./underground_bakerloo_line.png) |
+| ----------------------------- |
 
-Notice that the "Friends" cluster has disappeared along with the characters without a Spouse relationship. That is because Graphviz does its own filtering and will not draw a cluster that does not contain any nodes.
+Notice that the various clusters have disappeared along with the stations and interchanges that do not participate in a Bakerloo‑style relationship. This happens because the Relationship Visualizer is now excluding stand‑alone nodes, and Graphviz performs its own additional filtering: it will not draw a cluster that contains no nodes. The result is a clean graph showing only the stations and connections that belong to the Bakerloo line.
+
+> **Note:** This behavior differs from tools like Microsoft Visio, where layers simply hide or show shapes without affecting their layout or grouping. In Graphviz, filtering out nodes or edges can also remove entire clusters, because clusters only exist if they contain at least one visible node. As a result, the structure of the graph can change when a view is applied.
+
+**Step 9** — Repeat Steps 2 and 3 for all the remaining Underground lines. The `styles` worksheet should now show a diagonal pattern of **Yes** values across the View columns, and will appear similar to the following:
+
+| ![](./underground_styles_all_lines.png) |
+| --------------------------------------- |
+
+The list of available views on the Graphviz tab expands automatically to match the new column headings. It will appear as:
+
+| ![](./all_views_list.png) |
+| ------------------------- |
+
+**Step 10** — Pick another subway line, such as **DLR**. The graph updates to:
+
+| ![](./underground_dlr_line.png) |
+| ------------------------------- |
+
+You now have the ability to switch between subway lines using a single shared data set. You can also use the `Publish all views` button to quickly generate one output file per view, allowing you to produce a complete set of line‑specific graphs with a single command.
+
+With these views in place, the Relationship Visualizer becomes a powerful exploration tool. A single shared data set can now produce a family of focused, line‑specific graphs, each generated on demand or published in bulk. Whether you are analyzing connectivity, documenting infrastructure, or simply exploring the network, Views give you a flexible, repeatable way to highlight exactly the relationships you care about.
+
+<br/>
+<hr/>
+<center><p>Like this tool? <a href="https://www.buymeacoffee.com/exceltographviz">Buy me a coffee! ☕</a></p></center>

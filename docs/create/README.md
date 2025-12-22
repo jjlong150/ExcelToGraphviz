@@ -1,40 +1,42 @@
 ---
 prev: /install/
-next: /tutorial/
+next: /designer/
 ---
 
 # Creating Graphs
 
 You have installed Graphviz, and extracted the contents of the `Relationship Visualizer` zip file. It is time to create some graphs.
 
-::: tip
-This topic delves into extensive details. To jump directly to the graph creation examples, click [here](./README.md#graph-construction-basic-concepts). 
+::: tip Shortcuts
+- [Graph Construction Basic Concepts](./README.md#graph-construction-basic-concepts). 
+- [The `data` Worksheet](./README.md#the-data-worksheet)
+- [The `Graphviz` Ribbon Tab](./README.md#the-graphviz-ribbon-tab) 
 :::
 
 ## Prepare a New Microsoft Excel Workbook
 
 ### Create a New Workbook from the `Relationship Visualizer` Template
 
-The first action is to launch Microsoft Excel. When Excel starts, it will suggest sample spreadsheets you can create. This will contain the _Relationship Visualizer_ template which you saved as a template as part of the installation steps. Select this template to create a new workbook.
+The first action is to launch Microsoft Excel. When Excel starts, it will suggest sample spreadsheets you can create. This will contain the Relationship Visualizer template which you saved as a template as part of the installation steps. Select this template to create a new workbook.
 
-|![](../media/0ce33571eba93b1d147a1a90031a11be.png)|
+|![](./create_new_workbook.png)|
 |--------------------------------------------------|
 
 ### Save the Workbook as a Macro-Enabled Workbook
 
 The workbook will appear as shown below.
 
-|![](../media/65f29c11f6e38b041681f94b99c2b6dd.png)|
+|![](./new_workbook.png)|
 |--------------------------------------------------|
 
 Perform a "**FILE -> Save As**" action. Choose a directory where you would like to save the file and change the file name from `Relationship Visualizer1` to something meaningful to you.
 
 The most important step is to set the `Save as type:` dropdown list item as **Excel Macro-Enabled Workbook (*.xlsm)**. You will not be able to run the macros that create the visualizations unless the workbook is _macro-enabled_.
 
-|![](../media/1af4e421519e0adbbb1ecdb054fefba2.png)|
+|![](./save_as.png)|
 |--------------------------------------------------|
 
-The _Relationship Visualizer_ provides macros through seven Excel Fluent UI ribbon tabs named `Graphviz`, `Style Designer`, `SQL`, `Source`, `SVG`, and `Exchange`. The appropriate ribbon tab will appear and/or activate as you change worksheets.
+The Relationship Visualizer provides macros through seven Excel Fluent UI ribbon tabs named `Graphviz`, `Style Designer`, `SQL`, `Source`, `SVG`, and `Exchange`. The appropriate ribbon tab will appear and/or activate as you change worksheets.
 
 The workbook you just saved may show a **BLOCKED CONTENT** message. Click the `Trust Center` button.
 
@@ -52,20 +54,20 @@ Assuming that you changed the file name from `Relationship Visualizer1 `to somet
 
 When you reopen the workbook the message stating that macros have been blocked will be gone. The spreadheet will appear as follows, displaying a `data` worksheet and a custom ribbon tab named `Graphviz`.
 
-|![](../media/blank_spreadsheet.png)|
+|![](./reopen_workbook.png)|
 |--------------------------------------------------|
 
-::: warning
+::: warning WARNING - Ribbon Fails to Update Dynamically After “Save As”
+When you use **File → Save As** to change the workbook’s file name, Excel continues to associate the ribbon with the *original* file name. Because of this stale reference, any code that programmatically switches ribbon tabs will stop working.
 
-There is a known bug in _Microsoft Excel_ related to custom ribbons that occurs when a `File` -> `Save As` action changes the workbook file name.
+To work around the issue, you can either manually switch tabs as you move between worksheets, or close and reopen the workbook. Reopening forces Excel to reload the ribbon under the new file name, restoring normal tab‑switching behavior.
 
-The bug is caused by the ribbon retaining a reference to the original file name, which prevents programmatic tab switching. You can either manually switch tabs as you navigate between worksheets, or close and reopen the file to allow the ribbon tabs to automatically adjust according to worksheet selections.
+This is a known issue in **Microsoft Excel** that affects workbooks using a custom ribbon ([1](https://stackoverflow.com/questions/33673898/macro-button-under-customized-ribbon-tab-tries-to-open-old-excel-file), [2](https://www.mrexcel.com/board/threads/custom-ribbon-macros-point-to-old-workbook.1257482/)). 
+
 :::
 
 ::: tip
-
-Any time you save a copy of the spreadsheet using `File` -> `Save As` and change the Excel workbook file name, you should close the workbook and reopen it.
-
+Any time you save a copy of the spreadsheet using **File → Save As** and change the workbook’s file name, you should close the workbook and reopen it. This forces Excel to reload the custom ribbon under the new file name and restores normal tab‑switching behavior.
 :::
 
 ## The `data` Worksheet
@@ -82,27 +84,27 @@ The `data` Worksheet has 11 columns (A-K):
 |---|---|---|---|---|---|---|---|---|---|---|
 | [Indicator](./README.md#indicator) | [Item](./README.md#item) | [Tail Label](./README.md#tail-label) | [Label](./README.md#label) | [External Label](./README.md#external-label) | [Head Label](./README.md#head-label) | [Tooltip](./README.md#tooltip) | [Related Item](./README.md#related-item) | [Style Name](./README.md#style-name) | [Attributes](./README.md#attributes) | [Messages](./README.md#messages) |
 
-### Indicator
+#### Indicator
 
 The `Indicator` column is used to draw special attention to a row.
 - A `#` hash character treats the row as a comment. The text in the row will turn green, and no data in this row will be included in the graph. 
 - An `!` exclamation mark character will appear if errors are detected in your data on this row. The row will turn red, and an error message will be displayed in the [Messages](./README.md#messages) column.
 
-### Item
+#### Item
 
 The `Item` column serves two purposes. 
 - For nodes, it is a unique identifier of the node. 
 - For edges, it is the unique identifier of the `from` node in a (`from`, `to`) node pairing.
-- **mandatory** column.
+- **Mandatory** column for nodes and edges.
 
-### Tail Label
+#### Tail Label
 
 The `Tail Label` column contains a text label to be placed near the tail of an edge.
 - Only used if an edge relationship has been specified.
 - Optional column, hidden by default.
 - Inclusion in graph can be toggled on/off. 
 
-### Label
+#### Label
 
 The `Label` column contains text to use to label a node, edge, or cluster.
 - When specified for nodes, the value is placed inside the shape.
@@ -110,7 +112,7 @@ The `Label` column contains text to use to label a node, edge, or cluster.
 - Optional column.
 - Inclusion in graph can be toggled on/off. 
 
-### External Label
+#### External Label
 
 The `External Label` column contains text to use to label a node, or an edge.
 - When specified for nodes, the value is placed outside the shape, typically above and to the left of the shape.
@@ -120,37 +122,37 @@ The `External Label` column contains text to use to label a node, or an edge.
 
 If neither a `Label` or `External Label` is specified then the graph will default to showing the `Item` value as the inside label of nodes, and no data for edges.
 
-### Head Label
+#### Head Label
 
 The `Head Label` column contains a text label to be placed near the head of an edge. 
 - Only used if an edge relationship has been specified.
 - Optional column, hidden by default.
 - Inclusion in graph can be toggled on/off.
 
-### Tooltip 
+#### Tooltip 
 
 The `Tooltip` column specifies text to be displayed as a tooltip for clusters, nodes, or edges.
 - Only applies to graphs saved as files in the `SVG` format.
 - Optional column, hidden by default.
 
-### Related Item 
+#### Related Item 
 
 The `Related Item` column is the unique identifier of the `to` node in a (`from`, `to`) node pairing.
 - **Mandatory** column when specifying a relationship (edge).
 
-### Style Name 
+#### Style Name 
 
 The `Style Name` column indicates which style definition in the `styles` worksheet to use when drawing the graph.
 - Optional column.
 - Inclusion in graph can be toggled on/off.
 
-### Attributes 
+#### Attributes 
 
 The `Attributes` column provides a means to add extra elements of style which will only apply to a single row. For example, you can place style attributes in this column to change the color of a key relationship, or the fill color of a key shape you wish to highlight.
 - Optional column.
 - Inclusion in graph can be toggled on/off.
 
-### Messages
+#### Messages
 
 When the graphing macros run, they check for common data mistakes, such as specifying only one node for an edge.
 
@@ -159,12 +161,12 @@ If mistakes are found, they are reported in this column. Additionally, an exclam
 - Column is hidden by default.
 - Column is shown if an error is detected.
 
-### Show Hidden Columns
+#### Show Hidden Columns
 
 The columns for `Tail Label` (C), `External Label` (E), `Head Label` (F), `Tooltip` (G), and `Messages` (K) are hidden by default, since they are less frequently used. 
 
-You can quickly toggle the visibility of these columns by selecting the column name from the list in the dropdown menu beneath the `Columns` button in the `Toggles`.
-|![](../media/75352aac5fb1c38b70cd0450b6c99dd6.png)|
+You can quickly toggle the visibility of these columns by selecting the column name from the list in the dropdown menu beneath the `Show Columns` button in the **'data' Worksheet** group' on the right side of the Ribbon.
+|![](./show_columns.png)|
 |--------------------------------------------------|
 
 ## Graph Construction Basic Concepts
@@ -183,7 +185,7 @@ For our first graph, we will draw an _'a' is related to 'b'_ relationship.
 
 The results should resemble the following example:
 
-|![](../media/979b6a444c96ca8c16632e97bfa9b9f3.png)|
+|![](./first_graph.png)|
 |--------------------------------------------------|
 
 _Graphviz Source_
@@ -241,7 +243,7 @@ digraph "Relationship Visualizer"
 
 ### Add Node Labels
 
-The graph is how we want to see it, but the nodes need to be labeled. We do not want to change all our edges; however, we would like to replace 'a' with 'Alpha', 'b' with 'Bravo', and 'c' with 'Charlie'. The _Relationship Visualizer_ assumes that when there is information in the `Item` column, but not in the `Related Item` column that the data corresponds to a node.
+The graph is how we want to see it, but the nodes need to be labeled. We do not want to change all our edges; however, we would like to replace 'a' with 'Alpha', 'b' with 'Bravo', and 'c' with 'Charlie'. The Relationship Visualizer assumes that when there is information in the `Item` column, but not in the `Related Item` column that the data corresponds to a node.
 
 To label the nodes we will add 3 node definitions to the "data worksheet (rows 6, 7, 8) and press the `Refresh Graph` button. The Excel worksheet now looks like:
 
@@ -384,11 +386,13 @@ digraph "Relationship Visualizer"
 
 ### Delete all data
 
-Lets start by clearing the `data` worksheet so that we can create a new graph with clusters. Click on the `Delete` dropdown list, and choose `Delete all data`. _Notice that if you hover the mouse over the menu item a tooltip of help will appear._ 
+Lets start by clearing the `data` worksheet so that we can create a new graph with clusters. Click on the `Delete all data` button. 
+
+_Notice that if you hover the mouse over a Ribbon control a tooltip of help will appear._ 
 
 Once you click `Delete all data` the `data` worksheet is reset to blank form. 
 
-|![](../media/delete_all_data.png)|
+|![](./delete_all_data.png)|
 |----------------------------|
 
 
@@ -497,7 +501,7 @@ Graphviz will not draw the graph if there is a mismatch between the number of op
 
 ### Specify Comma-separated Items
 
-Another feature of the _Relationship Visualizer_ is the ability to specify a comma-separated list of Item names and have a relationship created for each Item. For example, we can say that Mr. Brady is the father of Greg, Peter, and Bobby on one row as follows:
+Another feature of the Relationship Visualizer is the ability to specify a comma-separated list of Item names and have a relationship created for each Item. For example, we can say that Mr. Brady is the father of Greg, Peter, and Bobby on one row as follows:
 
 |![](../media/d58e637f465efc9ac6a115a7077d477a.png)|
 |--------------------------------------------------|
@@ -558,45 +562,66 @@ digraph "Relationship Visualizer"
 
 Now that you understand the basics to create graphs, let us look at the features contained in the `Graphviz` ribbon tab. The `Graphviz` ribbon tab is activated whenever the `data` `graph`, `styles`, `settings` or `about…` worksheet is activated. It appears as follows:
 
+*Windows*
 | ![](../media/ribbon_tab_graphviz.png) |
 | ------------------------------------- |
 
-It contains the following major groups:
+*macOS*
+| ![](./mac_ribbon_graphviz.png) |
+| ------------------------------------- |
 
-- Graph to Worksheet
-- Graph to File
-- Algorithm
-- Options
-- Toggles
-- Debug
-- Help
+It contains the following groups, which are each explained in content which follows. You may jump directly to the content using the links in this table:
+| Group | Controls  | Description |
+| :---- | :--- |  :--- |
+| [Visualize](#visualize) | ![](./graphviz_tab_visualize.png) | Action and option buttons that cause the Excel data to be graphed by Graphviz and then displayed within the Excel workbook. |
+| | | |
+| [Publish](#publish) | ![](./graphviz_tab_publish.png) | Action buttons that cause the Excel data to be graphed by Graphviz and then written to a file. |
+| | | |
+| [Graph Layout](#graph-layout) | ![](./graphviz_tab_graph_layout.png) | Provides a set of toggle buttons that control which Graphviz layout engine is applied to your diagram. |
+| | | |
+| [Splines](#splines) | ![](./graphviz_tab_splines.png) | Provides a set of toggle buttons that control how edges are routed in your diagram.  |
+| | | |
+| [Type](#graph-type) | ![](./graphviz_tab_graph_type.png) |  Provides a set of toggle buttons that determine whether your diagram is treated as a directed or undirected graph. |
+| | | |
+| [Drawn First](#drawn-first) | ![](./graphviz_tab_drawn_first.png) | Provides a set of toggle buttons thatdetermine the sequence in which Graphviz draws nodes and edges during rendering. |
+| | | |
+| [Layout Options](#layout-options) | ![](./graphviz_tab_layout_dot.png) | The Algorithm group within the Graphviz tab changes dynamically based upon the layout algorithm chosen. The graph options shown are specific to that particular layout algorithm. |
+| | | |
+| ['data' Worksheet](#data-worksheet) | ![](./graphviz_tab_data_worksheet.png) | A set of menu items that control what columns and graphs are displayed on the `data` worksheet. |
+| | | |
+| [Debug](#debug) | ![](./graphviz_tab_debug.png) | An option to display additional information such as the row number and Item identifiers in the labels of nodes, edges, and clusters. |
+| | | |
+| [Help](#help) | ![](./graphviz_tab_help.png) | Provides a link to the `Help` content for the `data` worksheet (i.e. this web page). |
 
-### Graph to Worksheet
+### Visualize
 
-| ![](../media/graphviz_graph_to_worksheet.png) |
+| ![](./graphviz_tab_visualize.png) |
 | --------------------------------------------- |
 
 | Label              | Control Type  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------ | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Refresh Graph      | Button        | The action button that causes the Excel data to be graphed by Graphviz and then displayed within the Excel workbook.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Automatic  | Checkbox      | When checked, keystrokes are monitored and as cell changes are detected the graph is automatically refreshed (also requires that `Graph in worksheet` is set to `data`).                                                                                                                                                                                                                                                                                                                                                                                  |
-| Scale  | Dropdown      | Lets you scale the image displayed in Excel at `100%`, `75%`, `50%`, or `25%` so as the graph gets larger, you can see more of it within the workbook without having to scroll.                                                                                                                                                                                                                                                                                                                                                                                  || Delete Graph       | Button        | Clicking on this button will delete the graph from the worksheet. This is useful when adding rows as new rows will stretch the image. You may also find you want to delete the image before saving the file to reduce the file size.                                                                                                                                                                                                                                                                                                                      |
-| Delete all data    | Button        | Resets the `data` worksheet to blank cells, and deletes any graphs if present.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Refresh      | Button        | The action button that causes the Excel data to be graphed by Graphviz and then displayed within the Excel workbook.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Automatic  | Toggle Button      | When selected, keystrokes are monitored and as cell changes are detected the graph is automatically refreshed (also requires that `Worksheet` is set to `data`).                                                                                                                                                                                                                                                                                                                                                                                  |
+| Apply Styles  | Toggle Button      |Specifies if the style attributes associated with the Style Name assigned to a node, edge, or cluster should be applied when the graph is generated.<br><br>**Choices:**<ul><li>_Pressed_ - use the style format </li><li>_Unpressed_ - do not use the style format (i.e., use default Graphviz rendering method)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Apply Attributes  | Toggle Button      |Specifies if the style attributes in the `Attributes` column on the `data` worksheet should be included or omitted when the graph is generated. <br><br>**Choices:**<ul><li>_Pressed_ - include the style attributes </li><li>_Unpressed_ - do not include the style attributes</li></ul>|
+| Zoom In  | Button      | Magnifies the scale the of image displayed in Excel by 5%.                                                                                                                                                                                                                                                                                                                                                                                  |
+| Zoom Out  | Button      | Decreases the scale the image displayed in Excel by 5% so as the graph gets larger, you can see more of it within the workbook without having to scroll.                                                                                                                                                                                                                                                                                                                                                                                  |
+| Current Zoom  | Text  | Shows the current magnification level. The magnification can range from 5% to 150% in 5% increments                                                                                                                                                                                                                                                                                                                                                                                  |
 | View         | Dropdown list | The name of the column in the `styles` worksheet which controls which set of Yes/No values to use when creating the diagrams. This dropdown list is explained in more detail in the section [Creating Views](#creating-views).                                                                                                                                                                                                                                                                                                                            |
-| Image Type         | Dropdown list | Image format to use when displaying the graph on the `data` or `graph` worksheet of the _Relationship Visualizer_. <br><br>**Choices:**<ul><li>`bmp` - Microsoft Windows Bitmap format</li><li>`gif` - Graphics Interchange Format</li><li>`jpg` - Joint Photographic Experts Group format </li><li>`png` - Portable Network Graphics format</li><li>`svg` - Scalable Vector Graphics</li></ul>**Note:** SVG images only display in Office 365; they do not display in older versions of Excel.                                                             |
+| Image Type         | Dropdown list | Image format to use when displaying the graph on the `data` or `graph` worksheet of the Relationship Visualizer. <br><br>**Choices:**<ul><li>`bmp` - Microsoft Windows Bitmap format</li><li>`gif` - Graphics Interchange Format</li><li>`jpg` - Joint Photographic Experts Group format </li><li>`png` - Portable Network Graphics format</li><li>`svg` - Scalable Vector Graphics</li></ul>**Note:** SVG images only display in Office 365; they do not display in older versions of Excel.                                                             |
 | Worksheet | Dropdown list | The worksheet in the current workbook where the graph should be displayed <br><br>**Choices:**<ul><li>`data` - The graph is displayed in the `data` worksheet to the right of the data columns.</li><li>`graph` - The graph is displayed in the `graph` worksheet, and the `graph` worksheet is activated. This setting is useful for large graphs as it allows you to use Excel's magnification Zoom-In/Zoom-out feature. It is also useful when you want to flip back and forth between the data and the graph to correct errors in the data.</li></ul> |
 
-### Graph to File
+### Publish
 
-| ![](../media/graphviz_graph_to_file.png) |
+| ![](./graphviz_tab_publish.png) |
 | ---------------------------------------- |
 
-A tutorial on how to use these ribbon options is contained in the section [Publishing Graphs](#publishing-graphs).
+A tutorial on how to use these ribbon options is contained in the section [Publishing Graphs](#publish).
 
 | Label                                                               | Control Type  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Graph to File                                                       | Button        | The action button that causes the Excel data to be graphed by Graphviz and then written to a file.                                                                                                                                                                                                                                                                                                                                                                                                              |
-| All views to File                                                   | Button        | The action button that causes the Excel data to be graphed by Graphviz and then written to a file repeatedly for every view defined in the `Styles` worksheet.                                                                                                                                                                                                                                                                                                                                                  |
+| Publish                                                       | Button        | The action button that causes the Excel data to be graphed by Graphviz and then written to a file.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Publish all views                                                   | Button        | The action button that causes the Excel data to be graphed by Graphviz and then written to a file repeatedly for every view defined in the `Styles` worksheet.                                                                                                                                                                                                                                                                                                                                                  |
 | Get Directory                                                       | Button        | Brings up the Directory Selection dialog and stores/displays the directory where the files should be written to. Once a directory is selected the directory path replaces the "Get Directory" button label.                                                                                                                                                                                                                                                                                                     |
 | File Prefix                                                         | Edit box      | Base portion of the file name. For example: `Graph`. <br><br>You may also build a file name using the following character strings in the file prefix to insert run-time values into the file name.<ul><li>`%D` - Current date</li><li>`%T` - Current time <li>`%E` - Graphviz layout engine </li><li>`%S` - Splines </li><li>`%V` - View name </li><li>`%W` - Worksheet name </li></ul>**NOTE**: You must check the appropriate options in the `Filename options` dropdown list for the substitutions to occur. |
 | File Format                                                         | Dropdown List | File format of the output file.<br><br>**Choices:**<ul><li> `bmp` - Microsoft Windows Bitmap format</li><li>`gif` - Graphics Interchange Format</li><li>`jpg` - Joint Photographic Experts Group format</li><li>`pdf` - Portable Document Format</li><li>`png` - Portable Network Graphics format</li><li>`ps` - Postscript format</li><li>`svg` - Scalable Vector Graphics format </li><li>`tiff` - Tagged Image File Format </li></ul>                                                                        |
@@ -604,58 +629,219 @@ A tutorial on how to use these ribbon options is contained in the section [Publi
 | Add date/time to the filename                                       | Check box     | Option to add a date and time to the file name. <br><br>**Choices:**<ul><li>_Checked_ - Add the date and time</li><li>_Unchecked_ - Omit the date and time</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                |
 | Add Layout/Splines to the filename                                  | Check box     | Option to add the layout engine and spline type to the file name. <br><br>**Choices:**<ul><li>_Checked_ - Add the options</li><li>_Unchecked_ - Omit the options</li></ul>                                                                                                                                                                                                                                                                                                                                                                                          |
 
-### Algorithm
+### Graph Layout
+
+The **Graph Layout** section provides a set of toggle buttons that control which Graphviz layout engine is applied to your diagram. These toggles function like radio buttons, ensuring that only one layout is active at a time. This approach gives you a quick, intuitive way to explore how different layout algorithms organize your graph
+
+| ![](./graphviz_tab_graph_layout.png) |
+| ------------------------------------------ |
+
+### Splines
+
+The **Splines** section provides a set of toggle buttons that control how edges are routed in your diagram. These toggles function like radio buttons, ensuring that only one spline style is active at a time. This design gives you a quick, intuitive way to explore different routing options—straight lines, curves, orthogonal paths, and more—and immediately see how each style affects the readability and structure of your graph
+
+| ![](./graphviz_tab_splines.png) |
+| ------------------------------------------ |
+
+| Button     | Description |
+|-----------|-------------|
+| **false** | Edges are drawn as straight lines. |
+| **true**  | Edges are drawn using a combination of straight segments and free‑flowing curves.  |
+| **curved** | Edges are drawn as smooth, continuous curves between nodes. |
+| **ortho** | Edges are routed using horizontal and vertical segments with 90‑degree bends. |
+| **polyline** | Edges are drawn as straight segments with angular bends (not restricted to right angles). |
+| **none** | Edges (and edge labels) are not drawn, but still influence node placement. |
+
+### Graph Type
+
+The **Graph Type** section provides a set of toggle buttons that determine whether your diagram is treated as a directed or undirected graph. These toggles function like radio buttons, ensuring that only one graph type is active at a time. This setup gives you a quick, intuitive way to switch between directional and non‑directional relationships and immediately see how edge arrows, routing, and layout behavior change in response.
+
+| ![](./graphviz_tab_graph_type.png) |
+| ------------------------------------------ |
+
+| Button          | Description |
+|----------------|-------------|
+| **undirected** | Creates an [Undirected Graph](../terminology/README.md#undirected-graph) graph. Edges have no direction and are drawn without arrowheads. |
+| **directed**   | Creates a [Directed Graph](../terminology/README.md#directed-graph) graph (digraph). Edges have a defined direction and are drawn with arrowheads. |
+
+### Drawn First
+
+The **Drawn First** controls (i.e. outputorder) determine the sequence in which Graphviz draws nodes and edges during rendering. These options are presented as toggle buttons that behave like radio buttons, ensuring that only one drawing order is active at a time. This gives you a quick, intuitive way to adjust whether edges appear above or below nodes—useful when fine‑tuning visibility, layering, or stylistic preferences in your diagram.
+
+Output Order Values
+| Button          | Description |
+|----------------|-------------|
+| **breadth** | Draws nodes before edges. Edges appear on top and below nodes. |
+| **nodes**   | Nodes are drawn first; edges are drawn afterward. Edges appear on top of nodes. |
+| **edges**   | Edges are drawn first; nodes are drawn afterward, causing nodes to appear on top of edges. |
+
+### Layout Options
 
 The Algorithm group within the Graphviz tab changes dynamically based upon the layout algorithm chosen. The graph options shown are specific to that particular layout algorithm.
 
-#### Layout = `circo`
+---
 
-| ![](../media/graphviz_algorithm_circo.png) |
-| ------------------------------------------ |
+#### layout=circo
 
-#### Layout = `dot`
+There are no additional dynamic options for `layout=circo`.
 
-| ![](../media/graphviz_algorithm_dot.png) |
+---
+
+#### layout=dot
+
+| ![](./graphviz_tab_layout_dot.png) |
 | ---------------------------------------- |
 
-#### Layout = `fdp`
+The buttons `[tb]`, `[bt]`, `[lr]`, `[rl]` determine the **Rank Direction**  flow of the graph—whether nodes are arranged top‑to‑bottom, bottom‑to‑top, left‑to‑right, or right‑to‑left. These options are presented as toggle buttons that behave like radio buttons, ensuring that only one direction is active at a time.
 
-| ![](../media/graphviz_algorithm_fdp.png) |
+| Button | Description |
+| :----: |-------------|
+| **tb** | Top‑to‑Bottom. Ranks flow downward (the default for most layouts).<br/> ![](../media/b20a1369784eabff02360ff64df6bc81.png)|
+| **bt** | Bottom‑to‑Top. Ranks flow upward. <br/>![](../media/bb330ebf91c075dfdfe845b8ba50947d.png)
+|
+| **lr** | Left‑to‑Right. Ranks flow horizontally from left to right. <br/>![](../media/34ad965b9b46559a55fda440b89eb44a.png) |
+| **rl** | Right‑to‑Left. Ranks flow horizontally from right to left.<br/>![](../media/cd3fd86d5c1b96e6b7b93a9b0f7d9553.png) |
+
+The `[in]`, `[out]` Ordering buttons determine how edges are arranged around each node during layout. 
+
+| Button | Description |
+|--------|-------------|
+| **in**  | Preserves the order of incoming edges around each node. |
+| **out** | Preserves the order of outgoing edges around each node. |
+
+The **New Rank** button determines how Graphviz handles ranking when clusters are present in the graph. This option is presented as a toggle that behaves like a radio‑style switch, ensuring the feature is either fully enabled or disabled. Turning it on allows Graphviz to compute a single global ranking across all clusters, while turning it off preserves the traditional recursive ranking inside each cluster. This gives you a quick, intuitive way to influence how tightly or loosely clustered subgraphs interact in the final layout.
+
+The **Compound** button determines whether edges are allowed to connect into and out of clusters when using layout engines that support this feature. This option is presented as a simple toggle that behaves like a radio‑style switch, enabling or disabling compound edge routing. Turning it on allows edges to attach to cluster boundaries using lhead and ltail, giving you a quick, intuitive way to create more expressive diagrams where relationships span across grouped subgraphs.
+
+| Value     | Description |
+|-----------|-------------|
+| **false** | Disables compound edges. Edges cannot connect into or out of clusters using `lhead` or `ltail`. |
+| **true**  | Enables compound edges, allowing edges to enter or leave clusters and attach to cluster boundaries. |
+
+The **Cluster Rank** control determines how Graphviz ranks clusters relative to one another during layout.
+
+| Value       | Description |
+|-------------|-------------|
+| **local**   | Each cluster is ranked independently. This preserves the traditional recursive ranking behavior and often produces compact cluster layouts. |
+| **global**  | All clusters participate in a single, unified ranking. This can create more consistent alignment across clusters but may increase spacing. |
+
+---
+
+#### layout=fdp
+
+| ![](./graphviz_tab_layout_fdp.png) |
 | ---------------------------------------- |
 
-#### Layout = `neato`
+The **Overlap** control is presented as a dropdown list that lets you choose how Graphviz handles node collisions during layout. Each option corresponds to a specific overlap‑removal strategy supported by Graphviz, ranging from allowing overlaps for speed to applying more advanced algorithms for cleaner spacing. 
 
-| ![](../media/graphviz_algorithm_neato.png) |
+| Value      | Description |
+|------------|-------------|
+| **compress** | Reduces whitespace by compressing the layout after overlap removal, producing a tighter diagram. |
+| **prism**    | Uses a stress‑based algorithm to separate overlapping nodes while preserving layout structure. |
+| **scale**    | Uniformly scales the entire layout until nodes no longer overlap. |
+| **scalexy**  | Scales the layout independently in the X and Y directions to eliminate overlaps. |
+| **Voronoi**  | Uses a Voronoi‑based algorithm to push nodes apart by expanding their regions until overlaps are resolved. |
+
+The **Layout Dimensions** control (`dim=` attribute) sets the number of dimensions Graphviz uses when computing node positions for certain layout engines (primarily neato, fdp, and sfdp). This option is presented as a dropdown list, allowing you to choose how many dimensions the layout solver operates in. Higher dimensions can help the solver escape local minima and produce cleaner layouts, even though the final output is always projected back into 2D.
+
+The **Rendering Dimensions** control (`dimen=` attribute) specifies how many dimensions are used when interpreting node size attributes such as width, height, and size. This option is presented as a dropdown list, allowing you to choose whether nodes are sized in two dimensions or in higher‑dimensional space. Although the final drawing is always 2D, increasing the dimensionality can influence how Graphviz interprets size constraints during layout, giving you a simple, intuitive way to adjust how strictly node size attributes are applied.
+
+---
+
+#### layout=neato
+
+| ![](./graphviz_tab_layout_neato.png) |
 | ------------------------------------------ |
 
-#### Layout = `osage`
+The **Overlap** control is presented as a dropdown list that lets you choose how Graphviz handles node collisions during layout. Each option corresponds to a specific overlap‑removal strategy supported by Graphviz, ranging from allowing overlaps for speed to applying more advanced algorithms for cleaner spacing. 
 
-| ![](../media/graphviz_algorithm_osage.png) |
-| ------------------------------------------ |
+| Value      | Description |
+|------------|-------------|
+| **compress** | Reduces whitespace by compressing the layout after overlap removal, producing a tighter diagram. |
+| **prism**    | Uses a stress‑based algorithm to separate overlapping nodes while preserving layout structure. |
+| **scale**    | Uniformly scales the entire layout until nodes no longer overlap. |
+| **scalexy**  | Scales the layout independently in the X and Y directions to eliminate overlaps. |
+| **Voronoi**  | Uses a Voronoi‑based algorithm to push nodes apart by expanding their regions until overlaps are resolved. |
 
-#### Layout = `patchwork`
+The **Mode** control selects the algorithm that Neato uses to compute node positions during layout. This option is presented as a dropdown list, allowing you to choose among several solver strategies that influence how distances, forces, and constraints are optimized. Each mode offers a different balance of speed, stability, and layout style, giving you a quick, intuitive way to experiment with how the underlying algorithm shapes the structure of your diagram.
 
-| ![](../media/graphviz_algorithm_patchwork.png) |
-| ---------------------------------------------- |
+| Value      | Description |
+|------------|-------------|
+| **major**  | Uses stress majorization to iteratively refine node positions; stable and widely used. |
+| **KK**     | Uses the Kamada–Kawai spring model, optimizing ideal edge lengths through gradient descent. |
+| **hier**   | Produces a top‑down, hierarchy‑influenced layout similar to dot but using Neato’s solver. |
+| **ipsep**  | Applies iterative penalty separation to enforce minimum distances between nodes. |
+| **spring** | Uses a classical spring‑embedder approach for force‑directed placement. |
+| **maxent** | Uses a maximum‑entropy–inspired solver to spread nodes evenly while respecting constraints. |
 
-#### Layout = `sfdp`
+The **Model** control selects how Neato interprets edge relationships when computing ideal node distances. This option is presented as a dropdown list, allowing you to choose among several distance‑calculation models that influence clustering, separation, and overall layout behavior. Each model offers a different way of translating graph structure into geometric constraints, giving you a quick, intuitive way to shape how Neato arranges your diagram.
 
-| ![](../media/graphviz_algorithm_sfdp.png) |
+The **Layout Dimensions** control (`dim=` attribute) sets the number of dimensions Graphviz uses when computing node positions for certain layout engines (primarily neato, fdp, and sfdp). This option is presented as a dropdown list, allowing you to choose how many dimensions the layout solver operates in. Higher dimensions can help the solver escape local minima and produce cleaner layouts, even though the final output is always projected back into 2D.
+
+The **Rendering Dimensions** control (`dimen=` attribute) specifies how many dimensions are used when interpreting node size attributes such as width, height, and size. This option is presented as a dropdown list, allowing you to choose whether nodes are sized in two dimensions or in higher‑dimensional space. Although the final drawing is always 2D, increasing the dimensionality can influence how Graphviz interprets size constraints during layout, giving you a simple, intuitive way to adjust how strictly node size attributes are applied.
+
+---
+
+#### layout=osage
+
+There are no additional dynamic options for `layout=osage`.
+
+---
+
+#### layout=patchwork
+
+There are no additional dynamic options for `layout=patchwork`.
+
+---
+
+#### layout=sfdp
+
+| ![](./graphviz_tab_layout_sfdp.png) |
 | ----------------------------------------- |
+
+The **Overlap** control is presented as a dropdown list that lets you choose how Graphviz handles node collisions during layout. Each option corresponds to a specific overlap‑removal strategy supported by Graphviz, ranging from allowing overlaps for speed to applying more advanced algorithms for cleaner spacing. 
+
+| Value      | Description |
+|------------|-------------|
+| **compress** | Reduces whitespace by compressing the layout after overlap removal, producing a tighter diagram. |
+| **prism**    | Uses a stress‑based algorithm to separate overlapping nodes while preserving layout structure. |
+| **scale**    | Uniformly scales the entire layout until nodes no longer overlap. |
+| **scalexy**  | Scales the layout independently in the X and Y directions to eliminate overlaps. |
+| **Voronoi**  | Uses a Voronoi‑based algorithm to push nodes apart by expanding their regions until overlaps are resolved. |
+
+The **Mode** control selects the algorithm that Neato uses to compute node positions during layout. This option is presented as a dropdown list, allowing you to choose among several solver strategies that influence how distances, forces, and constraints are optimized. Each mode offers a different balance of speed, stability, and layout style, giving you a quick, intuitive way to experiment with how the underlying algorithm shapes the structure of your diagram.
+
+| Value      | Description |
+|------------|-------------|
+| **major**  | Uses stress majorization to iteratively refine node positions; stable and widely used. |
+| **KK**     | Uses the Kamada–Kawai spring model, optimizing ideal edge lengths through gradient descent. |
+| **hier**   | Produces a top‑down, hierarchy‑influenced layout similar to dot but using Neato’s solver. |
+| **ipsep**  | Applies iterative penalty separation to enforce minimum distances between nodes. |
+| **spring** | Uses a classical spring‑embedder approach for force‑directed placement. |
+| **maxent** | Uses a maximum‑entropy–inspired solver to spread nodes evenly while respecting constraints. |
+
+The Smoothing control is presented as a dropdown list that lets you choose how Graphviz refines the raw node positions produced by the layout engine. Each option applies a different post‑processing technique to “smooth out” irregularities, reduce jitter, or improve geometric consistency. This gives you a simple, intuitive way to fine‑tune the visual polish of your diagram without altering the underlying layout structure.
+
+| Value        | Description |
+|--------------|-------------|
+| **none**       | No smoothing applied. Uses the raw layout positions exactly as computed. |
+| **avg_dist**   | Adjusts node positions based on average distances to neighbors, reducing local irregularities. |
+| **graph_dist** | Smooths positions using graph‑theoretic distances, improving global consistency. |
+| **power_dist** | Applies a power‑law weighting to distances, emphasizing stronger relationships. |
+| **rng**        | Uses a Relative Neighborhood Graph–based smoothing to reduce noise while preserving structure. |
+| **spring**     | Applies a light spring‑embedder pass to gently relax node positions. |
+| **triangle**   | Uses triangle‑based geometric smoothing to even out spacing in dense regions. |
+
+The **Layout Dimensions** control (`dim=` attribute) sets the number of dimensions Graphviz uses when computing node positions for certain layout engines (primarily neato, fdp, and sfdp). This option is presented as a dropdown list, allowing you to choose how many dimensions the layout solver operates in. Higher dimensions can help the solver escape local minima and produce cleaner layouts, even though the final output is always projected back into 2D.
+
+The **Rendering Dimensions** control (`dimen=` attribute) specifies how many dimensions are used when interpreting node size attributes such as width, height, and size. This option is presented as a dropdown list, allowing you to choose whether nodes are sized in two dimensions or in higher‑dimensional space. Although the final drawing is always 2D, increasing the dimensionality can influence how Graphviz interprets size constraints during layout, giving you a simple, intuitive way to adjust how strictly node size attributes are applied.
+
+---
 
 #### Layout = `twopi`
 
-| ![](../media/graphviz_algorithm_twopi.png) |
-| ------------------------------------------ |
+There are no additional dynamic options for `layout=patchwork`.
 
-| Label     | Control Type                                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| --------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Layout    | Dropdown list                                                           | Specifies which Graphviz layout program to use when drawing the graph.<br><br>**Choices:**<ul><li>`circo`</li><li>`dot`</li><li>`fdp`</li><li>`neato`</li><li>`osage`</li><li>`patchwork`</li><li>`sfdp`</li><li>`twopi`</li></ul>See [Layout Algorithms](#layout-algorithms) for more information on how the algorithms draw the graphs.                                                                                                                                                                                                                    |
-| Splines   | Dropdown list ![](../media/f5a2e04d00e4abf6314400ac7d9f869d.png)        | Specifies how the edges between nodes should be drawn. See the examples in the [Splines](#splines) section.<br><br>**Choices:**<ul><li>`curved`</li><li>`line` </li><li>`none`</li><li> `ortho`</li><li>`polyline`</li><li>`spline`</li></ul>                                                                                                                                                                                                                                                                                                                |
-| Directed graph   | Checkbox       | Specifies if the graph should be drawn as a [Directed Graph](../terminology/README.md#directed-graph) or an [Undirected Graph](../terminology/README.md#undirected-graph).<br><br>**Choices:**<br><ul><li>_Checked_ - Graph will be drawn with arrowheads.</li><li>_Unchecked_ - Graph will be drawn without arrowheads.</li></ul>                                                                                                              |
-| Direction | Dropdown list<br><br>![](../media/085f8d2a9e5f4e39eb987958c065a13c.png) | This setting controls the way that shapes are placed when the `dot` layout engine is used. This option will be hidden from the ribbon if the graphing engine is set to anything other than dot.<br><br>**Choices:**<ul><li>`TB` - top to bottom</li><li>`BR` - bottom to top</li><li>`LR` - left to right</li><li>`RL` - right to left</li></ul> ![](../media/b20a1369784eabff02360ff64df6bc81.png) ![](../media/bb330ebf91c075dfdfe845b8ba50947d.png) ![](../media/34ad965b9b46559a55fda440b89eb44a.png) ![](../media/cd3fd86d5c1b96e6b7b93a9b0f7d9553.png) |
-| Rank ignoring clusters                                                  | Checkbox      | Adds a `newrank="true"` attribute when checked. This choice will only be present if the layout algorithm is set to `dot`. <br><br>See [Clusters - Aligning Nodes across Clusters](../advanced/#aligning-nodes-across-clusters) for more information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Allow edges between clusters                                            | Checkbox      | Adds a `compound="true"` attribute when checked. If `compound="true"`, allows edges between clusters. <br><br>See [Clusters - Depicting a Relationship from or to a Cluster](../advanced/#depicting-a-relationship-from-or-to-a-cluster) for more information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 ### Options
 
@@ -719,9 +905,20 @@ Choices which control how edges should be specified in the Graphviz source, and 
 | Use attributes | Checkbox      | Specifies if the `Attributes` style attributes on the `data` worksheet should be included or omitted when the graph is generated. <br><br>**Choices:**<ul><li>_Checked_ - include the style attributes </li><li>_Unchecked_ - do not include the style attributes</li></ul>|
 | Columns        | Dropdown List | A list of column names on the `data` worksheet which can be displayed or hidden.<br><br>**Choices:**<ul><li>_Checked_ - show the column </li><li>_Unchecked_ - hide the column</li></ul>                                                                            |                                                                              |
 
+### 'data' Worksheet
+
+| ![](./graphviz_tab_data_worksheet.png) |
+| ------- |
+
+| Label              | Control Type  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------ | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Show Columns      | Menu        | Displays a list of all the columns used by the data worksheet. Allows you to show or hide columns by clicking of the column names. Checked columns are shown, unchecked columns are hidden   |
+| Delete Graph       | Button        | Clicking on this button will delete the graph from the worksheet. This is useful when adding rows as new rows will stretch the image. You may also find you want to delete the image before saving the file to reduce the file size.                                                                                                                                                                                                                                                                                                                      |
+| Delete all data    | Button        | Resets the `data` worksheet to blank cells, and deletes any graphs if present.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+
 ### Debug
 
-| ![](./graphviz-ribbon-debug.png) |
+| ![](./graphviz_tab_debug.png) |
 | ------- |
 
 | Label                                                                   | Control Type  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -732,7 +929,7 @@ Choices which control how edges should be specified in the Graphviz source, and 
 
 ### Help
 
-| ![](./graphviz-ribbon-help.png) |
+| ![](./graphviz_tab_help.png) |
 | ------- |
 
 Provides the `Help` content for the `Graphviz` ribbon tab.
@@ -740,3 +937,16 @@ Provides the `Help` content for the `Graphviz` ribbon tab.
 | Label | Control Type  | Description |
 | ----- | ------------- | --------------------------------- |
 | Help  | Button        | Provides a link to this web page. |
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>
+
+
+
+
+

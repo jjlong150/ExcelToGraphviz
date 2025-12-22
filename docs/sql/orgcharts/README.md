@@ -1,18 +1,40 @@
-# Using SQL - Organization Charts
+---
+prev: /sql/recursion/
+next: /sql/syntax/
+---
 
-## Introduction
+# Creating Organization Charts
 
-*Relationship Visualizer* Version 7.2 added support for recursive SQL queries, enabling the creation of hierarchies such as organization charts. 
+A frequent question is: *“Can you create organization charts using the Relationship Visualizer?”*  
+The answer is **YES!**
 
-The candidate dataset should include the following key columns which define relationships, allowing hierarchical traversal.
-  - A parent node.
-  - A child node. 
+The tool's support for recursive SQL queries and parent–child relationships makes it well‑suited for generating multi‑level organizational hierarchies. As long as your dataset includes clear parent and child identifiers, the Relationship Visualizer can automatically construct a complete org chart—whether it's a simple two‑level structure or a deeply nested hierarchy.
 
-A recursive query consists of 2 parts:
-1. *Anchor the Base Case*: Define the starting point for recursion (e.g., the top-level parent in the hierarchy, like the CEO).
-2. *Define the Recursive Member*: Specify how to recursively join results back to the table to construct subsequent levels.
+::: tip What is Recursion?
+Recursion works by having a function repeatedly call itself, each time handling a smaller piece of the problem. The process continues until it reaches a base case that tells it when to stop.
+:::
 
-Four new keywords have been defined to enable recursive queries:
+## Recursive SQL Queries
+Relationship Visualizer Version 7.2 introduced support for recursive SQL queries, enabling the automatic construction of hierarchical structures such as organization charts, dependency trees, and connected data paths. Recursive queries allow the tool to walk parent–child relationships repeatedly, building multi‑level hierarchies from simple row‑based data.
+
+To use this feature effectively, the candidate dataset must include the key columns that define each relationship:
+
+- A **parent** node  
+- A **child** node
+
+These columns form the backbone of the hierarchy, allowing the recursive query engine to traverse upward or downward through the structure and generate a complete, layered graph.
+
+A recursive query consists of two essential parts:
+
+1. **Anchor the Base Case**  
+   This defines the starting point for recursion—typically the top‑level parent in the hierarchy (for example, the CEO in an organization chart or the root node in a dependency tree). The anchor member returns the initial set of rows from which the hierarchy will begin.
+
+2. **Define the Recursive Member**  
+   This portion of the query describes how to repeatedly join the growing result set back to the source table. Each iteration locates the next level of child nodes, allowing the hierarchy to expand downward (or upward) until no additional relationships remain.
+
+## SQL Extensions
+
+Four new keywords unique to Relationship Visualizer have been defined to enable recursive queries:
 - `TREE QUERY` - Passed as a literal string, the presence of `TREE QUERY` in the SQL result set tells the SQL engine to execute the associated SQL recursively. 
 
     The SQL **must** contain the symbolic value `''{WHERE VALUE}''` which will be replaced as each node is traversed with the value of the current node.
@@ -27,11 +49,13 @@ Four new keywords have been defined to enable recursive queries:
 
 ## Scenario
 
-You want to create an organization chart of the Executive Branch of the the United States government. (No politics intended, AI was used to create a sample data set). 
+You want to create an organization chart of the Executive Branch of the United States government.  
+(No political messages are intended; an AI‑generated sample dataset is used purely for demonstration.)
 
-Assume you have an Excel workbook with a worksheet named `US Executive Branch` containing information such as Name, Title, Department, and who reports to who. The data appears as:
+Assume you have an Excel workbook with a worksheet named `US Executive Branch` containing columns such as **Name**, **Title**, **Department**, and **Reports To**. The data appears as follows:
 
-![](./SampleData.png)
+| ![](./SampleData.png) |
+| --------------------- |
 
 ## Standard Query
 
@@ -270,5 +294,13 @@ Specifying `Max Depth = 0` removes the depth limit, and we get the full organiza
 ## Sample Content
 
 The files used in these examples are contained in the `\Relationship Visualizer\samples\13 - Using SQL - Organization Charts` directory in the zip file download.
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>
 
 

@@ -1,28 +1,34 @@
 ---
-prev: /sql/
-next: /settings/
+prev: /console/
+next: /diagnostics/
 ---
 
 # Exchanging Data
 
-There are several drawbacks of using an Excel workbook with macros as your Graphviz IDE.
+There are several drawbacks to using a macro‑enabled Excel workbook as your Graphviz IDE:
 
-- The primary drawback is that the data and the macro code live together in the same file. As new versions of the spreadsheet get published with new features it has always been a chore to copy existing data spanning several worksheets, and all the ribbon settings from the old version to the new version.
-- Another drawback is that an Excel Workbook is actually a zip file internally. With the file being a binary file, it is not conducive to checking into version control software such as Git, or for performing a diff on to see what has changed between versions.
-- Sharing services such as [Pastebin](https://pastebin.com/) provide an easy mechanism for sharing content and examples, but they require text files.
-- Finally, VBA macro-enabled workbooks are not always trusted by people, or email systems. People trying to share the workbook over email often learn that the email system has stripped the attachment from the email due to the presence of macros.
+- **Data and code live in the same file.** As new versions of the workbook are released with additional features, it becomes tedious to copy existing data across multiple worksheets—and to reapply all ribbon settings—from the old version to the new one.
+- **Excel workbooks are binary files.** Internally, an Excel file is a ZIP archive. Because it is not a plain text format, it does not work well with version control systems such as Git, nor does it lend itself to meaningful diffs between versions.
+- **Text‑based sharing services are incompatible.** Platforms such as [Pastebin](https://pastebin.com/) make it easy to share examples and snippets, but they require text files rather than binary Excel files.
+- **Macro‑enabled workbooks are often distrusted.** Many users—and many email systems—treat VBA‑enabled files as unsafe. It is common for email systems to strip the attachment entirely due to the presence of macros.
 
-It became apparent that a text-based representation of the data, styles, and settings was needed. The features to support exporting and importing the spreadsheet data comprise the `Exchange` workbook tab. There is not an associated worksheet since data exchange is focused on the internal contents of the workbook.
+These limitations made it clear that a text‑based representation of the workbook’s data, styles, and settings was needed. The features that support exporting and importing this information are provided on the **Exchange** ribbon tab. There is no associated worksheet, as data exchange operates directly on the internal contents of the workbook.
 
-Let's look at an existing spreadsheet and see how we can export it from one spreadsheet and import it into another using the exchange logic. The `Exchange` tab is the last tab in the workbook, and appears as follows:
+Let’s look at an existing spreadsheet and walk through exporting it from one workbook and importing it into another using the Exchange logic. The **Exchange** tab is the final tab in the workbook and appears as follows:
 
-![](../media/949ef9f37a36b537ffeff2c6fbdeafc1.png)
+| ![](../media/949ef9f37a36b537ffeff2c6fbdeafc1.png) |
+| -------------------------------------------------- |
 
 ## The `Exchange` Ribbon Tab
 
 The `Exchange` ribbon tab appears as follows, and is organized as illustrated
 
+*Windows*
 | ![](../media/bddf27390423201e36b72341e87823e5.png) |
+| -------------------------------------------------- |
+
+*macOS*
+| ![](./mac_ribbon_exchange.png) |
 | -------------------------------------------------- |
 
 - `Export JSON` - Writes contents out to JSON file
@@ -65,12 +71,11 @@ The `Exchange` ribbon tab appears as follows, and is organized as illustrated
 
 ## Exporting Relationship Visualizer Data to JSON format
 
-You can export all the data, or portions of the data depending upon how you intend to use it. Exporting portions of the data is useful when working in teams as you can do things such as export the style definitions and share them, or export the data of team members and combine them into a larger workbook using the `Append` option of an import.
+You can export all of the data, or only selected portions, depending on how you intend to use it. Exporting subsets is especially useful when working in teams—for example, you can export just the style definitions to share with others, or export individual team members’ data and combine it into a larger workbook using the **Append** option during import.
 
-You have the flexibility to export the entire contents to a `JSON` file, and selectively import just the sections desired in a new workbook.
+You may export the entire workbook to a `JSON` file and later import only the sections you need into a new workbook.
 
 Here are example snippets of exported workbook contents:
-
 ### Graphing Options
 
 | ![](../media/exchange_graphing_options.png) |
@@ -375,7 +380,7 @@ Here are example snippets of exported workbook contents:
 
 #### 'svg' Worksheet
 
-| ![](../media/exchange_sql_worksheet.png) |
+| ![](../media/exchange_svg_worksheet.png) |
 | ---------------------------------------- |
 
 ```json
@@ -418,13 +423,20 @@ Make the selections of the data you wish to export, and press the `Export JSON` 
 
 You will be prompted to specify the name of a JSON file that the data should be written to. Enter a file name and press the `Save` button.
 
-![](../media/8670de49c6cbbde7ff3719a4f51dffcb.png)
+*Windows*
+| ![](../media/8670de49c6cbbde7ff3719a4f51dffcb.png) |
+| :------------------------------------------------: |
+
+*macOS*
+![](./mac_export_save_as.png) |
+| :------------------------------------------------: |
 
 Once the data is written to the file you will receive a pop-up message such as:
 
-![](../media/6cca3bec16b578f942f1edd935ef8bce.png)
+| ![](../media/6cca3bec16b578f942f1edd935ef8bce.png) |
+:------------------------------------------------:
 
-Press the OK button, and you are done.
+Press the **OK** button, and you are done.
 
 ## Importing JSON Data into the Relationship Visualizer
 
@@ -453,8 +465,18 @@ Once you have selected your Import, press the `Import JSON` button.
 
 You will be prompted to **Choose an Excel to Graphviz data exchange file**
 
-![](../media/e92f7b2b8650392ddb0ac3818ffb4e2f.png)
+| ![](../media/e92f7b2b8650392ddb0ac3818ffb4e2f.png) |
+| -------------------------------------------------- |
 
 Select the file and press the `OK` button. The data will be imported (which may take several seconds). If the `Automatic Refresh` checkbox on the Graphviz tab is checked, the Relationship Visualizer will graph the data to the worksheet, otherwise press the `Refresh Graph` button to see the graph.
 
-![](../media/aa15bddb7bbdcca777cc1a4a8787596d.png)
+| ![](../media/aa15bddb7bbdcca777cc1a4a8787596d.png) |
+| -------------------------------------------------- |
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

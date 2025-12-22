@@ -48,7 +48,7 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: "Download",
+        text: "📥Download",
         items: [
           { text: "- Graphviz", link: "https://graphviz.org/download/" },
           {
@@ -57,7 +57,7 @@ module.exports = {
         ],
       },      
       {
-        text: "Install",
+        text: "🛠️Install",
         items: [
           { text: "- Microsoft Windows", link: "/install-win/" },
           {
@@ -66,7 +66,11 @@ module.exports = {
         ],
       },
       {
-        text: "Worksheets",
+        text: "🚀Launchpad",
+        link: "/launchpad/",
+      },
+      {
+        text: "📑Worksheets",
         items: [
           { text: "Data",
             items: [
@@ -76,7 +80,7 @@ module.exports = {
           },
           { text: "Style",
             items: [
-              { text: "- style designer", link: "/tutorial/#the-style-designer-ribbon-tab" },
+              { text: "- style designer", link: "/designer/" },
               { text: "- styles", link: "/styles/" },      
             ],
           },
@@ -114,12 +118,13 @@ module.exports = {
           }, 
         ],
       },
-      { text: "About...", 
+      { text: "ℹ️About...", 
         items: [
           { text: "- About Excel to Graphviz", link: "/about/" },
           { text: "- Acknowledgements", link: "/acknowledge/" },
           { text: "- Change Log", link: "/changelog/" },
           { text: "- Terminology", link: "/terminology/" },
+          { text: "- Workbook Structure", link: "/workbook/" },
         ]
       },
       { text: "☕", link: "https://buymeacoffee.com/exceltographviz"},

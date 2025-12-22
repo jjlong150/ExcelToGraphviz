@@ -1,18 +1,38 @@
 ---
-prev: /source/
-next: /exchange/
+prev: /styles/
+next: /sql/queries/
 ---
 
 # Using SQL
-## Import Data from other Excel Spreadsheets
 
-Have you ever wished that you could graph data that resides in some other spreadsheet? Do you have spreadsheets which change frequently, and thus need frequent re-graphing? The Relationship Visualizer provides a powerful solution which lets you write Structured Query Language (SQL) statements which can pull in your data from other worksheets in an easily repeatable manner.
+Unlock the power of SQL to extract and visualize data from your Excel spreadsheets with Relationship Visualizer. This optional feature<sup>[1]</sup> lets you write SQL queries to pull data from multiple worksheets and generate Graphviz graphs with ease.
 
-::: tip
+Ideal for users familiar with SQL, it provides a fast and flexible way to:
 
-Using the SQL capability is optional. You do not have to use this feature to create graphs. This is a feature for the Relationship Visualizer power user and requires some working knowledge of how to write SQL statements.
+- Combine data from multiple Excel worksheets using SQL queries  
+- Batch‑process queries to aggregate information across several workbooks  
+- Streamline repetitive data‑preparation and transformation tasks
 
+::: tip SQL Topics
+
+<!-- no toc -->
+- [What is SQL?](#what-is-sql)
+- [Excel SQL Queries](#excel-sql-queries)
+- [How to Use SQL in the Relationship Visualizer](#how-to-use-sql-in-the-relationship-visualizer)
+- [The `SQL` Worksheet](#the-sql-worksheet)
+- [The `SQL` Ribbon Tab](#the-sql-ribbon-tab)
+- [SQL Queries for Creating Graphs](./queries/)
+- [SQL Extensions](./extensions/)
+  - [Grouping Data into Clusters and Subclusters](./extensions/README.md#grouping-data-into-clusters-and-subclusters)
+  - [Splitting Labels](./extensions/README.md#splitting-labels)
+  - [Chaining Nodes Using Edges](./extensions/README.md#chaining-nodes-using-edges)
+  - [Creating Subgraphs With Rank](./extensions/README.md#creating-subgraphs-with-rank)
+  - [Traversing Trees Recursively](./recursion/)
+  - [Creating Organization Charts](./orgcharts/)
+- [SQL syntax](./syntax/)
 :::
+
+[1]: The SQL feature is **Windows-only** and requires basic SQL knowledge. If you use macOS, you can still use Relationship Visualizer’s manual data entry options. 
 
 ## What is SQL?
 
@@ -24,32 +44,35 @@ SQL `SELECT` statements are designed to query data contained in a relational dat
 
 _Syntax:_
 ```sql
-    SELECT column_name FROM table_name [WHERE clause]`
+    SELECT column_name FROM table_name [WHERE clause]
 ```
-
 ## Excel SQL Queries
 
-Excel can function as a flat-file RDBMS database that can be accessed using **ActiveX Data Objects (ADO)** and SQL queries. Microsoft Excel handles SQL via its own SQL dialect. 
+Excel can act as a flat‑file RDBMS, accessible through ActiveX Data Objects (ADO) and SQL queries. Its SQL support is provided through a dedicated Excel‑specific dialect implemented by the Jet and ACE database engines.
 
 ::: tip
-See the [SQL references](#sql-references) at the end of this chapter for detailed information on the Excel SQL dialect.
+See [SQL Syntax](./syntax/) for detailed information on the Excel SQL dialect.
 :::
 
-The Relationship Visualizer contains a worksheet named `sql` which hides most of the complexities of writing ADO SQL. It allows you to write SQL `SELECT` queries conforming to the ADO syntax conventions and it takes care of the rest. The SQL `SELECT` statements can reference either the Relationship Visualizer spreadsheet or another Excel spreadsheet as the source of the data. When the query is executed, the query results are written to the `data` worksheet ready for graphing.
+The Relationship Visualizer includes a worksheet named `sql` that abstracts away most of the complexity involved in writing ADO SQL. It lets you write SQL `SELECT` statements using ADO‑compatible syntax, while the tool automatically manages all connection details. Queries can reference either the Relationship Visualizer workbook itself or any other Excel workbook as the data source.
 
-ADO has many features, but the only features which the Relationship Visualizer uses are SQL `SELECT` queries of the form:
+When a query is executed, the results are written to the `data` worksheet, where they become immediately available for graphing.
+
+ADO supports many capabilities, but the Relationship Visualizer uses only a focused subset—specifically SQL `SELECT` queries of the form:
 
 ```sql
-    SELECT [Country Code] as [Item],
-           [Country Name] as [Label]
-    FROM [Countries$]
+SELECT [Country Code] AS [Item],
+       [Country Name] AS [Label]
+FROM   [Countries$]
 ```
 
-This is a standard SQL query, one that selects two columns in the database (which in our case is a worksheet) and names the results to correspond to the column names of the `data` worksheet. Notice that we specify the name of an individual worksheet in the query, in the same way that we would specify an individual table name if we were connecting to a database, with a couple of minor exceptions. The worksheet name is enclosed in square brackets and that the actual worksheet name - **Countries** - has a **$** appended to it.
+This is a standard SQL query—one that selects two columns from the database (which, in this context, is an Excel worksheet) and assigns names to the results that match the column names on the `data` worksheet. As with a traditional database, the query specifies the name of a table; however, Excel introduces two small differences. The worksheet name must be enclosed in square brackets, and the actual sheet name—**Countries** in this example—must have a **$** appended to it.
 
-Square brackets are also used to wrap the column names since the column names may have spaces present. The square brackets inform ADO to treat the value inside as the column name. Square brackets are used instead of quotes because quotes denote a string value to place in the results.
+Square brackets are also required around column names, since Excel headers may contain spaces or special characters. Bracketing ensures ADO interprets the text as a column identifier. Quoted values cannot be used for this purpose, because quotes indicate string literals rather than column references.
 
-The results of the `SELECT` statements are processed by the Relationship Visualizer to place the selected values into the appropriate columns of the `data` worksheet. The processing logic only recognizes the column names, and will discard all other data. The default English column names on the `data` worksheet are:
+### Map results to `data` worksheet columns
+
+After the `SELECT` statement runs, the Relationship Visualizer processes the results and places the selected values into the corresponding columns of the `data` worksheet. Only recognized column names are used; all other fields are ignored. The default English column names on the `data` worksheet are:
 
 - `[Comment]`
 - `[Item]`
@@ -61,9 +84,11 @@ The results of the `SELECT` statements are processed by the Relationship Visuali
 - `[Style Name]`
 - `[Attributes]`
 
-Excel SQL also allows you to specify strings values as selection columns. The string is repeated for each row of the query results when the SQL is executed. This is a useful feature for specifying values such as a style name.
+### String constants
 
-Assume that there is a style defined on the `styles` worksheet named `Country`. The query is modified as follows to add a style named `Country` to each row of the results:
+Excel SQL also allows you to specify string values as selection columns. When used in a `SELECT` statement, the string is repeated for every row returned by the query. This is particularly useful for assigning constant values **such as a style name** to each row of the result set.
+
+For example, suppose the `styles` worksheet defines a style named `Country`. You can modify the query to include this style by adding a constant string column, ensuring that every row in the output is tagged with the `Country` style:
 
 ```sql
     SELECT [Country Code] as [Item],
@@ -72,9 +97,11 @@ Assume that there is a style defined on the `styles` worksheet named `Country`. 
     FROM   [Countries$]
 ```
 
-SQL allows you to specify `WHERE` conditions which control what information is returned. The `WHERE` clause, states the qualifying conditions for a query. Multiple conditions can be joined by the `AND` and `OR` clauses, optionally surrounded by (parentheses) to group them. Only the records that satisfy the specified criteria are returned by the query.
+### Apply search conditions
 
-Assume that we wanted a list of countries which use US Dollars as their national currency. The international code for US Dollars is "USD" so the SQL would be modified to appear as follows:
+SQL allows you to specify `WHERE` conditions to control which records are returned. The `WHERE` clause defines the qualifying criteria for a query. Multiple conditions can be combined using the `AND` and `OR` operators, with optional parentheses to group expressions. Only rows that meet the specified conditions are included in the results.
+
+For example, suppose we want a list of countries that use US Dollars as their national currency. The international code for US Dollars is `USD`, so the SQL query would be modified as follows:
 
 ```sql
     SELECT [Country Code] as [Item],
@@ -84,7 +111,11 @@ Assume that we wanted a list of countries which use US Dollars as their national
     WHERE  [Currency Code] = 'USD'
 ```
 
-A column often contains duplicate values. To list the distinct values, use the `SELECT DISTINCT` clause. The `DISTINCT` keyword can be used to return only unique values from a set of records. For example, if our worksheet contains the continent names where countries reside, we can obtain a list of the continents without duplicate rows using the following SQL statement:
+### Eliminate duplicate values
+
+A column often contains duplicate values. To list only the unique entries, use the `SELECT DISTINCT` clause. The `DISTINCT` keyword filters the result set so that each value appears only once, even if it occurs many times in the underlying data.
+
+For example, if the worksheet includes a column listing the continent for each country, you can retrieve a deduplicated list of continents using a query such as:
 
 ```sql
     SELECT DISTINCT [Continent] as [Item],
@@ -93,135 +124,304 @@ A column often contains duplicate values. To list the distinct values, use the `
     FROM   [Countries$]
 ```
 
-Now that you understand the basics of writing SQL `SELECT` statements, let us look at the features contained in the `sql` worksheet and ribbon tab.
+## How to Use SQL in the Relationship Visualizer
 
-The `sql` worksheet is hidden by default. To expose the `sql` worksheet select the `sql` button on the `Graphviz` tab.
+Follow these simple steps to create graphs using SQL queries in Relationship Visualizer:
 
-![](../media/af15bb34ce96ea2061d42285932815f5.png)
+### Open the `sql` Worksheet
+  
+In your Relationship Visualizer workbook, use the Launchpad to show the `sql` worksheet, then make the `sql` worksheet active.
+
+| ![](./launchpad-sql.png) |
+| ------------------------ |
+
+| ![](./sql-worksheet.png) |
+| ------------------------ |
+
+### Write Your SQL Query
+
+Enter a SQL `SELECT` query using ADO syntax. For example, to create nodes for countries in the world, a simple query would look as follows:  
+
+```sql
+SELECT [Country Code] as [Item],
+       [Country Name] as [Label]
+FROM   [Countries$]
+```
+
+Reminders:
+- Use square brackets `[ ]` for column and worksheet names.
+- Worksheet names end with `$` (e.g., `[Countries$]`). 
+
+Assign column names from the data workbook to the Relationship Visualizer column names on the `data` worksheet. The default column names are:
+- `[Comment]`
+- `[Item]`
+- `[Label]`
+- `[External Label]`
+- `[Tail Label]`
+- `[Head Label]`
+- `[Related Item]`
+- `[Style Name]`
+- `[Attributes]`
+
+### Specify the Excel data file 
+
+Data can be queried from any Excel workbook. Specify the workbook name in column C. 
+
+If you leave column C blank the queries will try to use a workbook specified in the Ribbon. If not present there either, it default to looking for the worksheets in the Relationship Visualizer workbook.
+
+### Run the Query
+
+Click the `Run SQL Commands` button to execute your query. The results will populate the `data` worksheet, with status messages in column D (e.g., **SUCCESS**).
+
+
+### Visualize the Graph
+
+Press the `Refresh` button to generate your Graphviz visualization based on the query results.
+
+## The `SQL` Worksheet
+
+The `sql` worksheet is the worksheet you will write and execute queries to pull data from another Excel workbook. 
+
+Before we run any SQL, lets gain an understanding of the mandatory and optional columns on this worksheet.
+
+The `data` Worksheet has 4 columns (A-D):
+
+| A | B | C | D |
+|---|---|---|---|
+| [Indicator](./README.md#indicator) | [SQL SELECT Statement](./README.md#sql-select-statement) | [Excel data file](./README.md#excel-data-file) |[Status](./README.md#status) |
+
+### Indicator
+
+The `Indicator` column is used to draw special attention to a row.
+- A `#` hash character treats the row as a comment. The text in the row will turn gray, and this row will be skipped when running the SQL. 
+- An `!` exclamation mark character will appear if errors are detected in your data on this row. The Status will turn red, and an error message will be displayed in the [Status](./README.md#status) column.
+
+### SQL SELECT Statement
+
+This column is where the SQL Statement is entered. For example:
+
+```sql
+SELECT [Country Code] as [Item],
+       [Country Name] as [Label]
+FROM   [Countries$]
+```
+
+### Excel data file
+
+This column specifies the Excel file that contains the data.
+
+- If the column is left blank, the current Relationship Visualizer workbook is used as the data source.  
+- If a fully qualified filename (path + file) is provided, that file is used exactly as specified.  
+- If a relative filename (file only) is provided, it is assumed to be located in the same directory as the Relationship Visualizer workbook.
+
+### Status
+
+The result of the SQL query. The value will be either:
+
+- 🟩 `SUCCESS` - The query was executed successfully.  
+- 🟥 `FAILURE` - The query failed. Any error message will be appended to the status value. 
+
+  Even simple Excel SQL queries can fail for reasons that aren’t obvious at first glance. Keep an eye out for these common issues:
+  - **Missing the `$` in worksheet names**  
+    ADO requires worksheet names to end with a `$` (e.g., `[Countries$]`). Omitting it will cause the query to fail.
+
+  - **'xyz' is not a valid name. Make sure that it does not include invalid characters or punctuation and that it is not too long** *(where 'xyz' is a worksheet name in your `FROM` clause)*.  
+
+    This error usually means you have referenced a worksheet that cannot be found for one of these reasons:
+    - **The worksheet name is misspelled** Verify that the name in your FROM clause exactly matches the worksheet tab name, including capitalization and spacing.
+    - **The worksheet does not exist in the Relationship Visualizer workbook.** Ensure that the worksheet is present and has not been renamed or deleted.
+    - **No external Excel workbook was specified as a data source.** ADO cannot resolve worksheet names unless a workbook has been specified.
+    - **The wrong Excel workbook was selected as the data source.** Double‑check that the workbook you chose contains the worksheet referenced in your query.
+
+  - **Forgetting square brackets around sheet or column names**  
+    Brackets are required when names contain spaces, punctuation, or non‑alphanumeric characters.  
+    Examples: `[Country Code]`, `[Sales 2024$]`.
+
+  - **Using quotes instead of brackets for identifiers**  
+    `"Country Code"` is treated as a string literal, not a column reference. Always use `[Country Code]`.
+
+  - **Header row not in row 1**  
+    ADO expects column headers in the first row of the worksheet. If your data starts lower, the query may return no rows or incorrect results.
+
+  - **Mixed data types in a column**  
+    Excel may infer the wrong type (e.g., treating numeric IDs as text). This can cause filtering or comparison operations to behave unexpectedly.
+
+  - **Sheet names that look like ranges**  
+    Names such as `A1` or `R1C1` can confuse the provider. Renaming the sheet usually resolves the issue.
+
+  - **Hidden or filtered rows**  
+    ADO reads the entire sheet, including hidden rows. If you expect filtered results, you must filter them in SQL.
+
+  - **External workbook paths not fully pathed**  
+    When referencing another workbook, the full path must be provided.
+
+- ⬜ `SKIPPED` - The row was not processed because either a comment indicator (`#`) was present in Column A, or a [Filter](#filter) was applied and the row did not meet the filter criteria. Rows can be skipped for two independent reasons:
+
+  - Column A begins with `#`, the row is treated as a comment and is never processed.  
+  - A [Filter](#filter) is active, and only rows that match the filter criteria are executed; all others are skipped.
 
 ## The `SQL` Ribbon Tab
 
 The `SQL` ribbon tab is activated whenever the `sql` worksheet is activated. It appears as follows:
 
-![](../media/9dfc9427e1707656d96f800c25ee1885.png)
+![](./sql-ribbon.png)
 
-It contains the following major groups:
+It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
 
-- SQL
-- Visualize
+| Group                               | Controls                            | Description |
+| :----                               | :---                                | :---        | 
+| [SQL](#sql)                         | ![](./sql-group-sql.png)            | The **SQL** controls let you execute the queries defined on this worksheet and manage the status information associated with each statement. |
+|                                     |                                     | |
+| [Edit](#edit)                       | ![](./sql-group-edit.png)           | Provides tools to help get around Excel's inability to display large amounts of cell text. |
+|                                     |                                     | |
+| [Graphviz](#graphviz)               | ![](./sql-group-graphviz.png)       | The `sql` worksheet includes several convenience buttons designed to streamline graph generation after running SQL queries. |
+|                                     |                                     | |
+| [Filter](#filter)                   | ![](./sql-group-filter.png)         | The **Filter** controls allow you to limit which rows are processed when running SQL statements.  |
+|                                     |                                     | |
+| [Data File](#data-file)             | ![](./sql-group-datafile.png)       | The **Data File** controls let you point your SQL queries at external Excel workbooks. |
+|                                     |                                     | |
+| [Connection Pool](#connection-pool) | ![](./sql-group-connectionpool.png) | The Connection Pool group manages how ADO workbook connections are reused, opened, and closed during SQL batch execution to improve performance and control file access. |
+|                                     |                                     | |
+| [Help](#help)                       | ![](./sql-group-help.png)           | Provides a link to the `Help` content for the `sql` worksheet (i.e. this web page). |
+
 
 ### SQL
 
-![](../media/db98e2dfb6d0e0f76c4cc903914bff83.png)
+| ![](./sql-group-sql.png) |
+| ------------------------ |
+
+The **SQL** controls let you execute the queries defined on this worksheet and manage the status information associated with each statement.
 
 | Label            | Control Type | Description                                                                                          |
 | ---------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
-| Run SQL Commands | Button       | Sequentially runs the SQL statements in this worksheet, writing the results to the `data` worksheet. |
-| Clear Status     | Button       | Clear the values from the 'Status' column.                                                           |
+| Run SQL Commands | Button       | Sequentially executes all SQL statements in the worksheet and writes the results to the `data` worksheet. |
+| Clear Status     | Button       | Clears all values in the **Status** column, allowing you to reset or re‑run SQL statements cleanly. |
 
-### Visualize
+### Edit
 
-![](../media/b1462414f047e05a3527440c15eb5c51.png)
+| ![](./sql-group-edit.png) |
+| -------------------------------------------------- |
 
-| Label             | Control Type | Description                                                                                                                                                                                                                                                                                                                           |
-| ----------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Refresh Graph     | Button       | Graphs the data in the `data` worksheet and displays the results in Excel. This button does the same work as the like-named button on the `Graphviz` ribbon tab and is included here to speed the creation of graphs after running SQL statements.                                                                                    |
-| Graph to File     | Button       | Graphs the data in the `data` worksheet and writes the graph to a file using the values specified on the Graphviz ribbon tab. This button does the same work as the like-named button on the `Graphviz` ribbon tab and is included here to speed the creation of graphs after running SQL statements.                                 |
-| All views to File | Button       | Graphs the data in the `data` worksheet against all the views specified and writes the graphs to files using the values specified on the Graphviz ribbon tab. This button does the same work as the like-named button on the `Graphviz` ribbon tab and is included here to speed the creation of graphs after running SQL statements. |
+Provides tools to help get around Excel's inability to display large amounts of cell text.
 
-## Writing SQL Queries to create graphs
+| Label       | Control Type  | Description                                                                                                                                                                                                                        |
+| ----------- | :-----------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Edit SQL Statement | Button | Launches the [Edit Text](#the-edit-sql-statement-form) form with the contents of the currently selected cell.<br/><br/>A second location where the **Edit SQL Statement** button appears is as a floating pencil button on the right side of any selected SQL cell.&nbsp;&nbsp;&nbsp;![](./pencil-button.png) <br/><br/>Clicking the pencil button performs the same action as selecting the **Edit SQL Statement** button in the Ribbon. |
+| Copy to Clipboard | Button        | Copies the contents of the cell as straight text to the Microsoft Windows clipboard, so it can be pasted into an external editor.<br/><br/>Characters such as quotes are not escaped as would occur when using Excel's copy (Ctrl+C). |
 
-In the Relationship Visualizer download zip file, there is a directory named `SQL - World Map` within the `samples` directory. We will use this example to show how to use the `sql` worksheet. The `SQL - World Map` directory has in it a copy of the Relationship Visualizer spreadsheet containing SQL statements, and predefined styles on the `styles` worksheet, as well as `data` directory which has 5 representations of a `countries` worksheet corresponding to the supported file extensions of `csv`, `xls`, `xlsb`, `xlsm`, and `xslx`. All of the `countries` spreadsheets have the same data. The query logic has to treat each file extension a little differently (I won't bore you with the details) and is included in the different formats simply for testing purposes. 
 
-An example of a `countries` workbook appears as follows:
 
-![](../media/635d4bbb6c94a64856ea7ab380a10452.png)
+### Graphviz
 
-Now open the file `Relationship Visualizer.xslm`, select the `sql` worksheet. Note that there are 4 rows with SQL statements. We will use these statements to extract the values out the 'countries' workbooks and draw a graph view of the continents, countries, and connected borders. The 'sql' worksheet appears as follows:
+| ![](./sql-group-graphviz.png) |
+| -------------------------------------------------- |
 
-![](../media/d7e700f6a29de2275aeca07e492aca20.png)
+Convenience buttons designed to streamline graph generation after running SQL queries. These controls mirror the commands on the Graphviz ribbon tab but place them closer to where SQL work is performed:
 
-The first SQL statement on row 2 selects the column `ISO` to represent the `Item ID`, as well as the node `label`. The country name is selected to be an `External Label`, and the continent name is selected to be the `style name`. Within the `styles` worksheet there are 7 node style definitions which correspond to the continent names.
+| Label             | Control Type | Description                                                                                                                                                                                                                  |
+| ----------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Visualize         | Button       | Graphs the data in the `data` worksheet and displays the results in Excel. This button mirrors the **Visualize** command on the Graphviz ribbon tab and is provided here for faster graph creation after running SQL queries. |
+| Publish           | Button       | Graphs the data in the `data` worksheet and writes the output to a file using the settings on the Graphviz ribbon tab. This duplicates the **Publish** command and streamlines exporting graphs after executing SQL queries.   |
+| Publish all views | Button       | Graphs the data in the `data` worksheet using all defined views and writes each graph to a file based on the Graphviz ribbon settings. This matches the Graphviz ribbon's **Publish all views** command and accelerates batch graph generation. |
 
-The SQL is written as follows:
+### Filter
 
-```sql
-SELECT [ISO]       as [Item],
-       [ISO]       as [Label],
-       [Country]   as [External Label],
-       [Continent] as [Style Name]
-FROM  [countries$]
-WHERE [ISO] IS NOT NULL
-ORDER BY [Country] ASC
-```
+The **Filter** controls allow you to limit which rows are processed when running SQL statements. This is especially useful when working with large datasets or when you want to preview results for a specific subset of data.
 
-The second SQL statement on row 3 will extract the 7 seven unique continent names from the list of countries by using the `DISTINCT` clause. The continent name will be used as the `Item ID` as well as the node `label`. A `style name` of **Continent** will be used for all the rows.
+| ![](./sql-group-filter.png) |
+| --------------------------- |
 
-The SQL is written as follows:
+| Label         | Control Type   | Description                                                                                                                                                                                                 |
+| ------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filter Column | Dropdown list  | Lists column letters **E–Z**. Select the column you want to filter on.                                                                                                                                      |
+| Filter Value  | Dropdown list  | Displays all unique (de‑duplicated) values found in the selected **Filter Column**. When a value is chosen, SQL statements will run **only** on rows where that column matches the selected value.          |
+| Refresh       | Button         | Updates the **Filter Value** list. Use this after changing data in the selected Filter Column to ensure the dropdown reflects the latest values. 
 
-```sql
-SELECT DISTINCT [Continent] as [Item],
-                [Continent] as [Label],
-                'Continent' as [Style Name]
-FROM [countries$]
-ORDER BY [Continent]
-```
+### Data File
 
-The third SQL statement on row 4 creates edge relationship rows by selecting the ISO value as the `Item ID`, and the `Neighbors` column as the `Related Item` value. The `Neighbors` column in the source worksheet contains comma-delimited ISO values which are neighboring countries to that row. The Relationship Visualizer has built-in logic to expand the comma-delimited list into multiple relationships. No style name is provided, so the default edge style will be used. Note that on the `WHERE` clause the directive `IS NOT NULL` has been added. This clause causes the query to skip rows with empty cells, as there are no values with which to express relationships.
+The **Data File** controls let you point your SQL queries at external Excel workbooks. This is especially useful when your data is stored in multiple files—such as monthly extracts, departmental exports, or versioned snapshots—and you want to run the same SQL queries against each file without rewriting anything.
 
-The SQL is written as follows:
+| ![](./sql-group-datafile.png) |
+| ----------------------------- |
 
-```sql
-SELECT [ISO]       as [Item],
-       [Neighbors] as [Related Item]
-FROM   [countries$]
-WHERE [Neighbors] IS NOT NULL
-```
 
-The fourth SQL statement on row 5 is used to group countries by continent. It creates edge relationships by placing the Continent name as the `Item ID`, and the ISO country code in the `Related Item` column. The `style name` is specified as **ContinentToCountry**.
+| Label             | Control Type | Description                                                                                                      |
+| ----------------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Get Data Directory | Button       | Opens a directory‑picker dialog. When a folder is selected, its path replaces the “Get Data Directory” label.   |
+| File Name          | Dropdown list | Lists the Excel files found in the selected directory that are suitable for running Excel SQL queries against. This list is only visible when a data directory has been specified.<br/><br/><b>NOTE:</b> Entries in the file name column, and `SET DATA FILE` statements take precedence when resolving conflicts over which data source to use. |
+| Reset | Button | Clears the data directory and file name selections. This button is only visible when selections have been made |
 
-The SQL is written as follows:
+**Why would I use this?**  
+Many workflows produce recurring Excel extracts—for example, one workbook per month, quarter, or reporting cycle. By selecting a directory and choosing a file from the dropdown, you can run the *same* SQL queries against each extract in turn. This makes it easy to compare periods, regenerate graphs for new data, or batch‑process multiple datasets without modifying your SQL.
 
-```sql
-SELECT [Continent]          as [Item],
-       [ISO]                as [Related Item],
-       'ContinentToCountry' as [Style Name]
-FROM [countries$]
-WHERE [ISO] IS NOT NULL
-```
+### Connection Pool
 
-Each of these queries have to specify the name of the workbook against which the SQL is to run. This information is contained in column C. There are three ways the file name may be specified.
+| ![](./sql-group-connectionpool.png) |
+| ----------------------------------- |
 
-1.  Specify the **full path to the file** as shown in the sample file.
-2.  Specify just the **file name**. The Relationship Visualizer will assume that the data workbook is contained **in the same directory** as the Relationship Visualizer workbook.
-3.  Leave the cell blank. If the cell is blank the Relationship Visualizer assumes that the data is contained **within the same workbook**.
+The **Connection Pool** group manages how ADO workbook connections are reused, opened, and closed during SQL batch execution to improve performance and control file access. 
 
-Once the file paths are specified, we can run the SQL. Press the `Run SQL Commands` button
+Connection pooling was added in Version 7.0 in response to a March 2025 Office update that caused ADO connections to take over 12 seconds (previously under 4 milliseconds). See: [Excel ADO connection issue in recent Office 365 update](https://learn.microsoft.com/en-us/answers/questions/5443040/excel-ado-connection-issue-in-recent-office-365-up?forum=msoffice-all&referrer=answers)  
 
-![](../media/7487a95f7543c1f79bbaa9f12d494e7f.png)
+Workbook connections are now reused across all SQL statements during a `Run SQL Statements` batch run.  
 
-The SQL commands are run in sequence from top to bottom. Results are written to the `data` worksheet, and the query result status is displayed in column D such as:
+Users can choose to close connections after batch execution or keep them open until manually closed or until the workbook exits.  
 
-![](../media/b4bf922b0e12d5a322475f6f836209a6.png)
+**Note:** Keeping connections open may improve performance but can prevent access to referenced workbooks.
 
-If we switch worksheets to the `data` worksheet, it appears as follows:
+| Label                                   | Control Type  | Description                                                                                                                                                                                                 |
+| --------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Close connections after 'Run SQL'       | Toggle Button | Determines whether connections remain open (pooled) after running SQL statements or are closed immediately after execution.                                                                                |
+| Close all connections (#)               | Button        | Displays the number of currently open connections. Enabled only when one or more connections are open. Pressing the button closes all open connections.                                                    |
 
-![](../media/8c4309d1efcbddd71daadb0c1dd3d9dd.png)
+::: tip When should I keep connections open?
+Keeping connections open (pooled) is most beneficial when running many SQL statements in a batch, especially if each statement targets external workbooks. Reusing the same connection avoids repeated ADO initialization overhead and can dramatically improve performance.
 
-The data is all present and in the appropriate columns for graphing. In this example 678 rows of data have been created using 4 SQL statements! Press the `Refresh Graph` button to graph the data. Since this is a large data set, be prepared to wait a little while for the results.
-
-![](../media/8d7a0c8bbb5f0d7da4e53b27db8254e0.png)
-
-When Graphviz completes its work, you should see a logical world graph which appears as follows (sent to `graph` worksheet with zoom level set to 30%):
-
-![](../media/1fb5513a83b5269775e982f1ea98b7cc.png)
-
-## SQL References
-
-::: tip For more information on Excel SQL
-- [ACE SQL for Microsoft Excel](https://github.com/jjlong150/AceSqlForExcel)
-- [Writing SQL Queries against Excel files (Excel SQL)](https://querysurge.zendesk.com/hc/en-us/articles/205766136-Writing-SQL-Queries-against-Excel-files)
-- [SQL Query Reference](https://www.aquaclusters.com/app/home/project/public/aquadatastudio/wikibook/MS-Excel/page/SQL-Query-Reference/SQL-Query-Reference)
-- [Fundamental Microsoft Jet SQL for Access 2000](https://docs.microsoft.com/en-us/previous-versions/office/developer/office2000/aa140011%28v%3doffice.10%29)
-- [Intermediate Microsoft Jet SQL for Access 2000](https://docs.microsoft.com/en-us/previous-versions/office/developer/office2000/aa140015%28v%3doffice.10%29)
+However, if you need to open, edit, or replace any referenced workbooks, you may prefer to close connections after each run to avoid file‑locking issues.
 :::
+
+### Help
+
+Provides a link to the `Help` content for the `sql` worksheet (i.e. this web page).
+
+| ![](./sql-group-help.png) |
+| ------------------------ |
+
+| Label       | Control Type  | Description                                                                                                                                                                                                                        |
+| ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Help | Button        | Provides a link to this web page. |
+
+## The `Edit SQL Statement` Form
+
+Excel rows can hold a great deal of information, but cells have their quirks. Each cell can store up to 32,767 characters, yet only about 1,024 of them are visible directly in the grid without entering cell‑edit mode. For rows, the practical display limit depends on the combined content of each cell, though in reality screen size and readability become limiting factors long before Excel’s technical limits are reached. These limits get reached quickly if you like to break SQL statements down over multiple lines. In short, you can store a lot—but you may not be able to see it all at once.
+
+To address this, Version 7 introduced an `Edit SQL Statement` form. When you press the **Edit SQL Statement** button, a modal window opens containing the full text of the currently selected cell, making it easier to view and edit long content without fighting Excel’s display constraints. 
+
+| ![](./sql-popup.png) |
+| ----------------------------- |
+
+Horizontal and vertical scroll bars are provided to help navigate the text. You can change the text within the form. 
+
+Pressing the `Save` button transfers the contents from the form back to the active cell.
+
+## Next Steps
+
+The topics above introduce the core ways to use SQL within Relationship Visualizer. For more detailed, step‑by‑step lessons and reference material, explore the following pages:
+
+<!-- no toc -->
+- [SQL Queries for Creating Graphs](./queries/)
+- [SQL Extensions](./extensions/)
+  - [Grouping Data into Clusters and Subclusters](./extensions/README.md#grouping-data-into-clusters-and-subclusters)
+  - [Splitting Labels](./extensions/README.md#splitting-labels)
+  - [Chaining Nodes Using Edges](./extensions/README.md#chaining-nodes-using-edges)
+  - [Creating Subgraphs With Rank](./extensions/README.md#creating-subgraphs-with-rank)
+  - [Traversing Trees Recursively](./recursion/)
+  - [Creating Organization Charts](./orgcharts/)
+- [SQL Syntax](./syntax/)
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

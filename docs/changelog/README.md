@@ -1,5 +1,180 @@
 # Change Log
 
+## Version 9.0.0
+
+**UI Visual Refresh**  
+Replaced all [built-in Office Ribbon icons](https://spreadsheet1.com/microsoft-office-excel-ribbon-imagemso-icons-gallery.html) with [Google Material icons](https://fonts.google.com/icons).  
+- Modernized the overall appearance  
+- Improved visual clarity and contrast  
+- Ensured consistent iconography across Windows and macOS  
+
+**Breaking** - Several dropdown lists were redesigned as individual buttons that behave like radio buttons.
+- Graphviz tab: **Zoom**, **Layout**, **Splines**  
+- Style Designer tab: **Scale**, **Image Position**  
+- Simplifies interaction and reduces misclicks  
+- Enables dedicated tooltip text for every layout, spline mode, and image-position option  
+
+Overall, the refresh makes the Ribbon cleaner and easier to scan at a glance.
+
+---
+
+**New Features**
+
+**Silent Mode / Message Routing**  
+You can now disable message boxes entirely for "run silent" operation, as requested in this [issue](https://github.com/jjlong150/ExcelToGraphviz/issues/3).  
+
+Errors and notifications can be routed to:  
+- Message boxes  
+- The Excel status bar  
+- The Console worksheet  
+
+These options are controlled via enablement buttons on the **Console** tab, giving users full control over how the tool communicates during interactive or automated operations.
+
+**Support for Graphviz 14.1.0 `radius` Attribute**  
+Graphviz introduced a new `radius` attribute for rounding corners on orthogonal edges.  
+- The `Edge` mode of the **Style Designer** tab now includes a Gallery control that visually previews radius values from 0 to 20, making it easy to choose the desired corner roundness.
+- The `SVG` post-processing Javascript code was updated to animate the polyline elements used to display the rounded corners. 
+
+---
+
+**Improvements**
+
+**Breaking** - Image Zoom redesigned  
+- Replaced fixed zoom levels (25%, 50%, 75%, 100%)  
+- New range: **5%-150%** in **5% increments**  
+- Controlled via **Zoom In** and **Zoom Out** buttons  
+- Provides finer control and a smoother editing experience  
+
+**Windows Ribbon Performance**  
+Removed the one-second delay when switching Ribbon tabs after selecting a worksheet.  
+- Windows now switches tabs instantly  
+- macOS retains the asynchronous delay to avoid race conditions in Excel's event model  
+
+**Accessibility Cleanup**  
+Resolved all Excel "Accessibility" warnings to ensure a cleaner, more compliant workbook environment.
+
+**Internal Code Quality Enhancements**  
+- Replaced numerous string literals with named constants  
+- Improved maintainability and reduced risk of typos  
+- Strengthened the error-reporting pipeline with locale-aware timestamps, normalized messages, and safer numeric parsing  
+
+
+## Version 8.0.1
+
+- A previous update resolving image deletion on low-memory systems inadvertently disabled SVG removal. This regression has now been corrected. 
+
+## Version 8.0.0
+
+**Style Designer**
+
+Replaced dropdowns with Ribbon galleries; visual grid-style controls that display selectable items like colors or images for faster, more intuitive style selection.
+- Color galleries now display entire color schemes in a compact, high-speed format.
+- `fontname` previews are shown as a gallery alongside font names, with increased preview size for easier identification. (Note: existing font images may be deleted via the `diagnostics` tab.)
+- Node `shape`, edge `arrowhead`, `arrowtail`, `headport`, and `tailport` choices are now logically grouped for easier selection.
+
+Added RGB Color Picker support
+- Enables color selection using the operating system's native RGB dialog on both Windows and macOS.
+- On macOS, this requires updating the `ExcelToGraphviz.applescript` file to version 3.
+- The picker can be launched independently or preloaded with a color from Graphviz X11, SVG, or Brewer schemes.
+
+Improved preview rendering
+- Updated color and font previews to display selections directly within the Ribbon.
+- Refreshed icons for X11 and SVG color schemes, as well as polygon shape options.
+
+Performance optimizations
+- Faster algorithm (Win OS) to exclude font names which Graphviz converts to 'Arial'.
+- Rewrote string comparisons and concatenations for faster execution.
+- Removed progress bar when loading large color schemes. New speed makes them no longer needed.
+- Images are now pre-cached at workbook open if available; otherwise, they're generated on first use.
+
+Enhanced style saving
+- Labels (`label`, `xlabel`, `headlabel`, `taillabel`) can optionally be saved as part of the style format string which is ideal for edge annotations like protocols or cardinality.
+- Added support for naming styles when saving to the `styles` worksheet.
+- Introduced a prominent `Save` button within the style definition canvas area.
+
+Improved image path handling
+- Automatically extracts relative image paths to improve portability.  
+  Example: If the workbook is in `c:\users\jeff\data\example1\Relationship Visualizer.xlsm` and the image is in `c:\users\jeff\data\example1\images\network.png`, the saved path will be `images\network.png`.
+
+Fixed image deletion issue on low-memory systems
+- Addressed a bug on 32-bit Atom CPUs with 2GB RAM by switching to a more resource-efficient method for deleting preview images.
+
+---
+
+**Styles**
+
+One-click style restoration in Style Designer
+- Select a row on the `styles` worksheet containing a `node`, `edge`, or `cluster` format string, then click the `[...]` button to instantly reset `style designer` to match the saved format.
+
+Auto-refresh preview
+- Saving a style automatically updates the preview image on the `styles` worksheet.
+
+---
+
+**SQL**
+
+Connection pooling added 
+- Implemented in response to a March 2025 Office update that causes ADO connections to take over 12 seconds (previously under 4 milliseconds). See: [Excel ADO connection issue in recent Office 365 update](https://learn.microsoft.com/en-us/answers/questions/5443040/excel-ado-connection-issue-in-recent-office-365-up?forum=msoffice-all&referrer=answers)  
+- Workbook connections are now reused across all SQL statements during a `Run SQL Statements` batch run.  
+- Users can choose to close connections after batch execution or keep them open until manually closed or workbook exit.  
+  Note: Keeping connections open may improve performance but can prevent access to referenced workbooks.
+
+New default data source support 
+- Users can now specify a default data directory and Excel workbook.
+- Managed via new controls in the SQL tab of the Ribbon.
+- Entries in the file name column, and `SET DATA FILE` statements take precedence when resolving conflicts.
+
+SQL editor access
+- Added a `[...]` button next to SQL statements to open the SQL edit form.
+
+New SQL extensions for Graphviz automation 
+- Assume the you have an Excel workbook containing a worksheet named `Alphabet` with a column heading of `letter` with four rows of data with letters A, B, C, and D in the `letter` column. 
+  
+  The following SQL creates nodes `A`, `B`, `C`, `D`:
+
+  ```sql
+  SELECT [letter] AS [Item] from [Alphabet$]
+  ```
+- New *CREATE EDGES* syntax automatically generates edges like `A -> B`, `B -> C`, `C -> D`. 
+
+  ```sql
+  SELECT [letter] AS [Item], TRUE AS [CREATE EDGES] FROM [Alphabet$]
+  ```
+- The new *CREATE RANK* syntax produces subgraphs with a shared rank:
+
+  ```sql
+  SELECT [letter] AS [Item], TRUE AS [CREATE RANK], 'same' AS [RANK] FROM [Alphabet$]
+  ```
+  The SQL above results in one row added to the `data` worksheet with: 
+  - Item = `>`
+  - Label = `{rank="same"; "A"; "B"; "C"; "D";}`
+
+---
+
+**SVG**
+
+- Added `[...]` button to Find and Replace cells to open the SVG editor form.
+- Updated animation logic in one of the post-processing options to accept `1` or `0` for toggling inclusion of zoom buttons on clusters.
+
+---
+
+**macOS compatibility**
+- Fixed Excel version check to compare major and minor versions numerically, resolving a string-compare bug introduced when Excel reached three digits in version 16.100.
+- Revised the `ExcelToGraphviz.applescript` script version check to use integers instead of strings
+  - An alert triggers if installed script version is below 3.
+  - The new RGB color controls are hidden when an outdated script is detected, preventing users from interacting with buttons that would otherwise fail silently.
+
+---
+
+**Code Optimizations**
+- Introduced new constants throughout the codebase to improve clarity and maintainability.
+- Further optimized string concatenation routines for better performance.
+
+---
+
+**JSON Import/Export**
+- Updated to support exporting and restoring the new SQL settings.
+
 ## Version 7.2.02
 
 - Minor adjustment to comply with Graphviz ID naming rules: wrap ID values in quotes if they don't start with a letter or underscore.
@@ -40,7 +215,7 @@
 
 Fixed a bug that caused Excel to freeze when Graphviz wrote more than 4096 bytes of message output:
 
-- The *Relationship Visualizer* spreadsheet uses the `ExecuteAndCapture` routine to run Graphviz's `dot` command and capture any `dot` output messages.
+- The Relationship Visualizer spreadsheet uses the `ExecuteAndCapture` routine to run Graphviz's `dot` command and capture any `dot` output messages.
 - `ExecuteAndCapture` reads messages via an interprocess pipe with a fixed size of 4096 bytes.
 - `dot` paused after writing 4096 bytes of messages, waiting for `ExecuteAndCapture` to read and clear the data from the pipe before resuming.
 - `ExecuteAndCapture` was paused, waiting for `dot` to finish before reading any data from the pipe.
@@ -53,7 +228,7 @@ This resulted in a deadlock. To eliminate the deadlock:
 
 ## Version 7.0.0
 
-### Worksheet Changes
+**Worksheet Changes**
 
 `console` Worksheet
 - Added a **new** `console` worksheet which displays the Graphviz `dot` command's error & diagnostic messages.
@@ -115,7 +290,9 @@ This resulted in a deadlock. To eliminate the deadlock:
 - Provided alternate styling for SVG animation more akin to macOS controls. This version is commented-out by default. You can choose which to use by commenting-out one or the other.
 - Added `Copy to Clipboard`, `Graph to File` and `All views to File` buttons on SVG tab. `Copy to Clipboard` is not available on macOS as the clipboard code is Windows OS-specific.
 
-### Ribbon Tab Changes
+---
+
+**Ribbon Tab Changes**
 
 `Launchpad` Ribbon Tab
 - Consolidated all the buttons for showing/hiding worksheets onto a **new** `Launchpad` ribbon tab.
@@ -133,7 +310,9 @@ This resulted in a deadlock. To eliminate the deadlock:
 - Added `Include Image Path` as a `Graph` check option so the image path can be omitted from `dot` source when images are not being used.
 - Eased restrictions on when automatic drawing can occur so that ribbon tab changes can be observed in either the `data` or `graph` worksheet.
 
-### Miscellaneous Changes
+---
+
+**Miscellaneous Changes**
 
 - Windows OS: Replaced the Open Source `ShellAndWait()` function used to run the Graphviz `dot` command with a new Open Source function `ExecuteAndCapture()` which can run the Graphviz `dot` command and return the messages which `dot` writes to the standard output, and standard error message pipes. These messages are then displayed on the new `console` worksheet. A tradeoff of this code replacement is that the timeout capabilities which `ShellAndWait()` provided are not present in `ExecuteAndCapture`.
 
@@ -240,7 +419,6 @@ Sample Workbook Updates
 
 ## Version 5.8.00
 
-
 Solid-fill Gradients for Nodes and Clusters 
 - A new `Weight` percentage for the primary fill color has been added to the Style Designer which allows for the creation of solid-fill gradients. 
 - The `Weight` dropdown list dynamically appears under the `Fill Color` dropdown once a value for `Gradient Fill Color` has been selected. 
@@ -283,7 +461,7 @@ Made changes which reduce the time it takes to CREATE the color preview images w
 
 ## Version 5.5.00
 
-### Multiple Language Support
+**Multiple Language Support**
 
 Introduced a **"Language"** dropdown to the Graphviz tab providing a capability to toggle different languages. 
 
@@ -310,16 +488,24 @@ Items not translated include:
 Hidden worksheets contain the language translations. You can edit these worksheets to make corrections. Simply unhide the appropriate worksheet which starts with `locale_`, correct the text, save, and close the workbook, and reopen the workbook.
 
 
-### Metric Measurement Support
+**Metric Measurement Support**
 
 Added metric units for height and width to the Style Designer. 
 
 A checkbox lets you toggle the lists between inch units (which Graphviz uses) and millimeters (which the Style Designer will convert to inches)
 
-### Font Preview Images
+**Font Preview Images**
 
 Added font preview images to the Style Designer Font drop-down lists. 
 
 You may notice a delay the first time the Style Designer ribbon is displayed while preview images are created using the list of fonts on your PC. This is a one-time installation activity, and these images remain cached for future use. 
 
 In addition, Windows 11/Office 365 has introduced thousands of fonts and font variations (e.g., bold, italic). Code has been added to prune the font list to just the fonts which Graphviz can use.
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

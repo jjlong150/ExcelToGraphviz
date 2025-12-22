@@ -5,7 +5,7 @@ next: /create/
 
 # Installation Instructions
 
-The *Relationship Visualizer* operates on both **Microsoft Windows** and **Apple macOS**<sup>1</sup>. 
+The Relationship Visualizer operates on both **Microsoft Windows** and **Apple macOS**<sup>1</sup>. 
 
 Installation procedures vary by platform, and you can find detailed, platform-specific instructions by following the links below.
 <br/><br/>
@@ -17,3 +17,12 @@ Installation procedures vary by platform, and you can find detailed, platform-sp
 <br/>
 <hr/>
 <small>[1] SQL and Clipboard features are not available on Apple macOS.</small>
+<br/>
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

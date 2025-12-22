@@ -191,3 +191,11 @@ When the file save dialog appears, provide a “Save As” name (e.g., Relations
 | ------- |
 
 Note that Excel automatically specifies the Microsoft Office Templates directory.
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

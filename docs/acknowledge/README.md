@@ -1,6 +1,6 @@
 ---
-prev: /settings/
-next: /about/
+prev: /info/
+next: /overview/
 ---
 
 # Acknowledgements
@@ -125,3 +125,28 @@ Written By: [Christos Samaras](https://myengineeringworld.net/2011/05/welcome.ht
 Copyright © 2020-2024, Christos Samaras
 
 Office RibbonX Editor is free software licensed under the *MIT License*
+
+### Color Palette Icon
+
+The color palette icon used in the ribbon was sourced from clipartmax.com
+
+[Color Palette Icon - Paleta De Cores Icone @clipartmax.com](https://www.clipartmax.com/middle/m2H7i8m2A0b1b1K9_color-palette-icon-paleta-de-cores-icone/)
+
+### Material Symbols
+
+Most icons in the Ribbon were sourced from [Material Symbols by Google](https://developers.google.com/fonts/docs/material_symbols)
+
+Copyright © Google LLC. All rights reserved.
+
+Material Symbols are licensed under the 
+[Apache License, Version 2.0](
+https://www.apache.org/licenses/LICENSE-2.0)
+
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>

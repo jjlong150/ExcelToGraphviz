@@ -1,3 +1,8 @@
+---
+prev: /settings/
+next: /acknowledge/
+---
+
 # Info Worksheet
 
 ## The `info` Worksheet
@@ -16,16 +21,26 @@ The `info` worksheet provides information about the spreadsheet, the internal te
 
 The `Info` ribbon tab is activated whenever the `Info` worksheet is activated. It appears as follows:
 
+*Windows*
 | ![](./info-ribbon-tab.png) |
 | -------------------------- |
 
-It contains the following major groups:
+*macOS*
+| ![](./mac_ribbon_info.png) |
+| -------------------------- |
 
-- [Legal](./README.md#legal)
-- [Repositories](./README.md#repositories)
-- [Author](./README.md#author)
-- [Donate](./README.md#donate)
-- [Help](./README.md#lhelp)
+It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
+| Group | Controls  | Description |
+| :---- | :--- | :--- |
+| [Legal](#legal) |  ![](./info-ribbon-tab-legal.png) | The `Legal` section provides a quick overall summary of the tool's name, copyright, and Open Source license. |
+| | |
+| [Repositories](#repositories) | ![](./info-ribbon-tab-repositories.png) | The `Repositories` section provides web links to the **official** web pages and repositories for the Relationship Visualizer tool. |
+| | |
+| [Author](#author) | ![](./info-ribbon-tab-author.png) | Contact information for reaching the author of this tool.
+| | |
+| [Donate](#donate) | ![](./info-ribbon-tab-donate.png) | If you would like to show your appreciation for this **free** tool, you can buy the author a coffee through the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website. |
+| | |
+| [Help](#help) | ![](./info-ribbon-tab-help.png) | Provides a link to the `Help` content for the `Info` worksheet (i.e. this web page). |
 
 ### Legal
 
@@ -39,19 +54,19 @@ The `Legal` section provides a quick overall summary of the tool's name, copyrig
 | ![](./info-ribbon-tab-repositories.png) |
 | -------------------------------------------------- |
 
-The `Repositories` section provides web links to the **official** web pages and repositories for the **Relationship Visualizer** tool.
+The `Repositories` section provides web links to the **official** web pages and repositories for the Relationship Visualizer tool.
 
-::: warning
+::: warning Download Only from Official Sources
 
-At this time, there are no author-sanctioned clones of these repositories. However, cloned copies have been found on the internet. If you obtained your copy of the Relationship Visualizer from somewhere other than the sites these buttons link to, you may be running an out-of-date or potentially security-compromised version.
+At this time, there are **no** author‑sanctioned clones of these repositories. However, unofficial copies have been found on the internet. If you obtained your copy of the Relationship Visualizer from anywhere other than the sites linked by these buttons, you may be using an out‑of‑date or potentially security‑compromised version.
 
 :::
 
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Home | Button        | Provides a link to the [Excel To Graphviz](https://exceltographviz.com) documentation web site (i.e. this web site).|
-| SourceForge      | Button        | Provides a link to the [SourceForge](https://sourceforge.net/projects/relationship-visualizer/) repository where the **Relationship Visualizer** download files are managed. |
-| GitHub       | Button        | Provides a link to the [GitHub](https://github.com/jjlong150/ExcelToGraphviz) repository where the source pages for this web site are managed. |
+| SourceForge      | Button        | Provides a link to the [SourceForge](https://sourceforge.net/projects/relationship-visualizer/) repository where the Relationship Visualizer download files are managed. |
+| GitHub       | Button        | Provides a link to the [GitHub](https://github.com/jjlong150/ExcelToGraphviz) repository where the source pages for this website are maintained. <br/><br/>The VBA source code from the Relationship Visualizer workbook is also exported and stored there. Although the workbook cannot be rebuilt from this source code, publishing it in a readable, text‑based format ensures full transparency and allows for inspection. |
 
 ### Author
 
@@ -74,6 +89,8 @@ Excel to Graphviz / Relationship Visualizer is **free** software. However, it do
 
 If you would like to show your appreciation for this **free** tool, you can buy the author a coffee through the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website.
 
+FYI - 10 years, 10,000+ downloads, and a grand total of 2 coffees donated 😔
+
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Donate | Button        | Provides a link to the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website where you can show your appreciation to the author for this free software and awesome web site. |
@@ -88,3 +105,11 @@ Provides a link to the `Help` content for the `Info` worksheet (i.e. this web pa
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Help | Button        | Provides a link to this web page. |
+
+---
+
+<center>
+
+Like this tool? [Buy me a coffee! ☕](https://www.buymeacoffee.com/exceltographviz)
+
+</center>
