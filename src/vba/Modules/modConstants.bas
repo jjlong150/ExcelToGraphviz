@@ -426,9 +426,7 @@ Public Const SETTINGS_TABS_TOGGLE_EXCHANGE As String = "ToggleExchange"
 
 ' Names of Named Range lists used as dropdown values
 Public Const LISTS_FONT_SIZES As String = "FontSizes"
-#If Mac Then
 Public Const LISTS_FONTS As String = "Fonts"
-#End If
 Public Const LISTS_IMAGE_SCALE As String = "ImageScale"
 
 Public Const RANGE_STYLE_NAMES As String = "StyleNames"

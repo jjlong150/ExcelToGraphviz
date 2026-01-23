@@ -1,5 +1,5 @@
 Attribute VB_Name = "modRibbonTabStyleDesigner"
-' Copyright (c) 2015-2025 Jeffrey J. Long. All rights reserved
+' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
 
 '@Folder("Relationship Visualizer.Ribbon.Tabs")
 '@IgnoreModule IntegerDataType, AssignmentNotUsed, UseMeaningfulName, UnassignedVariableUsage, ProcedureNotUsed, ParameterNotUsed, ImplicitByRefModifier
@@ -34,14 +34,13 @@ Private fontImageDir As String
 Private fontImageCache As Dictionary
 
 ' Lists of font name filters used to exclude fonts which Graphviz cannot render.
-Private excludedPrefixes As Dictionary
-Private excludedSuffixes As Dictionary
+Private excludedFonts As Dictionary
 Private fontExclusionsInitialized As Boolean
 
-' There are seven color galleries on the Style Designer ribbon tab. X11 is Graphviz’s default
+' There are seven color galleries on the Style Designer ribbon tab. X11 is Graphviz?s default
 ' color scheme and includes 656 colors. For each color, two callbacks are triggered:
 ' one to retrieve the label (shown on hover), and one to retrieve or generate the image.
-' This results in 656 × 2 = 1,312 callbacks per gallery, or 9,184 total callbacks when
+' This results in 656 ? 2 = 1,312 callbacks per gallery, or 9,184 total callbacks when
 ' all galleries are loaded with the ribbon. Saving even a few milliseconds per callback
 ' yields noticeable performance improvements.
 
@@ -72,6 +71,11 @@ Private Type FilePathInfo
     fileName As String
     directory As String
 End Type
+
+Public Enum FontPreviewSize
+    FontPreviewSmall = 0
+    FontPreviewLarge = 1
+End Enum
 
 #If Mac Then
 ' On Mac, some functions are handled via AppleScript. Additional functionality has been added in successive releases.
@@ -422,25 +426,50 @@ Public Sub LoadFontImageCache()
     
     ' Load any files which already exist. If they have not been created, defer creation until
     ' the Style Designer worksheet is accessed by the user.
-    AddToFontCache "defaultFont", "defaultFont"
+    AddToFontCache "Times-Roman", FontPreviewSmall
+    AddToFontCache "Times-Roman", FontPreviewLarge
     Dim i As Long
     For i = LBound(fontList) To UBound(fontList)
-        AddToFontCache CStr(fontList(i)), CStr(fontList(i))
+        AddToFontCache CStr(fontList(i)), FontPreviewSmall
+        AddToFontCache CStr(fontList(i)), FontPreviewLarge
     Next i
 End Sub
 
-Private Sub AddToFontCache(cacheKey As String, fontName As String)
-    If Len(cacheKey) = 0 Or Len(fontName) = 0 Then Exit Sub
+Private Function GetFontCacheKey(fontName As String, imageSize As FontPreviewSize)
+    If imageSize = FontPreviewLarge Then
+        GetFontCacheKey = fontName & " - AaBbCc"
+    Else
+        GetFontCacheKey = fontName
+    End If
+End Function
+
+Private Function GetFontImagePath(fontName As String, imageSize As FontPreviewSize)
+    If imageSize = FontPreviewLarge Then
+        GetFontImagePath = GetFontImageDir() & Application.pathSeparator & fontName & " - AaBbCc" & DOT & RIBBON_EXT_FONT
+    Else
+        GetFontImagePath = GetFontImageDir() & Application.pathSeparator & fontName & DOT & RIBBON_EXT_FONT
+    End If
+End Function
+
+Private Sub AddToFontCache(fontName As String, imageSize As FontPreviewSize)
+    If Len(fontName) = 0 Then Exit Sub
+    
+    ' See if it already exists in cache
+    Dim cacheKey As String
+    cacheKey = GetFontCacheKey(fontName, imageSize)
     If fontImageCache.Exists(cacheKey) Then Exit Sub
     
+    ' Not in cache
     Dim imageFile As String
-    imageFile = GetFontImageDir() & Application.pathSeparator & fontName & DOT & RIBBON_EXT_FONT
+    imageFile = GetFontImagePath(fontName, imageSize)
 
+    ' Attempt to load an existing image file
     Dim image As StdPicture
     On Error Resume Next
     Set image = LoadPicture(imageFile)
     On Error GoTo 0
 
+    ' Add the loaded image to the font image cache
     If Not image Is Nothing Then
         fontImageCache.Add cacheKey, image
     End If
@@ -513,8 +542,9 @@ End Sub
 Private Sub fontName_getImage(ByVal control As IRibbonControl, ByRef image As Variant)
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_FONT_NAME)
-    If Len(fontName) = 0 Then fontName = "defaultFont"
-    FontGetOrCreateImage fontName, image
+    If Len(fontName) = 0 Then fontName = "Times-Roman"
+    Set image = Nothing
+    FontGetOrCreateImage fontName, image, FontPreviewSmall
 End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
@@ -524,97 +554,144 @@ Private Sub fontName_getItemImage(ByVal control As IRibbonControl, ByVal index A
     Dim fontName As String
     fontName = FontGetNameByIndex(index)
     If Len(fontName) = 0 Then
-        fontName = "defaultFont"
+        fontName = "Times-Roman"
     End If
-    FontGetOrCreateImage fontName, image
+    Set image = Nothing
+    FontGetOrCreateImage fontName, image, FontPreviewLarge
 End Sub
 
-Private Sub FontGetOrCreateImage(fontName As String, ByRef image As Variant)
-    ' See if the font's image is already in cache
-    If fontImageCache.Exists(fontName) Then
-        Set image = fontImageCache.item(fontName)
+Private Sub FontGetOrCreateImage( _
+    ByVal fontName As String, _
+    ByRef image As Variant, _
+    ByVal imageSize As FontPreviewSize)
+
+    ' Force Variant into object-compatible subtype
+    Set image = Nothing
+    
+    ' Determine filename suffix based on preview size
+    Dim filenameSuffix As String
+    filenameSuffix = IIf(imageSize = FontPreviewLarge, " - AaBbCc", vbNullString)
+
+    ' Cache key is font name + suffix
+    Dim cacheKey As String
+    cacheKey = fontName & filenameSuffix
+
+    ' Return cached image if available
+    If fontImageCache.Exists(cacheKey) Then
+        Set image = fontImageCache.item(cacheKey)
         Exit Sub
     End If
-  
-    ' Build the path to where the images are kept
-    Dim imageFile As String
-    imageFile = GetFontImageDir() & Application.pathSeparator & fontName & DOT & RIBBON_EXT_FONT
-    
-    ' If the image already exists we should be able to load it
-    On Error Resume Next
-    Set image = LoadPicture(imageFile)
-    On Error GoTo 0
 
-    If image Is Nothing Then    ' the image does not exist, create one
+    ' Build full path to the image file
+    Dim imageFile As String
+    imageFile = GetFontImageDir() & Application.pathSeparator & _
+                fontName & filenameSuffix & DOT & RIBBON_EXT_FONT
+
+    ' Try loading an existing image
+    Set image = SafeLoadPicture(imageFile)
+
+    ' If not found, create it
+    If image Is Nothing Then
         Application.StatusBar = replace(GetMessage("statusbarCreateFontImage"), "{fontName}", fontName)
-        If fontName_createItemImage(fontName, imageFile, RIBBON_EXT_FONT) Then
-            On Error Resume Next
-            Set image = LoadPicture(imageFile)
-            On Error GoTo 0
+
+        If fontName_createItemImage(fontName, imageFile, RIBBON_EXT_FONT, imageSize) Then
+            Set image = SafeLoadPicture(imageFile)
         End If
+
         Application.StatusBar = False
     End If
 
-    ' Add the loaded font image to the cache
-    fontImageCache.Add fontName, image
+    ' Cache the result (even if Nothing, but your logic always produces an image)
+    fontImageCache.Add cacheKey, image
 End Sub
 
-Private Function fontName_createItemImage(ByVal fontName As String, ByVal imageFile As String, ByVal imageFormat As Variant) As Boolean
+Private Function SafeLoadPicture(ByVal filePath As String) As StdPicture
+    On Error Resume Next
+    Set SafeLoadPicture = LoadPicture(filePath)
+    On Error GoTo 0
+End Function
+
+Private Function fontName_createItemImage( _
+    ByVal fontName As String, _
+    ByVal imageFile As String, _
+    ByVal imageFormat As Variant, _
+    ByVal imageSize As FontPreviewSize) As Boolean
+
     fontName_createItemImage = False
-    
     If Len(fontName) = 0 Or Len(imageFile) = 0 Then Exit Function
 
     On Error GoTo ErrorHandler
-               
-    ' Define a simple one node DOT graph which will create a 48x48 pixel image suitable for display in the ribbon
+
+    ' Build DOT source
     Dim dotSource As String
-    dotSource = "digraph g{ bgcolor=gray pad=0 margin=0 a[ shape=square style=filled fillcolor=white fontcolor=black fontsize=38 dpi=96 height=0.48 width=0.48 fixedsize=true penwidth=0"
-    If fontName <> "defaultFont" Then
-        dotSource = dotSource & " fontname=" & AddQuotesConditionally(fontName)
-    End If
-    dotSource = dotSource & " label=" & AddQuotes("A") & " ]; }"
-    
-    ' Determine settings for console output
+    dotSource = BuildFontPreviewDot(fontName, imageSize)
+
+    ' Console settings
     Dim console As consoleOptions
     console = GetSettingsForConsole()
-    
-    ' Instantiate a new Graphviz object
-    Dim graphvizObj As Graphviz
-    Set graphvizObj = New Graphviz
 
-    ' Configure Graphviz
-    With graphvizObj
+    ' Graphviz instance
+    Dim gv As Graphviz
+    Set gv = New Graphviz
+
+    With gv
         .GraphvizPath = SettingsSheet.Range(SETTINGS_GV_PATH).Value2
         .OutputDirectory = GetTempDirectory()
         .FilenameBase = fontName
         .GraphFormat = imageFormat
         .Verbose = console.graphvizVerbose
         .CaptureMessages = console.logToConsole
-    
-        ' Override the diagram file to use the path specified by the caller
+
+        ' Override output file
         .DiagramFilename = imageFile
-        
-        ' Write the Graphviz data to a file so it can be sent to a rendering engine
+
+        ' Write DOT and render
         .graphvizSource = dotSource
         .SourceToFile
-        
-        ' Generate an image using graphviz
         .RenderGraph
     End With
-    
-    ' Display any console output first
-    DisplayTextOnConsoleWorksheet graphvizObj.GraphvizCommand, graphvizObj.GraphvizMessages
-    
+
+    ' Show console output
+    DisplayTextOnConsoleWorksheet gv.GraphvizCommand, gv.GraphvizMessages
+
     fontName_createItemImage = True
-    
+
 Cleanup:
-    Set graphvizObj = Nothing
+    Set gv = Nothing
     On Error GoTo 0
     Exit Function
 
 ErrorHandler:
     Debug.Print "fontName_createItemImage Error: " & Err.Description
     Resume Cleanup
+End Function
+
+Private Function BuildFontPreviewDot( _
+    ByVal fontName As String, _
+    ByVal imageSize As FontPreviewSize) As String
+
+    Dim isLarge As Boolean
+    isLarge = (imageSize = FontPreviewLarge)
+
+    Dim labelText As String
+    Dim base As String
+
+    If isLarge Then
+        base = "digraph g{ bgcolor=""#F5F5F5"" pad=0 margin=0 a[" & _
+               " shape=none dpi=96 penwidth=0"
+        labelText = "Aa Bb Cc"
+    Else
+        base = "digraph g{ bgcolor=gray pad=0 margin=0 a[" & _
+               " shape=square style=filled fillcolor=white fontcolor=black" & _
+               " fontsize=38 dpi=96 height=0.48 width=0.48 fixedsize=true penwidth=0"
+        labelText = "A"
+    End If
+
+    If fontName <> "Times-Roman" Then
+        base = base & " fontname=" & AddQuotesConditionally(fontName)
+    End If
+
+    BuildFontPreviewDot = base & " label=" & AddQuotes(labelText) & " ]; }"
 End Function
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
@@ -644,7 +721,7 @@ Private Sub labelFontName_getSelectedItemIndex(ByVal control As IRibbonControl, 
     fontName = StyleDesignerSetting(DESIGNER_EDGE_LABEL_FONT_NAME)
     If Len(fontName) = 0 Then ' Revert to designer font name
         fontName = StyleDesignerSetting(DESIGNER_FONT_NAME)
-        If Len(fontName) = 0 Then fontName = "defaultFont" ' revert to Graphviz default font
+        If Len(fontName) = 0 Then fontName = "Times-Roman" ' revert to Graphviz default font
     End If
     listIndex = FontGetIndexByName(fontName)
 End Sub
@@ -655,9 +732,10 @@ Private Sub labelFontName_getImage(ByVal control As IRibbonControl, ByRef image 
     fontName = StyleDesignerSetting(DESIGNER_EDGE_LABEL_FONT_NAME)
     If Len(fontName) = 0 Then ' Revert to designer font name
         fontName = StyleDesignerSetting(DESIGNER_FONT_NAME)
-        If Len(fontName) = 0 Then fontName = "defaultFont" ' revert to Graphviz default ont
+        If Len(fontName) = 0 Then fontName = "Times-Roman" ' revert to Graphviz default font
     End If
-    FontGetOrCreateImage fontName, image
+    Set image = Nothing
+    FontGetOrCreateImage fontName, image, FontPreviewSmall
 End Sub
 
 Private Function FontGetNameByIndex(ByVal index As Long) As String
@@ -2632,340 +2710,131 @@ Public Sub ribbon_getSuperTip(ByVal control As IRibbonControl, ByRef returnedVal
 End Sub
 
 Private Function getFontList() As Variant
-    
+    Dim rawFonts As Variant
+
+    ' --- 1. OS-specific font retrieval only ---
 #If Mac Then
-    getFontList = Application.Transpose(ListsSheet.Range(LISTS_FONTS))
+    rawFonts = GetMacFontList()
 #Else
-    ' The list of fonts on Windows is availble through a menu control
+    rawFonts = GetWindowsFontList()
+#End If
+
+    ' --- 2. Shared processing: filter, dedupe, sort ---
+    getFontList = ProcessFontList(rawFonts)
+End Function
+
+Private Function GetWindowsFontList() As Variant
     Dim tmpFontList As CommandBarControl
+
     On Error Resume Next
     Set tmpFontList = Application.CommandBars.item("Formatting").FindControl(ID:=1728)
     On Error GoTo 0
-    
-    'If Font control is missing, create it on a temporary CommandBar
+
+    ' Create temporary command bar if needed
     If tmpFontList Is Nothing Then
-        Dim tmpCommandBar As Variant
+        Dim tmpCommandBar As CommandBar
         Set tmpCommandBar = Application.CommandBars.Add
         Set tmpFontList = tmpCommandBar.Controls.Add(ID:=1728)
         tmpCommandBar.Delete
     End If
-    
-    ' Cache the list of fonts in an array
+
+    Dim fonts() As String
+    Dim i As Long, count As Long
+
     On Error GoTo ErrorHandler
+
+    count = tmpFontList.ListCount
+    If count = 0 Then GoTo ErrorHandler
+
+    ReDim fonts(1 To count)
+    For i = 1 To count
+        fonts(i) = tmpFontList.List(i)
+    Next i
+
+    GetWindowsFontList = fonts
+    Exit Function
+
+ErrorHandler:
+    EmitMessage GetMessage("msgboxNoListOfFonts")
+    GetWindowsFontList = Array("")
+End Function
+
+Private Function GetMacFontList() As Variant
+    GetMacFontList = Application.Transpose(ListsSheet.Range(LISTS_FONTS))
+End Function
+
+Private Function ProcessFontList(ByVal rawFonts As Variant) As Variant
+    Dim dict As Dictionary
+    Set dict = New Dictionary
+    dict.CompareMode = TextCompare
+
     Dim i As Long
-    '@Ignore VariableNotAssigned
-    Dim fontList As Variant
-    '@Ignore MemberNotOnInterface
-    For i = 1 To tmpFontList.listCount
-        ' Office 365 has exploded the number of fonts, blowing past
-        ' the 1000 items a dropdown list is limited to. To compensate,
-        ' filter out variations of font names to try to bring the list
-        ' down to a managable size before truncating the list at 1000
-        ' font names.
-        '@Ignore MemberNotOnInterface
-        If addToFontList(tmpFontList.List(i)) Then
-            If IsEmpty(fontList) Then   ' Allocate an array
-                ReDim fontList(1)
-                '@Ignore MemberNotOnInterface
-                fontList(UBound(fontList)) = tmpFontList.List(i)
-            Else    ' Grow the array by 1
-                ReDim Preserve fontList(0 To UBound(fontList) + 1)
-                '@Ignore MemberNotOnInterface
-                fontList(UBound(fontList)) = tmpFontList.List(i)
+    Dim fontName As String
+
+    ' Handle both 1-based and 0-based arrays
+    Dim L As Long, U As Long
+    L = LBound(rawFonts)
+    U = UBound(rawFonts)
+
+    For i = L To U
+        fontName = CStr(rawFonts(i))
+
+        If addToFontList(fontName) Then
+            If Not dict.Exists(fontName) Then
+                dict.Add fontName, True
             End If
         End If
     Next i
-    
-    ' Clean up
-    Set excludedPrefixes = Nothing
-    Set excludedSuffixes = Nothing
-    Set tmpFontList = Nothing
-    getFontList = fontList
-    Exit Function
-ErrorHandler:
-    EmitMessage GetMessage("msgboxNoListOfFonts")
-    ReDim fontList(0)
-    getFontList = fontList
-#End If
 
+    Dim result As Variant
+    If dict.count = 0 Then
+        result = Array("")
+    Else
+        result = dict.Keys
+        SortStringArray result
+    End If
+
+    ProcessFontList = result
 End Function
+
+Private Sub SortStringArray(ByRef arr As Variant)
+    Dim i As Long, j As Long
+    Dim tmp As String
+
+    If IsEmpty(arr) Then Exit Sub
+    If UBound(arr) <= LBound(arr) Then Exit Sub
+
+    For i = LBound(arr) To UBound(arr) - 1
+        For j = i + 1 To UBound(arr)
+            If StrComp(arr(j), arr(i), vbTextCompare) < 0 Then
+                tmp = arr(i)
+                arr(i) = arr(j)
+                arr(j) = tmp
+            End If
+        Next j
+    Next i
+End Sub
 
 ' Initialize font exclusion dictionaries
 Private Sub InitializeFontExclusions()
     If fontExclusionsInitialized Then Exit Sub
     
-    Set excludedPrefixes = New Dictionary
-    excludedPrefixes.CompareMode = TextCompare ' Case-insensitive
-    With excludedPrefixes
-        .Add "Abadi", True
-        .Add "Abel", True
-        .Add "Abril", True
-        .Add "ADLaM", True
-        .Add "Agency FB", True
-        .Add "Aharoni", True
-        .Add "Alasassy", True
-        .Add "Aldhabi", True
-        .Add "Alef", True
-        .Add "Aleo", True
-        .Add "Algerian", True
-        .Add "Amatic", True
-        .Add "Angsana", True
-        .Add "Anton", True
-        .Add "Aparajita", True
-        .Add "Aptos", True
-        .Add "Arabic", True
-        .Add "Aref", True
-        .Add "Arial Narrow", True
-        .Add "Assistant", True
-        .Add "Athiti", True
-        .Add "Baguet", True
-        .Add "Bahnschrift", True
-        .Add "Barlow", True
-        .Add "Batang", True
-        .Add "Bauhaus", True
-        .Add "Bebas", True
-        .Add "Bembo", True
-        .Add "Berlin", True
-        .Add "Bierstadt", True
-        .Add "Biome", True
-        .Add "Bookshelf", True
-        .Add "Boucherie", True
-        .Add "Browallia", True
-        .Add "Brush", True
-        .Add "Buxton", True
-        .Add "Cambria", True
-        .Add "Cascadia", True
-        .Add "Caveat", True
-        .Add "Cavolini", True
-        .Add "Chamberi", True
-        .Add "Charmonman", True
-        .Add "Chiller", True
-        .Add "Chonburi", True
-        .Add "Concert", True
-        .Add "Congenial", True
-        .Add "Convection", True
-        .Add "Cordia", True
-        .Add "DM", True
-        .Add "Dante", True
-        .Add "DaunPenh", True
-        .Add "David", True
-        .Add "Daytona", True
-        .Add "DengXian", True
-        .Add "Didact", True
-        .Add "Dillenia", True
-        .Add "DokChampa", True
-        .Add "Dosis", True
-        .Add "Dotum", True
-        .Add "Dubai", True
-        .Add "EB Garamond", True
-        .Add "Ebrima", True
-        .Add "Edwardian Script", True
-        .Add "Engravers", True
-        .Add "Eucrosia", True
-        .Add "Euphemia", True
-        .Add "Fahkwang", True
-        .Add "FangSong", True
-        .Add "Fairwater", True
-        .Add "Fira", True
-        .Add "Fjalla", True
-        .Add "Forte", True
-        .Add "Frank", True
-        .Add "Fredoka", True
-        .Add "FreesiaUPC", True
-        .Add "Gabriela", True
-        .Add "Gabriola", True
-        .Add "Gaegu", True
-        .Add "Gautami", True
-        .Add "Gill", True
-        .Add "Gisha", True
-        .Add "Goudy", True
-        .Add "Grandview", True
-        .Add "Grotesque", True
-        .Add "Gulim", True
-        .Add "Gungsuh", True
-        .Add "HG", True
-        .Add "Hadassah", True
-        .Add "Hammersmith", True
-        .Add "Harlow", True
-        .Add "Heebo", True
-        .Add "Hind", True
-        .Add "HoloLens", True
-        .Add "IBM", True
-        .Add "Inconsolata", True
-        .Add "Impact", True
-        .Add "Informal", True
-        .Add "Iris", True
-        .Add "Iskoola", True
-        .Add "Jasmine", True
-        .Add "Josefin", True
-        .Add "Jumble", True
-        .Add "KaiTi", True
-        .Add "Kalinga", True
-        .Add "Karla", True
-        .Add "Kartika", True
-        .Add "Kermit", True
-        .Add "Kigelia", True
-        .Add "KleeOne", True
-        .Add "Kodchiang", True
-        .Add "Kokila", True
-        .Add "Kristen", True
-        .Add "Krub", True
-        .Add "Lalezar", True
-        .Add "Latha", True
-        .Add "Lato", True
-        .Add "Leelawadee", True
-        .Add "Levenim", True
-        .Add "Libre", True
-        .Add "Ligconsolata", True
-        .Add "Lily", True
-        .Add "Livvic", True
-        .Add "Lobster", True
-        .Add "Lora", True
-        .Add "Lucida", True
-        .Add "Magneto", True
-        .Add "Microsoft", True
-        .Add "MS", True
-        .Add "MT", True
-        .Add "Mangal", True
-        .Add "Marlett", True
-        .Add "Meddon", True
-        .Add "Meiryo", True
-        .Add "Merriweather", True
-        .Add "Ming", True
-        .Add "Miriam", True
-        .Add "Mitr", True
-        .Add "Modern", True
-        .Add "Monotype", True
-        .Add "Montserrat", True
-        .Add "MoolBoran", True
-        .Add "Mr Gabe", True
-        .Add "Mystical", True
-        .Add "Nanum", True
-        .Add "Narkisim", True
-        .Add "News", True
-        .Add "Niagara", True
-        .Add "Nina", True
-        .Add "Nordique", True
-        .Add "Noto", True
-        .Add "Nunito", True
-        .Add "Nyala", True
-        .Add "OCR", True
-        .Add "Open Sans", True
-        .Add "Oranienbaum", True
-        .Add "Oswald", True
-        .Add "Oxygen", True
-        .Add "PT", True
-        .Add "Pacifico", True
-        .Add "Palace", True
-        .Add "Palanquin", True
-        .Add "Patrick", True
-        .Add "Petit", True
-        .Add "Playbill", True
-        .Add "Playfair", True
-        .Add "Plantagenet", True
-        .Add "PMing", True
-        .Add "Poiret", True
-        .Add "Poppins", True
-        .Add "Posterama", True
-        .Add "Pridi", True
-        .Add "Prompt", True
-        .Add "Quattro", True
-        .Add "Questrial", True
-        .Add "QuickType", True
-        .Add "Quire", True
-        .Add "Raavi", True
-        .Add "Ravie", True
-        .Add "Rage", True
-        .Add "Raleway", True
-        .Add "Rastanty", True
-        .Add "Reem", True
-        .Add "Roboto", True
-        .Add "Rod", True
-        .Add "STCaiyun", True
-        .Add "STF", True
-        .Add "STH", True
-        .Add "STK", True
-        .Add "STX", True
-        .Add "STZ", True
-        .Add "Sacramento", True
-        .Add "Sagona", True
-        .Add "Sans Serif Collection", True
-        .Add "Sakkal", True
-        .Add "Seaford", True
-        .Add "Secular", True
-        .Add "Segoe", True
-        .Add "Selawik", True
-        .Add "Shadows", True
-        .Add "Shonar", True
-        .Add "Shruti", True
-        .Add "SimHei", True
-        .Add "Simplified", True
-        .Add "Sitka", True
-        .Add "Skeena", True
-        .Add "Statliches", True
-        .Add "Suez", True
-        .Add "Symbol", True
-        .Add "TH", True
-        .Add "Tahoma", True
-        .Add "Tenorite", True
-        .Add "Titillum", True
-        .Add "Times New Roman", True
-        .Add "Trade", True
-        .Add "Traditional", True
-        .Add "Trirong", True
-        .Add "Tunga", True
-        .Add "UD Digi", True
-        .Add "Ubuntu", True
-        .Add "Univers", True
-        .Add "Urdu", True
-        .Add "Utsaah", True
-        .Add "Vani", True
-        .Add "Varela", True
-        .Add "Vijaya", True
-        .Add "Vivaldi", True
-        .Add "Vrinda", True
-        .Add "Walbaum", True
-        .Add "Wandohope", True
-        .Add "Webdings", True
-        .Add "Wingdings", True
-        .Add "Wide Latin", True
-        .Add "Work Sans", True
-        .Add "Yesteryear", True
-        .Add "Yu", True
-    End With
+    Dim rng As Range
+    Dim cell As Range
     
-    Set excludedSuffixes = New Dictionary
-    excludedSuffixes.CompareMode = TextCompare
-    With excludedSuffixes
-        .Add "Black", True
-        .Add "Bold ITC", True
-        .Add "Bold", True
-        .Add "Compressed", True
-        .Add "Cond", True
-        .Add "Conde", True
-        .Add "Conden", True
-        .Add "Condensed", True
-        .Add "Demi ITC", True
-        .Add "Demi", True
-        .Add "Expanded", True
-        .Add "ExtB", True
-        .Add "Extended", True
-        .Add "Hand", True
-        .Add "Heavy", True
-        .Add "Light ITC", True
-        .Add "Light", True
-        .Add "Lt", True
-        .Add "Medium ITC", True
-        .Add "Medium", True
-        .Add "Nova", True
-        .Add "Pro", True
-        .Add "Schoolbook", True
-        .Add "Text", True
-        .Add "Thin", True
-        .Add "UI", True
-        .Add "XBd", True
-        .Add ".tmp", True
-    End With
+    ' Named range: FontExclusions
+    Set rng = ThisWorkbook.Names("ExcludedFonts").RefersToRange
+    
+    Set excludedFonts = New Dictionary
+    excludedFonts.CompareMode = TextCompare   ' Case-insensitive
+    
+    For Each cell In rng.Cells
+        If Len(cell.Value2) > 0 Then
+            If Not excludedFonts.Exists(cell.Value2) Then
+                excludedFonts.Add cell.Value2, True
+            End If
+        End If
+    Next cell
     
     fontExclusionsInitialized = True
 End Sub
@@ -2979,32 +2848,8 @@ Private Function addToFontList(ByVal fontName As String) As Boolean
     
     InitializeFontExclusions
     
-    Dim lowerFontName As String
-    lowerFontName = LCase$(fontName)
-    
-    ' Check prefixes
-    Dim prefix As Variant
-    For Each prefix In excludedPrefixes.Keys
-        If Len(lowerFontName) >= Len(prefix) Then
-            If left$(lowerFontName, Len(prefix)) = LCase$(prefix) Then
-                addToFontList = False
-                Exit Function
-            End If
-        End If
-    Next prefix
-    
-    ' Check suffixes
-    Dim suffix As Variant
-    For Each suffix In excludedSuffixes.Keys
-        If Len(lowerFontName) >= Len(suffix) Then
-            If Right$(lowerFontName, Len(suffix)) = LCase$(suffix) Then
-                addToFontList = False
-                Exit Function
-            End If
-        End If
-    Next suffix
-    
-    addToFontList = True
+    ' Direct membership test
+    addToFontList = Not excludedFonts.Exists(fontName)
 End Function
 
 Public Sub CreateColorImageDir()
@@ -3998,3 +3843,5 @@ Private Function GetRadius() As Long
         GetRadius = 0
     End If
 End Function
+
+
