@@ -12,6 +12,8 @@ Attribute VB_Exposed = False
 '@Folder("Relationship Visualizer.Sheets.Cluster")
 
 '@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
+Public id As String
+'@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
 Public label As String
 '@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
 Public tooltip As String

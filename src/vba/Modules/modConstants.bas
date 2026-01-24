@@ -42,6 +42,9 @@ Public Const COLON As String = ":"
 #End If
 Public Const UTF8_CHARSET As String = "UTF-8"
 
+Public Const MAX_RS_OPEN_RETRIES As Long = 3
+Public Const DEFAULT_MAX_CONN_AGE_MINUTES As Long = 5
+
 ' Keywords
 Public Const KEYWORD_NODE As String = "NODE"
 Public Const KEYWORD_EDGE As String = "EDGE"
@@ -365,6 +368,9 @@ Public Const SETTINGS_SQL_COL_STATUS As String = "SqlColStatus"
 Public Const SETTINGS_SQL_COL_FILTER As String = "SqlColFilter"
 Public Const SETTINGS_SQL_FILTER_VALUE As String = "SqlFilterValue"
 
+Public Const SETTINGS_SQL_RETRY_LIMIT As String = "SqlRetryLimit"
+Public Const SETTINGS_SQL_MAX_CONNECTION_MINUTES As String = "SqlMaxConnectionMinutes"
+
 Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_CLUSTER As String = "SqlCountPlaceholderCluster"
 Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_SUBCLUSTER As String = "SqlCountPlaceholderSubcluster"
 Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET As String = "SqlCountPlaceholderRecordset"
@@ -391,6 +397,18 @@ Public Const SETTINGS_SQL_FIELD_NAME_MAX_DEPTH As String = "SqlFieldNameMaxDepth
 
 Public Const SETTINGS_SQL_FIELD_NAME_CREATE_EDGES As String = "SqlFieldNameCreateEdges"
 Public Const SETTINGS_SQL_FIELD_NAME_CREATE_RANK As String = "SqlFieldNameCreateRank"
+
+Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH As String = "SqlFieldNameEnumerateSwitch"
+Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT As String = "SqlFieldNameEnumerateStartAt"
+Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT As String = "SqlFieldNameEnumerateStopAt"
+Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY As String = "SqlFieldNameEnumerateStepBy"
+Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER As String = "SqlFieldNameEnumeratePlaceholder"
+Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX As String = "SqlFieldNameEnumerateMax"
+
+Public Const SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH As String = "SqlFieldNameIterateSwitch"
+Public Const SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY As String = "SqlFieldNameIterateIdQuery"
+Public Const SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY As String = "SqlFieldNameIterateDataQuery"
+Public Const SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER As String = "SqlFieldNameIteratePlaceholder"
 
 Public Const SETTINGS_SQL_CLOSE_CONNECTIONS As String = "SqlCloseConnections"
 
@@ -805,11 +823,23 @@ Public Const JSON_SETTINGS_SQL_FIELD_NAME_WHERE_VALUE As String = "whereValue"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_MAX_DEPTH As String = "maxDepth"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_CREATE_EDGES As String = "createEdges"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_CREATE_RANK As String = "createRank"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH As String = "iterateSwitch"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY As String = "iterateQueryId"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY As String = "iterateQueryData"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER As String = "iteratePlaceholder"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH As String = "enumerateSwitch"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT As String = "enumerateStartAt"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT As String = "enumerateStopAt"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY As String = "enumerateStepBy"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER As String = "enumeratePlaceholder"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX As String = "enumerateMax"
 
 Public Const JSON_SETTINGS_SQL_FILTER_COLUMN As String = "filterColumn"
 Public Const JSON_SETTINGS_SQL_FILTER_VALUE As String = "filterValue"
 
 Public Const JSON_SETTINGS_SQL_CLOSE_CONNECTIONS As String = "closeConnections"
+Public Const JSON_SETTINGS_SQL_RETRY_LIMIT As String = "retryLimit"
+Public Const JSON_SETTINGS_SQL_MAX_CONNECTION_MINUTES As String = "maxConnectionMinutes"
 
 Public Const JSON_SETTINGS_SQL_DATASOURCE_DIRECTORY As String = "datasourceDirectory"
 Public Const JSON_SETTINGS_SQL_DATASOURCE_FILE As String = "datasourceFile"
@@ -897,6 +927,11 @@ Public Const MSGBOX_PRODUCT_TITLE As String = "msgboxProductTitle"
 
 ' File types
 Public Const FILETYPE_SVG As String = "svg"
+
+' LOGGING Statements
+Public Const SQL_ENABLE_LOGGING                           As String = "ENABLE LOGGING"
+Public Const SQL_DISABLE_LOGGING                          As String = "DISABLE LOGGING"
+Public Const SQL_LOG_ENVIRONMENT                          As String = "LOG ENVIRONMENT"
 
 ' PREVIEW Statements
 Public Const SQL_PREVIEW                                  As String = "PREVIEW"

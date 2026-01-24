@@ -641,7 +641,7 @@ Private Function GetSettingsDictionarySql() As Dictionary
     Set dictionaryObj = New Dictionary
     
     Dim fields As sqlFieldName
-    fields = GetSettingsForSqlFields()
+    fields = GetSettingsForSqlFields(False)
 
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER, fields.Cluster
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_LABEL, fields.clusterLabel
@@ -667,6 +667,18 @@ Private Function GetSettingsDictionarySql() As Dictionary
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_WHERE_VALUE, fields.whereValue
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_MAX_DEPTH, fields.maxDepth
     
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH, fields.iterate
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY, fields.idQuery
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY, fields.dataQuery
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER, fields.idPlaceholder
+    
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH, fields.enumerateSwitch
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT, fields.enumerateStartAt
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT, fields.enumerateStopAt
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY, fields.enumerateStepBy
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER, fields.enumeratePlaceholder
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX, fields.enumerateMax
+    
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CREATE_EDGES, fields.CreateEdges
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CREATE_RANK, fields.CreateRank
     
@@ -677,6 +689,9 @@ Private Function GetSettingsDictionarySql() As Dictionary
     
     dictionaryObj.Add JSON_SETTINGS_SQL_DATASOURCE_DIRECTORY, SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)
     dictionaryObj.Add JSON_SETTINGS_SQL_DATASOURCE_FILE, SettingsSheet.Range(SETTINGS_DATASOURCE_FILE)
+    
+    dictionaryObj.Add JSON_SETTINGS_SQL_RETRY_LIMIT, fields.retryLimit
+    dictionaryObj.Add JSON_SETTINGS_SQL_MAX_CONNECTION_MINUTES, fields.maxConnectionMinutes
     
     Set GetSettingsDictionarySql = dictionaryObj
 End Function

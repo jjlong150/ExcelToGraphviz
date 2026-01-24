@@ -1,5 +1,5 @@
 Attribute VB_Name = "modUtilityADODBConstants"
-' Copyright (c) 2015-2025 Jeffrey J. Long. All rights reserved
+' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
 
 '@Folder("Utility.Excel")
 

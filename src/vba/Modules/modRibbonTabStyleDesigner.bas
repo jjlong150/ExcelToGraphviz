@@ -174,7 +174,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub colorPicker_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
-    visible = ColorPickerGetVisible(control.ID)
+    visible = ColorPickerGetVisible(control.id)
 End Sub
 
 Private Function ColorPickerGetVisible(controlId As String) As Boolean
@@ -220,7 +220,7 @@ Private Sub color_getItemImage(ByVal control As IRibbonControl, ByVal index As L
     ' Get the color name
     If index = 0 Then   ' Determine the default color for the attribute
         color.scheme = GetColorScheme()
-        ColorGetDefaultColorByControlId color, control.ID
+        ColorGetDefaultColorByControlId color, control.id
     Else
         ' See comment at top of module regarding variable "kolorScheme"
         color.scheme = kolorScheme
@@ -272,22 +272,22 @@ Private Sub color_getItemCount(ByVal control As IRibbonControl, ByRef count As V
     
     ' Hack to disable loading the hidden dropdowns
     If StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER Then
-        If control.ID = RIBBON_CTL_EDGE_COLOR1 Or control.ID = RIBBON_CTL_EDGE_COLOR2 Or control.ID = RIBBON_CTL_EDGE_COLOR3 Or control.ID = RIBBON_CTL_EDGE_LABEL_FONT_COLOR Then
+        If control.id = RIBBON_CTL_EDGE_COLOR1 Or control.id = RIBBON_CTL_EDGE_COLOR2 Or control.id = RIBBON_CTL_EDGE_COLOR3 Or control.id = RIBBON_CTL_EDGE_LABEL_FONT_COLOR Then
             count = 0
         End If
         
-        If control.ID = RIBBON_CTL_GRADIENT_FILL_COLOR And CellIsEmpty(DESIGNER_FILL_COLOR) Then
+        If control.id = RIBBON_CTL_GRADIENT_FILL_COLOR And CellIsEmpty(DESIGNER_FILL_COLOR) Then
             count = 0
         End If
         
     ElseIf StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_EDGE Then
-        If control.ID = RIBBON_CTL_FILL_COLOR Or control.ID = RIBBON_CTL_GRADIENT_FILL_COLOR Or control.ID = RIBBON_CTL_BORDER_COLOR Then
+        If control.id = RIBBON_CTL_FILL_COLOR Or control.id = RIBBON_CTL_GRADIENT_FILL_COLOR Or control.id = RIBBON_CTL_BORDER_COLOR Then
             count = 0
-        ElseIf control.ID = RIBBON_CTL_EDGE_COLOR2 Then
+        ElseIf control.id = RIBBON_CTL_EDGE_COLOR2 Then
             If CellIsEmpty(DESIGNER_EDGE_COLOR_1) Then
                 count = 0
             End If
-        ElseIf control.ID = RIBBON_CTL_EDGE_COLOR3 Then
+        ElseIf control.id = RIBBON_CTL_EDGE_COLOR3 Then
             If CellIsEmpty(DESIGNER_EDGE_COLOR_2) Then
                 count = 0
             End If
@@ -329,7 +329,7 @@ Public Sub color_getLabel(ByVal control As IRibbonControl, ByRef label As Varian
     Dim cellName As String
     Dim cellValue As String
     
-    Select Case control.ID
+    Select Case control.id
         Case RIBBON_CTL_FONT_COLOR
             cellName = DESIGNER_FONT_COLOR
             
@@ -362,7 +362,7 @@ Public Sub color_getLabel(ByVal control As IRibbonControl, ByRef label As Varian
     
     cellValue = StyleDesignerSetting(cellName)
     If cellValue = vbNullString Then
-        label = GetLabel(control.ID)
+        label = GetLabel(control.id)
     Else
         label = cellValue
     End If
@@ -500,7 +500,7 @@ Private Sub fontName_getItemCount(ByVal control As IRibbonControl, ByRef count A
     
     ' Hack to disable loading the font which will not be displayed
     If StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER Then
-        If control.ID = RIBBON_CTL_LABEL_FONT_NAME Then
+        If control.id = RIBBON_CTL_LABEL_FONT_NAME Then
             count = 0
         End If
     End If
@@ -510,7 +510,7 @@ Public Sub fontName_getLabel(ByVal control As IRibbonControl, ByRef returnedVal 
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_FONT_NAME)
     If Len(fontName) = 0 Then
-        returnedVal = GetLabel(control.ID)
+        returnedVal = GetLabel(control.id)
     Else
         returnedVal = fontName
     End If
@@ -709,7 +709,7 @@ Public Sub labelFontName_getLabel(ByVal control As IRibbonControl, ByRef returne
     End If
     
     If Len(fontName) = 0 Then
-        returnedVal = GetLabel(control.ID)
+        returnedVal = GetLabel(control.id)
     Else
         returnedVal = fontName
     End If
@@ -1110,7 +1110,7 @@ Private Sub gradientFillColorPicker_getVisible(ByVal control As IRibbonControl, 
     End If
 
 #If Mac Then
-    visible = visible And ColorPickerGetVisible(control.ID)
+    visible = visible And ColorPickerGetVisible(control.id)
 #End If
 End Sub
 
@@ -1243,7 +1243,7 @@ Public Sub nodeShape_getLabel(ByVal control As IRibbonControl, ByRef returnedVal
     Dim shape As String
     shape = StyleDesignerSetting(DESIGNER_NODE_SHAPE)
     If Len(shape) = 0 Then
-        returnedVal = GetLabel(control.ID)
+        returnedVal = GetLabel(control.id)
     Else
         returnedVal = shape
     End If
@@ -1555,7 +1555,7 @@ Private Sub edgeColor2Picker_getVisible(ByVal control As IRibbonControl, ByRef r
     End If
     
 #If Mac Then
-    returnedVal = returnedVal And ColorPickerGetVisible(control.ID)
+    returnedVal = returnedVal And ColorPickerGetVisible(control.id)
 #End If
 End Sub
 
@@ -1598,7 +1598,7 @@ Private Sub edgeColor3Picker_getVisible(ByVal control As IRibbonControl, ByRef r
     End If
     
 #If Mac Then
-    returnedVal = returnedVal And ColorPickerGetVisible(control.ID)
+    returnedVal = returnedVal And ColorPickerGetVisible(control.id)
 #End If
 End Sub
 ' ===========================================================================
@@ -1797,7 +1797,7 @@ End Sub
 Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     Dim direction As String
     If pressed Then
-        direction = Mid$(control.ID, Len("ed_") + 1)
+        direction = Mid$(control.id, Len("ed_") + 1)
     Else
         direction = vbNullString
     End If
@@ -1844,10 +1844,10 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub edgeDirection_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = vbNullString And control.ID = "ed_forward" Then
+    If StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = vbNullString And control.id = "ed_forward" Then
         pressed = True
     Else
-        pressed = StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = LCase$(Mid$(control.ID, Len("ed_") + 1))
+        pressed = StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = LCase$(Mid$(control.id, Len("ed_") + 1))
     End If
 End Sub
 
@@ -2171,7 +2171,7 @@ End Sub
 '@Ignore ParameterNotUsed
 Public Sub imagepos_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
-        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.ID, Len("imagepos_") + 1))
+        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.id, Len("imagepos_") + 1))
     Else
         StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = vbNullString
     End If
@@ -2181,7 +2181,7 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub imagepos_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.ID, Len("imagepos_") + 1)) Then
+    If StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.id, Len("imagepos_") + 1)) Then
         pressed = True
     Else
         pressed = False
@@ -2203,7 +2203,7 @@ End Sub
 '@Ignore ParameterNotUsed
 Public Sub imagescale_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
-        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value = CStr(LCase$(Mid$(control.ID, Len("is_") + 1)))
+        StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value = CStr(LCase$(Mid$(control.id, Len("is_") + 1)))
     Else
         StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value = vbNullString
     End If
@@ -2213,7 +2213,7 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub imagescale_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If LCase$(CStr(StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value)) = Mid$(LCase$(CStr(control.ID)), Len("is_") + 1) Then
+    If LCase$(CStr(StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value)) = Mid$(LCase$(CStr(control.id)), Len("is_") + 1) Then
         pressed = True
     Else
         pressed = False
@@ -2698,15 +2698,15 @@ Public Sub RenderPreviewFromFormatString()
 End Sub
 
 Public Sub ribbon_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetLabel(control.ID)
+    returnedVal = GetLabel(control.id)
 End Sub
 
 Public Sub ribbon_getScreenTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetScreentip(control.ID)
+    returnedVal = GetScreentip(control.id)
 End Sub
 
 Public Sub ribbon_getSuperTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetSupertip(control.ID)
+    returnedVal = GetSupertip(control.id)
 End Sub
 
 Private Function getFontList() As Variant
@@ -2727,14 +2727,14 @@ Private Function GetWindowsFontList() As Variant
     Dim tmpFontList As CommandBarControl
 
     On Error Resume Next
-    Set tmpFontList = Application.CommandBars.item("Formatting").FindControl(ID:=1728)
+    Set tmpFontList = Application.CommandBars.item("Formatting").FindControl(id:=1728)
     On Error GoTo 0
 
     ' Create temporary command bar if needed
     If tmpFontList Is Nothing Then
         Dim tmpCommandBar As CommandBar
         Set tmpCommandBar = Application.CommandBars.Add
-        Set tmpFontList = tmpCommandBar.Controls.Add(ID:=1728)
+        Set tmpFontList = tmpCommandBar.Controls.Add(id:=1728)
         tmpCommandBar.Delete
     End If
 
@@ -2916,7 +2916,7 @@ Public Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef v
         Exit Sub
     End If
 
-    Select Case control.ID
+    Select Case control.id
         Case RIBBON_CTL_CLUSTER_MARGIN
             visible = Not GetCellBoolean(StyleDesignerSheet.name, DESIGNER_NODE_METRIC)
 
@@ -2931,11 +2931,11 @@ Public Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef v
     End Select
 End Sub
 
-Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, ID As String, ByVal index As Integer)
+Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
     Dim prefix As String
     Dim marginValue As String
 
-    Select Case control.ID
+    Select Case control.id
         Case RIBBON_CTL_CLUSTER_MARGIN
             prefix = "margin_"
         Case RIBBON_CTL_CLUSTER_MARGIN_MM
@@ -2944,8 +2944,8 @@ Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, ID As String,
             Exit Sub ' Unexpected control, do nothing
     End Select
 
-    If Len(ID) > Len(prefix) Then
-        marginValue = Mid$(ID, Len(prefix) + 1)
+    If Len(id) > Len(prefix) Then
+        marginValue = Mid$(id, Len(prefix) + 1)
         SaveStyleDesignerSetting DESIGNER_CLUSTER_MARGIN, marginValue
         RenderPreview
     End If
@@ -2959,7 +2959,7 @@ End Sub
 Public Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     Dim prefix As String
 
-    Select Case control.ID
+    Select Case control.id
         Case RIBBON_CTL_CLUSTER_MARGIN
             prefix = "margin_"
         Case RIBBON_CTL_CLUSTER_MARGIN_MM
@@ -2972,8 +2972,8 @@ Public Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRe
     itemId = prefix & StyleDesignerSetting(DESIGNER_CLUSTER_MARGIN)
 End Sub
 
-Public Sub clusterPackmode_onAction(ByVal control As IRibbonControl, ID As String, ByVal index As Integer)
-    SaveStyleDesignerSetting DESIGNER_CLUSTER_PACKMODE, Mid$(ID, Len("packmode_") + 1)
+Public Sub clusterPackmode_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
+    SaveStyleDesignerSetting DESIGNER_CLUSTER_PACKMODE, Mid$(id, Len("packmode_") + 1)
     RefreshControlsPackmode
     RenderPreview
 End Sub
@@ -2983,8 +2983,8 @@ Public Sub clusterPackmode_GetSelectedItemID(ByVal control As IRibbonControl, By
     itemId = GetSelectedItemID("packmode_", DESIGNER_CLUSTER_PACKMODE)
 End Sub
 
-Public Sub arraySplit_onAction(ByVal control As IRibbonControl, ID As String, ByVal index As Integer)
-    SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_SPLIT, Mid$(ID, Len("arraySplit_") + 1)
+Public Sub arraySplit_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
+    SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_SPLIT, Mid$(id, Len("arraySplit_") + 1)
     RenderPreview
 End Sub
 
@@ -3069,7 +3069,7 @@ Public Sub colorScheme_getLabel(ByVal control As IRibbonControl, ByRef label As 
     Dim colorScheme As String
     colorScheme = StyleDesignerSetting(DESIGNER_COLOR_SCHEME)
     If colorScheme = vbNullString Then
-        label = GetLabel(control.ID)
+        label = GetLabel(control.id)
     Else
         label = colorScheme
     End If
@@ -3461,7 +3461,7 @@ Private Sub RefreshControlsColor()
 End Sub
 
 Private Sub RefreshControlsColorPicker(ByVal control As IRibbonControl)
-    Select Case control.ID
+    Select Case control.id
         Case RIBBON_CTL_FONT_COLOR_PICKER
             InvalidateRibbonControl RIBBON_CTL_FONT_COLOR
             
@@ -3673,7 +3673,7 @@ Private Sub colorPicker_onAction(ByVal control As IRibbonControl)
     
     ' Bring up the RGB color chooser dialog. Fill controls have
     ' white default color, all others default to black.
-    Select Case control.ID
+    Select Case control.id
         Case RIBBON_CTL_FONT_COLOR_PICKER
             picked = PickColor(DESIGNER_FONT_COLOR, COLOR_BLACK_RGB)
             

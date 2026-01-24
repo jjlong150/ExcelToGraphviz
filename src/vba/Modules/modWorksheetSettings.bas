@@ -132,37 +132,95 @@ Public Function GetSettingsForSqlWorksheet() As sqlWorksheet
     GetSettingsForSqlWorksheet.statusColumn = GetSettingColNum(SETTINGS_SQL_COL_STATUS)
 End Function
 
-Public Function GetSettingsForSqlFields() As sqlFieldName
-    GetSettingsForSqlFields.Cluster = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CLUSTER).value))
-    GetSettingsForSqlFields.clusterLabel = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CLUSTER_LABEL).value))
-    GetSettingsForSqlFields.clusterStyleName = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CLUSTER_STYLE_NAME).value))
-    GetSettingsForSqlFields.clusterAttributes = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CLUSTER_ATTRIBUTES).value))
-    GetSettingsForSqlFields.clusterTooltip = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CLUSTER_TOOLTIP).value))
+Private Function GetSettingText(ByVal settingName As String, Optional ByVal makeLower As Boolean = True) As String
+    Dim v As Variant
+    v = SettingsSheet.Range(settingName).value
 
-    GetSettingsForSqlFields.subcluster = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER).value))
-    GetSettingsForSqlFields.subclusterLabel = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_LABEL).value))
-    GetSettingsForSqlFields.subclusterStyleName = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_STYLE_NAME).value))
-    GetSettingsForSqlFields.subclusterAttributes = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_ATTRIBUTES).value))
-    GetSettingsForSqlFields.subclusterTooltip = Trim$(LCase$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_TOOLTIP).value))
-    
-    GetSettingsForSqlFields.clusterPlaceholder = Trim$(SettingsSheet.Range(SETTINGS_SQL_COUNT_PLACEHOLDER_CLUSTER).value)
-    GetSettingsForSqlFields.subclusterPlaceholder = Trim$(SettingsSheet.Range(SETTINGS_SQL_COUNT_PLACEHOLDER_SUBCLUSTER).value)
-    GetSettingsForSqlFields.recordsetPlaceholder = Trim$(SettingsSheet.Range(SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET).value)
-    
-    GetSettingsForSqlFields.splitLength = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_SPLIT_LENGTH).value)
-    GetSettingsForSqlFields.lineEnding = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_LINE_ENDING).value)
-    
-    GetSettingsForSqlFields.filterColumn = Trim$(SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value)
-    GetSettingsForSqlFields.filterValue = Trim$(SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value)
-    
-    GetSettingsForSqlFields.treeQuery = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_TREE_QUERY).value)
-    GetSettingsForSqlFields.whereColumn = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN).value)
-    GetSettingsForSqlFields.whereValue = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_WHERE_VALUE).value)
-    GetSettingsForSqlFields.maxDepth = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_MAX_DEPTH).value)
-    GetSettingsForSqlFields.closeConnections = GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS)
+    If IsError(v) Or IsEmpty(v) Then
+        GetSettingText = ""
+    ElseIf makeLower Then
+        GetSettingText = Trim$(LCase$(CStr(v)))
+    Else
+        GetSettingText = Trim$(CStr(v))
+    End If
+End Function
 
-    GetSettingsForSqlFields.CreateEdges = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CREATE_EDGES).value)
-    GetSettingsForSqlFields.CreateRank = Trim$(SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CREATE_RANK).value)
+Private Function GetSettingLong(ByVal settingName As String) As String
+    Dim v As Variant
+    v = SettingsSheet.Range(settingName).value
+
+    If IsError(v) Or IsEmpty(v) Then
+        GetSettingLong = 0
+    Else
+        GetSettingLong = CLng(v)
+    End If
+End Function
+
+Public Function GetSettingsForSqlFields(ByVal makeLCase As Boolean) As sqlFieldName
+
+    With GetSettingsForSqlFields
+        ' Cluster
+        .Cluster = GetSettingText(SETTINGS_SQL_FIELD_NAME_CLUSTER, makeLCase)
+        .clusterLabel = GetSettingText(SETTINGS_SQL_FIELD_NAME_CLUSTER_LABEL, makeLCase)
+        .clusterStyleName = GetSettingText(SETTINGS_SQL_FIELD_NAME_CLUSTER_STYLE_NAME, makeLCase)
+        .clusterAttributes = GetSettingText(SETTINGS_SQL_FIELD_NAME_CLUSTER_ATTRIBUTES, makeLCase)
+        .clusterTooltip = GetSettingText(SETTINGS_SQL_FIELD_NAME_CLUSTER_TOOLTIP, makeLCase)
+
+        ' Subcluster
+        .subcluster = GetSettingText(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER, makeLCase)
+        .subclusterLabel = GetSettingText(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_LABEL, makeLCase)
+        .subclusterStyleName = GetSettingText(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_STYLE_NAME, makeLCase)
+        .subclusterAttributes = GetSettingText(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_ATTRIBUTES, makeLCase)
+        .subclusterTooltip = GetSettingText(SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_TOOLTIP, makeLCase)
+
+        ' Placeholders (case preserved)
+        .clusterPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_CLUSTER, False)
+        .subclusterPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_SUBCLUSTER, False)
+        .recordsetPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET, False)
+
+        ' Other settings (case preserved)
+        .splitLength = GetSettingText(SETTINGS_SQL_FIELD_NAME_SPLIT_LENGTH, False)
+        .lineEnding = GetSettingText(SETTINGS_SQL_FIELD_NAME_LINE_ENDING, False)
+        .filterColumn = GetSettingText(SETTINGS_SQL_COL_FILTER, False)
+        .filterValue = GetSettingText(SETTINGS_SQL_FILTER_VALUE, False)
+        .treeQuery = GetSettingText(SETTINGS_SQL_FIELD_NAME_TREE_QUERY, False)
+        .whereColumn = GetSettingText(SETTINGS_SQL_FIELD_NAME_WHERE_COLUMN, False)
+        .whereValue = GetSettingText(SETTINGS_SQL_FIELD_NAME_WHERE_VALUE, False)
+        .maxDepth = GetSettingText(SETTINGS_SQL_FIELD_NAME_MAX_DEPTH, False)
+
+        ' Boolean
+        .closeConnections = GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS)
+        
+        ' Long
+        
+        ' We can retry a failed query if the cause was not due to syntax error
+        ' If retry is not desired, it can be changed in the settings.
+        .retryLimit = GetSettingLong(SETTINGS_SQL_RETRY_LIMIT)
+        If .retryLimit <= 1 Then .retryLimit = MAX_RS_OPEN_RETRIES
+
+        ' If the connection is older than the configured freshness threshold (default: 5 minutes),
+        ' we treat it as stale. 0 minutes causes new connection with every invocation.
+        .maxConnectionMinutes = GetSettingLong(SETTINGS_SQL_MAX_CONNECTION_MINUTES)
+        If .maxConnectionMinutes < 0 Then .maxConnectionMinutes = DEFAULT_MAX_CONN_AGE_MINUTES
+
+        ' Flags (case preserved)
+        .CreateEdges = GetSettingText(SETTINGS_SQL_FIELD_NAME_CREATE_EDGES, False)
+        .CreateRank = GetSettingText(SETTINGS_SQL_FIELD_NAME_CREATE_RANK, False)
+
+        ' Enumeration (case preserved)
+        .enumerateSwitch = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH, False)
+        .enumerateStartAt = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT, False)
+        .enumerateStopAt = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT, False)
+        .enumerateStepBy = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY, False)
+        .enumeratePlaceholder = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER, False)
+        .enumerateMax = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX, False)
+
+        ' Iteration + queries (case preserved)
+        .iterate = GetSettingText(SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH, False)
+        .idQuery = GetSettingText(SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY, False)
+        .dataQuery = GetSettingText(SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY, False)
+        .idPlaceholder = GetSettingText(SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER, False)
+    End With
 End Function
 
 Public Function GetSettingsForSvgWorksheet() As svgWorksheet
@@ -406,7 +464,7 @@ Public Sub DisplaySqlOptions(ByVal isVisible As Boolean)
     Dim rowTo As Long
     
     rowFrom = SettingsSheet.Range(SETTINGS_SQL_COL_COMMENT).row - 1
-    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_MAX_DEPTH).row + 1
+    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER).row + 1
 #If Mac Then
     DisplayTabRows False, rowFrom, rowTo
     SettingsSheet.Shapes.Range("enabledTabSqlWorksheet").visible = False

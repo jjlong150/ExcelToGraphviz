@@ -17,15 +17,15 @@ Private Const ZOOM_STEP As Long = 5
 '@Ignore ParameterNotUsed
 Public Sub showColumn_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     ClearWorksheetGraphs
-    SettingsSheet.Range(control.ID).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
-    ShowHideDataColumn (control.ID)
+    SettingsSheet.Range(control.id).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
+    ShowHideDataColumn (control.id)
     AutoDraw
 End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub showColumn_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    ShowHideDataColumn (control.ID)
-    returnedVal = GetSettingBoolean(control.ID)
+    ShowHideDataColumn (control.id)
+    returnedVal = GetSettingBoolean(control.id)
 End Sub
 
 Public Sub ShowHideDataColumn(ByVal columnId As String)
@@ -285,7 +285,7 @@ End Sub
 '@Ignore ParameterNotUsed
 Public Sub layout_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
-        SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LCase$(Mid$(control.ID, Len("layout") + 1))
+        SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LCase$(Mid$(control.id, Len("layout") + 1))
     Else
         SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LAYOUT_DOT
     End If
@@ -315,7 +315,7 @@ Public Sub layout_getPressed(ByVal control As IRibbonControl, ByRef pressed As V
         Case "line": layout = "false"
     End Select
     
-    pressed = layout = LCase$(Mid$(control.ID, Len("layout") + 1))
+    pressed = layout = LCase$(Mid$(control.id, Len("layout") + 1))
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -374,7 +374,7 @@ End Sub
 '@Ignore ParameterNotUsed
 Public Sub splines_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
-        SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.ID, Len("spline") + 1))
+        SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.id, Len("spline") + 1))
     Else
         SettingsSheet.Range(SETTINGS_SPLINES).value = vbNullString
     End If
@@ -394,10 +394,10 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub splines_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If SettingsSheet.Range(SETTINGS_SPLINES).value = vbNullString And control.ID = "splineFalse" Then
+    If SettingsSheet.Range(SETTINGS_SPLINES).value = vbNullString And control.id = "splineFalse" Then
         pressed = True
     Else
-        pressed = SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.ID, Len("spline") + 1))
+        pressed = SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.id, Len("spline") + 1))
     End If
 End Sub
 
@@ -432,12 +432,42 @@ Public Sub getDir_getLabel(ByVal control As IRibbonControl, ByRef label As Varia
 End Sub
 
 ' ===========================================================================
-' Callbacks for dirNameLabel
+' Callbacks for getDirLabel
 
 '@Ignore ParameterNotUsed
 Public Sub getDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
-    label = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
+    Dim folder As String
+    folder = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
+    label = ShortenToLastTwoFolders(folder)
 End Sub
+
+Private Function ShortenToLastTwoFolders(ByVal fullPath As String) As String
+    Dim parts() As String
+    Dim n As Long
+    Dim sep As String
+
+    ' Ensure a path was passed in
+    If Trim$(fullPath) = vbNullString Then
+        ShortenToLastTwoFolders = vbNullString
+        Exit Function
+    End If
+    
+    ' We have a non-null string, parse it.
+    sep = Application.pathSeparator
+    parts = split(fullPath, sep)
+    n = UBound(parts)
+
+    Select Case n
+        Case 0
+            ShortenToLastTwoFolders = parts(0)
+
+        Case 1
+            ShortenToLastTwoFolders = parts(0) & sep & parts(1)
+
+        Case Else
+            ShortenToLastTwoFolders = "..." & sep & parts(n - 1) & sep & parts(n)
+    End Select
+End Function
 
 ' ===========================================================================
 ' Callbacks for fileFormat
@@ -672,7 +702,7 @@ End Sub
 
 Public Sub rankdir_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
-        SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.ID, Len("rankdir") + 1)
+        SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.id, Len("rankdir") + 1)
     Else
         SettingsSheet.Range(SETTINGS_RANKDIR).value = vbNullString
     End If
@@ -681,10 +711,10 @@ Public Sub rankdir_onAction(ByVal control As IRibbonControl, ByVal pressed As Bo
 End Sub
 
 Public Sub rankdir_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If SettingsSheet.Range(SETTINGS_RANKDIR).value = vbNullString And control.ID = "rankdirTB" Then
+    If SettingsSheet.Range(SETTINGS_RANKDIR).value = vbNullString And control.id = "rankdirTB" Then
         pressed = True
     Else
-        pressed = SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.ID, Len("rankdir") + 1)
+        pressed = SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.id, Len("rankdir") + 1)
     End If
 End Sub
 
@@ -967,7 +997,7 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub overlap_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value = control.ID
+    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value = control.id
 End Sub
 
 
@@ -1377,7 +1407,7 @@ End Sub
 
 Public Sub ordering_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
-        SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = LCase$(Mid$(control.ID, Len("ordering") + 1))
+        SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = LCase$(Mid$(control.id, Len("ordering") + 1))
     Else
         SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = vbNullString
     End If
@@ -1386,7 +1416,7 @@ Public Sub ordering_onAction(ByVal control As IRibbonControl, ByVal pressed As B
 End Sub
 
 Public Sub ordering_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If LCase$(SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value) = LCase$(Mid$(control.ID, Len("ordering") + 1)) Then
+    If LCase$(SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value) = LCase$(Mid$(control.id, Len("ordering") + 1)) Then
         pressed = True
     Else
         pressed = False

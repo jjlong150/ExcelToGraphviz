@@ -1135,12 +1135,12 @@ Private Function FormatId(ByVal nodeId As String, ByVal includePorts As Boolean)
     ' Build the id, taking ports into consideration
     If InStr(nodeId, ":") > 0 Then  ' nodeId specifies a port.
         If includePorts Then        ' wrap both sides of the id in quotes
-            formattedId = AddQuotesConditionally(GetStringTokenAtPosition(nodeId, ":", 1)) & ":" & AddQuotesConditionally(GetStringTokenAtPosition(nodeId, ":", 2))
+            formattedId = AddQuotes(GetStringTokenAtPosition(nodeId, ":", 1)) & ":" & AddQuotesConditionally(GetStringTokenAtPosition(nodeId, ":", 2))
         Else    ' strip the port off
-            formattedId = AddQuotesConditionally(GetStringTokenAtPosition(nodeId, ":", 1))
+            formattedId = AddQuotes(GetStringTokenAtPosition(nodeId, ":", 1))
         End If
     Else        ' no port was specified
-        formattedId = AddQuotesConditionally(nodeId)
+        formattedId = AddQuotes(nodeId)
     End If
 
     FormatId = formattedId

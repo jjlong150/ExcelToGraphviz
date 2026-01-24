@@ -30,25 +30,58 @@ Option Explicit
 '
 '*******************************************************************************
 
-Public Sub MergeRecordsets(ByVal rsFirst As Object, ByVal rsSecond As Object, ByRef rsMergedResults As Object)
+Public Sub MergeRecordsets(ByVal rsFirst As Object, _
+                           ByVal rsSecond As Object, _
+                           ByRef rsMergedResults As Object)
+
+    On Error GoTo MergeError
+
     Dim field As Object
     Dim mergedField As Object
     Dim fieldExists As Boolean
-    
-    ' Create a new recordset to contain the merged records
-    Set rsMergedResults = CreateObject("ADODB.Recordset")
+    Dim fieldSize As Long
 
-    ' Initialize the merged recordset
+    '---------------------------------------------------------------------------
+    ' Defensive guards: ensure both recordsets are valid and open
+    '---------------------------------------------------------------------------
+    If rsFirst Is Nothing Or rsFirst.State <> adStateOpen Then Exit Sub
+    If rsSecond Is Nothing Or rsSecond.State <> adStateOpen Then Exit Sub
+
+    '---------------------------------------------------------------------------
+    ' Ensure both recordsets are positioned at BOF
+    '---------------------------------------------------------------------------
+    On Error Resume Next
+    rsFirst.MoveFirst
+    rsSecond.MoveFirst
+    On Error GoTo MergeError
+
+    '---------------------------------------------------------------------------
+    ' If caller passed an existing recordset, close it safely
+    '---------------------------------------------------------------------------
+    If Not rsMergedResults Is Nothing Then
+        If rsMergedResults.State = adStateOpen Then rsMergedResults.Close
+    End If
+
+    '---------------------------------------------------------------------------
+    ' Create a new recordset to contain the merged records
+    '---------------------------------------------------------------------------
+    Set rsMergedResults = CreateObject("ADODB.Recordset")
     rsMergedResults.CursorLocation = CursorLocationEnum.adUseClient
     rsMergedResults.CursorType = CursorTypeEnum.adOpenStatic
     rsMergedResults.LockType = LockTypeEnum.adLockBatchOptimistic
-    
+
+    '---------------------------------------------------------------------------
     ' Create fields in merged recordset for rsFirst
+    '---------------------------------------------------------------------------
     For Each field In rsFirst.fields
-        rsMergedResults.fields.Append field.name, field.Type, field.DefinedSize, field.attributes
+        fieldSize = field.DefinedSize
+        If fieldSize < 1 Then fieldSize = 255   ' Prevent provider errors on -1 sizes
+        rsMergedResults.fields.Append field.name, field.Type, fieldSize, field.attributes
     Next field
-    
+
+    '---------------------------------------------------------------------------
     ' Create fields in merged recordset for rsSecond if they don't already exist
+    '---------------------------------------------------------------------------
     For Each field In rsSecond.fields
         fieldExists = False
         For Each mergedField In rsMergedResults.fields
@@ -57,39 +90,73 @@ Public Sub MergeRecordsets(ByVal rsFirst As Object, ByVal rsSecond As Object, By
                 Exit For
             End If
         Next mergedField
+
         If Not fieldExists Then
-            rsMergedResults.fields.Append field.name, field.Type, field.DefinedSize, field.attributes
+            fieldSize = field.DefinedSize
+            If fieldSize < 1 Then fieldSize = 255
+            rsMergedResults.fields.Append field.name, field.Type, fieldSize, field.attributes
         End If
     Next field
-    
+
+    '---------------------------------------------------------------------------
     ' Open the merged recordset
+    '---------------------------------------------------------------------------
     rsMergedResults.Open
-    
+
+    '---------------------------------------------------------------------------
     ' Copy records from rsFirst to rsMergedResults
+    '---------------------------------------------------------------------------
+    rsFirst.MoveFirst
     Do Until rsFirst.EOF
         rsMergedResults.AddNew
-        For Each field In rsMergedResults.fields
-            On Error Resume Next ' Skip errors if field is not found
-            rsMergedResults.fields(field.name).value = rsFirst.fields(field.name).value
-            On Error GoTo 0
-        Next field
+
+        For Each mergedField In rsMergedResults.fields
+            On Error Resume Next
+            rsMergedResults.fields(mergedField.name).value = rsFirst.fields(mergedField.name).value
+            On Error GoTo MergeError
+        Next mergedField
+
+        rsMergedResults.Update
         rsFirst.MoveNext
     Loop
-    
+
+    '---------------------------------------------------------------------------
     ' Copy records from rsSecond to rsMergedResults
-    rsSecond.MoveFirst ' Ensure the recordset is at the beginning
+    '---------------------------------------------------------------------------
+    rsSecond.MoveFirst
     Do Until rsSecond.EOF
         rsMergedResults.AddNew
-        For Each field In rsMergedResults.fields
-            On Error Resume Next ' Skip errors if field is not found
-            rsMergedResults.fields(field.name).value = rsSecond.fields(field.name).value
-            On Error GoTo 0
-        Next field
+
+        For Each mergedField In rsMergedResults.fields
+            On Error Resume Next
+            rsMergedResults.fields(mergedField.name).value = rsSecond.fields(mergedField.name).value
+            On Error GoTo MergeError
+        Next mergedField
+
+        rsMergedResults.Update
         rsSecond.MoveNext
     Loop
-    
-    ' Commit the records to the merged recordset
-    rsMergedResults.UpdateBatch
-End Sub
 
+    '---------------------------------------------------------------------------
+    ' Commit the records to the merged recordset
+    '---------------------------------------------------------------------------
+    rsMergedResults.UpdateBatch
+
+    Exit Sub
+
+'---------------------------------------------------------------------------
+' Local error handler — keeps merge failures isolated
+'---------------------------------------------------------------------------
+MergeError:
+    LogDiagnostic _
+        "MergeRecordsets(): " & Err.Description, _
+        errorNumber:=Err.number, _
+        errorCategory:="ADO / Merge"
+
+    On Error Resume Next
+    If Not rsMergedResults Is Nothing Then
+        If rsMergedResults.State = adStateOpen Then rsMergedResults.Close
+    End If
+    Set rsMergedResults = Nothing
+End Sub
 

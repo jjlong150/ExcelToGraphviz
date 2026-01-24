@@ -23,7 +23,7 @@ Private Sub Worksheet_Activate()
     ActiveSheet.Range("A1").Select
 End Sub
 
-Private Sub Worksheet_Change(ByVal Target As Range)
+Private Sub Worksheet_Change(ByVal target As Range)
     OptimizeCode_Begin
     UpdateSourceWorksheetLineNumbers
     OptimizeCode_End

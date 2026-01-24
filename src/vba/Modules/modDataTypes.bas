@@ -258,6 +258,18 @@ Public Type sqlFieldName
     closeConnections As Boolean
     CreateEdges As String
     CreateRank As String
+    iterate As String
+    idQuery As String
+    idPlaceholder As String
+    dataQuery As String
+    enumerateSwitch As String
+    enumerateStartAt As String
+    enumerateStopAt As String
+    enumerateStepBy As String
+    enumeratePlaceholder As String
+    enumerateMax As String
+    retryLimit As Long
+    maxConnectionMinutes As Long
 End Type
 
 ' Working variables for row data on the "svg" worksheet

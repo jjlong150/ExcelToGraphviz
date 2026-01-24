@@ -21,13 +21,47 @@ Public Sub sqlRun_onAction(ByVal control As IRibbonControl)
 End Sub
 
 Public Sub RunSQLAsExtension()
+    ' Change the cursor to the wait cursor (hourglass)
+    Dim originalCursorType As Long
+    originalCursorType = Application.Cursor
     Application.Cursor = xlWait
-    OptimizeCode_Begin
+    
+    ' Add a guard against Excel recalculation
+    ' If the user has volatile formulas or add-ins, Excel may re-enter during .Open
+    Dim originalCalculation As Long
+    originalCalculation = Application.Calculation
+    Application.Calculation = xlCalculationManual
+
+    ' AutoSave/AutoRecover can lock the workbook while ADO is reading it.
+    ' Disable AutoRecover during SQL
+    Dim originalAutoRecover As Boolean
+    originalAutoRecover = Application.AutoRecover.enabled
+    Application.AutoRecover.enabled = False
+
+    ' Disable screen updating
+    Dim originalScreenUpdating As Boolean
+    originalScreenUpdating = Application.ScreenUpdating
+    Application.ScreenUpdating = False
+    
+    ' Disable events
+    Dim originalEnableEvents As Long
+    originalEnableEvents = Application.enableEvents
+    Application.enableEvents = False
+
+    ' Execute ALL the SQL commands
     RunSQL
+    
+    ' Refresh the ribbon controls based on SQL execution activity
     InvalidateRibbonControl RIBBON_CTL_SQL_CONN_POOL_RESET
-    OptimizeCode_End
-    Application.Cursor = xlDefault
+    
+    ' Return to prior states
+    Application.enableEvents = originalEnableEvents
+    Application.ScreenUpdating = originalScreenUpdating
+    Application.AutoRecover.enabled = originalAutoRecover
+    Application.Calculation = originalCalculation
+    Application.Cursor = originalCursorType
 End Sub
+
 
 '@Ignore ParameterNotUsed
 Public Sub sqlClearStatus_onAction(ByVal control As IRibbonControl)
@@ -263,7 +297,7 @@ Public Sub sqlConnPoolReset_getEnabled(ByVal control As IRibbonControl, ByRef en
 End Sub
 
 Public Sub sqlConnPoolReset_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetLabel(control.ID) & " (" & GetConnectionCount() & ")"
+    returnedVal = GetLabel(control.id) & " (" & GetConnectionCount() & ")"
 End Sub
 
 ' ===========================================================================
@@ -348,7 +382,34 @@ End Sub
 
 '@Ignore ParameterNotUsed
 Public Sub datasourceDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
-    label = Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY))
+    Dim fullPath As String
+    Dim parts() As String
+    Dim n As Long
+
+    fullPath = Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY).value)
+
+    If Len(fullPath) = 0 Then
+        label = ""
+        Exit Sub
+    End If
+
+    ' Split path into components
+    parts = split(fullPath, Application.pathSeparator)
+    n = UBound(parts)
+
+    Select Case n
+        Case 0
+            ' Only one element (unlikely, but safe)
+            label = parts(0)
+
+        Case 1
+            ' Two elements ? show both
+            label = parts(0) & Application.pathSeparator & parts(1)
+
+        Case Else
+            ' Three or more ? show last two folders
+            label = "...\ " & parts(n - 1) & Application.pathSeparator & parts(n)
+    End Select
 End Sub
 
 ' ===========================================================================
@@ -443,12 +504,14 @@ Public Sub GetDatasources(ByVal folderPath As String)
     Set excelFiles = New Collection
 
     Dim fileName As String
-    fileName = Dir(folderPath & "\*.xls*") ' Broad match
+    fileName = Dir(folderPath & "\*.*")
+
     Do While fileName <> ""
-        Select Case LCase(Right(fileName, Len(fileName) - InStrRev(fileName, ".")))
-            Case "xls", "xlsx", "xlsm", "xlsb"
+        Select Case LCase$(Mid$(fileName, InStrRev(fileName, ".") + 1))
+            Case "xls", "xlsx", "xlsm", "xlsb", "accdb", "mdb"
                 excelFiles.Add fileName
         End Select
+
         fileName = Dir()
     Loop
 End Sub

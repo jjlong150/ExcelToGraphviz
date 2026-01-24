@@ -300,6 +300,7 @@ Private Sub ImportSettingsSql(ByVal dictionaryObj As Dictionary)
     RestoreSetting SETTINGS_SQL_COUNT_PLACEHOLDER_SUBCLUSTER, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_PLACEHOLDER)
     RestoreSetting SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_RECORDSET_PLACEHOLDER)
     
+    ' Tree Query settings
     If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_TREE_QUERY) Then
         RestoreSetting SETTINGS_SQL_FIELD_NAME_TREE_QUERY, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_TREE_QUERY)
     End If
@@ -316,13 +317,77 @@ Private Sub ImportSettingsSql(ByVal dictionaryObj As Dictionary)
         RestoreSetting SETTINGS_SQL_FIELD_NAME_MAX_DEPTH, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_MAX_DEPTH)
     End If
         
+    ' Iterate Query settings
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER)
+    End If
+    
+    ' Special Actions settings
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_CREATE_EDGES) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_CREATE_EDGES, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_CREATE_EDGES)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_CREATE_RANK) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_CREATE_RANK, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_CREATE_RANK)
+    End If
+    
+    ' Enumerate Query settings
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STEP_BY)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER)
+    End If
+    
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX) Then
+        RestoreSetting SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX, dictionaryObj.item(JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX)
+    End If
+    
+    ' Filter settings
     RestoreSetting SETTINGS_SQL_COL_FILTER, dictionaryObj.item(JSON_SETTINGS_SQL_FILTER_COLUMN)
     RestoreSetting SETTINGS_SQL_FILTER_VALUE, dictionaryObj.item(JSON_SETTINGS_SQL_FILTER_VALUE)
 
+    ' Connection pool settings
     If dictionaryObj.Exists(JSON_SETTINGS_SQL_CLOSE_CONNECTIONS) Then
         RestoreSetting SETTINGS_SQL_CLOSE_CONNECTIONS, BooleanToYesNo(dictionaryObj.item(JSON_SETTINGS_SQL_CLOSE_CONNECTIONS))
     End If
     
+    ' Retry Limit setting
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_RETRY_LIMIT) Then
+        RestoreSetting SETTINGS_SQL_RETRY_LIMIT, dictionaryObj.item(JSON_SETTINGS_SQL_RETRY_LIMIT)
+    End If
+    
+    ' Retry Limit setting
+    If dictionaryObj.Exists(JSON_SETTINGS_SQL_MAX_CONNECTION_MINUTES) Then
+        RestoreSetting SETTINGS_SQL_MAX_CONNECTION_MINUTES, dictionaryObj.item(JSON_SETTINGS_SQL_MAX_CONNECTION_MINUTES)
+    End If
+    
+    ' Datasource settings
     If dictionaryObj.Exists(JSON_SETTINGS_SQL_DATASOURCE_DIRECTORY) Then
         RestoreSetting SETTINGS_DATASOURCE_DIRECTORY, dictionaryObj.item(JSON_SETTINGS_SQL_DATASOURCE_DIRECTORY)
     End If

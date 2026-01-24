@@ -21,9 +21,9 @@ Private Sub Worksheet_Activate()
 #End If
 End Sub
 
-Private Sub Worksheet_FollowHyperlink(ByVal Target As Hyperlink)
+Private Sub Worksheet_FollowHyperlink(ByVal target As Hyperlink)
     On Error GoTo ErrorHandler
-    SetStyleDesignerColorScheme (Target.TextToDisplay)
+    SetStyleDesignerColorScheme (target.TextToDisplay)
     Exit Sub
 
 ErrorHandler:

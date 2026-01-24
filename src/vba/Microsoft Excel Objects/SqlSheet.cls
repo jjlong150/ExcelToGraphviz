@@ -29,8 +29,8 @@ Private Sub Worksheet_Deactivate()
     InvalidateRibbonControl RIBBON_CTL_SQL_CLIPBOARD
 End Sub
 
-Private Sub Worksheet_SelectionChange(ByVal Target As Range)
-    If Not TypeOf Target Is Range Then Exit Sub
+Private Sub Worksheet_SelectionChange(ByVal target As Range)
+    If Not TypeOf target Is Range Then Exit Sub
 
     ' Remove any existing Edit button
     On Error Resume Next
@@ -38,18 +38,18 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     Me.Shapes("SQLEditButton").Delete
     On Error GoTo 0
 
-    If Target.Cells.count = 1 Then
+    If target.Cells.count = 1 Then
         Dim sqlCol As Long
         sqlCol = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
 
-        If Not Intersect(Target, Me.columns(sqlCol)) Is Nothing Then
+        If Not Intersect(target, Me.columns(sqlCol)) Is Nothing Then
             If Not Me.ProtectContents Then
                 On Error Resume Next
                 ' Add clickable pencil icon with subtle button look
                 Dim shp As shape
                 Set shp = Me.Shapes.AddShape(msoShapeRoundedRectangle, _
-                            Target.left + Target.Width + 5, _
-                            Target.top + 1, 20, 20)
+                            target.left + target.Width + 5, _
+                            target.top + 1, 20, 20)
                 With shp
                     .name = "SQLEditButton"
                     .Fill.ForeColor.RGB = RGB(245, 245, 245)      ' very light gray background
