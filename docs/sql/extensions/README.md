@@ -39,9 +39,9 @@ Several substitution strings are available for inserting count values as cluster
 
 | Counter               | Substitution token  |
 | --------------------- | :-----------------: |
-| **Cluster**           |      `%clc%`        |
-| **Subcluster**        |      `%scc%`        |
-| **Result set record** |      `%rsc%`        |
+| **Cluster**           |      `{clc}`        |
+| **Subcluster**        |      `{scc}`        |
+| **Result set record** |      `{rsc}`        |
 
 These counts are especially helpful when you want to assign different border styles per cluster or subcluster, or when you need to emit a sort order using the `sortv` attribute. The `sortv` attribute is particularly valuable when using the [osage layout](../../terminology/README.md#osage) to create heatmaps or domain models where controlling the order of columns—or the elements within each column—is important.
 
@@ -51,43 +51,43 @@ For example:
 SELECT
     [Continent]       AS [CLUSTER],
     [Continent]       AS [CLUSTER LABEL],
-    'Continent_%clc%' AS [CLUSTER STYLE NAME],
+    'Continent_{clc}' AS [CLUSTER STYLE NAME],
 
     [Region]          AS [SUBCLUSTER],
     [Region]          AS [SUBCLUSTER LABEL],
-    'Region_%scc%'    AS [SUBCLUSTER STYLE NAME],
+    'Region_{scc}'    AS [SUBCLUSTER STYLE NAME],
 
     [Country]          AS [ITEM],
-    'sortv=%rsc%'      AS [ATTRIBUTES]
+    'sortv={rsc}'      AS [ATTRIBUTES]
 FROM [Countries$]
 ORDER BY [Continent], [Region], [Country]
 ```
 
 This snippet illustrates:
-- `%clc%` → increments once per cluster (continent)
-- `%scc%` → increments once per subcluster (region)
-- `%rsc%` → increments once per record in the result set
+- `{clc}` → increments once per cluster (continent)
+- `{scc}` → increments once per subcluster (region)
+- `{rsc}` → increments once per record in the result set
 
 ### Examples
 
-The following examples show how the `%clc%`, `%scc%`, and `%rsc%` counters are substituted as the SQL iterates through clusters, subclusters, and individual records. These counters allow you to generate unique labels, styles, and sort orders directly from the query output.
+The following examples show how the `{clc}`, `{scc}`, and `{rsc}` counters are substituted as the SQL iterates through clusters, subclusters, and individual records. These counters allow you to generate unique labels, styles, and sort orders directly from the query output.
 
 ::: tip Substitution tokens
-There is nothing inherently special about the `%` characters used in the substitution strings—you can change them to any token you prefer on the [settings](../../settings/) worksheet. The only requirement is that the token be something unlikely to appear in your data. The `%` convention simply echoes the C language, where formats like `%d` represent numeric placeholders during string conversion.
+There is nothing inherently special about the `{}` characters used in the substitution strings—you can change them to any token you prefer on the [settings](../../settings/) worksheet. The only requirement is that the token be something unlikely to appear in your data.
 
 **Example:**  
 If you prefer more visually distinctive markers, you could change:
 
-- `%clc%` → `<clc>`  
-- `%scc%` → `@scc@`  
-- `%rsc%` → `{rsc}`
+- `{clc}` → `<clc>`  
+- `{scc}` → `@scc@`  
+- `{rsc}` → `%rsc%`
 
 Your SQL would then use these new tokens, and the substitution engine will replace them exactly the same way as the defaults.
 :::
 
 ### Record, Cluster, and Subcluster Counters
 
-| Row | Continent | Region          | Country | `%clc%` | `%scc%` | `%rsc%` | Cluster Label | Subcluster Label | Attributes |
+| Row | Continent | Region          | Country | `{clc}` | `{scc}` | `{rsc}` | Cluster Label | Subcluster Label | Attributes |
 |----:|-----------|-----------------|---------|--------:|--------:|--------:|------------------------|---------------------------|---------------------|
 | 1   | Africa    | East Africa     | Kenya   | 1       | 1       | 1       | Africa               | East Africa             | sortv=1             |
 | 2   | Africa    | East Africa     | Uganda  | 1       | 1       | 2       | Africa               | East Africa             | sortv=2             |
@@ -97,7 +97,7 @@ Your SQL would then use these new tokens, and the substitution engine will repla
 
 ### Style Name Substitution
 
-| Row | Continent | Region          | `%clc%` | `%scc%` | Cluster Style Name     | Subcluster Style Name |
+| Row | Continent | Region          | `{clc}` | `{scc}` | Cluster Style Name     | Subcluster Style Name |
 |----:|-----------|-----------------|--------:|--------:|------------------------|---------------------------|
 | 1   | Africa    | East Africa     | 1       | 1       | Continent_1            | Region_1         |
 | 2   | Africa    | East Africa     | 1       | 1       | Continent_1            | Region_1         |
@@ -116,7 +116,7 @@ The `Style Name` names needed are `Continent_1 Begin`, `Continent_2 Begin`, `Reg
 
 Remember to include that trailing space if you are using the five pre-defined borders on the [styles](../../styles/) worksheet.
 
-These counters are especially powerful when generating heatmaps, osage layouts, or any diagram that relies on controlled ordering or dynamic styling. By embedding `%clc%`, `%scc%`, and `%rsc%` directly into labels, style names, or attributes, you can assign unique visual treatments to each cluster or subcluster and enforce a predictable sort order. This makes it easy to highlight categories, create graded color schemes, or arrange elements consistently across multiple graph views.
+These counters are especially powerful when generating heatmaps, osage layouts, or any diagram that relies on controlled ordering or dynamic styling. By embedding `{clc}`, `{scc}`, and `{rsc}` directly into labels, style names, or attributes, you can assign unique visual treatments to each cluster or subcluster and enforce a predictable sort order. This makes it easy to highlight categories, create graded color schemes, or arrange elements consistently across multiple graph views.
 
 ## Splitting Labels
 
@@ -278,20 +278,22 @@ This SQL statement will process the complete Use Case. It combines clusters, sub
 SELECT 
   [State Code]                      as [item],       
   'Medium Square'                   as [style name],
-  'sortv=%rsc%'                     as [attributes],
+  'sortv={rsc}'                     as [attributes],
   [State]                           as [label],
   5                                 as [split length],
   '\l'                              as [line ending], 
   [State Code]                      as [external label],
   [State]                           as [tooltip],
   [Region]                          as [cluster],
+  [Region]                          as [cluster label],
   'Border 6 '                       as [cluster style name],
   [Region]                          as [cluster tooltip],
-  'sortv=%clc% packmode=array_utr3' as [cluster attributes],
+  'sortv={clc} packmode=array_utr3' as [cluster attributes],
   [Division]                        as [subcluster],
-  'Border %scc% '                   as [subcluster style name],
+  [Division]                        as [subcluster label],
+  'Border {scc} '                   as [subcluster style name],
   [Division]                        as [subcluster tooltip],
-  'sortv=%scc% packmode=array_utr3' as [subcluster attributes]
+  'sortv={scc} packmode=array_utr3' as [subcluster attributes]
 FROM 
   [census regions$] 
 ORDER BY 

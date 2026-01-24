@@ -1,5 +1,5 @@
 ---
-prev: /sql/orgcharts/
+prev: /sql/timeline/
 next: /views/
 ---
 
@@ -11,10 +11,78 @@ Excel supports SQL through its own dialect. Earlier versions relied on the Jet e
 
 This page consolidates information from many [sources](#resourcesacknowlegements) to provide a clear reference for the SQL syntax and functions supported by Microsoft Excel’s SQL engine.
 
-## Key Concepts
-### Tables
+## Conceptual Overview
 
-Tables are represented by Excel worksheets. A table is specified as the worksheet name followed by a `$` character. The square bracket characters `[` and `]` are used as delimiters, allowing worksheet names that contain spaces or special characters to be referenced safely.
+### How Excel SQL Statements Are Structured
+
+Before diving into individual clauses and functions, it helps to understand how a SQL query is conceptually organized. Excel’s ACE SQL engine follows the same logical evaluation order used by most relational database systems.
+
+A SQL query can be viewed as a pipeline, where each stage refines or transforms the data.
+
+- [**SELECT**](#select-clause) — **What columns to return** 
+   
+   `SELECT` defines the output: which fields appear, in what order, and with what expressions, aliases, or calculations.
+
+- [**FROM**](#from-clause) — **What table or range to read from** 
+   
+   `FROM` identifies the worksheet or cell range that acts as the source dataset.
+
+- [**JOIN**](#join-clause) — **How to combine tables.** 
+   
+   `JOIN` adds additional worksheets by matching rows across tables. JOINs expand the dataset horizontally (more columns).
+
+- [**WHERE**](#where-clause) — **Which rows to keep** 
+   
+   `WHERE` filters individual rows based on conditions. This is row‑level filtering applied before grouping.
+
+- [**GROUP BY**](#group-by-clause) — **How to group rows** 
+   
+   `GROUP BY` aggregates rows into groups based on shared values.
+
+- [**HAVING**](#having-clause) — **Which groups to keep** 
+   
+   `HAVING` filters groups after aggregation, using conditions on aggregate values.
+
+- [**ORDER BY**](#order-by-clause) — **How to sort the results** 
+   
+   `ORDER BY` sorts the final output rows in ascending or descending order.
+
+- [**UNION / UNION ALL**](#combining-result-sets-union-and-union-all) — **How to combine result sets**  
+   
+   `UNION` / `UNION ALL` stacks the results of multiple `SELECT` statements vertically. 
+   - `UNION` removes duplicates
+   - `UNION ALL` preserves duplicates.
+
+### Why this hierarchy matters
+
+Understanding this flow helps you:
+
+- Predict how Excel SQL will interpret your query  
+- Avoid errors caused by using clauses in the wrong context  
+- Write cleaner, more intentional SQL  
+- Recognize the difference between row‑level, group‑level, and query‑level operations  
+- Understand why JOIN and UNION solve different problems  
+
+## Referencing Data in Excel SQL
+
+The sections below describe how Excel SQL identifies and interprets the basic elements of a worksheet. 
+
+Before you can filter rows, join tables, or format results, SQL must understand where your data lives, how columns are named, how literal values are written, and how missing values behave. These conventions 
+form the foundation for every query you write in Excel SQL.
+
+The topics that follow explain:
+
+- [how to reference worksheets and cell ranges as tables](#how-to-reference-worksheets-and-cell-ranges-as-tables)  
+- [how column names and data types are determined](#how-column-names-and-data-types-are-determined)  
+- [how to assign temporary names with aliases](#how-to-assign-temporary-names-with-aliases)  
+- [how to write and manipulate string values](#how-to-write-and-manipulate-string-values)  
+- [how Excel SQL represents and evaluates null values](#how-excel-sql-represents-and-evaluates-null-values)  
+
+Understanding these rules ensures that later clauses such as `WHERE`, `JOIN`, `GROUP BY`, and `ORDER BY` behave predictably and return the results you expect.
+
+### How to reference worksheets and cell ranges as tables
+
+**Tables** are represented by Excel worksheets. A table is specified as the worksheet name followed by a `$` character. The square bracket characters `[` and `]` are used as delimiters, allowing worksheet names that contain spaces or special characters to be referenced safely.
 
 In Excel SQL, table names follow this pattern:
 
@@ -42,11 +110,9 @@ _Example:_
 
 Refers to to range of cells `B10:G700` within the _Past Invoices_ Worksheet.
 
----
+### How column names and data types are determined
 
-### Columns
-
-Column names can refer to the Excel heading for the column, such as A, B, C or the column heading in the first row of the table (or table range). Column names are limited to 64 characters. Column names containing blanks should also be enclosed in square brackets as in the following example. It is generally a good habit to always delimit column names with the square brackets.
+**Column names** can refer to the Excel heading for the column, such as A, B, C or the column heading in the first row of the table (or table range). Column names are limited to 64 characters. Column names containing blanks should also be enclosed in square brackets as in the following example. It is generally a good habit to always delimit column names with the square brackets.
 
 _Example:_
 
@@ -56,11 +122,9 @@ _Example:_
 
 The data type of a column is determined by the ACE engine by scanning the values in the first 8 rows in that column. If the scanned rows are blank then ACE assumes a String data type. If a column is determined to be numeric, then any rows with alpha characters in this column will be returned as Null.
 
----
+### How to assign temporary names with aliases
 
-### Aliases
-
-Aliases are used to temporarily assign a different name to a table or column heading using an `AS` clause. Basically aliases are created to make column names more readable. The `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING` and `JOIN` clauses support aliases.
+**Aliases** are used to temporarily assign a different name to a table or column heading using an `AS` clause. Basically aliases are created to make column names more readable. The `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING` and `JOIN` clauses support aliases.
 
 SQL alias syntax for columns follows the syntax format:
 
@@ -88,10 +152,9 @@ _Example:_
     WHERE [sales.segment] = 'Government' AND [sales].[CC] = 'US'
 ```
 
----
+### How to write and manipulate string values
 
-### Strings
-Most SQL statements involve the use of string values as criteria in a [WHERE clause](#where-clause), or will return string values in the column results of a [SELECT clause](#select-clause). 
+Most SQL statements involve the use of **string values** as criteria in a [WHERE clause](#where-clause), or will return string values in the column results of a [SELECT clause](#select-clause). 
 
 Strings are denoted in SQL using the single quotation mark `'` character, as opposed to the double quote `"` character used in VBA and other programming languages. A String value such as `'Central Region'` is properly formatted for use as selection criteria, or as a value to be inserted.
 
@@ -99,25 +162,68 @@ Strings can be concatenated using the ampersand `&` character. For example, the 
 
 Microsoft Excel SQL provides numerous String functions that perform operations on an input String and return a String or numeric value result. These functions can be combined to create unique input or output values depending upon the SQL statement. A table of commonly used [String Functions](#string-functions) is provided at the end of this document as reference.
 
----
+### How Excel SQL represents and evaluates null values
 
-### Null Values
-A Null Value is a value that is unavailable, unassigned, unknown or inapplicable. If a row lacks the data value for a particular column, that value is said to be null or to contain a null. A Null Value is like a character string of length zero, however you should never use a Null Value to represent a value of zero. 
+A **Null Value** is a value that is unavailable, unassigned, unknown or inapplicable. If a row lacks the data value for a particular column, that value is said to be null or to contain a null. A Null Value is like a character string of length zero, however you should never use a Null Value to represent a value of zero. 
 
 Since Microsoft Excel SQL allows null values, it is your responsibility to take them into consideration in your SQL statements. [Null Handling](#null-handling) is described in greater detail later in this document.
 
 ## Querying Data
 
-Microsoft Excel SQL queries support `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, and `JOIN` clauses. Excel SQL `SELECT` statements conform to the following pattern:
+Microsoft Excel SQL queries support `FROM`, `JOIN`, `WHERE`, `GROUP BY`, `HAVING`, and `ORDER BY` clauses.  
 
-```sql
+Excel SQL `SELECT` statements conform to the following pattern:
+
+``` sql
     SELECT [DISTINCT] [TOP [PERCENT] n] * | column1, column2 [AS alias2], ...
     [FROM worksheet]
+    [JOIN worksheet ON condition]
     [WHERE condition]
     [GROUP BY column1, column2, ...]
     [HAVING condition]
-    [ORDER BY column1 [DESC|ASC], column2 [DESC|ASC], ...]
+    [ORDER BY column1 [ASC|DESC], column2 [ASC|DESC], ...]
 ```
+::: tip SQL Query Flow
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                              SQL Query Flow                              │
+└──────────────────────────────────────────────────────────────────────────┘
+
+   ┌───────────────┐
+   │    SELECT     │  Choose columns, expressions, aliases
+   └───────┬───────┘
+           │
+   ┌───────▼───────┐
+   │     FROM      │  Choose worksheet or range
+   └───────┬───────┘
+           │
+   ┌───────▼───────┐
+   │     JOIN      │  Combine tables horizontally
+   └───────┬───────┘
+           │
+   ┌───────▼───────┐
+   │     WHERE     │  Filter individual rows
+   └───────┬───────┘
+           │
+   ┌───────▼───────┐
+   │    GROUP BY   │  Form groups of rows
+   └───────┬───────┘
+           │
+   ┌───────▼───────┐
+   │     HAVING    │  Filter aggregated groups
+   └───────┬───────┘
+           │
+   ┌───────▼───────┐
+   │    ORDER BY   │  Sort final results
+   └───────┬───────┘
+           │
+   ┌───────▼───────────────────────────────────────────────────────────────┐
+   │                     UNION / UNION ALL                                 │
+   │     Combine complete result sets vertically (stack rows)              │
+   └───────────────────────────────────────────────────────────────────────┘
+```
+:::
 
 ## SELECT clause
 
@@ -298,18 +404,41 @@ Here the SQL statement returns the exponential value of the natural logarithm of
 
 ### Conditionals
 
-Conditionals are used to conditionally modify results. In Excel SQL, this is done with the `IIF()` function. The function signature is: `IIF(expression, truepart, falsepart)`. If expr evaluates to true, then truepart is returned, otherwise, falsepart is returned.
+Conditionals are used to conditionally modify results.
+
+### `IIF()` function
+
+The `IIF()` function provides simple conditional logic inside a `SELECT` clause. It evaluates an expression and returns one of two values depending on whether the expression is true or false.
+
+_Syntax:_
+
+``` sql
+IIF(expression, truepart, falsepart)
+```
+
+- **expression:** must evaluate to TRUE or FALSE  
+- **truepart:** returned when the expression is TRUE  
+- **falsepart:** returned when the expression is FALSE  
 
 _Example:_
 
-```sql
-    SELECT [Product], [Units Sold], [Sale Price],
-    IIF([Sale Price] < 10.00,'SPECIAL!','')
+``` sql
+    SELECT
+        [Product],
+        [Units Sold],
+        [Sale Price],
+        IIF([Sale Price] < 10.00, 'SPECIAL!', '') AS [Flag]
     FROM [Sales$]
 ```
 
-Here the SQL returns the string 'SPECIAL!' if the price is less than $10.00; otherwise it returns a blank string.
+This returns `'SPECIAL!'` when the sale price is below 10.00; otherwise it returns an empty string.
 
+_Example (handling nulls):_
+```sql
+    SELECT
+      IIF(IsNull([Units Sold]), 0, [Units Sold]) AS [Units Sold Clean]
+    FROM [Sales$]
+```
 ### Null Handling
 
 Under some conditions, such as when a cell is has no data, Excel returns a Null value. You can test whether a cell is null using the `IsNull(expression)` function. `IsNull()` returns a Boolean true value (=-1) if the argument is null, and a Boolean false (=0) if the argument is not null.
@@ -323,8 +452,55 @@ _Example:_
     FROM [Sales$]
 ```
 
-The `IsNull()` function can be combined with the `IIF()` syntax to return a specific value in cases where a null is found in a column, and the actual column value where the value is not null.
+`IIF()` is often combined with `IsNull()` to enforce predictable behavior when aggregating or formatting values. The `IsNull()` function can be combined with the `IIF()` syntax to return a specific value in cases where a null is found in a column, and the actual column value where the value is not null.
 
+### `SWITCH()` function
+
+The `SWITCH()` function evaluates multiple conditions in order and returns the value associated with the first condition that is TRUE. It is the ACE SQL equivalent of a multi‑branch CASE expression.
+
+_Syntax:_
+
+``` sql
+    SWITCH(
+        condition1, value_if_true1,
+        condition2, value_if_true2,
+        ...,
+        True, default_value
+    )
+```
+Key behaviors:
+
+- Conditions are evaluated **left to right**  
+- The first TRUE condition determines the return value  
+- If no condition is TRUE and no default is provided, the result is `NULL`  
+- All expressions are evaluated, so avoid expressions that may error (e.g., division by zero)
+
+_Example:_
+``` sql
+    SELECT
+      [Score],
+      SWITCH(
+          [Score] >= 90, 'A',
+          [Score] >= 80, 'B',
+          [Score] >= 70, 'C',
+          True,          'D'
+      ) AS [Grade]
+    FROM [Sales$]
+```
+This assigns a letter grade based on score ranges.
+
+_Example (categorizing values):_
+``` sql
+    SELECT
+      [Region],
+      SWITCH(
+          [Region] = 'North', 'Domestic',
+          [Region] = 'South', 'Domestic',
+          [Region] = 'Canada', 'International',
+          True,                'Other'
+      ) AS [Region Class]
+    FROM [Sales$]
+```
 ### Aggregate Functions + Conditionals + Null Handling
 
 Conditional tests are very useful in situations where you are aggregating data which may have `NULL` values. You can ensure predictable behavior by using `IFF` to return a consistent value within an aggregate function when `NULL` is encountered. For example, if you want `NULL` to be treated a zero, you write the SQL as:
@@ -441,6 +617,143 @@ _Example:_
 ```
 
 In this example the Sales worksheet is specified as `[Sales$]`
+
+## JOIN clause
+
+There are different types of joins available in Excel SQL: `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `CROSS JOIN`, and `self joins`.
+
+- `INNER JOIN` returns rows when there is a match on both tables.
+- `LEFT JOIN` returns all rows from the left table even if there are no matches in the right table.
+- `RIGHT JOIN` returns all rows from the right table even if there are no matches in the left table.
+- `CROSS JOIN` (or `CARTESIAN JOIN`) returns the Cartesian product of the sets of records from two or more joined tables.
+- `Self join` is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.
+  You can find the syntax for the different joins below.
+
+### INNER JOIN clause
+
+The `INNER JOIN` keyword selects all rows from both tables as long as there is a match between the columns in both tables.
+
+The `INNER JOIN` syntax follows this syntx pattern:
+
+_Syntax:_
+
+```sql
+    SELECT columns
+    FROM worksheet1 AS worksheet1_alias
+    INNER JOIN worksheet2 AS worsksheet2_alias
+    ON worksheet_alias1.column1 = worksheet2_alias.column2
+```
+
+The valid operator for the `ON` clause are `AND`, `OR`, `=`, `>`, `<`, `<>`, `>=`, `<=`, `!=`. In addition, nested joins are supported. Nested joins of more than two tables must be enclosed in parenthesis.
+
+_Example:_
+
+```sql
+    SELECT
+        A.[Segment], A.[Country], A.[Product],
+        B.[Units Sold], B.[SKU]
+    FROM [Products$] AS A
+    INNER JOIN [Sales$] AS B
+    ON A.[SKU] = B.[SKU]
+```
+
+### LEFT JOIN clause
+
+The `LEFT JOIN` clause returns all rows from the left table (worksheet1) with the matching rows in the right table (worksheet2). The result set returns no values in the right table when there is no match.
+
+The `LEFT JOIN` syntax follows this pattern:
+
+_Syntax:_
+
+```sql
+    SELECT columns
+    FROM worksheet1 AS worksheet1_alias
+    LEFT JOIN worksheet2 AS worsksheet2_alias
+    ON worksheet_alias1.column1 = worksheet2_alias.column2
+```
+
+The valid operator for the `ON` clause are `AND`, `OR`, `=`, `>`, `<`, `<>`, `>=`, `<=`, `!=`. In addition, nested joins are supported. Nested joins of more than two tables must be enclosed in parenthesis.
+
+_Example:_
+
+```sql
+    SELECT
+        A.[Segment], A.[Country], A.[Product],
+        B.[Units Sold], B.[SKU]
+    FROM [Products$] AS A
+    LEFT JOIN [Sales$] AS B
+    ON A.[SKU] = B.[SKU]
+```
+
+### RIGHT JOIN clause
+
+The `RIGHT JOIN` clause returns all rows from the right table (worksheet2) with the matching rows in the left table (worksheet1). The result set returns no values in the left table when there is no match.
+
+The `RIGHT JOIN` syntax follows this syntax pattern:
+
+_Syntax:_
+
+```sql
+    SELECT columns
+    FROM worksheet1 AS worksheet1_alias
+    RIGHT JOIN worksheet2 AS worsksheet2_alias
+    ON worksheet_alias1.column1 = worksheet2_alias.column2
+```
+
+The valid operator for the `ON` clause are `AND`, `OR`, `=`, `>`, `<`, `<>`, `>=`, `<=`, `!=`. In addition, nested joins are supported. Nested joins of more than two tables must be enclosed in parenthesis.
+
+_Example:_
+
+```sql
+    SELECT
+        A.[Segment], A.[Country], A.[Product],
+        B.[Units Sold], B.[SKU]
+    FROM [Products$] AS A
+    RIGHT JOIN [Sales$] AS B
+    ON A.[SKU] = B.[SKU]
+```
+
+### CROSS JOIN clause
+
+The `CROSS JOIN` (or `CARTESIAN JOIN`) returns the Cartesian product of the sets of records from two or more joined tables. It equates to an inner join where the join-condition always evaluates to either True or where the join-condition is absent from the statement. Each row in the first table is paired with all the rows in the second table. This happens when there is no relationship defined between the two tables.
+
+The `CROSS JOIN` syntax follows this pattern:
+
+_Syntax:_
+
+```sql
+    SELECT column1, column2 FROM [worksheet1$] CROSS JOIN [worksheet2$]
+```
+
+_Example:_
+
+```sql
+    SELECT A.[E_id], B.[P_id], A.[fname]
+    FROM [employee$] AS A
+    CROSS JOIN [project$] AS B
+```
+
+### Self Join
+
+`Self join` is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement. To join a table itself means that each row of the table is combined with itself and with every other row of the table.
+
+The Self Join syntax follows this pattern:
+
+_Syntax:_
+
+```sql
+    SELECT column1, column2
+    FROM [worksheet1$] AS alias1, [worksheet1$] AS alias2
+    WHERE alias1.column1 = alias2.column2
+```
+
+_Example:_
+
+```sql
+    SELECT A.[E_id], B.[E_id]
+    FROM [employee$] AS A, [employee$] AS B
+    WHERE A.[E_id] = B.[Mgr_id]
+```
 
 ## WHERE clause
 
@@ -689,142 +1002,67 @@ _Example:_
     ORDER BY 1
 ```
 
-## JOIN clause
+## Combining Result Sets: UNION and UNION ALL
 
-There are different types of joins available in Excel SQL: `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `CROSS JOIN`, and `self joins`.
+The `UNION` and `UNION ALL` operators combine the results of two or more `SELECT` statements. Each `SELECT` must return the same number of columns, in the same order, with compatible data types.
 
-- `INNER JOIN` returns rows when there is a match on both tables.
-- `LEFT JOIN` returns all rows from the left table even if there are no matches in the right table.
-- `RIGHT JOIN` returns all rows from the right table even if there are no matches in the left table.
-- `CROSS JOIN` (or `CARTESIAN JOIN`) returns the Cartesian product of the sets of records from two or more joined tables.
-- `Self join` is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.
-  You can find the syntax for the different joins below.
+### `UNION`
 
-### INNER JOIN clause
-
-The `INNER JOIN` keyword selects all rows from both tables as long as there is a match between the columns in both tables.
-
-The `INNER JOIN` syntax follows this syntx pattern:
-
-_Syntax:_
-
-```sql
-    SELECT columns
-    FROM worksheet1 AS worksheet1_alias
-    INNER JOIN worksheet2 AS worsksheet2_alias
-    ON worksheet_alias1.column1 = worksheet2_alias.column2
-```
-
-The valid operator for the `ON` clause are `AND`, `OR`, `=`, `>`, `<`, `<>`, `>=`, `<=`, `!=`. In addition, nested joins are supported. Nested joins of more than two tables must be enclosed in parenthesis.
+`UNION` combines result sets and removes duplicate rows. Because duplicates must be compared and eliminated, `UNION` is slower than `UNION ALL`.
 
 _Example:_
-
 ```sql
-    SELECT
-        A.[Segment], A.[Country], A.[Product],
-        B.[Units Sold], B.[SKU]
-    FROM [Products$] AS A
-    INNER JOIN [Sales$] AS B
-    ON A.[SKU] = B.[SKU]
+    SELECT [Name], [Region]
+    FROM [Sales$]
+    UNION
+    SELECT [Name], [Region]
+    FROM [Archive$]
 ```
+This returns distinct rows across both worksheets.
 
-### LEFT JOIN clause
+### `UNION ALL`
 
-The `LEFT JOIN` clause returns all rows from the left table (worksheet1) with the matching rows in the right table (worksheet2). The result set returns no values in the right table when there is no match.
-
-The `LEFT JOIN` syntax follows this pattern:
-
-_Syntax:_
-
-```sql
-    SELECT columns
-    FROM worksheet1 AS worksheet1_alias
-    LEFT JOIN worksheet2 AS worsksheet2_alias
-    ON worksheet_alias1.column1 = worksheet2_alias.column2
-```
-
-The valid operator for the `ON` clause are `AND`, `OR`, `=`, `>`, `<`, `<>`, `>=`, `<=`, `!=`. In addition, nested joins are supported. Nested joins of more than two tables must be enclosed in parenthesis.
+`UNION ALL` combines result sets without removing duplicates.  
+It is faster and should be used when you want all rows preserved.
 
 _Example:_
-
 ```sql
-    SELECT
-        A.[Segment], A.[Country], A.[Product],
-        B.[Units Sold], B.[SKU]
-    FROM [Products$] AS A
-    LEFT JOIN [Sales$] AS B
-    ON A.[SKU] = B.[SKU]
+    SELECT [Name], [Region]
+    FROM [Sales$]
+    UNION ALL
+    SELECT [Name], [Region]
+    FROM [Archive$]
 ```
+This returns all rows, including duplicates.
 
-### RIGHT JOIN clause
+### Using `UNION ALL` to generate inline values
 
-The `RIGHT JOIN` clause returns all rows from the right table (worksheet2) with the matching rows in the left table (worksheet1). The result set returns no values in the left table when there is no match.
-
-The `RIGHT JOIN` syntax follows this syntax pattern:
-
-_Syntax:_
-
-```sql
-    SELECT columns
-    FROM worksheet1 AS worksheet1_alias
-    RIGHT JOIN worksheet2 AS worsksheet2_alias
-    ON worksheet_alias1.column1 = worksheet2_alias.column2
-```
-
-The valid operator for the `ON` clause are `AND`, `OR`, `=`, `>`, `<`, `<>`, `>=`, `<=`, `!=`. In addition, nested joins are supported. Nested joins of more than two tables must be enclosed in parenthesis.
+Because ACE SQL does not support `VALUES()` or table literals, `UNION ALL` is often used to create small inline datasets.
 
 _Example:_
-
 ```sql
-    SELECT
-        A.[Segment], A.[Country], A.[Product],
-        B.[Units Sold], B.[SKU]
-    FROM [Products$] AS A
-    RIGHT JOIN [Sales$] AS B
-    ON A.[SKU] = B.[SKU]
+    SELECT 1 AS [Month]
+    UNION ALL SELECT 2
+    UNION ALL SELECT 3
+    UNION ALL SELECT 4
 ```
+This produces a four‑row result set containing the numbers 1–4.
 
-### CROSS JOIN clause
+### Using `UNION ALL` to expand rows
 
-The `CROSS JOIN` (or `CARTESIAN JOIN`) returns the Cartesian product of the sets of records from two or more joined tables. It equates to an inner join where the join-condition always evaluates to either True or where the join-condition is absent from the statement. Each row in the first table is paired with all the rows in the second table. This happens when there is no relationship defined between the two tables.
-
-The `CROSS JOIN` syntax follows this pattern:
-
-_Syntax:_
-
-```sql
-    SELECT column1, column2 FROM [worksheet1$] CROSS JOIN [worksheet2$]
-```
+`UNION ALL` can also be used to create repeated or expanded rows when no numbers table exists.
 
 _Example:_
-
 ```sql
-    SELECT A.[E_id], B.[P_id], A.[fname]
-    FROM [employee$] AS A
-    CROSS JOIN [project$] AS B
+    SELECT [Product], [Quantity], 'Q1' AS [Quarter] FROM [Sales$]
+    UNION ALL
+    SELECT [Product], [Quantity], 'Q2' FROM [Sales$]
+    UNION ALL
+    SELECT [Product], [Quantity], 'Q3' FROM [Sales$]
+    UNION ALL
+    SELECT [Product], [Quantity], 'Q4' FROM [Sales$]
 ```
-
-### Self Join
-
-`Self join` is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement. To join a table itself means that each row of the table is combined with itself and with every other row of the table.
-
-The Self Join syntax follows this pattern:
-
-_Syntax:_
-
-```sql
-    SELECT column1, column2
-    FROM [worksheet1$] AS alias1, [worksheet1$] AS alias2
-    WHERE alias1.column1 = alias2.column2
-```
-
-_Example:_
-
-```sql
-    SELECT A.[E_id], B.[E_id]
-    FROM [employee$] AS A, [employee$] AS B
-    WHERE A.[E_id] = B.[Mgr_id]
-```
+This produces four rows per product — one for each quarter.
 
 ## String Functions
 

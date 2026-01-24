@@ -1,5 +1,48 @@
 # Change Log
 
+## Version 10.0.0
+
+This release focuses primarily on expanding and strengthening the **SQL capabilities** of the Relationship Visualizer.
+
+**Enhancements**
+
+The Relationship Visualizer received the following improvements:
+
+- Added support for using **Microsoft Access** (`.accdb` / `.mdb`) files as SQL data sources. [(#5, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/5) 
+- Added SQL **enumeration** support for generating range‑based result sets (e.g. `from x to y by z`). [(#6, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/6)  
+- Added SQL **iterative query‑set** execution with dynamic placeholder substitution. It allows a result from one query to be used as a parameter in a second query. [(#7, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/7) 
+- Added SQL **error logging** to capture query failures in an external log file. [(#9, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/9)
+- Improved usability by abbreviating long file‑system paths in the `SQL` and `Graphviz` ribbon tabs. [(#10, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/10)  
+- Implemented a comprehensive set of **ADO SQL hardening changes**, improving reliability, determinism, and fault‑tolerance across the entire execution pipeline. [(#11, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/11)  
+- Expanded the SQL log‑to‑file feature to include **environment documentation**, improving diagnostics and reproducibility. [(#12, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/12)
+
+**Defect Fixes**
+
+The following defects were corrected:
+
+- Addressed an intermittent SQL execution failure caused by underlying COM/Automation instability in VBA. [(#4, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/4) 
+- **Breaking change**: SQL query clustering previously grouped results by **CLUSTER LABEL** instead of **CLUSTER**, and failed when cluster labels were null. [(#8, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/8) 
+
+  The fix correctly groups by **CLUSTER**, but this correction is **not backward‑compatible** and may alter the structure of existing graphs that relied on the prior (incorrect) behavior. You will have to modify cluster-oriented SQL statements if you use this feature.
+
+## Version 9.1.0
+
+**Font List Improvements**  
+Revised the logic used to build the font list in the Style Designer tab.
+- Expanded the available font choices by removing the prefix/suffix‑based screening logic for filtering out fonts.
+- Added an **excluded fonts** list on the `lists` worksheet containing fonts that testing shows will fall back to a default font in Graphviz.
+- Cross‑checked the expanded font list against the excluded‑fonts list to produce a clean set of fonts that Graphviz can reliably render.
+- Made enhancements to remove duplicates and alphabetize the final font list.
+
+**Font Image Improvements**  
+Updated the Style Designer tab to use a two‑image preview approach.  
+- The ribbon continues to display the legacy (backward‑compatible) **`A`** icon beside the font name.  
+- Font gallery controls now shows a wider 14pt preview image using the characters **`Aa Bb Cc`** to provide a clearer representation of each font.
+
+**Font Code Improvements**  
+Restructured the Windows and macOS code paths so both platforms now share the same filtering, deduplication, and sorting pipeline.  
+- macOS still relies on the font list stored in the `lists` worksheet, but the code is now structured to allow a native macOS font‑enumeration solution to be added cleanly when available.
+
 ## Version 9.0.0
 
 **UI Visual Refresh**  

@@ -7,13 +7,9 @@ next: /sql/queries/
 
 Unlock the power of SQL to extract and visualize data from your Excel spreadsheets with Relationship Visualizer. This optional feature<sup>[1]</sup> lets you write SQL queries to pull data from multiple worksheets and generate Graphviz graphs with ease.
 
-Ideal for users familiar with SQL, it provides a fast and flexible way to:
+::: tip SQL Topics - Quick Links
 
-- Combine data from multiple Excel worksheets using SQL queries  
-- Batch‑process queries to aggregate information across several workbooks  
-- Streamline repetitive data‑preparation and transformation tasks
-
-::: tip SQL Topics
+Use the links below to jump directly to key SQL concepts and features used throughout the Relationship Visualizer.
 
 <!-- no toc -->
 - [What is SQL?](#what-is-sql)
@@ -22,14 +18,30 @@ Ideal for users familiar with SQL, it provides a fast and flexible way to:
 - [The `SQL` Worksheet](#the-sql-worksheet)
 - [The `SQL` Ribbon Tab](#the-sql-ribbon-tab)
 - [SQL Queries for Creating Graphs](./queries/)
-- [SQL Extensions](./extensions/)
-  - [Grouping Data into Clusters and Subclusters](./extensions/README.md#grouping-data-into-clusters-and-subclusters)
-  - [Splitting Labels](./extensions/README.md#splitting-labels)
-  - [Chaining Nodes Using Edges](./extensions/README.md#chaining-nodes-using-edges)
-  - [Creating Subgraphs With Rank](./extensions/README.md#creating-subgraphs-with-rank)
-  - [Traversing Trees Recursively](./recursion/)
-  - [Creating Organization Charts](./orgcharts/)
 - [SQL syntax](./syntax/)
+:::
+
+Ideal for users familiar with SQL, it provides a fast and flexible way to:
+
+- Combine data from multiple Excel worksheets using SQL queries  
+- Batch‑process queries to aggregate information across several workbooks  
+- Streamline repetitive data‑preparation and transformation tasks
+
+::: tip SQL Extensions - Quick Links
+
+These SQL extensions simplify common graph‑building tasks. Passing specific values as SQL parameters activates each utility feature.
+
+
+<!-- no toc -->
+- [Group Items into Clusters](./extensions/README.md#grouping-data-into-clusters-and-subclusters)
+- [Split Long Label Text](./extensions/README.md#splitting-labels)
+- [Generate Edges to Chain Nodes](./extensions/README.md#chaining-nodes-using-edges)
+- [Generate Ranked Subgraphs](./extensions/README.md#creating-subgraphs-with-rank)
+- [Traverse Trees](./recursion/)
+- [Iterate SQL Results](./iterate/)
+- [Enumerate Values](./enumerate/)
+- [Example: Creating Organization Charts](./orgcharts/)
+- [Example: Building Timelines](./timeline/)
 :::
 
 [1]: The SQL feature is **Windows-only** and requires basic SQL knowledge. If you use macOS, you can still use Relationship Visualizer’s manual data entry options. 

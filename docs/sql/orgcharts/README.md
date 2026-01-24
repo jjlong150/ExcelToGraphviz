@@ -1,6 +1,6 @@
 ---
 prev: /sql/recursion/
-next: /sql/syntax/
+next: /sql/iterate/
 ---
 
 # Creating Organization Charts

@@ -177,7 +177,7 @@ SELECT
 
 ![](./uc6.png)
 
-## Sample Content
+## Try it Yourself
 
 The files used in these examples are contained in the `\Relationship Visualizer\samples\12 - Using SQL - Trees` directory in the zip file download.
 
