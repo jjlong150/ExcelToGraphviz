@@ -285,7 +285,7 @@ The **Style Designer** font drop‑downs present a gallery of fonts that Graphvi
 - **Windows** → The list is derived from the fonts installed on your PC, filtered to remove fonts known to be incompatible with Graphviz.  
 - **macOS** → A static list of fonts is provided from the **lists** worksheet.
 
-When the **Font Name** drop‑down is selected for the first time, Graphviz generates a preview image of the letter **A** using the chosen font.  
+When the **Font Name** drop‑down is selected for the first time, Graphviz generates a preview image of the letters **Aa Bb Cc** for each font.  
 
 These preview images are cached for future use. You may notice a slight delay the first time as the cache is built, but subsequent displays occur quickly.
 
@@ -301,7 +301,7 @@ The currently selected font name is highlighted in the gallery.
 When you choose a font (e.g., `Comic Sans MS`):
 
 - The **Font Name** caption on the drop‑down changes to the selected font.  
-- An icon of the font appears in the ribbon to the left of the **Font Name**.  
+- An icon of the letter **A** in the font appears in the ribbon to the left of the **Font Name**.  
 - The font name is added as an attribute in the **Format String**.  
 - A new preview image is generated, showing the associated labels rendered in the chosen font.
 
