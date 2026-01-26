@@ -5,14 +5,14 @@ heroImage: /hero.png
 tagline:
 actionText:
 actionLink:
-footer: MIT License - Copyright © 2017-2025 Jeffrey J. Long
+footer: MIT License - Copyright © 2017-2026 Jeffrey J. Long
 prev: false
 next: /install/
 ---
 Transform your Excel data into stunning graph diagrams with ease! Excel to Graphviz unleashes the power of visual relationships. Turn rows and columns into clear, dynamic graphs in seconds. Packed with style tools, SQL support, and multi-language compatibility, it’s your shortcut to insightful visualizations.
 <div class="features">
   <div class="feature" id="overview">
-    <h2><a href="./overview">Overview</a></h2>
+    <h2><a href="./overview">Tour</a></h2>
     <p>Visual examples showcasing features</p>
   </div>
 
