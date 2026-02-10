@@ -7,7 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
+' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
 
 '@IgnoreModule ParameterNotUsed
 '@Folder("Relationship Visualizer.Sheets.SQL")
@@ -29,49 +29,61 @@ Private Sub Worksheet_Deactivate()
     InvalidateRibbonControl RIBBON_CTL_SQL_CLIPBOARD
 End Sub
 
-Private Sub Worksheet_SelectionChange(ByVal target As Range)
-    If Not TypeOf target Is Range Then Exit Sub
-
-    ' Remove any existing Edit button
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     On Error Resume Next
-    Me.buttons("SQLEditButton").Delete
-    Me.Shapes("SQLEditButton").Delete
-    On Error GoTo 0
-
-    If target.Cells.count = 1 Then
-        Dim sqlCol As Long
-        sqlCol = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
-
-        If Not Intersect(target, Me.columns(sqlCol)) Is Nothing Then
-            If Not Me.ProtectContents Then
-                On Error Resume Next
-                ' Add clickable pencil icon with subtle button look
-                Dim shp As shape
-                Set shp = Me.Shapes.AddShape(msoShapeRoundedRectangle, _
-                            target.left + target.Width + 5, _
-                            target.top + 1, 20, 20)
-                With shp
-                    .name = "SQLEditButton"
-                    .Fill.ForeColor.RGB = RGB(245, 245, 245)      ' very light gray background
-                    .Fill.Transparency = 0
-                    .Line.Weight = 0.75
-                    .Line.ForeColor.RGB = RGB(180, 180, 180)      ' soft border
-                    .TextFrame2.TextRange.Characters.Text = ChrW(&H270E)  ' pencil
-                    .TextFrame2.TextRange.Font.name = "Segoe UI Symbol"
-                    .TextFrame2.TextRange.Font.Size = 16
-                    .TextFrame2.TextRange.Font.Fill.ForeColor.RGB = RGB(60, 60, 60)  ' dark gray pencil
-                    .TextFrame2.VerticalAnchor = msoAnchorMiddle
-                    .TextFrame2.HorizontalAnchor = msoAnchorCenter
-                    .Placement = xlMoveAndSize
-                    .OnAction = "ShowSQLEditForm"
-                End With
-                On Error GoTo 0
-            End If
-        End If
-    End If
-
     InvalidateRibbonControl RIBBON_CTL_SQL_EDIT_CELL
     InvalidateRibbonControl RIBBON_CTL_SQL_CLIPBOARD
     RefreshRibbon
+    On Error GoTo 0
+
+    ' Get configs once ? reuse for both creation and cleanup
+    Dim configs() As ButtonConfig
+    configs = GetFloatingButtonConfigs()
+
+    ' Cleanup using the shared utility
+    RemoveFloatingButtons Me, GetButtonNamesFromConfigs(configs)
+
+    ' Create buttons using the shared utility
+    UpdateFloatingButtonsOnSheet Me, Target, configs
 End Sub
 
+' Define button configurations specific to this worksheet
+Private Function GetFloatingButtonConfigs() As ButtonConfig()
+    Dim configs() As ButtonConfig
+    ReDim configs(0 To 2)   ' ? change upper bound when adding more
+
+    With configs(0)
+        .ColumnNumber = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
+        .ButtonName = "SqlEditButton"
+        .ActionMacro = "ShowSQLEditForm"
+        .IconText = ChrW(&H270E)
+        .VOffset = 0
+        .HOffset = 5
+        .ValidationFunc = ""
+    End With
+
+    With configs(1)
+        .ColumnNumber = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
+        .ButtonName = "SqlRunButton"
+        .ActionMacro = "RunOneSqlStatement"
+        .IconText = ChrW(&H25B6)
+        .VOffset = 22
+        .HOffset = 5
+        .ValidationFunc = "IsSqlRowActive"
+    End With
+
+    With configs(2)
+        .ColumnNumber = GetSettingColNum(SETTINGS_SQL_COL_STATUS)
+        .ButtonName = "SqlStatusButton"
+        .ActionMacro = "ShowSQLEditForm"
+        .IconText = ChrW(&H2315)
+        .VOffset = 0
+        .HOffset = 5
+        .ValidationFunc = ""
+    End With
+
+    GetFloatingButtonConfigs = configs
+End Function
+
+
+    

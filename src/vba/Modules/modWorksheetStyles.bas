@@ -90,6 +90,13 @@ Public Sub ClearStylesPreview()
     Next row
 End Sub
 
+Public Sub PreviewStyleForCurrentRow()
+    StylesSheet.Activate
+    GenerateStylesPreview ActiveCell.row
+    ClearStatusBar
+End Sub
+
+
 Public Sub PreviewStyleAndAutosize(ByVal styleName As String, ByVal graphvizSource As String, ByVal targetCol As String, ByRef targetRow As Long)
     
     '@Ignore UnhandledOnErrorResumeNext
@@ -551,4 +558,20 @@ Private Sub ApplyStyleValue(ByVal attributeValue As String, ByVal mode As String
             StyleDesignerSheet.Range(DESIGNER_EDGE_STYLE).value = attributeValue
     End Select
 End Sub
+
+' Validation routine for determing when to display floating buttons
+Public Function IsStylesRowActive(ByVal row As Long) As Boolean
+    IsStylesRowActive = False               ' Establish default setting
+    
+    Dim commentIndicator As String
+    commentIndicator = StylesSheet.Cells(row, GetSettingColNum(SETTINGS_STYLES_COL_COMMENT)).value
+    If commentIndicator = "#" Then Exit Function ' Commented out, exit
+    
+    ' We only use floating buttons for styles "node", "edge", and "subgraph-open"
+    Dim styleType As String: styleType = StylesSheet.Cells(row, GetSettingColNum(SETTINGS_STYLES_COL_OBJECT_TYPE)).value
+    
+    If styleType = TYPE_NODE Or styleType = TYPE_EDGE Or styleType = TYPE_SUBGRAPH_OPEN Then
+        IsStylesRowActive = True
+    End If
+End Function
 

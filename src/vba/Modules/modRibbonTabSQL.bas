@@ -20,49 +20,6 @@ Public Sub sqlRun_onAction(ByVal control As IRibbonControl)
     AutoDraw
 End Sub
 
-Public Sub RunSQLAsExtension()
-    ' Change the cursor to the wait cursor (hourglass)
-    Dim originalCursorType As Long
-    originalCursorType = Application.Cursor
-    Application.Cursor = xlWait
-    
-    ' Add a guard against Excel recalculation
-    ' If the user has volatile formulas or add-ins, Excel may re-enter during .Open
-    Dim originalCalculation As Long
-    originalCalculation = Application.Calculation
-    Application.Calculation = xlCalculationManual
-
-    ' AutoSave/AutoRecover can lock the workbook while ADO is reading it.
-    ' Disable AutoRecover during SQL
-    Dim originalAutoRecover As Boolean
-    originalAutoRecover = Application.AutoRecover.enabled
-    Application.AutoRecover.enabled = False
-
-    ' Disable screen updating
-    Dim originalScreenUpdating As Boolean
-    originalScreenUpdating = Application.ScreenUpdating
-    Application.ScreenUpdating = False
-    
-    ' Disable events
-    Dim originalEnableEvents As Long
-    originalEnableEvents = Application.enableEvents
-    Application.enableEvents = False
-
-    ' Execute ALL the SQL commands
-    RunSQL
-    
-    ' Refresh the ribbon controls based on SQL execution activity
-    InvalidateRibbonControl RIBBON_CTL_SQL_CONN_POOL_RESET
-    
-    ' Return to prior states
-    Application.enableEvents = originalEnableEvents
-    Application.ScreenUpdating = originalScreenUpdating
-    Application.AutoRecover.enabled = originalAutoRecover
-    Application.Calculation = originalCalculation
-    Application.Cursor = originalCursorType
-End Sub
-
-
 '@Ignore ParameterNotUsed
 Public Sub sqlClearStatus_onAction(ByVal control As IRibbonControl)
     OptimizeCode_Begin

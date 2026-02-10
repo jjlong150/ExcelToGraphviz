@@ -6,17 +6,15 @@ Attribute VB_Name = "modRibbonTabStyles"
 
 Option Explicit
 
-Public Sub stylesClear_onAction(ByVal control As IRibbonControl)
+Private Sub stylesClear_onAction(ByVal control As IRibbonControl)
     ClearStylesPreview
 End Sub
 
-Public Sub stylesPreview_onAction(ByVal control As IRibbonControl)
-    StylesSheet.Activate
-    GenerateStylesPreview ActiveCell.row
-    ClearStatusBar
+Private Sub stylesPreview_onAction(ByVal control As IRibbonControl)
+    PreviewStyleForCurrentRow
 End Sub
 
-Public Sub stylesPreviewAll_onAction(ByVal control As IRibbonControl)
+Private Sub stylesPreviewAll_onAction(ByVal control As IRibbonControl)
     StylesSheet.Activate
     ClearStylesPreview
     GenerateStylesPreviewAll
@@ -53,7 +51,7 @@ End Sub
 ' Callbacks for Help
 
 '@Ignore ParameterNotUsed
-Public Sub stylesHelp_onAction(ByVal control As IRibbonControl)
+Private Sub stylesHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLStylesTab").value, NewWindow:=True
 End Sub
 
@@ -61,13 +59,13 @@ End Sub
 ' Callbacks for stylesEdit
 
 '@Ignore ParameterNotUsed
-Public Sub stylesEdit_onAction(ByVal control As IRibbonControl)
+Private Sub stylesEdit_onAction(ByVal control As IRibbonControl)
     RestoreStyleDesigner
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub stylesEdit_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
-    enabled = False
+Private Sub stylesEdit_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+    Enabled = False
 
     If ActiveSheet.name <> StylesSheet.name Then Exit Sub
     If Not TypeOf Selection Is Range Then Exit Sub
@@ -84,5 +82,5 @@ Public Sub stylesEdit_getEnabled(ByVal control As IRibbonControl, ByRef enabled 
 
     If Not (styleType = TYPE_NODE Or styleType = TYPE_EDGE Or styleType = TYPE_SUBGRAPH_OPEN) Then Exit Sub
 
-    enabled = True
+    Enabled = True
 End Sub

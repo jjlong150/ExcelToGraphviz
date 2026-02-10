@@ -22,17 +22,17 @@ Private Sub Worksheet_Activate()
 #End If
 End Sub
 
-Private Sub Worksheet_Change(ByVal target As Range)
+Private Sub Worksheet_Change(ByVal Target As Range)
     On Error GoTo ErrorHandler
 
     ' Detect changes in the settings dropdown lists
-    If Not Intersect(target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
-        Application.enableEvents = False
+    If Not Intersect(Target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
+        Application.EnableEvents = False
         RefreshRibbon
     End If
 
 CleanExit:
-    Application.enableEvents = True
+    Application.EnableEvents = True
     Exit Sub
 
 ErrorHandler:
@@ -41,49 +41,60 @@ ErrorHandler:
     Resume CleanExit
 End Sub
 
-Private Sub Worksheet_SelectionChange(ByVal target As Range)
-    If target.Cells.CountLarge > 1 Or target.Cells.count = 0 Then Exit Sub
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    ' Exit if protected worksheet
+    If Me.ProtectContents Then Exit Sub
     
+    ' Enable or disable the edit button in the ribbon
     On Error Resume Next
     InvalidateRibbonControl RIBBON_CTL_STYLES_EDIT
     On Error GoTo 0
     
-    ' Remove old button/icon
-    On Error Resume Next
-    Me.buttons("FormatEditButton").Delete
-    Me.Shapes("FormatEditButton").Delete
-    On Error GoTo 0
-    
-    Dim formatCol As Long
-    formatCol = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT)
-    If Intersect(target, Me.columns(formatCol)) Is Nothing Then Exit Sub
-    
-    Dim row As Long
-    row = target.row
-    Dim styleType As String
-    styleType = StylesSheet.Cells(row, GetSettingColNum(SETTINGS_STYLES_COL_OBJECT_TYPE)).value
-    If Not (styleType = TYPE_NODE Or styleType = TYPE_EDGE Or styleType = TYPE_SUBGRAPH_OPEN) Then Exit Sub
-    If Me.ProtectContents Then Exit Sub
-    
-    ' Add clickable pencil icon with subtle button look
-    Dim shp As shape
-    Set shp = Me.Shapes.AddShape(msoShapeRoundedRectangle, _
-                target.left + target.Width + 5, _
-                target.top + 1, 20, 20)
-    With shp
-        .name = "FormatEditButton"
-        .Fill.ForeColor.RGB = RGB(245, 245, 245)      ' very light gray background
-        .Fill.Transparency = 0
-        .Line.Weight = 0.75
-        .Line.ForeColor.RGB = RGB(180, 180, 180)      ' soft border
-        .TextFrame2.TextRange.Characters.Text = ChrW(&H270E)  ' pencil
-        .TextFrame2.TextRange.Font.name = "Segoe UI Symbol"
-        .TextFrame2.TextRange.Font.Size = 16
-        .TextFrame2.TextRange.Font.Fill.ForeColor.RGB = RGB(60, 60, 60)  ' dark gray pencil
-        .TextFrame2.VerticalAnchor = msoAnchorMiddle
-        .TextFrame2.HorizontalAnchor = msoAnchorCenter
-        .Placement = xlMoveAndSize
-        .OnAction = "RestoreStyleDesigner"
-    End With
+    ' Get button configs and use for both creation and cleanup
+    Dim configs() As ButtonConfig
+    configs = GetFloatingButtonConfigs()
+
+    ' Cleanup old buttons, and create new ones
+    RemoveFloatingButtons Me, GetButtonNamesFromConfigs(configs)
+    UpdateFloatingButtonsOnSheet Me, Target, configs
 End Sub
+
+' Define button configurations specific to this worksheet
+Private Function GetFloatingButtonConfigs() As ButtonConfig()
+    Dim configs() As ButtonConfig
+    ReDim configs(0 To 2)   ' ? change upper bound when adding more
+
+    With configs(0)
+        .ColumnNumber = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT)
+        .ButtonName = "StyleRefreshButton"
+        .ActionMacro = "PreviewStyleForCurrentRow"
+        .IconText = ChrW(&H27F3)
+        .VOffset = 0
+        .HOffset = 5
+        .ValidationFunc = "IsStylesRowActive"
+    End With
+    
+    With configs(1)
+        .ColumnNumber = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT)
+        .ButtonName = "FormatEditButton"
+        .ActionMacro = "RestoreStyleDesigner"
+        .IconText = ChrW(&H270E)
+        .VOffset = 22
+        .HOffset = 5
+        .ValidationFunc = "IsStylesRowActive"
+    End With
+
+    With configs(2)
+        .ColumnNumber = GetSettingColNum(SETTINGS_STYLES_COL_STYLE)
+        .ButtonName = "StyleRefreshButton"
+        .ActionMacro = "PreviewStyleForCurrentRow"
+        .IconText = ChrW(&H27F3)
+        .VOffset = 0
+        .HOffset = 5
+        .ValidationFunc = "IsStylesRowActive"
+    End With
+
+    GetFloatingButtonConfigs = configs
+End Function
+
 
