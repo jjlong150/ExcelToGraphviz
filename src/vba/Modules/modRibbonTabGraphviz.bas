@@ -1173,6 +1173,18 @@ End Sub
 ' ===========================================================================
 ' Callbacks for graphZoomLevel
 
+'@Ignore ParameterNotUsed
+Public Sub graphZoomLevel_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = control.id & GetCurrentZoom()
+End Sub
+
+'@Ignore ParameterNotUsed
+Public Sub graphZoomLevel_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+    Dim zoomLevel As String
+    zoomLevel = Mid$(controlId, Len(control.id) + 1)
+    UpdateZoom CLng(zoomLevel)
+End Sub
+
 Public Sub graphZoomLevel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     label = GetCurrentZoom() & "%"
 End Sub
