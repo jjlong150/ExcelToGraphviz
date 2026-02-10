@@ -398,6 +398,13 @@ Public Const SETTINGS_SQL_FIELD_NAME_MAX_DEPTH As String = "SqlFieldNameMaxDepth
 Public Const SETTINGS_SQL_FIELD_NAME_CREATE_EDGES As String = "SqlFieldNameCreateEdges"
 Public Const SETTINGS_SQL_FIELD_NAME_CREATE_RANK As String = "SqlFieldNameCreateRank"
 
+Public Const SETTINGS_SQL_FIELD_NAME_CONCATENATE_SWITCH As String = "SqlFieldNameConcatenateSwitch"
+Public Const SETTINGS_SQL_FIELD_NAME_CONCATENATE_FIELD As String = "SqlFieldNameConcatenateField"
+Public Const SETTINGS_SQL_FIELD_NAME_CONCATENATE_MAP_TO As String = "SqlFieldNameConcatenateMapTo"
+Public Const SETTINGS_SQL_FIELD_NAME_CONCATENATE_PREFIX As String = "SqlFieldNameConcatenatePrefix"
+Public Const SETTINGS_SQL_FIELD_NAME_CONCATENATE_SUFFIX As String = "SqlFieldNameConcatenateSuffix"
+Public Const SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR As String = "SqlFieldNameConcatenateSeparator"
+
 Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH As String = "SqlFieldNameEnumerateSwitch"
 Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT As String = "SqlFieldNameEnumerateStartAt"
 Public Const SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT As String = "SqlFieldNameEnumerateStopAt"
@@ -827,6 +834,14 @@ Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_SWITCH As String = "iterateSwi
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_ID_QUERY As String = "iterateQueryId"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_DATA_QUERY As String = "iterateQueryData"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER As String = "iteratePlaceholder"
+
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_SWITCH As String = "concatenateSwitch"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_FIELD As String = "concatenateField"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_MAP_TO As String = "concatenateMapTo"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_PREFIX As String = "concatenatePrefix"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_SUFFIX As String = "concatenateSuffix"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR As String = "concatenateSeparator"
+
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH As String = "enumerateSwitch"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT As String = "enumerateStartAt"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_STOP_AT As String = "enumerateStopAt"

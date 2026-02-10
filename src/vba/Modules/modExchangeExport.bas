@@ -679,6 +679,13 @@ Private Function GetSettingsDictionarySql() As Dictionary
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_PLACEHOLDER, fields.enumeratePlaceholder
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_ENUMERATE_MAX, fields.enumerateMax
     
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_SWITCH, fields.concatenateSwitch
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_FIELD, fields.concatenateField
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_MAP_TO, fields.concatenateMapTo
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_PREFIX, fields.concatenatePrefix
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_SUFFIX, fields.concatenateSuffix
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR, fields.concatenateSeparator
+    
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CREATE_EDGES, fields.CreateEdges
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CREATE_RANK, fields.CreateRank
     

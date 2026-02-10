@@ -105,3 +105,41 @@ Public Enum ExecuteOptionEnum
     adOptionUnspecified = -1      ' Unspecified option
 End Enum
 
+' =====================================================================
+' ADO Constant Definitions (for late binding - no reference needed)
+' Only including the ones most commonly used in this project
+' Source: Microsoft ActiveX Data Objects (ADO) DataTypeEnum
+' =====================================================================
+
+Public Enum ADODataTypeEnum
+    ' String types
+    adChar = 129                      ' Fixed-length string
+    adVarChar = 200                   ' Variable-length string (most common)
+    adLongVarChar = 201               ' Long variable-length string (text/memo)
+    adWChar = 130                     ' Fixed-length Unicode string
+    adVarWChar = 202                  ' Variable-length Unicode string
+    adLongVarWChar = 203              ' Long Unicode string
+    
+    ' Numeric types
+    adInteger = 3                     ' 4-byte signed integer
+    adSmallInt = 2                    ' 2-byte signed integer
+    adBigInt = 20                     ' 8-byte signed integer
+    adUnsignedInt = 10                ' 4-byte unsigned integer
+    adSingle = 4                      ' Single-precision float
+    adDouble = 5                      ' Double-precision float
+    adCurrency = 6                    ' Currency
+    adDecimal = 14                    ' Decimal / Numeric
+    
+    ' Date/Time
+    adDate = 7                        ' Date (no time)
+    adDBDate = 133                    ' Date (yyyy-mm-dd)
+    adDBTime = 134                    ' Time (hh:mm:ss)
+    adDBTimeStamp = 135               ' Timestamp (yyyy-mm-dd hh:mm:ss)
+    
+    ' Binary / Other
+    adLongVarBinary = 205             ' Long binary (image, OLE, etc.)
+    adVarBinary = 204                 ' Variable binary
+    adBoolean = 11                    ' Boolean
+    adGUID = 72                       ' Globally Unique Identifier
+End Enum
+

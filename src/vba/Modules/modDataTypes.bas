@@ -270,6 +270,12 @@ Public Type sqlFieldName
     enumerateMax As String
     retryLimit As Long
     maxConnectionMinutes As Long
+    concatenateSwitch As String
+    concatenateField As String
+    concatenateMapTo As String
+    concatenatePrefix As String
+    concatenateSuffix As String
+    concatenateSeparator As String
 End Type
 
 ' Working variables for row data on the "svg" worksheet

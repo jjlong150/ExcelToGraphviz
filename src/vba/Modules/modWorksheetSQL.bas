@@ -27,9 +27,18 @@ Private Type sqlContext
     loop As EnumerateParameters
 End Type
 
+Private Type ConcatSettings
+    Enabled     As Boolean
+    ConcatField As String
+    TargetField As String
+    prefix      As String
+    suffix      As String
+    separator   As String
+End Type
+
 ''' Button Actions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 '''  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Public Sub RunSQL()
+Public Sub RunSQL(Optional ByVal row As Long = 0)
     ' Disable logging from prior run
     SetLoggingEnabled False
 
@@ -46,11 +55,24 @@ Public Sub RunSQL()
     ' Get the list of special field names used for determining clusters and subclusters.
     context.fields = GetSettingsForSqlFields(True)
 
-    ' Determine the last row with data
-    Dim lastRow As Long
-    With SqlSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
-    End With
+    ' Establish the loop constraints. A row of 0 passed in means run all SQL statements
+    Dim firstRow As Long
+    Dim lastRow  As Long
+    
+    Dim sqlCol As Long
+    sqlCol = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
+    
+    If row = 0 Then
+        firstRow = context.sqlLayout.firstRow
+        lastRow = GetLastRowInColumn(SqlSheet, sqlCol)
+        
+        If lastRow < firstRow Then
+            Exit Sub
+        End If
+    Else
+        firstRow = row
+        lastRow = row
+    End If
 
     ' Disable automatic graph rendering as cells change.
     Dim runMode As String
@@ -81,7 +103,7 @@ Public Sub RunSQL()
     Dim filePath As String
     Dim connectionObject As Object  ' Connection
 
-    For sqlRow = context.sqlLayout.firstRow To lastRow
+    For sqlRow = firstRow To lastRow
 
         ' Skip initializations if the SQL row is commented out
         If SafeStr(SqlSheet.Cells.item(sqlRow, context.sqlLayout.flagColumn).value) <> FLAG_COMMENT Then
@@ -526,9 +548,10 @@ executeSQLError:
 
     Dim statusMessage As String
     statusMessage = errDescription _
+                & vbNewLine & vbNewLine & ClassifyError(errDescription) _
                 & vbNewLine & vbNewLine & "Err.Number=" & errNumber _
                 & vbNewLine & vbNewLine & "datafile=" & filePath
-    
+
     LogDiagnostic logMessage, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(errDescription)
     executeSQL = GetMessage("msgboxSqlStatusFailure") & " - " & statusMessage
     GoTo Cleanup
@@ -568,7 +591,7 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
 
     Dim s As EnumerateParameters
     ' Default: no loop mode; EmitRows/consumers decide what to do with a single pass
-    s.enabled = False
+    s.Enabled = False
     s.startAt = 1                   ' Default single-iteration loop
     s.stopAt = 1
     s.stepBy = 1
@@ -605,7 +628,7 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
     End If
 
     ' From here on, ENUMERATE is explicitly enabled
-    s.enabled = True
+    s.Enabled = True
 
     ' ------------------------------------------------------------
     ' ENUMERATE = TRUE -> attempt to fetch loop parameters
@@ -680,48 +703,309 @@ Private Sub IterativeSearch( _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
-    ' Preconditions
-    If rsQueryResults Is Nothing Then Exit Sub
-    If rsQueryResults.State <> adStateOpen Then Exit Sub
-    If rsQueryResults.EOF And rsQueryResults.BOF Then Exit Sub
+    If rsQueryResults Is Nothing Or rsQueryResults.State <> adStateOpen Or _
+       (rsQueryResults.EOF And rsQueryResults.BOF) Then Exit Sub
 
-    If Not HasField(rsQueryResults, context.fields.iterate) Then Exit Sub
-    If Not HasField(rsQueryResults, context.fields.idQuery) Then Exit Sub
-    If Not HasField(rsQueryResults, context.fields.dataQuery) Then Exit Sub
+    If Not (HasField(rsQueryResults, context.fields.iterate) And _
+            HasField(rsQueryResults, context.fields.idQuery) And _
+            HasField(rsQueryResults, context.fields.dataQuery)) Then Exit Sub
 
-    ' Extract the get-ID-list query
-    Dim idQuery As String
+    Dim idQuery      As String
     idQuery = GetFieldValueString(rsQueryResults, context.fields.idQuery)
-    If Len(idQuery) = 0 Then Exit Sub
 
-    ' Extract the parameterized data query
-    Dim dataQueryTemplate As String
-    dataQueryTemplate = GetFieldValueString(rsQueryResults, context.fields.dataQuery)
-    If Len(dataQueryTemplate) = 0 Then Exit Sub
+    Dim dataTemplate As String
+    dataTemplate = GetFieldValueString(rsQueryResults, context.fields.dataQuery)
 
-    ' Run the query which returns the list of IDs
-    Dim idList As Object
-    Set idList = GetIDList(connectionObject, idQuery)
-    If idList Is Nothing Then Exit Sub
-    If idList.count = 0 Then Exit Sub
+    If Len(idQuery) = 0 Or Len(dataTemplate) = 0 Then Exit Sub
 
-    ' Run the data query for each ID
-    Dim id As Variant
-    Dim rsData As Object
+    Dim cs As ConcatSettings
+    cs = ReadConcatSettings(context, rsQueryResults)
 
+    Dim headerRS As Object
+    Set headerRS = GetHeaderRS(connectionObject, idQuery)
+    If headerRS Is Nothing Then Exit Sub
+
+    If cs.Enabled Then
+        ProcessInConcatMode connectionObject, context, dataTemplate, headerRS, cs, row, recordCnt
+    Else
+        ProcessInClassicMode connectionObject, context, dataTemplate, headerRS, row, recordCnt
+    End If
+
+    SafeCloseRecordset headerRS
+End Sub
+
+Private Sub ProcessInClassicMode( _
+    conn As Object, ctx As sqlContext, _
+    dataTemplate As String, headerRS As Object, _
+    ByRef row As Long, ByRef recordCnt As Long)
+
+    Dim idList As Object: Set idList = CollectUniqueIDs(headerRS)
+    If idList Is Nothing Or idList.count = 0 Then Exit Sub
+
+    Dim id As Variant, rsData As Object
     For Each id In idList.Keys
-        Set rsData = RunParameterizedQuery(connectionObject, context, dataQueryTemplate, id)
-
+        Set rsData = RunParameterizedQuery(conn, ctx, dataTemplate, id)
         If Not rsData Is Nothing Then
             If rsData.State = adStateOpen Then
-                MapResultsToDataWorksheet context, rsData, row, recordCnt
+                MapResultsToDataWorksheet ctx, rsData, row, recordCnt
             End If
+            SafeCloseRecordset rsData
+        End If
+    Next
+End Sub
+
+Private Sub ProcessInConcatMode( _
+    conn As Object, ctx As sqlContext, _
+    dataTemplate As String, headerRS As Object, _
+    ByRef cs As ConcatSettings, _
+    ByRef row As Long, ByRef recordCnt As Long)
+
+    Dim augRS As Object
+    Set augRS = CreateAugmentedRS(conn, ctx, headerRS, dataTemplate, _
+                                  cs.ConcatField, cs.TargetField, _
+                                  cs.prefix, cs.suffix, cs.separator)
+    
+    If Not augRS Is Nothing Then
+        If augRS.State = adStateOpen Then
+            MapResultsToDataWorksheet ctx, augRS, row, recordCnt
+        End If
+        SafeCloseRecordset augRS
+    End If
+End Sub
+
+Private Function CollectUniqueIDs( _
+    ByVal headerRS As Object) As Object
+
+    If headerRS Is Nothing Then Exit Function
+    If headerRS.State <> adStateOpen Then Exit Function
+
+    Dim idList As Object
+    Set idList = CreateObject("Scripting.Dictionary")
+
+    Dim id As String
+    headerRS.MoveFirst
+    Do While Not headerRS.EOF
+        id = SafeStr(headerRS.fields("ID").value)
+        If Len(id) > 0 Then
+            If Not idList.Exists(id) Then idList.Add id, True
+        End If
+        headerRS.MoveNext
+    Loop
+
+    Set CollectUniqueIDs = idList
+End Function
+
+Private Function ReadConcatSettings(ByRef ctx As sqlContext, ByRef rs As Object) As ConcatSettings
+    Dim s As ConcatSettings
+    s.Enabled = False
+    
+    If Not HasField(rs, ctx.fields.concatenateSwitch) Then
+        ReadConcatSettings = s
+        Exit Function
+    End If
+
+    Dim rawValue As Variant
+    rawValue = rs.fields(ctx.fields.concatenateSwitch).value
+    
+    ' Treat as true if: real True, "1", "TRUE", "true", "yes", non-zero number
+    If IsNull(rawValue) Then
+        s.Enabled = False
+    ElseIf VarType(rawValue) = vbBoolean Then
+        s.Enabled = rawValue = True
+    ElseIf IsNumeric(rawValue) Then
+        s.Enabled = CLng(rawValue) <> 0
+    Else
+        Dim strVal As String
+        strVal = LCase$(Trim$(CStr(rawValue)))
+        s.Enabled = (strVal = "true") Or (strVal = "yes") Or (strVal = "1")
+    End If
+    
+    If Not s.Enabled Then
+        ReadConcatSettings = s
+        Exit Function
+    End If
+    
+    s.ConcatField = Trim$(Nz(GetFieldValueString(rs, ctx.fields.concatenateField), ""))
+    s.TargetField = Trim$(Nz(GetFieldValueString(rs, ctx.fields.concatenateMapTo), ""))
+    s.prefix = Nz(GetFieldValueString(rs, ctx.fields.concatenatePrefix), "")
+    s.suffix = Nz(GetFieldValueString(rs, ctx.fields.concatenateSuffix), "")
+    s.separator = Nz(GetFieldValueString(rs, ctx.fields.concatenateSeparator), "")
+    
+    ' Optional: early exit if required fields missing
+    If Len(s.ConcatField) = 0 Or Len(s.TargetField) = 0 Then
+        s.Enabled = False
+    End If
+    
+    ReadConcatSettings = s
+End Function
+
+Private Function Nz(v, Optional def = "") As String: Nz = IIf(IsNull(v) Or Len(v & "") = 0, def, v): End Function
+
+Private Function GetHeaderRS( _
+    ByRef connectionObject As Object, _
+    ByVal idQuery As String) As Object
+    
+    Dim rs As Object
+
+    On Error GoTo GetHeaderRSError
+    
+    DoEvents
+    SleepMilliseconds 10
+    
+    ' Execute the ID query
+    Set rs = CreateObject("ADODB.Recordset")
+    rs.Open idQuery, connectionObject, adOpenStatic, adLockReadOnly
+    
+    ' Guard against empty or invalid recordsets
+    If rs Is Nothing Then Exit Function
+    If rs.State <> adStateOpen Then Exit Function
+    If rs.EOF And rs.BOF Then
+        SafeCloseRecordset rs
+        Exit Function
+    End If
+    
+    ' Check for required ID field (case-insensitive)
+    If Not HasField(rs, "ID") Then
+        SafeCloseRecordset rs
+        Exit Function
+    End If
+    
+    ' Always start at the beginning
+    On Error Resume Next
+    rs.MoveFirst
+    If Err.number <> 0 Then
+        Err.Clear
+        SafeCloseRecordset rs
+        Exit Function
+    End If
+    On Error GoTo GetHeaderRSError
+    
+    Set GetHeaderRS = rs
+    
+    Exit Function
+    
+GetHeaderRSError:
+        LogDiagnostic _
+            "GetHeaderRS SQL failed: " & Err.Description & vbNewLine, _
+            errorNumber:=Err.number, _
+            sql:=idQuery, _
+            errorCategory:="Iteration / SQL"
+            
+    On Error Resume Next
+    SafeCloseRecordset rs
+    Set GetHeaderRS = Nothing
+End Function
+
+Private Function CreateAugmentedRS( _
+    ByRef conn As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal headerRS As Object, _
+    ByVal dataTemplate As String, _
+    ByVal concatFld As String, _
+    ByVal targetFld As String, _
+    ByVal prefix As String, _
+    ByVal suffix As String, _
+    ByVal separator As String) As Object
+
+    If headerRS Is Nothing Or headerRS.State <> adStateOpen Then Exit Function
+
+    On Error GoTo ErrHandler
+
+    Dim aug As Object
+    Set aug = CreateObject("ADODB.Recordset")
+
+    ' Copy all fields from header
+    Dim f As Object
+    For Each f In headerRS.fields
+        aug.fields.Append f.name, f.Type, f.DefinedSize
+    Next
+
+    ' Ensure target field exists
+    If Not HasField(aug, targetFld) Then
+        aug.fields.Append targetFld, ADODataTypeEnum.adVarChar, 8192  ' 8K to be able to handle long concatenations
+    End If
+
+    aug.Open
+
+    headerRS.MoveFirst
+    Do While Not headerRS.EOF
+        aug.AddNew
+
+        ' Copy header fields
+        For Each f In headerRS.fields
+            aug(f.name) = headerRS(f.name)
+        Next
+
+        ' Run detail query
+        Dim rsDetail As Object
+        Set rsDetail = RunParameterizedQuery(conn, ctx, dataTemplate, headerRS("ID"))
+
+        ' Build concatenated string using extracted function
+        Dim concat As String
+        concat = ConcatenateFieldValues(rsDetail, concatFld, separator)
+
+        ' Apply prefix/suffix
+        concat = prefix & concat & suffix
+
+        aug(targetFld) = concat
+        aug.Update
+
+        SafeCloseRecordset rsDetail
+
+        headerRS.MoveNext
+    Loop
+
+    ' Prepare for reading/mapping
+    If Not (aug.EOF And aug.BOF) Then
+        aug.MoveFirst
+    End If
+
+    Set CreateAugmentedRS = aug
+    Exit Function
+
+ErrHandler:
+    LogDiagnostic _
+        "CreateAugmentedRS failed: " & Err.Description, _
+        errorNumber:=Err.number, _
+        errorCategory:="Iteration / Concatenation"
+
+    On Error Resume Next
+    SafeCloseRecordset aug
+    Set CreateAugmentedRS = Nothing
+End Function
+
+Private Function ConcatenateFieldValues( _
+    ByVal rs As Object, _
+    ByVal fieldName As String, _
+    ByVal separator As String) As String
+
+    Dim result As String
+    Dim first As Boolean
+    first = True
+
+    If rs Is Nothing Then Exit Function
+    If rs.State <> adStateOpen Then Exit Function
+    If rs.EOF And rs.BOF Then Exit Function
+
+    If Not HasField(rs, fieldName) Then Exit Function
+
+    rs.MoveFirst
+    Do While Not rs.EOF
+        Dim v As String
+        v = SafeStr(rs.fields(fieldName).value)
+
+        ' Only include non-empty values (user can filter NULLs in SQL if desired)
+        If Len(v) > 0 Then
+            If Not first Then result = result & separator
+            result = result & v
+            first = False
         End If
 
-        SafeCloseRecordset rsData
-    Next id
+        rs.MoveNext
+    Loop
 
-End Sub
+    ConcatenateFieldValues = result
+End Function
 
 Private Function GetIDList( _
     ByRef connectionObject As Object, _
@@ -1488,7 +1772,7 @@ Private Sub CreateEdges( _
     ' ------------------------------------------------------------
     ' LOOP MODE
     ' ------------------------------------------------------------
-    If context.loop.enabled Then
+    If context.loop.Enabled Then
 
         Dim stopValue As Long
         stopValue = context.loop.stopAt - 1
@@ -1667,7 +1951,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, _
                 clusterObject.label = clusterLabel
                 clusterObject.styleName = clusterStyleName
                 clusterObject.attributes = clusterAttributes
-                clusterObject.tooltip = clusterTooltip
+                clusterObject.Tooltip = clusterTooltip
 
                 clusters.Add clusterId, clusterObject
             End If
@@ -1765,7 +2049,7 @@ Private Function GetSubclusterInfo( _
                 clusterObject.label = subLabel
                 clusterObject.styleName = subStyle
                 clusterObject.attributes = subAttr
-                clusterObject.tooltip = subTooltip
+                clusterObject.Tooltip = subTooltip
 
                 subclusters.Add subId, clusterObject
             End If
@@ -1868,7 +2152,7 @@ Private Function GetSubClusterInfoForCluster( _
                     clusterObject.label = subLabel
                     clusterObject.styleName = subStyle
                     clusterObject.attributes = subAttr
-                    clusterObject.tooltip = subTooltip
+                    clusterObject.Tooltip = subTooltip
 
                     subclusters.Add subId, clusterObject
                 End If
@@ -1974,7 +2258,7 @@ Private Function GetOrphanSubClusterInfo( _
                     clusterObject.label = subLabel
                     clusterObject.styleName = subStyle
                     clusterObject.attributes = subAttr
-                    clusterObject.tooltip = subTooltip
+                    clusterObject.Tooltip = subTooltip
 
                     subclusters.Add subId, clusterObject
                 End If
@@ -2010,7 +2294,7 @@ Private Sub EmitClusterOpen( _
             replace(SafeStr(clusterRecord.attributes), _
                     findStr, SafeStr(replaceLong), , , vbTextCompare)
 
-        .Cells(row, dataLayout.tooltipColumn).value = SafeStr(clusterRecord.tooltip)
+        .Cells(row, dataLayout.tooltipColumn).value = SafeStr(clusterRecord.Tooltip)
 
         If Len(SafeStr(clusterRecord.styleName)) > 0 Then
             newStyle = replace(SafeStr(clusterRecord.styleName), _
@@ -2145,7 +2429,7 @@ Private Sub EmitOneRow( _
 
             If Len(v) > 0 Then
                 v = replace(v, context.fields.recordsetPlaceholder, SafeStr(position), , , vbTextCompare)
-                If context.loop.enabled Then
+                If context.loop.Enabled Then
                     v = replace(v, context.fields.enumeratePlaceholder, SafeStr(enumStep), , , vbTextCompare)
                 End If
             End If
@@ -2176,7 +2460,7 @@ Private Sub EmitOneRow( _
                 Case context.headings.headLabel
                     .Cells(targetRow, context.dataLayout.headLabelColumn).value = v
 
-                Case context.headings.tooltip
+                Case context.headings.Tooltip
                     .Cells(targetRow, context.dataLayout.tooltipColumn).value = v
 
                 Case context.headings.isRelatedToItem
@@ -2215,7 +2499,7 @@ Private Function GetSQLWorksheetHeadings(ByRef dataLayout As dataWorksheet) As D
         .xLabel = NormalizeHeading(rowValues(1, dataLayout.xLabelColumn))
         .tailLabel = NormalizeHeading(rowValues(1, dataLayout.tailLabelColumn))
         .headLabel = NormalizeHeading(rowValues(1, dataLayout.headLabelColumn))
-        .tooltip = NormalizeHeading(rowValues(1, dataLayout.tooltipColumn))
+        .Tooltip = NormalizeHeading(rowValues(1, dataLayout.tooltipColumn))
         .isRelatedToItem = NormalizeHeading(rowValues(1, dataLayout.isRelatedToItemColumn))
         .styleName = NormalizeHeading(rowValues(1, dataLayout.styleNameColumn))
         .extraAttributes = NormalizeHeading(rowValues(1, dataLayout.extraAttributesColumn))
@@ -2267,7 +2551,7 @@ Private Function ClassifyError(ByVal errMsg As String) As String
         "not a valid name", _
         "external table is not in the expected format")) Then
 
-        ClassifyError = "Worksheet (table) not found"
+        ClassifyError = "Cannot locate the worksheet/table. Check that the data file is correctly set and the worksheet/table name is valid."
         Exit Function
     End If
 
@@ -2276,7 +2560,7 @@ Private Function ClassifyError(ByVal errMsg As String) As String
         "does not recognize", _
         "no value given")) Then
 
-        ClassifyError = "Column not found"
+        ClassifyError = "Column not found. Verify the column name is correct and the worksheet/table is properly specified."
         Exit Function
     End If
 
@@ -2401,6 +2685,97 @@ CleanFail:
     SafeFieldValue = ""
 End Function
 
+' Validation routine for determing when to display floating buttons
+Public Function IsSqlRowActive(ByVal row As Long) As Boolean
+    IsSqlRowActive = False     ' Establish default
+    
+    ' Check to see if the row is commented out
+    Dim commentIndicator As String
+    commentIndicator = SqlSheet.Cells(row, GetSettingColNum(SETTINGS_SQL_COL_COMMENT)).value
+    If commentIndicator = "#" Then Exit Function
+    
+    ' Get SQL statement
+    Dim sqlStatement As String
+    sqlStatement = Trim$(SafeStr(SqlSheet.Cells.item(row, GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)).value))
+    If sqlStatement = "" Then Exit Function
+    
+    ' See if it starts with SELECT
+    Dim sqlUCase As String
+    sqlUCase = UCase$(sqlStatement)
+    If Not StartsWith(sqlUCase, SQL_SELECT) Then Exit Function
 
+    ' All tests passed
+    IsSqlRowActive = True
+End Function
 
+Public Sub RunOneSqlStatement()
+    Dim activeRow As Long
+    activeRow = ActiveCell.row
+    RunSQLAsExtension rowNumber:=activeRow
+End Sub
+
+Public Sub RunSQLAsExtension(Optional ByVal rowNumber As Long = 0)
+    ' Change the cursor to the wait cursor (hourglass)
+    Dim originalCursorType As Long
+    originalCursorType = Application.Cursor
+    Application.Cursor = xlWait
+    
+    ' Add a guard against Excel recalculation
+    Dim originalCalculation As Long
+    originalCalculation = Application.Calculation
+    Application.Calculation = xlCalculationManual
+
+    ' AutoSave/AutoRecover can lock the workbook while ADO is reading it.
+    ' Disable AutoRecover during SQL
+    Dim originalAutoRecover As Boolean
+    originalAutoRecover = Application.AutoRecover.Enabled
+    Application.AutoRecover.Enabled = False
+
+    ' Disable screen updating
+    Dim originalScreenUpdating As Boolean
+    originalScreenUpdating = Application.ScreenUpdating
+    Application.ScreenUpdating = False
+    
+    ' Disable events
+    Dim originalEnableEvents As Boolean
+    originalEnableEvents = Application.EnableEvents
+    Application.EnableEvents = False
+
+    ' Execute ALL the SQL commands — pass the row number
+    RunSQL rowNumber
+    
+    ' Refresh the ribbon controls based on SQL execution activity
+    InvalidateRibbonControl RIBBON_CTL_SQL_CONN_POOL_RESET
+    
+    ' Restore prior states
+    Application.EnableEvents = originalEnableEvents
+    Application.ScreenUpdating = originalScreenUpdating
+    Application.AutoRecover.Enabled = originalAutoRecover
+    Application.Calculation = originalCalculation
+    Application.Cursor = originalCursorType
+End Sub
+
+Private Function GetLastRowInColumn( _
+    ByVal ws As Worksheet, _
+    ByVal colNum As Long) As Long
+
+    ' Returns the last row that contains any value in the specified column
+    ' Returns 0 if the column is completely empty
+
+    If colNum < 1 Or colNum > ws.columns.count Then
+        GetLastRowInColumn = 0
+        Exit Function
+    End If
+
+    Dim last As Long
+    last = ws.Cells(ws.rows.count, colNum).End(xlUp).row
+
+    ' If .End(xlUp) lands on row 1 and that cell is empty ? column is empty
+    If last = 1 And IsEmpty(ws.Cells(1, colNum).value) Then
+        GetLastRowInColumn = 0
+    Else
+        GetLastRowInColumn = last
+    End If
+
+End Function
 

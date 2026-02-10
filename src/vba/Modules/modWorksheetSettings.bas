@@ -207,6 +207,14 @@ Public Function GetSettingsForSqlFields(ByVal makeLCase As Boolean) As sqlFieldN
         .CreateEdges = GetSettingText(SETTINGS_SQL_FIELD_NAME_CREATE_EDGES, False)
         .CreateRank = GetSettingText(SETTINGS_SQL_FIELD_NAME_CREATE_RANK, False)
 
+        ' Concatenation (case preserved)
+        .concatenateSwitch = GetSettingText(SETTINGS_SQL_FIELD_NAME_CONCATENATE_SWITCH, False)
+        .concatenateField = GetSettingText(SETTINGS_SQL_FIELD_NAME_CONCATENATE_FIELD, False)
+        .concatenateMapTo = GetSettingText(SETTINGS_SQL_FIELD_NAME_CONCATENATE_MAP_TO, False)
+        .concatenatePrefix = GetSettingText(SETTINGS_SQL_FIELD_NAME_CONCATENATE_PREFIX, False)
+        .concatenateSuffix = GetSettingText(SETTINGS_SQL_FIELD_NAME_CONCATENATE_SUFFIX, False)
+        .concatenateSeparator = GetSettingText(SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR, False)
+
         ' Enumeration (case preserved)
         .enumerateSwitch = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_SWITCH, False)
         .enumerateStartAt = GetSettingText(SETTINGS_SQL_FIELD_NAME_ENUMERATE_START_AT, False)
@@ -464,7 +472,7 @@ Public Sub DisplaySqlOptions(ByVal isVisible As Boolean)
     Dim rowTo As Long
     
     rowFrom = SettingsSheet.Range(SETTINGS_SQL_COL_COMMENT).row - 1
-    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_ITERATE_PLACEHOLDER).row + 1
+    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR).row + 1
 #If Mac Then
     DisplayTabRows False, rowFrom, rowTo
     SettingsSheet.Shapes.Range("enabledTabSqlWorksheet").visible = False
