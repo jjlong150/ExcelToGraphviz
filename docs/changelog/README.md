@@ -1,6 +1,27 @@
 # Change Log
 
-## Version 10.0.0
+## Version 10.1.0 – February 9, 2026
+
+This release focuses primarily on expanding the **SQL capabilities** of the Relationship Visualizer, along with meaningful UX improvements for everyday workflow.
+
+**Enhancements**
+
+The Relationship Visualizer received the following improvements:
+
+- **Concatenation Mode for Iterative SQL Queries** — Combine multiple detail records into a single string per header row (e.g., list of songs under an album, list of countries per continent, etc.).
+- **Floating Action Buttons** — Context-sensitive floating icons now appear next to selected cells in supported columns. Each button triggers a specific action:
+  - *'sql' Worksheet*:
+    - `✎` Edit this SQL statement
+    - `▶` Run this SQL statement
+    - `⌕` View query status using a dialog
+  - *'styles' Worksheet*:
+    - `✎` Edit this style in the Style Designer
+    - `↻` Refresh this style's preview image  
+
+  Buttons auto-appear/disappear on selection, respect sheet protection, and support per-button validation (e.g., SQL only shows "Run" when SQL row is active and begins with `SELECT`).
+- **Image Zoom Dropdown List** — Restored the Image Zoom dropdown list which was removed in the V9.0 UI refresh. The v9.0 Zoom In (+) and Zoom Out (-) buttons, and the 5% increments from 5%-150% have been retained.
+
+## Version 10.0.0 – January 23, 2026
 
 This release focuses primarily on expanding and strengthening the **SQL capabilities** of the Relationship Visualizer.
 
@@ -25,7 +46,7 @@ The following defects were corrected:
 
   The fix correctly groups by **CLUSTER**, but this correction is **not backward‑compatible** and may alter the structure of existing graphs that relied on the prior (incorrect) behavior. You will have to modify cluster-oriented SQL statements if you use this feature.
 
-## Version 9.1.0
+## Version 9.1.0 - January 7, 2026
 
 **Font List Improvements**  
 Revised the logic used to build the font list in the Style Designer tab.
@@ -43,7 +64,7 @@ Updated the Style Designer tab to use a two‑image preview approach.
 Restructured the Windows and macOS code paths so both platforms now share the same filtering, deduplication, and sorting pipeline.  
 - macOS still relies on the font list stored in the `lists` worksheet, but the code is now structured to allow a native macOS font‑enumeration solution to be added cleanly when available.
 
-## Version 9.0.0
+## Version 9.0.0 - December 22, 2025
 
 **UI Visual Refresh**  
 Replaced all [built-in Office Ribbon icons](https://spreadsheet1.com/microsoft-office-excel-ribbon-imagemso-icons-gallery.html) with [Google Material icons](https://fonts.google.com/icons).  
@@ -102,11 +123,11 @@ Resolved all Excel "Accessibility" warnings to ensure a cleaner, more compliant 
 - Strengthened the error-reporting pipeline with locale-aware timestamps, normalized messages, and safer numeric parsing  
 
 
-## Version 8.0.1
+## Version 8.0.1 - August 28, 2025
 
 - A previous update resolving image deletion on low-memory systems inadvertently disabled SVG removal. This regression has now been corrected. 
 
-## Version 8.0.0
+## Version 8.0.0 - August 27, 2025
 
 **Style Designer**
 
@@ -218,15 +239,15 @@ New SQL extensions for Graphviz automation
 **JSON Import/Export**
 - Updated to support exporting and restoring the new SQL settings.
 
-## Version 7.2.02
+## Version 7.2.02 - June 19, 2025
 
 - Minor adjustment to comply with Graphviz ID naming rules: wrap ID values in quotes if they don't start with a letter or underscore.
 
-## Version 7.2.01
+## Version 7.2.01 - April 19, 2025
 
 - Resolved [Output Directory macro 'Cannot run' #2](https://github.com/jjlong150/ExcelToGraphviz/issues/2) defect.
 
-## Version 7.2.0
+## Version 7.2.0 - March 14, 2025
 
 `sql` Worksheet
 
@@ -254,7 +275,7 @@ New SQL extensions for Graphviz automation
 `ExecuteAndCapture` Module
 - Conducted *RubberduckVBA* code inspections across the entire codebase. Implemented improvements to the `ExecuteAndCapture` module based on its recommendations.
 
-## Version 7.1.0
+## Version 7.1.0 - February 14, 2025
 
 Fixed a bug that caused Excel to freeze when Graphviz wrote more than 4096 bytes of message output:
 
@@ -269,7 +290,7 @@ This resulted in a deadlock. To eliminate the deadlock:
 - `ExecuteAndCapture` periodically checks the pipe for data. Any data found is read and removed from the pipe.
 - `dot` is now able to pause and resume as needed until graph generation is complete and all messages are captured.
 
-## Version 7.0.0
+## Version 7.0.0 - December 4, 2024
 
 **Worksheet Changes**
 
@@ -377,23 +398,23 @@ This resulted in a deadlock. To eliminate the deadlock:
 
 - Accepted **RubberDuckVBA** suggestions to improve code quality.
 
-## Version 6.1.01
+## Version 6.1.01 - October 10, 2024
 
 Style Designer enhanced to include `Mrecord` in the list of shapes. 
 
-## Version 6.1.00
+## Version 6.1.00 - August 13, 2023
 
 Style Designer enhanced to show a progress indicator when loading large dropdown lists. 
 
-## Version 6.0.03
+## Version 6.0.03 - June 26, 2023
 
 `Style Designer` ribbon tab was enhanced to not load names and images of colors and fonts for hidden dropdown lists. This change significantly reduced the time to load the tab from ~15 seconds to ~8 seconds.
 
-## Version 6.0.02
+## Version 6.0.02 - June 23, 2023
 
 Swapped the original SVG postprocessing find/replace scripting with a new contribution which adds animated edge highlighting, and cluster zoom in/zoom out capability. 
 
-## Version 6.0.01
+## Version 6.0.01 - May 19, 2023
 
 `Style Designer` ribbon was enhanced to cache references to color and font images as they get loaded from the file system. 
 
@@ -401,7 +422,7 @@ For Graphviz's default `X11` color scheme, this change eliminates over 4,000 fil
 
 The tab still takes about 15 seconds to load, but 15 is better than 17. Other color schemes load faster as well. 
 
-## Version 6.0.00
+## Version 6.0.00 - May 14, 2023
 
 New Online Help
 
@@ -460,7 +481,7 @@ Sample Workbook Updates
 
 - The workbooks and JSON files in the "samples" directory were updated to version 6.0.00.
 
-## Version 5.8.00
+## Version 5.8.00 - December 22, 2022
 
 Solid-fill Gradients for Nodes and Clusters 
 - A new `Weight` percentage for the primary fill color has been added to the Style Designer which allows for the creation of solid-fill gradients. 
@@ -479,16 +500,16 @@ Sample Workbooks
 File Size
 - Redundant images created by the Office RibbonX Editor tool have been removed, which reduced the Excel workbook size by over 1MB.
 
-## Version 5.7.01
+## Version 5.7.01 - October 23, 2022
 
 Polish language translation originally created using the http://www.deepl.com free translation service have been reviewed and edited by Polish-speaking contributor Arek Czak.
 
 Style Designer color dropdown lists now show the default color Graphviz will use when no color has been chosen as the first value in the list.
 
-## Version 5.7.00
+## Version 5.7.00 - September 7, 2022
 Added Polish language translation. The translation was created using the http://www.deepl.com free translation service (and may have errors). 
 
-## Version 5.6.00
+## Version 5.6.00 - August 14, 2022
 
 Fixed a small bug where the "outputorder" attribute was being emitted as "orderoutput".
 
@@ -496,13 +517,13 @@ Added `overlap`, `mode`, `smoothing`, `dim`, `dimen` attributes to the Algorithm
 
 Continued to purge performance slowing string operations, helping to improve performance on older machines.
 
-## Version 5.5.01
+## Version 5.5.01 - July 8, 2022
 
 Made several code performance optimizations to the `getItemColor` and `getItemLabel` callbacks in the Style Designer ribbon menu which greatly reduce the time it takes to LOAD the lists of color choices names and preview images. 
 
 Made changes which reduce the time it takes to CREATE the color preview images which are displayed in the color choice dropdown lists.
 
-## Version 5.5.00
+## Version 5.5.00 - July 4, 2022
 
 **Multiple Language Support**
 
