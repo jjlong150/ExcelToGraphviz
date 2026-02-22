@@ -64,6 +64,12 @@ Here are real diagrams generated directly from Excel data using the Relationship
 ![Musician-Band Network](./docs/media/home_neato.png)  
 *Force-directed network of musicians and bands with custom styling and embedded images (neato engine)*
 
+![Example Kanban Board](./docs/media/home_kanban.png)
+*Kanban board made from clustered nodes (osage engine)*
+
+![The Beatles Album Releases By Year](./docs/media/home_beatles.png)
+*The Beatles album releases by year, with images (osage engine)*
+
 All previews rendered live from Excel tables using Graphviz — no external tools needed.
 
 ## Key Features
