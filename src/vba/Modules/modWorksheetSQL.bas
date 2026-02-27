@@ -55,6 +55,11 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
     ' Get the list of special field names used for determining clusters and subclusters.
     context.fields = GetSettingsForSqlFields(True)
 
+    ' Create a dictionary to hold substitution placeholder values
+    Dim placeholders As Dictionary
+    Set placeholders = New Dictionary
+    placeholders.CompareMode = TextCompare
+
     ' Establish the loop constraints. A row of 0 passed in means run all SQL statements
     Dim firstRow As Long
     Dim lastRow  As Long
@@ -104,7 +109,8 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
     Dim connectionObject As Object  ' Connection
 
     For sqlRow = firstRow To lastRow
-
+        Application.StatusBar = False
+        
         ' Skip initializations if the SQL row is commented out
         If SafeStr(SqlSheet.Cells.item(sqlRow, context.sqlLayout.flagColumn).value) <> FLAG_COMMENT Then
 
@@ -149,31 +155,43 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
             LogDiagnostic "ENVIRONMENT", includeFingerprint:=True
             SetLoggingEnabled loggingEnabled
 
+        ElseIf StartsWith(sqlUCase, SQL_SET_PLACEHOLDER) Then
+            ParsePlaceholderLine placeholders, sqlStatement
+            
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_ALL_VIEWS_AS_DIRECTED_GRAPH) Then
+            Application.StatusBar = sqlStatement
             PublishAllViewsAsDirectedGraph (sqlStatement)
 
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_ALL_VIEWS_AS_UNDIRECTED_GRAPH) Then
+            Application.StatusBar = sqlStatement
             PublishAllViewsAsUndirectedGraph sqlStatement
 
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_ALL_VIEWS) Then
+            Application.StatusBar = sqlStatement
             PublishAllViews sqlStatement, SQL_PUBLISH_ALL_VIEWS
 
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_AS_DIRECTED_GRAPH) Then
+            Application.StatusBar = sqlStatement
             PublishAsDirectedGraph sqlStatement
 
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_AS_UNDIRECTED_GRAPH) Then
+            Application.StatusBar = sqlStatement
             PublishAsUndirectedGraph sqlStatement
 
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH) Then
+            Application.StatusBar = sqlStatement
             Publish sqlStatement, SQL_PUBLISH
 
         ElseIf StartsWith(sqlUCase, SQL_PREVIEW_AS_DIRECTED_GRAPH) Then
+            Application.StatusBar = sqlStatement
             PreviewAs TOGGLE_DIRECTED
 
         ElseIf StartsWith(sqlUCase, SQL_PREVIEW_AS_UNDIRECTED_GRAPH) Then
+            Application.StatusBar = sqlStatement
             PreviewAs TOGGLE_UNDIRECTED
 
         ElseIf StartsWith(sqlUCase, SQL_PREVIEW) Then
+            Application.StatusBar = sqlStatement
             CreateGraphWorksheet
 
         ElseIf Not StartsWith(sqlUCase, SQL_SELECT) Then
@@ -195,6 +213,9 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
                 LogDiagnostic connErrDescription, errorNumber:=connErrNumber, errorCategory:="Data / Connection"
                 message = GetMessage("msgboxSqlStatusFailure") & " - " & connErrDescription
             Else
+                ' Apply placeholder substitutions before executing SQL
+                ApplyPlaceholders sqlStatement, placeholders
+                
                 Err.Clear
                 message = executeSQL(context, filePath, connectionObject, sqlStatement, dataRow)
             End If
@@ -211,6 +232,9 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
     ' Clean up connection pool if using narrow-scoped pooling
     If GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS) Then CleanupConnectionPool
 
+    ' Clean up placeholder dictionary
+    CleanupPlaceholders placeholders
+    
     ' Restore the run mode setting
     SettingsSheet.Range(SETTINGS_RUN_MODE).value = runMode
 End Sub
@@ -2778,4 +2802,49 @@ Private Function GetLastRowInColumn( _
     End If
 
 End Function
+
+Private Sub ParsePlaceholderLine(ByRef placeholders As Dictionary, ByVal line As String)
+    Dim work As String
+    Dim eqPos As Long
+    Dim namePart As String
+    Dim valuePart As String
+
+    ' Strip the prefix "SET PLACEHOLDER"
+    work = Trim$(Mid$(line, Len("SET PLACEHOLDER") + 1))
+
+    ' Find the equals sign
+    eqPos = InStr(1, work, "=", vbTextCompare)
+    If eqPos = 0 Then Exit Sub   ' malformed, ignore
+
+    ' Split into name and value
+    namePart = Trim$(left$(work, eqPos - 1))
+    valuePart = Trim$(Mid$(work, eqPos + 1))
+
+    ' Add or replace
+    If placeholders.Exists(namePart) Then
+        placeholders(namePart) = valuePart
+    Else
+        placeholders.Add namePart, valuePart
+    End If
+End Sub
+
+Private Sub CleanupPlaceholders(ByRef placeholders As Dictionary)
+    If Not placeholders Is Nothing Then
+        placeholders.RemoveAll
+        Set placeholders = Nothing
+    End If
+End Sub
+
+Private Sub ApplyPlaceholders(ByRef sqlText As String, ByRef placeholders As Dictionary)
+    Dim key As Variant
+    Dim token As String
+
+    If placeholders Is Nothing Then Exit Sub
+    If placeholders.count = 0 Then Exit Sub
+
+    For Each key In placeholders.Keys
+        token = "{" & CStr(key) & "}"
+        sqlText = replace(sqlText, token, placeholders(key), , , vbTextCompare)
+    Next key
+End Sub
 

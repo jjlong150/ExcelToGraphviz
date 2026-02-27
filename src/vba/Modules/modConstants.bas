@@ -965,6 +965,7 @@ Public Const SQL_PUBLISH_AS_UNDIRECTED_GRAPH              As String = "PUBLISH A
 Public Const SQL_RESET                                    As String = "RESET"
 Public Const SQL_SELECT                                   As String = "SELECT"
 Public Const SQL_SET_DATA_FILE                            As String = "SET DATA FILE"
+Public Const SQL_SET_PLACEHOLDER                          As String = "SET PLACEHOLDER"
 
 ' Application Info
 Public Const DIAGNOSTICS_APPLICATION_OPERATING_SYSTEM     As String = "Diagnostics.ApplicationOperatingSystem"
