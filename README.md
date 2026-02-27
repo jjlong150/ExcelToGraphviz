@@ -6,7 +6,7 @@ The **Relationship Visualizer** is a powerful, free Excel tool that turns row-ba
 
 Supports Windows and macOS, with a multilingual tabbed ribbon interface.
 
-[![Latest Release v10.1.0](https://img.shields.io/badge/Latest%20Release-v10.1.0%20(Feb%202026)-brightgreen)](https://github.com/jjlong150/ExcelToGraphviz/releases/latest)
+[![Latest Release v10.2.0](https://img.shields.io/badge/Latest%20Release-v10.2.0%20(Feb%202026)-brightgreen)](https://github.com/jjlong150/ExcelToGraphviz/releases/latest)
 [![Download Now](https://img.shields.io/badge/Download%20Now-Free%20Excel%20Tool-green)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-yellow)](https://www.buymeacoffee.com/exceltographviz)
@@ -14,7 +14,7 @@ Supports Windows and macOS, with a multilingual tabbed ribbon interface.
 ## Quick Links
 
 - 🌐 **Website & Full Documentation**: [exceltographviz.com](https://exceltographviz.com/) — tutorials, overviews, and guides
-- 📥 **Latest Release (v10.1.0 — Feb 2026)**: [GitHub Releases](https://github.com/jjlong150/ExcelToGraphviz/releases/latest) — release notes & assets
+- 📥 **Latest Release (v10.2.0 — Feb 2026)**: [GitHub Releases](https://github.com/jjlong150/ExcelToGraphviz/releases/latest) — release notes & assets
 - ⬇️ **Download Relationship Visualizer**: [SourceForge ZIP (~81 MB)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download) — free & virus-scanned
 - 📜 **Changelog**: [exceltographviz.com/changelog](https://exceltographviz.com/changelog) — version history
 - 🔧 **Examples Repository**: [github.com/jjlong150/excel-to-graphviz-examples](https://github.com/jjlong150/excel-to-graphviz-examples) — ready-to-use workbooks & patterns

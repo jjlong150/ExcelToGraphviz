@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 10.2.0 – February 27, 2026
+
+This small release focuses primarily on expanding the **SQL capabilities** of the Relationship Visualizer.
+
+**Enhancements**
+
+The Relationship Visualizer received the following improvements:
+
+- **Added SQL placeholder substitution** – SQL extensions now support `SET PLACEHOLDER name = value` definitions and expand `{name}` tokens in statements before execution, enabling template‑style SQL for parameter‑driven queries.
+- **Added filename sanitization** – Introduced a routine that replaces invalid characters in filenames to prevent file write errors.
+
 ## Version 10.1.0 – February 9, 2026
 
 This release focuses primarily on expanding the **SQL capabilities** of the Relationship Visualizer, along with meaningful UX improvements for everyday workflow.
