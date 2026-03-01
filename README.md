@@ -67,6 +67,9 @@ Here are real diagrams generated directly from Excel data using the Relationship
 ![Example Kanban Board](./docs/media/home_kanban.png)
 *Kanban board made from clustered nodes (osage engine)*
 
+![Example Time Range](./docs/media/home_history.png)
+*Active years of various musical bands (dot engine)*
+
 ![The Beatles Album Releases By Year](./docs/media/home_beatles.png)
 *The Beatles album releases by year, with images (osage engine)*
 
