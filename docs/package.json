@@ -1,0 +1,38 @@
+{
+  "name": "exceltographviz",
+  "version": "1.0.0",
+  "description": "--- home: true heroText: Excel to Graphviz heroImage: /exceltographiz.png tagline: See the relationships",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjlong150/ExcelToGraphviz.git"
+  },
+  "keywords": [
+    "Excel",
+    "Graphviz",
+    "VBA"
+  ],
+  "author": "Jeffrey J. Long",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjlong150/ExcelToGraphviz/issues"
+  },
+  "homepage": "https://github.com/jjlong150/ExcelToGraphviz#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "@giscus/vue": "^3.1.1",
+    "vitepress-plugin-blog": "^0.2.0"
+  }
+}
