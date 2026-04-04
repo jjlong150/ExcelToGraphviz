@@ -36,15 +36,15 @@ Public Sub svgEditCell_onAction(ByVal control As IRibbonControl)
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub svgEditCell_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+Public Sub svgEditCell_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     If ActiveSheet.name <> SvgSheet.name Then
-        enabled = False
+        Enabled = False
     ElseIf Selection.Cells.count > 1 Then
-        enabled = False
+        Enabled = False
     ElseIf ActiveCell.HasFormula Then
-        enabled = False
+        Enabled = False
     Else
-        enabled = True
+        Enabled = True
     End If
 End Sub
 

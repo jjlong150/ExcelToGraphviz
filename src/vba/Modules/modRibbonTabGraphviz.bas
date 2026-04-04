@@ -583,8 +583,8 @@ Public Sub graphToWorksheet_onAction(ByVal control As IRibbonControl)
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub graphToWorksheet_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
-    enabled = IsAViewSpecified()
+Public Sub graphToWorksheet_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+    Enabled = IsAViewSpecified()
 End Sub
 
 ' ===========================================================================
@@ -1193,8 +1193,8 @@ End Sub
 ' Callbacks for graphZoomOut
 
 '@Ignore ParameterNotUsed
-Public Sub graphZoomOut_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
-    enabled = GetCurrentZoom() > MIN_ZOOM
+Public Sub graphZoomOut_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+    Enabled = GetCurrentZoom() > MIN_ZOOM
 End Sub
 
 '@Ignore ParameterNotUsed
@@ -1209,8 +1209,8 @@ End Sub
 ' Callbacks for graphZoomIn
 
 '@Ignore ParameterNotUsed
-Public Sub graphZoomIn_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
-    enabled = GetCurrentZoom() < MAX_ZOOM
+Public Sub graphZoomIn_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+    Enabled = GetCurrentZoom() < MAX_ZOOM
 End Sub
 
 Public Sub GraphZoomIn_OnAction(ByVal control As IRibbonControl)

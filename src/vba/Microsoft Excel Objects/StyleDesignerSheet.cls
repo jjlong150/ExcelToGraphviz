@@ -22,17 +22,17 @@ Private Sub Worksheet_Activate()
     RenderPreview
 End Sub
 
-Private Sub Worksheet_Change(ByVal target As Range)
+Private Sub Worksheet_Change(ByVal Target As Range)
 
     On Error GoTo Whoa
 
     ' Detect changes in the NodeFormatString text box
-    If Not Intersect(target, StyleDesignerSheet.Range("LabelText,XlabelText,TailLabelText,HeadLabelText")) Is Nothing Then
-        Application.enableEvents = False
+    If Not Intersect(Target, StyleDesignerSheet.Range("LabelText,XlabelText,TailLabelText,HeadLabelText")) Is Nothing Then
+        Application.EnableEvents = False
         RenderPreviewFromLists
         
-    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING)) Is Nothing Then
-        Application.enableEvents = False
+    ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING)) Is Nothing Then
+        Application.EnableEvents = False
         If StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value = vbNullString Then
             ClearStyleRibbon
         Else
@@ -40,18 +40,18 @@ Private Sub Worksheet_Change(ByVal target As Range)
             StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).Select
         End If
         
-    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_ADD_CAPTION)) Is Nothing Then
-        Application.enableEvents = False
+    ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_ADD_CAPTION)) Is Nothing Then
+        Application.EnableEvents = False
         RenderPreview
 
-    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
-        Application.enableEvents = False
+    ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
+        Application.EnableEvents = False
         RefreshControlsImageScale
         RefreshControlsImagePosition
     End If
     
 LetsContinue:
-    Application.enableEvents = True
+    Application.EnableEvents = True
     Exit Sub
 Whoa:
     EmitMessage "StyleDesignerSheet " & Err.number & " " & Err.Description

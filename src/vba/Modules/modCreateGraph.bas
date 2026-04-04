@@ -1067,7 +1067,7 @@ Public Function GetDataRow(ByRef ini As settings, ByVal worksheetName As String,
     GetDataRow.xLabel = GetCell(worksheetName, row, ini.data.xLabelColumn)
     GetDataRow.tailLabel = GetCell(worksheetName, row, ini.data.tailLabelColumn)
     GetDataRow.headLabel = GetCell(worksheetName, row, ini.data.headLabelColumn)
-    GetDataRow.tooltip = GetCell(worksheetName, row, ini.data.tooltipColumn)
+    GetDataRow.Tooltip = GetCell(worksheetName, row, ini.data.tooltipColumn)
     GetDataRow.relatedItem = GetCell(worksheetName, row, ini.data.isRelatedToItemColumn)
     GetDataRow.styleName = GetCell(worksheetName, row, ini.data.styleNameColumn)
     GetDataRow.extraAttrs = GetCell(worksheetName, row, ini.data.extraAttributesColumn)
@@ -1149,36 +1149,36 @@ End Function
 
 Private Function FormatDebugLabel(ByVal row As Long, ByRef data As dataRow) As String
                         
-    Dim debugStr As String
+    Dim debugstr As String
 
     FormatDebugLabel = data.label
     
     If Not IsLabelHTMLLike(data.label) Then
         If data.styleType = TYPE_EDGE Then
-            debugStr = "(Row: " & row & " " & FormatId(data.item, True) & "->" & FormatId(data.relatedItem, True) & ")"
+            debugstr = "(Row: " & row & " " & FormatId(data.item, True) & "->" & FormatId(data.relatedItem, True) & ")"
                         
             If data.label = vbNullString Then
-                FormatDebugLabel = debugStr
+                FormatDebugLabel = debugstr
             Else
-                FormatDebugLabel = data.label & NEWLINE & debugStr
+                FormatDebugLabel = data.label & NEWLINE & debugstr
             End If
                         
         ElseIf data.styleType = TYPE_NODE Then
-            debugStr = "(Row: " & row & " " & AddQuotes(data.item) & ")"
+            debugstr = "(Row: " & row & " " & AddQuotes(data.item) & ")"
                             
             If data.label = vbNullString Then
-                FormatDebugLabel = debugStr
+                FormatDebugLabel = debugstr
             Else
-                FormatDebugLabel = data.label & NEWLINE & debugStr
+                FormatDebugLabel = data.label & NEWLINE & debugstr
             End If
                         
         ElseIf data.styleType = TYPE_SUBGRAPH_OPEN Then
-            debugStr = "(Row: " & row & ")"
+            debugstr = "(Row: " & row & ")"
                             
             If data.label = vbNullString Then
-                FormatDebugLabel = debugStr
+                FormatDebugLabel = debugstr
             Else
-                FormatDebugLabel = data.label & NEWLINE & debugStr
+                FormatDebugLabel = data.label & NEWLINE & debugstr
             End If
         End If
     End If
@@ -1187,23 +1187,23 @@ End Function
 
 Private Function FormatDebugXLabel(ByVal row As Long, ByRef data As dataRow) As String
                         
-    Dim debugStr As String
+    Dim debugstr As String
 
     FormatDebugXLabel = data.xLabel
 
     If Not IsLabelHTMLLike(data.label) Then
         If data.styleType = TYPE_EDGE Then
-            debugStr = "(Row: " & row & " " & AddQuotes(data.item) & "->" & AddQuotes(data.relatedItem) & ")"
+            debugstr = "(Row: " & row & " " & AddQuotes(data.item) & "->" & AddQuotes(data.relatedItem) & ")"
             
             If data.xLabel <> vbNullString Then
-                FormatDebugXLabel = data.xLabel & NEWLINE & debugStr
+                FormatDebugXLabel = data.xLabel & NEWLINE & debugstr
             End If
             
         ElseIf data.styleType = TYPE_NODE Then
-            debugStr = "(Row: " & row & " " & AddQuotes(data.item) & ")"
+            debugstr = "(Row: " & row & " " & AddQuotes(data.item) & ")"
                             
             If data.xLabel <> vbNullString Then
-                FormatDebugXLabel = data.xLabel & NEWLINE & debugStr
+                FormatDebugXLabel = data.xLabel & NEWLINE & debugstr
             End If
         End If
     End If
@@ -1296,14 +1296,14 @@ Private Function ProcessSubgraphOpen(ByRef ini As settings, ByRef data As dataRo
     End If
                             
     ' If output format is SVG, then include the tooltip data
-    Dim tooltip As String
+    Dim Tooltip As String
     If ini.graph.includeTooltip Then
-        If data.tooltip <> vbNullString Then
-            tooltip = " tooltip=" & AddQuotes(ScrubText(data.tooltip))
+        If data.Tooltip <> vbNullString Then
+            Tooltip = " tooltip=" & AddQuotes(ScrubText(data.Tooltip))
         End If
     End If
     
-    ProcessSubgraphOpen = subgraphDirective & tooltip & vbNewLine
+    ProcessSubgraphOpen = subgraphDirective & Tooltip & vbNewLine
 
 End Function
 
@@ -1390,10 +1390,10 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
     End If
 
     ' If output format is SVG, then include the tooltip data
-    Dim tooltip As String
+    Dim Tooltip As String
     If ini.graph.includeTooltip Then
-        If data.tooltip <> vbNullString Then
-            tooltip = " tooltip=" & AddQuotes(ScrubText(data.tooltip))
+        If data.Tooltip <> vbNullString Then
+            Tooltip = " tooltip=" & AddQuotes(ScrubText(data.Tooltip))
         End If
     End If
     
@@ -1413,10 +1413,10 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
     ' Collect the label, and xlabel labels into name value pairs
     nodeLabel = FormatNodeLabels(ini, data)
     
-    If Trim$(styleAttributes & nodeLabel & tooltip) = vbNullString Then
+    If Trim$(styleAttributes & nodeLabel & Tooltip) = vbNullString Then
         WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), SEMICOLON, vbNewLine), vbNullString)
     Else
-        WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), " [ ", Trim$(styleAttributes & nodeLabel) & tooltip & " ];", vbNewLine), vbNullString)
+        WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), " [ ", Trim$(styleAttributes & nodeLabel) & Tooltip & " ];", vbNewLine), vbNullString)
     End If
 
 End Function
@@ -1432,10 +1432,10 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
     End If
 
     ' If output format is SVG, then include the tooltip data
-    Dim tooltip As String
+    Dim Tooltip As String
     If ini.graph.includeTooltip Then
-        If data.tooltip <> vbNullString Then
-            tooltip = Join(Array(" tooltip=", AddQuotes(ScrubText(data.tooltip))), vbNullString)
+        If data.Tooltip <> vbNullString Then
+            Tooltip = Join(Array(" tooltip=", AddQuotes(ScrubText(data.Tooltip))), vbNullString)
         End If
     End If
     
@@ -1453,10 +1453,10 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
     headId = FormatId(data.relatedItem, ini.graph.includeEdgePorts)
     
     ' Write out the edge command
-    If Trim$(styleAttributes & edgeLabel & tooltip) = vbNullString Then
+    If Trim$(styleAttributes & edgeLabel & Tooltip) = vbNullString Then
         WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, SEMICOLON, vbNewLine), vbNullString)
     Else
-        WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, "[ ", Trim$(styleAttributes & edgeLabel) & tooltip & " ];", vbNewLine), vbNullString)
+        WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, "[ ", Trim$(styleAttributes & edgeLabel) & Tooltip & " ];", vbNewLine), vbNullString)
     End If
     
 End Function

@@ -4,7 +4,7 @@ Attribute VB_Name = "modUtilityExcelPicture"
 
 Option Explicit
 
-Public Function InsertPicture(ByVal FName As String, ByVal Where As Range, _
+Public Function InsertPicture(ByVal fname As String, ByVal Where As Range, _
                               Optional ByVal LinkToFile As Boolean = False, _
                               Optional ByVal SaveWithDocument As Boolean = True, _
                               Optional ByVal AltText As String = vbNullString) As shape
@@ -14,10 +14,10 @@ Public Function InsertPicture(ByVal FName As String, ByVal Where As Range, _
     With Where
         'Insert in original size
         Set shapeObject = Where.Parent.Shapes.AddPicture( _
-                          FName, _
+                          fname, _
                           LinkToFile, _
                           SaveWithDocument, _
-                          .left, _
+                          .Left, _
                           .top, _
                           -1, _
                           -1)

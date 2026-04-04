@@ -23,7 +23,7 @@ Private Sub Worksheet_Activate()
 End Sub
 
 '@Ignore ParameterNotUsed
-Private Sub Worksheet_Change(ByVal target As Range)
+Private Sub Worksheet_Change(ByVal Target As Range)
     AutoDraw
 End Sub
 
@@ -31,22 +31,22 @@ Private Sub Worksheet_Deactivate()
     Application.StatusBar = False
 End Sub
 
-Private Sub Worksheet_SelectionChange(ByVal target As Range)
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     ' Exit if multiple cells selected?
-    If target.Cells.CountLarge > 1 Then Exit Sub
+    If Target.Cells.CountLarge > 1 Then Exit Sub
     
     ' Exit if the cell is outside the Style Name column
-    If target.Column <> GetSettingColNum(SETTINGS_DATA_COL_STYLE) Then Exit Sub
+    If Target.Column <> GetSettingColNum(SETTINGS_DATA_COL_STYLE) Then Exit Sub
     
     ' Clear the named range which is associated with the Style Name dropdown list
     ChoicesSheet.Range(RANGE_STYLE_NAMES).ClearContents
     
     ' Exit if heading row
-    If target.row = 1 Then Exit Sub
+    If Target.row = 1 Then Exit Sub
     
     ' Examine the row and determine how it is being used
     Dim rowType As String
-    rowType = getRowType(ActiveSheet.name, target.row)
+    rowType = getRowType(ActiveSheet.name, Target.row)
     
     ' Use a dictionary to load the unique style names for this row type
     Dim styleNames As Dictionary
@@ -61,7 +61,7 @@ Private Sub Worksheet_SelectionChange(ByVal target As Range)
             
             ' Adjust the size of the named range to match the number of values
             Dim namedRange As name
-            Set namedRange = ActiveWorkbook.Names.[_Default](RANGE_STYLE_NAMES)
+            Set namedRange = ActiveWorkbook.names.[_Default](RANGE_STYLE_NAMES)
             
             With namedRange
                 '@Ignore ImplicitDefaultMemberAccess

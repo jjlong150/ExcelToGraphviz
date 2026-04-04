@@ -265,7 +265,7 @@ Private Function SanitizeFilename(ByVal s As String) As String
     ' Windows-specific trailing rules
     If sep = "\" Then
         Do While Len(fname) > 0 And (Right$(fname, 1) = "." Or Right$(fname, 1) = " ")
-            fname = left$(fname, Len(fname) - 1)
+            fname = Left$(fname, Len(fname) - 1)
         Loop
     End If
 

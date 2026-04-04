@@ -99,7 +99,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub colorScheme_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    If left$(itemId, 4) = "cs_x" Then Exit Sub ' Blank gallery image selected
+    If Left$(itemId, 4) = "cs_x" Then Exit Sub ' Blank gallery image selected
     
     Dim colorScheme As String
     If index = 0 Then
@@ -1485,7 +1485,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor1_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    Application.enableEvents = False
+    Application.EnableEvents = False
     
     SaveColor index, DESIGNER_EDGE_COLOR_1
     
@@ -1501,7 +1501,7 @@ Private Sub edgeColor1_onAction(ByVal control As IRibbonControl, ByVal itemId As
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     
-    Application.enableEvents = True
+    Application.EnableEvents = True
     RenderPreview
 End Sub
 
@@ -1520,7 +1520,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    Application.enableEvents = False
+    Application.EnableEvents = False
     
     SaveColor index, DESIGNER_EDGE_COLOR_2
     
@@ -1532,7 +1532,7 @@ Private Sub edgeColor2_onAction(ByVal control As IRibbonControl, ByVal itemId As
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3_PICKER
-    Application.enableEvents = True
+    Application.EnableEvents = True
     
     RenderPreview
 End Sub
@@ -2037,7 +2037,7 @@ Private Function SplitFilePath(ByVal fullPath As String) As FilePathInfo
     
     Dim info As FilePathInfo
     info.fileName = components(UBound(components))
-    info.directory = left$(fullPath, Len(fullPath) - Len(info.fileName) - 1)
+    info.directory = Left$(fullPath, Len(fullPath) - Len(info.fileName) - 1)
     
     SplitFilePath = info
 End Function
@@ -2823,7 +2823,7 @@ Private Sub InitializeFontExclusions()
     Dim cell As Range
     
     ' Named range: FontExclusions
-    Set rng = ThisWorkbook.Names("ExcludedFonts").RefersToRange
+    Set rng = ThisWorkbook.names("ExcludedFonts").RefersToRange
     
     Set excludedFonts = New Dictionary
     excludedFonts.CompareMode = TextCompare   ' Case-insensitive
@@ -3179,7 +3179,7 @@ Private Function ColorGetIndex(ByVal cellName As String) As Long
     color = LCase$(StyleDesignerSetting(cellName))
     If Len(color) = 0 Then Exit Function
     
-    If left$(color, 1) = "#" Then Exit Function
+    If Left$(color, 1) = "#" Then Exit Function
      
     Dim index As Long
     index = 0
@@ -3286,7 +3286,7 @@ Private Sub ColorGetOrCreateImage(ByRef color As ColorInfo, ByRef image As Varia
     If Len(color.scheme) = 0 Then Exit Sub
     
     ' Handle colors passed as hex values (e.g. #FF00CC)
-    If left(color.name, 1) = "#" Then color.scheme = "rgb"
+    If Left(color.name, 1) = "#" Then color.scheme = "rgb"
     
     ' Build the cache key
     Dim colorCacheKey As String
@@ -3325,7 +3325,7 @@ Private Sub ColorGetOrCreateImage(ByRef color As ColorInfo, ByRef image As Varia
      
     Application.StatusBar = replace(GetMessage("statusbarCreateImage"), "{colorScheme}", color.scheme) & " " & color.name
     
-    If left(color.name, 1) = "#" Then
+    If Left(color.name, 1) = "#" Then
         color.RGB = ColorHexToRGBLong(color.name)
         color.scheme = "rgb"
     Else
@@ -3405,7 +3405,7 @@ End Function
 Public Function ColorHexToRGBLong(hexColor As String) As Long
     Dim r As Long, g As Long, b As Long
 
-    If Len(hexColor) = 7 And left(hexColor, 1) = "#" Then
+    If Len(hexColor) = 7 And Left(hexColor, 1) = "#" Then
         On Error Resume Next
         r = CLng("&H" & Mid(hexColor, 2, 2))
         g = CLng("&H" & Mid(hexColor, 4, 2))
@@ -3750,7 +3750,7 @@ Private Function GetRGBColorInCell(cellName As String) As String
     If Len(cellValue) = 0 Then Exit Function
         
     ' Is color in hex, or a value associated with a color scheme?
-    If left(cellValue, 1) = "#" Then
+    If Left(cellValue, 1) = "#" Then
         ' Color is in hex
         GetRGBColorInCell = cellValue
         Exit Function

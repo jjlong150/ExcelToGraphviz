@@ -50,7 +50,7 @@ Public Sub CreateOneFloatingButton( _
 
     On Error GoTo CreateErr
 
-    leftPos = cell.left + cell.Width + cfg.HOffset
+    leftPos = cell.Left + cell.Width + cfg.HOffset
     topPos = cell.top + 1 + cfg.VOffset
 
     ' Remove any existing button with this name
@@ -65,8 +65,8 @@ Public Sub CreateOneFloatingButton( _
         .name = cfg.ButtonName
         .Fill.ForeColor.RGB = RGB(245, 245, 245)
         .Fill.Transparency = 0
-        .Line.Weight = 0.75
-        .Line.ForeColor.RGB = RGB(180, 180, 180)
+        .line.Weight = 0.75
+        .line.ForeColor.RGB = RGB(180, 180, 180)
         .TextFrame2.TextRange.Characters.Text = cfg.IconText
         .TextFrame2.TextRange.Font.name = "Segoe UI Symbol"
         .TextFrame2.TextRange.Font.Size = 16

@@ -16,7 +16,7 @@ Public id As String
 '@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
 Public label As String
 '@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
-Public tooltip As String
+Public Tooltip As String
 '@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
 Public styleName As String
 '@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField

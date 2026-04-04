@@ -29,8 +29,8 @@ Private Sub Worksheet_Deactivate()
     InvalidateRibbonControl RIBBON_CTL_SVG_CLIPBOARD
 End Sub
 
-Private Sub Worksheet_SelectionChange(ByVal target As Range)
-    If Not TypeOf target Is Range Then Exit Sub
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    If Not TypeOf Target Is Range Then Exit Sub
 
     ' Remove any existing Edit button
     On Error Resume Next
@@ -38,21 +38,21 @@ Private Sub Worksheet_SelectionChange(ByVal target As Range)
     Me.Shapes("SVGEditButton").Delete
     On Error GoTo 0
 
-    If target.Cells.count = 1 Then
-        If Not Intersect(target, Me.columns(svgLayoutColumn.replaceColumn)) Is Nothing Then
+    If Target.Cells.count = 1 Then
+        If Not Intersect(Target, Me.columns(svgLayoutColumn.replaceColumn)) Is Nothing Then
             If Not Me.ProtectContents Then
                 On Error Resume Next
                 ' Add clickable pencil icon with subtle button look
                 Dim shp As shape
                 Set shp = Me.Shapes.AddShape(msoShapeRoundedRectangle, _
-                            target.left + target.Width + 5, _
-                            target.top + 1, 20, 20)
+                            Target.Left + Target.Width + 5, _
+                            Target.top + 1, 20, 20)
                 With shp
                     .name = "SVGEditButton"
                     .Fill.ForeColor.RGB = RGB(245, 245, 245)      ' very light gray background
                     .Fill.Transparency = 0
-                    .Line.Weight = 0.75
-                    .Line.ForeColor.RGB = RGB(180, 180, 180)      ' soft border
+                    .line.Weight = 0.75
+                    .line.ForeColor.RGB = RGB(180, 180, 180)      ' soft border
                     .TextFrame2.TextRange.Characters.Text = ChrW(&H270E)  ' pencil
                     .TextFrame2.TextRange.Font.name = "Segoe UI Symbol"
                     .TextFrame2.TextRange.Font.Size = 16

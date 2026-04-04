@@ -14,18 +14,18 @@ Public Function GetLastColumn(ByVal worksheetName As String, ByVal row As Long) 
 
 End Function
 
-Public Sub ShowColumn(ByVal worksheetName As String, ByVal columnNumber As Long, ByVal show As Boolean)
+Public Sub ShowColumn(ByVal worksheetName As String, ByVal ColumnNumber As Long, ByVal show As Boolean)
     Dim alphabeticColumnName As String
-    alphabeticColumnName = ConvertColumnNumberToLetters(columnNumber)
+    alphabeticColumnName = ConvertColumnNumberToLetters(ColumnNumber)
     ActiveWorkbook.worksheets.[_Default](worksheetName).columns(alphabeticColumnName & ":" & alphabeticColumnName).AutoFit
     ActiveWorkbook.worksheets.[_Default](worksheetName).Range(alphabeticColumnName & ":" & alphabeticColumnName).EntireColumn.Hidden = Not show
 End Sub
 
-Public Function ConvertColumnNumberToLetters(ByVal columnNumber As Long) As String
+Public Function ConvertColumnNumberToLetters(ByVal ColumnNumber As Long) As String
     Dim alpha As Long
     Dim remainder As Long
-    alpha = Int(columnNumber / 27)
-    remainder = columnNumber - (alpha * 26)
+    alpha = Int(ColumnNumber / 27)
+    remainder = ColumnNumber - (alpha * 26)
     If alpha > 0 Then
         ConvertColumnNumberToLetters = Chr$(alpha + 64)
     End If

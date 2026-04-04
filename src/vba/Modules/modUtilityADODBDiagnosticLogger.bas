@@ -11,8 +11,8 @@ Private Const LOG_FILE_NAME As String = "Relationship Visualizer ADO Log.txt"
 ' ===========================
 
 ' Enable or disable logging at runtime
-Public Sub SetLoggingEnabled(ByVal enabled As Boolean)
-    loggingEnabled = enabled
+Public Sub SetLoggingEnabled(ByVal Enabled As Boolean)
+    loggingEnabled = Enabled
 End Sub
 
 ' Query current logging state
@@ -108,7 +108,7 @@ Private Function GetEnvironmentFingerprint() As String
     ' Workbook context
     On Error Resume Next
     s = s & "  Workbook Path       : " & ThisWorkbook.FullName & vbCrLf
-    s = s & "  AutoRecover Enabled : " & Application.AutoRecover.enabled & vbCrLf
+    s = s & "  AutoRecover Enabled : " & Application.AutoRecover.Enabled & vbCrLf
     s = s & "  On OneDrive         : " & IsWorkbookOnOneDrive(ThisWorkbook) & vbCrLf
     
     ' Provider info

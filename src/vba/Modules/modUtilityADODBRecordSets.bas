@@ -38,7 +38,7 @@ Public Sub MergeRecordsets(ByVal rsFirst As Object, _
 
     Dim field As Object
     Dim mergedField As Object
-    Dim fieldExists As Boolean
+    Dim FieldExists As Boolean
     Dim fieldSize As Long
 
     '---------------------------------------------------------------------------
@@ -83,15 +83,15 @@ Public Sub MergeRecordsets(ByVal rsFirst As Object, _
     ' Create fields in merged recordset for rsSecond if they don't already exist
     '---------------------------------------------------------------------------
     For Each field In rsSecond.fields
-        fieldExists = False
+        FieldExists = False
         For Each mergedField In rsMergedResults.fields
             If mergedField.name = field.name Then
-                fieldExists = True
+                FieldExists = True
                 Exit For
             End If
         Next mergedField
 
-        If Not fieldExists Then
+        If Not FieldExists Then
             fieldSize = field.DefinedSize
             If fieldSize < 1 Then fieldSize = 255
             rsMergedResults.fields.Append field.name, field.Type, fieldSize, field.attributes

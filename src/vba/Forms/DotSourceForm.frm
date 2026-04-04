@@ -33,7 +33,7 @@ Private Sub FontSizeDecrease_Click()
     End If
     
     If DotSourceForm.dotMultiline.Font.Size < 8 Then
-        DotSourceForm.FontSizeDecrease.enabled = False
+        DotSourceForm.FontSizeDecrease.Enabled = False
     End If
 End Sub
 
@@ -41,7 +41,7 @@ Private Sub FontSizeIncrease_Click()
     DotSourceForm.dotMultiline.Font.Size = DotSourceForm.dotMultiline.Font.Size + 2
     
     If DotSourceForm.dotMultiline.Font.Size > 6 Then
-        DotSourceForm.FontSizeDecrease.enabled = True
+        DotSourceForm.FontSizeDecrease.Enabled = True
     End If
 End Sub
 

@@ -180,9 +180,9 @@ Public Sub ShowSQLEditForm()
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub sqlEditCell_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+Public Sub sqlEditCell_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
 
-    enabled = False
+    Enabled = False
     
     If ActiveSheet.name <> SqlSheet.name Then
         Exit Sub
@@ -197,7 +197,7 @@ Public Sub sqlEditCell_getEnabled(ByVal control As IRibbonControl, ByRef enabled
     End If
     
     If ActiveCell.Column = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT) Then
-        enabled = True
+        Enabled = True
     End If
     
 End Sub
@@ -245,11 +245,11 @@ Public Sub sqlConnPoolReset_onAction(ByVal control As IRibbonControl)
 End Sub
 
 '@Ignore ParameterNotUsed
-Public Sub sqlConnPoolReset_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+Public Sub sqlConnPoolReset_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     If GetConnectionCount() > 0 Then
-        enabled = True
+        Enabled = True
     Else
-        enabled = False
+        Enabled = False
     End If
 End Sub
 
@@ -449,11 +449,11 @@ Private Sub datasourceFile_getSelectedItemIndex(ByVal control As IRibbonControl,
 End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub datasourceFile_getEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
+Private Sub datasourceFile_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)) = vbNullString Then
-        enabled = False
+        Enabled = False
     Else
-        enabled = True
+        Enabled = True
     End If
 End Sub
 

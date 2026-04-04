@@ -28,5 +28,5 @@ End Sub
 
 Private Sub UserForm_Initialize()
     Me.top = Application.top + ((Application.height - ProgressIndicatorForm.height) / 2)
-    Me.left = Application.left + ((Application.Width - ProgressIndicatorForm.Width) / 2)
+    Me.Left = Application.Left + ((Application.Width - ProgressIndicatorForm.Width) / 2)
 End Sub

@@ -811,10 +811,10 @@ Private Function ConvertDataRowToDictionary(ByRef exchange As ExchangeOptions, B
         dictionaryObj.Add JSON_HEIGHT, DataSheet.rows.item(row).height
     End If
     
-    Dim enabled As Boolean
-    enabled = IsRowEnabled(data.comment)
-    If Not enabled Then
-        dictionaryObj.Add JSON_ENABLED, enabled
+    Dim Enabled As Boolean
+    Enabled = IsRowEnabled(data.comment)
+    If Not Enabled Then
+        dictionaryObj.Add JSON_ENABLED, Enabled
     End If
     
     If data.item <> vbNullString Then
@@ -837,8 +837,8 @@ Private Function ConvertDataRowToDictionary(ByRef exchange As ExchangeOptions, B
         dictionaryObj.Add JSON_DATA_HEAD_LABEL, data.headLabel
     End If
     
-    If data.tooltip <> vbNullString Then
-        dictionaryObj.Add JSON_DATA_TOOLTIP, data.tooltip
+    If data.Tooltip <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_TOOLTIP, data.Tooltip
     End If
     
     If data.relatedItem <> vbNullString Then
@@ -872,10 +872,10 @@ Private Function ConvertStylesRowToDictionary(ByRef exchange As ExchangeOptions,
         dictionaryObj.Add JSON_HEIGHT, StylesSheet.rows.item(row).height
     End If
     
-    Dim enabled As Boolean
-    enabled = IsRowEnabled(style.comment)
-    If Not enabled Then
-        dictionaryObj.Add JSON_ENABLED, enabled
+    Dim Enabled As Boolean
+    Enabled = IsRowEnabled(style.comment)
+    If Not Enabled Then
+        dictionaryObj.Add JSON_ENABLED, Enabled
     End If
     
     If style.styleName <> vbNullString Then
@@ -922,10 +922,10 @@ Private Function ConvertSqlRowToDictionary(ByRef exchange As ExchangeOptions, By
         dictionaryObj.Add JSON_HEIGHT, ActiveWorkbook.Sheets.[_Default](SqlSheet.name).rows(row).height
     End If
     
-    Dim enabled As Boolean
-    enabled = IsRowEnabled(sql.comment)
-    If Not enabled Then
-        dictionaryObj.Add JSON_ENABLED, enabled
+    Dim Enabled As Boolean
+    Enabled = IsRowEnabled(sql.comment)
+    If Not Enabled Then
+        dictionaryObj.Add JSON_ENABLED, Enabled
     End If
     
     If sql.sqlStatement <> vbNullString Then
@@ -969,10 +969,10 @@ Private Function ConvertSvgRowToDictionary(ByRef exchange As ExchangeOptions, By
         dictionaryObj.Add JSON_HEIGHT, SvgSheet.rows.item(row).height
     End If
     
-    Dim enabled As Boolean
-    enabled = IsRowEnabled(svg.comment)
-    If Not enabled Then
-        dictionaryObj.Add JSON_ENABLED, enabled
+    Dim Enabled As Boolean
+    Enabled = IsRowEnabled(svg.comment)
+    If Not Enabled Then
+        dictionaryObj.Add JSON_ENABLED, Enabled
     End If
     
     If svg.find <> vbNullString Then

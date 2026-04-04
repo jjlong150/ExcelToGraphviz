@@ -51,7 +51,7 @@ Public Type DataWorksheetHeadings
     xLabel As String                             ' External Label column heading
     tailLabel As String                          ' Edge Tail Label column heading
     headLabel As String                          ' Edge Head Label column heading
-    tooltip As String                            ' Tooltip column heading
+    Tooltip As String                            ' Tooltip column heading
     isRelatedToItem As String                    ' related Item ID column heading
     styleName As String                          ' Style name column heading
     extraAttributes As String                    ' line item style attributes column heading
@@ -207,7 +207,7 @@ Public Type dataRow
     xLabel As String
     tailLabel As String
     headLabel As String
-    tooltip As String
+    Tooltip As String
     styleName As String
     extraAttrs As String
     errorMessage As String
