@@ -1,5 +1,105 @@
 # Change Log
 
+## Version 10.3.0
+
+This release continues to expand the **SQL capabilities** of the Relationship Visualizer.
+
+**Enhancements**
+
+The Relationship Visualizer received the following improvements:
+
+- **Added support for “n” levels of clusters** – Previously, automatic clustering was limited to two levels via the `CLUSTER` and `SUBCLUSTER` column names. SQL clustering now supports an open‑ended number of levels by using integer‑suffixed field names. [(#13, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/13)
+
+  For example:
+  
+  `SELECT [continent] AS [CLUSTER1], [country] AS [CLUSTER2], [state] AS [CLUSTER3], [county] AS [CLUSTER5], [city] AS [CLUSTER6] ...`
+
+  Each level supports its own label, tooltip, style name, and attributes (e.g., `[CLUSTER1 LABEL]`, `[CLUSTER1 STYLE NAME]`, `[CLUSTER1 ATTRIBUTES]`, `[CLUSTER1 TOOLTIP]`).
+
+- **Added `{label}` placeholder in cluster labels** – Introduced a `{label}` substitution token for cluster labels. This update allows HTML‑like formatting strings to be stored in the saved style format, enabling enhancements such as embedding an image next to the label value. When the graph is rendered, the label value from the `data` worksheet replaces the `{label}` placeholder.
+  [(#14, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/14) 
+
+- **Revised format‑string parsing** – Updated the logic that interprets saved style formats to correctly recognize HTML‑like syntax and pass it through to the Style Designer when the **Edit Style** button is used.  [(#15, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/15) 
+
+- **Revised refresh‑all‑previews behavior** – Removed the progress‑bar dialog displayed when refreshing all style previews. Percent‑complete progress is now shown in the status bar. [(#16, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/16)
+
+## Version 10.2.0
+
+This small release focuses primarily on expanding the **SQL capabilities** of the Relationship Visualizer.
+
+### Enhancements
+
+The Relationship Visualizer received the following improvements:
+
+- **Added SQL placeholder substitution** – SQL extensions now support `SET PLACEHOLDER name = value` definitions and expand `{name}` tokens in statements before execution, enabling template‑style SQL for parameter‑driven queries.
+- **Added filename sanitization** – Introduced a routine that replaces invalid characters in filenames to prevent file write errors.
+
+## Version 10.1.0
+
+This release focuses primarily on expanding the **SQL capabilities** of the Relationship Visualizer.
+
+### Enhancements
+
+The Relationship Visualizer received the following improvements:
+
+- **Concatenation Mode for Iterative SQL Queries** - Combine multiple detail records into a single string per header row (e.g. list of songs under an album, list of countries per continent, etc.).
+  
+- **Floating Action Buttons** - Context-sensitive floating icons now appear next to selected cells in supported columns. Each button triggers a specific action:
+  - *'sql' Worksheet*
+    -  `✎` Edit this SQL statement
+    -  `▶` Run this SQL statement
+    -  `⌕` View query status using a dialog 
+  - *'styles' Worksheet*
+    - `✎` Edit this style in the Style Designer
+    - `↻` Refresh this style's preview image 
+
+  Buttons auto-appear/disappear on selection, respect sheet protection, and support per-button validation (e.g. SQL only shows "Run" when SQL row is active and begins with `SELECT`).
+
+- **Image Zoom Dropdown List** - Restored the Image Zoom dropdown list which was removed in the V9.0 UI refresh. The v9.0 Zoom In (+) and Zoom Out (-) buttons, and the 5% increments from 5%-150% have been retained.
+
+## Version 10.0.0
+
+This release focuses primarily on expanding and strengthening the **SQL capabilities** of the Relationship Visualizer.
+
+### Enhancements
+
+The Relationship Visualizer received the following improvements:
+
+- Added support for using **Microsoft Access** (`.accdb` / `.mdb`) files as SQL data sources. [(#5, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/5) 
+- Added SQL **enumeration** support for generating range‑based result sets (e.g. `from x to y by z`). [(#6, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/6)  
+- Added SQL **iterative query‑set** execution with dynamic placeholder substitution. It allows a result from one query to be used as a parameter in a second query. [(#7, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/7) 
+- Added SQL **error logging** to capture query failures in an external log file. [(#9, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/9)
+- Improved usability by abbreviating long file‑system paths in the `SQL` and `Graphviz` ribbon tabs. [(#10, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/10)  
+- Implemented a comprehensive set of **ADO SQL hardening changes**, improving reliability, determinism, and fault‑tolerance across the entire execution pipeline. [(#11, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/11)  
+- Expanded the SQL log‑to‑file feature to include **environment documentation**, improving diagnostics and reproducibility. [(#12, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/12)
+
+### Defect Fixes
+
+The following defects were corrected:
+
+- Addressed an intermittent SQL execution failure caused by underlying COM/Automation instability in VBA. [(#4, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/4) 
+- **Breaking change**: SQL query clustering previously grouped results by **CLUSTER LABEL** instead of **CLUSTER**, and failed when cluster labels were null. [(#8, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/8) 
+
+  The fix correctly groups by **CLUSTER**, but this correction is **not backward‑compatible** and may alter the structure of existing graphs that relied on the prior (incorrect) behavior. You will have to modify cluster-oriented SQL statements if you use this feature.
+
+## Version 9.1.0
+
+### Font Name Improvements
+
+Revised the logic used to build the font list in the **Style Designer**.
+
+- Expanded the available font choices by removing the earlier prefix/suffix‑based screening logic that filtered out fonts.
+- Added an **excluded fonts** list on the `lists` worksheet. Testing shows these fonts fall back to a default font in Graphviz, so they are filtered out of the available font list.
+- Cross‑checked the retrieved font list against the excluded‑fonts list to produce a clean set of fonts that Graphviz can reliably render.
+- Added logic to **remove duplicates** and **alphabetize** the final font list.
+
+Restructured the Windows and macOS code paths so both platforms now share the same filtering, deduplication, and sorting pipeline.  
+- macOS still relies on the font list stored in the `lists` worksheet, but the code is now structured to allow a native macOS font‑enumeration solution to be added cleanly when available.
+
+Updated the **Style Designer** ribbon tab to use a two‑image preview approach.  
+- The ribbon continues to display the legacy (backward‑compatible) `A` icon beside the font name.  
+- The font gallery now shows a wider 14pt preview image using the characters `Aa Bb Cc` to provide a clearer representation of each font.
+
 ## Version 9.0.0
 
 ### UI Visual Refresh

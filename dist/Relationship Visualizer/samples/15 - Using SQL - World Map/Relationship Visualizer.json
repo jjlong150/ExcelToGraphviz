@@ -1,0 +1,8278 @@
+{
+  "metadata": {
+    "name": "E2GXF",
+    "type": "Excel to Graphviz Exchange Format",
+    "version": "1.0",
+    "user": "Jeffrey Long",
+    "date": "2026-01-20",
+    "time": "15:19:20",
+    "os": "Windows (64-bit) NT 10.00",
+    "excel": "16.0",
+    "filename": "Relationship Visualizer OLD.xlsm"
+  },
+  "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "item": "AF",
+        "label": "AF",
+        "outsideLabel": "Afghanistan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "item": "AX",
+        "label": "AX",
+        "outsideLabel": "Aland Islands",
+        "styleName": "Europe"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "item": "AL",
+        "label": "AL",
+        "outsideLabel": "Albania",
+        "styleName": "Europe"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "item": "DZ",
+        "label": "DZ",
+        "outsideLabel": "Algeria",
+        "styleName": "Africa"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "item": "AS",
+        "label": "AS",
+        "outsideLabel": "American Samoa",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "item": "AD",
+        "label": "AD",
+        "outsideLabel": "Andorra",
+        "styleName": "Europe"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "item": "AO",
+        "label": "AO",
+        "outsideLabel": "Angola",
+        "styleName": "Africa"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "item": "AI",
+        "label": "AI",
+        "outsideLabel": "Anguilla",
+        "styleName": "North America"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "item": "AQ",
+        "label": "AQ",
+        "outsideLabel": "Antarctica",
+        "styleName": "Antarctica"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "item": "AG",
+        "label": "AG",
+        "outsideLabel": "Antigua and Barbuda",
+        "styleName": "North America"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "item": "AR",
+        "label": "AR",
+        "outsideLabel": "Argentina",
+        "styleName": "South America"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "item": "AM",
+        "label": "AM",
+        "outsideLabel": "Armenia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "item": "AW",
+        "label": "AW",
+        "outsideLabel": "Aruba",
+        "styleName": "North America"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "item": "AU",
+        "label": "AU",
+        "outsideLabel": "Australia",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "item": "AT",
+        "label": "AT",
+        "outsideLabel": "Austria",
+        "styleName": "Europe"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "item": "AZ",
+        "label": "AZ",
+        "outsideLabel": "Azerbaijan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "item": "BS",
+        "label": "BS",
+        "outsideLabel": "Bahamas",
+        "styleName": "North America"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "item": "BH",
+        "label": "BH",
+        "outsideLabel": "Bahrain",
+        "styleName": "Asia"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "item": "BD",
+        "label": "BD",
+        "outsideLabel": "Bangladesh",
+        "styleName": "Asia"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "item": "BB",
+        "label": "BB",
+        "outsideLabel": "Barbados",
+        "styleName": "North America"
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "item": "BY",
+        "label": "BY",
+        "outsideLabel": "Belarus",
+        "styleName": "Europe"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "item": "BE",
+        "label": "BE",
+        "outsideLabel": "Belgium",
+        "styleName": "Europe"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "item": "BZ",
+        "label": "BZ",
+        "outsideLabel": "Belize",
+        "styleName": "North America"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "item": "BJ",
+        "label": "BJ",
+        "outsideLabel": "Benin",
+        "styleName": "Africa"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "item": "BM",
+        "label": "BM",
+        "outsideLabel": "Bermuda",
+        "styleName": "North America"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "item": "BT",
+        "label": "BT",
+        "outsideLabel": "Bhutan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "item": "BO",
+        "label": "BO",
+        "outsideLabel": "Bolivia",
+        "styleName": "South America"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 30,
+        "item": "BQ",
+        "label": "BQ",
+        "outsideLabel": "Bonaire, Saint Eustatius and Saba",
+        "styleName": "North America"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "item": "BA",
+        "label": "BA",
+        "outsideLabel": "Bosnia and Herzegovina",
+        "styleName": "Europe"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "item": "BW",
+        "label": "BW",
+        "outsideLabel": "Botswana",
+        "styleName": "Africa"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "item": "BV",
+        "label": "BV",
+        "outsideLabel": "Bouvet Island",
+        "styleName": "Antarctica"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "item": "BR",
+        "label": "BR",
+        "outsideLabel": "Brazil",
+        "styleName": "South America"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 30,
+        "item": "IO",
+        "label": "IO",
+        "outsideLabel": "British Indian Ocean Territory",
+        "styleName": "Asia"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15,
+        "item": "VG",
+        "label": "VG",
+        "outsideLabel": "British Virgin Islands",
+        "styleName": "North America"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "item": "BN",
+        "label": "BN",
+        "outsideLabel": "Brunei",
+        "styleName": "Asia"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "item": "BG",
+        "label": "BG",
+        "outsideLabel": "Bulgaria",
+        "styleName": "Europe"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "item": "BF",
+        "label": "BF",
+        "outsideLabel": "Burkina Faso",
+        "styleName": "Africa"
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15,
+        "item": "BI",
+        "label": "BI",
+        "outsideLabel": "Burundi",
+        "styleName": "Africa"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "item": "KH",
+        "label": "KH",
+        "outsideLabel": "Cambodia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15,
+        "item": "CM",
+        "label": "CM",
+        "outsideLabel": "Cameroon",
+        "styleName": "Africa"
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "item": "CA",
+        "label": "CA",
+        "outsideLabel": "Canada",
+        "styleName": "North America"
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "item": "CV",
+        "label": "CV",
+        "outsideLabel": "Cape Verde",
+        "styleName": "Africa"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "item": "KY",
+        "label": "KY",
+        "outsideLabel": "Cayman Islands",
+        "styleName": "North America"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 30,
+        "item": "CF",
+        "label": "CF",
+        "outsideLabel": "Central African Republic",
+        "styleName": "Africa"
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "item": "TD",
+        "label": "TD",
+        "outsideLabel": "Chad",
+        "styleName": "Africa"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "item": "CL",
+        "label": "CL",
+        "outsideLabel": "Chile",
+        "styleName": "South America"
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "item": "CN",
+        "label": "CN",
+        "outsideLabel": "China",
+        "styleName": "Asia"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "item": "CX",
+        "label": "CX",
+        "outsideLabel": "Christmas Island",
+        "styleName": "Asia"
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15,
+        "item": "CC",
+        "label": "CC",
+        "outsideLabel": "Cocos Islands",
+        "styleName": "Asia"
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "item": "CO",
+        "label": "CO",
+        "outsideLabel": "Colombia",
+        "styleName": "South America"
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "item": "KM",
+        "label": "KM",
+        "outsideLabel": "Comoros",
+        "styleName": "Africa"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "item": "CK",
+        "label": "CK",
+        "outsideLabel": "Cook Islands",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "item": "CR",
+        "label": "CR",
+        "outsideLabel": "Costa Rica",
+        "styleName": "North America"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "item": "HR",
+        "label": "HR",
+        "outsideLabel": "Croatia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "item": "CU",
+        "label": "CU",
+        "outsideLabel": "Cuba",
+        "styleName": "North America"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "item": "CW",
+        "label": "CW",
+        "outsideLabel": "Curacao",
+        "styleName": "North America"
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "item": "CY",
+        "label": "CY",
+        "outsideLabel": "Cyprus",
+        "styleName": "Europe"
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "CZ",
+        "label": "CZ",
+        "outsideLabel": "Czech Republic",
+        "styleName": "Europe"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 30,
+        "item": "CD",
+        "label": "CD",
+        "outsideLabel": "Democratic Republic of the Congo",
+        "styleName": "Africa"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "item": "DK",
+        "label": "DK",
+        "outsideLabel": "Denmark",
+        "styleName": "Europe"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "item": "DJ",
+        "label": "DJ",
+        "outsideLabel": "Djibouti",
+        "styleName": "Africa"
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "item": "DM",
+        "label": "DM",
+        "outsideLabel": "Dominica",
+        "styleName": "North America"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "item": "DO",
+        "label": "DO",
+        "outsideLabel": "Dominican Republic",
+        "styleName": "North America"
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "item": "TL",
+        "label": "TL",
+        "outsideLabel": "East Timor",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "EC",
+        "label": "EC",
+        "outsideLabel": "Ecuador",
+        "styleName": "South America"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "item": "EG",
+        "label": "EG",
+        "outsideLabel": "Egypt",
+        "styleName": "Africa"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "item": "SV",
+        "label": "SV",
+        "outsideLabel": "El Salvador",
+        "styleName": "North America"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "item": "GQ",
+        "label": "GQ",
+        "outsideLabel": "Equatorial Guinea",
+        "styleName": "Africa"
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "item": "ER",
+        "label": "ER",
+        "outsideLabel": "Eritrea",
+        "styleName": "Africa"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "item": "EE",
+        "label": "EE",
+        "outsideLabel": "Estonia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "item": "ET",
+        "label": "ET",
+        "outsideLabel": "Ethiopia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "item": "FK",
+        "label": "FK",
+        "outsideLabel": "Falkland Islands",
+        "styleName": "South America"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "item": "FO",
+        "label": "FO",
+        "outsideLabel": "Faroe Islands",
+        "styleName": "Europe"
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "item": "FJ",
+        "label": "FJ",
+        "outsideLabel": "Fiji",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "item": "FI",
+        "label": "FI",
+        "outsideLabel": "Finland",
+        "styleName": "Europe"
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "item": "FR",
+        "label": "FR",
+        "outsideLabel": "France",
+        "styleName": "Europe"
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "item": "GF",
+        "label": "GF",
+        "outsideLabel": "French Guiana",
+        "styleName": "South America"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "PF",
+        "label": "PF",
+        "outsideLabel": "French Polynesia",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 30,
+        "item": "TF",
+        "label": "TF",
+        "outsideLabel": "French Southern Territories",
+        "styleName": "Antarctica"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "item": "GA",
+        "label": "GA",
+        "outsideLabel": "Gabon",
+        "styleName": "Africa"
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "item": "GM",
+        "label": "GM",
+        "outsideLabel": "Gambia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "item": "GE",
+        "label": "GE",
+        "outsideLabel": "Georgia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "item": "DE",
+        "label": "DE",
+        "outsideLabel": "Germany",
+        "styleName": "Europe"
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "item": "GH",
+        "label": "GH",
+        "outsideLabel": "Ghana",
+        "styleName": "Africa"
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15,
+        "item": "GI",
+        "label": "GI",
+        "outsideLabel": "Gibraltar",
+        "styleName": "Europe"
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15,
+        "item": "GR",
+        "label": "GR",
+        "outsideLabel": "Greece",
+        "styleName": "Europe"
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15,
+        "item": "GL",
+        "label": "GL",
+        "outsideLabel": "Greenland",
+        "styleName": "North America"
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15,
+        "item": "GD",
+        "label": "GD",
+        "outsideLabel": "Grenada",
+        "styleName": "North America"
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15,
+        "item": "GP",
+        "label": "GP",
+        "outsideLabel": "Guadeloupe",
+        "styleName": "North America"
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15,
+        "item": "GU",
+        "label": "GU",
+        "outsideLabel": "Guam",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15,
+        "item": "GT",
+        "label": "GT",
+        "outsideLabel": "Guatemala",
+        "styleName": "North America"
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15,
+        "item": "GG",
+        "label": "GG",
+        "outsideLabel": "Guernsey",
+        "styleName": "Europe"
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 15,
+        "item": "GN",
+        "label": "GN",
+        "outsideLabel": "Guinea",
+        "styleName": "Africa"
+      },
+      {
+        "row": 95,
+        "hidden": false,
+        "height": 15,
+        "item": "GW",
+        "label": "GW",
+        "outsideLabel": "Guinea-Bissau",
+        "styleName": "Africa"
+      },
+      {
+        "row": 96,
+        "hidden": false,
+        "height": 15,
+        "item": "GY",
+        "label": "GY",
+        "outsideLabel": "Guyana",
+        "styleName": "South America"
+      },
+      {
+        "row": 97,
+        "hidden": false,
+        "height": 15,
+        "item": "HT",
+        "label": "HT",
+        "outsideLabel": "Haiti",
+        "styleName": "North America"
+      },
+      {
+        "row": 98,
+        "hidden": false,
+        "height": 30,
+        "item": "HM",
+        "label": "HM",
+        "outsideLabel": "Heard Island and McDonald Islands",
+        "styleName": "Antarctica"
+      },
+      {
+        "row": 99,
+        "hidden": false,
+        "height": 15,
+        "item": "HN",
+        "label": "HN",
+        "outsideLabel": "Honduras",
+        "styleName": "North America"
+      },
+      {
+        "row": 100,
+        "hidden": false,
+        "height": 15,
+        "item": "HK",
+        "label": "HK",
+        "outsideLabel": "Hong Kong",
+        "styleName": "Asia"
+      },
+      {
+        "row": 101,
+        "hidden": false,
+        "height": 15,
+        "item": "HU",
+        "label": "HU",
+        "outsideLabel": "Hungary",
+        "styleName": "Europe"
+      },
+      {
+        "row": 102,
+        "hidden": false,
+        "height": 15,
+        "item": "IS",
+        "label": "IS",
+        "outsideLabel": "Iceland",
+        "styleName": "Europe"
+      },
+      {
+        "row": 103,
+        "hidden": false,
+        "height": 15,
+        "item": "IN",
+        "label": "IN",
+        "outsideLabel": "India",
+        "styleName": "Asia"
+      },
+      {
+        "row": 104,
+        "hidden": false,
+        "height": 15,
+        "item": "ID",
+        "label": "ID",
+        "outsideLabel": "Indonesia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 105,
+        "hidden": false,
+        "height": 15,
+        "item": "IR",
+        "label": "IR",
+        "outsideLabel": "Iran",
+        "styleName": "Asia"
+      },
+      {
+        "row": 106,
+        "hidden": false,
+        "height": 15,
+        "item": "IQ",
+        "label": "IQ",
+        "outsideLabel": "Iraq",
+        "styleName": "Asia"
+      },
+      {
+        "row": 107,
+        "hidden": false,
+        "height": 15,
+        "item": "IE",
+        "label": "IE",
+        "outsideLabel": "Ireland",
+        "styleName": "Europe"
+      },
+      {
+        "row": 108,
+        "hidden": false,
+        "height": 15,
+        "item": "IM",
+        "label": "IM",
+        "outsideLabel": "Isle of Man",
+        "styleName": "Europe"
+      },
+      {
+        "row": 109,
+        "hidden": false,
+        "height": 15,
+        "item": "IL",
+        "label": "IL",
+        "outsideLabel": "Israel",
+        "styleName": "Asia"
+      },
+      {
+        "row": 110,
+        "hidden": false,
+        "height": 15,
+        "item": "IT",
+        "label": "IT",
+        "outsideLabel": "Italy",
+        "styleName": "Europe"
+      },
+      {
+        "row": 111,
+        "hidden": false,
+        "height": 15,
+        "item": "CI",
+        "label": "CI",
+        "outsideLabel": "Ivory Coast",
+        "styleName": "Africa"
+      },
+      {
+        "row": 112,
+        "hidden": false,
+        "height": 15,
+        "item": "JM",
+        "label": "JM",
+        "outsideLabel": "Jamaica",
+        "styleName": "North America"
+      },
+      {
+        "row": 113,
+        "hidden": false,
+        "height": 15,
+        "item": "JP",
+        "label": "JP",
+        "outsideLabel": "Japan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 114,
+        "hidden": false,
+        "height": 15,
+        "item": "JE",
+        "label": "JE",
+        "outsideLabel": "Jersey",
+        "styleName": "Europe"
+      },
+      {
+        "row": 115,
+        "hidden": false,
+        "height": 15,
+        "item": "JO",
+        "label": "JO",
+        "outsideLabel": "Jordan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 116,
+        "hidden": false,
+        "height": 15,
+        "item": "KZ",
+        "label": "KZ",
+        "outsideLabel": "Kazakhstan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 117,
+        "hidden": false,
+        "height": 15,
+        "item": "KE",
+        "label": "KE",
+        "outsideLabel": "Kenya",
+        "styleName": "Africa"
+      },
+      {
+        "row": 118,
+        "hidden": false,
+        "height": 15,
+        "item": "KI",
+        "label": "KI",
+        "outsideLabel": "Kiribati",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 119,
+        "hidden": false,
+        "height": 15,
+        "item": "XK",
+        "label": "XK",
+        "outsideLabel": "Kosovo",
+        "styleName": "Europe"
+      },
+      {
+        "row": 120,
+        "hidden": false,
+        "height": 15,
+        "item": "KW",
+        "label": "KW",
+        "outsideLabel": "Kuwait",
+        "styleName": "Asia"
+      },
+      {
+        "row": 121,
+        "hidden": false,
+        "height": 15,
+        "item": "KG",
+        "label": "KG",
+        "outsideLabel": "Kyrgyzstan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 122,
+        "hidden": false,
+        "height": 15,
+        "item": "LA",
+        "label": "LA",
+        "outsideLabel": "Laos",
+        "styleName": "Asia"
+      },
+      {
+        "row": 123,
+        "hidden": false,
+        "height": 15,
+        "item": "LV",
+        "label": "LV",
+        "outsideLabel": "Latvia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 124,
+        "hidden": false,
+        "height": 15,
+        "item": "LB",
+        "label": "LB",
+        "outsideLabel": "Lebanon",
+        "styleName": "Asia"
+      },
+      {
+        "row": 125,
+        "hidden": false,
+        "height": 15,
+        "item": "LS",
+        "label": "LS",
+        "outsideLabel": "Lesotho",
+        "styleName": "Africa"
+      },
+      {
+        "row": 126,
+        "hidden": false,
+        "height": 15,
+        "item": "LR",
+        "label": "LR",
+        "outsideLabel": "Liberia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 127,
+        "hidden": false,
+        "height": 15,
+        "item": "LY",
+        "label": "LY",
+        "outsideLabel": "Libya",
+        "styleName": "Africa"
+      },
+      {
+        "row": 128,
+        "hidden": false,
+        "height": 15,
+        "item": "LI",
+        "label": "LI",
+        "outsideLabel": "Liechtenstein",
+        "styleName": "Europe"
+      },
+      {
+        "row": 129,
+        "hidden": false,
+        "height": 15,
+        "item": "LT",
+        "label": "LT",
+        "outsideLabel": "Lithuania",
+        "styleName": "Europe"
+      },
+      {
+        "row": 130,
+        "hidden": false,
+        "height": 15,
+        "item": "LU",
+        "label": "LU",
+        "outsideLabel": "Luxembourg",
+        "styleName": "Europe"
+      },
+      {
+        "row": 131,
+        "hidden": false,
+        "height": 15,
+        "item": "MO",
+        "label": "MO",
+        "outsideLabel": "Macao",
+        "styleName": "Asia"
+      },
+      {
+        "row": 132,
+        "hidden": false,
+        "height": 15,
+        "item": "MK",
+        "label": "MK",
+        "outsideLabel": "Macedonia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 133,
+        "hidden": false,
+        "height": 15,
+        "item": "MG",
+        "label": "MG",
+        "outsideLabel": "Madagascar",
+        "styleName": "Africa"
+      },
+      {
+        "row": 134,
+        "hidden": false,
+        "height": 15,
+        "item": "MW",
+        "label": "MW",
+        "outsideLabel": "Malawi",
+        "styleName": "Africa"
+      },
+      {
+        "row": 135,
+        "hidden": false,
+        "height": 15,
+        "item": "MY",
+        "label": "MY",
+        "outsideLabel": "Malaysia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 136,
+        "hidden": false,
+        "height": 15,
+        "item": "MV",
+        "label": "MV",
+        "outsideLabel": "Maldives",
+        "styleName": "Asia"
+      },
+      {
+        "row": 137,
+        "hidden": false,
+        "height": 15,
+        "item": "ML",
+        "label": "ML",
+        "outsideLabel": "Mali",
+        "styleName": "Africa"
+      },
+      {
+        "row": 138,
+        "hidden": false,
+        "height": 15,
+        "item": "MT",
+        "label": "MT",
+        "outsideLabel": "Malta",
+        "styleName": "Europe"
+      },
+      {
+        "row": 139,
+        "hidden": false,
+        "height": 15,
+        "item": "MH",
+        "label": "MH",
+        "outsideLabel": "Marshall Islands",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 140,
+        "hidden": false,
+        "height": 15,
+        "item": "MQ",
+        "label": "MQ",
+        "outsideLabel": "Martinique",
+        "styleName": "North America"
+      },
+      {
+        "row": 141,
+        "hidden": false,
+        "height": 15,
+        "item": "MR",
+        "label": "MR",
+        "outsideLabel": "Mauritania",
+        "styleName": "Africa"
+      },
+      {
+        "row": 142,
+        "hidden": false,
+        "height": 15,
+        "item": "MU",
+        "label": "MU",
+        "outsideLabel": "Mauritius",
+        "styleName": "Africa"
+      },
+      {
+        "row": 143,
+        "hidden": false,
+        "height": 15,
+        "item": "YT",
+        "label": "YT",
+        "outsideLabel": "Mayotte",
+        "styleName": "Africa"
+      },
+      {
+        "row": 144,
+        "hidden": false,
+        "height": 15,
+        "item": "MX",
+        "label": "MX",
+        "outsideLabel": "Mexico",
+        "styleName": "North America"
+      },
+      {
+        "row": 145,
+        "hidden": false,
+        "height": 15,
+        "item": "FM",
+        "label": "FM",
+        "outsideLabel": "Micronesia",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 146,
+        "hidden": false,
+        "height": 15,
+        "item": "MD",
+        "label": "MD",
+        "outsideLabel": "Moldova",
+        "styleName": "Europe"
+      },
+      {
+        "row": 147,
+        "hidden": false,
+        "height": 15,
+        "item": "MC",
+        "label": "MC",
+        "outsideLabel": "Monaco",
+        "styleName": "Europe"
+      },
+      {
+        "row": 148,
+        "hidden": false,
+        "height": 15,
+        "item": "MN",
+        "label": "MN",
+        "outsideLabel": "Mongolia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 149,
+        "hidden": false,
+        "height": 15,
+        "item": "ME",
+        "label": "ME",
+        "outsideLabel": "Montenegro",
+        "styleName": "Europe"
+      },
+      {
+        "row": 150,
+        "hidden": false,
+        "height": 15,
+        "item": "MS",
+        "label": "MS",
+        "outsideLabel": "Montserrat",
+        "styleName": "North America"
+      },
+      {
+        "row": 151,
+        "hidden": false,
+        "height": 15,
+        "item": "MA",
+        "label": "MA",
+        "outsideLabel": "Morocco",
+        "styleName": "Africa"
+      },
+      {
+        "row": 152,
+        "hidden": false,
+        "height": 15,
+        "item": "MZ",
+        "label": "MZ",
+        "outsideLabel": "Mozambique",
+        "styleName": "Africa"
+      },
+      {
+        "row": 153,
+        "hidden": false,
+        "height": 15,
+        "item": "MM",
+        "label": "MM",
+        "outsideLabel": "Myanmar",
+        "styleName": "Asia"
+      },
+      {
+        "row": 154,
+        "hidden": false,
+        "height": 15,
+        "item": "NA",
+        "label": "NA",
+        "outsideLabel": "Namibia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 155,
+        "hidden": false,
+        "height": 15,
+        "item": "NR",
+        "label": "NR",
+        "outsideLabel": "Nauru",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 156,
+        "hidden": false,
+        "height": 15,
+        "item": "NP",
+        "label": "NP",
+        "outsideLabel": "Nepal",
+        "styleName": "Asia"
+      },
+      {
+        "row": 157,
+        "hidden": false,
+        "height": 15,
+        "item": "NL",
+        "label": "NL",
+        "outsideLabel": "Netherlands",
+        "styleName": "Europe"
+      },
+      {
+        "row": 158,
+        "hidden": false,
+        "height": 15,
+        "item": "AN",
+        "label": "AN",
+        "outsideLabel": "Netherlands Antilles",
+        "styleName": "North America"
+      },
+      {
+        "row": 159,
+        "hidden": false,
+        "height": 15,
+        "item": "NC",
+        "label": "NC",
+        "outsideLabel": "New Caledonia",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 160,
+        "hidden": false,
+        "height": 15,
+        "item": "NZ",
+        "label": "NZ",
+        "outsideLabel": "New Zealand",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 161,
+        "hidden": false,
+        "height": 15,
+        "item": "NI",
+        "label": "NI",
+        "outsideLabel": "Nicaragua",
+        "styleName": "North America"
+      },
+      {
+        "row": 162,
+        "hidden": false,
+        "height": 15,
+        "item": "NE",
+        "label": "NE",
+        "outsideLabel": "Niger",
+        "styleName": "Africa"
+      },
+      {
+        "row": 163,
+        "hidden": false,
+        "height": 15,
+        "item": "NG",
+        "label": "NG",
+        "outsideLabel": "Nigeria",
+        "styleName": "Africa"
+      },
+      {
+        "row": 164,
+        "hidden": false,
+        "height": 15,
+        "item": "NU",
+        "label": "NU",
+        "outsideLabel": "Niue",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 165,
+        "hidden": false,
+        "height": 15,
+        "item": "NF",
+        "label": "NF",
+        "outsideLabel": "Norfolk Island",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 166,
+        "hidden": false,
+        "height": 15,
+        "item": "KP",
+        "label": "KP",
+        "outsideLabel": "North Korea",
+        "styleName": "Asia"
+      },
+      {
+        "row": 167,
+        "hidden": false,
+        "height": 30,
+        "item": "MP",
+        "label": "MP",
+        "outsideLabel": "Northern Mariana Islands",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 168,
+        "hidden": false,
+        "height": 15,
+        "item": "NO",
+        "label": "NO",
+        "outsideLabel": "Norway",
+        "styleName": "Europe"
+      },
+      {
+        "row": 169,
+        "hidden": false,
+        "height": 15,
+        "item": "OM",
+        "label": "OM",
+        "outsideLabel": "Oman",
+        "styleName": "Asia"
+      },
+      {
+        "row": 170,
+        "hidden": false,
+        "height": 15,
+        "item": "PK",
+        "label": "PK",
+        "outsideLabel": "Pakistan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 171,
+        "hidden": false,
+        "height": 15,
+        "item": "PW",
+        "label": "PW",
+        "outsideLabel": "Palau",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 172,
+        "hidden": false,
+        "height": 15,
+        "item": "PS",
+        "label": "PS",
+        "outsideLabel": "Palestinian Territory",
+        "styleName": "Asia"
+      },
+      {
+        "row": 173,
+        "hidden": false,
+        "height": 15,
+        "item": "PA",
+        "label": "PA",
+        "outsideLabel": "Panama",
+        "styleName": "North America"
+      },
+      {
+        "row": 174,
+        "hidden": false,
+        "height": 15,
+        "item": "PG",
+        "label": "PG",
+        "outsideLabel": "Papua New Guinea",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 175,
+        "hidden": false,
+        "height": 15,
+        "item": "PY",
+        "label": "PY",
+        "outsideLabel": "Paraguay",
+        "styleName": "South America"
+      },
+      {
+        "row": 176,
+        "hidden": false,
+        "height": 15,
+        "item": "PE",
+        "label": "PE",
+        "outsideLabel": "Peru",
+        "styleName": "South America"
+      },
+      {
+        "row": 177,
+        "hidden": false,
+        "height": 15,
+        "item": "PH",
+        "label": "PH",
+        "outsideLabel": "Philippines",
+        "styleName": "Asia"
+      },
+      {
+        "row": 178,
+        "hidden": false,
+        "height": 15,
+        "item": "PN",
+        "label": "PN",
+        "outsideLabel": "Pitcairn",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 179,
+        "hidden": false,
+        "height": 15,
+        "item": "PL",
+        "label": "PL",
+        "outsideLabel": "Poland",
+        "styleName": "Europe"
+      },
+      {
+        "row": 180,
+        "hidden": false,
+        "height": 15,
+        "item": "PT",
+        "label": "PT",
+        "outsideLabel": "Portugal",
+        "styleName": "Europe"
+      },
+      {
+        "row": 181,
+        "hidden": false,
+        "height": 15,
+        "item": "PR",
+        "label": "PR",
+        "outsideLabel": "Puerto Rico",
+        "styleName": "North America"
+      },
+      {
+        "row": 182,
+        "hidden": false,
+        "height": 15,
+        "item": "QA",
+        "label": "QA",
+        "outsideLabel": "Qatar",
+        "styleName": "Asia"
+      },
+      {
+        "row": 183,
+        "hidden": false,
+        "height": 15,
+        "item": "CG",
+        "label": "CG",
+        "outsideLabel": "Republic of the Congo",
+        "styleName": "Africa"
+      },
+      {
+        "row": 184,
+        "hidden": false,
+        "height": 15,
+        "item": "RE",
+        "label": "RE",
+        "outsideLabel": "Reunion",
+        "styleName": "Africa"
+      },
+      {
+        "row": 185,
+        "hidden": false,
+        "height": 15,
+        "item": "RO",
+        "label": "RO",
+        "outsideLabel": "Romania",
+        "styleName": "Europe"
+      },
+      {
+        "row": 186,
+        "hidden": false,
+        "height": 15,
+        "item": "RU",
+        "label": "RU",
+        "outsideLabel": "Russia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 187,
+        "hidden": false,
+        "height": 15,
+        "item": "RW",
+        "label": "RW",
+        "outsideLabel": "Rwanda",
+        "styleName": "Africa"
+      },
+      {
+        "row": 188,
+        "hidden": false,
+        "height": 15,
+        "item": "BL",
+        "label": "BL",
+        "outsideLabel": "Saint Barthelemy",
+        "styleName": "North America"
+      },
+      {
+        "row": 189,
+        "hidden": false,
+        "height": 15,
+        "item": "SH",
+        "label": "SH",
+        "outsideLabel": "Saint Helena",
+        "styleName": "Africa"
+      },
+      {
+        "row": 190,
+        "hidden": false,
+        "height": 15,
+        "item": "KN",
+        "label": "KN",
+        "outsideLabel": "Saint Kitts and Nevis",
+        "styleName": "North America"
+      },
+      {
+        "row": 191,
+        "hidden": false,
+        "height": 15,
+        "item": "LC",
+        "label": "LC",
+        "outsideLabel": "Saint Lucia",
+        "styleName": "North America"
+      },
+      {
+        "row": 192,
+        "hidden": false,
+        "height": 15,
+        "item": "MF",
+        "label": "MF",
+        "outsideLabel": "Saint Martin",
+        "styleName": "North America"
+      },
+      {
+        "row": 193,
+        "hidden": false,
+        "height": 30,
+        "item": "PM",
+        "label": "PM",
+        "outsideLabel": "Saint Pierre and Miquelon",
+        "styleName": "North America"
+      },
+      {
+        "row": 194,
+        "hidden": false,
+        "height": 30,
+        "item": "VC",
+        "label": "VC",
+        "outsideLabel": "Saint Vincent and the Grenadines",
+        "styleName": "North America"
+      },
+      {
+        "row": 195,
+        "hidden": false,
+        "height": 15,
+        "item": "WS",
+        "label": "WS",
+        "outsideLabel": "Samoa",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 196,
+        "hidden": false,
+        "height": 15,
+        "item": "SM",
+        "label": "SM",
+        "outsideLabel": "San Marino",
+        "styleName": "Europe"
+      },
+      {
+        "row": 197,
+        "hidden": false,
+        "height": 15,
+        "item": "ST",
+        "label": "ST",
+        "outsideLabel": "Sao Tome and Principe",
+        "styleName": "Africa"
+      },
+      {
+        "row": 198,
+        "hidden": false,
+        "height": 15,
+        "item": "SA",
+        "label": "SA",
+        "outsideLabel": "Saudi Arabia",
+        "styleName": "Asia"
+      },
+      {
+        "row": 199,
+        "hidden": false,
+        "height": 15,
+        "item": "SN",
+        "label": "SN",
+        "outsideLabel": "Senegal",
+        "styleName": "Africa"
+      },
+      {
+        "row": 200,
+        "hidden": false,
+        "height": 15,
+        "item": "RS",
+        "label": "RS",
+        "outsideLabel": "Serbia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 201,
+        "hidden": false,
+        "height": 30,
+        "item": "CS",
+        "label": "CS",
+        "outsideLabel": "Serbia and Montenegro",
+        "styleName": "Europe"
+      },
+      {
+        "row": 202,
+        "hidden": false,
+        "height": 15,
+        "item": "SC",
+        "label": "SC",
+        "outsideLabel": "Seychelles",
+        "styleName": "Africa"
+      },
+      {
+        "row": 203,
+        "hidden": false,
+        "height": 15,
+        "item": "SL",
+        "label": "SL",
+        "outsideLabel": "Sierra Leone",
+        "styleName": "Africa"
+      },
+      {
+        "row": 204,
+        "hidden": false,
+        "height": 15,
+        "item": "SG",
+        "label": "SG",
+        "outsideLabel": "Singapore",
+        "styleName": "Asia"
+      },
+      {
+        "row": 205,
+        "hidden": false,
+        "height": 15,
+        "item": "SX",
+        "label": "SX",
+        "outsideLabel": "Sint Maarten",
+        "styleName": "North America"
+      },
+      {
+        "row": 206,
+        "hidden": false,
+        "height": 15,
+        "item": "SK",
+        "label": "SK",
+        "outsideLabel": "Slovakia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 207,
+        "hidden": false,
+        "height": 15,
+        "item": "SI",
+        "label": "SI",
+        "outsideLabel": "Slovenia",
+        "styleName": "Europe"
+      },
+      {
+        "row": 208,
+        "hidden": false,
+        "height": 15,
+        "item": "SB",
+        "label": "SB",
+        "outsideLabel": "Solomon Islands",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 209,
+        "hidden": false,
+        "height": 15,
+        "item": "SO",
+        "label": "SO",
+        "outsideLabel": "Somalia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 210,
+        "hidden": false,
+        "height": 15,
+        "item": "ZA",
+        "label": "ZA",
+        "outsideLabel": "South Africa",
+        "styleName": "Africa"
+      },
+      {
+        "row": 211,
+        "hidden": false,
+        "height": 45,
+        "item": "GS",
+        "label": "GS",
+        "outsideLabel": "South Georgia and the South Sandwich Islands",
+        "styleName": "Antarctica"
+      },
+      {
+        "row": 212,
+        "hidden": false,
+        "height": 15,
+        "item": "KR",
+        "label": "KR",
+        "outsideLabel": "South Korea",
+        "styleName": "Asia"
+      },
+      {
+        "row": 213,
+        "hidden": false,
+        "height": 15,
+        "item": "SS",
+        "label": "SS",
+        "outsideLabel": "South Sudan",
+        "styleName": "Africa"
+      },
+      {
+        "row": 214,
+        "hidden": false,
+        "height": 15,
+        "item": "ES",
+        "label": "ES",
+        "outsideLabel": "Spain",
+        "styleName": "Europe"
+      },
+      {
+        "row": 215,
+        "hidden": false,
+        "height": 15,
+        "item": "LK",
+        "label": "LK",
+        "outsideLabel": "Sri Lanka",
+        "styleName": "Asia"
+      },
+      {
+        "row": 216,
+        "hidden": false,
+        "height": 15,
+        "item": "SD",
+        "label": "SD",
+        "outsideLabel": "Sudan",
+        "styleName": "Africa"
+      },
+      {
+        "row": 217,
+        "hidden": false,
+        "height": 15,
+        "item": "SR",
+        "label": "SR",
+        "outsideLabel": "Suriname",
+        "styleName": "South America"
+      },
+      {
+        "row": 218,
+        "hidden": false,
+        "height": 30,
+        "item": "SJ",
+        "label": "SJ",
+        "outsideLabel": "Svalbard and Jan Mayen",
+        "styleName": "Europe"
+      },
+      {
+        "row": 219,
+        "hidden": false,
+        "height": 15,
+        "item": "SZ",
+        "label": "SZ",
+        "outsideLabel": "Swaziland",
+        "styleName": "Africa"
+      },
+      {
+        "row": 220,
+        "hidden": false,
+        "height": 15,
+        "item": "SE",
+        "label": "SE",
+        "outsideLabel": "Sweden",
+        "styleName": "Europe"
+      },
+      {
+        "row": 221,
+        "hidden": false,
+        "height": 15,
+        "item": "CH",
+        "label": "CH",
+        "outsideLabel": "Switzerland",
+        "styleName": "Europe"
+      },
+      {
+        "row": 222,
+        "hidden": false,
+        "height": 15,
+        "item": "SY",
+        "label": "SY",
+        "outsideLabel": "Syria",
+        "styleName": "Asia"
+      },
+      {
+        "row": 223,
+        "hidden": false,
+        "height": 15,
+        "item": "TW",
+        "label": "TW",
+        "outsideLabel": "Taiwan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 224,
+        "hidden": false,
+        "height": 15,
+        "item": "TJ",
+        "label": "TJ",
+        "outsideLabel": "Tajikistan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 225,
+        "hidden": false,
+        "height": 15,
+        "item": "TZ",
+        "label": "TZ",
+        "outsideLabel": "Tanzania",
+        "styleName": "Africa"
+      },
+      {
+        "row": 226,
+        "hidden": false,
+        "height": 15,
+        "item": "TH",
+        "label": "TH",
+        "outsideLabel": "Thailand",
+        "styleName": "Asia"
+      },
+      {
+        "row": 227,
+        "hidden": false,
+        "height": 15,
+        "item": "TG",
+        "label": "TG",
+        "outsideLabel": "Togo",
+        "styleName": "Africa"
+      },
+      {
+        "row": 228,
+        "hidden": false,
+        "height": 15,
+        "item": "TK",
+        "label": "TK",
+        "outsideLabel": "Tokelau",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 229,
+        "hidden": false,
+        "height": 15,
+        "item": "TO",
+        "label": "TO",
+        "outsideLabel": "Tonga",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 230,
+        "hidden": false,
+        "height": 15,
+        "item": "TT",
+        "label": "TT",
+        "outsideLabel": "Trinidad and Tobago",
+        "styleName": "North America"
+      },
+      {
+        "row": 231,
+        "hidden": false,
+        "height": 15,
+        "item": "TN",
+        "label": "TN",
+        "outsideLabel": "Tunisia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 232,
+        "hidden": false,
+        "height": 15,
+        "item": "TR",
+        "label": "TR",
+        "outsideLabel": "Turkey",
+        "styleName": "Asia"
+      },
+      {
+        "row": 233,
+        "hidden": false,
+        "height": 15,
+        "item": "TM",
+        "label": "TM",
+        "outsideLabel": "Turkmenistan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 234,
+        "hidden": false,
+        "height": 30,
+        "item": "TC",
+        "label": "TC",
+        "outsideLabel": "Turks and Caicos Islands",
+        "styleName": "North America"
+      },
+      {
+        "row": 235,
+        "hidden": false,
+        "height": 15,
+        "item": "TV",
+        "label": "TV",
+        "outsideLabel": "Tuvalu",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 236,
+        "hidden": false,
+        "height": 15,
+        "item": "VI",
+        "label": "VI",
+        "outsideLabel": "U.S. Virgin Islands",
+        "styleName": "North America"
+      },
+      {
+        "row": 237,
+        "hidden": false,
+        "height": 15,
+        "item": "UG",
+        "label": "UG",
+        "outsideLabel": "Uganda",
+        "styleName": "Africa"
+      },
+      {
+        "row": 238,
+        "hidden": false,
+        "height": 15,
+        "item": "UA",
+        "label": "UA",
+        "outsideLabel": "Ukraine",
+        "styleName": "Europe"
+      },
+      {
+        "row": 239,
+        "hidden": false,
+        "height": 15,
+        "item": "AE",
+        "label": "AE",
+        "outsideLabel": "United Arab Emirates",
+        "styleName": "Asia"
+      },
+      {
+        "row": 240,
+        "hidden": false,
+        "height": 15,
+        "item": "GB",
+        "label": "GB",
+        "outsideLabel": "United Kingdom",
+        "styleName": "Europe"
+      },
+      {
+        "row": 241,
+        "hidden": false,
+        "height": 15,
+        "item": "US",
+        "label": "US",
+        "outsideLabel": "United States",
+        "styleName": "North America"
+      },
+      {
+        "row": 242,
+        "hidden": false,
+        "height": 30,
+        "item": "UM",
+        "label": "UM",
+        "outsideLabel": "United States Minor Outlying Islands",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 243,
+        "hidden": false,
+        "height": 15,
+        "item": "UY",
+        "label": "UY",
+        "outsideLabel": "Uruguay",
+        "styleName": "South America"
+      },
+      {
+        "row": 244,
+        "hidden": false,
+        "height": 15,
+        "item": "UZ",
+        "label": "UZ",
+        "outsideLabel": "Uzbekistan",
+        "styleName": "Asia"
+      },
+      {
+        "row": 245,
+        "hidden": false,
+        "height": 15,
+        "item": "VU",
+        "label": "VU",
+        "outsideLabel": "Vanuatu",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 246,
+        "hidden": false,
+        "height": 15,
+        "item": "VA",
+        "label": "VA",
+        "outsideLabel": "Vatican",
+        "styleName": "Europe"
+      },
+      {
+        "row": 247,
+        "hidden": false,
+        "height": 15,
+        "item": "VE",
+        "label": "VE",
+        "outsideLabel": "Venezuela",
+        "styleName": "South America"
+      },
+      {
+        "row": 248,
+        "hidden": false,
+        "height": 15,
+        "item": "VN",
+        "label": "VN",
+        "outsideLabel": "Vietnam",
+        "styleName": "Asia"
+      },
+      {
+        "row": 249,
+        "hidden": false,
+        "height": 15,
+        "item": "WF",
+        "label": "WF",
+        "outsideLabel": "Wallis and Futuna",
+        "styleName": "Oceana"
+      },
+      {
+        "row": 250,
+        "hidden": false,
+        "height": 15,
+        "item": "EH",
+        "label": "EH",
+        "outsideLabel": "Western Sahara",
+        "styleName": "Africa"
+      },
+      {
+        "row": 251,
+        "hidden": false,
+        "height": 15,
+        "item": "YE",
+        "label": "YE",
+        "outsideLabel": "Yemen",
+        "styleName": "Asia"
+      },
+      {
+        "row": 252,
+        "hidden": false,
+        "height": 15,
+        "item": "ZM",
+        "label": "ZM",
+        "outsideLabel": "Zambia",
+        "styleName": "Africa"
+      },
+      {
+        "row": 253,
+        "hidden": false,
+        "height": 15,
+        "item": "ZW",
+        "label": "ZW",
+        "outsideLabel": "Zimbabwe",
+        "styleName": "Africa"
+      },
+      {
+        "row": 254,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "label": "Africa",
+        "styleName": "Continent"
+      },
+      {
+        "row": 255,
+        "hidden": false,
+        "height": 15,
+        "item": "Antarctica",
+        "label": "Antarctica",
+        "styleName": "Continent"
+      },
+      {
+        "row": 256,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "label": "Asia",
+        "styleName": "Continent"
+      },
+      {
+        "row": 257,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "label": "Europe",
+        "styleName": "Continent"
+      },
+      {
+        "row": 258,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "label": "North America",
+        "styleName": "Continent"
+      },
+      {
+        "row": 259,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "label": "Oceana",
+        "styleName": "Continent"
+      },
+      {
+        "row": 260,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "label": "South America",
+        "styleName": "Continent"
+      },
+      {
+        "row": 261,
+        "hidden": false,
+        "height": 15,
+        "item": "AD",
+        "relatedItem": "ES,FR"
+      },
+      {
+        "row": 262,
+        "hidden": false,
+        "height": 15,
+        "item": "AE",
+        "relatedItem": "SA,OM"
+      },
+      {
+        "row": 263,
+        "hidden": false,
+        "height": 15,
+        "item": "AF",
+        "relatedItem": "TM,CN,IR,TJ,PK,UZ"
+      },
+      {
+        "row": 264,
+        "hidden": false,
+        "height": 15,
+        "item": "AL",
+        "relatedItem": "MK,GR,CS,ME,RS,XK"
+      },
+      {
+        "row": 265,
+        "hidden": false,
+        "height": 15,
+        "item": "AM",
+        "relatedItem": "GE,IR,AZ,TR"
+      },
+      {
+        "row": 266,
+        "hidden": false,
+        "height": 15,
+        "item": "AO",
+        "relatedItem": "CD,NA,ZM,CG"
+      },
+      {
+        "row": 267,
+        "hidden": false,
+        "height": 15,
+        "item": "AR",
+        "relatedItem": "CL,BO,UY,PY,BR"
+      },
+      {
+        "row": 268,
+        "hidden": false,
+        "height": 30,
+        "item": "AT",
+        "relatedItem": "CH,DE,HU,SK,CZ,IT,SI,LI"
+      },
+      {
+        "row": 269,
+        "hidden": false,
+        "height": 15,
+        "item": "AZ",
+        "relatedItem": "GE,IR,AM,TR,RU"
+      },
+      {
+        "row": 270,
+        "hidden": false,
+        "height": 15,
+        "item": "BA",
+        "relatedItem": "CS,HR,ME,RS"
+      },
+      {
+        "row": 271,
+        "hidden": false,
+        "height": 15,
+        "item": "BD",
+        "relatedItem": "MM,IN"
+      },
+      {
+        "row": 272,
+        "hidden": false,
+        "height": 15,
+        "item": "BE",
+        "relatedItem": "DE,NL,LU,FR"
+      },
+      {
+        "row": 273,
+        "hidden": false,
+        "height": 15,
+        "item": "BF",
+        "relatedItem": "NE,BJ,GH,CI,TG,ML"
+      },
+      {
+        "row": 274,
+        "hidden": false,
+        "height": 15,
+        "item": "BG",
+        "relatedItem": "MK,GR,RO,CS,TR,RS"
+      },
+      {
+        "row": 275,
+        "hidden": false,
+        "height": 15,
+        "item": "BI",
+        "relatedItem": "TZ,CD,RW"
+      },
+      {
+        "row": 276,
+        "hidden": false,
+        "height": 15,
+        "item": "BJ",
+        "relatedItem": "NE,TG,BF,NG"
+      },
+      {
+        "row": 277,
+        "hidden": false,
+        "height": 15,
+        "item": "BN",
+        "relatedItem": "MY"
+      },
+      {
+        "row": 278,
+        "hidden": false,
+        "height": 15,
+        "item": "BO",
+        "relatedItem": "PE,CL,PY,BR,AR"
+      },
+      {
+        "row": 279,
+        "hidden": false,
+        "height": 30,
+        "item": "BR",
+        "relatedItem": "SR,PE,BO,UY,GY,PY,GF,VE,CO,AR"
+      },
+      {
+        "row": 280,
+        "hidden": false,
+        "height": 15,
+        "item": "BT",
+        "relatedItem": "CN,IN"
+      },
+      {
+        "row": 281,
+        "hidden": false,
+        "height": 15,
+        "item": "BW",
+        "relatedItem": "ZW,ZA,NA"
+      },
+      {
+        "row": 282,
+        "hidden": false,
+        "height": 15,
+        "item": "BY",
+        "relatedItem": "PL,LT,UA,RU,LV"
+      },
+      {
+        "row": 283,
+        "hidden": false,
+        "height": 15,
+        "item": "BZ",
+        "relatedItem": "GT,MX"
+      },
+      {
+        "row": 284,
+        "hidden": false,
+        "height": 15,
+        "item": "CA",
+        "relatedItem": "US"
+      },
+      {
+        "row": 285,
+        "hidden": false,
+        "height": 30,
+        "item": "CD",
+        "relatedItem": "TZ,CF,SS,RW,ZM,BI,UG,CG,AO"
+      },
+      {
+        "row": 286,
+        "hidden": false,
+        "height": 15,
+        "item": "CF",
+        "relatedItem": "TD,SD,CD,SS,CM,CG"
+      },
+      {
+        "row": 287,
+        "hidden": false,
+        "height": 15,
+        "item": "CG",
+        "relatedItem": "CF,GA,CD,CM,AO"
+      },
+      {
+        "row": 288,
+        "hidden": false,
+        "height": 15,
+        "item": "CH",
+        "relatedItem": "DE,IT,LI,FR,AT"
+      },
+      {
+        "row": 289,
+        "hidden": false,
+        "height": 15,
+        "item": "CI",
+        "relatedItem": "LR,GH,GN,BF,ML"
+      },
+      {
+        "row": 290,
+        "hidden": false,
+        "height": 15,
+        "item": "CL",
+        "relatedItem": "PE,BO,AR"
+      },
+      {
+        "row": 291,
+        "hidden": false,
+        "height": 15,
+        "item": "CM",
+        "relatedItem": "TD,CF,GA,GQ,CG,NG"
+      },
+      {
+        "row": 292,
+        "hidden": false,
+        "height": 45,
+        "item": "CN",
+        "relatedItem": "LA,BT,TJ,KZ,MN,AF,NP,MM,KG,PK,KP,RU,VN,IN"
+      },
+      {
+        "row": 293,
+        "hidden": false,
+        "height": 15,
+        "item": "CO",
+        "relatedItem": "EC,PE,PA,BR,VE"
+      },
+      {
+        "row": 294,
+        "hidden": false,
+        "height": 15,
+        "item": "CR",
+        "relatedItem": "PA,NI"
+      },
+      {
+        "row": 295,
+        "hidden": false,
+        "height": 15,
+        "item": "CU",
+        "relatedItem": "US"
+      },
+      {
+        "row": 296,
+        "hidden": false,
+        "height": 15,
+        "item": "CZ",
+        "relatedItem": "PL,DE,SK,AT"
+      },
+      {
+        "row": 297,
+        "hidden": false,
+        "height": 30,
+        "item": "DE",
+        "relatedItem": "CH,PL,NL,DK,BE,CZ,LU,FR,AT"
+      },
+      {
+        "row": 298,
+        "hidden": false,
+        "height": 15,
+        "item": "DJ",
+        "relatedItem": "ER,ET,SO"
+      },
+      {
+        "row": 299,
+        "hidden": false,
+        "height": 15,
+        "item": "DK",
+        "relatedItem": "DE"
+      },
+      {
+        "row": 300,
+        "hidden": false,
+        "height": 15,
+        "item": "DO",
+        "relatedItem": "HT"
+      },
+      {
+        "row": 301,
+        "hidden": false,
+        "height": 30,
+        "item": "DZ",
+        "relatedItem": "NE,EH,LY,MR,TN,MA,ML"
+      },
+      {
+        "row": 302,
+        "hidden": false,
+        "height": 15,
+        "item": "EC",
+        "relatedItem": "PE,CO"
+      },
+      {
+        "row": 303,
+        "hidden": false,
+        "height": 15,
+        "item": "EE",
+        "relatedItem": "RU,LV"
+      },
+      {
+        "row": 304,
+        "hidden": false,
+        "height": 15,
+        "item": "EG",
+        "relatedItem": "LY,SD,IL"
+      },
+      {
+        "row": 305,
+        "hidden": false,
+        "height": 15,
+        "item": "EH",
+        "relatedItem": "DZ,MR,MA"
+      },
+      {
+        "row": 306,
+        "hidden": false,
+        "height": 15,
+        "item": "ER",
+        "relatedItem": "ET,SD,DJ"
+      },
+      {
+        "row": 307,
+        "hidden": false,
+        "height": 15,
+        "item": "ES",
+        "relatedItem": "AD,PT,GI,FR,MA"
+      },
+      {
+        "row": 308,
+        "hidden": false,
+        "height": 15,
+        "item": "ET",
+        "relatedItem": "ER,KE,SD,SS,SO,DJ"
+      },
+      {
+        "row": 309,
+        "hidden": false,
+        "height": 15,
+        "item": "FI",
+        "relatedItem": "NO,RU,SE"
+      },
+      {
+        "row": 310,
+        "hidden": false,
+        "height": 30,
+        "item": "FR",
+        "relatedItem": "CH,DE,BE,LU,IT,AD,MC,ES"
+      },
+      {
+        "row": 311,
+        "hidden": false,
+        "height": 15,
+        "item": "GA",
+        "relatedItem": "CM,GQ,CG"
+      },
+      {
+        "row": 312,
+        "hidden": false,
+        "height": 15,
+        "item": "GB",
+        "relatedItem": "IE"
+      },
+      {
+        "row": 313,
+        "hidden": false,
+        "height": 15,
+        "item": "GE",
+        "relatedItem": "AM,AZ,TR,RU"
+      },
+      {
+        "row": 314,
+        "hidden": false,
+        "height": 15,
+        "item": "GF",
+        "relatedItem": "SR,BR"
+      },
+      {
+        "row": 315,
+        "hidden": false,
+        "height": 15,
+        "item": "GH",
+        "relatedItem": "CI,TG,BF"
+      },
+      {
+        "row": 316,
+        "hidden": false,
+        "height": 15,
+        "item": "GI",
+        "relatedItem": "ES"
+      },
+      {
+        "row": 317,
+        "hidden": false,
+        "height": 15,
+        "item": "GM",
+        "relatedItem": "SN"
+      },
+      {
+        "row": 318,
+        "hidden": false,
+        "height": 15,
+        "item": "GN",
+        "relatedItem": "LR,SN,SL,CI,GW,ML"
+      },
+      {
+        "row": 319,
+        "hidden": false,
+        "height": 15,
+        "item": "GP",
+        "relatedItem": "AN"
+      },
+      {
+        "row": 320,
+        "hidden": false,
+        "height": 15,
+        "item": "GQ",
+        "relatedItem": "GA,CM"
+      },
+      {
+        "row": 321,
+        "hidden": false,
+        "height": 15,
+        "item": "GR",
+        "relatedItem": "AL,MK,TR,BG"
+      },
+      {
+        "row": 322,
+        "hidden": false,
+        "height": 15,
+        "item": "GT",
+        "relatedItem": "MX,HN,BZ,SV"
+      },
+      {
+        "row": 323,
+        "hidden": false,
+        "height": 15,
+        "item": "GW",
+        "relatedItem": "SN,GN"
+      },
+      {
+        "row": 324,
+        "hidden": false,
+        "height": 15,
+        "item": "GY",
+        "relatedItem": "SR,BR,VE"
+      },
+      {
+        "row": 325,
+        "hidden": false,
+        "height": 15,
+        "item": "HN",
+        "relatedItem": "GT,NI,SV"
+      },
+      {
+        "row": 326,
+        "hidden": false,
+        "height": 15,
+        "item": "HR",
+        "relatedItem": "HU,SI,CS,BA,ME,RS"
+      },
+      {
+        "row": 327,
+        "hidden": false,
+        "height": 15,
+        "item": "HT",
+        "relatedItem": "DO"
+      },
+      {
+        "row": 328,
+        "hidden": false,
+        "height": 30,
+        "item": "HU",
+        "relatedItem": "SK,SI,RO,UA,CS,HR,AT,RS"
+      },
+      {
+        "row": 329,
+        "hidden": false,
+        "height": 15,
+        "item": "ID",
+        "relatedItem": "PG,TL,MY"
+      },
+      {
+        "row": 330,
+        "hidden": false,
+        "height": 15,
+        "item": "IE",
+        "relatedItem": "GB"
+      },
+      {
+        "row": 331,
+        "hidden": false,
+        "height": 15,
+        "item": "IL",
+        "relatedItem": "SY,JO,LB,EG,PS"
+      },
+      {
+        "row": 332,
+        "hidden": false,
+        "height": 15,
+        "item": "IN",
+        "relatedItem": "CN,NP,MM,BT,PK,BD"
+      },
+      {
+        "row": 333,
+        "hidden": false,
+        "height": 15,
+        "item": "IQ",
+        "relatedItem": "SY,SA,IR,JO,TR,KW"
+      },
+      {
+        "row": 334,
+        "hidden": false,
+        "height": 30,
+        "item": "IR",
+        "relatedItem": "TM,AF,IQ,AM,PK,AZ,TR"
+      },
+      {
+        "row": 335,
+        "hidden": false,
+        "height": 15,
+        "item": "IT",
+        "relatedItem": "CH,VA,SI,SM,FR,AT"
+      },
+      {
+        "row": 336,
+        "hidden": false,
+        "height": 15,
+        "item": "JO",
+        "relatedItem": "SY,SA,IQ,IL,PS"
+      },
+      {
+        "row": 337,
+        "hidden": false,
+        "height": 15,
+        "item": "KE",
+        "relatedItem": "ET,TZ,SS,SO,UG"
+      },
+      {
+        "row": 338,
+        "hidden": false,
+        "height": 15,
+        "item": "KG",
+        "relatedItem": "CN,TJ,UZ,KZ"
+      },
+      {
+        "row": 339,
+        "hidden": false,
+        "height": 15,
+        "item": "KH",
+        "relatedItem": "LA,TH,VN"
+      },
+      {
+        "row": 340,
+        "hidden": false,
+        "height": 15,
+        "item": "KP",
+        "relatedItem": "CN,KR,RU"
+      },
+      {
+        "row": 341,
+        "hidden": false,
+        "height": 15,
+        "item": "KR",
+        "relatedItem": "KP"
+      },
+      {
+        "row": 342,
+        "hidden": false,
+        "height": 15,
+        "item": "XK",
+        "relatedItem": "RS,AL,MK,ME"
+      },
+      {
+        "row": 343,
+        "hidden": false,
+        "height": 15,
+        "item": "KW",
+        "relatedItem": "SA,IQ"
+      },
+      {
+        "row": 344,
+        "hidden": false,
+        "height": 15,
+        "item": "KZ",
+        "relatedItem": "TM,CN,KG,UZ,RU"
+      },
+      {
+        "row": 345,
+        "hidden": false,
+        "height": 15,
+        "item": "LA",
+        "relatedItem": "CN,MM,KH,TH,VN"
+      },
+      {
+        "row": 346,
+        "hidden": false,
+        "height": 15,
+        "item": "LB",
+        "relatedItem": "SY,IL"
+      },
+      {
+        "row": 347,
+        "hidden": false,
+        "height": 15,
+        "item": "LI",
+        "relatedItem": "CH,AT"
+      },
+      {
+        "row": 348,
+        "hidden": false,
+        "height": 15,
+        "item": "LR",
+        "relatedItem": "SL,CI,GN"
+      },
+      {
+        "row": 349,
+        "hidden": false,
+        "height": 15,
+        "item": "LS",
+        "relatedItem": "ZA"
+      },
+      {
+        "row": 350,
+        "hidden": false,
+        "height": 15,
+        "item": "LT",
+        "relatedItem": "PL,BY,RU,LV"
+      },
+      {
+        "row": 351,
+        "hidden": false,
+        "height": 15,
+        "item": "LU",
+        "relatedItem": "DE,BE,FR"
+      },
+      {
+        "row": 352,
+        "hidden": false,
+        "height": 15,
+        "item": "LV",
+        "relatedItem": "LT,EE,BY,RU"
+      },
+      {
+        "row": 353,
+        "hidden": false,
+        "height": 15,
+        "item": "LY",
+        "relatedItem": "TD,NE,DZ,SD,TN,EG"
+      },
+      {
+        "row": 354,
+        "hidden": false,
+        "height": 15,
+        "item": "MA",
+        "relatedItem": "DZ,EH,ES"
+      },
+      {
+        "row": 355,
+        "hidden": false,
+        "height": 15,
+        "item": "MC",
+        "relatedItem": "FR"
+      },
+      {
+        "row": 356,
+        "hidden": false,
+        "height": 15,
+        "item": "MD",
+        "relatedItem": "RO,UA"
+      },
+      {
+        "row": 357,
+        "hidden": false,
+        "height": 15,
+        "item": "ME",
+        "relatedItem": "AL,HR,BA,RS,XK"
+      },
+      {
+        "row": 358,
+        "hidden": false,
+        "height": 15,
+        "item": "MF",
+        "relatedItem": "SX"
+      },
+      {
+        "row": 359,
+        "hidden": false,
+        "height": 15,
+        "item": "MK",
+        "relatedItem": "AL,GR,CS,BG,RS,XK"
+      },
+      {
+        "row": 360,
+        "hidden": false,
+        "height": 15,
+        "item": "ML",
+        "relatedItem": "SN,NE,DZ,CI,GN,MR,BF"
+      },
+      {
+        "row": 361,
+        "hidden": false,
+        "height": 15,
+        "item": "MM",
+        "relatedItem": "CN,LA,TH,BD,IN"
+      },
+      {
+        "row": 362,
+        "hidden": false,
+        "height": 15,
+        "item": "MN",
+        "relatedItem": "CN,RU"
+      },
+      {
+        "row": 363,
+        "hidden": false,
+        "height": 15,
+        "item": "MR",
+        "relatedItem": "SN,DZ,EH,ML"
+      },
+      {
+        "row": 364,
+        "hidden": false,
+        "height": 15,
+        "item": "MW",
+        "relatedItem": "TZ,MZ,ZM"
+      },
+      {
+        "row": 365,
+        "hidden": false,
+        "height": 15,
+        "item": "MX",
+        "relatedItem": "GT,US,BZ"
+      },
+      {
+        "row": 366,
+        "hidden": false,
+        "height": 15,
+        "item": "MY",
+        "relatedItem": "BN,TH,ID"
+      },
+      {
+        "row": 367,
+        "hidden": false,
+        "height": 15,
+        "item": "MZ",
+        "relatedItem": "ZW,TZ,SZ,ZA,ZM,MW"
+      },
+      {
+        "row": 368,
+        "hidden": false,
+        "height": 15,
+        "item": "NA",
+        "relatedItem": "ZA,BW,ZM,AO"
+      },
+      {
+        "row": 369,
+        "hidden": false,
+        "height": 15,
+        "item": "NE",
+        "relatedItem": "TD,BJ,DZ,LY,BF,NG,ML"
+      },
+      {
+        "row": 370,
+        "hidden": false,
+        "height": 15,
+        "item": "NG",
+        "relatedItem": "TD,NE,BJ,CM"
+      },
+      {
+        "row": 371,
+        "hidden": false,
+        "height": 15,
+        "item": "NI",
+        "relatedItem": "CR,HN"
+      },
+      {
+        "row": 372,
+        "hidden": false,
+        "height": 15,
+        "item": "NL",
+        "relatedItem": "DE,BE"
+      },
+      {
+        "row": 373,
+        "hidden": false,
+        "height": 15,
+        "item": "NO",
+        "relatedItem": "FI,RU,SE"
+      },
+      {
+        "row": 374,
+        "hidden": false,
+        "height": 15,
+        "item": "NP",
+        "relatedItem": "CN,IN"
+      },
+      {
+        "row": 375,
+        "hidden": false,
+        "height": 15,
+        "item": "OM",
+        "relatedItem": "SA,YE,AE"
+      },
+      {
+        "row": 376,
+        "hidden": false,
+        "height": 15,
+        "item": "PA",
+        "relatedItem": "CR,CO"
+      },
+      {
+        "row": 377,
+        "hidden": false,
+        "height": 15,
+        "item": "PE",
+        "relatedItem": "EC,CL,BO,BR,CO"
+      },
+      {
+        "row": 378,
+        "hidden": false,
+        "height": 15,
+        "item": "PG",
+        "relatedItem": "ID"
+      },
+      {
+        "row": 379,
+        "hidden": false,
+        "height": 15,
+        "item": "PK",
+        "relatedItem": "CN,AF,IR,IN"
+      },
+      {
+        "row": 380,
+        "hidden": false,
+        "height": 15,
+        "item": "PL",
+        "relatedItem": "DE,LT,SK,CZ,BY,UA,RU"
+      },
+      {
+        "row": 381,
+        "hidden": false,
+        "height": 15,
+        "item": "PS",
+        "relatedItem": "JO,IL"
+      },
+      {
+        "row": 382,
+        "hidden": false,
+        "height": 15,
+        "item": "PT",
+        "relatedItem": "ES"
+      },
+      {
+        "row": 383,
+        "hidden": false,
+        "height": 15,
+        "item": "PY",
+        "relatedItem": "BO,BR,AR"
+      },
+      {
+        "row": 384,
+        "hidden": false,
+        "height": 15,
+        "item": "QA",
+        "relatedItem": "SA"
+      },
+      {
+        "row": 385,
+        "hidden": false,
+        "height": 15,
+        "item": "RO",
+        "relatedItem": "MD,HU,UA,CS,BG,RS"
+      },
+      {
+        "row": 386,
+        "hidden": false,
+        "height": 30,
+        "item": "RS",
+        "relatedItem": "AL,HU,MK,RO,HR,BA,BG,ME,XK"
+      },
+      {
+        "row": 387,
+        "hidden": false,
+        "height": 30,
+        "item": "RU",
+        "relatedItem": "GE,CN,BY,UA,KZ,LV,PL,EE,LT,FI,MN,NO,AZ,KP"
+      },
+      {
+        "row": 388,
+        "hidden": false,
+        "height": 15,
+        "item": "RW",
+        "relatedItem": "TZ,CD,BI,UG"
+      },
+      {
+        "row": 389,
+        "hidden": false,
+        "height": 30,
+        "item": "SA",
+        "relatedItem": "QA,OM,IQ,YE,JO,AE,KW"
+      },
+      {
+        "row": 390,
+        "hidden": false,
+        "height": 15,
+        "item": "SD",
+        "relatedItem": "SS,TD,EG,ET,ER,LY,CF"
+      },
+      {
+        "row": 391,
+        "hidden": false,
+        "height": 15,
+        "item": "SS",
+        "relatedItem": "CD,CF,ET,KE,SD,UG"
+      },
+      {
+        "row": 392,
+        "hidden": false,
+        "height": 15,
+        "item": "SE",
+        "relatedItem": "NO,FI"
+      },
+      {
+        "row": 393,
+        "hidden": false,
+        "height": 15,
+        "item": "SI",
+        "relatedItem": "HU,IT,HR,AT"
+      },
+      {
+        "row": 394,
+        "hidden": false,
+        "height": 15,
+        "item": "SK",
+        "relatedItem": "PL,HU,CZ,UA,AT"
+      },
+      {
+        "row": 395,
+        "hidden": false,
+        "height": 15,
+        "item": "SL",
+        "relatedItem": "LR,GN"
+      },
+      {
+        "row": 396,
+        "hidden": false,
+        "height": 15,
+        "item": "SM",
+        "relatedItem": "IT"
+      },
+      {
+        "row": 397,
+        "hidden": false,
+        "height": 15,
+        "item": "SN",
+        "relatedItem": "GN,MR,GW,GM,ML"
+      },
+      {
+        "row": 398,
+        "hidden": false,
+        "height": 15,
+        "item": "SO",
+        "relatedItem": "ET,KE,DJ"
+      },
+      {
+        "row": 399,
+        "hidden": false,
+        "height": 15,
+        "item": "SR",
+        "relatedItem": "GY,BR,GF"
+      },
+      {
+        "row": 400,
+        "hidden": false,
+        "height": 15,
+        "item": "SV",
+        "relatedItem": "GT,HN"
+      },
+      {
+        "row": 401,
+        "hidden": false,
+        "height": 15,
+        "item": "SX",
+        "relatedItem": "MF"
+      },
+      {
+        "row": 402,
+        "hidden": false,
+        "height": 15,
+        "item": "SY",
+        "relatedItem": "IQ,JO,IL,TR,LB"
+      },
+      {
+        "row": 403,
+        "hidden": false,
+        "height": 15,
+        "item": "SZ",
+        "relatedItem": "ZA,MZ"
+      },
+      {
+        "row": 404,
+        "hidden": false,
+        "height": 15,
+        "item": "TD",
+        "relatedItem": "NE,LY,CF,SD,CM,NG"
+      },
+      {
+        "row": 405,
+        "hidden": false,
+        "height": 15,
+        "item": "TG",
+        "relatedItem": "BJ,GH,BF"
+      },
+      {
+        "row": 406,
+        "hidden": false,
+        "height": 15,
+        "item": "TH",
+        "relatedItem": "LA,MM,KH,MY"
+      },
+      {
+        "row": 407,
+        "hidden": false,
+        "height": 15,
+        "item": "TJ",
+        "relatedItem": "CN,AF,KG,UZ"
+      },
+      {
+        "row": 408,
+        "hidden": false,
+        "height": 15,
+        "item": "TL",
+        "relatedItem": "ID"
+      },
+      {
+        "row": 409,
+        "hidden": false,
+        "height": 15,
+        "item": "TM",
+        "relatedItem": "AF,IR,UZ,KZ"
+      },
+      {
+        "row": 410,
+        "hidden": false,
+        "height": 15,
+        "item": "TN",
+        "relatedItem": "DZ,LY"
+      },
+      {
+        "row": 411,
+        "hidden": false,
+        "height": 30,
+        "item": "TR",
+        "relatedItem": "SY,GE,IQ,IR,GR,AM,AZ,BG"
+      },
+      {
+        "row": 412,
+        "hidden": false,
+        "height": 30,
+        "item": "TZ",
+        "relatedItem": "MZ,KE,CD,RW,ZM,BI,UG,MW"
+      },
+      {
+        "row": 413,
+        "hidden": false,
+        "height": 30,
+        "item": "UA",
+        "relatedItem": "PL,MD,HU,SK,BY,RO,RU"
+      },
+      {
+        "row": 414,
+        "hidden": false,
+        "height": 15,
+        "item": "UG",
+        "relatedItem": "TZ,KE,SS,CD,RW"
+      },
+      {
+        "row": 415,
+        "hidden": false,
+        "height": 15,
+        "item": "US",
+        "relatedItem": "CA,MX,CU"
+      },
+      {
+        "row": 416,
+        "hidden": false,
+        "height": 15,
+        "item": "UY",
+        "relatedItem": "BR,AR"
+      },
+      {
+        "row": 417,
+        "hidden": false,
+        "height": 15,
+        "item": "UZ",
+        "relatedItem": "TM,AF,KG,TJ,KZ"
+      },
+      {
+        "row": 418,
+        "hidden": false,
+        "height": 15,
+        "item": "VA",
+        "relatedItem": "IT"
+      },
+      {
+        "row": 419,
+        "hidden": false,
+        "height": 15,
+        "item": "VE",
+        "relatedItem": "GY,BR,CO"
+      },
+      {
+        "row": 420,
+        "hidden": false,
+        "height": 15,
+        "item": "VN",
+        "relatedItem": "CN,LA,KH"
+      },
+      {
+        "row": 421,
+        "hidden": false,
+        "height": 15,
+        "item": "YE",
+        "relatedItem": "SA,OM"
+      },
+      {
+        "row": 422,
+        "hidden": false,
+        "height": 15,
+        "item": "ZA",
+        "relatedItem": "ZW,SZ,MZ,BW,NA,LS"
+      },
+      {
+        "row": 423,
+        "hidden": false,
+        "height": 30,
+        "item": "ZM",
+        "relatedItem": "ZW,TZ,MZ,CD,NA,MW,AO"
+      },
+      {
+        "row": 424,
+        "hidden": false,
+        "height": 15,
+        "item": "ZW",
+        "relatedItem": "ZA,MZ,BW,ZM"
+      },
+      {
+        "row": 425,
+        "hidden": false,
+        "height": 30,
+        "item": "CS",
+        "relatedItem": "AL,HU,MK,RO,HR,BA,BG"
+      },
+      {
+        "row": 426,
+        "hidden": false,
+        "height": 15,
+        "item": "AN",
+        "relatedItem": "GP"
+      },
+      {
+        "row": 427,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "AD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 428,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "AE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 429,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "AF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 430,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "AG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 431,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "AI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 432,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "AL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 433,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "AM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 434,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "AO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 435,
+        "hidden": false,
+        "height": 15,
+        "item": "Antarctica",
+        "relatedItem": "AQ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 436,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "AR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 437,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "AS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 438,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "AT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 439,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "AU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 440,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "AW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 441,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "AX",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 442,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "AZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 443,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "BA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 444,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "BB",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 445,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "BD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 446,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "BE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 447,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "BF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 448,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "BG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 449,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "BH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 450,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "BI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 451,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "BJ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 452,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "BL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 453,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "BM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 454,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "BN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 455,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "BO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 456,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "BQ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 457,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "BR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 458,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "BS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 459,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "BT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 460,
+        "hidden": false,
+        "height": 15,
+        "item": "Antarctica",
+        "relatedItem": "BV",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 461,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "BW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 462,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "BY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 463,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "BZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 464,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "CA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 465,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "CC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 466,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "CD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 467,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "CF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 468,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "CG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 469,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "CH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 470,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "CI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 471,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "CK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 472,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "CL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 473,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "CM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 474,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "CN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 475,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "CO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 476,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "CR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 477,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "CU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 478,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "CV",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 479,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "CW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 480,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "CX",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 481,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "CY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 482,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "CZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 483,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "DE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 484,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "DJ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 485,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "DK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 486,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "DM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 487,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "DO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 488,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "DZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 489,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "EC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 490,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "EE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 491,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "EG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 492,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "EH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 493,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ER",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 494,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "ES",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 495,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ET",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 496,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "FI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 497,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "FJ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 498,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "FK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 499,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "FM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 500,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "FO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 501,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "FR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 502,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "GA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 503,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "GB",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 504,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "GD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 505,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "GE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 506,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "GF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 507,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "GG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 508,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "GH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 509,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "GI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 510,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "GL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 511,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "GM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 512,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "GN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 513,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "GP",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 514,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "GQ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 515,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "GR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 516,
+        "hidden": false,
+        "height": 15,
+        "item": "Antarctica",
+        "relatedItem": "GS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 517,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "GT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 518,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "GU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 519,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "GW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 520,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "GY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 521,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "HK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 522,
+        "hidden": false,
+        "height": 15,
+        "item": "Antarctica",
+        "relatedItem": "HM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 523,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "HN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 524,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "HR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 525,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "HT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 526,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "HU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 527,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "ID",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 528,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "IE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 529,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "IL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 530,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "IM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 531,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "IN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 532,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "IO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 533,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "IQ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 534,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "IR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 535,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "IS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 536,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "IT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 537,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "JE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 538,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "JM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 539,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "JO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 540,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "JP",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 541,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "KE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 542,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "KG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 543,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "KH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 544,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "KI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 545,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "KM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 546,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "KN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 547,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "KP",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 548,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "KR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 549,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "XK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 550,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "KW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 551,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "KY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 552,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "KZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 553,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "LA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 554,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "LB",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 555,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "LC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 556,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "LI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 557,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "LK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 558,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "LR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 559,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "LS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 560,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "LT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 561,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "LU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 562,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "LV",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 563,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "LY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 564,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "MA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 565,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "MC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 566,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "MD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 567,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "ME",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 568,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "MF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 569,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "MG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 570,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "MH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 571,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "MK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 572,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ML",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 573,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "MM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 574,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "MN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 575,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "MO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 576,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "MP",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 577,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "MQ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 578,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "MR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 579,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "MS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 580,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "MT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 581,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "MU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 582,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "MV",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 583,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "MW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 584,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "MX",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 585,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "MY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 586,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "MZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 587,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "NA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 588,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "NC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 589,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "NE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 590,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "NF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 591,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "NG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 592,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "NI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 593,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "NL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 594,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "NO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 595,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "NP",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 596,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "NR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 597,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "NU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 598,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "NZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 599,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "OM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 600,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "PA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 601,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "PE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 602,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "PF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 603,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "PG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 604,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "PH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 605,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "PK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 606,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "PL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 607,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "PM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 608,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "PN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 609,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "PR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 610,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "PS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 611,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "PT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 612,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "PW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 613,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "PY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 614,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "QA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 615,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "RE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 616,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "RO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 617,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "RS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 618,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "RU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 619,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "RW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 620,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "SA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 621,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "SB",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 622,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 623,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 624,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 625,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "SE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 626,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "SG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 627,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 628,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "SI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 629,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "SJ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 630,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "SK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 631,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 632,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "SM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 633,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 634,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 635,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "SR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 636,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ST",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 637,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "SV",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 638,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "SX",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 639,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "SY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 640,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "SZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 641,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "TC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 642,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "TD",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 643,
+        "hidden": false,
+        "height": 15,
+        "item": "Antarctica",
+        "relatedItem": "TF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 644,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "TG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 645,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "TH",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 646,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "TJ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 647,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "TK",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 648,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "TL",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 649,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "TM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 650,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "TN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 651,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "TO",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 652,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "TR",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 653,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "TT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 654,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "TV",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 655,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "TW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 656,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "TZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 657,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "UA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 658,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "UG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 659,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "UM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 660,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "US",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 661,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "UY",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 662,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "UZ",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 663,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "VA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 664,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "VC",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 665,
+        "hidden": false,
+        "height": 15,
+        "item": "South America",
+        "relatedItem": "VE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 666,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "VG",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 667,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "VI",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 668,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "VN",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 669,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "VU",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 670,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "WF",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 671,
+        "hidden": false,
+        "height": 15,
+        "item": "Oceana",
+        "relatedItem": "WS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 672,
+        "hidden": false,
+        "height": 15,
+        "item": "Asia",
+        "relatedItem": "YE",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 673,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "YT",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 674,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ZA",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 675,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ZM",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 676,
+        "hidden": false,
+        "height": 15,
+        "item": "Africa",
+        "relatedItem": "ZW",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 677,
+        "hidden": false,
+        "height": 15,
+        "item": "Europe",
+        "relatedItem": "CS",
+        "styleName": "ContinentToCountry"
+      },
+      {
+        "row": 678,
+        "hidden": false,
+        "height": 15,
+        "item": "North America",
+        "relatedItem": "AN",
+        "styleName": "ContinentToCountry"
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 43.5,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 25.5,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 100.5,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 45,
+        "name": "Country",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "fillcolor": "Bisque",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 43.5,
+        "name": "Continent",
+        "type": "node",
+        "format": {
+          "shape": "plaintext",
+          "fontname": "Calibri Bold",
+          "fontsize": "20"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 25.5,
+        "name": "ContinentToCountry",
+        "type": "edge",
+        "format": {
+          "color": "invis",
+          "fontcolor": "invis"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 45,
+        "name": "Africa",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "1",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 45,
+        "name": "Antarctica",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "2",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 45,
+        "name": "Asia",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "3",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 45,
+        "name": "Europe",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "4",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 45,
+        "name": "North America",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "5",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 45,
+        "name": "Oceana",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "6",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 45,
+        "name": "South America",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "shape",
+          "colorscheme": "pastel27",
+          "fillcolor": "7",
+          "fontname": "Calibri",
+          "fontsize": "10",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      }
+    ],
+    "sql": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the workbook containing the data",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "SET DATA FILE",
+        "excelFile": "countries.xlsx",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create a node for each country",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 108,
+        "sqlStatement": "SELECT   [ISO]                as [Item],\u000A         [ISO]                as [Label],\u000A         [Country]            as [External Label],\u000A         [Continent]          as [Style Name]\u000AFROM     [countries$]\u000AWHERE    [ISO] IS NOT NULL\u000AORDER BY [Country] ASC\u000A",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create a node for each continent",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT DISTINCT [Continent]   as [Item],\u000A                [Continent]   as [Label],\u000A                \"Continent\"   as [Style Name]\u000AFROM     [countries$]\u000AORDER BY [Continent] ASC\u000A",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create an edge between neighboring countries",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 67.5,
+        "sqlStatement": "SELECT   [ISO]                as [Item],\u000A         [Neighbors]          as [Related Item]\u000AFROM     [countries$]\u000AWHERE    [Neighbors] IS NOT NULL\u000A",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create an edge between each country and its parent continent",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT   [Continent]          as [Item],\u000A         [ISO]                as [Related Item],\u000A         \"ContinentToCountry\" as [Style Name]\u000AFROM     [countries$]\u000AWHERE    [ISO] IS NOT NULL\u000A",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "#####################################################################################################",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Quick Help",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "#####################################################################################################",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Excel SQL Syntax",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "https://github.com/jjlong150/AceSqlForExcel",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clear the 'data' worksheet",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "RESET",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the workbook containing the data",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "SET DATA FILE",
+        "excelFile": "Put workbook name here",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "SELECT [From Column] AS [Item], \u000A       [To Column]   AS [Related Item] \u000AFROM   [Worksheet Name$] \u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column]    AS [Item],\u000A       [Node Label Column] AS [Label],\u000A       [Node Style Column] AS [Style Name]\u000AFROM   [Worksheet Name$] \u000AWHERE  ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create edges which chain a set of nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column] AS [ITEM], \u000A       TRUE             AS [CREATE EDGES]\u000AFROM   [Worksheet Name$]\u000AWHERE  ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create a subgraph, with constraints set to rank specified as either 'same' | 'min' | 'source' | 'max' | 'sink'.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "Rank constraints on the nodes in a subgraph. If rank=\"same\", all nodes are placed on the same rank. If rank=\"min\", all nodes are placed on the minimum rank. If rank=\"source\", all nodes are placed on the minimum rank, and the only nodes on the minimum rank belong to some subgraph whose rank attribute is \"source\" or \"min\". Analogous criteria hold for rank=\"max\" and rank=\"sink\". (Note: the minimum rank is topmost or leftmost, and the maximum rank is bottommost or rightmost.)",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column] AS [ITEM], \r\u000A       TRUE             AS [CREATE RANK],\r\u000A       'same'           AS [RANK]\r\u000AFROM   [Worksheet Name$]\r\u000AWHERE  ...\r\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Split text for labels at first blank after 10 characters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "SELECT [Label Column] AS [Label],\u000A       10             AS [SPLIT LENGTH],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the line ending (\\l, \\n, \\r, | etc.) to use when splitting a label",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Label Column] AS [Label],\u000A       10             AS [SPLIT LENGTH],\u000A       '\\r'           AS [LINE ENDING],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Group nodes into a cluster",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 135,
+        "enabled": false,
+        "sqlStatement": "SELECT [Cluster Id Column]         AS [CLUSTER],\u000A       [Cluster Label Column]      AS [CLUSTER LABEL],\u000A       [Cluster Style Name Column] AS [CLUSTER STYLE NAME],\u000A       [Cluster Attributes]        AS [CLUSTER ATTRIBUTES],\u000A       [Cluster Tooltip Column]    AS [CLUSTER TOOLTIP],\u000A       [Node Id Column]            AS [Item],\u000A       [Node Label Column]         AS [Label],\u000A       [Node Style Name Column]    AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Group nodes into two level clusters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 229.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Outer Cluster Id Column]         AS [CLUSTER],\u000A       [Outer Cluster Label Column]      AS [CLUSTER LABEL],\u000A       [Outer Cluster Style Name Column] AS [CLUSTER STYLE NAME],\u000A       [Outer Cluster Attributes]        AS [CLUSTER ATTRIBUTES],\u000A       [Outer Cluster Tooltip Column]    AS [CLUSTER TOOLTIP],\u000A\u000A       [Inner Cluster Id Column]         AS [SUBCLUSTER],\u000A       [Inner Cluster Label Column]      AS [SUBCLUSTER LABEL],\u000A       [Inner Cluster Style Name Column] AS [SUBCLUSTER STYLE NAME],\u000A       [Inner Cluster Attributes]        AS [SUBCLUSTER ATTRIBUTES],\u000A       [Inner Cluster Tooltip Column]    AS [SUBCLUSTER TOOLTIP],\u000A\u000A       [Node Id Column]                  AS [Item],\u000A       [Node Label Column]               AS [Label],\u000A       [Node Style Name Column]          AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "Loop count substitution strings (useful in sortv= attributes, style names, and labels). \u000A  %clc% = Cluster count\u000A  %scc% = Subcluster count\u000A  %rsc% = Record set count\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 148.5,
+        "enabled": false,
+        "sqlStatement": "SELECT 'sortv=%clc%'    AS [CLUSTER ATTRIBUTES],\u000A       'Border %clc% '  AS [CLUSTER STYLE NAME],\u000A       'sortv=%scc%'    AS [SUBCLUSTER ATTRIBUTES],\u000A       'sortv=%rsc%'    AS [Attributes],\u000A       ...\u000AFROM   [Worksheet Name$] \u000AWHERE  ...\u000AORDER BY [Outer Cluster Label Column] ASC,\u000A         [Inner Cluster Label Column] ASC,\u000A         [Node Label Column]          ASC\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Show the graph immediately after all SQL statements processed",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PREVIEW [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] ",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Publish graphs as files",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PUBLISH [ ALL VIEWS ] [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] [ file prefix ]",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Graph it, and display it in the workbook",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PREVIEW AS UNDIRECTED GRAPH",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "data": {
+      "graphToWorksheet": {
+        "runMode": "auto",
+        "imageType": "svg",
+        "imageWorksheet": "graph",
+        "scaleImage": 45
+      },
+      "graphToFile": {
+        "directory": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\15 - Using SQL - World Map",
+        "fileNamePrefix": "Graph -",
+        "imageType": "png",
+        "appendOptions": false,
+        "appendTimeStamp": false
+      },
+      "layout": {
+        "engine": "fdp",
+        "direction": "",
+        "splines": "true"
+      },
+      "options": {
+        "graph": {
+          "center": false,
+          "clusterRank": "",
+          "compound": false,
+          "dim": "",
+          "dimen": "",
+          "forceLabels": false,
+          "graphType": "undirected",
+          "mode": "",
+          "model": "",
+          "newrank": false,
+          "ordering": "",
+          "orientation": false,
+          "outputOrder": "",
+          "overlap": "prism",
+          "smoothing": "",
+          "transparentBackground": false,
+          "includeImagePath": true
+        },
+        "nodes": {
+          "includeOrphanNodes": true,
+          "includeNodeLabels": true,
+          "includeNodeXLabels": true,
+          "blankNodeLabels": "default"
+        },
+        "edges": {
+          "addStrict": true,
+          "concentrate": false,
+          "includeOrphanEdges": true,
+          "includeEdgeHeadLabels": true,
+          "includeEdgeLabels": true,
+          "includeEdgeXLabels": true,
+          "includeEdgeTailLabels": true,
+          "includeEdgePorts": true,
+          "blankEdgeLabels": "blank"
+        }
+      },
+      "styles": {
+        "selectedViewColumn": "E",
+        "includeStyleFormat": true,
+        "includeExtraAttributes": true,
+        "suffixOpen": "Begin",
+        "suffixClose": "End"
+      },
+      "debug": {
+        "debug": "off",
+        "fileDisposition": "delete"
+      },
+      "columns": {
+        "flag": "show",
+        "item": "show",
+        "label": "show",
+        "outsideLabel": "show",
+        "tailLabel": "hide",
+        "headLabel": "hide",
+        "relatedItem": "show",
+        "styleName": "show",
+        "extraAttributes": "hide",
+        "message": "hide"
+      },
+      "language": {
+        "language": "locale_en-US"
+      },
+      "console": {
+        "logToConsole": false,
+        "appendConsole": false,
+        "graphvizVerbose": false,
+        "errorToConsole": false,
+        "errorToMessageBox": true,
+        "errorToStatusBar": false
+      },
+      "worksheets": {
+        "about": "show",
+        "attributes": "hide",
+        "colors": "hide",
+        "console": "show",
+        "diagnostics": "hide",
+        "exchange": "show",
+        "lists": "hide",
+        "locale_de-DE": "hide",
+        "locale_en-GB": "hide",
+        "locale_en-US": "hide",
+        "locale_fr-FR": "hide",
+        "locale_it-IT": "hide",
+        "locale_pl-PL": "hide",
+        "settings": "show",
+        "shapes": "hide",
+        "source": "hide",
+        "sql": "show",
+        "styleDesigner": "show",
+        "styles": "show",
+        "svg": "hide"
+      }
+    },
+    "graph": {
+      "zoom": 100
+    },
+    "settings": {
+      "graphvizPath": "",
+      "imagePath": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\15 - Using SQL - World Map",
+      "additionalGraphOptions": "",
+      "pictureName": "",
+      "additionalCmdParameters": ""
+    },
+    "source": {
+      "indent": 4,
+      "buttons": [
+        {
+          "id": "SourceWeb1",
+          "buttonText": "Graphviz Attributes",
+          "url": "https://graphviz.org/doc/info/attrs.html",
+          "screenTip": "Describes the attributes used by various Graphviz tools",
+          "superTip": "The table gives the name of the attribute, the graph components (node, edge, etc.) which use the attribute and the type of the attribute (strings representing legal values of that type). Where applicable, the table also gives a default value for the attribute, a minimum allowed setting for numeric attributes, and certain restrictions on the use of the attribute.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb2",
+          "buttonText": "Pocket Reference",
+          "url": "http://graphs.grevian.org/graph",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb3",
+          "buttonText": "Graphviz Online",
+          "url": "http://dreampuf.github.io/GraphvizOnline/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Online Graphviz editor with syntax higlighting.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb4",
+          "buttonText": "Sketchviz",
+          "url": "https://sketchviz.com/new",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Renders Graphviz diagrams as if sketched by hand.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb5",
+          "buttonText": "Graphviz Fiddle",
+          "url": "http://stamm-wilbrandt.de/GraphvizFiddle/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "GraphvizFiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb6",
+          "buttonText": "Dot to Ascii",
+          "url": "https://dot-to-ascii.ggerganov.com/",
+          "screenTip": "Renders Graphviz diagrams as ascii art.",
+          "superTip": "Renders Graphviz diagrams as ascii art.",
+          "visible": "show"
+        }
+      ]
+    },
+    "sql": {
+      "cluster": "cluster",
+      "clusterLabel": "cluster label",
+      "clusterStyleName": "cluster style name",
+      "clusterAttributes": "cluster attributes",
+      "clusterTooltip": "cluster tooltip",
+      "clusterPlaceholder": "%clc%",
+      "subcluster": "subcluster",
+      "subclusterLabel": "subcluster label",
+      "subclusterStyleName": "subcluster style name",
+      "subclusterAttributes": "subcluster attributes",
+      "subclusterTooltip": "subcluster tooltip",
+      "subclusterPlaceholder": "%scc%",
+      "recordsetPlaceholder": "%rsc%",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
+      "filterColumn": "",
+      "filterValue": "",
+      "closeConnections": true
+    },
+    "extensions": {
+      "tabName": "Extensions",
+      "customCode": {
+        "groupName": "Custom Code",
+        "buttons": [
+          {
+            "id": "ExtCode1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode6",
+            "visible": "hide"
+          }
+        ]
+      },
+      "webResources": {
+        "groupName": "Web Resources",
+        "buttons": [
+          {
+            "id": "ExtWeb1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb6",
+            "visible": "hide"
+          }
+        ]
+      }
+    }
+  },
+  "layouts": {
+    "data": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "item",
+          "column": 2,
+          "heading": "Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "label",
+          "column": 4,
+          "heading": "Label",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "outsideLabel",
+          "column": 5,
+          "heading": "External Label",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "tailLabel",
+          "column": 3,
+          "heading": "Tail Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "headLabel",
+          "column": 6,
+          "heading": "Head Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tooltip",
+          "column": 7,
+          "heading": "Tooltip",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "relatedItem",
+          "column": 8,
+          "heading": "Related Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "styleName",
+          "column": 9,
+          "heading": "Style Name",
+          "width": 26.57,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "extraAttributes",
+          "column": 10,
+          "heading": "Attributes",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "message",
+          "column": 11,
+          "heading": "Messages",
+          "width": 0,
+          "hidden": true,
+          "wrapText": false
+        },
+        {
+          "id": "graphDisplayColumn",
+          "column": 12,
+          "heading": "",
+          "width": 8.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "styles": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 101.25,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 43.5,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "name",
+          "column": 2,
+          "heading": "Style Name",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 3,
+          "heading": "Format",
+          "width": 52.43,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "type",
+          "column": 4,
+          "heading": "Style Type",
+          "width": 13.86,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view0",
+          "column": 5,
+          "heading": "All Styles",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view1",
+          "column": 6,
+          "heading": "No Clusters",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 7,
+          "heading": "No Edges",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        }
+      ],
+      "ranges": [
+        {
+        }
+      ]
+    },
+    "sql": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "sqlStatement",
+          "column": 2,
+          "heading": "SQL SELECT Statement",
+          "width": 140.57,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "excelFile",
+          "column": 3,
+          "heading": "Excel data file (.xlsx, .xlsm, .xlsb, or .xls only)",
+          "width": 34.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "status",
+          "column": 4,
+          "heading": "Status",
+          "width": 23.29,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 50.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 149.29,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    },
+    "source": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 22.5,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "lineNumber",
+          "column": 1,
+          "heading": "Line",
+          "width": 6.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "source",
+          "column": 2,
+          "heading": "Graphviz Source",
+          "width": 254,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    }
+  }
+}

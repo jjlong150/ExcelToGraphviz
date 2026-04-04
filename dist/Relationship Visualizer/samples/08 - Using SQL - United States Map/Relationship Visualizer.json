@@ -4,11 +4,11 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2025-08-27",
-    "time": "16:57:42",
+    "date": "2026-01-10",
+    "time": "15:34:08",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "Relationship Visualizer WMOld.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
     "data": [
@@ -1301,7 +1301,7 @@
       {
         "row": 4,
         "hidden": false,
-        "height": 99.75,
+        "height": 100.5,
         "name": "subgraph-open",
         "type": "subgraph-open",
         "viewSwitches": [
@@ -1345,7 +1345,7 @@
       {
         "row": 8,
         "hidden": false,
-        "height": 123.75,
+        "height": 120.75,
         "name": "Border 0 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1373,7 +1373,7 @@
       {
         "row": 10,
         "hidden": false,
-        "height": 117.75,
+        "height": 115.5,
         "name": "Border 1 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1404,7 +1404,7 @@
       {
         "row": 12,
         "hidden": false,
-        "height": 117.75,
+        "height": 115.5,
         "name": "Border 2 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1435,7 +1435,7 @@
       {
         "row": 14,
         "hidden": false,
-        "height": 117.75,
+        "height": 115.5,
         "name": "Border 3 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1466,7 +1466,7 @@
       {
         "row": 16,
         "hidden": false,
-        "height": 117.75,
+        "height": 115.5,
         "name": "Border 4 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1497,7 +1497,7 @@
       {
         "row": 18,
         "hidden": false,
-        "height": 117.75,
+        "height": 115.5,
         "name": "Border 5 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1654,7 +1654,7 @@
       {
         "row": 26,
         "hidden": false,
-        "height": 21,
+        "height": 19.5,
         "name": "Flow",
         "type": "edge",
         "format": {
@@ -3572,19 +3572,193 @@
           null,
           null
         ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ]
   },
   "settings": {
     "data": {
       "graphToWorksheet": {
-        "runMode": "manual",
-        "imageType": "png",
+        "runMode": "auto",
+        "imageType": "svg",
         "imageWorksheet": "graph",
         "scaleImage": 100
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\08 - Using SQL - World Map",
+        "directory": "C:\\data\\local\\rv\\v9.1.01\\Relationship Visualizer\\samples\\08 - Using SQL - United States Map",
         "fileNamePrefix": "Graph",
         "imageType": "svg",
         "appendOptions": false,
@@ -3611,7 +3785,7 @@
           "orientation": false,
           "outputOrder": "edgesfirst",
           "overlap": "",
-          "smoothing": "",
+          "smoothing": "rng",
           "transparentBackground": false,
           "includeImagePath": false
         },
@@ -3662,7 +3836,10 @@
       "console": {
         "logToConsole": false,
         "appendConsole": false,
-        "graphvizVerbose": false
+        "graphvizVerbose": false,
+        "errorToConsole": false,
+        "errorToMessageBox": true,
+        "errorToStatusBar": false
       },
       "worksheets": {
         "about": "hide",
@@ -3678,10 +3855,10 @@
         "locale_fr-FR": "hide",
         "locale_it-IT": "hide",
         "locale_pl-PL": "hide",
-        "settings": "hide",
+        "settings": "show",
         "shapes": "hide",
         "source": "hide",
-        "sql": "hide",
+        "sql": "show",
         "styleDesigner": "hide",
         "styles": "hide",
         "svg": "hide"
@@ -3692,7 +3869,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\08 - Using SQL - World Map",
+      "imagePath": "C:\\data\\local\\rv\\v9.1.01\\Relationship Visualizer\\samples\\08 - Using SQL - United States Map",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -3754,8 +3931,15 @@
       "recordsetPlaceholder": "%rsc%",
       "splitLength": "SPLIT LENGTH",
       "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
       "filterColumn": "",
-      "filterValue": ""
+      "filterValue": "",
+      "closeConnections": true
     },
     "extensions": {
       "tabName": "Extensions",

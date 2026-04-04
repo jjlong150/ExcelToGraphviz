@@ -1,3 +1,5 @@
+-- This file must reside in ~/Library/Application Scripts/com.microsoft.Excel/
+
 on runDot(dotParameters)
 	set dot_output to do shell script "/usr/local/bin/dot " & dotParameters & " 2>&1"
 	return dot_output

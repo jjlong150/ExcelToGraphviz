@@ -2,63 +2,53 @@ Excel to Graphviz Relationship Visualizer
 -----------------------------------------
 
 INTRODUCTION
+------------
+The Relationship Visualizer lets you easily collect relationship information in Excel and quickly generate relationship graphs.
 
-The Relationship Visualizer lets you easily collect relationship information in Excel and quickly create relationship graphs.
+It automatically draws diagrams from high‑level instructions, handling details like shape placement and connecting lines. While it offers many customization options, it isn't designed for precise, pixel‑perfect control. If you need exact placement or prefer freehand drawing, this tool may not be the right fit.
 
-It automatically draws relationship diagrams from high-level instructions, handling details like shape placement and connecting lines. While it offers many customization options, it’s not designed for precise, pixel-perfect control. If you need exact placement or like to draw freehand, this tool might not be suitable for you.
+It's ideal for anyone who wants fast visualizations with minimal effort and doesn't need fine‑grained layout control. Simply provide statements like "A is related to B," and the Relationship Visualizer will produce a complete graphical representation of your data.
 
-This tool is perfect for those who want quick visualizations with minimal effort and aren't concerned with detailed placement. Just provide simple 'A is related to B' statements, and the Relationship Visualizer will generate a comprehensive graphical depiction of the data.
 
 
 INSTALLATION
+------------
+The documentation at https://exceltographviz.com/install/ provides everything you need to set up and use the Relationship Visualizer.
 
-The documentation at https://exceltographviz.com/install/ provides all the information you need to set up and use the Relationship Visualizer.
+Please note that the required open‑source Graphviz tools are not included with this package. The online documentation explains how to download and install them separately.
 
-Please note that the co-requisite Open Source Graphviz tools are not included in this package. The online documentation provides detailed instructions on how to obtain and install them separately.
 
 
 GETTING STARTED
+---------------
+Take the time to work through the guides at https://exceltographviz.com/ to get the most out of the Relationship Visualizer. Much of the underlying graphic‑processing complexity is already configured for you, so creating a graph can be as simple as entering a few lists and clicking a button. If you choose to explore the full feature set, you’ll be able to produce far more intricate and expressive diagrams. Once you get comfortable with the workflow, the entire process becomes straightforward, enjoyable, and genuinely rewarding.
 
-Take the time to carefully follow the guides at https://exceltographviz.com/ and master the tool for the best results. Much of the graphic processing complexity is pre-configured and hidden, so creating a graph can be as easy as entering lists and pressing a button. However, exploring the full capabilities allows you to craft intricate and impressive graphs. Once you get the hang of it, the process becomes straightforward, enjoyable, and rewarding!
 
 
-MICROSOFT WINDOWS SOFTWARE REQUIREMENTS
 
-* Microsoft Excel
-  - Microsoft 365: Version 16.91.1 -or-
-  - Office 2024:   Version 16.91.1 -or-
-  - Office 2021:   Version 16.53   -or-
-  - Office 2019:   Version 16.0    -or-
-  - Office 2016:   Version 16.0
-* Operating System
-  - Windows 10 -or-
-  - Windows 11 -or-
-  - Windows Server 2022
-* Graphviz 
-  - Version 11.0.0 (20240428.1522) or higher
+MINIMUM SUPPORTED CONFIGURATIONS
+--------------------------------
 
-macOS SOFTWARE REQUIREMENTS
+Windows:
+- Excel for Microsoft 365, Excel LTSC 2024, or Excel LTSC 2021
+- Windows 10, Windows 11, or Windows Server 2022
+- Graphviz 14.1.1 (20251213.1925) or higher
 
-* Microsoft Excel
-  - Microsoft 365 for Mac: Version 16.91.1 (24111613) as of November 19, 2024.
-  - Office 2024 for Mac:   Version 16.91.1 (24111613) as of November 19, 2024.
-  - Office 2021 for Mac:   Version 16.53 (released in 2021)
-* Operating System
-  - macOS Sequoia -or-
-  - macOS Sonoma  -or-
-  - macOS Ventura
-* Graphviz 
-  - Version 11.0.0 (20240428.1522) or higher
+macOS:
+- Excel for Microsoft 365 for Mac, Excel LTSC 2024 for Mac, or Excel LTSC 2021 for Mac
+- macOS Ventura, Sonoma, or Sequoia
+- Graphviz 14.1.1 (20251213.1925) or higher
+
 
 
 LICENSE
+-------
 
 MIT License
 
-Copyright (c) 2015-2024 Jeffrey Long
+Copyright (c) 2015-2026 Jeffrey Long
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 

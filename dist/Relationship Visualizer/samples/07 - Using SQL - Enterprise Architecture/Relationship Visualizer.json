@@ -4,11 +4,11 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2025-08-27",
-    "time": "10:29:44",
+    "date": "2026-01-20",
+    "time": "13:56:20",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "Relationship Visualizer Old.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
     "data": [
@@ -28,7 +28,7 @@
       {
         "row": 3,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "{",
         "label": "explore",
         "styleName": "Border 2 Begin"
@@ -36,15 +36,14 @@
       {
         "row": 4,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "{",
-        "label": "Public communication",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 5,
         "hidden": false,
-        "height": 30,
+        "height": 60,
         "item": "Public communicationPublic website",
         "label": "Public website",
         "tooltip": "Communicatin material provided by our company available to the general public"
@@ -76,13 +75,12 @@
         "hidden": false,
         "height": 15,
         "item": "{",
-        "label": "Customer Activation",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 10,
         "hidden": false,
-        "height": 30,
+        "height": 45,
         "item": "Customer Activationorder activation system",
         "label": "order activation system",
         "tooltip": "Process of identifying and activating a new customer"
@@ -90,7 +88,7 @@
       {
         "row": 11,
         "hidden": false,
-        "height": 30,
+        "height": 45,
         "item": "Customer Activationsoftware downloader",
         "label": "software downloader",
         "tooltip": "Process of identifying and activating a new customer"
@@ -98,7 +96,7 @@
       {
         "row": 12,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "}",
         "styleName": "Border 4 End"
       },
@@ -107,13 +105,12 @@
         "hidden": false,
         "height": 15,
         "item": "{",
-        "label": "Customer Agreement management",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 14,
         "hidden": false,
-        "height": 15,
+        "height": 45,
         "item": "Customer Agreement managementorder management system",
         "label": "order management system",
         "tooltip": "Process of managing contracts with customers"
@@ -121,7 +118,7 @@
       {
         "row": 15,
         "hidden": false,
-        "height": 30,
+        "height": 45,
         "item": "Customer Agreement managementorder approval",
         "label": "order approval",
         "tooltip": "Process of managing contracts with customers"
@@ -129,7 +126,7 @@
       {
         "row": 16,
         "hidden": false,
-        "height": 30,
+        "height": 45,
         "item": "Customer Agreement managementordering portal",
         "label": "ordering portal",
         "tooltip": "Process of managing contracts with customers"
@@ -137,7 +134,7 @@
       {
         "row": 17,
         "hidden": false,
-        "height": 15,
+        "height": 45,
         "item": "Customer Agreement managementSalesforce CRM module",
         "label": "Salesforce CRM module",
         "tooltip": "Process of managing contracts with customers"
@@ -145,7 +142,7 @@
       {
         "row": 18,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "}",
         "styleName": "Border 4 End"
       },
@@ -154,13 +151,12 @@
         "hidden": false,
         "height": 15,
         "item": "{",
-        "label": "Sales and Relationship management",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 20,
         "hidden": false,
-        "height": 15,
+        "height": 75,
         "item": "Sales and Relationship managementSalesforce CRM module",
         "label": "Salesforce CRM module",
         "tooltip": "The capability to offer products and services to customers, follow up the customer succes and usage."
@@ -168,7 +164,7 @@
       {
         "row": 21,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "}",
         "styleName": "Border 4 End"
       },
@@ -192,13 +188,12 @@
         "hidden": false,
         "height": 15,
         "item": "{",
-        "label": "Busines process management",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 25,
         "hidden": false,
-        "height": 30,
+        "height": 60,
         "item": "Busines process managementorder workflow",
         "label": "order workflow",
         "tooltip": "Supporting function running multiple types of business processes"
@@ -206,7 +201,7 @@
       {
         "row": 26,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "}",
         "styleName": "Border 4 End"
       },
@@ -228,15 +223,14 @@
       {
         "row": 29,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "{",
-        "label": "Customer communication",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 30,
         "hidden": false,
-        "height": 30,
+        "height": 105,
         "item": "Customer communicationnotification center",
         "label": "notification center",
         "tooltip": "The communication made avalable on our products and services in all phases of onboarding, ordering, activation and usage to specific customers."
@@ -251,15 +245,14 @@
       {
         "row": 32,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "{",
-        "label": "Customer Training & Support",
         "styleName": "Border 4 Begin"
       },
       {
         "row": 33,
         "hidden": false,
-        "height": 15,
+        "height": 30,
         "item": "Customer Training & SupportCase Handler",
         "label": "Case Handler",
         "tooltip": "Training and support provided to customers"
@@ -274,7 +267,7 @@
       {
         "row": 35,
         "hidden": false,
-        "height": 30,
+        "height": 15,
         "item": "}",
         "styleName": "Border 2 End"
       },
@@ -284,236 +277,6 @@
         "height": 15,
         "item": "}",
         "styleName": "Border 0 End"
-      },
-      {
-        "row": 37,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 38,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 39,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 40,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 41,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 42,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 43,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 44,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 45,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 46,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 47,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 48,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 49,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 50,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 51,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 52,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 53,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 54,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 55,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 56,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 57,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 58,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 59,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 60,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 61,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 62,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 63,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 64,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 65,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 66,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 67,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 68,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 69,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 70,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 71,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 72,
-        "hidden": false,
-        "height": 45
-      },
-      {
-        "row": 73,
-        "hidden": false,
-        "height": 45
-      },
-      {
-        "row": 74,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 75,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 76,
-        "hidden": false,
-        "height": 30
-      },
-      {
-        "row": 77,
-        "hidden": false,
-        "height": 45
-      },
-      {
-        "row": 78,
-        "hidden": false,
-        "height": 45
-      },
-      {
-        "row": 79,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 80,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 81,
-        "hidden": false,
-        "height": 15
-      },
-      {
-        "row": 82,
-        "hidden": false,
-        "height": 15
       }
     ],
     "styles": [
@@ -544,7 +307,7 @@
       {
         "row": 4,
         "hidden": false,
-        "height": 99.75,
+        "height": 100.5,
         "name": "subgraph-open",
         "type": "subgraph-open",
         "viewSwitches": [
@@ -592,7 +355,7 @@
       {
         "row": 8,
         "hidden": false,
-        "height": 121.5,
+        "height": 123,
         "name": "Border 0 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1701,7 +1464,7 @@
         "row": 8,
         "hidden": false,
         "height": 189,
-        "sqlStatement": "SELECT\u000A  [1.Capability] & [2.Component] as [Item],\u000A  [2.Component]                  as [Label],\u000A  [1.Description]                as [Tooltip],\u000A  [1.Domain]                     as [cluster],\u000A  'Border 2 '                    as [cluster style name],\u000A  [1.Capability]                 as [subcluster],\u000A  'Border 4 '                    as [subcluster style name]      \u000AFROM \u000A  [Capabilities$] AS 1,[Capability Mapping$] AS 2\u000AWHERE\u000A  [1.Capability] = [2.Capability]\u000AORDER BY [1.Domain],[1.Capability]\u000A",
+        "sqlStatement": "SELECT\u000A  [1.Capability] & [2.Component] as [Item],\u000A  [2.Component]                  as [Label],\u000A  [1.Description]                as [Tooltip],\u000A  [1.Domain]                     as [cluster],\u000A  [1.Domain]                     as [cluster label],\u000A  'Border 2 '                    as [cluster style name],\u000A  [1.Capability]                 as [subcluster],\u000A  'Border 4 '                    as [subcluster style name]      \u000AFROM \u000A  [Capabilities$] AS 1,[Capability Mapping$] AS 2\u000AWHERE\u000A  [1.Capability] = [2.Capability]\u000AORDER BY [1.Domain],[1.Capability]\u000A",
         "excelFile": "Archdata.xlsx",
         "status": "SUCCESS",
         "filters": [
@@ -2194,7 +1957,7 @@
         "row": 24,
         "hidden": false,
         "height": 270,
-        "sqlStatement": "SELECT \u000A  [Component]          as [Item],       \u000A  'sortv=%rsc%'        as [attributes],\u000A  [Component]          as [Label],\u000A  [Description]        as [Tooltip],\u000A  [Layer]              as [cluster],\u000A  'Border 6 '          as [cluster style name],\u000A  [Layer]              as [cluster tooltip],\u000A  'sortv=%clc% packmode=array_utr3'     \u000A                       as [cluster attributes],\u000A  [Cluster]            as [subcluster],\u000A  'Border %scc% '      as [subcluster style name],\u000A  [Cluster]            as [subcluster tooltip],\u000A  'sortv=%scc% packmode=array_utr3' \u000A                       as [subcluster attributes] \u000AFROM \u000A  [Components$] \u000AORDER BY \u000A  [Layer Order]     ASC, \u000A  [Cluster] ASC",
+        "sqlStatement": "SELECT \u000A  [Component]          as [Item],       \u000A  'sortv={rsc}'        as [attributes],\u000A  [Component]          as [Label],\u000A  [Description]        as [Tooltip],\u000A  [Layer]              as [cluster],\u000A  [Layer]              as [cluster label],\u000A  'Border 6 '          as [cluster style name],\u000A  [Layer]              as [cluster tooltip],\u000A  'sortv={clc} packmode=array_utr3'     \u000A                       as [cluster attributes],\u000A  [Cluster]            as [subcluster],\u000A  [Cluster]            as [subcluster label],\u000A  'Border {scc} '      as [subcluster style name],\u000A  [Cluster]            as [subcluster tooltip],\u000A  'sortv={scc} packmode=array_utr3' \u000A                       as [subcluster attributes] \u000AFROM \u000A  [Components$] \u000AORDER BY \u000A  [Layer Order]     ASC, \u000A  [Cluster] ASC",
         "excelFile": "Archdata.xlsx",
         "status": "FILTERED OUT",
         "filters": [
@@ -2569,7 +2332,7 @@
         "row": 36,
         "hidden": false,
         "height": 81,
-        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Deployment Overview'     as [Label], \u000A  'Deployment Overview'     as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut1' as [attributes]",
+        "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Deployment Overview'          as [Label], \u000A  'Deployment Overview'          as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut1' as [attributes]",
         "status": "FILTERED OUT",
         "filters": [
           "Deployment Overview",
@@ -2663,7 +2426,7 @@
         "row": 39,
         "hidden": false,
         "height": 256.5,
-        "sqlStatement": "SELECT DISTINCT\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\u000A  [2.Component]                                         as [Label],\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\u000A  'Border 2 '                                           as [cluster style name],\u000A  'sortv=%clc% pack=\"12\" packmode=array_ut2'            as [cluster attributes], \u000A  [1.Node]                                              as [subcluster],\u000A  [1.Description]                                       as [subcluster Tooltip],\u000A  'Border 4 '                                           as [subcluster style name],\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\u000AFROM \u000A  [Nodes$] AS 1,[Deployment$] AS 2\u000AWHERE\u000A  [1.Node] = [2.Node] AND\u000A  [1.Layer]='Internet'\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\u000A",
+        "sqlStatement": "SELECT DISTINCT\r\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\r\u000A  [2.Component]                                         as [Label],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster label],\r\u000A  'Border 2 '                                           as [cluster style name],\r\u000A  'sortv={clc} pack=\"12\" packmode=array_ut2'            as [cluster attributes], \r\u000A  [1.Node]                                              as [subcluster],\r\u000A  [1.Node]                                              as [subcluster label],\r\u000A  [1.Description]                                       as [subcluster Tooltip],\r\u000A  'Border 4 '                                           as [subcluster style name],\r\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\r\u000AFROM \r\u000A  [Nodes$] AS 1,[Deployment$] AS 2\r\u000AWHERE\r\u000A  [1.Node] = [2.Node] AND\r\u000A  [1.Layer]='Internet'\r\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\r\u000A",
         "excelFile": "Archdata.xlsx",
         "status": "FILTERED OUT",
         "filters": [
@@ -2789,7 +2552,7 @@
         "row": 43,
         "hidden": false,
         "height": 270,
-        "sqlStatement": "SELECT DISTINCT\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\u000A  [2.Component]                                         as [Label],\u000A  [1.Description]                                       as [Tooltip],\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\u000A  'Border 2 '                                           as [cluster style name],\u000A  'sortv=%clc% pack=\"12\" packmode=array_ut2'            as [cluster attributes], \u000A  [1.Node]                                              as [subcluster],\u000A  [1.Description]                                       as [subcluster Tooltip],\u000A  'Border 4 '                                           as [subcluster style name],\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\u000AFROM \u000A  [Nodes$] AS 1,[Deployment$] AS 2\u000AWHERE\u000A  [1.Node] = [2.Node] AND\u000A  [1.Layer]='On premise'\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\u000A",
+        "sqlStatement": "SELECT DISTINCT\r\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\r\u000A  [2.Component]                                         as [Label],\r\u000A  [1.Description]                                       as [Tooltip],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster label],\r\u000A  'Border 2 '                                           as [cluster style name],\r\u000A  'sortv={clc} pack=\"12\" packmode=array_ut2'            as [cluster attributes], \r\u000A  [1.Node]                                              as [subcluster],\r\u000A  [1.Node]                                              as [subcluster label],\r\u000A  [1.Description]                                       as [subcluster Tooltip],\r\u000A  'Border 4 '                                           as [subcluster style name],\r\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\r\u000AFROM \r\u000A  [Nodes$] AS 1,[Deployment$] AS 2\r\u000AWHERE\r\u000A  [1.Node] = [2.Node] AND\r\u000A  [1.Layer]='On premise'\r\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\r\u000A",
         "excelFile": "Archdata.xlsx",
         "status": "FILTERED OUT",
         "filters": [
@@ -2947,7 +2710,7 @@
         "row": 48,
         "hidden": false,
         "height": 270,
-        "sqlStatement": "SELECT DISTINCT\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\u000A  [2.Component]                                         as [Label],\u000A  [1.Description]                                       as [Tooltip],\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\u000A  'Border 2 '                                           as [cluster style name],\u000A  'sortv=%clc% pack=\"12\" packmode=array_ut2'            as [cluster attributes], \u000A  [1.Node]                                              as [subcluster],\u000A  [1.Description]                                       as [subcluster Tooltip],\u000A  'Border 4 '                                           as [subcluster style name],\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\u000AFROM \u000A  [Nodes$] AS 1,[Deployment$] AS 2\u000AWHERE\u000A  [1.Node] = [2.Node] AND\u000A  [1.Layer]='Cloud'\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\u000A",
+        "sqlStatement": "SELECT DISTINCT\r\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\r\u000A  [2.Component]                                         as [Label],\r\u000A  [1.Description]                                       as [Tooltip],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster label],\r\u000A  'Border 2 '                                           as [cluster style name],\r\u000A  'sortv={clc} pack=\"12\" packmode=array_ut2'            as [cluster attributes], \r\u000A  [1.Node]                                              as [subcluster],\r\u000A  [1.Node]                                              as [subcluster label],\r\u000A  [1.Description]                                       as [subcluster Tooltip],\r\u000A  'Border 4 '                                           as [subcluster style name],\r\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\r\u000AFROM \r\u000A  [Nodes$] AS 1,[Deployment$] AS 2\r\u000AWHERE\r\u000A  [1.Node] = [2.Node] AND\r\u000A  [1.Layer]='Cloud'\r\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\r\u000A",
         "excelFile": "Archdata.xlsx",
         "status": "FILTERED OUT",
         "filters": [
@@ -3190,19 +2953,454 @@
           null,
           null
         ]
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ]
   },
   "settings": {
     "data": {
       "graphToWorksheet": {
-        "runMode": "auto",
+        "runMode": "manual",
         "imageType": "png",
         "imageWorksheet": "graph",
         "scaleImage": 100
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
+        "directory": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
         "fileNamePrefix": "graph",
         "imageType": "svg",
         "appendOptions": false,
@@ -3278,9 +3476,12 @@
         "language": "locale_en-US"
       },
       "console": {
-        "logToConsole": false,
-        "appendConsole": false,
-        "graphvizVerbose": false
+        "logToConsole": true,
+        "appendConsole": true,
+        "graphvizVerbose": false,
+        "errorToConsole": true,
+        "errorToMessageBox": false,
+        "errorToStatusBar": false
       },
       "worksheets": {
         "about": "hide",
@@ -3310,7 +3511,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
+      "imagePath": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -3370,22 +3571,41 @@
     },
     "sql": {
       "cluster": "cluster",
-      "clusterLabel": "",
-      "clusterStyleName": "cluster style name",
-      "clusterAttributes": "cluster attributes",
-      "clusterTooltip": "cluster tooltip",
-      "clusterPlaceholder": "%clc%",
+      "clusterLabel": "cluster label",
+      "clusterStyleName": "CLUSTER STYLE NAME",
+      "clusterAttributes": "CLUSTER ATTRIBUTES",
+      "clusterTooltip": "CLUSTER TOOLTIP",
+      "clusterPlaceholder": "{clc}",
       "subcluster": "subcluster",
-      "subclusterLabel": "",
-      "subclusterStyleName": "subcluster style name",
-      "subclusterAttributes": "subcluster attributes",
-      "subclusterTooltip": "subcluster tooltip",
-      "subclusterPlaceholder": "%scc%",
-      "recordsetPlaceholder": "%rsc%",
-      "splitLength": "",
-      "lineEnding": "",
+      "subclusterLabel": "subcluster label",
+      "subclusterStyleName": "SUBCLUSTER STYLE NAME",
+      "subclusterAttributes": "SUBCLUSTER ATTRIBUTES",
+      "subclusterTooltip": "SUBCLUSTER TOOLTIP",
+      "subclusterPlaceholder": "{scc}",
+      "recordsetPlaceholder": "{rsc}",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "iterateSwitch": "ITERATE",
+      "iterateQueryId": "SQL FOR ID",
+      "iterateQueryData": "SQL FOR DATA",
+      "iteratePlaceholder": "{id}",
+      "enumerateSwitch": "ENUMERATE",
+      "enumerateStartAt": "START AT",
+      "enumerateStopAt": "STOP AT",
+      "enumerateStepBy": "STEP BY",
+      "enumeratePlaceholder": "{step}",
+      "enumerateMax": "MAX CYCLES",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
       "filterColumn": "E",
-      "filterValue": "Capability Map"
+      "filterValue": "Capability Map",
+      "closeConnections": true,
+      "retryLimit": 3,
+      "maxConnectionMinutes": 15
     },
     "extensions": {
       "tabName": "Extensions",
@@ -3678,7 +3898,7 @@
           "id": "excelFile",
           "column": 3,
           "heading": "Excel data file (.xlsx, .xlsm, .xlsb, or .xls only)",
-          "width": 47.57,
+          "width": 34.86,
           "hidden": false,
           "wrapText": true
         },
