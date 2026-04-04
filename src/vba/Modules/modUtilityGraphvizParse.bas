@@ -12,65 +12,98 @@ End Function
 Private Function AddPipeDelimitersToAttributeString(ByVal attributes As String) As String
     Dim inValue As Boolean
     Dim equalsFound As Boolean
+    Dim inHtml As Boolean
+    Dim htmlLevel As Long
     Dim oneChar As String
     Dim pipedAttributes As String
+    Dim i As Long
     
     inValue = False
-    '@Ignore AssignmentNotUsed
     equalsFound = False
-    
+    inHtml = False
+    htmlLevel = 0
     pipedAttributes = vbNullString
     
-    Dim i As Long
-    ' Examine the attribute string once character at a time
     For i = 1 To Len(attributes)
-        ' Grab a character
         oneChar = Mid$(attributes, i, 1)
         
-        If oneChar = "=" Then
-            ' We are transitioning from the key to the value
+        If inHtml Then
+            ' === Inside HTML label: copy everything, only track < > nesting ===
+            pipedAttributes = pipedAttributes & oneChar
+            
+            If oneChar = "<" Then
+                htmlLevel = htmlLevel + 1
+            ElseIf oneChar = ">" Then
+                htmlLevel = htmlLevel - 1
+                If htmlLevel <= 0 Then
+                    ' HTML label is complete
+                    inHtml = False
+                    equalsFound = False
+                    inValue = False
+                    pipedAttributes = pipedAttributes & "|"   ' terminate this value
+                End If
+            End If
+            
+        ElseIf oneChar = "=" Then
             pipedAttributes = pipedAttributes & oneChar
             equalsFound = True
-        ElseIf oneChar = """" Then
-            ' We found a quote. It can either be either the start or
-            ' the end of the value string.
             
+        ElseIf oneChar = """" Then
+            ' === Standard quoted value logic (unchanged) ===
             If equalsFound Then
-                ' We are are past an equals character,
                 If inValue Then
-                    ' if inValue is true this is the second quote
-                    ' since the equals character, so append a pipe
-                    ' character in place of the quote.
                     inValue = False
                     equalsFound = False
                     pipedAttributes = pipedAttributes & "|"
                 Else
-                    ' This is the first quote found to the right of
-                    ' an equals character, meaning this is the start
-                    ' of a value string.
                     inValue = True
                 End If
             End If
+            
+        ElseIf oneChar = "<" And equalsFound And Not inValue Then
+            ' === Start of HTML label (handles both <...> and <<...>>) ===
+            pipedAttributes = pipedAttributes & oneChar
+            inHtml = True
+            inValue = True
+            htmlLevel = 1
+            
+            ' Consume the second < if it's <<
+            If i < Len(attributes) And Mid$(attributes, i + 1, 1) = "<" Then
+                i = i + 1
+                oneChar = Mid$(attributes, i, 1)
+                pipedAttributes = pipedAttributes & oneChar
+                htmlLevel = htmlLevel + 1
+            End If
+            
         ElseIf oneChar = ";" Or oneChar = "," Or oneChar = " " Then
-            ' An optional attribute terminator was encountered
+            ' === Attribute terminators ===
             If equalsFound Then
                 If inValue Then
-                    ' allow commas in the value, ignore it
-                    inValue = True
+                    ' inside a normal quoted value or HTML ? keep the character
                     pipedAttributes = pipedAttributes & oneChar
                 Else
-                    ' honor the terminator string, append a pipe
+                    ' end of previous attribute
                     inValue = False
                     equalsFound = False
                     pipedAttributes = pipedAttributes & "|"
                 End If
+            Else
+                pipedAttributes = pipedAttributes & oneChar
             End If
+            
         Else
-            ' Ordinary, boring character. Concatenate it to the piped
-            ' attribute string.
+            ' normal character
             pipedAttributes = pipedAttributes & oneChar
         End If
     Next i
+    
+    ' Final cleanup: add trailing | if we ended inside a normal value
+    If inValue And Not inHtml Then
+        pipedAttributes = pipedAttributes & "|"
+    End If
+    
+    ' Remove blanks after pipe
+    pipedAttributes = replace(pipedAttributes, "| ", "|", , , vbTextCompare)
     
     AddPipeDelimitersToAttributeString = pipedAttributes
 End Function
@@ -78,29 +111,36 @@ End Function
 Private Function ParsePipedAttributeString(ByVal pipedAttributes As String) As Dictionary
 
     Dim i As Long
-
     Dim pairs() As String
     Dim keyValue() As String
     
     Dim dictionaryObj As Dictionary
     Set dictionaryObj = New Dictionary
    
-    pairs = split(pipedAttributes, "|") ' create an array of key/value pairs
+    pairs = split(pipedAttributes, "|")
+    
     For i = LBound(pairs) To UBound(pairs)
-        ' Safety check to ensure the array element contains an equal string
-        If InStr(1, pairs(i), "=") Then
-            ' split the key/value pair into individual elemnts
-            keyValue = split(pairs(i), "=")
+        Dim pair As String
+        pair = Trim$(pairs(i))
+        
+        If InStr(1, pair, "=") > 0 Then
+            ' Split ONLY on the FIRST "="
+            keyValue = split(pair, "=", 2)   ' The "2" limits it to 2 parts
             
-            ' Ensure that an attribute only is specified once. Retain only
-            ' the last value if the attribute is a duplicate.
-            If dictionaryObj.Exists(Trim$(keyValue(0))) Then
-                dictionaryObj.Remove (Trim$(keyValue(0)))
+            Dim key As String
+            Dim value As String
+            
+            key = Trim$(keyValue(0))
+            value = Trim$(keyValue(1))   ' Everything after the first = goes to value
+            
+            ' Remove previous duplicate if it exists (keep the last one)
+            If dictionaryObj.Exists(key) Then
+                dictionaryObj.Remove key
             End If
-            ' Add the pair into the dictionary
-            dictionaryObj.Add Trim$(keyValue(0)), Trim$(keyValue(1))
+            
+            dictionaryObj.Add key, value
         End If
-    Next
+    Next i
 
     Set ParsePipedAttributeString = dictionaryObj
 End Function
@@ -195,7 +235,7 @@ Private Function ParseArrowheadsRecursive(ByVal currentString As String, _
     
     ' Try each valid arrowhead at the current position
     For Each arrowhead In validArrowheads
-        If Len(arrowhead) > 0 And left(currentString, Len(arrowhead)) = arrowhead Then
+        If Len(arrowhead) > 0 And Left(currentString, Len(arrowhead)) = arrowhead Then
             result(index) = arrowhead
             Dim remainingString As String
             remainingString = Mid(currentString, Len(arrowhead) + 1)
