@@ -175,6 +175,7 @@ Public Function GetSettingsForSqlFields(ByVal makeLCase As Boolean) As sqlFieldN
 
         ' Placeholders (case preserved)
         .clusterPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_CLUSTER, False)
+        .clusterLevelPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_LEVEL, False)
         .subclusterPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_SUBCLUSTER, False)
         .recordsetPlaceholder = GetSettingText(SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET, False)
 
@@ -192,6 +193,10 @@ Public Function GetSettingsForSqlFields(ByVal makeLCase As Boolean) As sqlFieldN
         .closeConnections = GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS)
         
         ' Long
+        
+        ' Empose a limit on how many nested clusters are allowed
+        .clusterLevelLimit = GetSettingLong(SETTINGS_SQL_MAX_CLUSTER_LEVELS)
+        If .clusterLevelLimit < 1 Then .clusterLevelLimit = MAX_CLUSTERS
         
         ' We can retry a failed query if the cause was not due to syntax error
         ' If retry is not desired, it can be changed in the settings.
