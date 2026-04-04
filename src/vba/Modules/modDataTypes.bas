@@ -240,6 +240,8 @@ Public Type sqlFieldName
     clusterAttributes As String
     clusterTooltip As String
     clusterPlaceholder As String
+    clusterLevelPlaceholder As String
+    clusterLevelLimit As Long
     subcluster As String
     subclusterLabel As String
     subclusterStyleName As String
