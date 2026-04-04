@@ -113,10 +113,8 @@ Public Function GeneratePreviewGraph(ByVal elementType As String, _
         End If
     End If
 
-    ' Only node previews show images
-    If elementType = KEYWORD_NODE Then
-        AddNameValue graphOptions, GRAPHVIZ_IMAGEPATH, AddQuotes(GetImagePath())
-    End If
+    ' HTML-like labels can specify <img>, so inclue the image path
+    AddNameValue graphOptions, GRAPHVIZ_IMAGEPATH, AddQuotes(GetImagePath())
     
     graphOptions = graphOptions & " " & SettingsSheet.Range(SETTINGS_GRAPH_OPTIONS).value
     
@@ -865,7 +863,7 @@ Public Sub SaveToStylesWorksheet()
         ' If the style is CLUSTER we want to add a row for the subgraph-close, as it improves filtering capabilities
         If StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_CLUSTER Then
             If EndsWith(styleName, styles.suffixOpen) Then
-                styleName = left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
+                styleName = Left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
             End If
             StylesSheet.Cells.item(row, styles.nameColumn).value = styleName & " " & styles.suffixOpen
          
