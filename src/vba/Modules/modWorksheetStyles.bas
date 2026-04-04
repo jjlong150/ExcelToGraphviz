@@ -14,16 +14,15 @@ Public Sub GenerateStylesPreviewAll()
     Dim styleCount As Long
     styleCount = styles.lastRow - styles.firstRow + 1
     
-    ShowProgressIndicator GetLabel("stylesProgressIndicator")
-
+    Dim statusMsg As String
+    statusMsg = GetLabel("stylesProgressIndicator")
     ' Loop through the rows, generating preview images from the format strings
     Dim row As Long
     For row = styles.firstRow To styles.lastRow
-        UpdateProgressIndicator (((row - 1) * 100) / styleCount)
+        Application.StatusBar = statusMsg & " " & format(((row - 1) * 100) / styleCount, "0") & "%"
         GenerateStylesPreview row
+        DoEvents
     Next row
-    
-    HideProgressIndicator
 End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
@@ -56,17 +55,35 @@ Public Sub GenerateStylesPreview(ByRef row As Long)
     Dim styleType As String
     styleType = StylesSheet.Cells.item(row, styles.typeColumn).value
     
-    Dim graphvizSource As String
-    Select Case styleType
-        Case TYPE_NODE
-            graphvizSource = "digraph preview { bgcolor=transparent imagepath=" & AddQuotes(GetImagePath()) & " " & AddQuotes(styleName) & " [label=" & AddQuotes(replace(styleName, " ", "\n")) & " " & StylesSheet.Cells.item(row, styles.formatColumn).value & "] }"
-        Case TYPE_EDGE
-            graphvizSource = "digraph preview { bgcolor=transparent layout=dot rankdir=LR tail[shape=point color=invis]; head[shape=point color=invis]; tail->head[label=" & AddQuotes(styleName) & " " & StylesSheet.Cells.item(row, styles.formatColumn).value & "] }"
-        Case TYPE_SUBGRAPH_OPEN
-            graphvizSource = "digraph preview { bgcolor=transparent layout=dot rankdir=LR subgraph cluster_1 { label=" & AddQuotes(styleName) & " " & StylesSheet.Cells.item(row, styles.formatColumn).value & " node[style=filled fillcolor=white]; A->Z; } }"
-        Case Else
-    End Select
+    Dim styleFormat As String
+    styleFormat = StylesSheet.Cells.item(row, styles.formatColumn).value
     
+    Dim graphvizSource As String
+    
+    ' Check for the label attribute
+    If InStr(1, styleFormat, "label=", vbTextCompare) > 0 Then
+        ' Contains the label attribute
+        Select Case styleType
+            Case TYPE_NODE
+                graphvizSource = "digraph preview { bgcolor=transparent imagepath=" & AddQuotes(GetImagePath()) & " " & AddQuotes(styleName) & " [" & styleFormat & "] }"
+            Case TYPE_EDGE
+                graphvizSource = "digraph preview { bgcolor=transparent imagepath=" & AddQuotes(GetImagePath()) & " layout=dot rankdir=LR tail[shape=point color=invis]; head[shape=point color=invis]; tail->head[" & styleFormat & "] }"
+            Case TYPE_SUBGRAPH_OPEN
+                graphvizSource = "digraph preview { bgcolor=transparent imagepath=" & AddQuotes(GetImagePath()) & " layout=dot rankdir=LR subgraph cluster_1 {" & styleFormat & " node[style=filled fillcolor=white]; A->Z; } }"
+            Case Else
+        End Select
+    Else
+        ' Supply a label
+        Select Case styleType
+            Case TYPE_NODE
+                graphvizSource = "digraph preview { bgcolor=transparent imagepath=" & AddQuotes(GetImagePath()) & " " & AddQuotes(styleName) & " [label=" & AddQuotes(replace(styleName, " ", "\n")) & " " & styleFormat & "] }"
+            Case TYPE_EDGE
+                graphvizSource = "digraph preview { bgcolor=transparent layout=dot rankdir=LR tail[shape=point color=invis]; head[shape=point color=invis]; tail->head[label=" & AddQuotes(styleName) & " " & styleFormat & "] }"
+            Case TYPE_SUBGRAPH_OPEN
+                graphvizSource = "digraph preview { bgcolor=transparent layout=dot rankdir=LR subgraph cluster_1 { label=" & AddQuotes(styleName) & " " & styleFormat & " node[style=filled fillcolor=white]; A->Z; } }"
+            Case Else
+        End Select
+    End If
     If graphvizSource <> vbNullString Then
         PreviewStyleAndAutosize styleName, graphvizSource, previewColumn, row
     End If
@@ -280,7 +297,7 @@ Private Function GetStyleNameForRestore(row As Long)
     
     ' If the style is associated with a cluster, trim off the suffix
     If styleType = TYPE_SUBGRAPH_OPEN And EndsWith(styleName, styles.suffixOpen) Then
-        styleName = left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
+        styleName = Left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
     End If
 
     GetStyleNameForRestore = Trim$(styleName)
@@ -459,17 +476,17 @@ Private Sub ApplyFontNameSettings(ByVal attributeValue As String)
         Case Right$(fullFontName, 11) = "Bold Italic"
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_YES
             StyleDesignerSheet.Range(DESIGNER_FONT_ITALIC).value = TOGGLE_YES
-            baseFontName = left$(fullFontName, Len(fullFontName) - 12)
+            baseFontName = Left$(fullFontName, Len(fullFontName) - 12)
 
         Case Right$(fullFontName, 4) = "Bold"
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_YES
             StyleDesignerSheet.Range(DESIGNER_FONT_ITALIC).value = TOGGLE_NO
-            baseFontName = left$(fullFontName, Len(fullFontName) - 5)
+            baseFontName = Left$(fullFontName, Len(fullFontName) - 5)
 
         Case Right$(fullFontName, 6) = "Italic"
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_NO
             StyleDesignerSheet.Range(DESIGNER_FONT_ITALIC).value = TOGGLE_YES
-            baseFontName = left$(fullFontName, Len(fullFontName) - 7)
+            baseFontName = Left$(fullFontName, Len(fullFontName) - 7)
 
         Case Else
             StyleDesignerSheet.Range(DESIGNER_FONT_BOLD).value = TOGGLE_NO
