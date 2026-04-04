@@ -649,6 +649,8 @@ Private Function GetSettingsDictionarySql() As Dictionary
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_ATTRIBUTES, fields.clusterAttributes
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_TOOLTIP, fields.clusterTooltip
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_PLACEHOLDER, fields.clusterPlaceholder
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_LEVEL_PLACEHOLDER, fields.clusterLevelPlaceholder
+    dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_MAX_LEVELS, fields.clusterLevelLimit
     
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER, fields.subcluster
     dictionaryObj.Add JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_LABEL, fields.subclusterLabel

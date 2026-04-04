@@ -40,10 +40,11 @@ Public Const ONE_SECOND_DELAY As String = "00:00:01"
 #If Mac Then
 Public Const COLON As String = ":"
 #End If
-Public Const UTF8_CHARSET As String = "UTF-8"
+Public Const UTF8_CHARSET As String = "utf-8"
 
 Public Const MAX_RS_OPEN_RETRIES As Long = 3
 Public Const DEFAULT_MAX_CONN_AGE_MINUTES As Long = 5
+Public Const MAX_CLUSTERS As Long = 25
 
 ' Keywords
 Public Const KEYWORD_NODE As String = "NODE"
@@ -370,8 +371,10 @@ Public Const SETTINGS_SQL_FILTER_VALUE As String = "SqlFilterValue"
 
 Public Const SETTINGS_SQL_RETRY_LIMIT As String = "SqlRetryLimit"
 Public Const SETTINGS_SQL_MAX_CONNECTION_MINUTES As String = "SqlMaxConnectionMinutes"
+Public Const SETTINGS_SQL_MAX_CLUSTER_LEVELS As String = "SqlMaxClusterLevels"
 
 Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_CLUSTER As String = "SqlCountPlaceholderCluster"
+Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_LEVEL As String = "SqlCountPlaceholderLevel"
 Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_SUBCLUSTER As String = "SqlCountPlaceholderSubcluster"
 Public Const SETTINGS_SQL_COUNT_PLACEHOLDER_RECORDSET As String = "SqlCountPlaceholderRecordset"
 
@@ -815,6 +818,8 @@ Public Const JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_STYLE_NAME As String = "cluste
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_ATTRIBUTES As String = "clusterAttributes"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_TOOLTIP As String = "clusterTooltip"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_PLACEHOLDER As String = "clusterPlaceholder"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_LEVEL_PLACEHOLDER As String = "clusterLevelPlaceholder"
+Public Const JSON_SETTINGS_SQL_FIELD_NAME_CLUSTER_MAX_LEVELS As String = "clusterMaxLevels"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER As String = "subcluster"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_LABEL As String = "subclusterLabel"
 Public Const JSON_SETTINGS_SQL_FIELD_NAME_SUBCLUSTER_STYLE_NAME As String = "subclusterStyleName"
@@ -966,6 +971,7 @@ Public Const SQL_RESET                                    As String = "RESET"
 Public Const SQL_SELECT                                   As String = "SELECT"
 Public Const SQL_SET_DATA_FILE                            As String = "SET DATA FILE"
 Public Const SQL_SET_PLACEHOLDER                          As String = "SET PLACEHOLDER"
+Public Const SQL_SET_CLUSTER_LEVEL_LIMIT                  As String = "SET CLUSTER LEVEL LIMIT"
 
 ' Application Info
 Public Const DIAGNOSTICS_APPLICATION_OPERATING_SYSTEM     As String = "Diagnostics.ApplicationOperatingSystem"
