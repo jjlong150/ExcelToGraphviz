@@ -137,7 +137,12 @@ Public Sub SourceWorksheetToFile(ByVal fileName As String)
 
     ' Position the start of the utf8 stream past the Byte Order Mark (BOM) (i.e. BOM = first 3 bytes)
     ' and copy the contents to the binary stream
-    utf8Stream.position = 3
+    If utf8Stream.Size >= 3 Then
+        utf8Stream.position = 3   ' skip BOM
+    Else
+        utf8Stream.position = 0   ' no BOM present
+    End If
+    
     utf8Stream.CopyTo binaryStream
     
     ' Write out UTF-8 data without the BOM
