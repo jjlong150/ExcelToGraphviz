@@ -1,5 +1,28 @@
 # Changelog
 
+## Version 10.3.0 - April 3, 2026
+
+This release continues to expand the **SQL capabilities** of the Relationship Visualizer.
+
+**Enhancements**
+
+The Relationship Visualizer received the following improvements:
+
+- **Added support for “n” levels of clusters** – Previously, automatic clustering was limited to two levels via the `CLUSTER` and `SUBCLUSTER` column names. SQL clustering now supports an open‑ended number of levels by using integer‑suffixed field names. [(#13, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/13)
+
+  For example:
+  
+  `SELECT [continent] AS [CLUSTER1], [country] AS [CLUSTER2], [state] AS [CLUSTER3], [county] AS [CLUSTER5], [city] AS [CLUSTER6] ...`
+
+  Each level supports its own label, tooltip, style name, and attributes (e.g., `[CLUSTER1 LABEL]`, `[CLUSTER1 STYLE NAME]`, `[CLUSTER1 ATTRIBUTES]`, `[CLUSTER1 TOOLTIP]`).
+
+- **Added `{label}` placeholder in cluster labels** – Introduced a `{label}` substitution token for cluster labels. This update allows HTML‑like formatting strings to be stored in the saved style format, enabling enhancements such as embedding an image next to the label value. When the graph is rendered, the label value from the `data` worksheet replaces the `{label}` placeholder.
+  [(#14, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/14) 
+
+- **Revised format‑string parsing** – Updated the logic that interprets saved style formats to correctly recognize HTML‑like syntax and pass it through to the Style Designer when the **Edit Style** button is used.  [(#15, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/15) 
+
+- **Revised refresh‑all‑previews behavior** – Removed the progress‑bar dialog displayed when refreshing all style previews. Percent‑complete progress is now shown in the status bar. [(#16, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/16)
+
 ## Version 10.2.0 – February 27, 2026
 
 This small release focuses primarily on expanding the **SQL capabilities** of the Relationship Visualizer.
