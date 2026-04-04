@@ -1288,7 +1288,11 @@ Private Function ProcessSubgraphOpen(ByRef ini As settings, ByRef data As dataRo
 
     ' The subgraph can have an optional label. Include it if specified
     If data.label <> vbNullString Then
-        subgraphDirective = subgraphDirective & " label=" & FormatLabel(data.label)
+        If InStr(1, data.format, "{label}", vbTextCompare) Then
+            subgraphDirective = replace(subgraphDirective, "{label}", data.label, 1, -1, vbTextCompare)
+        Else
+            subgraphDirective = subgraphDirective & " label=" & FormatLabel(data.label)
+        End If
     End If
                             
     ' If output format is SVG, then include the tooltip data
