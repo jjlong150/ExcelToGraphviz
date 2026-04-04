@@ -11,7 +11,7 @@ Private Const DEFAULT_MAX_RECURSION_DEPTH As Long = 100
 Private Const LOOP_MAX_STEPS As Long = 10000 ' Put an upper limit on DO loop to prevent infinite loops
 
 Private Type EnumerateParameters
-    enabled As Boolean
+    Enabled As Boolean
     startAt As Long
     stopAt As Long
     stepBy As Long
@@ -19,7 +19,7 @@ Private Type EnumerateParameters
     count As Long
 End Type
 
-Private Type sqlContext
+Public Type sqlContext
     dataLayout As dataWorksheet
     fields As sqlFieldName
     headings As DataWorksheetHeadings
@@ -43,18 +43,18 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
     SetLoggingEnabled False
 
     ' Get the column layout of the 'data' worksheet
-    Dim context As sqlContext
-    context.dataLayout = GetSettingsForDataWorksheet(DataSheet.name)
+    Dim ctx As sqlContext
+    ctx.dataLayout = GetSettingsForDataWorksheet(DataSheet.name)
 
     ' Get the heading values of the 'data' worksheet columns.
-    context.headings = GetSQLWorksheetHeadings(context.dataLayout)
+    ctx.headings = GetSQLWorksheetHeadings(ctx.dataLayout)
 
     ' Get the column layout of the 'sql' worksheet
-    context.sqlLayout = GetSettingsForSqlWorksheet()
+    ctx.sqlLayout = GetSettingsForSqlWorksheet()
 
     ' Get the list of special field names used for determining clusters and subclusters.
-    context.fields = GetSettingsForSqlFields(True)
-
+    ctx.fields = GetSettingsForSqlFields(True)
+    
     ' Create a dictionary to hold substitution placeholder values
     Dim placeholders As Dictionary
     Set placeholders = New Dictionary
@@ -68,7 +68,7 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
     sqlCol = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
     
     If row = 0 Then
-        firstRow = context.sqlLayout.firstRow
+        firstRow = ctx.sqlLayout.firstRow
         lastRow = GetLastRowInColumn(SqlSheet, sqlCol)
         
         If lastRow < firstRow Then
@@ -89,7 +89,7 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
     ClearDataWorksheet DataSheet.name
 
     Dim dataRow As Long
-    dataRow = context.dataLayout.firstRow
+    dataRow = ctx.dataLayout.firstRow
 
     ' The column used to filter which SQL statements should be run
     Dim filterColumn As Long
@@ -112,20 +112,20 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
         Application.StatusBar = False
         
         ' Skip initializations if the SQL row is commented out
-        If SafeStr(SqlSheet.Cells.item(sqlRow, context.sqlLayout.flagColumn).value) <> FLAG_COMMENT Then
+        If SafeStr(SqlSheet.Cells.item(sqlRow, ctx.sqlLayout.flagColumn).value) <> FLAG_COMMENT Then
 
             ' Establish the full path to the Excel file containing the data
-            filePath = GetExcelFilePath(sqlRow, context.sqlLayout, dataFile)
+            filePath = GetExcelFilePath(sqlRow, ctx.sqlLayout, dataFile)
 
             ' Get SQL statement, and convert to upper case
-            sqlStatement = Trim$(SafeStr(SqlSheet.Cells.item(sqlRow, context.sqlLayout.sqlStatementColumn).value))
+            sqlStatement = Trim$(SafeStr(SqlSheet.Cells.item(sqlRow, ctx.sqlLayout.sqlStatementColumn).value))
             sqlUCase = UCase$(sqlStatement)
 
             ' Get default SUCCESS message
             message = GetMessage("msgboxSqlStatusSuccess")
         End If
 
-        If SafeStr(SqlSheet.Cells.item(sqlRow, context.sqlLayout.flagColumn).value) = FLAG_COMMENT Then
+        If SafeStr(SqlSheet.Cells.item(sqlRow, ctx.sqlLayout.flagColumn).value) = FLAG_COMMENT Then
             sqlStatement = vbNullString
             sqlUCase = vbNullString
             message = GetMessage("msgboxSqlStatusSkipped")
@@ -137,7 +137,7 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
             message = GetMessage("msgboxSqlStatusFiltered")
 
         ElseIf sqlUCase = SQL_SET_DATA_FILE Then
-            dataFile = SafeStr(SqlSheet.Cells.item(sqlRow, context.sqlLayout.excelFileColumn).value)
+            dataFile = SafeStr(SqlSheet.Cells.item(sqlRow, ctx.sqlLayout.excelFileColumn).value)
 
         ElseIf sqlUCase = SQL_RESET Then
             ClearDataWorksheet DataSheet.name
@@ -157,6 +157,9 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
 
         ElseIf StartsWith(sqlUCase, SQL_SET_PLACEHOLDER) Then
             ParsePlaceholderLine placeholders, sqlStatement
+            
+        ElseIf StartsWith(sqlUCase, SQL_SET_CLUSTER_LEVEL_LIMIT) Then
+            ParseClusterLevelLimitLine sqlStatement, ctx.fields.clusterLevelLimit
             
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_ALL_VIEWS_AS_DIRECTED_GRAPH) Then
             Application.StatusBar = sqlStatement
@@ -203,7 +206,7 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
 
             ' Get connection to data source
             On Error Resume Next
-            Set connectionObject = getConnection(filePath, context.fields.maxConnectionMinutes)
+            Set connectionObject = getConnection(filePath, ctx.fields.maxConnectionMinutes)
             Dim connErrDescription As String: connErrDescription = Err.Description
             Dim connErrNumber As Long: connErrNumber = Err.number
             On Error GoTo 0
@@ -217,12 +220,12 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
                 ApplyPlaceholders sqlStatement, placeholders
                 
                 Err.Clear
-                message = executeSQL(context, filePath, connectionObject, sqlStatement, dataRow)
+                message = executeSQL(ctx, filePath, connectionObject, sqlStatement, dataRow)
             End If
         End If
 
         ' Display the status of the SQL query
-        SqlSheet.Cells.item(sqlRow, context.sqlLayout.statusColumn).value = message
+        SqlSheet.Cells.item(sqlRow, ctx.sqlLayout.statusColumn).value = message
 
         ' Breathe. a small delay before each SQL execution can reduce COM collisions on slower machines
         DoEvents
@@ -459,7 +462,7 @@ End Sub
 ' https://technet.microsoft.com/en-us/library/ee692882.aspx
 
 Private Function executeSQL( _
-    ByRef context As sqlContext, _
+    ByRef ctx As sqlContext, _
     ByVal filePath As String, _
     ByRef connectionObject As Object, _
     ByVal sqlStatement As String, _
@@ -469,9 +472,9 @@ Private Function executeSQL( _
 
     On Error GoTo executeSQLError
     
-    Dim rsQueryResults As Object
-    Dim rsRecursionResults As Object
-    Dim rsMergedResults As Object
+    Dim rs As Object
+    Dim rsRecursion As Object
+    Dim rsMerged As Object
     Dim recordCnt As Long: recordCnt = 0
     Dim attempts As Long: attempts = 0
     Dim userError As Boolean: userError = False
@@ -484,14 +487,14 @@ Private Function executeSQL( _
     ' Define a recordset for a SQL SELECT statement using late binding
     ' as we do not know which version of Excel this spreadsheet
     ' will be running on
-    Set rsQueryResults = CreateObject("ADODB.Recordset")
+    Set rs = CreateObject("ADODB.Recordset")
     
     Err.Clear
-    For attempts = 1 To context.fields.retryLimit
+    For attempts = 1 To ctx.fields.retryLimit
         On Error Resume Next
         
         ' Execute the SQL SELECT query
-        rsQueryResults.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenStatic, LockType:=LockTypeEnum.adLockReadOnly, options:=CommandTypeEnum.adCmdText
+        rs.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenStatic, LockType:=LockTypeEnum.adLockReadOnly, options:=CommandTypeEnum.adCmdText
         
         ' Immediately save error state, as processing an error could trigger it being cleared
         errNumber = Err.number
@@ -506,7 +509,7 @@ Private Function executeSQL( _
             Exit For
         End If
 
-        LogDiagnostic "executeSQL(): rsQueryResults.Open - " & errDescription, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(Err.Description)
+        LogDiagnostic "executeSQL(): rs.Open - " & errDescription, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(Err.Description)
         Err.Clear
         SleepMilliseconds RETRY_DELAY_MS
     Next attempts
@@ -519,33 +522,56 @@ Private Function executeSQL( _
     If userError Then GoTo executeSQLError
     If errNumber <> 0 Then GoTo executeSQLError
     
-    ' If the recordset failed to open but didn?t trigger userError, rsQueryResults.State might be 0.
+    ' If the recordset failed to open but didn?t trigger userError, rs.State might be 0.
     
-    If rsQueryResults Is Nothing Or rsQueryResults.State <> ObjectStateEnum.adStateOpen Then
+    If rs Is Nothing Or rs.State <> ObjectStateEnum.adStateOpen Then
         Err.Raise vbObjectError + 513, , "executeSQL(): Recordset failed to open"
     End If
 
     ' Determine if enumeration values are present
-    context.loop = GetLoopLimits(context, rsQueryResults)
+    ctx.loop = GetLoopLimits(ctx, rs)
     
     ' Execute any iteration query passed in the SQL SELECT
     ' Performs iteration of parameterized query + mapping to data worksheet.
-    IterativeSearch connectionObject, context, rsQueryResults, row, recordCnt
+    IterativeSearch connectionObject, ctx, rs, row, recordCnt
     
     ' Execute any recursion query passed in the SQL SELECT
     ' Perfroms recursion + mapping to data worksheet.
-    RecursiveSearch connectionObject, context, rsQueryResults, rsRecursionResults
+    RecursiveSearch connectionObject, ctx, rs, rsRecursion
     
-    If rsRecursionResults Is Nothing Then
+    Dim finalRs As Object
+
+    If rsRecursion Is Nothing Then
         ' No recursion query was run, emit the results of the primary query
-        MapResultsToDataWorksheet context, rsQueryResults, row, recordCnt
+        Set finalRs = rs
     Else
         ' A set of recursive queries was executed. We have to merge the results
         ' of the primary query, and recursive queries into a single set of
         ' results so that cluster and subclusters are honored across all the
         ' queries.
-        MergeRecordsets rsQueryResults, rsRecursionResults, rsMergedResults
-        MapResultsToDataWorksheet context, rsMergedResults, row, recordCnt
+        MergeRecordsets rs, rsRecursion, rsMerged
+        Set finalRs = rsMerged
+    End If
+
+    ' =========================================================================
+    ' Process the results
+    ' =========================================================================
+    
+    If HasField(finalRs, ctx.fields.CreateEdges) Then
+        ' Create a chain of edges from record to next record
+        CreateEdges ctx, finalRs, row, recordCnt
+        
+    ElseIf HasField(finalRs, ctx.fields.CreateRank) Then
+        ' Create subgroup of nodes on a common specified rank
+        CreateRank ctx, finalRs, row, recordCnt
+        
+    ElseIf DetectMultiLevel(finalRs, ctx.fields.Cluster) Then
+        ' Use the new CLUSTERn multi-level processor
+        ProcessMultiLevelRecordset ctx, finalRs, row, recordCnt
+        
+    Else
+        ' Use the legacy CLUSTER / SUBCLUSTER processor
+        MapResultsToDataWorksheet ctx, finalRs, row, recordCnt
     End If
     
     ' Return success status in local language
@@ -553,9 +579,9 @@ Private Function executeSQL( _
     
 Cleanup:
     On Error Resume Next
-    SafeCloseRecordset rsQueryResults
-    SafeCloseRecordset rsRecursionResults
-    SafeCloseRecordset rsMergedResults
+    SafeCloseRecordset rs
+    SafeCloseRecordset rsRecursion
+    SafeCloseRecordset rsMerged
     Application.StatusBar = False
     On Error GoTo 0
     Exit Function
@@ -610,8 +636,8 @@ Private Sub SleepMilliseconds(ByVal ms As Long)
 #End If
 End Sub
 
-Private Function GetLoopLimits(ByRef context As sqlContext, _
-                               ByVal rsQueryResults As Object) As EnumerateParameters
+Private Function GetLoopLimits(ByRef ctx As sqlContext, _
+                               ByVal rs As Object) As EnumerateParameters
 
     Dim s As EnumerateParameters
     ' Default: no loop mode; EmitRows/consumers decide what to do with a single pass
@@ -625,7 +651,7 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
     ' ------------------------------------------------------------
     ' Preconditions
     ' ------------------------------------------------------------
-    If rsQueryResults.EOF Then
+    If rs.EOF Then
         ' No rows -> callers can still choose to emit once with defaults
         GetLoopLimits = s
         Exit Function
@@ -634,7 +660,7 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
     ' ------------------------------------------------------------
     ' ENUMERATE field missing -> normal mode, single iteration, no diagnostics
     ' ------------------------------------------------------------
-    If Not HasField(rsQueryResults, context.fields.enumerateSwitch) Then
+    If Not HasField(rs, ctx.fields.enumerateSwitch) Then
         GetLoopLimits = s
         Exit Function
     End If
@@ -643,7 +669,7 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
     ' ENUMERATE field present -> read it
     ' ------------------------------------------------------------
     Dim enumerateSwitch As Boolean
-    enumerateSwitch = GetFieldValueBoolean(rsQueryResults, context.fields.enumerateSwitch)
+    enumerateSwitch = GetFieldValueBoolean(rs, ctx.fields.enumerateSwitch)
 
     ' ENUMERATE = FALSE -> normal mode, single iteration, no diagnostics
     If Not enumerateSwitch Then
@@ -657,9 +683,9 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
     ' ------------------------------------------------------------
     ' ENUMERATE = TRUE -> attempt to fetch loop parameters
     ' ------------------------------------------------------------
-    Dim hasStart As Boolean: hasStart = HasField(rsQueryResults, context.fields.enumerateStartAt)
-    Dim hasStop  As Boolean: hasStop = HasField(rsQueryResults, context.fields.enumerateStopAt)
-    Dim hasStep  As Boolean: hasStep = HasField(rsQueryResults, context.fields.enumerateStepBy)
+    Dim hasStart As Boolean: hasStart = HasField(rs, ctx.fields.enumerateStartAt)
+    Dim hasStop  As Boolean: hasStop = HasField(rs, ctx.fields.enumerateStopAt)
+    Dim hasStep  As Boolean: hasStep = HasField(rs, ctx.fields.enumerateStepBy)
 
     ' Missing parameters -> single iteration + diagnostic
     If Not hasStart Or Not hasStop Or Not hasStep Then
@@ -671,16 +697,16 @@ Private Function GetLoopLimits(ByRef context As sqlContext, _
     ' ------------------------------------------------------------
     ' Extract supplied values
     ' ------------------------------------------------------------
-    s.startAt = GetFieldValueLong(rsQueryResults, context.fields.enumerateStartAt)
-    s.stopAt = GetFieldValueLong(rsQueryResults, context.fields.enumerateStopAt)
-    s.stepBy = GetFieldValueLong(rsQueryResults, context.fields.enumerateStepBy)
+    s.startAt = GetFieldValueLong(rs, ctx.fields.enumerateStartAt)
+    s.stopAt = GetFieldValueLong(rs, ctx.fields.enumerateStopAt)
+    s.stepBy = GetFieldValueLong(rs, ctx.fields.enumerateStepBy)
 
     ' ------------------------------------------------------------
     ' Caller can override the loop governor
     ' ------------------------------------------------------------
-    Dim hasMax As Boolean: hasMax = HasField(rsQueryResults, context.fields.enumerateMax)
+    Dim hasMax As Boolean: hasMax = HasField(rs, ctx.fields.enumerateMax)
     If hasMax Then
-        s.max = GetFieldValueLong(rsQueryResults, context.fields.enumerateMax)
+        s.max = GetFieldValueLong(rs, ctx.fields.enumerateMax)
         
         ' Max must be positive
         If s.max < 0 Then
@@ -722,37 +748,37 @@ End Function
 
 Private Sub IterativeSearch( _
     ByRef connectionObject As Object, _
-    ByRef context As sqlContext, _
-    ByVal rsQueryResults As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
-    If rsQueryResults Is Nothing Or rsQueryResults.State <> adStateOpen Or _
-       (rsQueryResults.EOF And rsQueryResults.BOF) Then Exit Sub
+    If rs Is Nothing Or rs.State <> ObjectStateEnum.adStateOpen Or _
+       (rs.EOF And rs.BOF) Then Exit Sub
 
-    If Not (HasField(rsQueryResults, context.fields.iterate) And _
-            HasField(rsQueryResults, context.fields.idQuery) And _
-            HasField(rsQueryResults, context.fields.dataQuery)) Then Exit Sub
+    If Not (HasField(rs, ctx.fields.iterate) And _
+            HasField(rs, ctx.fields.idQuery) And _
+            HasField(rs, ctx.fields.dataQuery)) Then Exit Sub
 
     Dim idQuery      As String
-    idQuery = GetFieldValueString(rsQueryResults, context.fields.idQuery)
+    idQuery = GetFieldValueString(rs, ctx.fields.idQuery)
 
     Dim dataTemplate As String
-    dataTemplate = GetFieldValueString(rsQueryResults, context.fields.dataQuery)
+    dataTemplate = GetFieldValueString(rs, ctx.fields.dataQuery)
 
     If Len(idQuery) = 0 Or Len(dataTemplate) = 0 Then Exit Sub
 
     Dim cs As ConcatSettings
-    cs = ReadConcatSettings(context, rsQueryResults)
+    cs = ReadConcatSettings(ctx, rs)
 
     Dim headerRS As Object
     Set headerRS = GetHeaderRS(connectionObject, idQuery)
     If headerRS Is Nothing Then Exit Sub
 
     If cs.Enabled Then
-        ProcessInConcatMode connectionObject, context, dataTemplate, headerRS, cs, row, recordCnt
+        ProcessInConcatMode connectionObject, ctx, dataTemplate, headerRS, cs, row, recordCnt
     Else
-        ProcessInClassicMode connectionObject, context, dataTemplate, headerRS, row, recordCnt
+        ProcessInClassicMode connectionObject, ctx, dataTemplate, headerRS, row, recordCnt
     End If
 
     SafeCloseRecordset headerRS
@@ -770,7 +796,7 @@ Private Sub ProcessInClassicMode( _
     For Each id In idList.Keys
         Set rsData = RunParameterizedQuery(conn, ctx, dataTemplate, id)
         If Not rsData Is Nothing Then
-            If rsData.State = adStateOpen Then
+            If rsData.State = ObjectStateEnum.adStateOpen Then
                 MapResultsToDataWorksheet ctx, rsData, row, recordCnt
             End If
             SafeCloseRecordset rsData
@@ -790,7 +816,7 @@ Private Sub ProcessInConcatMode( _
                                   cs.prefix, cs.suffix, cs.separator)
     
     If Not augRS Is Nothing Then
-        If augRS.State = adStateOpen Then
+        If augRS.State = ObjectStateEnum.adStateOpen Then
             MapResultsToDataWorksheet ctx, augRS, row, recordCnt
         End If
         SafeCloseRecordset augRS
@@ -801,7 +827,7 @@ Private Function CollectUniqueIDs( _
     ByVal headerRS As Object) As Object
 
     If headerRS Is Nothing Then Exit Function
-    If headerRS.State <> adStateOpen Then Exit Function
+    If headerRS.State <> ObjectStateEnum.adStateOpen Then Exit Function
 
     Dim idList As Object
     Set idList = CreateObject("Scripting.Dictionary")
@@ -882,7 +908,7 @@ Private Function GetHeaderRS( _
     
     ' Guard against empty or invalid recordsets
     If rs Is Nothing Then Exit Function
-    If rs.State <> adStateOpen Then Exit Function
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Function
     If rs.EOF And rs.BOF Then
         SafeCloseRecordset rs
         Exit Function
@@ -931,7 +957,7 @@ Private Function CreateAugmentedRS( _
     ByVal suffix As String, _
     ByVal separator As String) As Object
 
-    If headerRS Is Nothing Or headerRS.State <> adStateOpen Then Exit Function
+    If headerRS Is Nothing Or headerRS.State <> ObjectStateEnum.adStateOpen Then Exit Function
 
     On Error GoTo ErrHandler
 
@@ -1008,7 +1034,7 @@ Private Function ConcatenateFieldValues( _
     first = True
 
     If rs Is Nothing Then Exit Function
-    If rs.State <> adStateOpen Then Exit Function
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Function
     If rs.EOF And rs.BOF Then Exit Function
 
     If Not HasField(rs, fieldName) Then Exit Function
@@ -1047,7 +1073,7 @@ Private Function GetIDList( _
 
     ' Guard against empty or invalid recordsets
     If rs Is Nothing Then Exit Function
-    If rs.State <> adStateOpen Then Exit Function
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Function
     If rs.EOF And rs.BOF Then
         SafeCloseRecordset rs
         Exit Function
@@ -1121,7 +1147,7 @@ End Function
 
 Private Function RunParameterizedQuery( _
     ByRef connectionObject As Object, _
-    ByRef context As sqlContext, _
+    ByRef ctx As sqlContext, _
     ByVal dataQueryTemplate As String, _
     ByVal id As Variant) As Object
 
@@ -1131,7 +1157,7 @@ Private Function RunParameterizedQuery( _
     On Error GoTo RunQueryError
 
     ' Substitute placeholder for the derived ID (Null-safe)
-    sql = replace(dataQueryTemplate, context.fields.idPlaceholder, SafeStr(id), , , vbTextCompare)
+    sql = replace(dataQueryTemplate, ctx.fields.idPlaceholder, SafeStr(id), , , vbTextCompare)
 
     ' Create fresh recordset
     Set rsData = CreateObject("ADODB.Recordset")
@@ -1145,7 +1171,7 @@ Private Function RunParameterizedQuery( _
         Exit Function
     End If
 
-    If rsData.State <> adStateOpen Then
+    If rsData.State <> ObjectStateEnum.adStateOpen Then
         SafeCloseRecordset rsData
         Set RunParameterizedQuery = Nothing
         Exit Function
@@ -1167,25 +1193,25 @@ RunQueryError:
 End Function
 
 Private Sub RecursiveSearch(ByRef connectionObject As Object, _
-                                  ByRef context As sqlContext, _
-                                  ByVal rsQueryResults As Object, _
-                                  ByRef rsRecursionResults As Object)
+                                  ByRef ctx As sqlContext, _
+                                  ByVal rs As Object, _
+                                  ByRef rsRecursion As Object)
     
-    If rsQueryResults.EOF Then Exit Sub
-    If Not HasField(rsQueryResults, context.fields.treeQuery) Then Exit Sub
+    If rs.EOF Then Exit Sub
+    If Not HasField(rs, ctx.fields.treeQuery) Then Exit Sub
     
     Dim recursionSql As String
     Dim whereValue As String
     Dim whereColumn As String
     
     ' Extract the query and parameters. Exit if not provided
-    recursionSql = GetFieldValueString(rsQueryResults, context.fields.treeQuery)
+    recursionSql = GetFieldValueString(rs, ctx.fields.treeQuery)
     If Len(recursionSql) = 0 Then Exit Sub
     
-    whereValue = GetFieldValueString(rsQueryResults, context.fields.whereValue)
+    whereValue = GetFieldValueString(rs, ctx.fields.whereValue)
     If Len(whereValue) = 0 Then Exit Sub
     
-    whereColumn = GetFieldValueString(rsQueryResults, context.fields.whereColumn)
+    whereColumn = GetFieldValueString(rs, ctx.fields.whereColumn)
     If Len(whereColumn) = 0 Then Exit Sub
     
     ' Create a collection to track what has been searched, so we
@@ -1195,7 +1221,7 @@ Private Sub RecursiveSearch(ByRef connectionObject As Object, _
     
     ' Place limits on how many recursive calls can be made
     Dim maxDepth As Long
-    maxDepth = GetFieldValueLong(rsQueryResults, context.fields.maxDepth)
+    maxDepth = GetFieldValueLong(rs, ctx.fields.maxDepth)
     
     If maxDepth = 0 Then
         maxDepth = DEFAULT_MAX_RECURSION_DEPTH
@@ -1205,7 +1231,7 @@ Private Sub RecursiveSearch(ByRef connectionObject As Object, _
     currentDepth = 0
     
     ' Execute SQL recursively until all branches of the tree are followed
-    PerformRecursiveSearch connectionObject, context, recursionSql, whereValue, whereColumn, currentDepth, maxDepth, rsRecursionResults, searchedIDs
+    PerformRecursiveSearch connectionObject, ctx, recursionSql, whereValue, whereColumn, currentDepth, maxDepth, rsRecursion, searchedIDs
     
 End Sub
   
@@ -1255,7 +1281,7 @@ End Function
 
 Private Sub PerformRecursiveSearch( _
     ByRef connectionObject As Object, _
-    ByRef context As sqlContext, _
+    ByRef ctx As sqlContext, _
     ByVal sqlStatement As String, _
     ByRef whereValue As String, _
     ByVal whereColumn As String, _
@@ -1279,22 +1305,22 @@ Private Sub PerformRecursiveSearch( _
 
     ' Expand placeholder
     Dim query As String
-    query = replace(sqlStatement, "{" & context.fields.whereValue & "}", SafeStr(whereValue), , , vbTextCompare)
+    query = replace(sqlStatement, "{" & ctx.fields.whereValue & "}", SafeStr(whereValue), , , vbTextCompare)
 
     ' Mark this ID as searched
     AddToSearchedList whereValue, searchedIDs
 
     ' Execute recursive query
-    Dim rsQueryResults As Object
-    Set rsQueryResults = CreateObject("ADODB.Recordset")
-    rsQueryResults.CursorLocation = adUseClient
-    rsQueryResults.Open query, connectionObject, adOpenStatic, adLockReadOnly
+    Dim rs As Object
+    Set rs = CreateObject("ADODB.Recordset")
+    rs.CursorLocation = adUseClient
+    rs.Open query, connectionObject, adOpenStatic, adLockReadOnly
 
     ' Guard against invalid or empty recordsets
-    If rsQueryResults Is Nothing Then Exit Sub
-    If rsQueryResults.State <> adStateOpen Then Exit Sub
-    If rsQueryResults.EOF And rsQueryResults.BOF Then
-        SafeCloseRecordset rsQueryResults
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then
+        SafeCloseRecordset rs
         Exit Sub
     End If
 
@@ -1303,11 +1329,11 @@ Private Sub PerformRecursiveSearch( _
         Set recursionRecordSet = CreateObject("ADODB.Recordset")
 
         Dim fieldNumber As Long
-        For fieldNumber = 0 To rsQueryResults.fields.count - 1
+        For fieldNumber = 0 To rs.fields.count - 1
             recursionRecordSet.fields.Append _
-                rsQueryResults.fields(fieldNumber).name, _
-                rsQueryResults.fields(fieldNumber).Type, _
-                rsQueryResults.fields(fieldNumber).DefinedSize
+                rs.fields(fieldNumber).name, _
+                rs.fields(fieldNumber).Type, _
+                rs.fields(fieldNumber).DefinedSize
         Next fieldNumber
 
         recursionRecordSet.Open
@@ -1315,36 +1341,36 @@ Private Sub PerformRecursiveSearch( _
 
     ' Iterate through results
     On Error Resume Next
-    rsQueryResults.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
-        SafeCloseRecordset rsQueryResults
+        SafeCloseRecordset rs
         Exit Sub
     End If
     On Error GoTo RecursionError
 
-    Do While Not rsQueryResults.EOF
+    Do While Not rs.EOF
 
         ' Append row to merged recordset
         recursionRecordSet.AddNew
-        For fieldNumber = 0 To rsQueryResults.fields.count - 1
+        For fieldNumber = 0 To rs.fields.count - 1
             recursionRecordSet.fields(fieldNumber).value = _
-                SafeFieldValue(rsQueryResults, rsQueryResults.fields(fieldNumber).name)
+                SafeFieldValue(rs, rs.fields(fieldNumber).name)
         Next fieldNumber
         recursionRecordSet.Update
 
         ' Recurse using safe field value
         Dim nextValue As String
-        nextValue = SafeFieldValue(rsQueryResults, whereColumn)
+        nextValue = SafeFieldValue(rs, whereColumn)
 
         PerformRecursiveSearch _
-            connectionObject, context, sqlStatement, nextValue, _
+            connectionObject, ctx, sqlStatement, nextValue, _
             whereColumn, currentDepth, maxDepth, recursionRecordSet, searchedIDs
 
-        rsQueryResults.MoveNext
+        rs.MoveNext
     Loop
 
-    SafeCloseRecordset rsQueryResults
+    SafeCloseRecordset rs
     Exit Sub
 
 RecursionError:
@@ -1360,7 +1386,7 @@ RecursionError:
         errorCategory:="Recursion / SQL"
 
     On Error Resume Next
-    SafeCloseRecordset rsQueryResults
+    SafeCloseRecordset rs
     On Error GoTo 0
 End Sub
 
@@ -1375,24 +1401,24 @@ Private Function WasAlreadySearched(ByRef rowId As Variant, ByVal searchedIDs As
 End Function
 
 Private Sub MapResultsToDataWorksheet( _
-    ByRef context As sqlContext, _
-    ByVal rsQueryResults As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
     ' Exit early if invalid or empty
-    If rsQueryResults Is Nothing Then Exit Sub
-    If rsQueryResults.State <> adStateOpen Then Exit Sub
-    If rsQueryResults.EOF And rsQueryResults.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     ' Special-case overrides: edges and rank
-    If HasField(rsQueryResults, context.fields.CreateEdges) Then
-        CreateEdges context, rsQueryResults, row, recordCnt
+    If HasField(rs, ctx.fields.CreateEdges) Then
+        CreateEdges ctx, rs, row, recordCnt
         Exit Sub
     End If
 
-    If HasField(rsQueryResults, context.fields.CreateRank) Then
-        CreateRank context, rsQueryResults, row, recordCnt
+    If HasField(rs, ctx.fields.CreateRank) Then
+        CreateRank ctx, rs, row, recordCnt
         Exit Sub
     End If
 
@@ -1400,32 +1426,32 @@ Private Sub MapResultsToDataWorksheet( _
     Dim hasCluster As Boolean
     Dim hasSubcluster As Boolean
 
-    hasCluster = HasField(rsQueryResults, context.fields.Cluster)
-    hasSubcluster = HasField(rsQueryResults, context.fields.subcluster)
+    hasCluster = HasField(rs, ctx.fields.Cluster)
+    hasSubcluster = HasField(rs, ctx.fields.subcluster)
 
     ' Always start from BOF before dispatching
-    rsQueryResults.MoveFirst
+    rs.MoveFirst
 
     ' Dispatch to the correct processing routine
     If hasCluster Then
         If hasSubcluster Then
-            ProcessClusterYesSubclusterYes context, rsQueryResults, row, recordCnt
+            ProcessClusterYesSubclusterYes ctx, rs, row, recordCnt
         Else
-            ProcessClusterYesSubclusterNo context, rsQueryResults, row, recordCnt
+            ProcessClusterYesSubclusterNo ctx, rs, row, recordCnt
         End If
     Else
         If hasSubcluster Then
-            ProcessClusterNoSubclusterYes context, rsQueryResults, row, recordCnt
+            ProcessClusterNoSubclusterYes ctx, rs, row, recordCnt
         Else
-            ProcessClusterNoSubclusterNo context, rsQueryResults, row, recordCnt
+            ProcessClusterNoSubclusterNo ctx, rs, row, recordCnt
         End If
     End If
 
 End Sub
 
 Private Sub ProcessClusterYesSubclusterYes( _
-    ByRef context As sqlContext, _
-    ByVal recordSetObject As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
@@ -1443,20 +1469,20 @@ Private Sub ProcessClusterYesSubclusterYes( _
     Dim subclusterRecord As Cluster
 
     ' Guard against invalid recordsets
-    If recordSetObject Is Nothing Then Exit Sub
-    If recordSetObject.State <> adStateOpen Then Exit Sub
-    If recordSetObject.EOF And recordSetObject.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     ' Collect distinct clusters
-    Set clusterList = GetClusterInfo(recordSetObject, context.fields)
+    Set clusterList = GetClusterInfo(rs, ctx.fields)
 
     If clusterList.count > 0 Then
         ' Attach subcluster dictionaries to each cluster
         For Each clusterKey In clusterList.Keys()
             Set clusterInstance = clusterList.item(clusterKey)
             Set clusterInstance.subclusters = GetSubClusterInfoForCluster( _
-                                                recordSetObject, _
-                                                context.fields, _
+                                                rs, _
+                                                ctx.fields, _
                                                 CStr(clusterKey))
         Next clusterKey
     End If
@@ -1467,24 +1493,24 @@ Private Sub ProcessClusterYesSubclusterYes( _
         clusterCnt = clusterCnt + 1
         Set clusterRecord = clusterList.item(CStr(clusterKey))
 
-        EmitClusterOpen clusterRecord, context.dataLayout, row, _
-                        context.fields.clusterPlaceholder, clusterCnt
+        EmitClusterOpen clusterRecord, ctx.dataLayout, row, _
+                        ctx.fields.clusterPlaceholder, clusterCnt
 
         If clusterRecord.subclusters.count = 0 Then
             ' No subclusters: emit all rows for this cluster
             On Error Resume Next
-            recordSetObject.MoveFirst
+            rs.MoveFirst
             If Err.number <> 0 Then
                 Err.Clear
                 Exit For
             End If
             On Error GoTo 0
 
-            Do While Not recordSetObject.EOF
-                If SafeFieldValue(recordSetObject, context.fields.Cluster) = CStr(clusterKey) Then
-                    EmitRows context, recordSetObject, row, recordCnt
+            Do While Not rs.EOF
+                If SafeFieldValue(rs, ctx.fields.Cluster) = CStr(clusterKey) Then
+                    EmitRows ctx, rs, row, recordCnt
                 End If
-                recordSetObject.MoveNext
+                rs.MoveNext
             Loop
 
         Else
@@ -1496,7 +1522,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
                 Set subclusterRecord = clusterRecord.subclusters.item(subclusterKey)
 
                 On Error Resume Next
-                recordSetObject.MoveFirst
+                rs.MoveFirst
                 If Err.number <> 0 Then
                     Err.Clear
                     Exit For
@@ -1505,54 +1531,54 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
                 subclusterCnt = subclusterCnt + 1
 
-                EmitClusterOpen subclusterRecord, context.dataLayout, row, _
-                                context.fields.subclusterPlaceholder, subclusterCnt
+                EmitClusterOpen subclusterRecord, ctx.dataLayout, row, _
+                                ctx.fields.subclusterPlaceholder, subclusterCnt
 
-                Do While Not recordSetObject.EOF
-                    If SafeFieldValue(recordSetObject, context.fields.Cluster) = CStr(clusterKey) _
-                       And SafeFieldValue(recordSetObject, context.fields.subcluster) = CStr(subclusterKey) Then
-                        EmitRows context, recordSetObject, row, recordCnt
+                Do While Not rs.EOF
+                    If SafeFieldValue(rs, ctx.fields.Cluster) = CStr(clusterKey) _
+                       And SafeFieldValue(rs, ctx.fields.subcluster) = CStr(subclusterKey) Then
+                        EmitRows ctx, rs, row, recordCnt
                     End If
-                    recordSetObject.MoveNext
+                    rs.MoveNext
                 Loop
 
-                EmitClusterClose subclusterRecord, context.dataLayout, row, _
-                                 context.fields.subclusterPlaceholder, subclusterCnt
+                EmitClusterClose subclusterRecord, ctx.dataLayout, row, _
+                                 ctx.fields.subclusterPlaceholder, subclusterCnt
 
                 ' Emit rows in this cluster with NULL subcluster
                 On Error Resume Next
-                recordSetObject.MoveFirst
+                rs.MoveFirst
                 If Err.number <> 0 Then
                     Err.Clear
                     Exit For
                 End If
                 On Error GoTo 0
 
-                Do While Not recordSetObject.EOF
-                    If SafeFieldValue(recordSetObject, context.fields.Cluster) = CStr(clusterKey) _
-                       And SafeFieldValue(recordSetObject, context.fields.subcluster) = "" Then
-                        EmitRows context, recordSetObject, row, recordCnt
+                Do While Not rs.EOF
+                    If SafeFieldValue(rs, ctx.fields.Cluster) = CStr(clusterKey) _
+                       And SafeFieldValue(rs, ctx.fields.subcluster) = "" Then
+                        EmitRows ctx, rs, row, recordCnt
                     End If
-                    recordSetObject.MoveNext
+                    rs.MoveNext
                 Loop
 
             Next subclusterKey
         End If
 
-        EmitClusterClose clusterRecord, context.dataLayout, row, _
-                         context.fields.clusterPlaceholder, clusterCnt
+        EmitClusterClose clusterRecord, ctx.dataLayout, row, _
+                         ctx.fields.clusterPlaceholder, clusterCnt
     Next clusterKey
 
     ' Handle case where cluster has no data, but subcluster does
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
 
-    Set orphanClusterList = GetOrphanSubClusterInfo(recordSetObject, context.fields)
+    Set orphanClusterList = GetOrphanSubClusterInfo(rs, ctx.fields)
     subclusterCnt = 0
 
     For Each subclusterKey In orphanClusterList.Keys()
@@ -1560,7 +1586,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
         Set subclusterRecord = orphanClusterList.item(subclusterKey)
 
         On Error Resume Next
-        recordSetObject.MoveFirst
+        rs.MoveFirst
         If Err.number <> 0 Then
             Err.Clear
             Exit For
@@ -1569,53 +1595,53 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
         subclusterCnt = subclusterCnt + 1
 
-        EmitClusterOpen subclusterRecord, context.dataLayout, row, _
-                        context.fields.subclusterPlaceholder, subclusterCnt
+        EmitClusterOpen subclusterRecord, ctx.dataLayout, row, _
+                        ctx.fields.subclusterPlaceholder, subclusterCnt
 
-        Do While Not recordSetObject.EOF
-            If SafeFieldValue(recordSetObject, context.fields.Cluster) = "" _
-               And SafeFieldValue(recordSetObject, context.fields.subcluster) = CStr(subclusterKey) Then
-                EmitRows context, recordSetObject, row, recordCnt
+        Do While Not rs.EOF
+            If SafeFieldValue(rs, ctx.fields.Cluster) = "" _
+               And SafeFieldValue(rs, ctx.fields.subcluster) = CStr(subclusterKey) Then
+                EmitRows ctx, rs, row, recordCnt
             End If
-            recordSetObject.MoveNext
+            rs.MoveNext
         Loop
 
-        EmitClusterClose subclusterRecord, context.dataLayout, row, _
-                         context.fields.subclusterPlaceholder, subclusterCnt
+        EmitClusterClose subclusterRecord, ctx.dataLayout, row, _
+                         ctx.fields.subclusterPlaceholder, subclusterCnt
     Next subclusterKey
 
     ' Handle rows where both cluster and subcluster are NULL
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
 
-    Do While Not recordSetObject.EOF
-        If SafeFieldValue(recordSetObject, context.fields.Cluster) = "" _
-           And SafeFieldValue(recordSetObject, context.fields.subcluster) = "" Then
-            EmitRows context, recordSetObject, row, recordCnt
+    Do While Not rs.EOF
+        If SafeFieldValue(rs, ctx.fields.Cluster) = "" _
+           And SafeFieldValue(rs, ctx.fields.subcluster) = "" Then
+            EmitRows ctx, rs, row, recordCnt
         End If
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
 End Sub
 
 Private Sub ProcessClusterYesSubclusterNo( _
-    ByRef context As sqlContext, _
-    ByVal recordSetObject As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
     ' Guard against invalid recordsets
-    If recordSetObject Is Nothing Then Exit Sub
-    If recordSetObject.State <> adStateOpen Then Exit Sub
-    If recordSetObject.EOF And recordSetObject.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     Dim clusterList As Dictionary
-    Set clusterList = GetClusterInfo(recordSetObject, context.fields)
+    Set clusterList = GetClusterInfo(rs, ctx.fields)
 
     Dim clusterCnt As Long
     clusterCnt = 0
@@ -1629,12 +1655,12 @@ Private Sub ProcessClusterYesSubclusterNo( _
         clusterCnt = clusterCnt + 1
         Set clusterRecord = clusterList.item(CStr(clusterKey))
 
-        EmitClusterOpen clusterRecord, context.dataLayout, row, _
-                        context.fields.clusterPlaceholder, clusterCnt
+        EmitClusterOpen clusterRecord, ctx.dataLayout, row, _
+                        ctx.fields.clusterPlaceholder, clusterCnt
 
         ' Safe MoveFirst
         On Error Resume Next
-        recordSetObject.MoveFirst
+        rs.MoveFirst
         If Err.number <> 0 Then
             Err.Clear
             Exit For
@@ -1642,48 +1668,48 @@ Private Sub ProcessClusterYesSubclusterNo( _
         On Error GoTo 0
 
         ' Emit rows belonging to this cluster
-        Do While Not recordSetObject.EOF
-            If SafeFieldValue(recordSetObject, context.fields.Cluster) = CStr(clusterKey) Then
-                EmitRows context, recordSetObject, row, recordCnt
+        Do While Not rs.EOF
+            If SafeFieldValue(rs, ctx.fields.Cluster) = CStr(clusterKey) Then
+                EmitRows ctx, rs, row, recordCnt
             End If
-            recordSetObject.MoveNext
+            rs.MoveNext
         Loop
 
-        EmitClusterClose clusterRecord, context.dataLayout, row, _
-                         context.fields.clusterPlaceholder, clusterCnt
+        EmitClusterClose clusterRecord, ctx.dataLayout, row, _
+                         ctx.fields.clusterPlaceholder, clusterCnt
     Next clusterKey
 
     ' Emit orphan rows (cluster column is Null)
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
 
-    Do While Not recordSetObject.EOF
-        If SafeFieldValue(recordSetObject, context.fields.Cluster) = "" Then
-            EmitRows context, recordSetObject, row, recordCnt
+    Do While Not rs.EOF
+        If SafeFieldValue(rs, ctx.fields.Cluster) = "" Then
+            EmitRows ctx, rs, row, recordCnt
         End If
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
 End Sub
 
 Private Sub ProcessClusterNoSubclusterYes( _
-    ByRef context As sqlContext, _
-    ByVal recordSetObject As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
     ' Guard against invalid recordsets
-    If recordSetObject Is Nothing Then Exit Sub
-    If recordSetObject.State <> adStateOpen Then Exit Sub
-    If recordSetObject.EOF And recordSetObject.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     Dim subclusterList As Dictionary
-    Set subclusterList = GetSubclusterInfo(recordSetObject, context.fields)
+    Set subclusterList = GetSubclusterInfo(rs, ctx.fields)
 
     Dim subclusterCnt As Long
     subclusterCnt = 0
@@ -1697,12 +1723,12 @@ Private Sub ProcessClusterNoSubclusterYes( _
         subclusterCnt = subclusterCnt + 1
         Set subclusterRecord = subclusterList.item(CStr(subclusterKey))
 
-        EmitClusterOpen subclusterRecord, context.dataLayout, row, _
-                        context.fields.subclusterPlaceholder, subclusterCnt
+        EmitClusterOpen subclusterRecord, ctx.dataLayout, row, _
+                        ctx.fields.subclusterPlaceholder, subclusterCnt
 
         ' Safe MoveFirst
         On Error Resume Next
-        recordSetObject.MoveFirst
+        rs.MoveFirst
         If Err.number <> 0 Then
             Err.Clear
             Exit For
@@ -1710,49 +1736,49 @@ Private Sub ProcessClusterNoSubclusterYes( _
         On Error GoTo 0
 
         ' Emit rows belonging to this subcluster
-        Do While Not recordSetObject.EOF
-            If SafeFieldValue(recordSetObject, context.fields.subcluster) = CStr(subclusterKey) Then
-                EmitRows context, recordSetObject, row, recordCnt
+        Do While Not rs.EOF
+            If SafeFieldValue(rs, ctx.fields.subcluster) = CStr(subclusterKey) Then
+                EmitRows ctx, rs, row, recordCnt
             End If
-            recordSetObject.MoveNext
+            rs.MoveNext
         Loop
 
-        EmitClusterClose subclusterRecord, context.dataLayout, row, _
-                         context.fields.subclusterPlaceholder, subclusterCnt
+        EmitClusterClose subclusterRecord, ctx.dataLayout, row, _
+                         ctx.fields.subclusterPlaceholder, subclusterCnt
     Next subclusterKey
 
     ' Emit orphan rows (subcluster column is Null)
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
 
-    Do While Not recordSetObject.EOF
-        If SafeFieldValue(recordSetObject, context.fields.subcluster) = "" Then
-            EmitRows context, recordSetObject, row, recordCnt
+    Do While Not rs.EOF
+        If SafeFieldValue(rs, ctx.fields.subcluster) = "" Then
+            EmitRows ctx, rs, row, recordCnt
         End If
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
 End Sub
 
 Private Sub ProcessClusterNoSubclusterNo( _
-    ByRef context As sqlContext, _
-    ByVal recordSetObject As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
     ' Guard against invalid or empty recordsets
-    If recordSetObject Is Nothing Then Exit Sub
-    If recordSetObject.State <> adStateOpen Then Exit Sub
-    If recordSetObject.EOF And recordSetObject.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     ' Always start at the beginning
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
@@ -1760,27 +1786,27 @@ Private Sub ProcessClusterNoSubclusterNo( _
     On Error GoTo 0
 
     ' Emit each row
-    Do While Not recordSetObject.EOF
-        EmitRows context, recordSetObject, row, recordCnt
-        recordSetObject.MoveNext
+    Do While Not rs.EOF
+        EmitRows ctx, rs, row, recordCnt
+        rs.MoveNext
     Loop
 
 End Sub
 
 Private Sub CreateEdges( _
-    ByRef context As sqlContext, _
-    ByVal recordSetObject As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
     ' Guard against invalid or empty recordsets
-    If recordSetObject Is Nothing Then Exit Sub
-    If recordSetObject.State <> adStateOpen Then Exit Sub
-    If recordSetObject.EOF And recordSetObject.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     ' Safe MoveFirst
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
@@ -1788,34 +1814,33 @@ Private Sub CreateEdges( _
     On Error GoTo 0
 
     Dim item As String
-    item = GetFieldValueString(recordSetObject, context.headings.item)
+    item = GetFieldValueString(rs, ctx.headings.item)
 
     Dim relatedItem As String
-    Dim emittedRow As Long
 
     ' ------------------------------------------------------------
     ' LOOP MODE
     ' ------------------------------------------------------------
-    If context.loop.Enabled Then
+    If ctx.loop.Enabled Then
 
         Dim stopValue As Long
-        stopValue = context.loop.stopAt - 1
+        stopValue = ctx.loop.stopAt - 1
 
         Dim i As Long
-        For i = context.loop.startAt To stopValue Step context.loop.stepBy
+        For i = ctx.loop.startAt To stopValue Step ctx.loop.stepBy
 
-            context.loop.count = context.loop.count + 1
-            If context.loop.count > context.loop.max Then Exit For
+            ctx.loop.count = ctx.loop.count + 1
+            If ctx.loop.count > ctx.loop.max Then Exit For
 
-            emittedRow = row   ' capture before EmitOneRow increments it
-            EmitOneRow context, recordSetObject, row, recordCnt, i
+            EmitOneRow ctx, rs, row, recordCnt, i
 
-            DataSheet.Cells.item(emittedRow, context.dataLayout.itemColumn) = _
-                replace(SafeStr(item), context.fields.enumeratePlaceholder, CStr(i), , , vbTextCompare)
+            DataSheet.Cells.item(row, ctx.dataLayout.itemColumn) = _
+                replace(SafeStr(item), ctx.fields.enumeratePlaceholder, CStr(i), , , vbTextCompare)
 
-            DataSheet.Cells.item(emittedRow, context.dataLayout.isRelatedToItemColumn) = _
-                replace(SafeStr(item), context.fields.enumeratePlaceholder, CStr(i + 1), , , vbTextCompare)
-
+            DataSheet.Cells.item(row, ctx.dataLayout.isRelatedToItemColumn) = _
+                replace(SafeStr(item), ctx.fields.enumeratePlaceholder, CStr(i + 1), , , vbTextCompare)
+            
+            row = row + 1
         Next i
 
     ' ------------------------------------------------------------
@@ -1825,26 +1850,28 @@ Private Sub CreateEdges( _
 
         ' Safe MoveNext (skip first row)
         On Error Resume Next
-        recordSetObject.MoveNext
+        rs.MoveNext
         If Err.number <> 0 Then
             Err.Clear
             Exit Sub
         End If
         On Error GoTo 0
 
-        Do While Not recordSetObject.EOF
+        Dim emittedRow As Long
+        
+        Do While Not rs.EOF
 
-            relatedItem = GetFieldValueString(recordSetObject, context.headings.item)
+            relatedItem = GetFieldValueString(rs, ctx.headings.item)
 
             emittedRow = row   ' capture before EmitRows increments it
-            EmitRows context, recordSetObject, row, recordCnt
+            EmitRows ctx, rs, row, recordCnt
 
-            DataSheet.Cells.item(emittedRow, context.dataLayout.itemColumn) = item
-            DataSheet.Cells.item(emittedRow, context.dataLayout.isRelatedToItemColumn) = relatedItem
+            DataSheet.Cells.item(emittedRow, ctx.dataLayout.itemColumn) = item
+            DataSheet.Cells.item(emittedRow, ctx.dataLayout.isRelatedToItemColumn) = relatedItem
 
             item = relatedItem
 
-            recordSetObject.MoveNext
+            rs.MoveNext
         Loop
 
     End If
@@ -1852,19 +1879,19 @@ Private Sub CreateEdges( _
 End Sub
 
 Private Sub CreateRank( _
-    ByRef context As sqlContext, _
-    ByVal recordSetObject As Object, _
+    ByRef ctx As sqlContext, _
+    ByVal rs As Object, _
     ByRef row As Long, _
     ByRef recordCnt As Long)
 
     ' Exit early if invalid or empty
-    If recordSetObject Is Nothing Then Exit Sub
-    If recordSetObject.State <> adStateOpen Then Exit Sub
-    If recordSetObject.EOF And recordSetObject.BOF Then Exit Sub
+    If rs Is Nothing Then Exit Sub
+    If rs.State <> ObjectStateEnum.adStateOpen Then Exit Sub
+    If rs.EOF And rs.BOF Then Exit Sub
 
     ' Safe MoveFirst
     On Error Resume Next
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     If Err.number <> 0 Then
         Err.Clear
         Exit Sub
@@ -1873,35 +1900,35 @@ Private Sub CreateRank( _
 
     ' Establish the rank (Null-safe)
     Dim rank As String
-    rank = LCase$(SafeFieldValue(recordSetObject, "RANK"))
+    rank = LCase$(SafeFieldValue(rs, "RANK"))
 
     ' Collect node identifiers
     Dim item As String
     Dim subgraph As String
     subgraph = "{ rank=" & AddQuotes(rank) & ";"
 
-    Do While Not recordSetObject.EOF
-        item = SafeFieldValue(recordSetObject, context.headings.item)
+    Do While Not rs.EOF
+        item = SafeFieldValue(rs, ctx.headings.item)
         subgraph = subgraph & " " & AddQuotes(item) & ";"
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
     subgraph = subgraph & " }"
 
     ' Emit the row
     recordCnt = recordCnt + 1
-    DataSheet.Cells.item(row, context.dataLayout.itemColumn) = ">"
-    DataSheet.Cells.item(row, context.dataLayout.labelColumn) = subgraph
+    DataSheet.Cells.item(row, ctx.dataLayout.itemColumn) = ">"
+    DataSheet.Cells.item(row, ctx.dataLayout.labelColumn) = subgraph
     row = row + 1
 End Sub
 
-Private Function GetClusterInfo(ByVal recordSetObject As Object, _
+Private Function GetClusterInfo(ByVal rs As Object, _
                                 ByRef fields As sqlFieldName) As Dictionary
     Dim clusters As Dictionary
     Set clusters = New Dictionary
 
     ' Exit early if empty
-    If recordSetObject.EOF Then
+    If rs.EOF Then
         Set GetClusterInfo = clusters
         Exit Function
     End If
@@ -1915,7 +1942,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, _
 
     ' Check once whether CLUSTER LABEL exists
     Dim hasClusterLabel As Boolean
-    hasClusterLabel = HasField(recordSetObject, fields.clusterLabel)
+    hasClusterLabel = HasField(rs, fields.clusterLabel)
 
     Dim fieldObject As Variant
     Dim clusterId As String
@@ -1924,9 +1951,9 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, _
     Dim clusterAttributes As String
     Dim clusterTooltip As String
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
 
-    Do While Not recordSetObject.EOF
+    Do While Not rs.EOF
         clusterId = vbNullString
         clusterLabel = vbNullString
         clusterStyleName = vbNullString
@@ -1934,7 +1961,7 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, _
         clusterTooltip = vbNullString
 
         ' Extract cluster metadata
-        For Each fieldObject In recordSetObject.fields
+        For Each fieldObject In rs.fields
             Select Case LCase$(fieldObject.name)
 
                 Case clusterField
@@ -1981,32 +2008,32 @@ Private Function GetClusterInfo(ByVal recordSetObject As Object, _
             End If
         End If
 
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     Set GetClusterInfo = clusters
 End Function
 
 Private Function GetSubclusterInfo( _
-    ByVal recordSetObject As Object, _
+    ByVal rs As Object, _
     ByRef fields As sqlFieldName) As Dictionary
 
     Dim subclusters As Dictionary
     Set subclusters = New Dictionary
 
     ' Exit early if empty or invalid
-    If recordSetObject Is Nothing Then
+    If rs Is Nothing Then
         Set GetSubclusterInfo = subclusters
         Exit Function
     End If
 
-    If recordSetObject.State <> adStateOpen Then
+    If rs.State <> ObjectStateEnum.adStateOpen Then
         Set GetSubclusterInfo = subclusters
         Exit Function
     End If
 
-    If recordSetObject.EOF And recordSetObject.BOF Then
+    If rs.EOF And rs.BOF Then
         Set GetSubclusterInfo = subclusters
         Exit Function
     End If
@@ -2020,7 +2047,7 @@ Private Function GetSubclusterInfo( _
 
     ' Check once whether SUBCLUSTER LABEL exists
     Dim hasSubLabel As Boolean
-    hasSubLabel = HasField(recordSetObject, fields.subclusterLabel)
+    hasSubLabel = HasField(rs, fields.subclusterLabel)
 
     Dim fieldObject As Variant
     Dim subId As String
@@ -2029,9 +2056,9 @@ Private Function GetSubclusterInfo( _
     Dim subAttr As String
     Dim subTooltip As String
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
 
-    Do While Not recordSetObject.EOF
+    Do While Not rs.EOF
 
         subId = ""
         subLabel = ""
@@ -2040,7 +2067,7 @@ Private Function GetSubclusterInfo( _
         subTooltip = ""
 
         ' Extract subcluster metadata
-        For Each fieldObject In recordSetObject.fields
+        For Each fieldObject In rs.fields
             Select Case LCase$(SafeStr(fieldObject.name))
 
                 Case subField
@@ -2079,15 +2106,15 @@ Private Function GetSubclusterInfo( _
             End If
         End If
 
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     Set GetSubclusterInfo = subclusters
 End Function
 
 Private Function GetSubClusterInfoForCluster( _
-    ByVal recordSetObject As Object, _
+    ByVal rs As Object, _
     ByRef fields As sqlFieldName, _
     ByVal clusterName As String) As Dictionary
 
@@ -2095,17 +2122,17 @@ Private Function GetSubClusterInfoForCluster( _
     Set subclusters = New Dictionary
 
     ' Exit early if empty or invalid
-    If recordSetObject Is Nothing Then
+    If rs Is Nothing Then
         Set GetSubClusterInfoForCluster = subclusters
         Exit Function
     End If
 
-    If recordSetObject.State <> adStateOpen Then
+    If rs.State <> ObjectStateEnum.adStateOpen Then
         Set GetSubClusterInfoForCluster = subclusters
         Exit Function
     End If
 
-    If recordSetObject.EOF And recordSetObject.BOF Then
+    If rs.EOF And rs.BOF Then
         Set GetSubClusterInfoForCluster = subclusters
         Exit Function
     End If
@@ -2120,7 +2147,7 @@ Private Function GetSubClusterInfoForCluster( _
 
     ' Check once whether SUBCLUSTER LABEL exists (optional)
     Dim hasSubLabel As Boolean
-    hasSubLabel = HasField(recordSetObject, fields.subclusterLabel)
+    hasSubLabel = HasField(rs, fields.subclusterLabel)
 
     Dim fieldObject As Variant
     Dim subId As String
@@ -2129,12 +2156,12 @@ Private Function GetSubClusterInfoForCluster( _
     Dim subAttr As String
     Dim subTooltip As String
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
 
-    Do While Not recordSetObject.EOF
+    Do While Not rs.EOF
 
         ' Only process rows belonging to this cluster (Null-safe)
-        If SafeFieldValue(recordSetObject, fields.Cluster) = clusterName Then
+        If SafeFieldValue(rs, fields.Cluster) = clusterName Then
 
             subId = vbNullString
             subLabel = vbNullString
@@ -2143,7 +2170,7 @@ Private Function GetSubClusterInfoForCluster( _
             subTooltip = vbNullString
 
             ' Extract subcluster metadata
-            For Each fieldObject In recordSetObject.fields
+            For Each fieldObject In rs.fields
                 Select Case LCase$(SafeStr(fieldObject.name))
 
                     Case subField
@@ -2184,15 +2211,15 @@ Private Function GetSubClusterInfoForCluster( _
 
         End If
 
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     Set GetSubClusterInfoForCluster = subclusters
 End Function
 
 Private Function GetOrphanSubClusterInfo( _
-    ByVal recordSetObject As Object, _
+    ByVal rs As Object, _
     ByRef fields As sqlFieldName) As Dictionary
 
     ' Build a list of subclusters where the cluster column is null
@@ -2200,17 +2227,17 @@ Private Function GetOrphanSubClusterInfo( _
     Set subclusters = New Dictionary
 
     ' Exit early if empty or invalid
-    If recordSetObject Is Nothing Then
+    If rs Is Nothing Then
         Set GetOrphanSubClusterInfo = subclusters
         Exit Function
     End If
 
-    If recordSetObject.State <> adStateOpen Then
+    If rs.State <> ObjectStateEnum.adStateOpen Then
         Set GetOrphanSubClusterInfo = subclusters
         Exit Function
     End If
 
-    If recordSetObject.EOF And recordSetObject.BOF Then
+    If rs.EOF And rs.BOF Then
         Set GetOrphanSubClusterInfo = subclusters
         Exit Function
     End If
@@ -2225,7 +2252,7 @@ Private Function GetOrphanSubClusterInfo( _
 
     ' Check once whether SUBCLUSTER LABEL exists
     Dim hasSubLabel As Boolean
-    hasSubLabel = HasField(recordSetObject, fields.subclusterLabel)
+    hasSubLabel = HasField(rs, fields.subclusterLabel)
 
     Dim fieldObject As Variant
     Dim subId As String
@@ -2234,13 +2261,13 @@ Private Function GetOrphanSubClusterInfo( _
     Dim subAttr As String
     Dim subTooltip As String
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
 
-    Do While Not recordSetObject.EOF
+    Do While Not rs.EOF
 
         ' Only process rows where cluster is NULL/empty and subcluster is NOT NULL/empty
-        If SafeFieldValue(recordSetObject, fields.Cluster) = "" _
-           And Len(SafeFieldValue(recordSetObject, fields.subcluster)) > 0 Then
+        If SafeFieldValue(rs, fields.Cluster) = "" _
+           And Len(SafeFieldValue(rs, fields.subcluster)) > 0 Then
 
             subId = ""
             subLabel = ""
@@ -2249,7 +2276,7 @@ Private Function GetOrphanSubClusterInfo( _
             subTooltip = ""
 
             ' Extract subcluster metadata
-            For Each fieldObject In recordSetObject.fields
+            For Each fieldObject In rs.fields
                 Select Case LCase$(SafeStr(fieldObject.name))
 
                     Case subField
@@ -2290,10 +2317,10 @@ Private Function GetOrphanSubClusterInfo( _
 
         End If
 
-        recordSetObject.MoveNext
+        rs.MoveNext
     Loop
 
-    recordSetObject.MoveFirst
+    rs.MoveFirst
     Set GetOrphanSubClusterInfo = subclusters
 End Function
 
@@ -2362,85 +2389,44 @@ Private Sub EmitClusterClose( _
     row = row + 1
 End Sub
 
-Private Function HasField(ByVal recordSetObject As Object, ByVal fieldName As String) As Boolean
-    Dim fieldObject As Variant
-
-    For Each fieldObject In recordSetObject.fields
-        If Trim$(LCase$(CStr(fieldObject.name))) = LCase$(fieldName) Then
-            HasField = True
-            Exit For
-        End If
-    Next
-End Function
-
 Private Sub EmitRows( _
-    ByRef context As sqlContext, _
+    ByRef ctx As sqlContext, _
     ByVal rs As Object, _
-    ByRef targetRow As Long, _
+    ByRef row As Long, _
     ByRef position As Long)
 
     Dim i As Long
 
     ' Safety: prevent infinite loop
-    If context.loop.stepBy = 0 Then Exit Sub
+    If ctx.loop.stepBy = 0 Then Exit Sub
 
     ' Safety: prevent direction mismatch infinite loop
-    If context.loop.stepBy > 0 Then
-        If context.loop.startAt > context.loop.stopAt Then Exit Sub
+    If ctx.loop.stepBy > 0 Then
+        If ctx.loop.startAt > ctx.loop.stopAt Then Exit Sub
     Else
-        If context.loop.startAt < context.loop.stopAt Then Exit Sub
+        If ctx.loop.startAt < ctx.loop.stopAt Then Exit Sub
     End If
 
-    For i = context.loop.startAt To context.loop.stopAt Step context.loop.stepBy
-        context.loop.count = context.loop.count + 1
-        If context.loop.count > context.loop.max Then Exit For
+    For i = ctx.loop.startAt To ctx.loop.stopAt Step ctx.loop.stepBy
+        ctx.loop.count = ctx.loop.count + 1
+        If ctx.loop.count > ctx.loop.max Then Exit For
 
-        EmitOneRow context, rs, targetRow, position, i
+        EmitOneRow ctx, rs, row, position, i
+        row = row + 1
     Next i
 
 End Sub
 
 Private Sub EmitOneRow( _
-    ByRef context As sqlContext, _
+    ByRef ctx As sqlContext, _
     ByVal rs As Object, _
-    ByRef targetRow As Long, _
+    ByRef row As Long, _
     ByRef position As Long, _
     ByVal enumStep As Long)
 
     ' Increment the result set position (i.e. recordCnt)
     position = position + 1
 
-    ' ---------------------------------------------------------------
-    ' Determine multiline splitting behavior for THIS row / THIS query
-    ' ---------------------------------------------------------------
-    Dim doSplit     As Boolean: doSplit = False
-    Dim splitLength As Long:    splitLength = 0
-    Dim lineEnding  As String:  lineEnding = NEWLINE    ' default
-
-    Dim temp As String
-
-    ' Check & read split length if the column exists in this resultset
-    If HasField(rs, context.fields.splitLength) Then
-        temp = SafeFieldValue(rs, context.fields.splitLength)
-        If Len(temp) > 0 Then
-            If IsNumeric(temp) Then
-                splitLength = CLng(temp)
-                If splitLength > 0 Then doSplit = True
-            End If
-        End If
-    End If
-
-    ' Check & read custom line ending if present
-    If HasField(rs, context.fields.lineEnding) Then
-        temp = SafeFieldValue(rs, context.fields.lineEnding)
-        If Len(temp) > 0 Then
-            lineEnding = temp
-        End If
-    End If
-
-    ' ---------------------------------------------------------------
-    ' Process all fields and write to sheet
-    ' ---------------------------------------------------------------
     With DataSheet
         Dim fld As Object
         Dim v As String
@@ -2452,59 +2438,60 @@ Private Sub EmitOneRow( _
             v = SafeStr(fld.value)
 
             If Len(v) > 0 Then
-                v = replace(v, context.fields.recordsetPlaceholder, SafeStr(position), , , vbTextCompare)
-                If context.loop.Enabled Then
-                    v = replace(v, context.fields.enumeratePlaceholder, SafeStr(enumStep), , , vbTextCompare)
+                v = replace(v, ctx.fields.recordsetPlaceholder, SafeStr(position), , , vbTextCompare)
+                If ctx.loop.Enabled Then
+                    v = replace(v, ctx.fields.enumeratePlaceholder, SafeStr(enumStep), , , vbTextCompare)
                 End If
             End If
 
             Select Case LCase$(fld.name)
 
-                Case context.headings.flag
-                    .Cells(targetRow, context.dataLayout.flagColumn).value = v
+                Case ctx.headings.flag
+                    .Cells(row, ctx.dataLayout.flagColumn).value = v
 
-                Case context.headings.item
-                    .Cells(targetRow, context.dataLayout.itemColumn).value = v
+                Case ctx.headings.item
+                    .Cells(row, ctx.dataLayout.itemColumn).value = v
 
-                Case context.headings.label, context.headings.xLabel
-                    targetCol = IIf(LCase$(fld.name) = context.headings.label, _
-                                    context.dataLayout.labelColumn, _
-                                    context.dataLayout.xLabelColumn)
+                Case ctx.headings.label, ctx.headings.xLabel
+                    targetCol = IIf(LCase$(fld.name) = ctx.headings.label, _
+                                    ctx.dataLayout.labelColumn, _
+                                    ctx.dataLayout.xLabelColumn)
 
                     ' Apply multiline splitting only when requested & meaningful
-                    If doSplit Then
+                    Dim splitLength As Long
+                    splitLength = GetSplitLength(rs, ctx.fields.splitLength)
+                    If splitLength > 0 Then
+                        Dim lineEnding  As String
+                        lineEnding = GetLineEnding(rs, ctx.fields.lineEnding, NEWLINE)
                         v = SplitMultilineText(v, splitLength, lineEnding)
                     End If
 
-                    .Cells(targetRow, targetCol).value = v
+                    .Cells(row, targetCol).value = v
 
-                Case context.headings.tailLabel
-                    .Cells(targetRow, context.dataLayout.tailLabelColumn).value = v
+                Case ctx.headings.tailLabel
+                    .Cells(row, ctx.dataLayout.tailLabelColumn).value = v
 
-                Case context.headings.headLabel
-                    .Cells(targetRow, context.dataLayout.headLabelColumn).value = v
+                Case ctx.headings.headLabel
+                    .Cells(row, ctx.dataLayout.headLabelColumn).value = v
 
-                Case context.headings.Tooltip
-                    .Cells(targetRow, context.dataLayout.tooltipColumn).value = v
+                Case ctx.headings.Tooltip
+                    .Cells(row, ctx.dataLayout.tooltipColumn).value = v
 
-                Case context.headings.isRelatedToItem
-                    .Cells(targetRow, context.dataLayout.isRelatedToItemColumn).value = v
+                Case ctx.headings.isRelatedToItem
+                    .Cells(row, ctx.dataLayout.isRelatedToItemColumn).value = v
 
-                Case context.headings.styleName
-                    .Cells(targetRow, context.dataLayout.styleNameColumn).value = v
+                Case ctx.headings.styleName
+                    .Cells(row, ctx.dataLayout.styleNameColumn).value = v
 
-                Case context.headings.extraAttributes
-                    .Cells(targetRow, context.dataLayout.extraAttributesColumn).value = v
+                Case ctx.headings.extraAttributes
+                    .Cells(row, ctx.dataLayout.extraAttributesColumn).value = v
 
-                Case context.headings.errorMessage
-                    .Cells(targetRow, context.dataLayout.errorMessageColumn).value = v
+                Case ctx.headings.errorMessage
+                    .Cells(row, ctx.dataLayout.errorMessageColumn).value = v
 
                 ' Case Else: ignore unknown columns (intentional, general-purpose)
             End Select
         Next fld
-
-        ' Increment the row counter once the row has been fully emitted
-        targetRow = targetRow + 1
     End With
 
 End Sub
@@ -2624,7 +2611,7 @@ Private Function ContainsAny(ByVal Text As String, ByVal patterns As Variant) As
     Next p
 End Function
 
-Private Function SafeStr(ByVal v As Variant) As String
+Public Function SafeStr(ByVal v As Variant) As String
     ' Convert Null, Empty, Missing, or Error to ""
     ' Convert anything else to a string without throwing
     
@@ -2660,7 +2647,7 @@ CleanFail:
 End Function
 
 
-Private Function SafeFieldValue(ByVal recordSetObject As Object, ByVal fieldName As String) As String
+Public Function SafeFieldValue(ByVal rs As Object, ByVal fieldName As String) As String
     ' Null-safe accessor for recordset fields.
     ' Returns "" for:
     '   - Null
@@ -2673,12 +2660,12 @@ Private Function SafeFieldValue(ByVal recordSetObject As Object, ByVal fieldName
     On Error GoTo CleanFail
 
     ' Validate recordset
-    If recordSetObject Is Nothing Then
+    If rs Is Nothing Then
         SafeFieldValue = ""
         Exit Function
     End If
 
-    If recordSetObject.State <> adStateOpen Then
+    If rs.State <> ObjectStateEnum.adStateOpen Then
         SafeFieldValue = ""
         Exit Function
     End If
@@ -2692,7 +2679,7 @@ Private Function SafeFieldValue(ByVal recordSetObject As Object, ByVal fieldName
     ' Check if field exists
     Dim fld As Object
     On Error Resume Next
-    Set fld = recordSetObject.fields(fieldName)
+    Set fld = rs.fields(fieldName)
     If Err.number <> 0 Then
         Err.Clear
         SafeFieldValue = ""
@@ -2810,14 +2797,14 @@ Private Sub ParsePlaceholderLine(ByRef placeholders As Dictionary, ByVal line As
     Dim valuePart As String
 
     ' Strip the prefix "SET PLACEHOLDER"
-    work = Trim$(Mid$(line, Len("SET PLACEHOLDER") + 1))
+    work = Trim$(Mid$(line, Len(SQL_SET_PLACEHOLDER) + 1))
 
     ' Find the equals sign
     eqPos = InStr(1, work, "=", vbTextCompare)
     If eqPos = 0 Then Exit Sub   ' malformed, ignore
 
     ' Split into name and value
-    namePart = Trim$(left$(work, eqPos - 1))
+    namePart = Trim$(Left$(work, eqPos - 1))
     valuePart = Trim$(Mid$(work, eqPos + 1))
 
     ' Add or replace
@@ -2826,6 +2813,24 @@ Private Sub ParsePlaceholderLine(ByRef placeholders As Dictionary, ByVal line As
     Else
         placeholders.Add namePart, valuePart
     End If
+End Sub
+
+Private Sub ParseClusterLevelLimitLine(ByVal line As String, ByRef clusterLevelLimit As Long)
+    Dim work As String
+    Dim eqPos As Long
+    Dim valuePart As String
+    Dim limit As Long
+
+    ' Strip the prefix "SET CLUSTER LEVEL LIMIT"
+    work = Trim$(Mid$(line, Len(SQL_SET_CLUSTER_LEVEL_LIMIT) + 1))
+
+    ' Find the equals sign
+    eqPos = InStr(1, work, "=", vbTextCompare)
+    If eqPos = 0 Then Exit Sub   ' malformed, ignore
+
+    ' Get the value after the equals sign, and convert to a number
+    valuePart = Trim$(Mid$(work, eqPos + 1))
+    clusterLevelLimit = CLng(valuePart)
 End Sub
 
 Private Sub CleanupPlaceholders(ByRef placeholders As Dictionary)
@@ -2847,4 +2852,62 @@ Private Sub ApplyPlaceholders(ByRef sqlText As String, ByRef placeholders As Dic
         sqlText = replace(sqlText, token, placeholders(key), , , vbTextCompare)
     Next key
 End Sub
+
+Public Function HasField(ByVal rs As Object, ByVal fieldName As String) As Boolean
+    If rs Is Nothing Then Exit Function
+    
+    Dim fld As Object
+    Dim searchName As String
+    searchName = LCase$(Trim$(fieldName))
+    
+    For Each fld In rs.fields
+        If LCase$(CStr(fld.name)) = searchName Then
+            HasField = True
+            Exit Function
+        End If
+    Next fld
+End Function
+
+Public Function GetLineEnding( _
+    ByVal rs As Object, _
+    ByVal fieldName As String, _
+    ByVal defaultLineEnding As String) As String
+
+    Dim temp As String
+
+    If HasField(rs, fieldName) Then
+        temp = SafeFieldValue(rs, fieldName)
+        If Len(temp) > 0 Then
+            GetLineEnding = temp
+            Exit Function
+        End If
+    End If
+
+    GetLineEnding = defaultLineEnding
+End Function
+
+Public Function GetSplitLength( _
+    ByVal rs As Object, _
+    ByVal fieldName As String) As Long
+
+    Dim temp As String
+    Dim value As Long
+
+    If HasField(rs, fieldName) Then
+        temp = SafeFieldValue(rs, fieldName)
+
+        If Len(temp) > 0 Then
+            If IsNumeric(temp) Then
+                value = CLng(temp)
+                If value > 0 Then
+                    GetSplitLength = value
+                    Exit Function
+                End If
+            End If
+        End If
+    End If
+
+    GetSplitLength = 0
+End Function
+
 
