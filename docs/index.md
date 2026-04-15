@@ -1,6 +1,7 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+markdownStyles: true
 
 hero:
   name: "Excel to Graphviz"
@@ -74,8 +75,10 @@ Whether you're mapping data flows, org charts, timelines, ERDs, or circuits, thi
 | **Advanced features** | SQL queries, SVG animation, DOT preview, JSON exchange |
 | **Cross-platform** |  Works on 🪟 Windows and 🍎 macOS |
 | **Sleek UI** | Custom Excel ribbon tabs across all worksheets |
-| **Multilingual** | English, French, German, Italian, Polish |
-| **Open Source** | MIT License |
-| **Absolutely Free** | No cost to use; ☕[BMC donations](https://buymeacoffee.com/exceltographviz) appreciated |
-| ![](/sourceforge-community-choice.png)[![Download Excel to Graphviz](https://img.shields.io/sourceforge/dt/relationship-visualizer.svg)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download) |  SourceForge Community Choice award · 10,000+ downloads |
+| **Multilingual** | English · French · German · Italian · Polish |
+| **Absolutely Free**  | Free to use, no license required |
+| **Open Source** | [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](./license/) |
+| **Support the Project**  | [![BuyMeACoffee](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-donate-yellow.svg)](https://www.buymeacoffee.com/exceltographviz) |
+| **Code Documentation** | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/jjlong150/ExcelToGraphviz)  |
+| ![](/sourceforge-community-choice.png) | SourceForge Community Choice award [![Download Excel to Graphviz](https://img.shields.io/sourceforge/dt/relationship-visualizer.svg)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)|
 | | |
