@@ -181,7 +181,7 @@ export default defineConfig({
 
     editLink: {
       pattern: 'https://buymeacoffee.com/exceltographviz',
-      text: 'Like this tool? Buy me a coffee! ☕'
+      text: 'Like this tool? Show your support!'
     },
 
     socialLinks: [
