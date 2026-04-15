@@ -60,6 +60,8 @@ features:
     link: /exchange/
 ---
 
+<div class="vp-doc">
+
 ### Create Stunning Relationship Diagrams from Spreadsheets
 
 The **Relationship Visualizer** spreadsheet transforms your Excel tables into clear, professional **Graphviz diagrams** in seconds. Say goodbye to manual drawing tools — simply enter your data as rows (e.g., "A is related to B"), and watch graphs appear automatically.
@@ -76,9 +78,11 @@ Whether you're mapping data flows, org charts, timelines, ERDs, or circuits, thi
 | **Cross-platform** |  Works on 🪟 Windows and 🍎 macOS |
 | **Sleek UI** | Custom Excel ribbon tabs across all worksheets |
 | **Multilingual** | English · French · German · Italian · Polish |
-| **Absolutely Free**  | Free to use, no license required |
+| **Absolutely Free**  | Free to use · No license required · Donations appreciated |
 | **Open Source** | [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](./license/) |
-| **Support the Project**  | [![BuyMeACoffee](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-donate-yellow.svg)](https://www.buymeacoffee.com/exceltographviz) |
+| **Project Supporters**  | [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/exceltographviz) |
 | **Code Documentation** | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/jjlong150/ExcelToGraphviz)  |
-| ![](/sourceforge-community-choice.png) | SourceForge Community Choice award [![Download Excel to Graphviz](https://img.shields.io/sourceforge/dt/relationship-visualizer.svg)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)|
+| ![](/sourceforge-community-choice.png) | *SourceForge Community Choice* Award [![Download Excel to Graphviz](https://img.shields.io/sourceforge/dt/relationship-visualizer.svg)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)|
 | | |
+
+</div>
