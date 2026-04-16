@@ -37,7 +37,7 @@ export default {
               <tr><td><strong>Absolutely Free</strong></td><td>Free to use · No license required · Donations appreciated</td></tr>
               <tr><td><strong>Open Source</strong></td><td>MIT License</td></tr>
               <tr><td><strong>Rich Code Documentaion</strong></td><td><a href="https://deepwiki.com/jjlong150/ExcelToGraphviz" target="_blank" rel="noopener">AI-powered DeepWiki </a></td></tr>
-              <tr><td><strong>Buy Me a Coffee</strong></td><td><a href="https://www.buymeacoffee.com/exceltographviz" target="_blank" rel="noopener">Show your support!</a></td></tr>              
+              <tr><td><strong>Show Your Support</strong></td><td><a href="https://www.buymeacoffee.com/exceltographviz" target="_blank" rel="noopener">Buy Me a Coffee!</a></td></tr>              
               <tr><td><strong>Award Winning</strong><br></td><td>SourceForge Community Choice Award</td></tr>
             </table> 
             <center>      
