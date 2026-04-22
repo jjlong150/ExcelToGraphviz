@@ -1,8 +1,56 @@
 Attribute VB_Name = "modUtilityString"
-'@IgnoreModule UseMeaningfulName
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.String")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityString
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / String Processing
+'
+' ROLE:
+'   Core string-manipulation toolkit used throughout the Relationship Visualizer
+'   and Excel-to-Graphviz pipeline. Provides case-insensitive prefix/suffix
+'   checks, quoting helpers, delimiter extraction, tokenization, wrapping,
+'   multiline splitting, and Graphviz-safe text scrubbing.
+'
+' RESPONSIBILITIES:
+'   - Basic predicates:
+'       • StartsWith / EndsWith: trimmed, case-insensitive comparisons
+'   - Quoting helpers:
+'       • AddQuotes: wrap text in double quotes
+'       • AddQuotesConditionally: quote only when non-alphanumeric characters appear
+'   - Delimiter extraction:
+'       • GetStringBetweenDelimiters: extract inner content when wrapped by
+'         caller-supplied left/right delimiters
+'       • GetStringTokenAtPosition: positional token retrieval
+'       • AddNameValue: append name=value pairs to attribute strings
+'
+'   - Text wrapping and multiline handling:
+'       • WrapText: concatenate a range and wrap to fixed width
+'       • SplitMultilineText: normalize symbolic breaks (\n, \r, \l, <br/>) and
+'         wrap each segment
+'       • SplitText: wrap a single string into segments with caller-supplied
+'         line endings
+'       • GetTextSegment: core word-boundary-aware segmenter
+'
+'   - Graphviz-safe scrubbing:
+'       • ScrubText: normalize LF, escape quotes, and convert "" -> blank
+'
+' ARCHITECTURAL NOTES:
+'   - All wrapping routines collapse multiple spaces and preserve word
+'     boundaries when possible.
+'   - Symbolic newline tokens are normalized before splitting.
+'   - ScrubText ensures Graphviz-compatible escaping for labels and attributes.
+'   - Consumed by Data sheet helpers, SQL output, HTML label generation,
+'     and attribute-parsing modules.
+'
+' USAGE:
+'   - Ideal for attribute construction, label preparation, text normalization,
+'     and any workflow requiring predictable, Graphviz-safe string handling.
+'
+' RELATED WIKI PAGES:
+'   - String Normalization & Escaping
+'   - Text Wrapping & Multiline Handling
+'   - Graphviz Label Safety Rules
+' =============================================================================
 
 Option Explicit
 

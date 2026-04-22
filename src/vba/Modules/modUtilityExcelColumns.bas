@@ -1,7 +1,37 @@
 Attribute VB_Name = "modUtilityExcelColumns"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Excel")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcelColumns
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Excel Interop
+'
+' ROLE:
+'   Column-oriented worksheet utilities for determining last-used columns,
+'   converting column numbers to A1-style letters, and showing/hiding columns
+'   with automatic autofit behavior.
+'
+' RESPONSIBILITIES:
+'   - Column discovery:
+'       • GetLastColumn: determine the rightmost non-empty column in a row
+'   - Column visibility:
+'       • ShowColumn: toggle visibility of a specific column and apply AutoFit
+'   - Column name conversion:
+'       • ConvertColumnNumberToLetters: convert numeric column index -> A, B, …, AA, AB
+'
+' ARCHITECTURAL NOTES:
+'   - Uses ActiveWorkbook.Worksheets.[_Default] for late-bound sheet resolution.
+'   - Column-letter conversion supports 1–702 (A–ZZ) using a compact algorithm.
+'   - AutoFit is applied before visibility toggling to ensure consistent layout.
+'   - Consumed by data-sheet workflows, diagnostics, and UI-driven column toggles.
+'
+' USAGE:
+'   - Ideal for worksheet automation, dynamic UI toggles, and data-driven
+'     column visibility logic.
+'
+' RELATED WIKI PAGES:
+'   - Worksheet Access Patterns
+'   - Column Visibility & Layout Management
+' =============================================================================
 
 Option Explicit
 

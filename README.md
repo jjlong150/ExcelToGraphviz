@@ -10,6 +10,7 @@ Supports Windows and macOS, with a multilingual tabbed ribbon interface.
 [![Download Now](https://img.shields.io/badge/Download%20Now-Free%20Excel%20Tool-green)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/exceltographviz)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/jjlong150/ExcelToGraphviz)
 
 ## Quick Links
 
@@ -18,6 +19,7 @@ Supports Windows and macOS, with a multilingual tabbed ribbon interface.
 - ⬇️ **Download Relationship Visualizer**: [SourceForge ZIP (~81 MB)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download) — free & virus-scanned
 - 📜 **Changelog**: [exceltographviz.com/changelog](https://exceltographviz.com/changelog) — version history
 - 🔧 **Examples Repository**: [github.com/jjlong150/excel-to-graphviz-examples](https://github.com/jjlong150/excel-to-graphviz-examples) — ready-to-use workbooks & patterns
+- 🧩 **Project Architecture**: [deepwiki.com/jjlong150/ExcelToGraphviz](https://deepwiki.com/jjlong150/ExcelToGraphviz) — insights into the tool's internal mechanisms
 - ☕ **Support the Project**: [Buy Me a Coffee](https://www.buymeacoffee.com/exceltographviz) — optional thanks for ongoing development!
 
 ## Quick Start
@@ -94,6 +96,7 @@ Here's the main directory overview:
 
 ```
 .
+├── .devin/                           # DeepWiki wiki.json
 ├── .github/                          # GitHub workflows and FUNDING.yml
 ├── dist/                             # Distribution-ready ZIP assets
 │   ├── Relationship Visualizer/      # Distribution assets
@@ -101,32 +104,33 @@ Here's the main directory overview:
 │   │   └── samples/                  # Sample workbooks
 │   └── Relationship Visualizer.zip   # Distribution file published on SourceForge
 ├── docs/                             # https://exceltographviz.com content files
-│   ├── .vuepress/                    # VuePress configuration settings
+│   ├── .vitepress/                   # VitePress configuration settings
 │   ├── topic(s)/                     # Markdown content structured within subdirectories by topic.
-│   └── README.md                     # Home page
+│   ├── index.md                      # VitePress Home page
+│   ├── package.json                  # Manifest for Node.js VitePress project
+│   └── package-lock.json             # Detailed snapshot of NPM project dependencies
 ├── legacy_docs/                      # Legacy user documentation (.docx, .pdf)
 ├── src/                              # Source files for the workbook
 │   ├── applescript/                  # applescript script for running on macOS
 │   ├── excel/                        # Excel workbook matching extracted source
 │   ├── vba/                          # VBA code extracted from 'Relationship Visualizer.xlsm'
-│   │   ├── Class Modules/            # VBA class files (.cls)
+│   │   ├── ClassModules/             # VBA class files (.cls)
 │   │   ├── Forms/                    # VBA form files (.frm)
-│   │   ├── Microsoft Excel Objects/  # VBA worksheet class files (.cls)
+│   │   ├── MicrosoftExcelObjects/    # VBA worksheet class files (.cls)
 │   │   └── Modules/                  # VBA macro files (.bas)
 │   └── xlsm/                         # Supporting files contained in the workbook
 │       ├── _rels/                    # Manages ribbon xml for different versions of Excel
-│       ├── customUI/                 # VBA worksheet class files (.cls)
-│       │   ├── _rels_/               # Manages logical names for ribbon images
-│       │   ├── images/               # Images used in the custom ribbon
-│       │   ├── customUI.xml          # Ribbon definition for Excel versions prior to 2010.
-│       │   └── customUI14.xml        # Ribbon definition for Excel versions 2010 and later.
-│       └── docProps/                 # Excel workbook document properties
+│       └── customUI/                 # VBA worksheet class files (.cls)
+│           ├── images/               # Images used in the custom ribbon
+│           ├── customUI.xml          # Ribbon definition for Excel versions prior to 2010.
+│           └── customUI14.xml        # Ribbon definition for Excel versions 2010 and later.
+├── .gitattributes                    # Git name and line ending rules
 ├── .gitignore                        # Git ignore rules
 ├── .npmignore                        # NPM ignore rules
 ├── LICENSE                           # Project license (MIT)
-├── README.md                         # This file
-├── package-lock.json                 # Detailed snapshot of NPM project dependencies
-└── package.json                      # Manifest for Node.js VuePress project
+├── README.md                         # GitHub Repository home page (this file)
+└── SECURITY.md                       # Security Considerations
+
 ```
 
 ## Installation
@@ -153,7 +157,7 @@ Visit **[exceltographviz.com](https://exceltographviz.com/)** for comprehensive,
 - Advanced Graphviz techniques  
 
 **In this repository**  
-- Website source (Markdown files built with VuePress): [`docs/`](./docs/) — powers exceltographviz.com  
+- Website source (Markdown files built with VitePress): [`docs/`](./docs/) — powers exceltographviz.com  
 - Legacy documentation archive (older .docx & .pdf manuals): [`legacy_docs/`](./legacy_docs/) — historical reference, platform-specific
   
 ## License

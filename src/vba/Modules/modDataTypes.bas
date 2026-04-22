@@ -1,8 +1,58 @@
 Attribute VB_Name = "modDataTypes"
-'@IgnoreModule UseMeaningfulName
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Bootstrap")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modDataTypes
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Bootstrap / Type System
+'
+' ROLE:
+'   Central registry of all User-Defined Types (UDTs) used throughout the
+'   Relationship Visualizer. Defines the structural contracts for worksheet
+'   schemas, runtime settings, SQL extension metadata, Style Designer fields,
+'   Exchange import/export options, and row-level data models.
+'
+' RESPONSIBILITIES:
+'   - Provide strongly-typed structures for:
+'       • Worksheet schemas (data, styles, sql, svg, source)
+'       • Runtime graph options (graphOptions)
+'       • File output and command-line settings
+'       • SQL extension field names and execution parameters
+'       • Style Designer attribute sets and label groups
+'       • Exchange import/export configuration
+'       • Row-level data models for data, styles, SQL, and SVG worksheets
+'   - Serve as the canonical contract surface for all transformation pipelines:
+'       • ConvertDataWorksheetToGvSource
+'       • CreateGraphWorksheet / CreateGraphFile
+'       • SQL execution engine (iterative, recursive, enumeration, placeholder)
+'       • Style Designer preview and format restoration
+'       • Exchange import/export serialization
+'   - Eliminate reliance on loosely-typed Variant dictionaries by providing
+'     explicit, documented fields for every subsystem.
+'
+' INTERACTIONS:
+'   - modCreateGraph: consumes settings, dataWorksheet, stylesWorksheet,
+'                     graphOptions, and dataRow.
+'   - SQL Engine: consumes sqlWorksheet, sqlRow, sqlFieldName, and settings.sql.
+'   - Style Designer: consumes stylesWorksheet, StylesRow, LabelSet.
+'   - Exchange Subsystem: consumes ExchangeOptions and related UDTs.
+'   - Source/SVG Editors: consume sourceWorksheet, svgWorksheet, svgRow.
+'
+' CROSS-PLATFORM NOTES:
+'   - Fully cross-platform; UDTs are consumed identically on Windows and macOS.
+'   - Some fields (e.g., image paths, file disposition) are interpreted
+'     differently by platform-specific modules.
+'
+' ERROR HANDLING:
+'   - No executable logic; UDTs provide structural guarantees that reduce
+'     downstream error-handling complexity.
+'
+' RELATED WIKI PAGES:
+'   - Workbook Architecture & Sheet Layout
+'   - Data Worksheet Schema
+'   - Style Designer Attribute Map
+'   - SQL Extensions & Field Naming
+'   - Exchange Import/Export Specification
+' =============================================================================
 
 Option Explicit
 

@@ -1,6 +1,47 @@
 Attribute VB_Name = "modUtilityExcelPicture"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-'@Folder("Utility.Excel")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcelPicture
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER: Utility / Excel Interop
+'
+' ROLE:
+'   Insert, locate, and remove raster and vector images on worksheets. Provides
+'   a consistent abstraction over Shapes.AddPicture and worksheet-based picture
+'   enumeration, including SVG-aware deletion routines.
+'
+' RESPONSIBILITIES:
+'   - Picture insertion:
+'       • InsertPicture: add raster or vector images at a target cell's position
+'         using original dimensions, optional linking, and optional AltText
+'   - Picture deletion:
+'       • DeletePictures: remove pictures whose bounding cells intersect a range
+'       • DeleteCellPictures: remove images anchored to a specific cell
+'       • DeleteAllPictures: remove all msoPicture and msoGraphic shapes
+'
+' ARCHITECTURAL NOTES:
+'   - Uses Shapes.AddPicture for full compatibility with PNG, JPG, GIF, BMP,
+'     and SVG (msoGraphic) formats.
+'   - Placement = xlMove ensures images track row/column movement without
+'     resizing.
+'   - Deletion routines rely on TopLeftCell/BottomRightCell for precise
+'     cell-anchored targeting.
+'   - v8.0.01 revisions (per changelog): SVG deletion added; Atom CPU-safe
+'     enumeration logic preserved.
+'
+' VERSION NOTES:
+'   - v8.0.01: Expanded deletion logic to include SVG (msoGraphic) and maintain
+'              compatibility with low-power Atom CPUs.
+'
+' USAGE:
+'   - Used by SVG export, Data sheet previews, Source/Styles workflows, and
+'     any feature requiring image placement or cleanup.
+'
+' RELATED WIKI PAGES:
+'   - Image Handling & SVG Support
+'   - Worksheet Rendering Pipeline
+'   - Shape Enumeration & Deletion Patterns
+' =============================================================================
 
 Option Explicit
 

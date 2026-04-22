@@ -1,7 +1,44 @@
 Attribute VB_Name = "modUtilityADODBConstants"
-' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Excel")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityADODBConstants
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / ADO SQL / Late-binding Constants
+'
+' ROLE:
+'   Late-binding compatibility module defining ADO enumeration constants for
+'   CommandType, CursorLocation, LockType, ObjectState, StreamType, ExecuteOption,
+'   and DataType. Ensures stable, reference-free ADO usage across all supported
+'   Excel versions.
+'
+' RESPONSIBILITIES:
+'   - Provide local definitions of ADO enum values:
+'       • Eliminates "magic numbers" in SQL engine and connection pool
+'       • Prevents compile-time failures when ADO library references are missing
+'   - Enable late-bound ADO:
+'       • ADODB.Connection
+'       • ADODB.Recordset
+'       • ADODB.Stream
+'   - Support cross-module consumers:
+'       • SQL engine (iterative SQL, enumeration SQL, placeholder SQL)
+'       • ExecuteAndCapture (stream handling)
+'       • Connection pool (cursor/lock settings)
+'       • Diagnostic logging
+'
+' ARCHITECTURAL NOTES:
+'   - Windows-only subsystem; ADO is not available on macOS.
+'   - Contains no executable logic—constants only.
+'   - Ensures version-agnostic behavior across Office/ACE provider changes.
+'
+' USAGE:
+'   - Imported by all ADO-dependent modules to guarantee stable enum values.
+'   - Required for late-bound SQL execution and stream operations.
+'
+' RELATED WIKI PAGES:
+'   - ADO Late Binding Architecture
+'   - SQL Engine & Connection Pooling
+'   - Diagnostics & Environment Documentation
+' =============================================================================
 
 Option Explicit
 

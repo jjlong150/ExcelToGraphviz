@@ -1,4 +1,54 @@
 Attribute VB_Name = "modUtilityExcelColorPicker"
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcelColorPicker
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Color Selection
+'
+' ROLE:
+'   Cross-platform color-selection subsystem providing Excel-dialog,
+'   Windows-API, and macOS-AppleScript color pickers. Converts between
+'   hex and RGB formats and exposes a unified interface for Ribbon and
+'   worksheet-driven color workflows.
+'
+' RESPONSIBILITIES:
+'   - Color selection:
+'       • ShowColorChooser: unified entry point for Excel dialog, Windows API,
+'         or macOS AppleScript color pickers
+'       • Validate and parse #RRGGBB hex input
+'       • Return selected color as VBA RGB Long
+'   - Windows API integration:
+'       • Declare and configure ChooseColorA dialog
+'       • Populate custom-color memory block
+'       • Initialize dialog with RGB seed color
+'   - macOS integration:
+'       • Invoke AppleScriptTask-based color picker
+'       • Parse returned RGB triplet
+'   - Format conversion:
+'       • RGBToHex: convert VBA RGB Long -> #RRGGBB
+'
+' ARCHITECTURAL NOTES:
+'   - Fully cross-platform: Excel dialog (Windows/macOS), Windows API
+'     (Windows-only), AppleScriptTask (macOS-only).
+'   - Defensive error handling ensures color selection never interrupts
+'     calling workflows.
+'   - COLORREF ordering (R + G*256 + B*65536) handled explicitly for API calls.
+'   - Consumed by Style Designer, Styles tab, and any UI requiring color input.
+'
+' VERSION NOTES:
+'   Introduced in Version 8.0.0
+'
+' USAGE:
+'   - Ideal for Ribbon callbacks, style editors, and worksheet-driven color
+'     selection fields.
+'   - Supports both interactive UI workflows and automated test harnesses.
+'
+' RELATED WIKI PAGES:
+'   - Color Selection Architecture
+'   - Cross-Platform UI Interop (Windows/macOS)
+'   - Style Designer & Color Workflow
+' =============================================================================
+
 Option Explicit
 
 Public Enum ColorPickerType

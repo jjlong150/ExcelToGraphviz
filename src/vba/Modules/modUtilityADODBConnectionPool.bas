@@ -1,14 +1,53 @@
 Attribute VB_Name = "modUtilityADODBConnectionPool"
-' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityADODBConnectionPool
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / ADO SQL / Connection Pooling
 '
-' Connection pool with:
-' - Provider auto-detection
-' - Timestamped freshness
-' - Safe-mode fallback
-' - Hardened open/close
-' - Diagnostic logging hooks
+' ROLE:
+'   High-performance ADO connection-pooling subsystem for Excel and Access
+'   data sources. Provides provider auto-detection, freshness validation,
+'   retry-based resilience, and safe-mode fallback to ensure deterministic
+'   SQL execution under Windows.
 '
-'@Folder("Utility.Excel")
+' RESPONSIBILITIES:
+'   - Connection pooling:
+'       • Maintain late-bound ADO connections keyed by file path
+'       • Enforce freshness via timestamp-based TTL checks
+'       • Provide safe-mode, non-pooled connections for recovery paths
+'   - Provider negotiation:
+'       • Auto-detect newest available OLEDB provider (ACE -> Jet fallback)
+'   - Resilience and diagnostics:
+'       • Retry-based open logic for transient locks and latency
+'       • Defensive close logic to prevent lingering file handles
+'       • Emit diagnostic telemetry for provider failures and stale handles
+'   - Integration:
+'       • SQL Engine (iterative SQL, enumeration, placeholder SQL, batch execution)
+'       • Ribbon controls (pool reset, dev-mode toggles)
+'       • Settings and Diagnostics worksheets
+'
+' ARCHITECTURAL NOTES:
+'   - Late-bound ADO for cross-version compatibility.
+'   - Windows-only subsystem; macOS SQL features degrade gracefully.
+'   - Designed to mitigate Office/ACE instability and long-running handle issues.
+'   - Works in concert with modUtilityADODBDiagnosticLogger and SQL engine modules.
+'
+' VERSION NOTES:
+'   - v10.x: "Connection Pool" group added to address March 2025 Office update
+'            causing ADO connections to slow down significantly.
+'
+' USAGE:
+'   - Invoked by SQL execution pipeline via getConnection/returnConnection.
+'   - Supports iterative SQL, recursive SQL, enumeration, and placeholder expansion.
+'   - Ribbon "Reset Pool" button triggers full cleanup and provider re-evaluation.
+'
+' RELATED WIKI PAGES:
+'   - SQL Engine & Connection Pooling
+'   - Diagnostics & Environment Documentation
+'   - SQL Worksheet Architecture
+' =============================================================================
+
 
 Option Explicit
 
@@ -24,10 +63,14 @@ Private ConnectionPool As Object
 
 Private CachedProvider As String
 
-' ===========================
-' Public API
-' ===========================
+' --- Public API ---
 
+''
+' INITIALIZER: Bootstraps the Scripting.Dictionary used for pooling.
+' 1. Logic is restricted to Windows environments (Win32/Win64).
+' 2. Ensures the pool exists before any SQL execution is attempted.
+' Called by: InitializeRibbon and SQL execution entry points.
+'
 Public Sub InitializeConnectionPool()
 #If Win32 Or Win64 Then
     If ConnectionPool Is Nothing Then
@@ -36,11 +79,31 @@ Public Sub InitializeConnectionPool()
 #End If
 End Sub
 
-' Returns a pooled or fresh connection to the given Excel file.
-' Uses:
-' - Provider auto-detection
-' - Connection freshness
-' - Safe-mode fallback
+''
+' FUNCTION: getConnection
+' PURPOSE:
+'   Retrieves an active ADO connection for the specified Excel or Access file.
+'   Implements a high-performance "Retrieve-or-Create" pattern with pooling.
+'
+' TECHNICAL WORKFLOW:
+'   1. VALIDATION: Verifies file existence and initializes the pool if null.
+'   2. POOL CHECK: Looks for a cached handle. Discards if 'stale' (maxConnectionMinutes)
+'      or if the connection state is closed/broken.
+'   3. SCHEMA NEGOTIATION: Dynamically builds 'Extended Properties' based on
+'      extension (.xlsx, .xlsm, .xlsb, .xls, .accdb).
+'   4. DATA INTEGRITY: Forces IMEX=1 and ImportMixedTypes=Text to prevent
+'      Excel driver "type-guessing" errors in mixed columns.
+'   5. RESILIENCE: Implements a retry-loop (MAX_CONN_OPEN_RETRIES) with delays
+'      to handle transient file-locks or network latency.
+'   6. SAFE-MODE: Automatically falls back to a non-pooled "Safe Connection"
+'      if the primary driver negotiation fails.
+'
+' PARAMETERS:
+'   - fileName [String]: Path to the target database.
+'   - maxConnectionMinutes [Long]: Freshness threshold for the pool.
+' RETURNS:
+'   - Late-bound ADODB.Connection (Object).
+'
 Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinutes As Long) As Object
 #If Win32 Or Win64 Then
     On Error GoTo ErrorHandler
@@ -95,15 +158,15 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
     '
     ' "Excel 12.0 Xml"
     '   - Specifies the Excel file format this connection targets
-    '   - "Excel 12.0"  = Excel 2007?2019 / Microsoft 365 (.xlsx, .xlsm, etc.)
+    '   - "Excel 12.0"  = Excel 2007->2019 / Microsoft 365 (.xlsx, .xlsm, etc.)
     '   - "Xml"         = indicates the modern Office Open XML format (not legacy .xls binary)
     '   - Use "Excel 8.0" instead if connecting to old .xls files (with Jet 4.0 provider)
     '
     ' "HDR=YES"
-    '   - Header Row = YES ? Treats the **first row** of the used range as column headers
+    '   - Header Row = YES -> Treats the **first row** of the used range as column headers
     '   - Field names in SQL become the values in row 1 (e.g. [Year], [Shell], etc.)
     '   - Alternatives:
-    '       HDR=NO   ? No headers; columns become F1, F2, F3? (useful for raw data)
+    '       HDR=NO   -> No headers; columns become F1, F2, F3-> (useful for raw data)
     '       HDR=YES;IMEX=1 is the most common combo for structured tables
     '
     ' "IMEX=1"
@@ -117,7 +180,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
     '   - Forces the driver to treat **mixed-type columns as Text** (most reliable for mixed data)
     '   - Works in combination with IMEX=1
     '   - Without this, even with IMEX=1, the driver may still guess numeric if the first 8 rows are all numbers
-    '   - Alternative (older style): IMEX=1 + Registry change (TypeGuessRows=0) ? but this is cleaner
+    '   - Alternative (older style): IMEX=1 + Registry change (TypeGuessRows=0) -> but this is cleaner
     '
     ' =============================================================================
     ' Recommended full connection string patterns (pick one):
@@ -143,7 +206,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
             properties = "Excel 12.0 Xml;HDR=YES;IMEX=1;ImportMixedTypes=Text"
     
         Case "xlsb"
-            ' .xlsb is the binary format ? use "Excel 12.0" (no "Xml")
+            ' .xlsb is the binary format -> use "Excel 12.0" (no "Xml")
             properties = "Excel 12.0;HDR=YES;IMEX=1;ImportMixedTypes=Text"
     
         Case "xlsm"
@@ -154,7 +217,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
         Case "xls"
             ' Legacy binary .xls files use "Excel 8.0"
             ' (Note: IMEX=1 and ImportMixedTypes=Text are **not** supported/ignored by the ACE driver for .xls,
-            ' but including them does no harm ? they're safely passed through)
+            ' but including them does no harm -> they're safely passed through)
             properties = "Excel 8.0;HDR=YES"
     
          Case "accdb"
@@ -270,7 +333,23 @@ ErrorHandler:
 #End If
 End Function
 
-' Cleans up all pooled connections.
+''
+' PROCEDURE: CleanupConnectionPool
+' PURPOSE:
+'   Systematically closes and destroys all active database handles.
+'
+' TECHNICAL WORKFLOW:
+'   1. ITERATION: Loops through the Dictionary keys to access every pooled
+'      handle.
+'   2. SAFE-CLOSE: Calls SafeCloseConnection on each object to ensure
+'      the database is released even if the connection is in an unstable state.
+'   3. MEMORY RELEASE: Clears the Dictionary and sets the global
+'      ConnectionPool reference to Nothing to reclaim system resources.
+'
+' USAGE:
+'   - Called during Ribbon reset, Workbook_BeforeClose, or after fatal errors
+'     to prevent 'File In Use' locks for the user.
+'
 Public Sub CleanupConnectionPool()
 #If Win32 Or Win64 Then
     On Error Resume Next
@@ -290,7 +369,19 @@ Public Sub CleanupConnectionPool()
 #End If
 End Sub
 
-' Returns the number of pooled connections.
+''
+' FUNCTION: GetConnectionCount
+' PURPOSE:
+'   Returns the current number of active database handles in the pool.
+'
+' TECHNICAL WORKFLOW:
+'   1. STATE CHECK: Verifies if the ConnectionPool Dictionary has been initialized.
+'   2. TELEMETRY: Retrieves the 'Count' property from the internal Dictionary.
+'
+' USAGE:
+'   - Used by the Diagnostics worksheet to report system health.
+'   - Used by the SQL Ribbon tab to indicate if any connections are currently 'hot'.
+'
 Public Function GetConnectionCount() As Long
 #If Win32 Or Win64 Then
     If ConnectionPool Is Nothing Then
@@ -301,11 +392,17 @@ Public Function GetConnectionCount() As Long
 #End If
 End Function
 
-' ===========================
-' Internal helpers
-' ===========================
+' ==========================================================================
+' SECTION: INTERNAL HEALTH CHECKS & DRIVER DETECTION
+' ==========================================================================
 
-' Returns True if the connection is open and can execute a trivial query.
+''
+' CONNECTION VALIDATOR: Performs a "heartbeat" check on a pooled handle.
+' 1. State Verification: Ensures the connection is currently 'adStateOpen'.
+' 2. Trivial Execution: Executes a dummy query (SELECT 1) to verify the
+'    underlying database file hasn't been moved or locked externally.
+' @returns Boolean: True if the connection is alive and responsive.
+'
 Private Function IsConnectionValid(ByVal conn As Object) As Boolean
 #If Win32 Or Win64 Then
     On Error GoTo ErrorHandler
@@ -323,7 +420,20 @@ ErrorHandler:
 #End If
 End Function
 
-' Safely closes and releases a connection.
+''
+' PROCEDURE: SafeCloseConnection
+' PURPOSE:
+'   Defensively closes and destroys an ADO connection object.
+'
+' TECHNICAL WORKFLOW:
+'   1. NULL CHECK: Verifies the object exists before attempting operations.
+'   2. BITWISE STATE CHECK: Uses a bitwise AND comparison against 'adStateOpen'
+'      to verify the connection is truly active before calling .Close.
+'   3. GRACEFUL FAILURE: Employs 'On Error Resume Next' to prevent the
+'      application from crashing if the database file is already locked or inaccessible.
+'   4. MEMORY RECLAMATION: Explicitly sets the object to 'Nothing' to ensure
+'      the COM handle is released by the Windows OS.
+'
 Private Sub SafeCloseConnection(ByRef cn As Object)
 #If Win32 Or Win64 Then
     On Error Resume Next
@@ -337,7 +447,23 @@ Private Sub SafeCloseConnection(ByRef cn As Object)
 #End If
 End Sub
 
-' Extracts connection and timestamp from the pool entry.
+''
+' PROCEDURE: GetPooledConnection
+' PURPOSE:
+'   Extracts a cached connection and its metadata from the internal registry.
+'
+' TECHNICAL WORKFLOW:
+'   1. DICTIONARY LOOKUP: Retrieves the Variant array associated with the
+'      specified fileName key.
+'   2. OBJECT RECOVERY: Unpacks the 'ADODB.Connection' object from the first
+'      array element (index 0).
+'   3. METADATA RECOVERY: Unpacks the 'openedAt' timestamp from the second
+'      array element (index 1) for age verification.
+'
+' USAGE:
+'   - Internal utility for the 'getConnection' workflow to facilitate
+'     freshness checks before reusing a handle.
+'
 Private Sub GetPooledConnection(ByVal fileName As String, _
                                 ByRef conn As Object, _
                                 ByRef openedAt As Date)
@@ -347,12 +473,21 @@ Private Sub GetPooledConnection(ByVal fileName As String, _
     openedAt = entry(1)
 End Sub
 
-' Returns True if the connection age is less than MAX_CONN_AGE_MINUTES.
+''
+' FRESHNESS CHECK: Calculates the age of a pooled handle in minutes.
+' Uses the '1440' constant (minutes in a day) to compare the 'openedAt'
+' timestamp against the user-defined 'maxConnectionMinutes' threshold.
+'
 Private Function IsConnectionFresh(ByVal openedAt As Date, maxConnectionMinutes As Long) As Boolean
     IsConnectionFresh = ((Now - openedAt) * 1440) < maxConnectionMinutes
 End Function
 
-' Creates a fresh, non-pooled "safe-mode" connection.
+''
+' SAFE-MODE GENERATOR: Creates an un-pooled, high-timeout connection.
+' 1. Logic: Used as a fallback when standard pooling fails.
+' 2. Configuration: Forces CommandTimeout and ConnectionTimeout to 0 (infinite)
+'    to ensure critical data retrieval is prioritized over speed.
+'
 Private Function CreateSafeModeConnection(ByVal fileName As String, _
                                           ByVal provider As String, _
                                           ByVal properties As String) As Object
@@ -379,10 +514,14 @@ SafeModeError:
 #End If
 End Function
 
-' ===========================
-' Provider auto-detection
-' ===========================
-' Returns the best available provider string for Excel files.
+''
+' DRIVER AUTO-DETECTION: Identifies the newest OLEDB provider on the system.
+' 1. Version Hunt: Prioritizes Microsoft ACE (16.0 -> 15.0 -> 12.0) for modern
+'    Excel formats (.xlsx, .xlsm, .xlsb).
+' 2. Legacy Fallback: Drops down to Jet 4.0 if ACE is missing.
+' 3. Performance: Caches the result in 'CachedProvider' to prevent
+'    redundant registry probes during the session.
+'
 Public Function DetectBestExcelProvider() As String
     ' Return cached result if already detected
     If Len(CachedProvider) > 0 Then
@@ -417,7 +556,11 @@ Public Function DetectBestExcelProvider() As String
     DetectBestExcelProvider = vbNullString
 End Function
 
-' Checks if a provider is installed by attempting to assign it to a connection.
+''
+' PROBE UTILITY: Tests for the physical presence of a database driver.
+' Attempts to assign the provider to a late-bound connection object and
+' catches the resulting error if the driver is not installed.
+'
 Private Function ProviderExists(ByVal providerName As String) As Boolean
 #If Win32 Or Win64 Then
     On Error Resume Next

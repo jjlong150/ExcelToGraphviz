@@ -1,11 +1,71 @@
 Attribute VB_Name = "modWorksheetConsole"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modWorksheetConsole
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Relationship Visualizer / Sheets / Console
+'
+' ROLE:
+'   Manage the on-sheet Console subsystem used for real-time diagnostics,
+'   Graphviz CLI logging, verbose-mode control, and cross-platform export.
+'   Provides a persistent audit trail of commands, stdout/stderr output,
+'   and internal status messages.
+'
+' RESPONSIBILITIES:
+'   - Console lifecycle:
+'       • ClearConsoleWorksheet: purge prior command/output history
+'       • SaveConsoleToFile / ConsoleWorksheetToFile: export logs to UTF-8
+'       • CopyConsoleToClipboard (Windows): aggregate and copy log text
+'
+'   - Logging:
+'       • DisplayTextOnConsoleWorksheet: log CLI command + parsed output
+'       • LogToConsoleWorksheet: append raw diagnostic text
+'       • Platform-aware delimiter handling (vbCr on macOS, vbLf on Windows)
+'       • High-speed bulk writes using Application.Transpose
+'
+'   - Verbose-mode logic:
+'       • RunGraphvizInVerboseMode: enable Graphviz "-v" only when
+'         Console is visible and user settings permit verbose logging
+'
+' ARCHITECTURAL NOTES:
+'   - Integrates with SETTINGS_ Named Range API for append/overwrite,
+'     verbose mode, and log-to-console toggles.
+'   - macOS uses AppleScriptTask for Save As dialogs and command logging
+'     normalization; Windows uses native dialogs and clipboard APIs.
+'   - ConsoleSheet is treated as a UI surface and a diagnostic buffer,
+'     optimized for minimal overhead during graph generation.
+'
+' USAGE:
+'   - Ideal for capturing Graphviz engine behavior, debugging DOT output,
+'     and providing transparent audit trails during graph generation.
+'
+' RELATED WIKI PAGES:
+'   - DOT Source Viewer & Console Architecture
+'   - Logging & Diagnostics Pipeline
+'   - Cross-Platform Execution Model
+' =============================================================================
 
-'@Folder("Relationship Visualizer.Sheets.Console")
-'@IgnoreModule UseMeaningfulName
 
 Option Explicit
 
+' ==========================================================================
+' PROCEDURE: ClearConsoleWorksheet
+'
+' PURPOSE:
+'   Purges all previous Graphviz execution logs and command history from the
+'   'Console' worksheet to provide a clean state for new diagnostic data.
+'
+' TECHNICAL WORKFLOW:
+'   1. BOUNDARY DETECTION: Identifies the 'lastRow' of data using the
+'      worksheet's 'UsedRange'.
+'   2. BULK REMOVAL: Defines a dynamic range spanning columns A and B
+'      (Command and Message columns) and executes '.ClearContents'.
+'
+' TECHNICAL NOTES:
+'   - Layer: UI / Diagnostics (Console).
+'   - DeepWiki Context: Implements the "Console Architecture" described
+'     in the 'DOT Source Viewer & Console' page.
+' ==========================================================================
 Public Sub ClearConsoleWorksheet()
     
     ' Determine the range of the cells which need to be cleared
@@ -21,6 +81,32 @@ Public Sub ClearConsoleWorksheet()
     
 End Sub
 
+' ==========================================================================
+' PROCEDURE: DisplayTextOnConsoleWorksheet
+'
+' PURPOSE:
+'   Logs the external Graphviz CLI command and its resulting output (stdout/stderr)
+'   to the 'Console' worksheet for real-time debugging and audit trails.
+'
+' TECHNICAL WORKFLOW:
+'   1. PRE-FLIGHT CHECK: Evaluates 'SETTINGS_LOG_TO_CONSOLE' via the Settings
+'      sheet; exits immediately if logging is disabled.
+'   2. STATE MANAGEMENT: Conditionally invokes 'ClearConsoleWorksheet' unless
+'      'SETTINGS_APPEND_CONSOLE' is enabled.
+'   3. COMMAND LOGGING:
+'      - Records the executed command string with a ">" prefix in Column A.
+'      - MAC LOGIC: Injects a "dot " prefix to the command to simulate the
+'        AppleScript-executed CLI call for consistent logging.
+'   4. DATA PARSING: Splits the 'textBlob' based on platform delimiters
+'      (vbCr for macOS, vbLf for Windows).
+'   5. BULK TRANSFER: Uses 'Application.Transpose' to write the parsed log
+'      lines into Column B as a single range operation for maximum performance.
+'
+' TECHNICAL NOTES:
+'   - Platform: Cross-Platform (delimiters and command faking).
+'   - Layer: UI / Diagnostics (Console).
+'   - Contract: Adheres to the 'SETTINGS_' Named Range API for logging behavior.
+' ==========================================================================
 Public Sub DisplayTextOnConsoleWorksheet(ByVal dotCommand As String, ByVal textBlob As String)
 
     ' Exit if logging is disabled
@@ -77,6 +163,26 @@ Public Sub DisplayTextOnConsoleWorksheet(ByVal dotCommand As String, ByVal textB
     
 End Sub
 
+' ==========================================================================
+' PROCEDURE: LogToConsoleWorksheet
+'
+' PURPOSE:
+'   A simplified logging utility that appends raw text messages to the
+'   'Console' worksheet without requiring an associated CLI command string.
+'
+' TECHNICAL WORKFLOW:
+'   1. DISPOSITION CHECK: Evaluates 'SETTINGS_APPEND_CONSOLE' to decide
+'      whether to purge the sheet via 'ClearConsoleWorksheet' or append data.
+'   2. ROW RESOLUTION: Identifies the next available row using 'UsedRange'.
+'   3. DELIMITER HANDLING: Splits the 'textBlob' based on the host OS
+'      standards (vbCr for macOS, vbLf for Windows).
+'   4. BULK INJECTION: Writes the array to Column B using 'Application.Transpose'
+'      for efficient range-based updates.
+'
+' TECHNICAL NOTES:
+'   - Layer: UI / Diagnostics (Console).
+'   - Usage: Ideal for internal VBA status messages or non-CLI error reporting.
+' ==========================================================================
 Public Sub LogToConsoleWorksheet(ByVal textBlob As String)
 
     ' Clear console if not in append mode
@@ -114,6 +220,26 @@ Public Sub LogToConsoleWorksheet(ByVal textBlob As String)
     
 End Sub
 
+' ==========================================================================
+' PROCEDURE: CopyConsoleToClipboard
+'
+' PURPOSE:
+'   Aggregates all log entries from the 'Console' worksheet into a single
+'   string and copies it to the system clipboard for external support or debugging.
+'
+' TECHNICAL WORKFLOW:
+'   1. STRING AGGREGATION: Iterates through the 'ConsoleSheet' rows,
+'      concatenating the contents of Column B (Message column) with
+'      Line Feed (vbLf) separators.
+'   2. CLIPBOARD TRANSFER (Windows): Invokes 'ClipBoard_SetData' to commit
+'      the log data to the Windows clipboard buffer.
+'   3. UX FEEDBACK: Updates the Excel StatusBar with a localized success
+'      or failure message for 5 seconds via 'UpdateStatusBarForNSeconds'.
+'
+' TECHNICAL NOTES:
+'   - Platform: Windows Only (#If Not Mac).
+'   - Layer: UI / Logic.
+' ==========================================================================
 Public Sub CopyConsoleToClipboard()
 #If Not Mac Then
 
@@ -140,6 +266,33 @@ Public Sub CopyConsoleToClipboard()
 #End If
 End Sub
 
+' ==========================================================================
+' PROCEDURE: ConsoleWorksheetToFile
+'
+' PURPOSE:
+'   Exports the entire 'Console' log to a physical file, ensuring consistent
+'   UTF-8 encoding and cross-platform line-ending normalization.
+'
+' TECHNICAL WORKFLOW:
+'   1. BOUNDARY DETECTION: Identifies the 'lastRow' of the log using
+'      the worksheet's 'UsedRange'.
+'   2. MAC EXECUTION (#If Mac):
+'      - Concatenates Column B (Messages) into a single string using
+'        Carriage Returns (vbCr).
+'      - Persists to disk via the native 'WriteTextToFile' wrapper.
+'   3. WINDOWS EXECUTION (#Else):
+'      - ADODB.STREAM ENCODING: Uses ADODB.Stream to force UTF-8 encoding.
+'      - BOM STRIPPING: Manually shifts the stream position to skip the
+'        3-byte Byte Order Mark (BOM) for cleaner text file interoperability.
+'      - PERSISTENCE: Saves via a binary stream to ensure the BOM-less
+'        state is preserved on disk.
+'   4. RESOURCE HYGIENE: Implements 'EndMacro' cleanup to close handles and
+'      nullify late-bound ADO objects.
+'
+' TECHNICAL NOTES:
+'   - Platform: Cross-Platform (ADODB/Windows vs. Native/Mac).
+'   - Layer: UI / File System.
+' ==========================================================================
 Public Sub ConsoleWorksheetToFile(ByVal fileName As String)
 
     Dim rowNumber As Long
@@ -204,7 +357,28 @@ EndMacro:
 #End If
 End Sub
 
-'@Ignore ParameterNotUsed
+' ==========================================================================
+' PROCEDURE: SaveConsoleToFile
+'
+' PURPOSE:
+'   Triggers a user-interactive dialog to save the current 'Console' log
+'   to a physical text file.
+'
+' TECHNICAL WORKFLOW:
+'   1. DIALOG INVOCATION:
+'      - MAC (#If Mac): Calls 'RunAppleScriptTask' with the "getSaveAsFileName"
+'        command to bypass sandboxed file system restrictions.
+'      - WINDOWS (#Else): Uses the native 'GetSaveAsFilename' method with
+'        a ".txt" filter.
+'   2. PERSISTENCE: If a path is selected, it invokes 'ConsoleWorksheetToFile'
+'      to handle the UTF-8 encoding and BOM stripping logic.
+'   3. UX FEEDBACK: Alerts the user with a localized "Saved to File" message
+'      displaying the full target path.
+'
+' TECHNICAL NOTES:
+'   - Platform: Cross-Platform (AppleScript vs. Windows Native Dialog).
+'   - Layer: UI / File System.
+' ==========================================================================
 Public Sub SaveConsoleToFile()
     Dim fileName As String
     
@@ -220,6 +394,27 @@ Public Sub SaveConsoleToFile()
     End If
 End Sub
 
+' ==========================================================================
+' FUNCTION: RunGraphvizInVerboseMode
+'
+' PURPOSE:
+'   Determines if the Graphviz engine should be executed with the verbose
+'   flag (-v) based on a combination of UI state and user settings.
+'
+' TECHNICAL WORKFLOW:
+'   1. UI STATE CHECK: Verifies if the 'ConsoleSheet' is currently visible
+'      to the user.
+'   2. PREFERENCE CHECK: Validates that both 'SETTINGS_GRAPHVIZ_VERBOSE'
+'      and 'SETTINGS_LOG_TO_CONSOLE' are enabled in the project settings.
+'   3. LOGICAL AND: Returns TRUE only if all three conditions are met,
+'      ensuring verbose output is suppressed if there is no visible
+'      destination or logging is disabled.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic / Diagnostics.
+'   - DeepWiki Context: Part of the "DOT Source Viewer & Console" logic
+'     used to toggle detailed engine feedback.
+' ==========================================================================
 Public Function RunGraphvizInVerboseMode() As Boolean
     RunGraphvizInVerboseMode = ConsoleSheet.visible And GetSettingBoolean(SETTINGS_GRAPHVIZ_VERBOSE) And GetSettingBoolean(SETTINGS_LOG_TO_CONSOLE)
 End Function

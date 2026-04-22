@@ -1,21 +1,68 @@
 Attribute VB_Name = "modUtilityADODBRecordSets"
-' Copyright (c) 2015-2025 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Excel")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityADODBRecordSets
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / ADO SQL / Recordset Merging
+'
+' ROLE:
+'   Virtual-Join engine for merging heterogeneous ADODB.Recordset objects.
+'   Provides schema synthesis, field-normalization, and client-side static
+'   recordset construction to support SQL features that cannot be expressed
+'   through native ADO JOIN semantics.
+'
+' RESPONSIBILITIES:
+'   - Recordset merging:
+'       • Combine two open ADODB.Recordset objects into a unified static set
+'       • Resolve mismatched or missing fields across sources
+'       • Normalize field sizes (e.g., DefinedSize = –1) for provider safety
+'   - Schema synthesis:
+'       • Construct merged field lists dynamically
+'       • Ensure deterministic field ordering and type compatibility
+'   - Data population:
+'       • Two-pass append strategy for performance and correctness
+'       • Batch-update semantics for large merges
+'   - Error isolation:
+'       • Defensive handling of merge-time failures
+'       • Forward errors to the diagnostic logger without interrupting SQL flow
+'
+' ARCHITECTURAL NOTES:
+'   - Late-bound ADO for cross-version compatibility.
+'   - Windows-only subsystem (ADO unavailable on macOS).
+'   - Consumed by recursive SQL, iterative SQL, enumeration SQL, placeholder SQL,
+'     and multi-stage SQL pipelines.
+'   - Integrates with modUtilityADODBConstants and modUtilityADODBDiagnosticLogger.
+'
+' USAGE:
+'   - Invoked by SQL engine modules requiring heterogeneous recordset merging.
+'   - Supports advanced SQL workflows where ADO cannot natively JOIN sources.
+'
+' RELATED WIKI PAGES:
+'   - Virtual Joins & Recordset Merging
+'   - SQL Engine Architecture
+'   - Diagnostics & ADO Error Handling
+' =============================================================================
 
 Option Explicit
 
-'*******************************************************************************
+''
 ' Subroutine:  MergeRecordsets
 ' Description: Merges two ADODB recordsets (rsFirst and rsSecond) into a single
 '              recordset (rsMergedResults) using late binding. The merged
 '              recordset is passed by reference. This subroutine handles
 '              recordsets with different field lists.
 '
-' Parameters:
-'   rsFirst  - The first ADODB recordset to be merged.
-'   rsSecond - The second ADODB recordset to be merged.
-'   rsMergedResults - The resulting merged ADODB recordset, passed by reference.
+' THE VIRTUAL JOIN ENGINE: Merges two open recordsets into a new target.
+' 1. DEFENSIVE GUARDS: Ensures both sources are open and positioned at BOF.
+' 2. SCHEMA ASSEMBLY:
+'    - Iterates through rsFirst to define the initial field list.
+'    - Iterates through rsSecond to append unique fields not found in the first.
+'    - Normalizes 'fieldSize' to prevent provider errors on variable-length fields.
+' 3. DATA POPULATION:
+'    - Performs a double-pass (rsFirst then rsSecond) to populate the new structure.
+'    - Uses 'UpdateBatch' for high-performance record commitment.
+' 4. ERROR ISOLATION: Captures failures (e.g., type mismatches) and logs them
+'    to the ADODBDiagnosticLogger without crashing the main pipeline.
 '
 ' Process:
 '   1. Initialize the merged recordset (rsMergedResults) with fields from both
@@ -28,8 +75,10 @@ Option Explicit
 '   - The subroutine uses late binding for ADODB objects.
 '   - Fields that exist in one recordset but not the other are handled gracefully.
 '
-'*******************************************************************************
-
+' @param rsFirst [Object]: The primary source recordset to be merged.
+' @param rsSecond [Object]: The secondary source recordset to be merged.
+' @param rsMergedResults [ByRef Object]: The resulting merged recordset.
+'
 Public Sub MergeRecordsets(ByVal rsFirst As Object, _
                            ByVal rsSecond As Object, _
                            ByRef rsMergedResults As Object)

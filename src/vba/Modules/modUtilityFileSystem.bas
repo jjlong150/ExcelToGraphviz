@@ -1,8 +1,45 @@
 Attribute VB_Name = "modUtilityFileSystem"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.File System")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityFileSystem
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / File System
+'
+' ROLE:
+'   Cross-platform file-system abstraction layer providing directory and file
+'   existence checks, safe deletion and creation routines, and text-file
+'   read/write helpers compatible with both Windows and macOS sandbox rules.
+'
+' RESPONSIBILITIES:
+'   - Existence checks:
+'       • DirectoryExists: macOS via AppleScriptTask; Windows via FileSystemObject
+'       • FileExists: macOS via AppleScriptTask; Windows via FileSystemObject
+'   - File and directory operations:
+'       • DeleteFile: wrapper over Kill with defensive error handling
+'       • CreateDirectory: wrapper over MkDir with suppressed errors
+'   - Text I/O:
+'       • WriteTextToFile: overwrite-mode text output using FreeFile
+'       • ReadFileToString: macOS line-by-line Input; Windows via OpenTextFile
+'   - Enumerations:
+'       • IOMode and FileFormat enums mirror VBScript/OpenTextFile semantics
+'
+' ARCHITECTURAL NOTES:
+'   - macOS uses AppleScriptTask to bypass sandbox restrictions for file
+'     existence checks.
+'   - Windows uses late-bound Scripting.FileSystemObject for compatibility
+'     across Office versions.
+'   - All routines are defensive and avoid raising errors to callers.
+'   - Consumed by SQL engine, SVG export, logging, and Graphviz file output.
+'
+' USAGE:
+'   - Ideal for cross-platform file checks, safe deletion, and lightweight
+'     text-file read/write operations.
+'
+' RELATED WIKI PAGES:
+'   - File System Abstraction (Windows/macOS)
+'   - Text Output & Graphviz File Generation
+'   - Sandbox-Aware macOS Operations
+' =============================================================================
 
 Option Explicit
 

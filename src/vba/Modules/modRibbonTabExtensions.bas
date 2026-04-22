@@ -1,8 +1,36 @@
 Attribute VB_Name = "modRibbonTabExtensions"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabExtensions
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Extensions" Ribbon Tab, enabling user-defined
+'   VBA subroutines and web resources through dynamic, named-range-driven
+'   configuration.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for Extensions tab controls.
+'   - Execute user-defined VBA routines via Application.Run.
+'   - Launch user-defined web URLs.
+'   - Determine tab/group visibility using prefix-based lookup patterns.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Named Ranges: SETTINGS_EXT_TAB_NAME, SETTINGS_EXT_TAB_GROUP_NAME_*,
+'                   BUTTON_PREFIX_EXT_CODE/WEB, BUTTON_SUFFIX_*.
+'
+' CROSS-PLATFORM NOTES:
+'   - Fully supported on Windows and macOS.
+'
+' ERROR HANDLING:
+'   - Dynamic execution assumes valid user-provided subroutine names.
+'
+' RELATED WIKI PAGES:
+'   - Extensions Tab
+'   - Worksheet Architecture & Named Ranges
+' =============================================================================
 
 Option Explicit
 

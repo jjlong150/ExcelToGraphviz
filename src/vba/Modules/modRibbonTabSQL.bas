@@ -1,8 +1,62 @@
 Attribute VB_Name = "modRibbonTabSQL"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabSQL
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "SQL" Ribbon Tab, providing UI access to the
+'   workbook's SQL engine, filter system, datasource discovery, connection
+'   pooling, and SQL-driven graph generation workflows.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for all SQL tab controls.
+'   - Execute SQL queries via RunSQLAsExtension and trigger AutoDraw.
+'   - Manage dynamic filter dropdowns (column selector, value selector)
+'     using dictionary-based caching.
+'   - Persist filter settings via SETTINGS_SQL_* named ranges.
+'   - Provide datasource directory/file selection, validation, and refresh.
+'   - Control SQL cell editing through CellValueEditForm.
+'   - Manage ADO connection pool visibility, reset, and dev-mode toggles.
+'   - Support clipboard operations (Windows-only).
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml (control IDs -> callbacks).
+'   - Named Ranges:
+'       SETTINGS_SQL_COL_FILTER, SETTINGS_SQL_FILTER_VALUE,
+'       SETTINGS_SQL_COL_SQL_STATEMENT,
+'       SETTINGS_DATASOURCE_DIRECTORY, SETTINGS_DATASOURCE_FILE,
+'       SETTINGS_SQL_CLOSE_CONNECTIONS, HelpURLSqlTab.
+'   - Modules: SQL execution engine (RunSQLAsExtension),
+'              modUtilityADODBConnectionPool (CleanupConnectionPool,
+'              GetConnectionCount),
+'              datasource utilities (SelectDirectoryToCell, DirectoryExists),
+'              clipboard helpers, status-bar helpers.
+'   - Worksheets: SqlSheet, SettingsSheet, DataSheet.
+'   - Global State: internalMyRibbon (via InvalidateRibbonControl).
+'
+' CROSS-PLATFORM NOTES:
+'   - SQL execution is Windows-only (ADO dependency), Ribbon controls
+'     are hidden on macOS.
+'   - Clipboard operations and some dialogs are suppressed on macOS.
+'
+' ERROR HANDLING:
+'   - Uses OptimizeCode_Begin/End for UI-heavy operations.
+'   - Callback signatures follow IRibbonControl requirements.
+'   - Filter dropdowns gracefully degrade when no datasource or column is set.
+'
+' RELATED WIKI PAGES:
+'   - SQL Ribbon Tab
+'   - SQL Data Integration
+'   - SQL Engine & Connection Pooling
+'   - Advanced SQL Patterns
+'   - Worksheet Architecture & Named Ranges
+'
+' VERSION NOTES:
+'   - Enhanced in v8.0+ with connection pooling, dynamic filter galleries,
+'     datasource directory/file discovery, and SQL-driven AutoDraw integration.
+' =============================================================================
 
 Option Explicit
 
@@ -360,11 +414,11 @@ Public Sub datasourceDirLabel_getLabel(ByVal control As IRibbonControl, ByRef la
             label = parts(0)
 
         Case 1
-            ' Two elements ? show both
+            ' Two elements -> show both
             label = parts(0) & Application.pathSeparator & parts(1)
 
         Case Else
-            ' Three or more ? show last two folders
+            ' Three or more -> show last two folders
             label = "...\ " & parts(n - 1) & Application.pathSeparator & parts(n)
     End Select
 End Sub

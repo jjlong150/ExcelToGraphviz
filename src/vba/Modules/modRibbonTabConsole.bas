@@ -1,11 +1,38 @@
 Attribute VB_Name = "modRibbonTabConsole"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
 
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule ParameterNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabConsole
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Console" Ribbon Tab, providing controls for
+'   message routing, console visibility, and console-driven utilities.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for Console tab controls.
+'   - Route user actions to console utilities (clear, save, copy).
+'   - Manage append-mode and error-routing toggles.
+'   - Provide macOS-specific visibility logic for clipboard controls.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Named Ranges: SETTINGS_APPEND_CONSOLE, SETTINGS_ERROR_TO_*.
+'   - Worksheets: ConsoleSheet, SettingsSheet.
+'
+' CROSS-PLATFORM NOTES:
+'   - Clipboard operations hidden on macOS.
+'
+' ERROR HANDLING:
+'   - Callback signatures follow IRibbonControl requirements.
+'
+' RELATED WIKI PAGES:
+'   - Console Worksheet
+'   - Message Routing & Silent Mode
+' =============================================================================
 
 Option Explicit
-
 
 '@Ignore ParameterNotUsed
 Public Sub consoleClear_onAction(ByVal control As IRibbonControl)

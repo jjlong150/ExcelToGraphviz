@@ -1,8 +1,41 @@
 Attribute VB_Name = "modUtilityExcelFormulas"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Sheets.Data")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcelFormulas
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Relationship Visualizer / Data Sheet Helpers
+'
+' ROLE:
+'   Generate Graphviz-ready subgraph fragments from worksheet ranges. Supports
+'   rank-constrained subgraphs, unconstrained subgraphs, and HTML-table labels
+'   for node styling and layout control.
+'
+' RESPONSIBILITIES:
+'   - Rank-constrained subgraphs:
+'       • RangeToSubgraphWithRank: build { rank="…" ; node1 ; node2 ; … }
+'       • Validate rank keywords (min, max, same, sink, source)
+'       • Convenience wrappers: SameRank, MaxRank, MinRank, SinkRank, SourceRank
+'   - Unconstrained subgraphs:
+'       • RangeToSubgraph: build { node1 ; node2 ; … }
+'       • Wrapper: subgraph()
+'   - HTML-table labels:
+'       • RangeToHtmlTable: convert a cell block into <table><tr><td>…</td></tr></table>
+'       • TableLabel: wrap HTML table in <…> for Graphviz HTML-label syntax
+'
+' ARCHITECTURAL NOTES:
+'   - All node identifiers are quoted via AddQuotes / AddQuotesConditionally.
+'   - Output strings are fully Graphviz-ready and require no post-processing.
+'   - HTML-table generation preserves row/column order exactly as in Excel.
+'   - Consumed by SQL-driven pipelines, Data sheet helpers, and style workflows.
+'
+' USAGE:
+'   - Ideal for Data-sheet-driven layout control, rank grouping, and HTML labels.
+'
+' RELATED WIKI PAGES:
+'   - Subgraph & Rank Construction
+'   - HTML Labels in Graphviz
+'   - Data Sheet -> Graphviz Pipeline
+' =============================================================================
 
 Option Explicit
 

@@ -1,8 +1,36 @@
 Attribute VB_Name = "modRibbonTabSource"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabSource
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Source" Ribbon Tab, providing controls for
+'   generating, editing, formatting, exporting, and rendering DOT source.
+'
+' RESPONSIBILITIES:
+'   - Generate DOT source via CreateGraphSource and display it in worksheet
+'     and pop-up form.
+'   - Persist indentation settings.
+'   - Support source-level operations (copy, clear, save, line numbers).
+'   - Enable source-driven rendering (Graph -> Worksheet/File).
+'   - Integrate with GVEdit when available.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Modules: CreateGraphSource, ShowSource, ShowSourceForm, etc.
+'
+' CROSS-PLATFORM NOTES:
+'   - Clipboard and GVEdit visibility differ on macOS.
+'
+' ERROR HANDLING:
+'   - Uses OptimizeCode blocks for UI stability.
+'
+' RELATED WIKI PAGES:
+'   - Source Worksheet
+'   - Output & Publishing
+' =============================================================================
 
 Option Explicit
 

@@ -1,8 +1,60 @@
 Attribute VB_Name = "modExchangeImport"
-'@IgnoreModule UseMeaningfulName
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Exchange")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modExchangeImport
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Exchange Subsystem
+'
+' ROLE:
+'   High-fidelity JSON import engine for the Relationship Visualizer. Restores
+'   workbook state — metadata, worksheet layouts, settings, data, styles, SQL,
+'   and SVG directives — from a structured E2GXF exchange file.
+'
+' RESPONSIBILITIES:
+'   - Validate and parse JSON:
+'       • UTF-8 ingestion with carriage-return normalization
+'       • E2GXF metadata verification (name/type/version)
+'   - Ordered restoration pipeline:
+'       • metadata -> layouts -> settings -> worksheet content
+'       • recalculates dependent formulas when required
+'   - Worksheet content import:
+'       • data -> row-level graph entities
+'       • styles -> style definitions + view switches
+'       • sql -> SQL statements, datasource paths, status fields
+'       • svg -> find/replace directives
+'   - Settings restoration:
+'       • Graphviz engine, splines, rankdir, transparency, run mode
+'       • Style Designer suffixes, format-inclusion rules, extra attributes
+'       • Console routing, debug switches, worksheet visibility
+'       • Language, command-line parameters, picture name
+'   - Post-import actions:
+'       • rebuild style previews
+'       • refresh Ribbon state
+'       • regenerate active graph
+'
+' ARCHITECTURAL NOTES:
+'   - Uses JsonConverter for parsing and Dictionary-based traversal.
+'   - macOS: Uses sandbox-safe file selection.
+'   - Windows: Uses native file dialogs and UTF-8 readers.
+'   - Backward-compatible with v7.x–v10.x export schemas.
+'   - Deep integration with:
+'       • modDataTypes (settings, dataRow, StylesRow, sqlRow, svgRow)
+'       • modUtilityWorksheet (column/row mapping)
+'       • modCreateGraph (post-import rendering)
+'
+' USAGE:
+'   - Invoked by the Exchange ribbon tab.
+'   - Restores a fully self-describing JSON file suitable for:
+'       • backup/restore
+'       • version control
+'       • cross-machine migration
+'       • automated graph-generation pipelines
+'
+' RELATED WIKI PAGES:
+'   - Exchange Format Specification
+'   - Worksheet Layout Encoding
+'   - JSON Import/Export Architecture
+' =============================================================================
 
 Option Explicit
 

@@ -1,6 +1,49 @@
 Attribute VB_Name = "modExecuteAndCapture"
-'@Folder("Open Source")
-'@IgnoreModule AssignmentNotUsed, UseMeaningfulName, HungarianNotation, VariableNotAssigned, IntegerDataType, DefaultMemberRequired, UnassignedVariableUsage
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modExecuteAndCapture
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Bootstrap / Win32 Execution Subsystem
+'
+' ROLE:
+'   High-performance Win32 process-execution and pipe-capture engine. Provides
+'   asynchronous, deadlock-free StdOut/StdErr retrieval for external tools
+'   (primarily Graphviz) with full 32/64-bit compatibility and macOS stubbing.
+'
+' RESPONSIBILITIES:
+'   - Spawn external processes silently:
+'       • CreateProcessA with hidden window (SW_HIDE)
+'       • Inheritable pipe handles for StdOut and StdErr
+'   - Real-time stream capture:
+'       • Non-blocking PeekNamedPipe polling
+'       • Chunked 4096-byte reads to prevent pipe saturation
+'       • Continuous draining during process execution to avoid 4KB deadlock
+'   - Cross-platform resilience:
+'       • macOS stub implementation to avoid unsupported WinAPI calls
+'       • PtrSafe/LongPtr parity for 32/64-bit Office
+'   - Resource hygiene:
+'       • Deterministic closing of process, thread, and pipe handles
+'       • Safe ByRef return of both output streams
+'
+' ARCHITECTURAL NOTES:
+'   - Based on Christos Samaras' MIT-licensed implementation; heavily hardened
+'     for long-running Graphviz workloads and large console output.
+'   - Uses SECURITY_ATTRIBUTES, STARTUPINFO, PROCESS_INFORMATION, and the full
+'     Win32 pipe/handle lifecycle.
+'   - Designed to eliminate UI blocking and buffer back-pressure stalls.
+'   - Integrated into the Graphviz execution pipeline via modCreateGraph.
+'
+' USAGE:
+'   - Called by the Graphviz class to execute dot.exe and capture console
+'     diagnostics, warnings, and error streams.
+'   - Suitable for any external CLI tool requiring silent, asynchronous
+'     execution with complete output capture.
+'
+' RELATED WIKI PAGES:
+'   - Graphviz Execution Pipeline
+'   - Win32 Process & Pipe Architecture
+'   - Deadlock Prevention in External Tool Integration
+' =============================================================================
 
 Option Explicit
 
@@ -241,6 +284,25 @@ Public Const STILL_ACTIVE As Long = &H103
 ' ReadFile() constants
 Public Const PIPE_BUFFER_SIZE  As Long = 1024 * 4
 
+' ==========================================================================
+' PROCEDURE: ExecuteAndCapture
+' PURPOSE:
+'   Spawns an external process and captures its output streams in real-time.
+'
+' TECHNICAL WORKFLOW:
+'   1. PIPE INITIALIZATION: Creates two anonymous pipes (StdOut and StdErr)
+'      using Win32 Security Attributes to allow handle inheritance.
+'   2. STARTUP CONFIGURATION: Forces the external process window to remain
+'      hidden (SW_HIDE) to provide a seamless "integrated" feel.
+'   3. PROCESS CREATION: Launches the command-line (e.g., dot.exe) and
+'      immediately closes the write-end handles to prevent pipe-locks.
+'   4. NON-BLOCKING READ LOOP:
+'      - Continuously polls both Output and Error pipes while the process
+'        is still active.
+'      - Prevents the 4KB buffer deadlock by reading data as it is produced.
+'   5. RESOURCE RECLAMATION: Systematically closes all process, thread, and
+'      pipe handles to ensure no lingering system artifacts remain.
+' ==========================================================================
 Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String, ByRef stdErr As String)
 
     ' Declare pipe handles
@@ -316,6 +378,26 @@ Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String
     CloseHandle hStdErrRead
 End Sub
 
+' ==========================================================================
+' FUNCTION: ReadPipe
+' PURPOSE:
+'   Drains data from a Windows pipe and converts it into a VBA string.
+'
+' TECHNICAL WORKFLOW:
+'   1. PEEKING: Uses 'PeekNamedPipe' to check if data is waiting without
+'      blocking the execution thread.
+'   2. CHUNKED READING: Implements a 'Do...Loop' to read the buffer in
+'      segments (PIPE_BUFFER_SIZE), typically 4096 bytes.
+'   3. DEADLOCK PREVENTION: By clearing the pipe while the process is
+'      still running, it prevents the external EXE from stalling when
+'      its standard output buffer is full.
+'   4. DATA CONVERSION: Converts the raw byte-array buffer into a readable
+'      Unicode string via 'StrConv' and appends it to the result.
+'
+' USAGE:
+'   - Powering 'ExecuteAndCapture' to handle high-volume console feedback
+'     from 'dot.exe' (Graphviz).
+' ==========================================================================
 #If Win64 Then
 Private Function ReadPipe(ByVal hPipe As LongPtr) As String
 #Else

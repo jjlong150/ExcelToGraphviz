@@ -1,5 +1,46 @@
 Attribute VB_Name = "modUtilityADODBDiagnosticLogger"
-' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityADODBDiagnosticLogger
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / ADO SQL / Message Logging
+'
+' ROLE:
+'   Forensic diagnostic logger for the SQL engine. Captures structured ADO
+'   failure reports, environment fingerprints, and execution metadata to a
+'   persistent log file in the workbook directory. Provides deep telemetry
+'   for troubleshooting SQL, ADO provider issues, and environment-specific
+'   regressions.
+'
+' RESPONSIBILITIES:
+'   - Toggle and expose global logging state for Ribbon and SQL subsystems.
+'   - Write structured diagnostic entries (timestamp, error number, category,
+'     attempt count, SQL text) to a local log file.
+'   - Generate environment fingerprints including OS, Excel version, bitness,
+'     macro security, trusted-location status, OneDrive/SharePoint detection,
+'     and provider information.
+'   - Support the SQL engine, connection pool, and ExecuteAndCapture by
+'     recording failures that would otherwise be silent.
+'
+' ARCHITECTURAL NOTES:
+'   - Windows-only subsystem (ADO and provider diagnostics are not available
+'     on macOS).
+'   - Fully defensive: all logging operations use On Error Resume Next to
+'     avoid cascading failures.
+'   - Log file creation and writes are resilient to missing directories,
+'     locked files, and restricted environments.
+'   - Integrates with modUtilityADODBConnectionPool, SQL engine modules,
+'     and Ribbon diagnostics controls.
+'
+' USAGE:
+'   - Called by SQL execution pipeline, connection pool, and Ribbon toggles.
+'   - Provides developers with actionable telemetry for debugging SQL failures.
+'
+' RELATED WIKI PAGES:
+'   - SQL Engine & Connection Pooling
+'   - Diagnostics & Environment Fingerprinting
+'   - Troubleshooting ADO Provider Failures
+' =============================================================================
 
 Option Explicit
 
@@ -10,16 +51,51 @@ Private Const LOG_FILE_NAME As String = "Relationship Visualizer ADO Log.txt"
 ' Public entry point for logging
 ' ===========================
 
-' Enable or disable logging at runtime
+''
+' PROCEDURE: SetLoggingEnabled
+' PURPOSE:
+'   Globally toggles the diagnostic logging engine.
+'
+' TECHNICAL WORKFLOW:
+'   1. STATE UPDATE: Sets the private 'loggingEnabled' boolean.
+'   2. PERSISTENCE: This state is typically linked to a Ribbon toggle
+'      button or a setting on the 'Settings' worksheet.
+'
+' USAGE:
+'   - Called by the 'Console' ribbon tab to enable or disable the
+'     capture of deep technical ADO logs.
+'
 Public Sub SetLoggingEnabled(ByVal Enabled As Boolean)
     loggingEnabled = Enabled
 End Sub
 
-' Query current logging state
+''
+' FUNCTION: IsLoggingEnabled
+' PURPOSE:
+'   Retrieves the current activation status of the ADO diagnostic logger.
+'
+' TECHNICAL WORKFLOW:
+'   1. READ STATE: Accesses the private 'loggingEnabled' boolean variable.
+'   2. UI FEEDBACK: Returns the state to the Ribbon callback to determine
+'      if the 'Logging' toggle button should appear as pressed (Selected).
+'
+' USAGE:
+'   - Used by 'modRibbon.bas' to synchronize the visual state of the
+'     ribbon controls with the underlying engine state.
+'
 Public Function IsLoggingEnabled() As Boolean
     IsLoggingEnabled = loggingEnabled
 End Function
 
+''
+' THE PRIMARY LOGGER: Writes a structured diagnostic entry to disk.
+' 1. Logic: Only executes if 'loggingEnabled' is True.
+' 2. Metadata: Records timestamp, attempt count, error numbers, and categories.
+' 3. Fingerprinting: Optionally appends a full system audit (GetEnvironmentFingerprint).
+' @param message [String]: The high-level error description.
+' @param sql [Optional String]: The SQL query being executed at the time of failure.
+' @param includeFingerprint [Boolean]: If True, appends hardware/software specs.
+'
 Public Sub LogDiagnostic(ByVal message As String, _
                             Optional ByVal errorNumber As Long = 0, _
                             Optional ByVal errorCategory As String = vbNullString, _
@@ -65,11 +141,15 @@ Public Sub LogDiagnostic(ByVal message As String, _
     ts.Close
 End Sub
 
-' ===========================
-' Environment Fingerprint
-' ===========================
-
-' Builds a structured environment fingerprint
+''
+' THE FINGERPRINT ENGINE: Performs a deep-dive audit of the host environment.
+' Captures critical debugging data:
+' - Hardware: Processor count and architecture.
+' - Software: Application version, Build number, and VBA version (VBA7 vs legacy).
+' - Security: Macro security level (High/Low) and Trusted Location status.
+' - Context: Detects OneDrive/SharePoint paths which often cause ADO locks.
+' @returns String: A multi-line technical report for the log file.
+'
 Private Function GetEnvironmentFingerprint() As String
     Dim s As String
     's = vbCrLf & "Environment" & vbCrLf
@@ -117,7 +197,21 @@ Private Function GetEnvironmentFingerprint() As String
     GetEnvironmentFingerprint = s
 End Function
 
-' Detects if workbook is on OneDrive/SharePoint
+''
+' FUNCTION: IsWorkbookOnOneDrive
+' PURPOSE:
+'   Determines if the active workbook is hosted on a cloud-synchronized path.
+'
+' TECHNICAL WORKFLOW:
+'   1. PATH CAPTURE: Retrieves the workbook's physical file path.
+'   2. HEURISTIC SCAN: Performs a case-insensitive search for "onedrive"
+'      or "sharepoint" substrings within the path string.
+'   3. STATE REPORT: Returns True if a cloud-based directory structure is detected.
+'
+' USAGE:
+'   - Crucial for the 'Environment Fingerprint' report to diagnose ADO
+'     connection failures caused by URI-based cloud paths vs. local paths.
+'
 Private Function IsWorkbookOnOneDrive(wb As Workbook) As Boolean
     On Error Resume Next
     Dim p As String
@@ -132,7 +226,16 @@ Private Function IsWorkbookOnOneDrive(wb As Workbook) As Boolean
     End If
 End Function
 
-' Determines log file location
+' ==========================================================================
+' SECTION: ENVIRONMENT RESOLUTION HELPERS
+' ==========================================================================
+
+''
+' PATH RESOLVER: Determines the physical location for the diagnostic log file.
+' 1. Logic: Prioritizes the directory of the current workbook.
+' 2. Fallback: Uses 'CurDir$' if the workbook hasn't been saved yet.
+' 3. Cross-Platform: Employs 'Application.pathSeparator' for Win/Mac compatibility.
+'
 Private Function GetLogFilePath() As String
     On Error Resume Next
     Dim basePath As String
@@ -141,6 +244,11 @@ Private Function GetLogFilePath() As String
     GetLogFilePath = basePath & Application.pathSeparator & LOG_FILE_NAME
 End Function
 
+''
+' BITNESS PROBE: Identifies if the host Excel application is 32-bit or 64-bit.
+' Critical for ADO troubleshooting, as database drivers (ACE/Jet) must
+' match the bitness of the Office installation.
+'
 Private Function GetOfficeBitness() As String
 #If Win64 Then
     GetOfficeBitness = "64-bit"
@@ -149,16 +257,41 @@ Private Function GetOfficeBitness() As String
 #End If
 End Function
 
+''
+' FUNCTION: GetExcelBuildNumber
+' PURPOSE:
+'   Retrieves the specific build number of the host Excel application.
+'
+' TECHNICAL WORKFLOW:
+'   1. SYSTEM QUERY: Accesses the 'Application.Build' property.
+'   2. ERROR HANDLING: Uses 'On Error Resume Next' to prevent failures
+'      on legacy versions of Excel where this property might be restricted.
+'
+' USAGE:
+'   - Incorporated into the 'Environment Fingerprint' report.
+'   - Allows developers to identify version-specific regressions in ADO
+'     or VBA behavior during remote troubleshooting.
+'
 Private Function GetExcelBuildNumber() As String
     On Error Resume Next
     GetExcelBuildNumber = Application.Build
 End Function
 
+''
+' VERSION AUDIT: Captures the granular build and version numbers of Excel.
+' Used to identify specific Office updates or service packs that may
+' impact VBA or ADO stability.
+'
 Private Function GetExcelFullVersion() As String
     On Error Resume Next
     GetExcelFullVersion = Application.version & " (Build " & Application.Build & ")"
 End Function
 
+''
+' TRUST AUDIT: Verifies if the file is in an Excel 'Trusted Location'.
+' Important for ADO because untrusted files may have restricted access
+' to external database drivers (ACE/Jet).
+'
 Private Function IsWorkbookInTrustedLocation(wb As Workbook) As Boolean
     On Error Resume Next
     
@@ -184,6 +317,20 @@ Private Function IsWorkbookInTrustedLocation(wb As Workbook) As Boolean
     IsWorkbookInTrustedLocation = False
 End Function
 
+''
+' FUNCTION: GetMacroSecurityMode
+' PURPOSE:
+'   Identifies the active Excel Automation Security level.
+'
+' TECHNICAL WORKFLOW:
+'   1. SYSTEM QUERY: Polls Application.AutomationSecurity.
+'   2. MAPPING: Converts the MsoAutomationSecurity enum into descriptive strings:
+'      - 1 (Low), 2 (Medium), 3 (High), 4 (Very High).
+'
+' USAGE:
+'   - Injected into the 'Environment Fingerprint' during a diagnostic log.
+'   - Helps distinguish between a code bug and an environment-level macro block.
+'
 Private Function GetMacroSecurityMode() As String
     On Error Resume Next
     

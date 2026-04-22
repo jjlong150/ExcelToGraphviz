@@ -1,8 +1,42 @@
 Attribute VB_Name = "modUtilityExcelCell"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Excel")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcel
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Excel Interop
+'
+' ROLE:
+'   Thin abstraction layer over worksheet cell access. Provides consistent,
+'   centralized helpers for reading and writing typed values, toggling
+'   settings, clearing ranges, and loading external file contents into cells.
+'
+' RESPONSIBILITIES:
+'   - Typed cell accessors:
+'       • GetCellLong, GetCellString, GetCellBoolean, GetCellUCase
+'       • GetCell(row, col) with trimming and normalization
+'   - Cell mutation helpers:
+'       • SetCell, SetCellString, ClearCell, ClearNamedCellContents
+'       • ToggleCell and Toggle for boolean-driven value switching
+'   - File ingestion:
+'       • ReadFileIntoCell: binary-safe file read into a worksheet cell
+'   - Directory selection:
+'       • SelectDirectoryToCell: integrates ChooseDirectory with worksheet storage
+'
+' ARCHITECTURAL NOTES:
+'   - Uses ActiveWorkbook.Sheets.[_Default] for late-bound sheet resolution.
+'   - Ensures consistent trimming, case normalization, and boolean coercion.
+'   - File ingestion uses FreeFile + Binary mode for full-file reads.
+'   - Consumed by Settings, SQL, SVG, Source, Styles, and Diagnostics workflows.
+'
+' USAGE:
+'   - Provides a stable, centralized API for all worksheet cell interactions.
+'   - Used throughout the project to avoid duplicated Range/Cells logic.
+'
+' RELATED WIKI PAGES:
+'   - Worksheet Access Patterns
+'   - Settings Sheet Architecture
+'   - File Ingestion & Binary Read Guidelines
+' =============================================================================
 
 Option Explicit
 

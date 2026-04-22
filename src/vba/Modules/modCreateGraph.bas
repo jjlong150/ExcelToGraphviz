@@ -1,11 +1,84 @@
 Attribute VB_Name = "modCreateGraph"
-'@IgnoreModule AssignmentNotUsed, UnassignedVariableUsage, VariableNotAssigned
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Sheets.Data")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modCreateGraph
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Logic / Transformation Pipeline
+'
+' ROLE:
+'   Central Graphviz orchestration engine. Converts structured worksheet data
+'   into DOT source, executes the external Graphviz binary, and injects the
+'   resulting diagram back into Excel. Coordinates the full end-to-end
+'   rendering lifecycle for both interactive (AutoDraw) and batch-export
+'   workflows.
+'
+' RESPONSIBILITIES:
+'   - Manage the complete graph-generation pipeline:
+'       • Worksheet parsing and validation
+'       • Style and view resolution
+'       • DOT synthesis (ConvertDataWorksheetToGvSource)
+'       • Temporary file creation and cleanup
+'       • Graphviz execution (Graphviz.cls)
+'       • Image insertion, scaling, and naming
+'   - Provide AutoDraw reactivity for live preview during data entry.
+'   - Support batch export across multiple Views, including filename token
+'     substitution (%D, %T, %V, %W, %E, %S) and timestamp/option appending.
+'   - Handle SVG post-processing (animations, replacements) when enabled.
+'   - Maintain cross-platform parity (Windows stopwatch vs macOS sandbox
+'     routing, path separators, temp-directory handling).
+'   - Expose CreateGraphSource for DOT-only workflows (Source Viewer, debugging).
+'
+' INTERACTIONS:
+'   - Graphviz.cls: External engine wrapper (RenderGraph, SourceToFile).
+'   - modDataTypes: settings, dataWorksheet, and style UDTs.
+'   - modUtilityString: label scrubbing, token substitution, HTML-label handling.
+'   - modUtilityFileSystem: temp directories, file existence, deletion.
+'   - modUtilityStatusBar: progress and timing feedback.
+'   - Ribbon Tabs: Graphviz, Source, SVG, Styles, Launchpad.
+'
+' CROSS-PLATFORM NOTES:
+'   - Windows: Stopwatch timing, native file access, direct DOT execution.
+'   - macOS: AppleScript-mediated file dialogs, sandbox-safe temp routing,
+'            conditional filename overrides for "delete" disposition.
+'
+' ERROR HANDLING:
+'   - Defensive validation of worksheet existence, view selection, and
+'     output-directory prerequisites.
+'   - DOT generation failures surface via the errorMessageColumn and abort
+'     rendering cleanly.
+'   - Graphviz execution errors routed to the Console worksheet.
+'
+' RELATED WIKI PAGES:
+'   - Rendering Pipeline Overview
+'   - Working with the Data Worksheet
+'   - Batch Export & View Iteration
+'   - DOT Source Generation & Validation
+'   - Image Path Resolution
+' =============================================================================
 
 Option Explicit
 
+' ==========================================================================
+' PROCEDURE: AutoDraw
+'
+' PURPOSE:
+'   Triggers an automatic graph refresh in response to worksheet changes,
+'   providing a "Live Preview" experience for the data entry layer.
+'
+' TECHNICAL WORKFLOW:
+'   1. MODE VALIDATION: Checks the 'SETTINGS_RUN_MODE' named range; only
+'      proceeds if the value matches 'TOGGLE_AUTO'.
+'   2. UI FEEDBACK: Sets the 'xlWait' cursor and executes 'DoEvents' to
+'      process any pending system messages.
+'   3. RENDERING PIPELINE:
+'      - Wraps execution in 'OptimizeCode_Begin/End' to maximize performance.
+'      - Invokes 'CreateGraphWorksheet' to re-parse data and update the image.
+'
+' TECHNICAL NOTES:
+'   - Trigger: Linked to the 'Worksheet_Change' event on the DataSheet.
+'   - DeepWiki Context: Implements the 'AutoDraw reactivity' mentioned in
+'     the Overview and Working with the Data Worksheet pages.
+' ==========================================================================
 Public Sub AutoDraw()
     If SettingsSheet.Range(SETTINGS_RUN_MODE).value = TOGGLE_AUTO Then
         ' Show the hourglass cursor
@@ -23,6 +96,24 @@ Public Sub AutoDraw()
     End If
 End Sub
 
+' ==========================================================================
+' PROCEDURE: ClearWorksheetGraphs
+'
+' PURPOSE:
+'   Purges all Graphviz-generated imagery from the primary workspace to
+'   reset the visual state or prepare for a fresh rendering cycle.
+'
+' TECHNICAL WORKFLOW:
+'   1. DATA SHEET RESET: Invokes 'DeleteAllPictures' on the active Data
+'      worksheet (resolved via 'GetDataWorksheetName').
+'   2. GRAPH SHEET RESET: Invokes 'DeleteAllPictures' on the dedicated
+'      'Graph' worksheet.
+'
+' TECHNICAL NOTES:
+'   - Layer: UI / Presentation Layer.
+'   - Strategy: Prevents image "stacking" where new renders might be
+'     hidden behind stale OLE objects.
+' ==========================================================================
 Public Sub ClearWorksheetGraphs()
     ' Delete pictures from 'data' worksheet
     DeleteAllPictures GetDataWorksheetName()
@@ -31,6 +122,27 @@ Public Sub ClearWorksheetGraphs()
     DeleteAllPictures GraphSheet.name
 End Sub
 
+' ==========================================================================
+' PROCEDURE: ClearErrors
+'
+' PURPOSE:
+'   Resets the error state of the active Data worksheet by removing error
+'   flags and localized diagnostic messages from individual rows.
+'
+' TECHNICAL WORKFLOW:
+'   1. SCHEMA DISCOVERY: Retrieves the 'dataWorksheet' UDT to resolve
+'      the 'flag' and 'errorMessage' column indices per the Named Range API.
+'   2. ITERATIVE SCAN: Loops through the worksheet from 'firstRow' to
+'      'lastRow' (as defined by the system's "Contract").
+'   3. CONDITIONAL RESET: Checks the 'flagColumn' for the 'FLAG_ERROR'
+'      constant; if found, it invokes 'ClearCell' to wipe both the
+'      visual indicator and the descriptive error text.
+'
+' TECHNICAL NOTES:
+'   - Layer: Data Management / Logic.
+'   - Strategy: Pre-flight maintenance used to ensure previous validation
+'     runs do not pollute new rendering attempts.
+' ==========================================================================
 Public Sub ClearErrors()
 
     ' Data worksheet variables
@@ -48,7 +160,30 @@ Public Sub ClearErrors()
 
 End Sub
 
+' ==========================================================================
+' PROCEDURE: CreateGraphWorksheetQuickly
+'
+' PURPOSE:
+'   Provides a high-performance, hotkey-accessible entry point for generating
+'   a graph from the active worksheet data.
+'
+' TECHNICAL WORKFLOW:
+'   1. UI FEEDBACK: Sets the 'xlWait' cursor and executes 'DoEvents' to
+'      ensure the UI remains responsive during the initial handshake.
+'   2. PERFORMANCE OPTIMIZATION: Invokes 'OptimizeCode_Begin' to suspend
+'      calculations, events, and screen updates.
+'   3. EXECUTION: Calls 'CreateGraphWorksheet' to run the full parsing and
+'      rendering pipeline.
+'   4. STATE RESTORATION: Re-enables Excel features via 'OptimizeCode_End'
+'      and restores the default cursor.
+'
+' TECHNICAL NOTES:
+'   - Access: Mapped to Ctrl+Shift+Q (@ExcelHotkey q).
+'   - Strategy: Minimizes overhead for power users who frequently
+'     regenerate graphs during data entry.
+' ==========================================================================
 '@ExcelHotkey q
+'
 Public Sub CreateGraphWorksheetQuickly()
 Attribute CreateGraphWorksheetQuickly.VB_ProcData.VB_Invoke_Func = "q\n14"
     ' Show the hourglass cursor
@@ -63,6 +198,39 @@ Attribute CreateGraphWorksheetQuickly.VB_ProcData.VB_Invoke_Func = "q\n14"
     Application.Cursor = xlDefault
 End Sub
 
+' ==========================================================================
+' PROCEDURE: CreateGraphWorksheet
+'
+' PURPOSE:
+'   THE CENTRAL RENDERING ORCHESTRATOR. Transforms structured worksheet data
+'   into a visual diagram by managing the end-to-end Graphviz lifecycle.
+'
+' TECHNICAL WORKFLOW:
+'   1. ENVIRONMENT INIT: Retrieves the 'settings' UDT and clears previous
+'      visual assets.
+'   2. PERFORMANCE MONITORING: Starts a Windows-specific 'Stopwatch' to
+'      track rendering latency.
+'   3. DOT GENERATION: Invokes 'ConvertDataWorksheetToGvSource' to translate
+'      Excel rows into DOT language. If validation fails, it reveals the
+'      'errorMessageColumn' and aborts.
+'   4. DIAGNOSTIC HOOKS: Passes the generated string to 'ShowSource' to
+'      update the Source Viewer/Form if debugging is enabled.
+'   5. ENGINE EXECUTION:
+'      - Commits the DOT string to a temporary physical file.
+'      - Configures the 'Graphviz' class with engine and CLI parameters.
+'      - Invokes 'RenderGraph' to trigger the external binary.
+'   6. UI INJECTION: Inserts the resulting image at the 'targetCell'
+'      (either B2 on the Graph sheet or a specific cell on the Data sheet).
+'   7. POST-PROCESSING: Applies user-defined scaling (Zoom) and renames
+'      the picture object for downstream reference.
+'   8. RESOURCE HYGIENE: Deletes temporary files and releases class instances.
+'
+' TECHNICAL NOTES:
+'   - Cross-Platform: Conditional logic manages the Windows 'Stopwatch' vs.
+'     macOS execution.
+'   - Layer: The primary bridge between the Logic Layer (VBA) and the
+'     External Layer (Graphviz Engine).
+' ==========================================================================
 '@Ignore MissingMemberAnnotation
 Public Sub CreateGraphWorksheet()
 Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
@@ -188,6 +356,39 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     On Error GoTo 0
 End Sub
 
+' ==========================================================================
+' SECTION: EXTERNAL FILE EXPORT & BATCH PROCESSING
+' ==========================================================================
+
+' ==========================================================================
+' PROCEDURE: CreateGraphFile
+'
+' PURPOSE:
+'   The primary batch-export engine. Iterates through defined "View" columns
+'   to generate and save multiple diagram files to disk.
+'
+' TECHNICAL WORKFLOW:
+'   1. PRE-FLIGHT: Loads 'settings' UDT and validates that the output
+'      directory and filename prefixes are established.
+'   2. VIEW ITERATION: Loops from 'firstViewColumn' to 'lastViewColumn'.
+'   3. DYNAMIC LABELING: Updates the 'ViewNameLabel' named range for every
+'      iteration, allowing the graph title or filename to react to the
+'      active View name.
+'   4. MAC SANDBOX MANAGEMENT (#If Mac): If disposition is set to 'delete',
+'      it routes the DOT source through the system Temp directory to avoid
+'      repetitive permission prompts.
+'   5. RENDERING: Orchestrates DOT generation via 'ConvertDataWorksheetToGvSource'
+'      and invokes the 'Graphviz' class for CLI execution.
+'   6. SVG POST-PROCESSING: If 'postProcessSVG' is enabled, it triggers
+'      'FindAndReplaceSVG' to inject animations or XML modifications.
+'   7. CLEANUP: Deletes temporary source files based on 'fileDisposition'.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Implements the "Batch Export Process" and "File System
+'     Handshake" architectural flows.
+'   - Strategy: Decouples the rendering loop from the UI, enabling high-
+'     volume production of graph variants.
+' ==========================================================================
 Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn As Long)
     ' Clear the status bar
     ClearStatusBar
@@ -293,6 +494,28 @@ Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn A
 
 End Sub
 
+' ==========================================================================
+' FUNCTION: CreateGraphSource
+'
+' PURPOSE:
+'   Generates a raw Graphviz DOT source string from the active data sheet
+'   without initiating an external rendering process.
+'
+' TECHNICAL WORKFLOW:
+'   1. CONTEXT INITIALIZATION: Loads the 'settings' UDT for the active
+'      data worksheet to resolve layout and view constraints.
+'   2. SOURCE SYNTHESIS: Invokes 'ConvertDataWorksheetToGvSource' using the
+'      currently selected 'viewColumn' defined in the Style Gallery settings.
+'   3. ERROR MANAGEMENT: If DOT generation fails, returns a null string;
+'      otherwise, returns the complete Graphviz markup.
+'   4. UI CLEANUP: Force-hides the 'errorMessageColumn' to ensure the
+'      data sheet remains clean after the operation.
+'
+' USAGE:
+'   - Primary data provider for the "DOT Source Viewer" and "Source Form."
+'   - Allows for structural validation of the graph logic without the
+'     overhead of file I/O or binary execution.
+' ==========================================================================
 Public Function CreateGraphSource() As String
 
     ' Read in the runtime settings
@@ -315,6 +538,27 @@ Public Function CreateGraphSource() As String
     ShowColumn ini.data.worksheetName, ini.data.errorMessageColumn, False
 End Function
 
+' ==========================================================================
+' FUNCTION: FileLocationProvided
+'
+' PURPOSE:
+'   Ensures all file system prerequisites are met before the rendering engine
+'   attempts to write a diagram to disk.
+'
+' TECHNICAL WORKFLOW:
+'   1. DIRECTORY VALIDATION: Checks the existence of the 'output.directory'
+'      using 'DirectoryExists'. If missing, alerts the user with a localized
+'      error message.
+'   2. FILENAME VALIDATION: Verifies that 'output.fileNamePrefix' is not
+'      empty, ensuring the "Publishing" pipeline has a valid target name.
+'   3. STATE RETURN: Returns FALSE if either check fails, acting as a
+'      critical safety gate for file-export operations.
+'
+' TECHNICAL NOTES:
+'   - Layer: File System / Logic Layer.
+'   - Strategy: Prevents VBA runtime errors during binary execution by
+'     validating paths at the UI/Logic boundary.
+' ==========================================================================
 Public Function FileLocationProvided(ByRef ini As settings) As Boolean
     FileLocationProvided = True
     
@@ -332,6 +576,31 @@ Public Function FileLocationProvided(ByRef ini As settings) As Boolean
 
 End Function
 
+' ==========================================================================
+' FUNCTION: GetFilenameBase
+'
+' PURPOSE:
+'   Constructs a highly-customizable filename by resolving dynamic tokens
+'   and metadata into a sanitized string for file system operations.
+'
+' TECHNICAL WORKFLOW:
+'   1. TOKEN RESOLUTION: Parses the user-defined prefix for specific tokens:
+'      - %D / %T: Injects localized Date and Time stamps.
+'      - %V: Injects the current View Name from the Style Gallery.
+'      - %W: Injects the name of the active Data Worksheet.
+'      - %E / %S: Injects the Graphviz Engine and Splines configuration.
+'   2. HEURISTIC APPENDING: If tokens aren't present but "Append" toggles are
+'      enabled, the function automatically appends Date/Time or Engine
+'      options to the end of the string.
+'   3. SYNTAX NORMALIZATION: Formats appended options within brackets [ ]
+'      to maintain consistent file naming conventions.
+'   4. SANITIZATION: Returns a trimmed string ready for path concatenation.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic / File System.
+'   - Strategy: Empowers users to create descriptive, unique filenames for
+'     batch exports without manual renaming.
+' ==========================================================================
 Public Function GetFilenameBase(ByRef ini As settings, ByVal showStyleColumn As Long) As String
 
     Dim fileBase As String
@@ -395,10 +664,58 @@ Public Function GetFilenameBase(ByRef ini As settings, ByVal showStyleColumn As 
 
 End Function
 
+' ==========================================================================
+' FUNCTION: GetExcelToGraphvizImageDirectory
+'
+' PURPOSE:
+'   Retrieves the absolute path stored in the 'ExcelToGraphvizImages'
+'   system environment variable.
+'
+' TECHNICAL WORKFLOW:
+'   1. SYSTEM QUERY: Uses the VBA 'Environ$' function to poll the host OS
+'      for the project-specific variable.
+'   2. NORMALIZATION: Trims any leading or trailing whitespace to ensure
+'      the path string is valid for downstream file I/O operations.
+'
+' TECHNICAL NOTES:
+'   - Layer: File System / Logic Layer.
+'   - DeepWiki Context: Documents the "Image Path Resolution" logic used
+'     to provide a standardized directory for icons and backgrounds
+'     independent of the Workbook's physical location.
+' ==========================================================================
 Public Function GetExcelToGraphvizImageDirectory() As String
     GetExcelToGraphvizImageDirectory = Trim$(Environ$("ExcelToGraphvizImages"))
 End Function
 
+' ==========================================================================
+' SECTION: PARSING LOGIC & ELEMENT CLASSIFICATION
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: GetImagePath
+'
+' PURPOSE:
+'   Aggregates multiple directory paths into a single delimited string to
+'   inform the Graphviz 'imagepath' attribute where to find visual assets.
+'
+' TECHNICAL WORKFLOW:
+'   1. BASE RESOLUTION: Retrieves the user-defined path from the
+'      'SETTINGS_IMAGE_PATH' named range.
+'   2. PLATFORM DELIMITERS: Selects the correct path separator based on OS
+'      standards (Colon for macOS, Semicolon for Windows).
+'   3. HIERARCHICAL MERGE:
+'      - Prepends the 'ActiveWorkbook.path' to ensure relative assets
+'        are prioritized.
+'      - Appends the 'ExcelToGraphvizImages' environment variable path
+'        if it exists.
+'   4. CONCATENATION: Joins all valid paths into a single string for DOT
+'      attribute injection.
+'
+' TECHNICAL NOTES:
+'   - Platform: Cross-Platform (Conditional separators).
+'   - DeepWiki Context: Implements the "Image Path Resolution" logic,
+'     ensuring the Graphviz engine can resolve external icons/backgrounds.
+' ==========================================================================
 Public Function GetImagePath() As String
 
     Dim imagePath As String
@@ -430,6 +747,30 @@ Public Function GetImagePath() As String
     
 End Function
 
+' ==========================================================================
+' FUNCTION: DetermineStyleName
+'
+' PURPOSE:
+'   Acts as the primary "Classifier" for the parsing engine, determining
+'   how a worksheet row should be translated into Graphviz DOT syntax.
+'
+' TECHNICAL WORKFLOW:
+'   1. STRUCTURAL DETECTION:
+'      - Detects Subgraph boundaries by checking for '{' (Open) or '}' (Close).
+'      - Detects Native DOT passthrough when the Item column starts with '>'.
+'   2. RELATIONSHIP HEURISTICS:
+'      - If a 'Related Item' is present, the row is classified as an EDGE.
+'      - If no 'Related Item' is present, it is classified as a NODE.
+'   3. KEYWORD OVERRIDE:
+'      - Recognizes global Graphviz keywords (node, edge, graph) to apply
+'        broad attribute settings.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Implements the "Row Classification Logic" detailed
+'     in the Graph Generation Pipeline documentation.
+'   - Strategy: Centralizes the transformation logic that maps Excel rows
+'     to Graphviz object types (TYPE_NODE, TYPE_EDGE, etc.).
+' ==========================================================================
 Private Function DetermineStyleName(ByRef ini As settings, ByVal row As Long) As String
 
     Dim styleName As String
@@ -467,6 +808,26 @@ Private Function DetermineStyleName(ByRef ini As settings, ByVal row As Long) As
     
 End Function
 
+' ==========================================================================
+' FUNCTION: RemovePort
+'
+' PURPOSE:
+'   Extracts the base Node ID from a string that potentially contains
+'   Graphviz port or compass point notation (e.g., "Node:port:sw").
+'
+' TECHNICAL WORKFLOW:
+'   1. DELIMITER DETECTION: Scans the 'nodeId' string for the colon (:)
+'      separator used by Graphviz for port addressing.
+'   2. TOKEN EXTRACTION: If a colon is present, it invokes
+'      'GetStringTokenAtPosition' to retrieve only the first segment.
+'   3. FALLBACK: Returns the original string if no port syntax is detected.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Essential for the "Defining Nodes & Edges" page,
+'     ensuring the parser can identify parent nodes even when specific
+'     connection ports are defined.
+'   - Syntax: Supports standard DOT notation (node:port).
+' ==========================================================================
 Private Function RemovePort(ByVal nodeId As String) As String
     
     ' Strip off the port (if specified)
@@ -478,6 +839,34 @@ Private Function RemovePort(ByVal nodeId As String) As String
 
 End Function
 
+' ==========================================================================
+' FUNCTION: ConvertDataWorksheetToGvSource
+'
+' PURPOSE:
+'   The primary structural logic controller. Orchestrates data validation,
+'   style caching, and relationship filtering before final DOT generation.
+'
+' TECHNICAL WORKFLOW:
+'   1. STYLE CACHING: Invokes 'CacheEnabledStyles' to load formatting rules
+'      into a Dictionary, enabling high-performance attribute lookups.
+'   2. PRE-FLIGHT CLEANUP: Iterates through the data worksheet to purge
+'      'FLAG_ERROR' indicators and stale messages from previous runs.
+'   3. CONNECTIVITY ANALYSIS: If orphan filtering is enabled:
+'      - 'ConfirmItemStyleIsValid': Verifies objects have mapped styles.
+'      - 'DetermineWhatGraphShouldInclude': Evaluates Node-Edge-Node
+'        integrity to filter out disconnected elements.
+'   4. VALIDATION GATE: Calls 'ValidateData'; only proceeds to source
+'      generation if 'errorCount' is zero.
+'   5. SOURCE SYNTHESIS: Triggers 'CreateGraphvizSource' to assemble the
+'      final DOT markup string.
+'   6. RESOURCE HYGIENE: Force-clears all Dictionary objects to prevent
+'      memory leaks.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Prevents invalid or "broken" graphs by enforcing a
+'     strict validation-before-rendering pipeline.
+'   - Layer: Logic Layer / Data Management.
+' ==========================================================================
 Private Function ConvertDataWorksheetToGvSource(ByRef ini As settings, _
                                                 ByVal showStyleColumn As Long, _
                                                 ByRef graphvizSource As String) As Boolean
@@ -535,6 +924,35 @@ Private Function ConvertDataWorksheetToGvSource(ByRef ini As settings, _
     
 End Function
 
+' ==========================================================================
+' SECTION: STRUCTURAL ANALYSIS & ORPHAN FILTERING
+' ==========================================================================
+
+' ==========================================================================
+' PROCEDURE: ConfirmItemStyleIsValid
+'
+' PURPOSE:
+'   The primary structural scanner. Performs an initial pass of the Data
+'   worksheet to catalog every Node and Edge endpoint that possesses a
+'   valid, enabled style definition.
+'
+' TECHNICAL WORKFLOW:
+'   1. COMMENT FILTERING: Skips any rows explicitly marked with 'FLAG_COMMENT'.
+'   2. STYLE RESOLUTION: Retrieves the 'styleName'; if blank, it invokes
+'      'DetermineStyleName' to infer the type (Node/Edge/Subgraph/Native).
+'   3. REGISTRY ENROLLMENT:
+'      - TYPE_NODE: Parses the 'Item' column (handling comma-delimited lists
+'        and stripping ports) to populate the 'nodeIds' Dictionary.
+'      - TYPE_EDGE: Parses both 'Item' (Tail) and 'Related Item' (Head) columns
+'        to catalog all referenced endpoints in the 'edgeIds' Dictionary.
+'   4. DATA NORMALIZATION: Uses 'UCase$' for style name lookups and 'RemovePort'
+'      to ensure base ID consistency.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic Layer / Pre-processing.
+'   - Strategy: Builds the "Source of Truth" for valid IDs, serving as the
+'     input for the subsequent Orphan Filtering logic.
+' ==========================================================================
 Private Sub ConfirmItemStyleIsValid(ByRef ini As settings, _
                                    ByVal styles As Dictionary, _
                                    ByVal nodeIds As Dictionary, _
@@ -613,6 +1031,31 @@ Private Sub ConfirmItemStyleIsValid(ByRef ini As settings, _
 
 End Sub
 
+' ==========================================================================
+' PROCEDURE: DetermineWhatGraphShouldInclude
+'
+' PURPOSE:
+'   Performs a connectivity audit to identify "Island" (orphan) nodes by
+'   tracking which IDs participate in valid, stylable relationships.
+'
+' TECHNICAL WORKFLOW:
+'   1. EDGE SCAN: Iterates through the data worksheet specifically looking
+'      for rows classified as TYPE_EDGE.
+'   2. MULTI-TARGET RESOLUTION: Splits comma-delimited 'Item' and
+'      'Related Item' strings into individual ID arrays.
+'   3. RELATIONSHIP VALIDATION:
+'      - Cross-references both the Tail (Item) and Head (Related Item)
+'        against the 'nodeIds' dictionary (Nodes with valid styles).
+'      - Only if BOTH endpoints are stylable is the connection deemed valid.
+'   4. CONNECTIVITY MAPPING: Populates 'nodeIdsInRelationships' with the
+'      base IDs (ports removed) of every node that has at least one degree.
+'
+' TECHNICAL NOTES:
+'   - Strategy: This is the logic engine for the "Nodes without Relationships"
+'     suppression setting.
+'   - Complexity: Handles Cartesian product relationships when multiple
+'     items are related to multiple targets in a single row.
+' ==========================================================================
 Private Sub DetermineWhatGraphShouldInclude(ByRef ini As settings, _
                                            ByVal styles As Dictionary, _
                                            ByVal nodeIds As Dictionary, _
@@ -686,6 +1129,35 @@ Private Sub DetermineWhatGraphShouldInclude(ByRef ini As settings, _
 
 End Sub
 
+' ==========================================================================
+' FUNCTION: ValidateData
+'
+' PURPOSE:
+'   THE SEMANTIC AUDITOR. Performs a structural integrity pass on the Data
+'   worksheet to ensure logic is sound before the DOT generation phase.
+'
+' TECHNICAL WORKFLOW:
+'   1. DATA EXTRACTION: Uses 'GetDataRow' to pull row attributes into a UDT
+'      for high-speed evaluation.
+'   2. STYLE RESOLUTION: Normalizes style names and verifies their existence
+'      within the cached 'styles' Dictionary.
+'   3. TYPE-SPECIFIC RULES:
+'      - TYPE_NODE: Flags errors if the 'Item' is missing or if a
+'        'Related Item' is present (which would imply an Edge).
+'      - TYPE_EDGE: Flags errors if either 'Item' (Tail) or 'Related Item'
+'        (Head) are missing.
+'      - SUBGRAPHS: Tracks the 'openSubgraphs' stack. Increments on '{'
+'        and decrements on '}'.
+'   4. STACK VALIDATION: Flags immediate errors for excess closing braces
+'      and a final error if the stack isn't zero at the end of the sheet.
+'   5. LOGGING: Invokes 'LogError' to write diagnostic messages back to the
+'      worksheet for user correction.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic Layer / Validation.
+'   - DeepWiki Context: Implements the "Error Handling Philosophy" to prevent
+'     VBA state loss by catching issues before external execution.
+' ==========================================================================
 Private Function ValidateData(ByRef ini As settings, ByVal styles As Dictionary) As Long
 
     Dim data As dataRow
@@ -765,10 +1237,64 @@ Private Function ValidateData(ByRef ini As settings, ByVal styles As Dictionary)
     
 End Function
 
+' ==========================================================================
+' SECTION: DOT SOURCE GENERATION & SYNTAX ASSEMBLY
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: isKeyword
+'
+' PURPOSE:
+'   Identifies if a worksheet entry represents a global Graphviz
+'   configuration scope rather than a specific unique entity.
+'
+' TECHNICAL WORKFLOW:
+'   1. NORMALIZATION: Converts the 'item' string to uppercase.
+'   2. COMPARISON: Evaluates against core DOT keywords: 'NODE', 'EDGE',
+'      or 'GRAPH'.
+'   3. LOGICAL RETURN: Returns TRUE if the entry matches any of the
+'      global scope triggers.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Prevents the parser from treating global attribute blocks
+'     as individual nodes or edges.
+'   - Layer: Logic Layer / Parser.
+' ==========================================================================
 Private Function isKeyword(ByVal item As String) As Boolean
     isKeyword = (UCase$(item) = KEYWORD_NODE) Or (UCase$(item) = KEYWORD_EDGE) Or (UCase$(item) = KEYWORD_GRAPH)
 End Function
 
+' ==========================================================================
+' PROCEDURE: CreateGraphvizSource
+'
+' PURPOSE:
+'   THE DOT ASSEMBLER. Orchestrates the construction of the final .gv
+'   source string by synthesizing worksheet data into structured DOT syntax.
+'
+' TECHNICAL WORKFLOW:
+'   1. HEADER INITIALIZATION: Establishes the graph's fundamental signature
+'      (Strict status, directed vs. undirected command) and opens the
+'      primary Graphviz block with '{'.
+'   2. GLOBAL DIRECTIVES: Invokes 'ProcessGraphOptions' to inject
+'      workbook-wide settings (rankdir, splines, imagepath, etc.).
+'   3. STATE MANAGEMENT: Initializes the 'clusterCnt' for subgraph naming
+'      and a dynamic 'indent' counter for human-readable code formatting.
+'   4. MAIN PARSING LOOP: Iterates through the data worksheet, routing
+'      rows to specialized handlers:
+'      - 'ProcessNode' / 'ProcessEdge': Standard graph entities.
+'      - 'ProcessSubgraphOpen' / 'Close': Handles cluster naming and
+'        recursive indentation shifts.
+'      - 'ProcessKeyword' / 'ProcessNative': Global overrides and raw
+'        code passthrough ('>').
+'   5. DEBUG ENHANCEMENT: If 'debug' mode is enabled, it automatically
+'      injects row metadata into labels via 'FormatDebugLabel'.
+'   6. CLOSURE: Finalizes the buffer with a closing brace '}'.
+'
+' TECHNICAL NOTES:
+'   - Performance: Uses 'Join(Array(...))' for efficient string concatenation.
+'   - DeepWiki Context: Implements the "Transformation Pipeline" and
+'     "Stack-based Parsing" logic for subgraphs.
+' ==========================================================================
 Private Sub CreateGraphvizSource(ByRef ini As settings, _
                                     ByVal styles As Dictionary, _
                                     ByVal nodeIds As Dictionary, _
@@ -881,6 +1407,40 @@ Private Sub CreateGraphvizSource(ByRef ini As settings, _
 
 End Sub
 
+' ==========================================================================
+' SECTION: GLOBAL GRAPH DIRECTIVES & ENGINE-SPECIFIC OPTIONS
+' ==========================================================================
+
+' ==========================================================================
+' PROCEDURE: ProcessGraphOptions
+'
+' PURPOSE:
+'   THE GLOBAL CONFIGURATOR. Translates high-level project settings into
+'   valid DOT graph-level attribute statements.
+'
+' TECHNICAL WORKFLOW:
+'   1. CORE VISUALS: Applies global attributes like 'splines', 'bgcolor'
+'      (transparency), 'center', and 'concentrate' using 'AddAttributeLine'.
+'   2. ASSET RESOLUTION: Injects the 'imagepath' directory list to ensure
+'      Graphviz can find external icons/backgrounds.
+'   3. ENGINE-SPECIFIC PARAMETERS: Uses a 'Select Case' structure to apply
+'      parameters tailored to the active layout engine:
+'      - DOT: 'rankdir', 'compound', 'newrank', 'clusterrank'.
+'      - NEATO/FDP/SFDP: 'overlap', 'dim/dimen', 'mode', 'model', 'smoothing'.
+'      - CIRCO/TWOPI/OSAGE: 'outputorder'.
+'   4. ORIENTATION: Handles the 'Rotate 90' flag for landscape renderings.
+'   5. POWER-USER OVERRIDE: Appends the 'ini.graph.options' string at the
+'      very end, allowing manual DOT code from the 'Settings' worksheet to
+'      supersede any automated assignments.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Decouples the rendering engine's vast attribute set from
+'     the Excel UI via the 'settings' UDT and 'AddAttributeLine' helper.
+'   - DeepWiki Context: Directly implements the engine logic described in
+'     the "Graphviz Ribbon Tab" documentation.
+' ==========================================================================
+
+'
 Private Sub ProcessGraphOptions(ByRef graphvizSource As String, ByRef ini As settings, ByVal indent As Long)
 
     Dim spaces As String
@@ -1044,14 +1604,77 @@ Private Sub ProcessGraphOptions(ByRef graphvizSource As String, ByRef ini As set
     End If
 End Sub
 
+' ==========================================================================
+' PROCEDURE: AddAttributeLine
+'
+' PURPOSE:
+'   A low-level string-assembly utility that appends a single, valid
+'   Graphviz attribute statement to the source buffer.
+'
+' TECHNICAL WORKFLOW:
+'   1. CONCATENATION: Combines the current indentation, attribute name,
+'      assignment operator (=), and value.
+'   2. TERMINATION: Appends a semicolon (SEMICOLON) and a newline (vbNewLine)
+'      to ensure strict adherence to DOT language syntax.
+'   3. PERFORMANCE: Uses 'Join(Array(...))' to minimize memory allocation
+'      overhead during large-scale graph generation.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Centralizes the "semicolon-terminated" pattern to prevent
+'     syntax errors across all object handlers (Node, Edge, Graph).
+'   - Constraint: Assumes 'attributeValue' is already properly formatted
+'     (e.g., quoted or numeric).
+' ==========================================================================
 Private Sub AddAttributeLine(ByRef graphvizSource As String, ByVal spaces As String, ByVal attributeName As String, ByVal attributeValue As String)
     graphvizSource = Join(Array(graphvizSource, spaces, Trim$(attributeName), "=", attributeValue, SEMICOLON, vbNewLine), vbNullString)
 End Sub
 
+' ==========================================================================
+' SECTION: INDENTATION & NESTING LOGIC
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: IncreaseIndent
+'
+' PURPOSE:
+'   Increments the indentation depth tracker used to generate human-readable
+'   and structurally organized DOT source code.
+'
+' TECHNICAL WORKFLOW:
+'   1. STACK ADVANCE: Adds a value of 1 to the current 'indent' level.
+'
+' USAGE:
+'   - Triggered by 'CreateGraphvizSource' immediately after processing
+'     a 'TYPE_SUBGRAPH_OPEN' ({) row.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Essential for the "Stack-based Parsing" logic used
+'     to maintain correct nesting hierarchy in complex diagrams.
+' ==========================================================================
 Private Function IncreaseIndent(ByVal indent As Long) As Long
     IncreaseIndent = indent + 1
 End Function
 
+' ==========================================================================
+' FUNCTION: DecreaseIndent
+'
+' PURPOSE:
+'   Decrements the indentation depth tracker when exiting a nested
+'   Graphviz scope (e.g., closing a Subgraph or Cluster).
+'
+' TECHNICAL WORKFLOW:
+'   1. STACK RETREAT: Subtracts 1 from the current 'indent' level.
+'   2. BOUNDARY PROTECTION: Implements a safety floor to ensure the indent
+'      never drops below 0, preventing string-generation errors.
+'
+' USAGE:
+'   - Invoked by 'CreateGraphvizSource' after processing a
+'     'TYPE_SUBGRAPH_CLOSE' (}) row or before closing the main graph block.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Works in tandem with 'IncreaseIndent' to support
+'     the "Stack-based Parsing" architecture for hierarchical grouping.
+' ==========================================================================
 Private Function DecreaseIndent(ByVal indent As Long) As Long
     DecreaseIndent = indent - 1
     If DecreaseIndent < 0 Then
@@ -1059,6 +1682,34 @@ Private Function DecreaseIndent(ByVal indent As Long) As Long
     End If
 End Function
 
+' ==========================================================================
+' SECTION: DATA MAPPING & SYNTACTIC HELPERS
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: GetDataRow
+'
+' PURPOSE:
+'   THE DATA MAPPER. Extracts and structures raw worksheet data from a
+'   single row into a 'dataRow' UDT for high-speed internal processing.
+'
+' TECHNICAL WORKFLOW:
+'   1. COLUMN RESOLUTION: Maps logical Graphviz properties (Labels,
+'      Tooltips, Ports) to their physical worksheet coordinates using the
+'      'ini.data' settings contract.
+'   2. ATTRIBUTE GATHERING: Captures core entity data:
+'      - IDENTIFIERS: 'item' (Node ID/Tail) and 'relatedItem' (Head).
+'      - LABELS: Standard, XLabel (external), TailLabel, and HeadLabel.
+'      - METADATA: 'Tooltip' and 'extraAttrs' for DOT passthrough.
+'   3. STATE CAPTURE: Records the 'comment' flag and 'styleName' to inform
+'      the subsequent classification and validation stages.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Implements the "GetDataRow internal structure"
+'     specified in the Defining Nodes & Edges architecture page.
+'   - Strategy: Centralizes all worksheet-to-VBA field mapping to isolate
+'     the core logic from changes in the spreadsheet layout.
+' ==========================================================================
 Public Function GetDataRow(ByRef ini As settings, ByVal worksheetName As String, ByVal row As Long) As dataRow
 
     GetDataRow.comment = GetCell(worksheetName, row, ini.data.flagColumn)
@@ -1075,7 +1726,14 @@ Public Function GetDataRow(ByRef ini As settings, ByVal worksheetName As String,
 
 End Function
 
-
+''
+' STYLE CACHE ENGINE: Loads all 'Yes' flagged styles into a high-speed Dictionary.
+' 1. Skips commented rows in the Style sheet.
+' 2. Filters for the currently active View (column).
+' 3. Instantiates Style class objects for every enabled style.
+' Used to prevent redundant worksheet lookups during the main generation loop.
+' @param showStyleColumn [Long]: The column index of the current View.
+'
 Private Function CacheEnabledStyles(ByRef ini As settings, ByVal showStyleColumn As Long) As Dictionary
 
     ' Dictionary to hold the key and associated values
@@ -1107,6 +1765,34 @@ Private Function CacheEnabledStyles(ByRef ini As settings, ByVal showStyleColumn
     
 End Function
 
+' ==========================================================================
+' SECTION: OBJECT FACTORIES & ERROR REPORTING
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: CacheEnabledStyles
+'
+' PURPOSE:
+'   THE STYLE CACHE ENGINE. Loads all active style definitions for the
+'   selected View into a high-speed Dictionary to optimize rendering performance.
+'
+' TECHNICAL WORKFLOW:
+'   1. DICTIONARY INIT: Instantiates a new 'Dictionary' to serve as the
+'      in-memory style registry.
+'   2. VIEW-BASED FILTERING: Scans the Styles sheet and only processes rows
+'      where the 'showStyleColumn' (the active View) is set to 'TOGGLE_YES'.
+'   3. DUPLICATE PROTECTION: Identifies the 'styleName' (normalized to UCase)
+'      and ensures only the first occurrence of a unique name is cached.
+'   4. OBJECT HYDRATION: Invokes the 'GetStyle' factory function to create
+'      'Style' class instances, populating them with 'ObjectType' and
+'      'Format' attributes.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic Layer / Caching.
+'   - DeepWiki Context: Implements the "Multi-layered Caching" strategy
+'     noted in the Style Designer documentation to prevent redundant
+'     worksheet I/O during the main DOT generation loop.
+' ==========================================================================
 Public Function GetStyle(ByVal styleType As String, ByVal styleFormat As String) As style
 
     Dim value As style
@@ -1119,6 +1805,27 @@ Public Function GetStyle(ByVal styleType As String, ByVal styleFormat As String)
 
 End Function
 
+' ==========================================================================
+' PROCEDURE: LogError
+'
+' PURPOSE:
+'   THE IN-SHEET ERROR LOGGER. Provides visual and textual feedback to the
+'   user when a row fails structural or semantic validation.
+'
+' TECHNICAL WORKFLOW:
+'   1. VISUAL FLAGGING: Updates the 'flagColumn' with the 'FLAG_ERROR'
+'      constant, typically triggering Excel conditional formatting (e.g.,
+'      red background).
+'   2. MESSAGE INJECTION: Writes the descriptive 'errorMessage' string
+'      directly into the 'errorMessageColumn' for the specific failing row.
+'   3. STATE ACCUMULATION: Increments the 'errCnt' by reference, which
+'      serves as the primary "Kill Switch" for the rendering pipeline.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Implements the "ValidateData" pattern to prevent passing
+'     malformed DOT code to the external Graphviz engine.
+'   - Layer: UI / Data Management.
+' ==========================================================================
 Private Sub LogError(ByRef ini As settings, ByVal row As Long, ByVal errorMessage As String, ByRef errCnt As Long)
 
     SetCell ini.data.worksheetName, row, ini.data.flagColumn, FLAG_ERROR
@@ -1128,6 +1835,29 @@ Private Sub LogError(ByRef ini As settings, ByVal row As Long, ByVal errorMessag
     
 End Sub
 
+' ==========================================================================
+' FUNCTION: FormatId
+'
+' PURPOSE:
+'   THE ID FORMATTER. Sanitizes Node IDs for the DOT engine by applying
+'   correct quoting and handling specialized port/compass point syntax.
+'
+' TECHNICAL WORKFLOW:
+'   1. PORT DETECTION: Scans the 'nodeId' for the colon (:) delimiter.
+'   2. CONDITIONAL PORT HANDLING:
+'      - If 'includePorts' is TRUE: Individually quotes the Node ID and
+'        conditionally quotes the port/compass segment (e.g., "Node":"port").
+'      - If 'includePorts' is FALSE: Discards the port segment and returns
+'        only the quoted base Node ID.
+'   3. STANDARD QUOTING: For IDs without ports, applies 'AddQuotes' to
+'      ensure strings with spaces or special characters are valid DOT tokens.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Directly supports the "Defining Nodes & Edges"
+'     architecture by enabling advanced port syntax (node:port).
+'   - Strategy: Prevents syntax errors in the Graphviz parser caused by
+'     unquoted reserved characters or whitespace.
+' ==========================================================================
 Private Function FormatId(ByVal nodeId As String, ByVal includePorts As Boolean) As String
 
     Dim formattedId As String
@@ -1147,6 +1877,29 @@ Private Function FormatId(ByVal nodeId As String, ByVal includePorts As Boolean)
     
 End Function
 
+' ==========================================================================
+' FUNCTION: FormatDebugLabel
+'
+' PURPOSE:
+'   THE DEBUG OVERLAY. Injects row numbers and connectivity metadata into
+'   object labels to facilitate visual auditing of the graph structure.
+'
+' TECHNICAL WORKFLOW:
+'   1. HTML SAFETY CHECK: Invokes 'IsLabelHTMLLike' to detect labels wrapped
+'      in angle brackets (< >). Skips debugging for these to avoid corrupting
+'      Graphviz HTML-table syntax.
+'   2. METADATA COMPOSITION:
+'      - TYPE_EDGE: Appends "(Row: # Tail->Head)" to the label.
+'      - TYPE_NODE: Appends "(Row: # ID)" to the label.
+'      - TYPE_SUBGRAPH: Appends "(Row: #)" for cluster identification.
+'   3. STRING INJECTION: Concatenates the debug string with a newline (NEWLINE)
+'      if a label already exists, or replaces a null label with the metadata.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic / Diagnostics.
+'   - Strategy: Allows developers to trace rendered shapes back to their
+'     exact source row in the Excel Data worksheet.
+' ==========================================================================
 Private Function FormatDebugLabel(ByVal row As Long, ByRef data As dataRow) As String
                         
     Dim debugstr As String
@@ -1185,6 +1938,33 @@ Private Function FormatDebugLabel(ByVal row As Long, ByRef data As dataRow) As S
     
 End Function
 
+' ==========================================================================
+' SECTION: DEBUGGING & EXTERNAL LABEL FORMATTING
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: FormatDebugXLabel
+'
+' PURPOSE:
+'   THE XLABEL DEBUG OVERLAY. Injects source row numbers and entity mapping
+'   into the external 'xLabel' field when debugging is enabled.
+'
+' TECHNICAL WORKFLOW:
+'   1. HTML SAFETY CHECK: Uses 'IsLabelHTMLLike' to detect angle-bracket
+'      syntax (<...>); if present, the debug string is suppressed to
+'      prevent breaking Graphviz HTML-label parsing.
+'   2. METADATA COMPOSITION:
+'      - TYPE_EDGE: Formats a string containing the row index and the
+'        Tail->Head relationship mapping.
+'      - TYPE_NODE: Formats a string containing the row index and Node ID.
+'   3. STRING INJECTION: Appends the 'debugstr' to the existing 'xLabel'
+'      using a 'NEWLINE' constant, provided the xLabel is not null.
+'
+' TECHNICAL NOTES:
+'   - Layer: Logic / Diagnostics.
+'   - Usage: Complements 'FormatDebugLabel' by providing traceability
+'     for external (floating) labels in complex layouts.
+' ==========================================================================
 Private Function FormatDebugXLabel(ByVal row As Long, ByRef data As dataRow) As String
                         
     Dim debugstr As String
@@ -1210,6 +1990,34 @@ Private Function FormatDebugXLabel(ByVal row As Long, ByRef data As dataRow) As 
     
 End Function
 
+' ==========================================================================
+' SECTION: EDGE LABEL ASSEMBLY
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: FormatEdgeLabels
+'
+' PURPOSE:
+'   THE EDGE LABEL ASSEMBLER. Constructs a combined Graphviz attribute string
+'   for all supported edge label positions (center, external, head, and tail).
+'
+' TECHNICAL WORKFLOW:
+'   1. PRIMARY LABEL LOGIC:
+'      - If 'includeEdgeLabels' is enabled: Processes the main 'label' field.
+'      - BLANK LABEL OVERRIDE: If the label is empty and 'blankEdgeLabels' is
+'        TRUE, it injects the Graphviz "\E" token (which displays the Edge ID).
+'   2. MULTI-POSITIONAL ASSEMBLY:
+'      - XLABEL: Appends 'xlabel=' if external labels are enabled and present.
+'      - TAILLABEL: Appends 'taillabel=' for labels anchored at the edge start.
+'      - HEADLABEL: Appends 'headlabel=' for labels anchored at the edge arrow.
+'   3. SANITIZATION: All labels are passed through 'FormatLabel' to handle
+'      automatic quoting and HTML-like syntax (<...>) branching.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Directly implements the multi-label architecture
+'     specified in the "Defining Nodes & Edges" and "Styles" pages.
+'   - Layer: Logic Layer / DOT Synthesis.
+' ==========================================================================
 Private Function FormatEdgeLabels(ByRef ini As settings, ByRef data As dataRow) As String
 
     Dim edgeLabel As String
@@ -1241,6 +2049,34 @@ Private Function FormatEdgeLabels(ByRef ini As settings, ByRef data As dataRow) 
     
 End Function
 
+' ==========================================================================
+' SECTION: NODE LABEL ASSEMBLY
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: FormatNodeLabels
+'
+' PURPOSE:
+'   THE NODE LABEL ASSEMBLER. Constructs the DOT attribute segment for
+'   internal and external node labeling, managing the relationship between
+'   Node IDs and display labels.
+'
+' TECHNICAL WORKFLOW:
+'   1. PRIMARY LABEL LOGIC:
+'      - If 'includeNodeLabels' is enabled: Processes the main 'label' field.
+'      - BLANK OVERRIDE: If 'blankNodeLabels' is TRUE, it allows Graphviz
+'        to default to the Node ID. If FALSE, it explicitly forces an
+'        empty label="".
+'   2. XLABEL ASSEMBLY: Appends the 'xlabel=' attribute if external labels
+'      are toggled ON and data exists in the 'xLabel' field.
+'   3. SANITIZATION: Routes all strings through 'FormatLabel' to handle
+'      automatic quoting or HTML bracket detection.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Provides granular control over whether Node IDs are
+'     visible as labels, supporting both "ID-as-Label" and "Clean Node" aesthetics.
+'   - Layer: Logic Layer / DOT Synthesis.
+' ==========================================================================
 Private Function FormatNodeLabels(ByRef ini As settings, ByRef data As dataRow) As String
 
     Dim nodeLabel As String
@@ -1265,6 +2101,41 @@ Private Function FormatNodeLabels(ByRef ini As settings, ByRef data As dataRow) 
     
 End Function
 
+' ==========================================================================
+' SECTION: SUBGRAPH & CLUSTER INITIALIZATION
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: ProcessSubgraphOpen
+'
+' PURPOSE:
+'   THE HIERARCHY HANDLER. Generates the opening statement for a Graphviz
+'   subgraph or cluster, managing automatic naming and attribute merging.
+'
+' TECHNICAL WORKFLOW:
+'   1. NAME RESOLUTION:
+'      - Extracts the name from the 'item' column (text before '{').
+'      - If blank, it auto-increments 'clusterCnt' and assigns a "cluster_"
+'        prefix to ensure Graphviz renders a bounding box.
+'   2. ATTRIBUTE INJECTION:
+'      - Appends the base 'format' from the cached Style definition.
+'      - Merges 'extraAttrs' if 'includeExtraAttributes' is enabled.
+'   3. LABEL HANDLING:
+'      - Checks for the "{label}" placeholder in the format string for
+'        dynamic injection.
+'      - If no placeholder exists, it appends a standard 'label=' attribute
+'        sanitized via 'FormatLabel'.
+'   4. SVG ENHANCEMENT: Appends 'tooltip=' attributes if the output is set
+'      to SVG and data is present.
+'   5. INDENTATION: Prepends leading spaces based on the current nesting
+'      depth for clean, human-readable source code.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Foundational for the "Subgraphs & Clusters"
+'     architecture, enabling recursive grouping of nodes.
+'   - Strategy: Centralizes the "cluster" vs "subgraph" naming logic to
+'     ensure consistent visual grouping.
+' ==========================================================================
 Private Function ProcessSubgraphOpen(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long, ByRef clusterCnt As Long) As String
 
     Dim subgraphName As String
@@ -1307,6 +2178,35 @@ Private Function ProcessSubgraphOpen(ByRef ini As settings, ByRef data As dataRo
 
 End Function
 
+' ==========================================================================
+' SECTION: NODE ENTITY PROCESSING
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: ProcessNode
+'
+' PURPOSE:
+'   THE NODE DISPATCHER. Orchestrates the translation of worksheet node
+'   definitions into DOT syntax, supporting multi-node batching and
+'   connectivity filtering.
+'
+' TECHNICAL WORKFLOW:
+'   1. BATCH PROCESSING: Splits the 'Item' column by commas to handle
+'      multiple Node IDs defined in a single Excel row.
+'   2. ORPHAN SUPPRESSION:
+'      - If 'includeOrphanNodes' is FALSE, it cross-references each ID
+'        (ports removed) against the 'nodesUsedInRelationships' dictionary.
+'      - Only "connected" nodes are passed to the next stage.
+'   3. SYNTAX GENERATION: Invokes 'WriteNode' for every validated ID to
+'      construct the specific DOT attribute string.
+'   4. CONCATENATION: Merges individual node strings into a single buffer
+'      using 'Join(Array(...))' for optimal performance.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Implements the "Single Row, Multiple Nodes" efficiency
+'     pattern while enforcing graph-theory constraints like orphan removal.
+'   - Layer: Logic Layer / Parser.
+' ==========================================================================
 Private Function ProcessNode(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long, ByVal nodesUsedInRelationships As Dictionary) As String
                         
     Dim item As String
@@ -1335,6 +2235,36 @@ Private Function ProcessNode(ByRef ini As settings, ByRef data As dataRow, ByVal
     ProcessNode = graphvizSource
 End Function
 
+' ==========================================================================
+' SECTION: EDGE ENTITY PROCESSING & MATRIX EXPANSION
+' ==========================================================================
+
+' ==========================================================================
+' PROCEDURE: ProcessEdge
+'
+' PURPOSE:
+'   THE EDGE DISPATCHER. Translates worksheet relationship rows into DOT
+'   syntax, supporting the expansion of many-to-many "matrix" relationships.
+'
+' TECHNICAL WORKFLOW:
+'   1. MATRIX EXPANSION: Splits both 'item' (Tails) and 'relatedItem' (Heads)
+'      by commas. It then performs a nested loop to generate a cross-product
+'      of all possible connections from a single row.
+'   2. ORPHAN INTEGRITY CHECK:
+'      - If 'includeOrphanEdges' is FALSE: It verifies that both endpoints
+'        (ports removed) exist in the 'definedNodes' registry.
+'      - Connections to non-existent or unstyled nodes are suppressed.
+'   3. SYNTAX GENERATION: Invokes 'WriteEdge' for every validated Tail-Head
+'      pair to construct the specific DOT relationship string.
+'   4. CONCATENATION: Aggregates all expanded edge strings into a single
+'      buffer for return to the main assembly loop.
+'
+' TECHNICAL NOTES:
+'   - Complexity: An $O(N \times M)$ expansion where $N$ is the number of
+'     Tails and $M$ is the number of Heads in a single Excel cell.
+'   - DeepWiki Context: Implements the "Relationship Expansion" logic
+'     specified in the Defining Nodes & Edges architecture.
+' ==========================================================================
 Private Function ProcessEdge(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long, ByVal definedNodes As Dictionary) As String
                         
     Dim item As String
@@ -1372,10 +2302,67 @@ Private Function ProcessEdge(ByRef ini As settings, ByRef data As dataRow, ByVal
     ProcessEdge = graphvizSource
 End Function
 
+' ==========================================================================
+' SECTION: SUBGRAPH & CLUSTER TERMINATION
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: ProcessSubgraphClose
+'
+' PURPOSE:
+'   THE HIERARCHY TERMINATOR. Generates the closing brace for a Graphviz
+'   subgraph or cluster, ensuring structural and visual alignment.
+'
+' TECHNICAL WORKFLOW:
+'   1. INDENTATION: Prepends leading spaces based on the *restored* parent
+'      nesting level to align the closing brace with its opening 'subgraph'
+'      statement.
+'   2. SYNTAX GENERATION: Appends the 'data.item' (typically the '}' character)
+'      followed by a newline to cleanly terminate the block scope.
+'
+' TECHNICAL NOTES:
+'   - DeepWiki Context: Works in tandem with 'ProcessSubgraphOpen' to manage
+'     the "Stack-based Parsing" logic for nested groups.
+'   - Strategy: Maintains human-readable DOT source code within the
+'     Source Viewer by reflecting the logical nesting in the visual layout.
+' ==========================================================================
 Private Function ProcessSubgraphClose(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
     ProcessSubgraphClose = Space(indent * ini.source.indent) & data.item & vbNewLine
 End Function
 
+' ==========================================================================
+' SECTION: ENTITY WRITERS (FINAL DOT ASSEMBLY)
+' ==========================================================================
+
+' ==========================================================================
+' PROCEDURE: WriteNode
+'
+' PURPOSE:
+'   THE NODE ASSEMBLER. Translates a specific node instance into its final
+'   Graphviz DOT representation, merging styles, labels, and metadata.
+'
+' TECHNICAL WORKFLOW:
+'   1. ID PURIFICATION: Strips port syntax for the base declaration to
+'      ensure the node is correctly identified in the Graphviz symbol table.
+'   2. HTML ADAPTATION: Detects HTML-like labels (<...>); if no other style
+'      is provided, it automatically injects 'shape=plaintext' to prevent
+'      Graphviz from wrapping the table in a default box.
+'   3. ATTRIBUTE MERGING:
+'      - Combines the Style Gallery 'format' with user-defined 'extraAttrs'.
+'      - Appends SVG tooltips if the rendering format supports them.
+'   4. LABEL INTEGRATION: Invokes 'FormatNodeLabels' to handle standard
+'      labels and external xLabels.
+'   5. OPTIMIZED EMISSION:
+'      - If no attributes exist: Outputs a compact 'ID;' declaration.
+'      - If attributes exist: Outputs a structured 'ID [ attributes ];' block
+'        with appropriate indentation.
+'
+' TECHNICAL NOTES:
+'   - Performance: Uses 'Join(Array(...))' to handle string concatenation
+'     efficiently during high-volume node generation.
+'   - DeepWiki Context: Implements the "Defining Nodes" logic where Excel
+'     data meets DOT syntax requirements.
+' ==========================================================================
 Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
 
     Dim nodeLabel As String
@@ -1421,6 +2408,34 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
 
 End Function
 
+' ==========================================================================
+' PROCEDURE: WriteEdge
+'
+' PURPOSE:
+'   THE EDGE ASSEMBLER. Translates a relationship row into the final Graphviz
+'   DOT connection string, managing directionality, ports, and multi-position labels.
+'
+' TECHNICAL WORKFLOW:
+'   1. ATTRIBUTE SYNTHESIS:
+'      - Merges the Style 'format' with 'extraAttrs' (if enabled).
+'      - Appends SVG tooltips for interactive metadata support.
+'   2. ID PREPARATION: Invokes 'FormatId' for both Tail and Head, conditionally
+'      including or stripping port notation based on 'includeEdgePorts'.
+'   3. LABEL AGGREGATION: Calls 'FormatEdgeLabels' to bundle standard,
+'      external (xLabel), head, and tail labels into attribute pairs.
+'   4. OPERATOR SELECTION: Injects 'ini.graph.edgeOperator' (-> or --) to
+'      match the graph type (Digraph vs. Graph).
+'   5. OPTIMIZED EMISSION:
+'      - If no attributes: Outputs a simple 'A -> B;' declaration.
+'      - If attributes exist: Outputs 'A -> B [ attributes ];' with
+'        correct hierarchical indentation.
+'
+' TECHNICAL NOTES:
+'   - Performance: Uses 'Join(Array(...))' to handle string concatenation
+'     efficiently during high-volume edge generation.
+'   - DeepWiki Context: Implements the "Defining Edges" logic where Excel
+'     links are converted to DOT relationships.
+' ==========================================================================
 Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
 
     Dim styleAttributes As String
@@ -1461,10 +2476,59 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
     
 End Function
 
+' ==========================================================================
+' SECTION: NATIVE PASSTHROUGH & GLOBAL OVERRIDES
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: ProcessNative
+'
+' PURPOSE:
+'   THE NATIVE PASSTHROUGH. Allows power users to inject raw, unparsed DOT
+'   code directly into the generation stream, bypassing the project's
+'   standard data-mapping logic.
+'
+' TECHNICAL WORKFLOW:
+'   1. TRIGGER: Executed when a row is classified as 'TYPE_NATIVE'
+'      (typically identified by the '>' character in the Item column).
+'   2. INJECTION: Retrieves the 'label' field—which contains the raw DOT
+'      syntax—and prepends the current level of indentation.
+'   3. TERMINATION: Appends a newline to ensure the next DOT statement
+'      starts on a fresh line in the Source Viewer.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Provides an "Escape Hatch" for advanced Graphviz features
+'     not natively supported by the Excel UI (e.g., custom rank blocks
+'     or complex multi-line attribute strings).
+'   - Layer: Logic Layer / Native Passthrough.
+' ==========================================================================
 Private Function ProcessNative(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
     ProcessNative = Space(indent * ini.source.indent) & data.label & vbNewLine
 End Function
 
+' ==========================================================================
+' FUNCTION: ProcessKeyword
+'
+' PURPOSE:
+'   THE GLOBAL SCOPE HANDLER. Defines or overrides default attributes for
+'   all subsequent nodes, edges, or the graph itself within the DOT stream.
+'
+' TECHNICAL WORKFLOW:
+'   1. ATTRIBUTE SYNTHESIS: Combines the Style 'format' with 'extraAttrs'
+'      to establish the base property set for the specified scope.
+'   2. CONTEXT-SENSITIVE LABELING:
+'      - KEYWORD_NODE: Invokes 'FormatNodeLabels' to set global node defaults.
+'      - KEYWORD_EDGE: Invokes 'FormatEdgeLabels' to set global edge defaults.
+'      - KEYWORD_GRAPH: Directly appends a 'label=' attribute if present.
+'   3. SYNTAX GENERATION: Constructs a standard DOT keyword block:
+'      'keyword [ attributes ];' with hierarchical indentation.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Implements the Graphviz "State Machine" behavior, where
+'     setting a keyword attribute affects all following declarations in
+'     the same or nested scopes.
+'   - Layer: Logic Layer / DOT Synthesis.
+' ==========================================================================
 Private Function ProcessKeyword(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
 
     Dim styleAttributes As String
@@ -1491,6 +2555,31 @@ Private Function ProcessKeyword(ByRef ini As settings, ByRef data As dataRow, By
     
 End Function
 
+' ==========================================================================
+' SECTION: LABEL SANITIZATION & SYNTAX SAFETY
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: FormatLabel
+'
+' PURPOSE:
+'   THE LABEL GATEKEEPER. Standardizes label values for DOT output by
+'   distinguishing between raw text and Graphviz HTML-like markup.
+'
+' TECHNICAL WORKFLOW:
+'   1. HTML DETECTION: Uses 'IsLabelHTMLLike' to identify if the string is
+'      wrapped in angle brackets (<...>); if TRUE, the string is returned
+'      untouched to allow Graphviz to parse the internal XML/HTML tags.
+'   2. TEXT SANITIZATION: If not HTML, the value is passed through:
+'      - 'ScrubText': Handles escape characters and reserved DOT sequences.
+'      - 'AddQuotes': Wraps the sanitized string in double quotes for
+'        standard attribute assignment.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Prevents Graphviz syntax crashes by ensuring reserved
+'     characters in labels are either escaped or correctly identified as
+'     HTML code.
+' ==========================================================================
 Private Function FormatLabel(ByVal labelValue As String) As String
 
     If IsLabelHTMLLike(labelValue) Then          ' just return it intact
@@ -1501,6 +2590,35 @@ Private Function FormatLabel(ByVal labelValue As String) As String
 
 End Function
 
+' ==========================================================================
+' SECTION: HTML-LIKE LABEL DETECTION
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: IsLabelHTMLLike
+'
+' PURPOSE:
+'   THE SYNTAX CLASSIFIER. Detects if a label string contains Graphviz
+'   HTML-like markup (XML based) to determine if standard DOT quoting
+'   should be bypassed.
+'
+' TECHNICAL WORKFLOW:
+'   1. PRE-PROCESSING: Normalizes the input by stripping Line Feed characters
+'      (Chr 10) to facilitate reliable boundary checking.
+'   2. BOUNDARY VALIDATION: Checks if the string starts with '<' and ends
+'      with '>', which is the Graphviz requirement for HTML-like labels.
+'   3. HEURISTIC INSPECTION: Scans the internal content for terminal XML
+'      markers ("</" or "/>"). This validates intent and distinguishes
+'      actual markup from simple inequality comparisons.
+'   4. LOGICAL RETURN: Returns TRUE if the string satisfies the structural
+'      requirements, signaling the parser to emit the string unquoted.
+'
+' TECHNICAL NOTES:
+'   - Performance: Uses a "process of elimination" structure to minimize
+'     string evaluations.
+'   - Strategy: Prioritizes speed over exhaustive XML validation, deferring
+'     syntax correction to the external Graphviz engine.
+' ==========================================================================
 Public Function IsLabelHTMLLike(ByVal label As String) As Boolean
      
      IsLabelHTMLLike = False
@@ -1530,6 +2648,36 @@ Public Function IsLabelHTMLLike(ByVal label As String) As Boolean
     
 End Function
 
+' ==========================================================================
+' SECTION: DATA SOURCE RESOLUTION & VALIDATION
+' ==========================================================================
+
+' ==========================================================================
+' FUNCTION: GetDataWorksheetName
+'
+' PURPOSE:
+'   THE CONTEXT RESOLVER. Dynamically identifies the correct worksheet to use
+'   as the data source, enabling the rendering engine to work on custom sheets
+'   while protecting system-critical worksheets.
+'
+' TECHNICAL WORKFLOW:
+'   1. SYSTEM BLACKLIST: Checks the 'ActiveSheet' name against a hard-coded
+'      list of protected system worksheets (Settings, Styles, Help, etc.).
+'   2. SCHEMA VALIDATION: If the active sheet is not on the blacklist, it
+'      retrieves the 'dataWorksheet' UDT and verifies the worksheet's
+'      integrity by comparing header values (Item, Label, Related Item)
+'      against the 'DataSheet' master template.
+'   3. SAFE FALLBACK: If the active sheet is a protected system sheet or
+'      fails the schema validation, the function defaults to the standard
+'      'DataSheet.name'.
+'   4. IDENTITY RETURN: Returns the validated 'worksheetName' to the caller
+'      to anchor the rest of the parsing pipeline.
+'
+' TECHNICAL NOTES:
+'   - Strategy: Empowers "Multi-Sheet" projects by allowing users to create
+'     alternate data views that still adhere to the global Data Model.
+'   - Layer: Logic Layer / Context Management.
+' ==========================================================================
 Public Function GetDataWorksheetName() As String
 
     Dim worksheetName As String

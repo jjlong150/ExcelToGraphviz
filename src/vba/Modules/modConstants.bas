@@ -1,8 +1,59 @@
 Attribute VB_Name = "modConstants"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Bootstrap")
-'@IgnoreModule UseMeaningfulName
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modConstants
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Bootstrap / Global Constants
+'
+' ROLE:
+'   Central registry of all workbook-wide constants used by the Ribbon,
+'   SQL engine, Style Designer, Exchange subsystem, Source/SVG editors,
+'   Graphviz renderer, and worksheet navigation logic. Defines the canonical
+'   names for worksheets, settings cells, toggle values, Graphviz attributes,
+'   Style Designer fields, SQL extension identifiers, and Ribbon control IDs.
+'
+' RESPONSIBILITIES:
+'   - Provide a single authoritative source for:
+'       • Worksheet names (data, graph, settings, source, sql, styles, svg)
+'       • Toggle values (yes/no, show/hide, directed/undirected, etc.)
+'       • Graphviz layout identifiers and attribute keywords
+'       • Style Designer cell mappings and attribute names
+'       • SQL extension field names (cluster levels, placeholders, iteration,
+'         enumeration, concatenation, CREATE EDGES, CREATE RANK, etc.)
+'       • Exchange import/export settings
+'       • Ribbon control IDs for all tabs (Graphviz, Launchpad, Styles,
+'         Style Designer, SQL, SVG, Source, Exchange)
+'   - Ensure cross-module consistency by eliminating string literals scattered
+'     across the codebase.
+'   - Support localization by abstracting worksheet names and settings keys.
+'
+' INTERACTIONS:
+'   - Ribbon Tabs: All tabs reference these constants for control IDs,
+'     visibility toggles, and settings persistence.
+'   - SQL Engine: Uses SQL_* constants for placeholder expansion, recursive
+'     queries, iterative pipelines, enumeration, concatenation, and clustering.
+'   - Style Designer: Uses DESIGNER_* constants for every attribute, preview
+'     field, and gallery binding.
+'   - Graphviz Renderer: Uses layout constants, file extensions, and attribute
+'     keywords for DOT generation.
+'   - Exchange Subsystem: Uses SETTINGS_EXCHANGE_* constants for import/export.
+'   - Source/SVG Editors: Uses worksheet and column constants for mapping.
+'
+' CROSS-PLATFORM NOTES:
+'   - Fully cross-platform; constants are consumed by both Windows and macOS
+'     code paths.
+'   - macOS-specific constants (e.g., COLON) included where required.
+'
+' ERROR HANDLING:
+'   - No executable logic; constants are static and safe.
+'   - Serves as a compile-time contract for all dependent modules.
+'
+' RELATED WIKI PAGES:
+'   - Workbook Architecture & Sheet Layout
+'   - SQL Extensions & Field Naming
+'   - Style Designer Attribute Map
+'   - Ribbon Control Reference
+' =============================================================================
 
 Option Explicit
 

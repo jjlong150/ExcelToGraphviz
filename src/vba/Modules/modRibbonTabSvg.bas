@@ -1,8 +1,42 @@
 Attribute VB_Name = "modRibbonTabSvg"
-'@IgnoreModule ProcedureNotUsed
-' Copyright (c) 2015-2023 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabSvg
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "SVG" Ribbon Tab, providing controls for editing,
+'   post-processing, clipboard operations, and worksheet-level SVG utilities.
+'   Acts as the UI surface for managing SVG replacement strings, animation
+'   options, and post-processing directives.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for all SVG tab controls.
+'   - Persist post-processing settings (SETTINGS_POST_PROCESS_SVG).
+'   - Launch the SVG edit form for large replacement strings.
+'   - Support clipboard operations (Windows-only).
+'   - Provide help-panel navigation for SVG documentation.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Named Ranges: SETTINGS_POST_PROCESS_SVG, HelpURLSvgTab.
+'   - Worksheets: SvgSheet, SettingsSheet.
+'   - Modules: CellValueEditForm, clipboard helpers, status-bar helpers.
+'
+' CROSS-PLATFORM NOTES:
+'   - Clipboard operations are hidden on macOS.
+'   - SVG editing and post-processing logic behave consistently across platforms.
+'
+' ERROR HANDLING:
+'   - Localized checks ensure edit controls are only enabled for valid cells.
+'   - Callback signatures follow IRibbonControl requirements.
+'
+' RELATED WIKI PAGES:
+'   - SVG Worksheet
+'   - Output, Publishing & Post-Processing
+'   - Working with Replacement Strings
+' =============================================================================
 
 Option Explicit
 

@@ -1,8 +1,48 @@
 Attribute VB_Name = "modRibbonTabStyles"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule AssignmentNotUsed, UseMeaningfulName, UnassignedVariableUsage, ProcedureNotUsed, ParameterNotUsed, ImplicitByRefModifier
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabStyles
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Styles" Ribbon Tab, providing worksheet-level
+'   style preview actions, suffix configuration, and integration with the
+'   full Style Designer. Acts as the UI surface for managing and inspecting
+'   style definitions stored on the Styles worksheet.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for all Styles tab controls.
+'   - Trigger style previews (single row, all rows) and clear preview output.
+'   - Persist style suffix settings (open/close markers) via named ranges.
+'   - Enable "Edit Style" only when the active row represents a valid
+'     style object (Node / Edge / Subgraph).
+'   - Bridge to the Style Designer via RestoreStyleDesigner.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml (control IDs -> callbacks).
+'   - Named Ranges:
+'       StylesSuffixOpen, StylesSuffixClose,
+'       SETTINGS_STYLES_COL_OBJECT_TYPE, HelpURLStylesTab.
+'   - Worksheets: StylesSheet, SettingsSheet, DataSheet.
+'   - Modules: ClearStylesPreview, PreviewStyleForCurrentRow,
+'              GenerateStylesPreviewAll, RestoreStyleDesigner.
+'   - Global State: internalMyRibbon (via Ribbon invalidation in parent tabs).
+'
+' CROSS-PLATFORM NOTES:
+'   - Fully supported on Windows and macOS.
+'   - All actions rely on worksheet operations and hyperlink navigation.
+'
+' ERROR HANDLING:
+'   - Localized checks ensure "Edit Style" is only enabled for valid rows.
+'   - Callback signatures follow IRibbonControl requirements.
+'
+' RELATED WIKI PAGES:
+'   - Styles & the Style Gallery
+'   - Style Designer Ribbon Tab
+'   - Working with the Data Worksheet
+'   - Worksheet Architecture & Named Ranges
+' =============================================================================
 
 Option Explicit
 

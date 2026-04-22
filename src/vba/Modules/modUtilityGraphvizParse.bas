@@ -1,6 +1,60 @@
 Attribute VB_Name = "modUtilityGraphvizParse"
-'@IgnoreModule UseMeaningfulName
-'@Folder("Utility.Excel")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityGraphvizParse
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Graphviz DOT Parser
+'
+' ROLE:
+'   Robust parsing engine for Graphviz attribute strings, arrowhead sequences,
+'   and packmode specifications. Converts worksheet-supplied text into
+'   structured dictionaries and validated component arrays suitable for
+'   downstream graph-generation logic.
+'
+' RESPONSIBILITIES:
+'   - Attribute parsing:
+'       • ParseAttributeString: convert raw attribute text into key/value pairs
+'       • AddPipeDelimitersToAttributeString: delimiter-insertion engine that
+'         handles quoted values, HTML labels, nested <…> and <<…>> constructs,
+'         and mixed separators (; , space)
+'       • ParsePipedAttributeString: final dictionary construction with
+'         duplicate-key overwrite semantics
+'
+'   - Arrowhead parsing:
+'       • ParseGraphvizArrowheads: split concatenated arrowhead strings into
+'         up to three valid Graphviz arrowhead tokens
+'       • ParseArrowheadsRecursive: recursive backtracking parser to resolve
+'         ambiguous prefix matches
+'
+'   - Packmode parsing:
+'       • ParseGraphvizPackmode: validate and decompose Graphviz packmode
+'         strings into Mode, Flags, Suffix, and IsValid fields
+'       • Supports simple modes (node, cluster, graph, array) and extended
+'         array forms (array_ctblr8, array_u, etc.)
+'
+' ARCHITECTURAL NOTES:
+'   - Attribute parser is HTML-aware and preserves nested table/label content.
+'   - Arrowhead parser generates all valid modifier/base combinations and
+'     resolves sequences via recursive descent.
+'   - Packmode parser uses VBScript.RegExp for structural validation and
+'     flag-level correctness.
+'   - All routines are defensive and return empty/invalid structures rather
+'     than raising errors.
+'
+' VERSION NOTES:
+'   Introduced in Version 8.0.0
+'
+' USAGE:
+'   - Consumed by Exchange export for constructing JSON element, and by "styles"
+'     sheet re-hydration of format strings into "style designer" attribute
+'     settings.
+'
+' RELATED WIKI PAGES:
+'   - Attribute Parsing & HTML Label Handling
+'   - Arrowhead Syntax & Modifiers
+'   - Packmode Semantics (Graphviz)
+' =============================================================================
+
 Option Explicit
 
 Public Function ParseAttributeString(ByVal attributes As String) As Dictionary
@@ -79,7 +133,7 @@ Private Function AddPipeDelimitersToAttributeString(ByVal attributes As String) 
             ' === Attribute terminators ===
             If equalsFound Then
                 If inValue Then
-                    ' inside a normal quoted value or HTML ? keep the character
+                    ' inside a normal quoted value or HTML -> keep the character
                     pipedAttributes = pipedAttributes & oneChar
                 Else
                     ' end of previous attribute

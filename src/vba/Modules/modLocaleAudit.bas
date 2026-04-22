@@ -1,8 +1,48 @@
 Attribute VB_Name = "modLocaleAudit"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Locale")
-'@IgnoreModule ProcedureNotUsed, ModuleWithoutFolder
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modLocaleAudit
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Locale / Maintenance Utilities
+'
+' ROLE:
+'   Translation integrity and synchronization engine. Ensures all non-English
+'   locale worksheets remain structurally aligned with the master locale
+'   (en-US), preserving key order, detecting drift, and inserting missing
+'   translation rows.
+'
+' RESPONSIBILITIES:
+'   - Key auditing:
+'       • Compare locale worksheets against the master key list
+'       • Detect out-of-sync rows and report discrepancies
+'   - Synchronization:
+'       • Rebuild locale sheets to match master ordering
+'       • Insert missing keys with default English text
+'       • Flag untranslated rows for downstream filtering
+'   - Structural preservation:
+'       • Maintain row-to-row alignment across all locale sheets
+'       • Ensure control IDs, compact labels, verbose labels, screentips,
+'         and supertips remain in consistent column positions
+'
+' ARCHITECTURAL NOTES:
+'   - Uses Scripting.Dictionary for fast key-to-row mapping.
+'   - Operates directly on locale worksheets; no dependency on the runtime
+'     localization cache.
+'   - Designed for translator workflows and release-engineering validation.
+'   - Ensures that the i18n engine (modLocalize) always receives clean,
+'     predictable locale sheets.
+'
+' USAGE:
+'   - Run in VBA editor before shipping a new release to ensure all locales
+'     are aligned.
+'   - Used by translators to identify missing or outdated strings.
+'   - Supports automated QA workflows for localization completeness.
+'
+' RELATED WIKI PAGES:
+'   - Locale Worksheet Specification
+'   - Translation Workflow & Release Checklist
+'   - Localization Integrity Tools
+' =============================================================================
 
 Option Explicit
 

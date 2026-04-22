@@ -1,8 +1,35 @@
 Attribute VB_Name = "modRibbonTabLaunchpad"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule ParameterNotUsed, UseMeaningfulName, UnassignedVariableUsage, ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabLaunchpad
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Centralized visibility controller for all auxiliary worksheets (Help,
+'   Settings, Source, SQL, Console, SVG, Lists, Diagnostics, Styles, About,
+'   Exchange, Translations).
+'
+' RESPONSIBILITIES:
+'   - Toggle worksheet visibility via SETTINGS_* named ranges.
+'   - Activate appropriate sheet when shown; return to DataSheet when hidden.
+'   - Manage macOS-specific console availability.
+'   - Handle localization controls (language, verbose mode, translation sheets).
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Worksheets: DataSheet, SettingsSheet, SourceSheet, SqlSheet, etc.
+'
+' CROSS-PLATFORM NOTES:
+'   - macOS console availability depends on AppleScript version.
+'
+' ERROR HANDLING:
+'   - Localized; Ribbon hydration remains stable.
+'
+' RELATED WIKI PAGES:
+'   - Launchpad Tab
+'   - Worksheet Architecture
+' =============================================================================
 
 Option Explicit
 

@@ -1,8 +1,59 @@
 Attribute VB_Name = "modExchangeExport"
-'@IgnoreModule UseMeaningfulName
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Exchange")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modExchangeExport
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:    Utility / Exchange Subsystem
+'
+' ROLE:
+'   High-fidelity JSON export engine for the Relationship Visualizer. Converts
+'   workbook state — data, styles, SQL, SVG, worksheet layouts, and settings —
+'   into a structured, portable JSON document suitable for archival, migration,
+'   automation, or cross-machine synchronization.
+'
+' RESPONSIBILITIES:
+'   - Serialize worksheet content:
+'       • data -> row-level graph entities
+'       • styles -> style definitions + view switches
+'       • sql -> SQL statements, datasource paths, status fields
+'       • svg -> find/replace directives
+'   - Serialize workbook configuration:
+'       • Graphviz options (engine, splines, rankdir, transparency, etc.)
+'       • Style Designer suffixes, format-inclusion rules, extra attributes
+'       • Console routing (status bar, message box, console worksheet)
+'       • Worksheet visibility toggles and column-visibility settings
+'       • Language, layouts, and metadata
+'   - Generate a complete JSON document containing:
+'       • metadata section (user, OS, Excel version, timestamp)
+'       • content section (worksheet rows)
+'       • settings section (graph, styles, console, debug, language)
+'       • layouts section (row/column mappings for all sheets)
+'
+' ARCHITECTURAL NOTES:
+'   - Uses late-bound Scripting.Dictionary for cross-version compatibility.
+'   - macOS: Uses AppleScriptTask for Save-As dialogs and UTF-8 file writes.
+'   - Windows: Uses native SaveFileDialog and BOM-free UTF-8 writer.
+'   - Silent Mode: Honors message-routing settings; suppresses overwrite prompts
+'     when message boxes are disabled.
+'   - Deep integration with:
+'       • modDataTypes (settings, dataRow, StylesRow, sqlRow, svgRow)
+'       • modUtilityJson (ConvertToJson)
+'       • modUtilityWorksheet (layout discovery)
+'       • modUtilityFileSystem (file existence, UTF-8 writing)
+'
+' USAGE:
+'   - Invoked by the Exchange ribbon tab.
+'   - Produces a fully self-describing JSON file suitable for:
+'       • backup/restore
+'       • version control
+'       • automated graph generation pipelines
+'       • cross-machine migration
+'
+' RELATED WIKI PAGES:
+'   - Exchange Format Specification
+'   - Worksheet Layout Encoding
+'   - JSON Import/Export Architecture
+' =============================================================================
 
 Option Explicit
 

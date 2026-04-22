@@ -1,7 +1,41 @@
 Attribute VB_Name = "modUtilityExcelDialogs"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Excel")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcelDialogs
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Excel Interop
+'
+' ROLE:
+'   Cross-platform directory-selection and Save-As filename utilities.
+'   Provides a unified abstraction over macOS AppleScriptTask folder pickers
+'   and Windows FileDialog APIs, ensuring consistent behavior across all
+'   workflows that require directory or file-output selection.
+'
+' RESPONSIBILITIES:
+'   - Directory selection:
+'       • ChooseDirectory: macOS folder picker via AppleScriptTask
+'         or Windows FileDialog(msoFileDialogFolderPicker)
+'       • Normalize initial directory and handle user cancellation
+'   - Save-As filename selection:
+'       • GetSaveAsFilename: wrapper over Application.GetSaveAsFilename
+'         with project-specific defaults and trimming
+'
+' ARCHITECTURAL NOTES:
+'   - Fully cross-platform: AppleScriptTask on macOS, FileDialog on Windows.
+'   - Defensive handling of missing folder-picker support (older Office builds).
+'   - Integrates with Settings, SQL, SVG, Source, and export workflows.
+'   - Emits localized messages via GetMessage/GetLabel when folder pickers
+'     are unavailable.
+'
+' USAGE:
+'   - Used by Settings sheet, SQL engine, SVG export, and any workflow
+'     requiring user-selected directories or output filenames.
+'
+' RELATED WIKI PAGES:
+'   - Directory Selection (Windows/macOS)
+'   - File Output & Save-As Conventions
+'   - Cross-Platform UI Interop
+' =============================================================================
 
 Option Explicit
 

@@ -1,8 +1,57 @@
 Attribute VB_Name = "modRibbonTabStyleDesigner"
-' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule IntegerDataType, AssignmentNotUsed, UseMeaningfulName, UnassignedVariableUsage, ProcedureNotUsed, ParameterNotUsed, ImplicitByRefModifier
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabStyleDesigner
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Style Designer" Ribbon Tab, providing dynamic
+'   color galleries, font previews, shape/edge controls, gradient settings,
+'   and real-time style preview rendering. Acts as the UI front end to the
+'   Style Designer object model and preview engine.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for all Style Designer controls.
+'   - Manage color scheme selection (X11, SVG, Brewer) with lazy-loaded
+'     arrays and image caching for high-volume gallery callbacks.
+'   - Generate and cache color thumbnails and font preview images
+'     (Windows: ChartObjects/WIA; macOS: AppleScript bridge).
+'   - Control context-sensitive visibility based on DESIGNER_MODE
+'     (Node / Edge / Cluster).
+'   - Persist style attributes via DESIGNER_* named ranges.
+'   - Trigger RenderPreview for real-time visual updates.
+'   - Support Graphviz-driven font preview rendering via temporary DOT files.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml (control IDs -> callbacks).
+'   - Named Ranges:
+'       DESIGNER_COLOR_SCHEME, DESIGNER_FONT_COLOR, DESIGNER_FILL_COLOR,
+'       DESIGNER_BORDER_COLOR, DESIGNER_EDGE_COLOR_1/2/3,
+'       DESIGNER_EDGE_LABEL_FONT_COLOR, DESIGNER_FONT_NAME,
+'       DESIGNER_FONT_SIZE, DESIGNER_MODE, etc.
+'   - Worksheets: StyleDesignerSheet, HelpColorsSheet, ListsSheet.
+'   - Modules: RenderPreview engine, StyleDesignerSetting helpers,
+'              color/font image generators, Graphviz.cls for preview images.
+'   - Global State: internalMyRibbon (via InvalidateRibbonControl).
+'
+' CROSS-PLATFORM NOTES:
+'   - Windows: uses WIA/ChartObjects for color and font thumbnails.
+'   - macOS: uses AppleScript for color picker and font rendering; visibility
+'     of controls depends on scriptVersion.
+'   - Performance optimizations (kolorScheme caching, lazy loading) are
+'     essential due to thousands of gallery callbacks.
+'
+' ERROR HANDLING:
+'   - Local error handling protects Ribbon hydration.
+'   - Uses OptimizeCode_Begin/End to reduce flicker during gallery refresh.
+'
+' RELATED WIKI PAGES:
+'   - Style Designer Ribbon Tab
+'   - Styles & the Style Gallery
+'   - Output, Publishing & Post-Processing
+'   - Working with the Data Worksheet
+' =============================================================================
 
 Option Explicit
 
@@ -37,10 +86,10 @@ Private fontImageCache As Dictionary
 Private excludedFonts As Dictionary
 Private fontExclusionsInitialized As Boolean
 
-' There are seven color galleries on the Style Designer ribbon tab. X11 is Graphviz?s default
+' There are seven color galleries on the Style Designer ribbon tab. X11 is Graphviz's default
 ' color scheme and includes 656 colors. For each color, two callbacks are triggered:
 ' one to retrieve the label (shown on hover), and one to retrieve or generate the image.
-' This results in 656 ? 2 = 1,312 callbacks per gallery, or 9,184 total callbacks when
+' This results in 656 * 2 = 1,312 callbacks per gallery, or 9,184 total callbacks when
 ' all galleries are loaded with the ribbon. Saving even a few milliseconds per callback
 ' yields noticeable performance improvements.
 

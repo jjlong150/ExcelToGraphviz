@@ -1,0 +1,248 @@
+{
+  "repo_notes": [
+    { "content": "The project is an Excel-based wrapper for Graphviz. Every documentation page must respect the distinction between Excel (the UI/Data layer) and Graphviz (the rendering engine)." },
+    { "content": "Technical Consistency: Always refer to the primary data entry points as 'Items' and 'Related Items' rather than 'From' and 'To' to match the worksheet headers." },
+    { "content": "Cross-Platform Logic: When documenting any code that triggers a shell command or file I/O, mention the conditional logic for Windows (Shell/CreatePipe) vs. macOS (AppleScript bridge)." },
+    { "content": "Module Mapping: Every functional feature should be linked to its corresponding VBA module (e.g., modRibbonTab*.bas for UI, modCreateGraph.bas for parsing, Graphviz.cls for execution)." },
+    { "content": "State Management: Remind that the tool relies on a 'Settings' worksheet for persistent state and a global 'internalMyRibbon' variable for UI state." },
+    { "content": "Error Handling Philosophy: Emphasize that the tool uses 'ValidateData' and local error handling to prevent VBA global state loss, which would break the Ribbon reference." },
+    { "content": "Graphviz Syntax: When discussing attributes (color, shape, etc.), ensure they align with the official DOT language specifications." },
+    { "content": "Community Feedback: Mention that community feedback and feature requests are captured via GitHub issues, and via Giscus-powered comments on the official website blog pages." },
+    { "content": "Version Awareness: Reference v8.0+ enhancements including Style Designer galleries, Graphviz.cls refactor, SQL connection pooling, unlimited CLUSTERn, SVG editor form, silent mode, and new ribbon tabs (Info, Console, Diagnostics, Styles)." },
+    { "content": "Common Pitfalls & Best Practices: Include Graphviz node ID rules (must start with letter or underscore, quote digits), layout reproducibility tips (start=regular), SVG image embedding via base64 in post-processor, and named-range contract for safe sheet modifications." }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "High-level entry point outlining the project's mission, key features, and architecture.",
+      "page_notes": [
+        { "content": "Core Mission: Transforms structured Excel data (Items and Related Items) into professional Graphviz-rendered diagrams with zero DOT coding required." },
+        { "content": "Key Capabilities: Ribbon-based Style Designer, SQL-driven graph generation, dynamic AutoDraw reactivity, and multi-format publishing." },
+        { "content": "Architectural Flow: Data Entry (Worksheet) → Parsing (modCreateGraph.bas) → DOT generation → Graphviz rendering → Image display in Excel." }
+      ]
+    },
+    {
+      "title": "Getting Started & Installation",
+      "purpose": "Onboarding guide covering setup, dependencies, and cross-platform compatibility.",
+      "parent": "Overview",
+      "page_notes": [
+        { "content": "Graphviz Dependency: Install Graphviz and ensure the dot executable is in the system PATH." },
+        { "content": "Macro Security: Unblock the file in Windows properties and enable macros in Excel. Review public source on GitHub before enabling." },
+        { "content": "macOS Specifics: Uses AppleScript bridge for shell execution; SQL features are Windows-only due to ADO requirements." }
+      ]
+    },
+    {
+      "title": "Core Concepts & Terminology",
+      "purpose": "Foundational glossary of graph terms and project-specific concepts.",
+      "parent": "Overview",
+      "page_notes": [
+        { "content": "Item vs Related Item: Excel worksheet terms defining the endpoints of edges." },
+        { "content": "Subgraphs vs Clusters: Both group nodes; Clusters (prefixed cluster_) render with a visible bounding box in Graphviz." }
+      ]
+    },
+    {
+      "title": "Architecture & Data Flow",
+      "purpose": "High-level technical map of the system's layers and transformation pipeline.",
+      "page_notes": [
+        { "content": "Transformation Pipeline: Worksheet data → modCreateGraph.bas parsing → DOT file → Graphviz executable → output image (or worksheet)." },
+        { "content": "Multi-Tiered Layers: Excel UI/Data, VBA Logic (modules + classes), and External Graphviz engine." }
+      ]
+    },
+    {
+      "title": "VBA Class Hierarchy & Key Objects",
+      "purpose": "Overview of the object-oriented core and data structures.",
+      "parent": "Architecture & Data Flow",
+      "page_notes": [
+        { "content": "Key Classes: Graphviz.cls (execution), Cluster.cls, Style object model, and dataRow UDT as worksheet-to-DOT intermediary." },
+        { "content": "Integration: Classes work with named ranges and modCreateGraph.bas while protecting Ribbon state via local error handling." }
+      ]
+    },
+    {
+      "title": "Graph Generation Pipeline",
+      "purpose": "End-to-end lifecycle from worksheet parsing to rendering.",
+      "parent": "Architecture & Data Flow",
+      "page_notes": [
+        { "content": "Row Classification: modCreateGraph.bas handles TYPE_NODE, TYPE_EDGE, and TYPE_SUBGRAPH rows." },
+        { "content": "File Handshake: Writes DOT string to temp file and invokes Graphviz via platform-specific execution." }
+      ]
+    },
+    {
+      "title": "Graphviz Class & Process Execution",
+      "purpose": "Low-level execution logic for communicating with Graphviz binaries.",
+      "parent": "Architecture & Data Flow",
+      "page_notes": [
+        { "content": "Windows Path: Uses modExecuteAndCapture.bas with CreatePipe/CreateProcessA and PeekNamedPipe/ReadFile for deadlock-free stdout/stderr capture." },
+        { "content": "macOS Path: AppleScript bridge. Graphviz.cls refactor centralizes cross-platform logic." }
+      ]
+    },
+    {
+      "title": "Worksheet Architecture & Named Ranges",
+      "purpose": "Guide to sheet structure and the named-range contract.",
+      "parent": "Architecture & Data Flow",
+      "page_notes": [
+        { "content": "Named Range API: Over 700 named ranges act as a stable contract, allowing UI changes without breaking VBA code." },
+        { "content": "Maintenance Note: Avoid hard-coded cell addresses; always use named ranges." }
+      ]
+    },
+    {
+      "title": "Constants, Data Types & Utility Modules",
+      "purpose": "Foundational building blocks and utility organization.",
+      "parent": "Architecture & Data Flow",
+      "page_notes": [
+        { "content": "Constant Prefixes: SETTINGS_ and DESIGNER_ map directly to named ranges." },
+        { "content": "Utilities: String helpers, picture management, OptimizeCode_Begin/End, and ADO connection pooling." }
+      ]
+    },
+    {
+      "title": "User Interface: Ribbon Tabs",
+      "purpose": "Overview of custom Ribbon architecture and callback system.",
+      "page_notes": [
+        { "content": "Callback Model: Dedicated modules (e.g., modRibbonTabGraphviz.bas) bridge UI to logic." },
+        { "content": "State Management: Global internalMyRibbon + InvalidateRibbonControl pattern. Includes newer tabs: Info, Console, Diagnostics, Styles." }
+      ]
+    },
+    {
+      "title": "Graphviz Ribbon Tab",
+      "purpose": "Guide to layout engines and publishing functions.",
+      "parent": "User Interface: Ribbon Tabs",
+      "page_notes": [
+        { "content": "Layout Engines: dot, neato, fdp, sfdp, twopi, circo, osage, patchwork." },
+        { "content": "Publish Group: graphToWorksheet, graphToFile, graphAllViewsToFile." }
+      ]
+    },
+    {
+      "title": "Style Designer Ribbon Tab",
+      "purpose": "Technical guide to the Style Designer and gallery system.",
+      "parent": "User Interface: Ribbon Tabs",
+      "page_notes": [
+        { "content": "Gallery Previews: Uses ChartObjects for color swatches and Graphviz for font previews (v8.0+ enhancements)." },
+        { "content": "RestoreStyleDesigner: Re-hydrates ribbon settings when a style is selected." }
+      ]
+    },
+    {
+      "title": "SQL Ribbon Tab",
+      "purpose": "Interface and floating action button framework.",
+      "parent": "User Interface: Ribbon Tabs",
+      "page_notes": [
+        { "content": "Filter System: Dynamic dropdowns via filterValues Dictionary." },
+        { "content": "Floating Buttons: UpdateFloatingButtonsOnSheet enables on-sheet SQL execution (Windows-only)." }
+      ]
+    },
+    {
+      "title": "Working with the Data Worksheet",
+      "purpose": "Guide to data entry and event-driven behavior.",
+      "page_notes": [
+        { "content": "AutoDraw Reactivity: Worksheet_Change triggers live graph updates." },
+        { "content": "SelectionChange: Updates ribbon context and style dropdowns. Uses ValidateData for safe error handling." }
+      ]
+    },
+    {
+      "title": "Defining Nodes & Edges",
+      "purpose": "Node and Edge data models with advanced syntax.",
+      "parent": "Working with the Data Worksheet",
+      "page_notes": [
+        { "content": "Advanced Support: Port syntax (node:port), HTML-like labels in angle brackets, and GetDataRow structure." }
+      ]
+    },
+    {
+      "title": "Subgraphs & Clustering",
+      "purpose": "Hierarchical grouping and stack-based parsing.",
+      "parent": "Working with the Data Worksheet",
+      "page_notes": [
+        { "content": "Parsing Logic: Stack-based indentation in ProcessSubgraphOpen (modCreateGraph.bas)." },
+        { "content": "SQL Clustering: Unlimited CLUSTERn fields and {label} placeholder support (v10.3+)." }
+      ]
+    },
+    {
+      "title": "Styles & the Style Gallery",
+      "purpose": "Style object model, caching, and preview lifecycle.",
+      "parent": "Working with the Data Worksheet",
+      "page_notes": [
+        { "content": "Preview Mechanics: WIA for sizing on Windows; gallery-based previews with auto-refresh." }
+      ]
+    },
+    {
+      "title": "Views: Filtering Graph Content",
+      "purpose": "View-based filtering and batch export.",
+      "parent": "Working with the Data Worksheet",
+      "page_notes": [
+        { "content": "Batch Export: graphAllViewsToFile iterates defined View columns for mass generation." }
+      ]
+    },
+    {
+      "title": "SQL Data Integration",
+      "purpose": "Windows-only ADO-based external data connectivity.",
+      "page_notes": [
+        { "content": "Windows-Only: SQL/ADO unavailable on macOS." },
+        { "content": "Supported Sources: External Excel workbooks and Access databases." }
+      ]
+    },
+    {
+      "title": "SQL Engine & Connection Pooling",
+      "purpose": "ADO execution engine details.",
+      "parent": "SQL Data Integration",
+      "page_notes": [
+        { "content": "Pooling: modUtilityADODBConnectionPool.bas maintains handles for performance." },
+        { "content": "Late-Binding: Uses modUtilityADODBConstants.bas to avoid explicit library references." }
+      ]
+    },
+    {
+      "title": "Advanced SQL Patterns",
+      "purpose": "Specialized query modes and recent enhancements.",
+      "parent": "SQL Data Integration",
+      "page_notes": [
+        { "content": "RecursiveSearch: Anchor/recursive member pattern for tree traversal." },
+        { "content": "Enhancements: Placeholders, concatenation/iterative queries, CREATE EDGES/RANK, and multi-level CLUSTERn." }
+      ]
+    },
+    {
+      "title": "Output, Publishing & Post-Processing",
+      "purpose": "Rendering, publishing, and SVG manipulation.",
+      "page_notes": [
+        { "content": "SVG Post-Processor: XML find/replace and JS injection for interactivity and base64 image embedding (Excel reliability)." },
+        { "content": "Formats: EMF for Office integration; SVG editor form available for manual tweaks." }
+      ]
+    },
+    {
+      "title": "Event-Driven Architecture & AutoDraw",
+      "purpose": "Worksheet events and real-time reactivity.",
+      "parent": "Working with the Data Worksheet",
+      "page_notes": [
+        { "content": "Lifecycle: Worksheet_Change and Worksheet_SelectionChange drive AutoDraw while protecting internalMyRibbon via ValidateData." }
+      ]
+    },
+    {
+      "title": "Troubleshooting, Best Practices & Graphviz Quirks",
+      "purpose": "Practical guidance for common issues.",
+      "parent": "Settings & Diagnostics",
+      "page_notes": [
+        { "content": "Node IDs: Start with letter/underscore; quote digits. Use start=regular for reproducible layouts in neato/fdp." },
+        { "content": "Diagnostics: Worksheet tests OS/Excel/Graphviz versions; check Console for stdout/stderr." }
+      ]
+    },
+    {
+      "title": "Settings & Diagnostics",
+      "purpose": "Configuration, health checks, and system state.",
+      "page_notes": [
+        { "content": "GetSettings UDT: Cached repository for all configuration values." },
+        { "content": "Diagnostics Worksheet: Automated version and environment tests; supports silent mode." }
+      ]
+    },
+    {
+      "title": "Data Exchange (JSON Import/Export)",
+      "purpose": "E2GXF format for portability and version control.",
+      "page_notes": [
+        { "content": "Use Cases: Git-friendly templates and sharing via text files." },
+        { "content": "Implementation: modExchangeImport.bas handles carriage-return kludge for multi-line cells." }
+      ]
+    },
+    {
+      "title": "Web Presence & Community",
+      "purpose": "Public ecosystem and contribution channels.",
+      "page_notes": [
+        { "content": "Site: VitePress on GitHub Pages at exceltographviz.com with custom domain." },
+        { "content": "Feedback: GitHub issues and Giscus comments on blog posts. Public source encourages community contributions." }
+      ]
+    }
+  ]
+}

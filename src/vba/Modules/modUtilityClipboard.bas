@@ -1,8 +1,40 @@
 Attribute VB_Name = "modUtilityClipboard"
-' Copyright (c) 2015-2023 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Clipboard")
-'@IgnoreModule UseMeaningfulName, VariableNotUsed, AssignmentNotUsed, ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityClipboard
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Clipboard
+'
+' ROLE:
+'   Windows-only clipboard subsystem providing safe, late-bound access to the
+'   Win32 API for copying text to the system clipboard. Supports Ribbon-level
+'   "Copy to Clipboard" actions across SQL, SVG, Source, and Styles workflows.
+'
+' RESPONSIBILITIES:
+'   - Expose a stable, late-bound API wrapper for GlobalAlloc, GlobalLock,
+'     SetClipboardData, and related Win32 functions.
+'   - Provide ClipBoard_SetData for safe text transfer to the Windows clipboard.
+'   - Provide Clipboard_Clear for clearing clipboard contents with defensive
+'     error handling.
+'   - Abstract away 32-bit vs 64-bit pointer differences (VBA7 vs legacy VBA).
+'
+' ARCHITECTURAL NOTES:
+'   - Windows-only subsystem; excluded on macOS via conditional compilation.
+'   - Ribbon controls automatically hide clipboard buttons on macOS.
+'   - Defensive unlock/close logic prevents memory leaks and clipboard locks.
+'   - Integrated with SQL, SVG, Source, and Styles tabs for copy operations.
+'
+' VERSION NOTES:
+'   - v8.0.0: Removed reliance on Internet Explorer ActiveX.
+'
+' USAGE:
+'   - Invoked by Ribbon "Copy" buttons across multiple tabs.
+'   - Used by editor pop-ups and worksheet-driven copy actions.
+'
+' RELATED WIKI PAGES:
+'   - Clipboard Operations (Windows)
+'   - Ribbon Copy Actions (SQL, SVG, Source)
+' =============================================================================
 
 Option Explicit
 

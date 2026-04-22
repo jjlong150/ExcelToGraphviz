@@ -1,8 +1,36 @@
 Attribute VB_Name = "modRibbonTabExchange"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
-'@IgnoreModule ProcedureNotUsed
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabExchange
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Exchange" Ribbon Tab, coordinating JSON import/
+'   export and granular include/exclude settings for Data, Styles, SQL, SVG,
+'   Metadata, Layouts, and Graph Options.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for Exchange tab controls.
+'   - Manage include/exclude toggles across multiple worksheet categories.
+'   - Persist import/export settings via SETTINGS_* named ranges.
+'   - Support Append/Replace import modes with Ribbon invalidation.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Named Ranges: SETTINGS_TOOLS_EXCHANGE_*, SETTINGS_EXCHANGE_*.
+'   - Modules: ImportData, ExportData, SettingsSheet utilities.
+'
+' CROSS-PLATFORM NOTES:
+'   - Fully supported on Windows and macOS.
+'
+' ERROR HANDLING:
+'   - Localized; Ribbon hydration remains stable.
+'
+' RELATED WIKI PAGES:
+'   - JSON Import/Export
+'   - Data Exchange Architecture
+' =============================================================================
 
 Option Explicit
 

@@ -1,17 +1,50 @@
 Attribute VB_Name = "modMessages"
-Option Explicit
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modMessages
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Core Infrastructure / Diagnostics
+'
+' ROLE:
+'   Unified error-messaging pipeline for the Relationship Visualizer. Routes
+'   diagnostic text to Console, Status Bar, and Message Box channels while
+'   honoring user-configured toggles, silent-mode automation, and severity
+'   semantics.
+'
+' RESPONSIBILITIES:
+'   - Multi-channel dispatch:
+'       • Console worksheet logging (timestamped, normalized)
+'       • Status bar notifications (non-blocking)
+'       • Message box alerts (optional title + button set)
+'   - Behavior gating:
+'       • Reads SETTINGS_ERROR_* toggles to determine active channels
+'       • Supports silent automation workflows (no pop-ups)
+'   - Severity framework:
+'       • Extensible enum (Info, Warning, Error, Critical)
+'       • Consistent labeling across all output surfaces
+'   - Message normalization:
+'       • Collapses CR/LF/tab variants
+'       • Ensures clean, single-line console output
+'
+' ARCHITECTURAL NOTES:
+'   - Designed for cross-module use: rendering pipeline, import/export,
+'     SQL engine, style designer, and localization subsystems.
+'   - MessageBox title defaults to a localized product label when omitted.
+'   - Console output uses locale-aware timestamps for auditability.
+'   - Fully compatible with silent-mode batch operations.
+'
+' USAGE:
+'   - EmitMessage: Standard reporting with optional title/severity/buttons.
+'   - EmitMessageSilent: Background operations without UI interruption.
+'   - TestEmitMessage: Developer harness for verifying channel behavior.
+'
+' RELATED WIKI PAGES:
+'   - Error Routing Architecture
+'   - Console Worksheet Specification
+'   - Silent Mode & Automation Guidelines
+' =============================================================================
 
-' ============================================================
-' Error Reporting Module
-' Centralized pipeline for console, status bar, and message box
-' Includes:
-'   - Optional title
-'   - Optional buttons
-'   - Silent mode
-'   - Severity enum (future-proofing)
-'   - Settings gatekeeper
-'   - Test harness
-' ============================================================
+Option Explicit
 
 ' -----------------------------
 ' Severity Levels (extensible)

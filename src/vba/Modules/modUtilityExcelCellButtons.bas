@@ -1,5 +1,52 @@
 Attribute VB_Name = "modUtilityExcelCellButtons"
-' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityExcelCellButtons
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Floating Buttons Engine
+'
+' ROLE:
+'   Dynamic floating-button engine for worksheet-level actions. Creates,
+'   positions, validates, and removes shape-based action buttons tied to
+'   row-specific operations, enabling lightweight, context-aware UI elements
+'   without requiring Ribbon customization.
+'
+' RESPONSIBILITIES:
+'   - Button creation:
+'       • CreateOneFloatingButton: render a rounded-rectangle shape with
+'         icon glyph, styling, and assigned macro
+'       • Compute per-cell offsets for precise placement
+'       • Auto-delete existing buttons with the same name
+'   - Button orchestration:
+'       • UpdateFloatingButtonsOnSheet: evaluate ButtonConfig arrays,
+'         validate per-row conditions, and create buttons when appropriate
+'       • Support optional validation functions via Application.Run
+'   - Button lifecycle:
+'       • GetButtonNamesFromConfigs: extract button names for cleanup
+'       • RemoveFloatingButtons: delete all shapes matching supplied names
+'
+' ARCHITECTURAL NOTES:
+'   - Uses Segoe UI Symbol glyphs for consistent, cross-platform iconography.
+'   - Shapes are anchored with xlMoveAndSize to follow row/column resizing.
+'   - Validation functions allow row-aware logic without embedding rules
+'     directly in the UI layer.
+'   - Fully defensive: all creation and validation paths trap errors to
+'     prevent UI failures from interrupting worksheet workflows.
+'
+' VERSION NOTES:
+'   Introduced in Version 10.1.0
+'
+' USAGE:
+'   - Ideal for row-level actions such as "Edit", "Run", "Refresh", "Delete",
+'     or workflow-specific triggers.
+'   - Typically called from Worksheet_SelectionChange to update buttons
+'     dynamically as the user navigates rows.
+'
+' RELATED WIKI PAGES:
+'   - Worksheet UI Enhancements
+'   - Shape-Based Action Buttons
+'   - Row-Level Interaction Patterns
+' =============================================================================
 
 Option Explicit
 

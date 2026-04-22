@@ -1,17 +1,104 @@
 Attribute VB_Name = "modWorksheetSQLClusters"
-' Copyright (c) 2026 Jeffrey J. Long. All rights reserved
-' New module for multi-level clustering support in Relationship Visualizer.
-
-'@Folder("Relationship Visualizer.Sheets.SQL")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modWorksheetSQLClusters
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Relationship Visualizer / Sheets / SQL
+'
+' ROLE:
+'   The flagship engine for N-level hierarchical cluster nesting. Performs
+'   multi-level cluster discovery, sorting, scope management, and token-driven
+'   metadata injection for deeply nested subgraph structures.
+'
+' RESPONSIBILITIES:
+'   - Multi-level detection:
+'       • DetectMultiLevel and DetectMaxLevels probe CLUSTER1…CLUSTERn fields
+'         and determine the active hierarchy depth.
+'
+'   - Hierarchy orchestration:
+'       • ProcessMultiLevelRecordset performs delta-driven open/close logic,
+'         maintains per-level counters, and ensures structural continuity.
+'
+'   - Cluster emission:
+'       • EmitClusterOpen / EmitClusterClose write Graphviz subgraph braces,
+'         labels, styles, attributes, and tooltips with suffix-aware formatting.
+'
+'   - Token substitution:
+'       • ProcessClusterProperty applies {cluster}, {subcluster}, and {level}
+'         placeholders for dynamic naming and styling.
+'
+'   - Data emission:
+'       • EmitRows / EmitOneRow map SQL records into the Data worksheet while
+'         filtering structural fields and applying enumeration and wrapping rules.
+'
+' ARCHITECTURAL NOTES:
+'   - Built as an extension of the SQL subsystem's modern clustering model.
+'   - Uses ADO recordset sorting to guarantee stable hierarchical ordering.
+'   - Integrates with sqlContext, dataWorksheet, and sqlFieldName UDTs.
+'   - Backward-compatible with legacy CLUSTER/SUBCLUSTER logic via dispatcher.
+'
+' VERSION NOTES:
+'   - v10.3.0 (Apr 3, 2026):
+'       • Introduced full N-level clustering (CLUSTER1, CLUSTER2, …)
+'       • Added per-level label/style/attribute/tooltip fields
+'       • Added {label} placeholder support for cluster label formatting
+'       • Added revised format-string parsing for HTML-like syntax
+'
+' USAGE:
+'   - Automatically invoked by RunSQL when CLUSTER1 is detected.
+'   - Enables unlimited hierarchical depth with zero configuration.
+'
+' RELATED WIKI PAGES:
+'   - SQL Engine & Multi-Level Clustering
+'   - Hierarchical Graph Construction
+'   - Token-Driven Label and Style Formatting
+' =============================================================================
 
 Option Explicit
 
-' Detect if multi-level clustering is present (prefers over old "CLUSTER")
+' ==========================================================================
+' FUNCTION: DetectMultiLevel
+' PURPOSE:
+'   Determines if the SQL results require the modern N-level clustering engine.
+'   Detect if multi-level clustering is present (prefers over old "CLUSTER").
+'
+' TECHNICAL WORKFLOW:
+'   1. SIGNATURE CHECK: Scans the recordset for the specific field 'CLUSTER1'.
+'   2. PRECEDENCE LOGIC: If 'CLUSTER1' is found, this function returns True,
+'      signaling the 'MapResultsToDataWorksheet' dispatcher to prioritize
+'      Multi-Level processing over the legacy 'CLUSTER/SUBCLUSTER' logic.
+'
+' USAGE:
+'   - The primary decision gate for modern hierarchical rendering.
+'   - Allows for backward compatibility while enabling infinite nesting.
+' ==========================================================================
 Public Function DetectMultiLevel(ByVal rs As Object, prefix As String) As Boolean
     DetectMultiLevel = HasField(rs, prefix & "1")
 End Function
 
-' Main entry point: Process recordset with multi-level clusters
+' ==========================================================================
+' PROCEDURE: ProcessMultiLevelRecordset
+' PURPOSE:
+'   The flagship engine for generating deeply nested graph hierarchies.
+'
+' TECHNICAL WORKFLOW:
+'   1. LEVEL DISCOVERY: Calls 'DetectMaxLevels' to identify the depth of the
+'      hierarchy (e.g., discovering CLUSTER1 through CLUSTER5).
+'   2. IN-MEMORY SORTING: Dynamically builds an ADO Sort string to group
+'      records by level (ASC) to ensure structural continuity during emission.
+'   3. STATE TRACKING: Initializes parallel arrays to monitor 'currentClusters'
+'      and 'clusterCounters' for every depth level.
+'   4. DELTA ANALYSIS: For every record, 'FindChangeLevel' identifies the
+'      exact tier where the hierarchy shifts (e.g., moving from Dept A to Dept B).
+'   5. SYMMETRICAL EMISSION:
+'      - Closes all "inner" levels that have ended.
+'      - Opens "outer" levels that have just begun, maintaining both
+'        Absolute and Relative (per-level) cluster counts.
+'   6. ATOMIC MAPPING: Calls 'EmitRows' to populate the node/edge data
+'      within the currently active nested scope.
+'   7. FINAL SEALING: Closes all remaining open levels after the recordset
+'      is exhausted to ensure valid DOT syntax.
+' ==========================================================================
 Public Sub ProcessMultiLevelRecordset( _
     ByRef ctx As sqlContext, _
     ByVal rs As Object, _
@@ -134,6 +221,27 @@ SortFailed:
 
 End Sub
 
+' ==========================================================================
+' FUNCTION: DetectMaxLevels
+' PURPOSE:
+'   Determines the total number of sequential clustering tiers in the data.
+'
+' TECHNICAL WORKFLOW:
+'   1. LINEAR PROBING: Starts at index 1 and incrementaly checks for the
+'      existence of fields matching the pattern [Prefix] + [Index]
+'      (e.g., CLUSTER1, CLUSTER2).
+'   2. GOVERNOR COMPLIANCE: Respects the 'levelLimit' setting to ensure
+'      the probe does not exceed user-defined or system boundaries.
+'   3. TERMINATION: Stops as soon as a break in the sequence is found
+'      (e.g., if CLUSTER1 and CLUSTER2 exist, but CLUSTER3 is missing).
+'   4. COORDINATE CALCULATION: Returns the final successful index,
+'      providing the 'maxLevels' value used to drive the clustering loop.
+'
+' USAGE:
+'   - Called at the start of 'ProcessMultiLevelRecordset'.
+'   - Enables "Zero-Configuration" hierarchies—just add columns to your
+'     SQL and the engine adapts.
+' ==========================================================================
 Private Function DetectMaxLevels(ByVal rs As Object, prefix As String, levelLimit As Long) As Long
     Dim i As Long
     i = 1
@@ -143,6 +251,25 @@ Private Function DetectMaxLevels(ByVal rs As Object, prefix As String, levelLimi
     DetectMaxLevels = i - 1
 End Function
 
+' ==========================================================================
+' FUNCTION: FindChangeLevel
+' PURPOSE:
+'   Compares the current row's hierarchy against the previous row to
+'   identify the highest-level grouping shift.
+'
+' TECHNICAL WORKFLOW:
+'   1. LINEAR COMPARISON: Iterates through the cluster levels (1 to maxLevels)
+'      comparing the cached 'current' array with the 'thisOne' array.
+'   2. BREAKPOINT IDENTIFICATION: Returns the index of the first level
+'      where the values differ (e.g., if Level 1 is the same but Level 2
+'      changes, it returns 2).
+'   3. NO-CHANGE SIGNAL: If all levels match exactly, it returns 'maxLevels + 1',
+'      signaling the engine to continue emitting nodes within the existing scope.
+'
+' USAGE:
+'   - The core decision logic for 'ProcessMultiLevelRecordset'.
+'   - Determines the "Symmetry Point" for closing and opening Graphviz braces.
+' ==========================================================================
 Private Function FindChangeLevel(ByRef current() As String, ByRef thisOne() As String, ByVal maxLevels As Long) As Long
     Dim i As Long
     For i = 1 To maxLevels
@@ -154,6 +281,24 @@ Private Function FindChangeLevel(ByRef current() As String, ByRef thisOne() As S
     FindChangeLevel = maxLevels + 1  ' No change
 End Function
 
+' ==========================================================================
+' PROCEDURE: EmitClusterOpen (Multi-Level)
+' PURPOSE:
+'   Writes the structural 'Open' row for a specific tier in an N-level hierarchy.
+'
+' TECHNICAL WORKFLOW:
+'   1. SCOPE INITIATION: Places the mandatory 'OPEN_BRACE' ({) in the
+'      Data worksheet's 'Item' column to start the Graphviz subgraph.
+'   2. PROPERTY DELEGATION: Calls 'ProcessClusterProperty' for each
+'      visual attribute (Label, Style, Attributes, Tooltip).
+'   3. TOKEN CONTEXT: Passes both 'absoluteClusterCount' (global) and
+'      'relativeClusterCount' (per-level) to allow for sophisticated
+'      style and label formatting.
+'   4. STYLE SYNCHRONIZATION: Injects the global 'Suffix Open' constant
+'      when processing the StyleName column to ensure proper registry lookup.
+'   5. ROW MANAGEMENT: Automatically increments the worksheet 'row' index
+'      after the write is complete.
+' ==========================================================================
 Private Sub EmitClusterOpen( _
     ByRef ctx As sqlContext, _
     ByVal rs As Object, _
@@ -187,6 +332,27 @@ Private Sub EmitClusterOpen( _
     row = row + 1
 End Sub
 
+' ==========================================================================
+' PROCEDURE: EmitClusterClose (Multi-Level)
+' PURPOSE:
+'   Writes the structural 'Close' row for a specific tier in an N-level hierarchy.
+'
+' TECHNICAL WORKFLOW:
+'   1. SCOPE SEALING: Places the mandatory 'CLOSE_BRACE' (}) in the
+'      Data worksheet's 'Item' column to end the Graphviz subgraph.
+'   2. STYLE RE-ALIGNMENT:
+'      - Re-evaluates the style name for the current level.
+'      - Appends the global 'Suffix Close' (e.g., "_CLOSE") to enable
+'        visual differentiation between the start and end of a container.
+'   3. TOKEN SUBSTITUTION: Passes the Absolute and Relative counters to
+'      'ProcessClusterProperty' to maintain consistent naming/ID references.
+'   4. ROW MANAGEMENT: Increments the worksheet 'row' index to prepare for
+'      the next set of data or the next closing brace.
+'
+' USAGE:
+'   - Called by 'ProcessMultiLevelRecordset' whenever a hierarchy depth
+'     shift is detected or the recordset ends.
+' ==========================================================================
 Private Sub EmitClusterClose( _
     ByRef ctx As sqlContext, _
     ByVal rs As Object, _
@@ -209,6 +375,26 @@ Private Sub EmitClusterClose( _
     row = row + 1
 End Sub
 
+' ==========================================================================
+' PROCEDURE: ProcessClusterProperty
+' PURPOSE:
+'   Extracts, transforms, and writes specific cluster attributes (Labels,
+'   Styles, etc.) for a specific level of the N-tier hierarchy.
+'
+' TECHNICAL WORKFLOW:
+'   1. FIELD RESOLUTION: Dynamically constructs the source field name by
+'      appending the current 'levelNumber' to the base template (e.g.,
+'      transforming "CLUSTER_LABEL" into "CLUSTER_LABEL2").
+'   2. SUFFIX APPLICATION: Appends the 'Suffix Open' or 'Suffix Close'
+'      to style names to maintain alignment with the Styles worksheet.
+'   3. TRIPLE-TOKEN SUBSTITUTION: Resolves dynamic placeholders within
+'      the value:
+'      - {cluster}: Replaced by the Absolute Count (global index).
+'      - {subcluster}: Replaced by the Relative Count (per-level index).
+'      - {level}: Replaced by the current depth (1, 2, 3...).
+'   4. DATA EMISSION: Writes the finalized, substituted string into the
+'      target 'Data' worksheet column.
+' ==========================================================================
 Private Sub ProcessClusterProperty( _
     ByRef ctx As sqlContext, _
     ByVal rs As Object, _
@@ -245,6 +431,25 @@ Private Sub ProcessClusterProperty( _
     DataSheet.Cells(wsRow, targetColumn).value = value
 End Sub
 
+' ==========================================================================
+' PROCEDURE: EmitRows (Multi-Level)
+' PURPOSE:
+'   Translates ADO records into worksheet rows while preserving the active
+'   hierarchical state (Depth, Absolute ID, and Relative ID).
+'
+' TECHNICAL WORKFLOW:
+'   1. SAFETY VALIDATION: Prevents infinite loops by verifying 'stepBy'
+'      values and ensuring mathematical directionality (start vs stop).
+'   2. LOOP ENUMERATION: Supports "Enumeration Mode" within a cluster,
+'      allowing a single SQL record to generate a sequenced range of nodes.
+'   3. STATE INJECTION: Passes the current clustering context—including
+'      'levelNumber', 'absoluteClusterCount', and 'relativeClusterCount'—
+'      down to the atomic 'EmitOneRow' writer.
+'   4. GOVERNOR COMPLIANCE: Tracks the total 'ctx.loop.count' against
+'      system limits to ensure stability in high-density graphs.
+'   5. COORDINATE MANAGEMENT: Increments the worksheet 'row' index after
+'      each successful write to maintain the vertical pipeline.
+' ==========================================================================
 Private Sub EmitRows( _
     ByRef ctx As sqlContext, _
     ByVal rs As Object, _
@@ -277,6 +482,26 @@ Private Sub EmitRows( _
 
 End Sub
 
+' ==========================================================================
+' PROCEDURE: EmitOneRow (Multi-Level)
+' PURPOSE:
+'   Maps an ADO record to the 'Data' worksheet while applying hierarchical tokens.
+'
+' TECHNICAL WORKFLOW:
+'   1. FIELD FILTERING: Uses 'IsClusterRelatedField' to ignore structural
+'      columns (like CLUSTER1) so they aren't mistakenly written as node data.
+'   2. QUAD-TOKEN SUBSTITUTION: Resolves dynamic placeholders in every field:
+'      - {record}: Sequential record count.
+'      - {cluster}: The global Absolute Cluster ID.
+'      - {subcluster}: The local Relative Cluster ID.
+'      - {level}: The current depth of the active cluster.
+'   3. ENUMERATION SUPPORT: If a loop is active, injects the {i} placeholder
+'      using the 'enumStep' value.
+'   4. AUTOMATIC TEXT WRAPPING: Identifies 'Label' and 'xLabel' fields and
+'      applies 'SplitMultilineText' if a 'SPLIT_LENGTH' is detected.
+'   5. DYNAMIC COLUMN MAPPING: Routes sanitized values to the correct
+'      worksheet column based on the language-agnostic 'ctx.headings' map.
+' ==========================================================================
 Private Sub EmitOneRow( _
     ByRef ctx As sqlContext, _
     ByVal rs As Object, _
@@ -297,7 +522,7 @@ Private Sub EmitOneRow( _
         For Each fld In rs.fields
             If Not IsClusterRelatedField(fld.name, maxLevels) Then
 
-                ' Common transformation: null ? "", placeholder replacement
+                ' Common transformation: null -> "", placeholder replacement
                 v = SafeStr(fld.value)
                 
                 If Len(v) > 0 Then
@@ -362,6 +587,28 @@ Private Sub EmitOneRow( _
     End With
 End Sub
 
+' ==========================================================================
+' FUNCTION: IsClusterRelatedField
+' PURPOSE:
+'   Determines if a field is a "structural" clustering column to prevent
+'   it from being written as standard node/edge data.
+'
+' TECHNICAL WORKFLOW:
+'   1. NORMALIZATION: Converts the 'fieldName' to lowercase for
+'      case-insensitive matching.
+'   2. PATTERN SCAN: Iterates from Level 1 up to 'maxLevels' to build
+'      expected metadata names:
+'      - Base Cluster ID: "cluster1", "cluster2"...
+'      - Visual Attributes: "cluster1 label", "cluster1 style name",
+'        "cluster1 attributes", "cluster1 tooltip".
+'   3. LOGIC GATE: Returns True if the field matches any of these structural
+'      patterns, signaling the emission engine to skip this column.
+'
+' USAGE:
+'   - Called by 'EmitOneRow' (Multi-Level) to filter the Recordset fields.
+'   - Keeps the 'Data' worksheet clean by isolating "How to group" data
+'     from "What to show" data.
+' ==========================================================================
 Private Function IsClusterRelatedField(ByVal fieldName As String, ByVal maxLevels As Long) As Boolean
     Dim i As Long
     Dim lcName As String

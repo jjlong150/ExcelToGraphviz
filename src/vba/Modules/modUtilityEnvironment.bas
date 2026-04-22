@@ -1,11 +1,46 @@
 Attribute VB_Name = "modUtilityEnvironment"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Utility.Environment")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modUtilityEnvironment
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Utility / Environment & OS Integration
+'
+' ROLE:
+'   Cross-platform environment utility layer providing PATH search helpers,
+'   username resolution, and temp-directory management for both Windows and
+'   macOS execution contexts.
+'
+' RESPONSIBILITIES:
+'   - PATH utilities:
+'       • SearchPathForFile: Boolean existence check across PATH segments
+'       • FindFileOnPath: Return fully-qualified path to a discovered file
+'       • Normalize PATH entries (trim, strip quotes, enforce separators)
+'   - User and environment helpers:
+'       • GetUsername: Cached username retrieval (Application.Username on Windows,
+'         AppleScript via MacScript on macOS)
+'       • GetEnvVarSeparator: Platform-appropriate PATH delimiter
+'   - Temp directory management:
+'       • SetTempDirectory: OS-specific temp directory resolution
+'       • GetTempDirectory: Cached retrieval for downstream consumers
+'
+' ARCHITECTURAL NOTES:
+'   - Fully cross-platform: Windows and macOS branches via conditional compilation.
+'   - macOS username retrieval uses MacScript; cached to avoid repeated shell calls.
+'   - PATH scanning uses defensive trimming and delimiter normalization.
+'   - Consumed by modules requiring file discovery, temp storage, or user identity.
+'
+' USAGE:
+'   - Used by file-discovery routines, temp-file creation, and OS-aware workflows.
+'   - Supports SQL, SVG, Source, and Graphviz execution paths requiring temp storage.
+'
+' RELATED WIKI PAGES:
+'   - Environment & Platform Abstraction
+'   - File Discovery & PATH Handling
+'   - Cross-Platform Execution Notes (Windows/macOS)
+' =============================================================================
 
 Option Explicit
 
-'@Ignore MoveFieldCloserToUsage
 Private username As String
 Private tempDir As String
 

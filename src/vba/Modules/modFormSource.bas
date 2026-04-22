@@ -1,7 +1,37 @@
 Attribute VB_Name = "modFormSource"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@Folder("Relationship Visualizer.Forms.DotSource")
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    DotFormSource
+' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     UI / Forms Subsystem
+'
+' ROLE:
+'   Controller for the DOT Source Viewer form. Manages lifecycle, localization,
+'   and real-time population of the multiline DOT preview surface.
+'
+' RESPONSIBILITIES:
+'   - Form lifecycle management:
+'       • show/hide the DOT Source Viewer
+'       • clear/reset the multiline text surface
+'   - Localization:
+'       • apply translated captions to Copy and Word-Wrap controls
+'   - Source presentation:
+'       • inject generated DOT source into the form when visible
+'       • normalize line endings for consistent display
+'
+' ARCHITECTURAL NOTES:
+'   - Lightweight controller invoked by modRibbonTabSource and modCreateGraph.
+'   - Uses DotSourceForm as the UI surface; no external dependencies.
+'   - Designed for non-modal, always-on-top inspection during graph generation.
+'
+' USAGE:
+'   - Called by Ribbon actions ("View Source", "Copy Source").
+'   - Used during debugging, validation, and advanced authoring workflows.
+'
+' RELATED WIKI PAGES:
+'   - DOT Source Viewer
+'   - Source Worksheet & Source Form Architecture
+' =============================================================================
 
 Option Explicit
 

@@ -1,7 +1,35 @@
 Attribute VB_Name = "modRibbonTabAbout"
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
+' =============================================================================
+' PROJECT:   Excel to Graphviz
+' MODULE:    modRibbonTabAbout
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
+' LAYER:     Excel UI / Ribbon
+'
+' ROLE:
+'   Callback bridge for the "Info" Ribbon Tab, providing hyperlinks to
+'   project resources, community pages, and author information.
+'
+' RESPONSIBILITIES:
+'   - Dispatch IRibbonControl callbacks for all Info tab controls.
+'   - Open external URLs (GitHub, SourceForge, LinkedIn, Website, Email).
+'   - Maintain cross-platform hyperlink behavior.
+'
+' INTERACTIONS:
+'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
+'   - Named Ranges: HelpURLAboutTab.
+'   - Worksheets: SettingsSheet.
+'
+' CROSS-PLATFORM NOTES:
+'   - Fully supported on Windows and macOS.
+'
+' ERROR HANDLING:
+'   - Minimal; relies on Excel hyperlink engine.
+'
+' RELATED WIKI PAGES:
+'   - Web Presence & Community
+'   - User Interface: Ribbon Tabs
+' =============================================================================
 
-'@Folder("Relationship Visualizer.Ribbon.Tabs")
 Option Explicit
 
 ' ===========================================================================
