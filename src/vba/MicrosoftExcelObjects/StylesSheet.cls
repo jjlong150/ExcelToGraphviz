@@ -98,19 +98,23 @@ End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
     On Error GoTo ErrorHandler
 
-    ' Detect changes in the settings dropdown lists
+    ' Detect changes in the view switch headings
     If Not Intersect(Target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
         Application.EnableEvents = False
         RefreshRibbon
     End If
 
+    If IsStylesRowActive(Target.row) Then
+        PreviewStyleForRow Target.row
+    End If
+    
 CleanExit:
     Application.EnableEvents = True
     Exit Sub
 
 ErrorHandler:
-    EmitMessage "Sheet: StylesSheet - " & Err.number & " " & Err.Description
-    Err.Clear
+    EmitMessage "Sheet: StylesSheet - " & err.number & " " & err.Description
+    err.Clear
     Resume CleanExit
 End Sub
 

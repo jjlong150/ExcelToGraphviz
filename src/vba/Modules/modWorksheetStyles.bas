@@ -227,8 +227,12 @@ End Sub
 '   - Used for rapid iterative testing during style development.
 ' ==========================================================================
 Public Sub PreviewStyleForCurrentRow()
+    PreviewStyleForRow ActiveCell.row
+End Sub
+
+Public Sub PreviewStyleForRow(row As Long)
     StylesSheet.Activate
-    GenerateStylesPreview ActiveCell.row
+    GenerateStylesPreview row
     ClearStatusBar
 End Sub
 
