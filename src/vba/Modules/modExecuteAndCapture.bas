@@ -2,7 +2,7 @@ Attribute VB_Name = "modExecuteAndCapture"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modExecuteAndCapture
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Bootstrap / Win32 Execution Subsystem
 '
 ' ROLE:
@@ -392,7 +392,7 @@ End Sub
 '      still running, it prevents the external EXE from stalling when
 '      its standard output buffer is full.
 '   4. DATA CONVERSION: Converts the raw byte-array buffer into a readable
-'      Unicode string via 'StrConv' and appends it to the result.
+'      Unicode string via 'UTF8_To_String' and appends it to the result.
 '
 ' USAGE:
 '   - Powering 'ExecuteAndCapture' to handle high-volume console feedback
@@ -421,7 +421,7 @@ Private Function ReadPipe(ByVal hPipe As Long) As String
                 bytesRead = 0
                 If ReadFile(hPipe, buffer(0), PIPE_BUFFER_SIZE, bytesRead, ByVal 0&) = 0 Then Exit Do
                 If bytesRead > 0 Then
-                    ReadPipe = ReadPipe & Left$(StrConv(buffer(), vbUnicode), bytesRead)
+                    ReadPipe = ReadPipe & UTF8_To_String(buffer, bytesRead)
                 End If
                 peeked = PeekNamedPipe(hPipe, ByVal 0&, 0, ByVal 0&, bytesAvail, ByVal 0&)
             Loop While bytesRead > 0
@@ -429,6 +429,41 @@ Private Function ReadPipe(ByVal hPipe As Long) As String
     Loop While peeked = True And bytesAvail > 0
 End Function
 
+Private Function UTF8_To_String(bytes() As Byte, count As Long) As String
+    Dim i As Long, c As Long
+    Dim result As String
+
+    result = ""
+    i = 0
+
+    Do While i < count
+        c = bytes(i)
+
+        If c < &H80 Then
+            ' 1-byte ASCII
+            result = result & ChrW(c)
+            i = i + 1
+
+        ElseIf (c And &HE0) = &HC0 Then
+            ' 2-byte sequence
+            result = result & ChrW(((c And &H1F) * &H40) Or (bytes(i + 1) And &H3F))
+            i = i + 2
+
+        ElseIf (c And &HF0) = &HE0 Then
+            ' 3-byte sequence
+            result = result & ChrW(((c And &HF) * &H1000) _
+                                   Or ((bytes(i + 1) And &H3F) * &H40) _
+                                   Or (bytes(i + 2) And &H3F))
+            i = i + 3
+
+        Else
+            ' Unsupported 4-byte UTF-8 (optional to implement)
+            result = result & "?"
+            i = i + 1
+        End If
+    Loop
+
+    UTF8_To_String = result
+End Function
+
 #End If
-
-
