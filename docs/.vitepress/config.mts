@@ -51,6 +51,7 @@ export default defineConfig({
               { text: 'About', link: '/about/' },
               { text: 'License', link: '/license/' },
               { text: 'Privacy', link: '/privacy/' },
+              { text: 'Security', link: '/security/' },
               { text: 'Credits', link: '/acknowledge/' },
               { text: 'Changelog', link: '/changelog/' }
             ]
