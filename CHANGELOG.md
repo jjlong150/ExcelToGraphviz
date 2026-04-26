@@ -1,5 +1,20 @@
 # Change Log
 
+## Version 10.4.0
+
+This release provides several small but meaningful usability improvements:
+
+- **Enhanced placeholder engine for labels** - Node, edge, cluster, and graph label builders now support template‑driven placeholders (`{label}`, `{xlabel}`, `{taillabel}`, `{headlabel}`), allowing `styles` worksheet formats to dynamically expand or fall back to data‑layer values. 
+
+- **Smoother, cleaner AutoDraw updates** - `AutoDraw` has been revamped so graph updates now happen across more events in a single clean pass, without screen flashes or repeated triggers. The result is a more consistent, more polished *live preview* experience while you edit your data.
+
+
+- **Smarter preview updates in the Styles sheet** - The preview image now updates automatically whenever you modify a style row (node, edge, or cluster), giving you instant visual feedback as you fine‑tune your formatting.
+
+- **Standardized encoding for Graphviz integration** - `ExecuteAndCapture` now uses UTF‑8 for all command input and output, fixing an internal mismatch where the function previously sent UTF‑8 to Graphviz but returned Unicode on stdout and stderr.
+
+- **Comprehensive module documentation for DeepWiki** - All VBA modules have been updated with clear, structured header comments to improve DeepWiki's analysis and generate more accurate, better‑organized documentation throughout the project.
+
 ## Version 10.3.0
 
 This release continues to expand the **SQL capabilities** of the Relationship Visualizer.
