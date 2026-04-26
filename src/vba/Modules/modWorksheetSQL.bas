@@ -369,8 +369,8 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
             ' Get connection to data source
             On Error Resume Next
             Set connectionObject = getConnection(filePath, ctx.fields.maxConnectionMinutes)
-            Dim connErrDescription As String: connErrDescription = Err.Description
-            Dim connErrNumber As Long: connErrNumber = Err.number
+            Dim connErrDescription As String: connErrDescription = err.Description
+            Dim connErrNumber As Long: connErrNumber = err.number
             On Error GoTo 0
 
             ' Execute the SQL query
@@ -381,7 +381,7 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
                 ' Apply placeholder substitutions before executing SQL
                 ApplyPlaceholders sqlStatement, placeholders
                 
-                Err.Clear
+                err.Clear
                 message = executeSQL(ctx, filePath, connectionObject, sqlStatement, dataRow)
             End If
         End If
@@ -914,7 +914,7 @@ Private Function executeSQL( _
     ' will be running on
     Set rs = CreateObject("ADODB.Recordset")
     
-    Err.Clear
+    err.Clear
     For attempts = 1 To ctx.fields.retryLimit
         On Error Resume Next
         
@@ -922,8 +922,8 @@ Private Function executeSQL( _
         rs.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenStatic, LockType:=LockTypeEnum.adLockReadOnly, options:=CommandTypeEnum.adCmdText
         
         ' Immediately save error state, as processing an error could trigger it being cleared
-        errNumber = Err.number
-        errDescription = Err.Description
+        errNumber = err.number
+        errDescription = err.Description
         
         ' Break from retry loop if query succeeded
         If errNumber = 0 Then Exit For
@@ -934,14 +934,14 @@ Private Function executeSQL( _
             Exit For
         End If
 
-        LogDiagnostic "executeSQL(): rs.Open - " & errDescription, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(Err.Description)
-        Err.Clear
+        LogDiagnostic "executeSQL(): rs.Open - " & errDescription, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(err.Description)
+        err.Clear
         SleepMilliseconds RETRY_DELAY_MS
     Next attempts
     
     ' Reset status bar
     Application.StatusBar = False
-    Err.Clear
+    err.Clear
     
     ' If userError, then the SQL is bad. Stop processing.
     If userError Then GoTo executeSQLError
@@ -950,7 +950,7 @@ Private Function executeSQL( _
     ' If the recordset failed to open but didn't trigger userError, rs.State might be 0.
     
     If rs Is Nothing Or rs.State <> ObjectStateEnum.adStateOpen Then
-        Err.Raise vbObjectError + 513, , "executeSQL(): Recordset failed to open"
+        err.Raise vbObjectError + 513, , "executeSQL(): Recordset failed to open"
     End If
 
     ' Determine if enumeration values are present
@@ -1013,9 +1013,9 @@ Cleanup:
 
 executeSQLError:
     ' GetMessage will reset the error state, save the message
-    If Err.number <> 0 Then
-        errDescription = Err.Description
-        errNumber = Err.number
+    If err.number <> 0 Then
+        errDescription = err.Description
+        errNumber = err.number
     End If
     
     Dim logMessage As String
@@ -1061,7 +1061,7 @@ Private Sub SafeCloseRecordset(ByRef rs As Object)
         End If
         Set rs = Nothing
     End If
-    Err.Clear
+    err.Clear
 #End If
 End Sub
 
@@ -1526,8 +1526,8 @@ Private Function GetHeaderRS( _
     ' Always start at the beginning
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         SafeCloseRecordset rs
         Exit Function
     End If
@@ -1539,8 +1539,8 @@ Private Function GetHeaderRS( _
     
 GetHeaderRSError:
         LogDiagnostic _
-            "GetHeaderRS SQL failed: " & Err.Description & vbNewLine, _
-            errorNumber:=Err.number, _
+            "GetHeaderRS SQL failed: " & err.Description & vbNewLine, _
+            errorNumber:=err.number, _
             sql:=idQuery, _
             errorCategory:="Iteration / SQL"
             
@@ -1637,8 +1637,8 @@ Private Function CreateAugmentedRS( _
 
 ErrHandler:
     LogDiagnostic _
-        "CreateAugmentedRS failed: " & Err.Description, _
-        errorNumber:=Err.number, _
+        "CreateAugmentedRS failed: " & err.Description, _
+        errorNumber:=err.number, _
         errorCategory:="Iteration / Concatenation"
 
     On Error Resume Next
@@ -1767,8 +1767,8 @@ Private Function GetIDList( _
     ' Always start at the beginning
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         SafeCloseRecordset rs
         Exit Function
     End If
@@ -1798,8 +1798,8 @@ Private Function GetIDList( _
 
 GetIDListError:
     LogDiagnostic _
-        "GetIDList SQL failed: " & Err.Description & vbNewLine, _
-        errorNumber:=Err.number, _
+        "GetIDList SQL failed: " & err.Description & vbNewLine, _
+        errorNumber:=err.number, _
         sql:=idQuery, _
         errorCategory:="Iteration / SQL"
 
@@ -1866,10 +1866,10 @@ Private Function RunParameterizedQuery( _
 
 RunQueryError:
     LogDiagnostic _
-        "RunParameterizedQuery failed: " & Err.Description, _
-        errorNumber:=Err.number, _
+        "RunParameterizedQuery failed: " & err.Description, _
+        errorNumber:=err.number, _
         sql:=sql, _
-        errorCategory:=ClassifyError(Err.Description)
+        errorCategory:=ClassifyError(err.Description)
 
     On Error Resume Next
     SafeCloseRecordset rsData
@@ -2093,8 +2093,8 @@ Private Sub PerformRecursiveSearch( _
     ' Iterate through results
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         SafeCloseRecordset rs
         Exit Sub
     End If
@@ -2126,13 +2126,13 @@ Private Sub PerformRecursiveSearch( _
 
 RecursionError:
     LogDiagnostic _
-        "Recursive SQL failed: " & Err.Description & vbNewLine & _
+        "Recursive SQL failed: " & err.Description & vbNewLine & _
         "  Query: " & query & vbNewLine & _
         "  whereValue   = " & whereValue & vbNewLine & _
         "  whereColumn  = " & whereColumn & vbNewLine & _
         "  currentDepth = " & CStr(currentDepth) & vbNewLine & _
         "  maxDepth     = " & CStr(maxDepth) & vbNewLine, _
-        errorNumber:=Err.number, _
+        errorNumber:=err.number, _
         sql:=query, _
         errorCategory:="Recursion / SQL"
 
@@ -2326,8 +2326,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
             ' No subclusters: emit all rows for this cluster
             On Error Resume Next
             rs.MoveFirst
-            If Err.number <> 0 Then
-                Err.Clear
+            If err.number <> 0 Then
+                err.Clear
                 Exit For
             End If
             On Error GoTo 0
@@ -2349,8 +2349,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
                 On Error Resume Next
                 rs.MoveFirst
-                If Err.number <> 0 Then
-                    Err.Clear
+                If err.number <> 0 Then
+                    err.Clear
                     Exit For
                 End If
                 On Error GoTo 0
@@ -2374,8 +2374,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
                 ' Emit rows in this cluster with NULL subcluster
                 On Error Resume Next
                 rs.MoveFirst
-                If Err.number <> 0 Then
-                    Err.Clear
+                If err.number <> 0 Then
+                    err.Clear
                     Exit For
                 End If
                 On Error GoTo 0
@@ -2398,8 +2398,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
     ' Handle case where cluster has no data, but subcluster does
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2413,8 +2413,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
         On Error Resume Next
         rs.MoveFirst
-        If Err.number <> 0 Then
-            Err.Clear
+        If err.number <> 0 Then
+            err.Clear
             Exit For
         End If
         On Error GoTo 0
@@ -2439,8 +2439,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
     ' Handle rows where both cluster and subcluster are NULL
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2504,8 +2504,8 @@ Private Sub ProcessClusterYesSubclusterNo( _
         ' Safe MoveFirst
         On Error Resume Next
         rs.MoveFirst
-        If Err.number <> 0 Then
-            Err.Clear
+        If err.number <> 0 Then
+            err.Clear
             Exit For
         End If
         On Error GoTo 0
@@ -2525,8 +2525,8 @@ Private Sub ProcessClusterYesSubclusterNo( _
     ' Emit orphan rows (cluster column is Null)
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2590,8 +2590,8 @@ Private Sub ProcessClusterNoSubclusterYes( _
         ' Safe MoveFirst
         On Error Resume Next
         rs.MoveFirst
-        If Err.number <> 0 Then
-            Err.Clear
+        If err.number <> 0 Then
+            err.Clear
             Exit For
         End If
         On Error GoTo 0
@@ -2611,8 +2611,8 @@ Private Sub ProcessClusterNoSubclusterYes( _
     ' Emit orphan rows (subcluster column is Null)
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2658,8 +2658,8 @@ Private Sub ProcessClusterNoSubclusterNo( _
     ' Always start at the beginning
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2709,8 +2709,8 @@ Private Sub CreateEdges( _
     ' Safe MoveFirst
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2753,8 +2753,8 @@ Private Sub CreateEdges( _
         ' Safe MoveNext (skip first row)
         On Error Resume Next
         rs.MoveNext
-        If Err.number <> 0 Then
-            Err.Clear
+        If err.number <> 0 Then
+            err.Clear
             Exit Sub
         End If
         On Error GoTo 0
@@ -2816,8 +2816,8 @@ Private Sub CreateRank( _
     ' Safe MoveFirst
     On Error Resume Next
     rs.MoveFirst
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -3891,8 +3891,8 @@ Public Function SafeFieldValue(ByVal rs As Object, ByVal fieldName As String) As
     Dim fld As Object
     On Error Resume Next
     Set fld = rs.fields(fieldName)
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         SafeFieldValue = ""
         Exit Function
     End If

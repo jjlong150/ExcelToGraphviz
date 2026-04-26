@@ -211,7 +211,7 @@ Public Sub RenderGraph()
     Dim stdOut As String
     Dim stdErr As String
     ExecuteAndCapture GraphvizCommand, stdOut, stdErr
-   
+
     If m_captureMessages Then
         m_graphvizMessages = stdErr & stdOut
     End If
@@ -239,9 +239,9 @@ Public Sub SourceToFile()
 #End If
 
 WriteFailed:
-    If Err.number > 0 Then
-        EmitMessage Err.number & " " & Err.Description, "Graphviz.SourceToFile()"
-        Err.Clear
+    If err.number > 0 Then
+        EmitMessage err.number & " " & err.Description, "Graphviz.SourceToFile()"
+        err.Clear
     End If
     
     On Error GoTo 0

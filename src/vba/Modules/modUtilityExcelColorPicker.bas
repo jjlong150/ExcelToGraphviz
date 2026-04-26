@@ -117,8 +117,8 @@ Public Function ShowColorChooser(ByVal colorAsHex As String, Optional ByVal pick
     r = CLng("&H" & Left(hexColor, 2))
     g = CLng("&H" & Mid(hexColor, 3, 2))
     b = CLng("&H" & Right(hexColor, 2))
-    If Err.number <> 0 Then
-        Debug.Print "ShowColorChooser(): Error converting hex to RGB: " & Err.Description
+    If err.number <> 0 Then
+        Debug.Print "ShowColorChooser(): Error converting hex to RGB: " & err.Description
         ShowColorChooser = -1
         Exit Function
     End If
@@ -183,8 +183,8 @@ Public Function ShowColorChooser(ByVal colorAsHex As String, Optional ByVal pick
     Exit Function
 
 ErrorHandler:
-    Debug.Print "ShowColorChooser() Error - " & Err.Description & vbCrLf & _
-           "Error Number: " & Err.number
+    Debug.Print "ShowColorChooser() Error - " & err.Description & vbCrLf & _
+           "Error Number: " & err.number
     ShowColorChooser = -1
 End Function
 
@@ -207,7 +207,7 @@ Public Function RGBToHex(rgbColor As Long) As String
     Exit Function
 
 ErrorHandler:
-    Debug.Print "RGBToHex(): Error - " & Err.Description
+    Debug.Print "RGBToHex(): Error - " & err.Description
     RGBToHex = "#000000"
 End Function
 

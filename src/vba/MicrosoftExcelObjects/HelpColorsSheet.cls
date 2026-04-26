@@ -91,7 +91,7 @@ Private Sub Worksheet_FollowHyperlink(ByVal Target As Hyperlink)
     Exit Sub
 
 ErrorHandler:
-    Err.Clear
+    err.Clear
     Resume Next
 End Sub
 

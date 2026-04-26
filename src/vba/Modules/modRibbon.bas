@@ -151,8 +151,8 @@ Public Sub ribbon_activateTab()
     Exit Sub
 
 ErrorHandler:
-    If Err.number > 0 Then
-        Err.Clear
+    If err.number > 0 Then
+        err.Clear
         Resume Next
     End If
 End Sub
@@ -230,7 +230,7 @@ Public Sub RefreshRibbon()
         EmitMessage "Error refreshing the ribbon. Save and reopen this file."
     Else
         myRibbon.Invalidate
-        If Err.number <> 0 Then
+        If err.number <> 0 Then
             ' This message cannot be localized due to error state.
             EmitMessage "Lost the Ribbon object. Save this file, close worksbook, and reopen."
         End If
@@ -239,8 +239,8 @@ Public Sub RefreshRibbon()
     Exit Sub
 
 ErrorHandler:
-    If Err.number > 0 Then
-        Err.Clear
+    If err.number > 0 Then
+        err.Clear
         Resume Next
     End If
 End Sub
@@ -273,8 +273,8 @@ Public Sub InvalidateRibbonControl(ByVal controlName As String)
         myRibbon.InvalidateControl controlName
     End If
 ErrorHandler:
-    If Err.number > 0 Then
-        Err.Clear
+    If err.number > 0 Then
+        err.Clear
         Resume Next
     End If
 End Sub
@@ -306,8 +306,8 @@ Public Sub ActivateTab(ByVal tabName As String)
         myRibbon.ActivateTab tabName
     End If
 ErrorHandler:
-    If Err.number > 0 Then
-        Err.Clear
+    If err.number > 0 Then
+        err.Clear
         Resume Next
     End If
 End Sub

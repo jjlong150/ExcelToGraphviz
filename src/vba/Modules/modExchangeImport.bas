@@ -148,7 +148,7 @@ Private Function TryParseJson(ByVal jsonString As String) As Object
 
 parseExit:
     Dim errorMsg As String
-    errorMsg = GetMessage("msgboxCannotImportJSON") & vbNewLine & vbNewLine & Err.Description
+    errorMsg = GetMessage("msgboxCannotImportJSON") & vbNewLine & vbNewLine & err.Description
     EmitMessage errorMsg
     
 End Function

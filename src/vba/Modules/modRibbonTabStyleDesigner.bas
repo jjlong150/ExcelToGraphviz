@@ -711,7 +711,7 @@ Cleanup:
     Exit Function
 
 ErrorHandler:
-    Debug.Print "fontName_createItemImage Error: " & Err.Description
+    Debug.Print "fontName_createItemImage Error: " & err.Description
     Resume Cleanup
 End Function
 
@@ -2660,8 +2660,8 @@ Private Function GetListIndex(ByVal listName As String, ByVal cellName As String
     On Error Resume Next
     Dim cellValue As String
     cellValue = LCase$(CStr(StyleDesignerSetting(cellName)))
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Function
     End If
     On Error GoTo 0
@@ -2671,8 +2671,8 @@ Private Function GetListIndex(ByVal listName As String, ByVal cellName As String
     ' Iterating arrays is faster than iterating cells
     Dim listArray As Variant
     listArray = Application.WorksheetFunction.Transpose(ListsSheet.Range(listName))
-    If Err.number <> 0 Then
-        Err.Clear
+    If err.number <> 0 Then
+        err.Clear
         Exit Function
     End If
     On Error GoTo 0

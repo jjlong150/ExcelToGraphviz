@@ -137,7 +137,7 @@ Public Sub Clipboard_Clear()
     CloseClipboard
     Exit Sub
 ErrorHandler_:
-    EmitMessage "Error: " & Err.Description, buttons:=vbCritical
+    EmitMessage "Error: " & err.Description, buttons:=vbCritical
 End Sub
 
 

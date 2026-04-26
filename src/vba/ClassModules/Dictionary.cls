@@ -68,7 +68,7 @@ Public Property Let CompareMode(value As CompareMethod)
     If Me.count > 0 Then
         ' Can't change CompareMode for Dictionary that contains data
         ' http://msdn.microsoft.com/en-us/library/office/gg278481(v=office.15).aspx
-        Err.Raise 5 ' Invalid procedure call or argument
+        err.Raise 5 ' Invalid procedure call or argument
     End If
 
     dict_pCompareMode = value
@@ -164,7 +164,7 @@ Attribute Add.VB_Description = "Add a new key and item to the dictionary."
         dict_AddKeyValue key, item
     Else
         ' This key is already associated with an element of this collection
-        Err.Raise 457
+        err.Raise 457
     End If
 #Else
     dict_pDictionary.Add key, item
@@ -239,7 +239,7 @@ Attribute Remove.VB_Description = "Remove a given key from the dictionary."
         dict_RemoveKeyValue dict_KeyValue
     Else
         ' Application-defined or object-defined error
-        Err.Raise 32811
+        err.Raise 32811
     End If
 #Else
     dict_pDictionary.Remove key
@@ -270,7 +270,7 @@ End Sub
 Private Function dict_GetKeyValue(dict_Key As Variant) As Variant
     On Error Resume Next
     dict_GetKeyValue = dict_pKeyValues(dict_GetFormattedKey(dict_Key))
-    Err.Clear
+    err.Clear
 End Function
 
 Private Sub dict_AddKeyValue(dict_Key As Variant, dict_Value As Variant, Optional dict_Index As Long = -1)

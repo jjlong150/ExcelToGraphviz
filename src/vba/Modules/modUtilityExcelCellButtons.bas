@@ -127,8 +127,8 @@ Public Sub CreateOneFloatingButton( _
     Exit Sub
 
 CreateErr:
-    Debug.Print "CreateFloatingButton failed for " & cfg.ButtonName & ": " & Err.Description
-    Err.Clear
+    Debug.Print "CreateFloatingButton failed for " & cfg.ButtonName & ": " & err.Description
+    err.Clear
 End Sub
 
 ' Processes the supplied ButtonConfig array and creates floating buttons
@@ -162,11 +162,11 @@ Public Sub UpdateFloatingButtonsOnSheet( _
             If Len(cfg.ValidationFunc) > 0 Then
                 On Error Resume Next
                 showIt = Application.Run(cfg.ValidationFunc, rowNum)
-                If Err.number <> 0 Then
+                If err.number <> 0 Then
                     Debug.Print "Validation function failed: " & cfg.ValidationFunc & _
-                                " - Error: " & Err.Description
+                                " - Error: " & err.Description
                     showIt = False
-                    Err.Clear
+                    err.Clear
                 End If
                 On Error GoTo 0
             End If

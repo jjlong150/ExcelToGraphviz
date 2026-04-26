@@ -1094,8 +1094,8 @@ Private Function IsArrayAllocated(ByRef arr As Variant) As Boolean
 
     Exit Function
 ErrorHandler:
-    If Err.number > 0 Then
-        Err.Clear
+    If err.number > 0 Then
+        err.Clear
         Resume Next
     End If
 End Function

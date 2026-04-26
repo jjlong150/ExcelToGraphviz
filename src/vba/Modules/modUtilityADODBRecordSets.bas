@@ -198,8 +198,8 @@ Public Sub MergeRecordsets(ByVal rsFirst As Object, _
 '---------------------------------------------------------------------------
 MergeError:
     LogDiagnostic _
-        "MergeRecordsets(): " & Err.Description, _
-        errorNumber:=Err.number, _
+        "MergeRecordsets(): " & err.Description, _
+        errorNumber:=err.number, _
         errorCategory:="ADO / Merge"
 
     On Error Resume Next

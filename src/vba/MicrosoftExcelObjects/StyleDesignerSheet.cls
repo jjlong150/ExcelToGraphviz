@@ -139,7 +139,7 @@ LetsContinue:
     Application.EnableEvents = True
     Exit Sub
 Whoa:
-    EmitMessage "StyleDesignerSheet " & Err.number & " " & Err.Description
+    EmitMessage "StyleDesignerSheet " & err.number & " " & err.Description
     
     Resume LetsContinue
 

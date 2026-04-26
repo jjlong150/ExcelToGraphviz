@@ -206,7 +206,7 @@ LetsContinue:
     Application.EnableEvents = True
     Exit Sub
 Whoa:
-    EmitMessage Err.number & " " & Err.Description
+    EmitMessage err.number & " " & err.Description
     
     Resume LetsContinue
 
