@@ -62,38 +62,37 @@ Option Explicit
 ' PROCEDURE: AutoDraw
 '
 ' PURPOSE:
-'   Triggers an automatic graph refresh in response to worksheet changes,
-'   providing a "Live Preview" experience for the data entry layer.
+'   Executes a graph refresh safely and atomically, ensuring that worksheet
+'   events and screen repaints do not interfere with the rendering pipeline.
+'   This routine assumes that the caller has already validated run mode
+'   (e.g., Auto vs Manual) and that a redraw is appropriate.
 '
 ' TECHNICAL WORKFLOW:
-'   1. MODE VALIDATION: Checks the 'SETTINGS_RUN_MODE' named range; only
-'      proceeds if the value matches 'TOGGLE_AUTO'.
-'   2. UI FEEDBACK: Sets the 'xlWait' cursor and executes 'DoEvents' to
-'      process any pending system messages.
-'   3. RENDERING PIPELINE:
-'      - Wraps execution in 'OptimizeCode_Begin/End' to maximize performance.
-'      - Invokes 'CreateGraphWorksheet' to re-parse data and update the image.
+'   1. EVENT & UI SUSPENSION:
+'      - Disables ScreenUpdating to prevent flicker and mid-render repaints.
+'      - Disables EnableEvents to prevent recursive Worksheet_Change triggers.
+'
+'   2. RENDER EXECUTION:
+'      - Calls 'CreateGraphWorksheet' to rebuild the DOT source, invoke
+'        Graphviz, and insert the updated image into the GraphSheet.
+'
+'   3. RESTORATION:
+'      - Re-enables events and screen updates, restoring normal Excel behavior.
 '
 ' TECHNICAL NOTES:
-'   - Trigger: Linked to the 'Worksheet_Change' event on the DataSheet.
-'   - DeepWiki Context: Implements the 'AutoDraw reactivity' mentioned in
-'     the Overview and Working with the Data Worksheet pages.
+'   - This routine is intentionally minimal: it provides a safe execution
+'     boundary around the rendering pipeline without introducing UI latency
+'     (e.g., cursor changes or DoEvents).
+'   - Triggered indirectly via Worksheet_Change ? AutoDrawDebounced ? AutoDraw.
+'   - DeepWiki Context: Represents the "safe execution wrapper" for the
+'     AutoDraw reactivity model described in the Data Worksheet documentation.
 ' ==========================================================================
 Public Sub AutoDraw()
-    If SettingsSheet.Range(SETTINGS_RUN_MODE).value = TOGGLE_AUTO Then
-        ' Show the hourglass cursor
-        Application.Cursor = xlWait
-        
-        ' Clear pending events
-        DoEvents
-    
-        OptimizeCode_Begin
-        CreateGraphWorksheet
-        OptimizeCode_End
-         
-        ' Reset the cursor back to the default
-        Application.Cursor = xlDefault
-    End If
+    Application.ScreenUpdating = False
+    Application.EnableEvents = False
+    CreateGraphWorksheet
+    Application.EnableEvents = True
+    Application.ScreenUpdating = True
 End Sub
 
 ' ==========================================================================
@@ -117,7 +116,6 @@ End Sub
 Public Sub ClearWorksheetGraphs()
     ' Delete pictures from 'data' worksheet
     DeleteAllPictures GetDataWorksheetName()
-            
     ' Delete pictures from the 'graph' worksheet
     DeleteAllPictures GraphSheet.name
 End Sub
@@ -1367,7 +1365,7 @@ Private Sub CreateGraphvizSource(ByRef ini As settings, _
                         data.label = FormatDebugLabel(row, data)
                         data.xLabel = FormatDebugXLabel(row, data)
                     End If
-
+                    
                     ' Process the rows according to object type
                     If boolKeyword Then
                         graphvizSource = Join(Array(graphvizSource, ProcessKeyword(ini, data, indent)), vbNullString)
@@ -1998,54 +1996,141 @@ End Function
 ' FUNCTION: FormatEdgeLabels
 '
 ' PURPOSE:
-'   THE EDGE LABEL ASSEMBLER. Constructs a combined Graphviz attribute string
-'   for all supported edge label positions (center, external, head, and tail).
+'   Builds the complete Graphviz edge-label attribute string, combining
+'   template-driven placeholders with explicit label fields from the data row.
+'   Supports all four Graphviz label positions: label, xlabel, taillabel,
+'   and headlabel.
 '
 ' TECHNICAL WORKFLOW:
-'   1. PRIMARY LABEL LOGIC:
-'      - If 'includeEdgeLabels' is enabled: Processes the main 'label' field.
-'      - BLANK LABEL OVERRIDE: If the label is empty and 'blankEdgeLabels' is
-'        TRUE, it injects the Graphviz "\E" token (which displays the Edge ID).
-'   2. MULTI-POSITIONAL ASSEMBLY:
-'      - XLABEL: Appends 'xlabel=' if external labels are enabled and present.
-'      - TAILLABEL: Appends 'taillabel=' for labels anchored at the edge start.
-'      - HEADLABEL: Appends 'headlabel=' for labels anchored at the edge arrow.
-'   3. SANITIZATION: All labels are passed through 'FormatLabel' to handle
-'      automatic quoting and HTML-like syntax (<...>) branching.
+'   1. TEMPLATE EXPANSION:
+'        - Begins with 'styleAttributes' (the style-layer template).
+'        - For each supported placeholder ({label}, {xlabel}, {taillabel},
+'          {headlabel}), replaces it with the corresponding data value.
+'
+'   2. FALLBACK ATTRIBUTE EMISSION:
+'        - If a placeholder is *not* present in the template, appends the
+'          appropriate attribute (e.g., " label=", " xlabel=") when the
+'          corresponding data field is non-blank.
+'
+'   3. BLANK-LABEL OVERRIDE:
+'        - When edge labels are enabled and the main label is blank:
+'             • If 'blankEdgeLabels' = TRUE, emits the Graphviz "\E" token.
+'             • Otherwise, emits an empty formatted label.
+'
+'   4. SANITIZATION:
+'        - All emitted label values pass through 'FormatLabel' (or AddQuotes
+'          for "\E") to ensure correct quoting and HTML-label handling.
 '
 ' TECHNICAL NOTES:
-'   - DeepWiki Context: Directly implements the multi-label architecture
-'     specified in the "Defining Nodes & Edges" and "Styles" pages.
-'   - Layer: Logic Layer / DOT Synthesis.
+'   - This function merges style-layer templates with data-layer values,
+'     enabling both declarative styling and dynamic label substitution.
+'   - DeepWiki Context: Implements the multi-label synthesis rules described
+'     in the "Defining Nodes & Edges" and "Styles" documentation.
 ' ==========================================================================
-Private Function FormatEdgeLabels(ByRef ini As settings, ByRef data As dataRow) As String
+Private Function FormatEdgeLabels(ByRef ini As settings, ByRef data As dataRow, ByRef styleAttributes) As String
 
     Dim edgeLabel As String
+    edgeLabel = styleAttributes
     
+    ' Handle label= attribute
     If ini.graph.includeEdgeLabels Then
-        If data.label = vbNullString Then
-            If ini.graph.blankEdgeLabels Then
-                ' True, label = edge id
-                edgeLabel = " label=" & AddQuotes("\E")
+        If InStr(1, edgeLabel, "{label}", vbTextCompare) Then
+            ' Expand the {label} placeholder
+            If data.label = vbNullString And ini.graph.blankEdgeLabels Then
+                edgeLabel = replace(edgeLabel, "{label}", "\E", 1, -1, vbTextCompare)
+            Else
+                edgeLabel = replace(edgeLabel, "{label}", data.label, 1, -1, vbTextCompare)
             End If
         Else
-            edgeLabel = " label=" & FormatLabel(data.label)
+            ' Append the label
+            If data.label <> vbNullString Then
+                edgeLabel = edgeLabel & " label=" & FormatLabel(data.label)
+            ElseIf ini.graph.blankEdgeLabels Then
+                edgeLabel = edgeLabel & " label=" & AddQuotes("\E")
+            End If
         End If
     End If
 
-    If ini.graph.includeEdgeXLabels And data.xLabel <> vbNullString Then
-        edgeLabel = edgeLabel & " xlabel=" & FormatLabel(data.xLabel)
+    ' Handle xlabel= attribute
+    If InStr(1, edgeLabel, "{xlabel}", vbTextCompare) Then
+        ' Expand the {xlabel} placeholder
+        edgeLabel = replace(edgeLabel, "{xlabel}", data.xLabel, 1, -1, vbTextCompare)
+    Else
+        ' Append the label
+        If data.xLabel <> vbNullString Then
+            edgeLabel = edgeLabel & " xlabel=" & FormatLabel(data.xLabel)
+        End If
     End If
-            
-    If ini.graph.includeEdgeTailLabels And data.tailLabel <> vbNullString Then
-        edgeLabel = edgeLabel & " taillabel=" & FormatLabel(data.tailLabel)
+    
+    ' Handle taillabel= attribute
+    If InStr(1, edgeLabel, "{taillabel}", vbTextCompare) Then
+        ' Expand the {taillabel} placeholder
+        edgeLabel = replace(edgeLabel, "{taillabel}", data.tailLabel, 1, -1, vbTextCompare)
+    Else
+        ' Append the taillabel
+        If data.tailLabel <> vbNullString Then
+            edgeLabel = edgeLabel & " taillabel=" & FormatLabel(data.tailLabel)
+        End If
     End If
-            
-    If ini.graph.includeEdgeHeadLabels And data.headLabel <> vbNullString Then
-        edgeLabel = edgeLabel & " headlabel=" & FormatLabel(data.headLabel)
+   
+    ' Handle headlabel= attribute
+    If InStr(1, edgeLabel, "{headlabel}", vbTextCompare) Then
+        ' Expand the {taillabel} placeholder
+        edgeLabel = replace(edgeLabel, "{headlabel}", data.headLabel, 1, -1, vbTextCompare)
+    Else
+        ' Append the headlabel
+        If data.headLabel <> vbNullString Then
+            edgeLabel = edgeLabel & " headlabel=" & FormatLabel(data.headLabel)
+        End If
     End If
     
     FormatEdgeLabels = edgeLabel
+    
+End Function
+
+' ==========================================================================
+' FUNCTION: FormatGraphLabels
+'
+' PURPOSE:
+'   Produces the Graphviz graph-level label attribute by merging a style
+'   template with the data row's primary label. Supports placeholder-based
+'   substitution as well as fallback attribute emission.
+'
+' TECHNICAL WORKFLOW:
+'   1. TEMPLATE EXPANSION:
+'        - Starts with 'styleAttributes' (the style-layer template).
+'        - If the template contains the {label} token, replaces it with the
+'          data row's label value.
+'
+'   2. FALLBACK ATTRIBUTE EMISSION:
+'        - If no {label} placeholder is present, appends a standard
+'          "label=" attribute using the formatted label text.
+'
+'   3. SANITIZATION:
+'        - All emitted label values pass through 'FormatLabel' to ensure
+'          correct quoting and HTML-label handling.
+'
+' TECHNICAL NOTES:
+'   - Graph-level labels differ from node/edge labels: no blank-label override
+'     logic is applied here; the label is always emitted or substituted.
+'   - DeepWiki Context: Implements the graph-label synthesis rules described
+'     in the "Graph Attributes" and "Styles" documentation.
+' ==========================================================================
+Private Function FormatGraphLabels(ByRef ini As settings, ByRef data As dataRow, ByRef styleAttributes) As String
+
+    Dim graphLabel As String
+    graphLabel = styleAttributes
+    
+    ' label=
+    If InStr(1, graphLabel, "{label}", vbTextCompare) Then
+        ' Expand the {label} placeholder
+        graphLabel = replace(graphLabel, "{label}", data.label, 1, -1, vbTextCompare)
+    Else
+        ' Append the label
+        graphLabel = graphLabel & " label=" & FormatLabel(data.label)
+    End If
+
+    FormatGraphLabels = graphLabel
     
 End Function
 
@@ -2057,44 +2142,66 @@ End Function
 ' FUNCTION: FormatNodeLabels
 '
 ' PURPOSE:
-'   THE NODE LABEL ASSEMBLER. Constructs the DOT attribute segment for
-'   internal and external node labeling, managing the relationship between
-'   Node IDs and display labels.
+'   Builds the complete Graphviz node-label attribute string by merging
+'   style-layer templates with data-layer values. Supports both primary
+'   labels ("label=") and external labels ("xlabel="), with placeholder
+'   expansion when template tokens are present.
 '
 ' TECHNICAL WORKFLOW:
-'   1. PRIMARY LABEL LOGIC:
-'      - If 'includeNodeLabels' is enabled: Processes the main 'label' field.
-'      - BLANK OVERRIDE: If 'blankNodeLabels' is TRUE, it allows Graphviz
-'        to default to the Node ID. If FALSE, it explicitly forces an
-'        empty label="".
-'   2. XLABEL ASSEMBLY: Appends the 'xlabel=' attribute if external labels
-'      are toggled ON and data exists in the 'xLabel' field.
-'   3. SANITIZATION: Routes all strings through 'FormatLabel' to handle
-'      automatic quoting or HTML bracket detection.
+'   1. TEMPLATE EXPANSION:
+'        - Begins with 'styleAttributes' (the style-layer template).
+'        - Replaces the {label} and {xlabel} placeholders when present.
+'
+'   2. FALLBACK ATTRIBUTE EMISSION:
+'        - If a placeholder is *not* present:
+'             • Emits "label=" when node labels are enabled and the data
+'               label is non-blank.
+'             • Emits an explicit empty label ("") when labels are enabled
+'               but 'blankNodeLabels' is FALSE.
+'             • Emits "xlabel=" when external labels are enabled and data
+'               exists in the xLabel field.
+'
+'   3. SANITIZATION:
+'        - All emitted label values pass through 'FormatLabel' to ensure
+'          correct quoting and HTML-label handling.
 '
 ' TECHNICAL NOTES:
-'   - Strategy: Provides granular control over whether Node IDs are
-'     visible as labels, supporting both "ID-as-Label" and "Clean Node" aesthetics.
-'   - Layer: Logic Layer / DOT Synthesis.
+'   - Supports both "ID-as-Label" and "Clean Node" aesthetics depending on
+'     the 'blankNodeLabels' setting.
+'   - DeepWiki Context: Implements the node-label synthesis rules described
+'     in the "Defining Nodes & Edges" and "Styles" documentation.
 ' ==========================================================================
-Private Function FormatNodeLabels(ByRef ini As settings, ByRef data As dataRow) As String
+Private Function FormatNodeLabels(ByRef ini As settings, ByRef data As dataRow, ByVal styleAttributes As String) As String
 
     Dim nodeLabel As String
-   
+    nodeLabel = styleAttributes
+    
+    ' Handle label= attribute
     If ini.graph.includeNodeLabels Then
-        If data.label = vbNullString Then
-            If ini.graph.blankNodeLabels Then    ' True = use default Graphviz behavior.
-                nodeLabel = vbNullString
-            Else                                 ' False, send null value as the label
-                nodeLabel = " label=" & FormatLabel(vbNullString)
-            End If
+        If InStr(1, nodeLabel, "{label}", vbTextCompare) Then
+            ' Expand the {label} placeholder
+            nodeLabel = replace(nodeLabel, "{label}", data.label, 1, -1, vbTextCompare)
         Else
-            nodeLabel = " label=" & FormatLabel(data.label)
+            ' Append the label
+            If data.label <> vbNullString Then
+                nodeLabel = nodeLabel & " label=" & FormatLabel(data.label)
+            ElseIf Not ini.graph.blankNodeLabels Then
+                nodeLabel = nodeLabel & " label=" & FormatLabel(vbNullString)
+            End If
         End If
     End If
-
-    If ini.graph.includeNodeXLabels And data.xLabel <> vbNullString Then
-        nodeLabel = nodeLabel & " xlabel=" & FormatLabel(data.xLabel)
+    
+    ' Handle xlabel= attribute
+    If ini.graph.includeNodeXLabels Then
+        If InStr(1, nodeLabel, "{xlabel}", vbTextCompare) Then
+            ' Expand the {xlabel} placeholder
+            nodeLabel = replace(nodeLabel, "{xlabel}", data.xLabel, 1, -1, vbTextCompare)
+        Else
+            ' Append the xlabel
+            If data.xLabel <> vbNullString Then
+                nodeLabel = nodeLabel & " xlabel=" & FormatLabel(data.xLabel)
+            End If
+        End If
     End If
 
     FormatNodeLabels = nodeLabel
@@ -2365,7 +2472,6 @@ End Function
 ' ==========================================================================
 Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
 
-    Dim nodeLabel As String
     Dim styleAttributes As String
     
     Dim nodeId As String
@@ -2385,7 +2491,7 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
     End If
     
     styleAttributes = Trim$(data.format)
-
+    
     ' Include the extra style attributes if enabled in the settings
     If ini.graph.includeExtraAttributes Then
         styleAttributes = Trim$(styleAttributes & " " & data.extraAttrs)
@@ -2398,12 +2504,12 @@ Private Function WriteNode(ByRef ini As settings, ByRef data As dataRow, ByVal i
     End If
 
     ' Collect the label, and xlabel labels into name value pairs
-    nodeLabel = FormatNodeLabels(ini, data)
+    styleAttributes = FormatNodeLabels(ini, data, styleAttributes)
     
-    If Trim$(styleAttributes & nodeLabel & Tooltip) = vbNullString Then
+    If Trim$(styleAttributes & Tooltip) = vbNullString Then
         WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), SEMICOLON, vbNewLine), vbNullString)
     Else
-        WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), " [ ", Trim$(styleAttributes & nodeLabel) & Tooltip & " ];", vbNewLine), vbNullString)
+        WriteNode = Join(Array(Space(indent * ini.source.indent), AddQuotesConditionally(nodeId), " [ ", Trim$(styleAttributes) & Tooltip & " ];", vbNewLine), vbNullString)
     End If
 
 End Function
@@ -2454,11 +2560,9 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
         End If
     End If
     
-    styleAttributes = Trim$(styleAttributes)
-    
     ' Collect the label, xlabel, taillabel, and headlabel labels into name value pairs
-    Dim edgeLabel As String
-    edgeLabel = FormatEdgeLabels(ini, data)
+    styleAttributes = Trim$(styleAttributes)
+    styleAttributes = FormatEdgeLabels(ini, data, styleAttributes)
 
     ' Add the quotes to the id and (optional) port for the item, and the "is related to" item
     Dim tailId As String
@@ -2468,10 +2572,10 @@ Private Function WriteEdge(ByRef ini As settings, ByRef data As dataRow, ByVal i
     headId = FormatId(data.relatedItem, ini.graph.includeEdgePorts)
     
     ' Write out the edge command
-    If Trim$(styleAttributes & edgeLabel & Tooltip) = vbNullString Then
+    If Trim$(styleAttributes & Tooltip) = vbNullString Then
         WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, SEMICOLON, vbNewLine), vbNullString)
     Else
-        WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, "[ ", Trim$(styleAttributes & edgeLabel) & Tooltip & " ];", vbNewLine), vbNullString)
+        WriteEdge = Join(Array(Space(indent * ini.source.indent), tailId, " ", ini.graph.edgeOperator, " ", headId, "[ ", Trim$(styleAttributes) & Tooltip & " ];", vbNewLine), vbNullString)
     End If
     
 End Function
@@ -2510,25 +2614,46 @@ End Function
 ' FUNCTION: ProcessKeyword
 '
 ' PURPOSE:
-'   THE GLOBAL SCOPE HANDLER. Defines or overrides default attributes for
-'   all subsequent nodes, edges, or the graph itself within the DOT stream.
+'   Generates a fully-formed DOT keyword block (node, edge, or graph) by
+'   merging style-layer attributes with data-layer values. Acts as the
+'   global-scope attribute injector, establishing default properties for
+'   all subsequent declarations in the DOT stream.
 '
 ' TECHNICAL WORKFLOW:
-'   1. ATTRIBUTE SYNTHESIS: Combines the Style 'format' with 'extraAttrs'
-'      to establish the base property set for the specified scope.
-'   2. CONTEXT-SENSITIVE LABELING:
-'      - KEYWORD_NODE: Invokes 'FormatNodeLabels' to set global node defaults.
-'      - KEYWORD_EDGE: Invokes 'FormatEdgeLabels' to set global edge defaults.
-'      - KEYWORD_GRAPH: Directly appends a 'label=' attribute if present.
-'   3. SYNTAX GENERATION: Constructs a standard DOT keyword block:
-'      'keyword [ attributes ];' with hierarchical indentation.
+'   1. BASE ATTRIBUTE ASSEMBLY:
+'        - Starts with the style 'format' string.
+'        - Optionally appends 'extraAttrs' when enabled, producing the
+'          complete style-layer attribute template.
+'
+'   2. CONTEXT-SENSITIVE LABEL SYNTHESIS:
+'        - KEYWORD_NODE:
+'             • Passes the assembled template to FormatNodeLabels, which
+'               expands placeholders and emits node-label attributes.
+'        - KEYWORD_EDGE:
+'             • Passes the template to FormatEdgeLabels for multi-positional
+'               edge-label synthesis.
+'        - KEYWORD_GRAPH:
+'             • If a graph-level label exists, delegates to FormatGraphLabels
+'               for placeholder expansion or fallback label emission.
+'
+'   3. DOT SYNTAX GENERATION:
+'        - Emits a standard DOT keyword block of the form:
+'              <keyword> [ <attributes> ];
+'          with indentation controlled by the caller.
 '
 ' TECHNICAL NOTES:
-'   - Strategy: Implements the Graphviz "State Machine" behavior, where
-'     setting a keyword attribute affects all following declarations in
-'     the same or nested scopes.
-'   - Layer: Logic Layer / DOT Synthesis.
+'   - Implements Graphviz's cascading "state machine" behavior: once a keyword
+'     block is emitted, its attributes become defaults for all following nodes,
+'     edges, or subgraphs within the same scope. Graphviz does not support
+'     clearing defaults via an empty keyword block (e.g., node []; has no
+'     reset effect). To disable previously established defaults, you must
+'     either:
+'         • explicitly override each attribute with new values, or
+'         • open a new subgraph { ... } to create a fresh attribute scope.
+'     These are the only mechanisms Graphviz provides for neutralizing
+'     inherited keyword defaults.
 ' ==========================================================================
+
 Private Function ProcessKeyword(ByRef ini As settings, ByRef data As dataRow, ByVal indent As Long) As String
 
     Dim styleAttributes As String
@@ -2538,20 +2663,19 @@ Private Function ProcessKeyword(ByRef ini As settings, ByRef data As dataRow, By
         styleAttributes = Trim$(Join(Array(styleAttributes, " ", data.extraAttrs), vbNullString))
     End If
 
-    Dim labelValue As String
     If UCase$(data.item) = KEYWORD_NODE Then
-        labelValue = FormatNodeLabels(ini, data)
+        styleAttributes = FormatNodeLabels(ini, data, styleAttributes)
     
     ElseIf UCase$(data.item) = KEYWORD_EDGE Then
-        labelValue = FormatEdgeLabels(ini, data)
+        styleAttributes = FormatEdgeLabels(ini, data, styleAttributes)
     
     ElseIf UCase$(data.item) = KEYWORD_GRAPH Then
         If data.label <> vbNullString Then
-            labelValue = Join(Array(labelValue, " label=", FormatLabel(data.label)), vbNullString)
+            styleAttributes = FormatGraphLabels(ini, data, styleAttributes)
         End If
     End If
         
-    ProcessKeyword = Join(Array(Space(indent * ini.source.indent), data.item, "[ ", Trim$(styleAttributes & labelValue), " ];", vbNewLine), vbNullString)
+    ProcessKeyword = Join(Array(Space(indent * ini.source.indent), data.item, "[ ", Trim$(styleAttributes), " ];", vbNewLine), vbNullString)
     
 End Function
 
