@@ -86,23 +86,32 @@ End Sub
 
 ' ==========================================================================
 ' PROCEDURE: Worksheet_Change
+'
 ' PURPOSE:
-'   Triggers the automated drawing engine in response to data edits.
+'   Responds to user edits on the 'data' worksheet and conditionally
+'   triggers a graph refresh based on the current run mode.
 '
 ' TECHNICAL WORKFLOW:
-'   1. EVENT INTERCEPTION: Captures any manual or programmatic change
-'      within the worksheet's grid.
-'   2. ENGINE INVOCATION: Calls 'AutoDraw', which evaluates the
-'      'Draw Graph Automatically' setting before regenerating the diagram.
+'   1. SAFETY CHECK:
+'        - Exits immediately if events are disabled, preventing recursion
+'          during programmatic updates or internal redraw operations.
+'
+'   2. MODE GATE:
+'        - Reads the 'SETTINGS_RUN_MODE' named range on the Settings sheet.
+'        - Only invokes AutoDraw when the workbook is in "Automatic" mode.
+'
+'   3. RENDER DISPATCH:
+'        - Delegates to AutoDraw, which handles event suspension, screen
+'          suppression, and the full graph-generation pipeline.
 '
 ' USAGE:
-'   - Provides the "Instant Feedback" loop for users tweaking node
-'     labels, colors, or relationships.
-'   - Seamlessly integrates data entry with visual output.
+'   - Provides the live-update behavior for users editing graph data.
+'   - Integrates seamlessly with manual/auto toggling.
 ' ==========================================================================
 '@Ignore ParameterNotUsed
 Private Sub Worksheet_Change(ByVal Target As Range)
-    AutoDraw
+    If Application.EnableEvents = False Then Exit Sub
+    If SettingsSheet.Range(SETTINGS_RUN_MODE).value = TOGGLE_AUTO Then AutoDraw
 End Sub
 
 ' ==========================================================================
