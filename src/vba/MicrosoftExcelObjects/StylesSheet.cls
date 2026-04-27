@@ -100,7 +100,7 @@ Private Sub Worksheet_Change(ByVal Target As Range)
 
     ' Detect changes in the view switch headings
     If Not Intersect(Target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         RefreshRibbon
     End If
 
@@ -109,7 +109,7 @@ Private Sub Worksheet_Change(ByVal Target As Range)
     End If
     
 CleanExit:
-    Application.EnableEvents = True
+    Application.enableEvents = True
     Exit Sub
 
 ErrorHandler:
