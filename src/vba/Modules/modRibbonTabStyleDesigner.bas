@@ -1534,7 +1534,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor1_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    Application.EnableEvents = False
+    Application.enableEvents = False
     
     SaveColor index, DESIGNER_EDGE_COLOR_1
     
@@ -1550,7 +1550,7 @@ Private Sub edgeColor1_onAction(ByVal control As IRibbonControl, ByVal itemId As
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     
-    Application.EnableEvents = True
+    Application.enableEvents = True
     RenderPreview
 End Sub
 
@@ -1569,7 +1569,7 @@ End Sub
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
-    Application.EnableEvents = False
+    Application.enableEvents = False
     
     SaveColor index, DESIGNER_EDGE_COLOR_2
     
@@ -1581,7 +1581,7 @@ Private Sub edgeColor2_onAction(ByVal control As IRibbonControl, ByVal itemId As
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR2_PICKER
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3_PICKER
-    Application.EnableEvents = True
+    Application.enableEvents = True
     
     RenderPreview
 End Sub

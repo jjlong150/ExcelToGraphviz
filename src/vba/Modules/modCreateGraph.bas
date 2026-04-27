@@ -89,9 +89,9 @@ Option Explicit
 ' ==========================================================================
 Public Sub AutoDraw()
     Application.ScreenUpdating = False
-    Application.EnableEvents = False
+    Application.enableEvents = False
     CreateGraphWorksheet
-    Application.EnableEvents = True
+    Application.enableEvents = True
     Application.ScreenUpdating = True
 End Sub
 

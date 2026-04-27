@@ -4014,8 +4014,8 @@ Public Sub RunSQLAsExtension(Optional ByVal rowNumber As Long = 0)
     
     ' Disable events
     Dim originalEnableEvents As Boolean
-    originalEnableEvents = Application.EnableEvents
-    Application.EnableEvents = False
+    originalEnableEvents = Application.enableEvents
+    Application.enableEvents = False
 
     ' Execute ALL the SQL commands — pass the row number
     RunSQL rowNumber
@@ -4024,7 +4024,7 @@ Public Sub RunSQLAsExtension(Optional ByVal rowNumber As Long = 0)
     InvalidateRibbonControl RIBBON_CTL_SQL_CONN_POOL_RESET
     
     ' Restore prior states
-    Application.EnableEvents = originalEnableEvents
+    Application.enableEvents = originalEnableEvents
     Application.ScreenUpdating = originalScreenUpdating
     Application.AutoRecover.Enabled = originalAutoRecover
     Application.Calculation = originalCalculation

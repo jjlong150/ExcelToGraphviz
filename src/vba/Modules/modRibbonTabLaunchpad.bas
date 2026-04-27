@@ -124,10 +124,10 @@ End Sub
 Public Sub toggleSource_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SOURCE).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SOURCE).value = TOGGLE_SHOW Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         ClearSource
         ShowSource CreateGraphSource()
-        Application.EnableEvents = True
+        Application.enableEvents = True
         SourceSheet.visible = True
         SourceSheet.Activate
     Else

@@ -110,7 +110,7 @@ End Sub
 ' ==========================================================================
 '@Ignore ParameterNotUsed
 Private Sub Worksheet_Change(ByVal Target As Range)
-    If Application.EnableEvents = False Then Exit Sub
+    If Application.enableEvents = False Then Exit Sub
     If SettingsSheet.Range(SETTINGS_RUN_MODE).value = TOGGLE_AUTO Then AutoDraw
 End Sub
 

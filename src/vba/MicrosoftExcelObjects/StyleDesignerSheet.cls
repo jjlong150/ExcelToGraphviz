@@ -113,11 +113,11 @@ Private Sub Worksheet_Change(ByVal Target As Range)
 
     ' Detect changes in the NodeFormatString text box
     If Not Intersect(Target, StyleDesignerSheet.Range("LabelText,XlabelText,TailLabelText,HeadLabelText")) Is Nothing Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         RenderPreviewFromLists
         
     ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING)) Is Nothing Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         If StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value = vbNullString Then
             ClearStyleRibbon
         Else
@@ -126,17 +126,17 @@ Private Sub Worksheet_Change(ByVal Target As Range)
         End If
         
     ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_ADD_CAPTION)) Is Nothing Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         RenderPreview
 
     ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
-        Application.EnableEvents = False
+        Application.enableEvents = False
         RefreshControlsImageScale
         RefreshControlsImagePosition
     End If
     
 LetsContinue:
-    Application.EnableEvents = True
+    Application.enableEvents = True
     Exit Sub
 Whoa:
     EmitMessage "StyleDesignerSheet " & err.number & " " & err.Description
