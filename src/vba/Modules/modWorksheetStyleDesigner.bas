@@ -1449,6 +1449,10 @@ Public Sub SaveToStylesWorksheet()
     rowFocus = row
     
     If insertRow Then
+        Dim enableEvents As Boolean
+        enableEvents = Application.enableEvents
+        Application.enableEvents = False
+        
         ' Set the format string and the object type
         StylesSheet.Cells.item(row, styles.nameColumn).value = styleName
         StylesSheet.Cells.item(row, styles.formatColumn).value = StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value
@@ -1478,6 +1482,7 @@ Public Sub SaveToStylesWorksheet()
             ' Add default values for the view columns
             SetStyleViewDefaults row, styles
         End If
+        Application.enableEvents = enableEvents
     End If
     
     ' Put the focus on the cell where the style name has to be entered
