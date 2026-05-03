@@ -167,3 +167,5 @@ A consistent, open‑source emoji set available as SVGs — perfect when you wan
 I’ve highlighted many of the best free resources, but the icon ecosystem keeps expanding and everyone has their own trusted go‑to sets. What **free** icon collections do you rely on when building your Graphviz diagrams?
 
 Share your favorites in the comments and help the community discover new gems.
+
+<Comments />
