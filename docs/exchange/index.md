@@ -1,4 +1,4 @@
-# Data Exchange Using JSON Files
+# Exchange Data Using JSON Files
 
 There are several drawbacks to using an Excel workbook as your Graphviz IDE:
 

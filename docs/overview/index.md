@@ -1,6 +1,14 @@
-# Overview
+# Foundations
 
-The **Relationship Visualizer** allows you to effortlessly collect relationship information in Microsoft Excel and rapidly create relationship graphs. The most effective way to demonstrate its capabilities is through visual examples.
+The **Relationship Visualizer** spreadsheet helps you organize relationship data in Excel and transform it into clear, expressive Graphviz diagrams. 
+
+Before exploring the workflow, this brief 3‑minute video shows what the tool can produce.
+
+<YouTube id="b-1TcSIug0I" />
+
+::: tip About This Section
+This page provides a guided tour of the Relationship Visualizer’s core concepts and workflow, showing how data becomes a graph and how styles, views, and publishing fit into the process.
+:::
 
 ## Visualize Relationships
 

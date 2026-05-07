@@ -1,20 +1,8 @@
-# Data Manipulation Using SQL
+# Using SQL
 
-Unlock the power of SQL to extract and visualize data from your Excel spreadsheets with Relationship Visualizer. This optional feature<sup>[1]</sup> lets you write SQL queries to pull data from multiple worksheets and generate Graphviz graphs with ease.
+Unlock the power of SQL to extract and visualize data from your Excel spreadsheets with **Relationship Visualizer**. 
 
-::: tip SQL Topics - Quick Links
-
-Use the links below to jump directly to key SQL concepts and features used throughout the Relationship Visualizer.
-
-<!-- no toc -->
-- [What is SQL?](#what-is-sql)
-- [Excel SQL Queries](#excel-sql-queries)
-- [How to Use SQL in the Relationship Visualizer](#how-to-use-sql-in-the-relationship-visualizer)
-- [The `SQL` Worksheet](#the-sql-worksheet)
-- [The `SQL` Ribbon Tab](#the-sql-ribbon-tab)
-- [SQL Queries for Creating Graphs](./queries/)
-- [SQL syntax](./syntax/)
-:::
+This *optional feature*<sup>[1]</sup> lets you write SQL queries to pull data from multiple worksheets and generate Graphviz graphs with ease.
 
 Ideal for users familiar with SQL, it provides a fast and flexible way to:
 
@@ -22,23 +10,282 @@ Ideal for users familiar with SQL, it provides a fast and flexible way to:
 - Batch‑process queries to aggregate information across several workbooks  
 - Streamline repetitive data‑preparation and transformation tasks
 
-::: tip SQL Extensions - Quick Links
+
+::: tip SQL Topics
+
+Use the links below to jump directly to key SQL concepts and features used throughout the Relationship Visualizer.
+
+<div class="advanced-grid">
+
+  <a class="advanced-card" href="#what-is-sql">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="6" rx="8" ry="3" />
+        <path d="M4 6v6a8 3 0 0 0 16 0V6" />
+        <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+      </svg>
+    </span>
+    What is SQL?
+  </a>
+
+  <a class="advanced-card" href="#excel-sql-queries">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3" />
+        <path d="M4 6v6c0 1.657 3.582 3 8 3m8 -3.5v-5.5" />
+        <path d="M4 12v6c0 1.657 3.582 3 8 3" />
+        <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M20.2 20.2l1.8 1.8" />
+      </svg>
+    </span>
+    Excel SQL Queries
+  </a>
+
+  <a class="advanced-card" href="#the-sql-worksheet">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" />
+        <path d="M8 11h8v7h-8l0 -7" />
+        <path d="M8 15h8" />
+        <path d="M11 11v7" />
+      </svg>
+    </span>
+    The SQL Worksheet
+  </a>
+
+  <a class="advanced-card" href="#the-sql-ribbon-tab">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" />
+        <path d="M4 9l16 0" />
+      </svg>
+    </span>
+    The SQL Ribbon Tab
+  </a>
+
+  <a class="advanced-card" href="#how-to-use-sql-in-the-relationship-visualizer">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M5 20.25c0 .414 .336 .75 .75 .75h1.25a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-1a1 1 0 0 1 -1 -1v-1a1 1 0 0 1 1 -1h1.25a.75 .75 0 0 1 .75 .75" />
+        <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+        <path d="M18 15v6h2" />
+        <path d="M13 15a2 2 0 0 1 2 2v2a2 2 0 1 1 -4 0v-2a2 2 0 0 1 2 -2" />
+        <path d="M14 20l1.5 1.5" />
+      </svg>
+    </span>
+    SQL + Relationship Visualizer
+  </a>
+
+  <a class="advanced-card" href="./queries/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M10 5a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M6 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M10 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M18 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M2 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M14 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M5 17l2 -3" />
+        <path d="M9 10l2 -3" />
+        <path d="M13 7l2 3" />
+        <path d="M17 14l2 3" />
+        <path d="M15 14l-2 3" />
+        <path d="M9 14l2 3" />
+      </svg>
+    </span>
+    SQL to Graph Example
+  </a>
+
+  <a class="advanced-card" href="./syntax/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 8a2 2 0 0 1 2 2v4a2 2 0 1 1 -4 0v-4a2 2 0 0 1 2 -2" />
+        <path d="M17 8v8h4" />
+        <path d="M13 15l1 1" />
+        <path d="M3 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-2a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1" />
+      </svg>
+    </span>
+    SQL Language Syntax Reference
+  </a>
+
+</div>
+
+:::
+
+::: tip SQL Extensions
 
 These SQL extensions simplify common graph‑building tasks. Passing specific values as SQL parameters activates each utility feature.
 
-<!-- no toc -->
-- [Group Items into Clusters](./extensions/#grouping-data-into-clusters-and-subclusters)
-- [Split Long Label Text](./extensions/#splitting-labels)
-- [Generate Edges to Chain Nodes](./extensions/#chaining-nodes-using-edges)
-- [Generate Ranked Subgraphs](./extensions/#creating-subgraphs-with-rank)
-- [Traverse Trees](./recursion/)
-- [Iterate SQL Results](./iterate/)
-- [Enumerate Values](./enumerate/)
-- [Example: Creating Organization Charts](./orgcharts/)
-- [Example: Building Timelines](./timeline/)
+<div class="advanced-grid">
+  <a class="advanced-card" href="./directives/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4.887 20h11.868c.893 0 1.664 -.665 1.847 -1.592l2.358 -12c.212 -1.081 -.442 -2.14 -1.462 -2.366a1.784 1.784 0 0 0 -.385 -.042h-11.868c-.893 0 -1.664 .665 -1.847 1.592l-2.358 12c-.212 1.081 .442 2.14 1.462 2.366c.127 .028 .256 .042 .385 .042" />
+        <path d="M9 8l4 4l-6 4" />
+        <path d="M12 16h3" />
+      </svg>
+    </span>
+    Directives
+  </a>
+  <a class="advanced-card" href="./clustering/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M8 8h8v8h-8l0 -8" />
+        <path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" />
+      </svg>
+    </span>
+    Group Items into Nested Clusters
+  </a>
+  <a class="advanced-card" href="./labelsplit/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 19v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2" />
+        <path d="M11 17h2" />
+        <path d="M9 12h6" />
+        <path d="M10 7h4" />
+      </svg>
+    </span>
+    Split Long Label Text
+  </a>
+  <a class="advanced-card" href="./chaining/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M15 6.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
+        <path d="M4 17.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
+        <path d="M8.5 15.5l7 -7" />
+      </svg>
+    </span>
+    Generate Edges to Chain Nodes
+  </a>
+  <a class="advanced-card" href="./subgraphs/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -12" />
+        <path d="M14 6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -6" />
+      </svg>
+    </span>
+    Align Nodes on the Same Level
+  </a>
+  <a class="advanced-card" href="./recursion/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 20a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" />
+        <path d="M16 4a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" />
+        <path d="M16 20a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" />
+        <path d="M11 12a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" />
+        <path d="M21 12a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" />
+        <path d="M5.058 18.306l2.88 -4.606" />
+        <path d="M10.061 10.303l2.877 -4.604" />
+        <path d="M10.065 13.705l2.876 4.6" />
+        <path d="M15.063 5.7l2.881 4.61" />
+      </svg>
+    </span>
+    Traverse Trees Recursively
+  </a>
+  <a class="advanced-card" href="./iterate/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M8.5 16a5.5 5.5 0 1 0 -5.5 -5.5v.5" />
+        <path d="M3 16h18" />
+        <path d="M18 13l3 3l-3 3" />
+      </svg>
+    </span>
+    Iterate SQL Results
+  </a>
+  <a class="advanced-card" href="./enumerate/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 10l2 -2v8" />
+        <path d="M9 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3" />
+        <path d="M17 8h2.5a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1 -1.5 1.5h-1.5h1.5a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1 -1.5 1.5h-2.5" />
+      </svg>
+    </span>
+    Enumerate Values
+  </a>
+  <a class="advanced-card" href="./counts/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3" />
+        <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3" />
+        <path d="M11 11l1 -1v4" />
+      </svg>
+    </span>
+    Count Substitution
+  </a>
+  <a class="advanced-card" href="./concatenation/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 4l-8 4l8 4l8 -4l-8 -4" />
+        <path d="M4 12l8 4l8 -4" />
+        <path d="M4 16l8 4l8 -4" />
+      </svg>
+    </span>
+    Concatenation
+  </a>
+</div>
+
 :::
 
-[1]: The SQL feature is **Windows-only** and requires basic SQL knowledge. If you use macOS, you can still use Relationship Visualizer’s manual data entry options. 
+::: tip SQL Advanced Examples
+
+These SQL examples illustrate how to build graphs using SQL statements and extensions.
+
+<div class="advanced-grid">
+
+  <a class="advanced-card" href="./orgcharts/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 17a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -2" />
+        <path d="M15 17a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -2" />
+        <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -2" />
+        <path d="M6 15v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" />
+        <path d="M12 9l0 3" />
+      </svg>
+    </span>
+    Create Organization Charts
+  </a>
+
+  <a class="advanced-card" href="./timeline/">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 4a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -2" />
+        <path d="M17 18a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -2" />
+        <path d="M7 5l7 0" />
+        <path d="M10 19l7 0" />
+        <path d="M8 19a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M14 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M7 5.5a5 6.5 0 0 1 5 6.5a5 6.5 0 0 0 5 6.5" />
+      </svg>
+    </span>
+    Build Roadmaps and Timelines
+  </a>
+
+</div>
+
+:::
+
+[1]: The SQL feature is **Windows only** and requires basic SQL knowledge. If you use macOS, you can still use Relationship Visualizer’s manual data entry options. 
 
 ## What is SQL?
 

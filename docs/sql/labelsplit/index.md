@@ -1,4 +1,4 @@
-# Label Splitting
+# Split Long Labels
 
 Label splitting is a powerful SQL extension that allows you to break long label text into multiple readable lines within a node. It gives you control over where lines break and how each line is aligned (left, center, or right), resulting in cleaner, more balanced, and professional-looking diagrams.
 

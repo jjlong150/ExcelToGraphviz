@@ -1,4 +1,4 @@
-# Publish Graphs
+# Publishing Graphs
 
 One of the strengths of the Relationship Visualizer is its ability to handle large datasets and let Graphviz determine an efficient layout automatically. However, graphs with substantial amounts of data can become quite large—often far beyond what can be comfortably viewed within Excel.
 

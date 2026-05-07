@@ -65,3 +65,50 @@
 .home-extra-content .features-table td:last-child {
   color: var(--vp-c-text-2);
 }
+
+/* Advanced topic cards grid */
+.advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Card styling (merged + icon-ready + grid-safe) */
+.advanced-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  text-decoration: none;
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  /* CRITICAL FIXES */
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0; /* allows flex content to shrink inside grid cell */
+}
+
+/* Hover state */
+.advanced-card:hover {
+  background: var(--vp-c-bg-alt);
+  border-color: var(--vp-c-brand-1);
+}
+
+/* Icon wrapper */
+.advanced-card .icon {
+  display: flex;
+  align-items: center;
+}
+
+/* SVG icon sizing */
+.advanced-card .icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}

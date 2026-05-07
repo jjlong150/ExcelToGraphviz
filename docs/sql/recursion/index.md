@@ -1,4 +1,4 @@
-# Traversing Trees Recursively
+# Traverse Trees Recursively
 
 A frequent question is: *“Can you create tree‑traversal graphs using the Relationship Visualizer?”*  
 The answer is **YES!**

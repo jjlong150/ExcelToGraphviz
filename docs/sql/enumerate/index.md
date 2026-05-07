@@ -1,4 +1,4 @@
-# Enumeration Queries
+# Enumerate Values
 
 **Enumerated SQL queries** enable a query to loop through a numeric range and generate rows for each value in that range. Enumeration is especially useful when you need to fill in missing values, create evenly spaced steps, or build a complete sequence that does not exist in the underlying data.
 

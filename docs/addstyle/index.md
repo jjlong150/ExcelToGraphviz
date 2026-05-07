@@ -1,11 +1,50 @@
-# Add Style to Your Graphs
+# Adding Style
 
-Styling is what transforms a raw graph into a clear, expressive visualization, helping your graph tell a more compelling story. This section introduces the tools and techniques for applying styles to nodes, edges, and clusters.
+Styling is where your graphs come alive. Colors, shapes, and layout choices turn raw data into a visual story your audience can understand at a glance. This section introduces the tools that make that possible.
 
-Use the links below to explore each styling capability in depth.
+Use the cards below to explore each styling capability in depth.
 
-| [Style Designer](../designer/) | [Style Gallery](../styles/) | [Create Views](../views/) |
-|----------------|-------------- | ------------ |
-| ![](./styledesigner.png) | ![](./stylegallery.png) | ![](./createviews.png) |
-| Define reusable styles for graph elements. Control color, shape, font, and layout attributes with precision. | Save and organize your custom styles in a gallery for easy reuse across graphs and workbooks. | Apply styles selectively to create focused views highlighting specific data or relationships. |
+<div class="advanced-grid">
+  <a class="advanced-card" href="../designer/">
+    <strong>Style Designer</strong><br><br>
+    <img src="./styledesigner.png" alt="Style Designer"
+         style="width:50%; border-radius:6px; margin:0.8rem 0; border:1px solid rgba(0,0,0,0.08);">
+    <small><i>Define reusable styles for nodes, edges, and clusters.</i></small>
+  </a>
+</div>
 
+<div class="advanced-grid">
+  <a class="advanced-card" href="../styles/">
+    <strong>Style Gallery</strong><br><br>
+    <img src="./stylegallery.png" alt="Style Gallery"
+         style="width:50%; border-radius:6px; margin:0.8rem 0; border:1px solid rgba(0,0,0,0.08);">
+    <small><i>Save and organize your custom styles for reuse.</i></small>
+  </a>
+</div>
+
+<div class="advanced-grid">
+  <a class="advanced-card" href="../views/">
+    <strong>Create Views</strong><br><br>
+    <img src="./createviews.png" alt="Create Views"
+         style="width:50%; border-radius:6px; margin:0.8rem 0; border:1px solid rgba(0,0,0,0.08);">
+    <small><i>Apply styles selectively to highlight specific data.</i></small>
+  </a>
+</div>
+
+<style>
+.advanced-card,
+.advanced-card:visited,
+.advanced-card:hover,
+.advanced-card:active {
+  text-decoration: none !important;
+}
+
+.advanced-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.advanced-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+</style>

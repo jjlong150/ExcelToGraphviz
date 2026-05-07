@@ -64,16 +64,15 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Getting Started',
+        text: 'Foundations',
+            link: '/overview/',
         items: [
-          { text: 'Overview', link: '/overview/' },
-          { text: 'Workbook', link: '/workbook/' },
-          { text: 'Launchpad', link: '/launchpad/' },
-        ]
-      },
-      {
-        text: 'Graphs',
-        items: [
+          {
+            items: [
+              { text: 'Workbook', link: '/workbook/' },
+              { text: 'Launchpad', link: '/launchpad/' },
+            ]
+          },
           {
             text: 'Creating Graphs', 
             link: '/create/',
@@ -86,7 +85,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Styling and Views', 
+            text: 'Adding Style', 
             link: '/addstyle/',
             items: [
               { text: 'Style Designer', link: '/designer/' },
@@ -115,28 +114,28 @@ export default defineConfig({
             link: '/sql/extensions/',
             items: [
               { text: 'Directives', link: '/sql/directives/' },
-              { text: 'Clustering', link: '/sql/clustering/' },
-              { text: 'Count Substitution', link: '/sql/counts/' },
-              { text: 'Label Splitting', link: '/sql/labelsplit/' },
-              { text: 'Chaining Nodes', link: '/sql/chaining/' },
-              { text: 'Creating Subgraphs', link: '/sql/subgraphs/' },
-              { text: 'Tree Traversal', link: '/sql/recursion/'},
-              { text: 'Iteration', link: '/sql/iterate/' },
-              { text: 'Enumeration', link: '/sql/enumerate/' } ,
-              { text: 'Concatenation', link: '/sql/concatenation/' }
+              { text: 'Cluster Nodes', link: '/sql/clustering/' },
+              { text: 'Substitute Counts', link: '/sql/counts/' },
+              { text: 'Split Long Labels', link: '/sql/labelsplit/' },
+              { text: 'Chain Nodes', link: '/sql/chaining/' },
+              { text: 'Align Nodes', link: '/sql/subgraphs/' },
+              { text: 'Traverse Trees', link: '/sql/recursion/'},
+              { text: 'Iterate SQL Results', link: '/sql/iterate/' },
+              { text: 'Enumerate Values', link: '/sql/enumerate/' } ,
+              { text: 'Concatenate Values', link: '/sql/concatenation/' }
                   ]
           },
-          { text: 'Examples',
+          { text: 'Advanced SQL Examples',
             items: [
               { text: 'Organization Charts', link: '/sql/orgcharts/' },
               { text: 'Timelines and Roadmaps', link: '/sql/timeline/' }
                     ]
           },
-          { text: 'SQL Syntax', link: '/sql/syntax/' },
+          { text: 'SQL Syntax Reference', link: '/sql/syntax/' },
         ]
       },
       {
-        text: 'Data Exchange',
+        text: 'Exchange Data',
         items: [
           { text: 'Using JSON Files', link: '/exchange/',
             items: [
@@ -182,7 +181,7 @@ export default defineConfig({
 
     editLink: {
       pattern: 'https://buymeacoffee.com/exceltographviz',
-      text: 'Like this tool? Show your support!'
+      text: 'Find this tool helpful? Consider supporting its development.'
     },
 
     socialLinks: [

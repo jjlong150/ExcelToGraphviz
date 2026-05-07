@@ -12,9 +12,6 @@ hero:
     alt: Excel to Graphviz
   actions:
     - theme: brand
-      text: Overview
-      link: /overview/
-    - theme: alt
       text: Download
       link: /download/
     - theme: alt
@@ -25,26 +22,26 @@ features:
   - icon:
       dark: /share-2.svg
       light: /share-2.svg
-    title: Visualize Graphs Using Excel
-    details: Create Graphviz graphs directly from your Excel data
-    link: /create/
+    title: Foundations
+    details: Essential concepts and workflow for creating Graphviz diagrams from Excel
+    link: /overview/
   - icon:
       dark: /palette.svg
       light: /palette.svg
     title: Apply Style
-    details: Fast, expressive graph styling with a built‑in designer and gallery
-    link: /designer/
+    details: Fast, expressive graph styling with a built-in style designer and CSS-like styles gallery
+    link: /addstyle/
   - icon:
       dark: /image-down.svg
       light: /image-down.svg
     title: Publish Graphs
-    details: Save graphs as image, PDF, or SVG files<br/>Add animation to SVG files
+    details: Save graphs as image, PDF, or SVG files, and add animation to SVG output
     link: /publish/
   - icon:
       dark: /database-search.svg
       light: /database-search.svg
     title: Manipulate Data Using SQL
-    details: Use SQL to retrieve data from Excel and Access (Windows-only)
+    details: Use SQL to retrieve data from Excel and Access (Windows only)
     link: /sql/
   - icon:
       dark: /monitor-cog.svg
