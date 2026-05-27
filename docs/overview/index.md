@@ -1,18 +1,14 @@
-# Foundations
+# Overview
 
-The **Relationship Visualizer** spreadsheet helps you organize relationship data in Excel and transform it into clear, expressive Graphviz diagrams. 
+See how the **Relationship Visualizer** turns raw data into clean, meaningful graph diagrams, with styles, views, and publishing built into the workflow.
 
-Before exploring the workflow, this brief 3‑minute video shows what the tool can produce.
+This quick 2-minute video gives a feel for what's possible.
 
-<YouTube id="b-1TcSIug0I" />
+<YouTube id="0T0CMk4Y3Ls" />
 
-::: tip About This Section
-This page provides a guided tour of the Relationship Visualizer’s core concepts and workflow, showing how data becomes a graph and how styles, views, and publishing fit into the process.
-:::
+## Enter Data
 
-## Visualize Relationships
-
-The `data` worksheet is where you construct your relationships to be graphed. 
+The `data` worksheet is where you specify the relationships to be graphed. 
 
 Large data-driven graphs can be constructed easily by simply supplying two columns of data, as shown below:
 
