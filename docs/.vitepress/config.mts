@@ -64,7 +64,7 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Foundations',
+        text: 'Overview',
             link: '/overview/',
         items: [
           {
@@ -99,11 +99,18 @@ export default defineConfig({
             ]
       },
       {
-        text: 'Graphviz',
+        text: 'Setup',
         items: [
-          { text: 'View DOT Source Code', link: '/source/' },
-          { text: 'DOT Message Console', link: '/console/' }
-        ],
+          { text: 'Download', link: '/download/' },
+          {
+            text: 'Install', 
+            link: '/install/',
+            items: [
+              { text: 'Windows Instructions', link: '/install-win/' },
+              { text: 'macOS Instructions', link: '/install-mac/' }
+            ]
+          }
+        ]
       },
       {
         text: 'Data Manipulation',
@@ -135,29 +142,11 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Exchange Data',
+        text: 'Graphviz',
         items: [
-          { text: 'Using JSON Files', link: '/exchange/',
-            items: [
-              { text: 'Export', link: '/exchange/export/' },
-              { text: 'Import', link: '/exchange/import/' }
-            ]
-          },
-        ]
-      },
-      {
-        text: 'Setup',
-        items: [
-          { text: 'Download', link: '/download/' },
-          {
-            text: 'Install', 
-            link: '/install/',
-            items: [
-              { text: 'Windows Instructions', link: '/install-win/' },
-              { text: 'macOS Instructions', link: '/install-mac/' }
-            ]
-          }
-        ]
+          { text: 'View DOT Source Code', link: '/source/' },
+          { text: 'DOT Message Console', link: '/console/' }
+        ],
       },
       {
         text: 'Maintenance',
@@ -167,6 +156,17 @@ export default defineConfig({
           { text: 'Settings', link: '/settings/' },
           { text: 'Information', link: '/info/' }
         ],
+      },
+      {
+        text: 'Exchange Data',
+        items: [
+          { text: 'Using JSON Files', link: '/exchange/',
+            items: [
+              { text: 'Export', link: '/exchange/export/' },
+              { text: 'Import', link: '/exchange/import/' }
+            ]
+          },
+        ]
       }
     ],
 

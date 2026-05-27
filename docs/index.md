@@ -15,8 +15,8 @@ hero:
       text: Download
       link: /download/
     - theme: alt
-      text: Install
-      link: /install/
+      text: Learn More
+      link: /overview/
 
 features:
   - icon:
