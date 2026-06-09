@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: DiagnosticsSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Diagnostics
 '
 ' ROLE:
@@ -20,7 +20,7 @@ Attribute VB_Exposed = True
 '
 ' DESCRIPTION:
 '   This worksheet module provides the interactive layer for the Diagnostics
-'   subsystem. When activated, it triggers a full environment audit—capturing
+'   subsystem. When activated, it triggers a full environment audit-capturing
 '   OS details, Excel version, provider state, file paths, and other runtime
 '   metadata. It also manages Ribbon activation and uses macOS-safe deferred
 '   scheduling to avoid UI race conditions. Upon deactivation, it clears all
@@ -29,20 +29,20 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - REAL-TIME ENVIRONMENT REPORTING:
-'       • Calls ReportDiagnostics on activation to populate system metadata
-'       • Surfaces provider state, file paths, and environment fingerprints
+'       o Calls ReportDiagnostics on activation to populate system metadata
+'       o Surfaces provider state, file paths, and environment fingerprints
 '
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Diagnostics Ribbon tab when the sheet is selected
-'       • Ensures diagnostic tools are immediately accessible
+'       o Activates the Diagnostics Ribbon tab when the sheet is selected
+'       o Ensures diagnostic tools are immediately accessible
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 '   - PRIVACY & DATA HYGIENE:
-'       • Calls ClearDiagnostics on deactivation to remove system-specific data
-'       • Prevents environment fingerprints from persisting in saved files
+'       o Calls ClearDiagnostics on deactivation to remove system-specific data
+'       o Prevents environment fingerprints from persisting in saved files
 '
 ' USAGE:
 '   - Fires automatically when the user selects the Diagnostics worksheet

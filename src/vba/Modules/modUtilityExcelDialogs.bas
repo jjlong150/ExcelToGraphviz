@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelDialogs"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelDialogs
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Excel Interop
 '
 ' ROLE:
@@ -13,11 +13,11 @@ Attribute VB_Name = "modUtilityExcelDialogs"
 '
 ' RESPONSIBILITIES:
 '   - Directory selection:
-'       • ChooseDirectory: macOS folder picker via AppleScriptTask
+'       o ChooseDirectory: macOS folder picker via AppleScriptTask
 '         or Windows FileDialog(msoFileDialogFolderPicker)
-'       • Normalize initial directory and handle user cancellation
+'       o Normalize initial directory and handle user cancellation
 '   - Save-As filename selection:
-'       • GetSaveAsFilename: wrapper over Application.GetSaveAsFilename
+'       o GetSaveAsFilename: wrapper over Application.GetSaveAsFilename
 '         with project-specific defaults and trimming
 '
 ' ARCHITECTURAL NOTES:

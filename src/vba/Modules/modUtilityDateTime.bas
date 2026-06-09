@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityDateTime"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityDateTime
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Date & Time
 '
 ' ROLE:

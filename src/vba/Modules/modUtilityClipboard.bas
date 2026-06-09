@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityClipboard"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityClipboard
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Clipboard
 '
 ' ROLE:

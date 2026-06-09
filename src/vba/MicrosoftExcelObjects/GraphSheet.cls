@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: GraphSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Output
 '
 ' ROLE:
@@ -27,16 +27,16 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-SENSITIVE UI:
-'       • Activates the Graphviz Ribbon tab when the sheet is selected
-'       • Ensures zoom, export, and redraw tools are immediately available
+'       o Activates the Graphviz Ribbon tab when the sheet is selected
+'       o Ensures zoom, export, and redraw tools are immediately available
 '
 '   - UI HYGIENE:
-'       • Clears the StatusBar on entry and exit to remove stale messages
-'       • Maintains a clean viewing environment for rendered diagrams
+'       o Clears the StatusBar on entry and exit to remove stale messages
+'       o Maintains a clean viewing environment for rendered diagrams
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 ' USAGE:
 '   - Fires automatically when the user navigates to the Graph worksheet

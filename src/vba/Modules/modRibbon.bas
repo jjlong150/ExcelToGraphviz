@@ -2,7 +2,7 @@ Attribute VB_Name = "modRibbon"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modRibbon
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Excel UI / Ribbon
 '
 ' ROLE:
@@ -12,20 +12,20 @@ Attribute VB_Name = "modRibbon"
 '
 ' RESPONSIBILITIES:
 '   - Ribbon lifecycle management:
-'       • Capture and cache the IRibbonUI handle on load
-'       • Preload font and color image assets for instant dropdown rendering
-'       • Defer initial tab activation to avoid Excel UI race conditions
+'       o Capture and cache the IRibbonUI handle on load
+'       o Preload font and color image assets for instant dropdown rendering
+'       o Defer initial tab activation to avoid Excel UI race conditions
 '   - Context-sensitive routing:
-'       • Auto-select the correct Ribbon tab based on the active worksheet
-'       • Provide named wrappers for tab activation (Graphviz, SQL, Styles, etc.)
+'       o Auto-select the correct Ribbon tab based on the active worksheet
+'       o Provide named wrappers for tab activation (Graphviz, SQL, Styles, etc.)
 '   - Dynamic localization:
-'       • Bind getLabel/getScreentip/getSupertip to worksheet-driven values
-'       • Refresh Ribbon state when language or settings change
+'       o Bind getLabel/getScreentip/getSupertip to worksheet-driven values
+'       o Refresh Ribbon state when language or settings change
 '   - Visibility and platform gating:
-'       • Respect user toggles for optional tabs (Console, Diagnostics, Styles)
-'       • Enforce macOS restrictions (SQL tab hidden on Mac)
+'       o Respect user toggles for optional tabs (Console, Diagnostics, Styles)
+'       o Enforce macOS restrictions (SQL tab hidden on Mac)
 '   - Partial and full invalidation:
-'       • Invalidate entire Ribbon or individual controls for efficient updates
+'       o Invalidate entire Ribbon or individual controls for efficient updates
 '
 ' ARCHITECTURAL NOTES:
 '   - Ribbon XML is data-driven: Named Ranges on the Settings sheet act as

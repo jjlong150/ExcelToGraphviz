@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetSettings"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetSettings
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / Settings
 '
 ' ROLE:
@@ -12,31 +12,31 @@ Attribute VB_Name = "modWorksheetSettings"
 '
 ' RESPONSIBILITIES:
 '   - Global settings aggregation:
-'       • GetSettings: assemble the master settings UDT from all subsystems
+'       o GetSettings: assemble the master settings UDT from all subsystems
 '         (Graph, Data, Source, SQL, SVG, Styles, Output, CommandLine, Console)
 '
 '   - Worksheet layout mapping:
-'       • GetSettingsForDataWorksheet, GetSettingsForStylesWorksheet,
+'       o GetSettingsForDataWorksheet, GetSettingsForStylesWorksheet,
 '         GetSettingsForSourceWorksheet, GetSettingsForSqlWorksheet,
 '         GetSettingsForSvgWorksheet: map logical settings to physical
 '         worksheet coordinates via Named Range API and layout globals
-'       • GetSettingColNum: translate logical column identifiers into
+'       o GetSettingColNum: translate logical column identifiers into
 '         numeric indices
 '
 '   - SQL integration configuration:
-'       • GetSettingsForSqlFields: load SQL field names, placeholders,
+'       o GetSettingsForSqlFields: load SQL field names, placeholders,
 '         limits, and advanced behaviors (concatenate, enumerate, iterate)
 '
 '   - File output configuration:
-'       • GetSettingsForFileOutput: resolve output directory, filename
+'       o GetSettingsForFileOutput: resolve output directory, filename
 '         prefix, timestamp/options flags, and date/time snapshot
 '
 '   - Image and output paths:
-'       • SelectImageDirectory / SelectOutputDirectory: drive folder pickers
+'       o SelectImageDirectory / SelectOutputDirectory: drive folder pickers
 '         and persist choices into SETTINGS_ ranges
 '
 '   - Typed retrieval helpers:
-'       • GetSettingText, GetSettingLong: safe wrappers around Settings
+'       o GetSettingText, GetSettingLong: safe wrappers around Settings
 '         ranges with error shielding and optional case normalization
 '
 ' ARCHITECTURAL NOTES:
@@ -61,6 +61,9 @@ Attribute VB_Name = "modWorksheetSettings"
 ' =============================================================================
 
 Option Explicit
+
+Private workbookSettings As settings
+Private workbookSettingsAreValid As Boolean
 
 ' ==========================================================================
 ' PROCEDURE: SelectImageDirectory
@@ -138,34 +141,119 @@ End Sub
 ' FUNCTION: GetSettings
 '
 ' PURPOSE:
-'   Constructs a comprehensive 'settings' UDT (User Defined Type) by
-'   aggregating configuration data from all functional subsystems.
+'   Produces a fully-hydrated settings UDT representing the workbook’s
+'   configuration state across all subsystems (Graph, Data, Source, Styles,
+'   CommandLine, Console). Provides a single, authoritative snapshot used by
+'   the rendering pipeline, SQL workflows, diagnostics, and UI logic.
+'
+' PERFORMANCE FEATURES:
+'   - Full-structure caching: Once populated, the settings UDT is returned
+'     immediately on subsequent calls, eliminating repeated worksheet scans.
+'   - Targeted data binding: Accepts a data worksheet name, enabling dynamic
+'     switching between multiple data sources without recomputing unrelated
+'     settings.
 '
 ' TECHNICAL WORKFLOW:
-'   1. UDT ASSEMBLY: Sequentially invokes specialized "GetSettingsFor..."
-'      functions to populate each member of the global settings structure.
-'   2. LAYER MAPPING: Integrates parameters for Graph rendering, Data/SQL
-'      worksheets, SVG post-processing, Style galleries, and Output paths.
-'   3. ENGINE CONFIGURATION: Includes low-level CLI and Console settings
-'      required for the Graphviz process execution.
+'   1. WORKSHEET NAME ASSIGNMENT:
+'        - Stores the caller-provided data worksheet name into the
+'          workbookSettings.data.worksheetName field.
 '
-' TECHNICAL NOTES:
-'   - DeepWiki Context: Implements the "GetSettings UDT" pattern noted in
-'     the 'Settings & Diagnostics' architectural page.
-'   - Strategy: Acts as a centralized "Snapshot" of the workbook's state,
-'     serving as the primary contract for the rendering pipeline.
+'   2. CACHE CHECK:
+'        - If workbookSettingsAreValid = True, returns the previously built UDT
+'          without recomputing any subsystem settings.
+'
+'   3. SUBSYSTEM INITIALIZATION:
+'        - Calls the following subsystem loaders to populate the UDT:
+'            o GetSettingsForGraph()
+'            o GetSettingsForDataWorksheet(dataWorksheet)
+'            o GetSettingsForSourceWorksheet()
+'            o GetSettingsForStylesWorksheet()
+'            o GetSettingsForCommandLine()
+'            o GetSettingsForConsole()
+'
+'   4. CACHE ACTIVATION:
+'        - Sets workbookSettingsAreValid = True to mark the UDT as valid for reuse.
+'
+'   5. RETURN VALUE:
+'        - Outputs the fully assembled settings UDT for immediate use by
+'          downstream modules.
+'
+' USAGE:
+'   - Called at the start of graph generation, SQL execution, diagnostics,
+'     and any workflow requiring a consistent configuration snapshot.
+'   - Safe to call repeatedly; caching ensures minimal overhead.
+'
+' DEPENDENCIES:
+'   - Module-level UDT: workbookSettings
+'   - Module-level Boolean: workbookSettingsAreValid
+'   - Subsystem loaders:
+'       o GetSettingsForGraph
+'       o GetSettingsForDataWorksheet
+'       o GetSettingsForSourceWorksheet
+'       o GetSettingsForStylesWorksheet
+'       o GetSettingsForCommandLine
+'       o GetSettingsForConsole
+'
 ' ==========================================================================
 Public Function GetSettings(ByVal dataWorksheet As String) As settings
-    GetSettings.graph = GetSettingsForGraph()
-    GetSettings.data = GetSettingsForDataWorksheet(dataWorksheet)
-    GetSettings.source = GetSettingsForSourceWorksheet()
-    GetSettings.sql = GetSettingsForSqlWorksheet()
-    GetSettings.svg = GetSettingsForSvgWorksheet()
-    GetSettings.styles = GetSettingsForStylesWorksheet()
-    GetSettings.output = GetSettingsForFileOutput()
-    GetSettings.CommandLine = GetSettingsForCommandLine()
-    GetSettings.console = GetSettingsForConsole()
+    ' "data" worksheet is allowed to have clones, record which clone
+    ' is the active one.
+    workbookSettings.data.worksheetName = dataWorksheet
+    
+    ' If "settings" worksheet has not changed, return the previous values
+    If workbookSettingsAreValid Then
+        GetSettings = workbookSettings
+        Exit Function
+    End If
+    
+    ' Cache is invalid, perform full reload
+    workbookSettings.graph = GetSettingsForGraph()
+    workbookSettings.data = GetSettingsForDataWorksheet(dataWorksheet)
+    workbookSettings.source = GetSettingsForSourceWorksheet()
+    workbookSettings.styles = GetSettingsForStylesWorksheet()
+    workbookSettings.CommandLine = GetSettingsForCommandLine()
+    workbookSettings.console = GetSettingsForConsole()
+    
+    ' Mark the cache as fresh
+    workbookSettingsAreValid = True
+    
+    GetSettings = workbookSettings
 End Function
+
+' ==========================================================================
+' PROCEDURE: InvalidateSettings
+'
+' PURPOSE:
+'   Marks the global settings cache as invalid, ensuring that the next call
+'   to GetSettings() triggers a full reload of all subsystem configuration
+'   (Graph, Data, Source, Styles, CommandLine, Console) rather than returning
+'   a previously cached UDT snapshot.
+'
+' PERFORMANCE FEATURES:
+'   - Constant-time invalidation: Only flips a Boolean flag; no immediate
+'     recomputation or memory cleanup occurs.
+'   - Lazy regeneration: Defers the cost of rebuilding settings until the
+'     next consumer explicitly requests them.
+'
+' TECHNICAL WORKFLOW:
+'   1. Sets workbookSettingsAreValid = False.
+'   2. Leaves the workbookSettings UDT untouched; it will be overwritten
+'      automatically on the next GetSettings() call.
+'
+' USAGE:
+'   - Called whenever a settings-relevant worksheet or subsystem changes
+'     (e.g., Settings sheet edits, Named Range updates, structural changes).
+'   - Typically invoked from Worksheet_Change, initialization routines, or
+'     any workflow that modifies configuration inputs.
+'
+' DEPENDENCIES:
+'   - Module-level Boolean: workbookSettingsAreValid
+'   - Module-level UDT: workbookSettings (implicitly refreshed later)
+'
+' ==========================================================================
+Public Sub InvalidateSettings()
+    workbookSettingsAreValid = False
+End Sub
 
 ' ==========================================================================
 ' FUNCTION: GetSettingsForStylesWorksheet

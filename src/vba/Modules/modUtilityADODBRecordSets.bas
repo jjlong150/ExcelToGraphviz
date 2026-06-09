@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityADODBRecordSets"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityADODBRecordSets
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / ADO SQL / Recordset Merging
 '
 ' ROLE:
@@ -13,18 +13,18 @@ Attribute VB_Name = "modUtilityADODBRecordSets"
 '
 ' RESPONSIBILITIES:
 '   - Recordset merging:
-'       • Combine two open ADODB.Recordset objects into a unified static set
-'       • Resolve mismatched or missing fields across sources
-'       • Normalize field sizes (e.g., DefinedSize = –1) for provider safety
+'       o Combine two open ADODB.Recordset objects into a unified static set
+'       o Resolve mismatched or missing fields across sources
+'       o Normalize field sizes (e.g., DefinedSize = -1) for provider safety
 '   - Schema synthesis:
-'       • Construct merged field lists dynamically
-'       • Ensure deterministic field ordering and type compatibility
+'       o Construct merged field lists dynamically
+'       o Ensure deterministic field ordering and type compatibility
 '   - Data population:
-'       • Two-pass append strategy for performance and correctness
-'       • Batch-update semantics for large merges
+'       o Two-pass append strategy for performance and correctness
+'       o Batch-update semantics for large merges
 '   - Error isolation:
-'       • Defensive handling of merge-time failures
-'       • Forward errors to the diagnostic logger without interrupting SQL flow
+'       o Defensive handling of merge-time failures
+'       o Forward errors to the diagnostic logger without interrupting SQL flow
 '
 ' ARCHITECTURAL NOTES:
 '   - Late-bound ADO for cross-version compatibility.
@@ -194,7 +194,7 @@ Public Sub MergeRecordsets(ByVal rsFirst As Object, _
     Exit Sub
 
 '---------------------------------------------------------------------------
-' Local error handler — keeps merge failures isolated
+' Local error handler - keeps merge failures isolated
 '---------------------------------------------------------------------------
 MergeError:
     LogDiagnostic _

@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelSheets"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelSheets
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Excel Interop
 '
 ' ROLE:
@@ -12,9 +12,9 @@ Attribute VB_Name = "modUtilityExcelSheets"
 '
 ' RESPONSIBILITIES:
 '   - WorksheetExists:
-'       • Test whether a worksheet with a given name exists in the active
+'       o Test whether a worksheet with a given name exists in the active
 '         workbook using late-bound resolution
-'       • Return Boolean without raising errors
+'       o Return Boolean without raising errors
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses ActiveWorkbook.Sheets.[_Default] for name-based lookup.

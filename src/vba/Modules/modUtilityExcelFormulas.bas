@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelFormulas"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelFormulas
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Data Sheet Helpers
 '
 ' ROLE:
@@ -12,15 +12,15 @@ Attribute VB_Name = "modUtilityExcelFormulas"
 '
 ' RESPONSIBILITIES:
 '   - Rank-constrained subgraphs:
-'       • RangeToSubgraphWithRank: build { rank="…" ; node1 ; node2 ; … }
-'       • Validate rank keywords (min, max, same, sink, source)
-'       • Convenience wrappers: SameRank, MaxRank, MinRank, SinkRank, SourceRank
+'       o RangeToSubgraphWithRank: build { rank="..." ; node1 ; node2 ; ... }
+'       o Validate rank keywords (min, max, same, sink, source)
+'       o Convenience wrappers: SameRank, MaxRank, MinRank, SinkRank, SourceRank
 '   - Unconstrained subgraphs:
-'       • RangeToSubgraph: build { node1 ; node2 ; … }
-'       • Wrapper: subgraph()
+'       o RangeToSubgraph: build { node1 ; node2 ; ... }
+'       o Wrapper: subgraph()
 '   - HTML-table labels:
-'       • RangeToHtmlTable: convert a cell block into <table><tr><td>…</td></tr></table>
-'       • TableLabel: wrap HTML table in <…> for Graphviz HTML-label syntax
+'       o RangeToHtmlTable: convert a cell block into <table><tr><td>...</td></tr></table>
+'       o TableLabel: wrap HTML table in <...> for Graphviz HTML-label syntax
 '
 ' ARCHITECTURAL NOTES:
 '   - All node identifiers are quoted via AddQuotes / AddQuotesConditionally.

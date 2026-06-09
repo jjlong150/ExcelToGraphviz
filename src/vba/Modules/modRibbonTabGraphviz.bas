@@ -1393,7 +1393,7 @@ End Sub
 ' CALLBACK: includeOrphanEdges_onAction
 '
 ' PURPOSE:
-'   Toggles the suppression of "Orphan Edges"—relationships that refer to
+'   Toggles the suppression of "Orphan Edges"-relationships that refer to
 '   nodes not currently defined or styled in the active view.
 '
 ' TECHNICAL WORKFLOW:
@@ -1431,7 +1431,7 @@ End Sub
 ' CALLBACK: includeOrphanNodes_onAction
 '
 ' PURPOSE:
-'   Toggles the suppression of "Orphan Nodes"—nodes that do not have
+'   Toggles the suppression of "Orphan Nodes"-nodes that do not have
 '   any active relationships (edges) defined within the current view.
 '
 ' TECHNICAL WORKFLOW:

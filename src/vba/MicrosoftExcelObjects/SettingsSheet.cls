@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: SettingsSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Settings
 '
 ' ROLE:
@@ -21,7 +21,7 @@ Attribute VB_Exposed = True
 '
 ' DESCRIPTION:
 '   This worksheet module governs the interactive behavior of the Settings
-'   sheet—the authoritative storage location for every GetSetting call. It
+'   sheet-the authoritative storage location for every GetSetting call. It
 '   manages Ribbon synchronization, monitors changes to key configuration
 '   ranges, and provides the metadata that powers user-defined extensions
 '   (SourceWeb, ExtCode, ExtWeb). The module also enforces robust event
@@ -30,27 +30,27 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Launchpad Ribbon tab when the sheet is selected
-'       • Ensures administrative tools and worksheet navigation are visible
+'       o Activates the Launchpad Ribbon tab when the sheet is selected
+'       o Ensures administrative tools and worksheet navigation are visible
 '
 '   - RIBBON SYNCHRONIZATION:
-'       • Monitors Named Ranges tied to output paths, filenames, indentation,
+'       o Monitors Named Ranges tied to output paths, filenames, indentation,
 '         and extension definitions
-'       • Calls RefreshRibbon to invalidate and redraw the Ribbon UI
+'       o Calls RefreshRibbon to invalidate and redraw the Ribbon UI
 '
 '   - EXTENSION ARCHITECTURE:
-'       • Hosts metadata for user-defined web links (SourceWeb1–6)
-'       • Hosts metadata for user-defined macro triggers (ExtCode1–6)
-'       • Hosts metadata for user-defined external web actions (ExtWeb1–6)
-'       • Enables no-code extensibility of the Ribbon
+'       o Hosts metadata for user-defined web links (SourceWeb1-6)
+'       o Hosts metadata for user-defined macro triggers (ExtCode1-6)
+'       o Hosts metadata for user-defined external web actions (ExtWeb1-6)
+'       o Enables no-code extensibility of the Ribbon
 '
 '   - NAMED RANGE AUTHORITY:
-'       • Stores all configuration values retrieved by GetSetting*
-'       • Provides the physical backing for Settings-driven worksheet layouts
+'       o Stores all configuration values retrieved by GetSetting*
+'       o Provides the physical backing for Settings-driven worksheet layouts
 '
 '   - ERROR-HARDENED EVENT MANAGEMENT:
-'       • Uses a recovery block to guarantee EnableEvents is restored
-'       • Logs unexpected failures to the Console for diagnostics
+'       o Uses a recovery block to guarantee EnableEvents is restored
+'       o Logs unexpected failures to the Console for diagnostics
 '
 ' USAGE:
 '   - Fires automatically when users modify any configuration value
@@ -111,6 +111,9 @@ End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
 
     On Error GoTo Whoa
+
+    ' This call indicates the settings need to be refreshed upon next reference.
+    InvalidateSettings
 
     ' Detect changes in the settings dropdown lists
     If Not Intersect(Target, SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY)) Is Nothing Then

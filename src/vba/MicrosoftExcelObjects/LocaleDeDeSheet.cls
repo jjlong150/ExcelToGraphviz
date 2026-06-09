@@ -10,11 +10,11 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: LocaleDeDeSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Localization
 '
 ' ROLE:
-'   German language resource sheet containing key–value translation pairs
+'   German language resource sheet containing key-value translation pairs
 '   consumed by the localization engine. Provides the authoritative source
 '   for UI labels, messages, tooltips, and Ribbon text when German is the
 '   active application language.
@@ -29,17 +29,17 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Launchpad Ribbon tab when the sheet is selected
-'       • Ensures worksheet navigation and settings tools are accessible
+'       o Activates the Launchpad Ribbon tab when the sheet is selected
+'       o Ensures worksheet navigation and settings tools are accessible
 '
 '   - TRANSLATION AUTHORITY:
-'       • Hosts the German key–value pairs used by modLocalize
-'       • Supplies translated UI labels, messages, and tooltips
-'       • Supports dynamic language switching across the application
+'       o Hosts the German key-value pairs used by modLocalize
+'       o Supplies translated UI labels, messages, and tooltips
+'       o Supports dynamic language switching across the application
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 ' USAGE:
 '   - Fires automatically when navigating to the German localization sheet

@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetSVG"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetSVG
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / SVG
 '
 ' ROLE:
@@ -12,19 +12,19 @@ Attribute VB_Name = "modWorksheetSVG"
 '
 ' RESPONSIBILITIES:
 '   - Stream-based XML editing:
-'       • Load full SVG into memory, apply ordered rule substitutions,
+'       o Load full SVG into memory, apply ordered rule substitutions,
 '         and write the transformed output to disk.
 '
 '   - Worksheet-driven rule execution:
-'       • Iterate SVG worksheet rows, respecting comment flags (#)
-'       • Apply case-insensitive replacements for robust XML matching
+'       o Iterate SVG worksheet rows, respecting comment flags (#)
+'       o Apply case-insensitive replacements for robust XML matching
 '
 '   - Interactive editing:
-'       • Launch CellValueEditForm for multi-line CSS/JS editing
-'       • Support large replacement strings beyond Excel's row display limits
+'       o Launch CellValueEditForm for multi-line CSS/JS editing
+'       o Support large replacement strings beyond Excel's row display limits
 '
 '   - UI responsiveness:
-'       • Use DoEvents during long replacement loops to keep Excel responsive
+'       o Use DoEvents during long replacement loops to keep Excel responsive
 '
 ' ARCHITECTURAL NOTES:
 '   - Designed for post-Graphviz enhancement (animations, tooltips, interactivity)
@@ -33,17 +33,17 @@ Attribute VB_Name = "modWorksheetSVG"
 '
 ' VERSION NOTES:
 '   - v6.0.00 (May 14, 2023):
-'       • Introduced SVG post-processing subsystem and new SVG worksheet
-'       • Added JavaScript-based node/edge highlighting
-'       • Added on/off toggle for post-processing
+'       o Introduced SVG post-processing subsystem and new SVG worksheet
+'       o Added JavaScript-based node/edge highlighting
+'       o Added on/off toggle for post-processing
 '
 '   - v8.0.0 (Aug 27, 2025):
-'       • Added pop-up editor for large replacement strings
-'       • Improved JavaScript animation logic and added macOS-style variant
-'       • Added Copy to Clipboard, Graph to File, and All Views to File buttons
+'       o Added pop-up editor for large replacement strings
+'       o Improved JavaScript animation logic and added macOS-style variant
+'       o Added Copy to Clipboard, Graph to File, and All Views to File buttons
 '
 '   - v9.0.0 (Dec 22, 2025):
-'       • Updated SVG animation logic to support rounded-corner edge rendering
+'       o Updated SVG animation logic to support rounded-corner edge rendering
 '
 ' USAGE:
 '   - Automatically invoked during Publish/Preview when SVG post-processing is enabled

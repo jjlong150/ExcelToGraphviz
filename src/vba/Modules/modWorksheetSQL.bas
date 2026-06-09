@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetSQL"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetSQL
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / SQL
 '
 ' ROLE:
@@ -14,33 +14,33 @@ Attribute VB_Name = "modWorksheetSQL"
 '
 ' RESPONSIBILITIES:
 '   - SQL execution lifecycle:
-'       • RunSQL: primary dispatcher for SQL commands, SELECT queries,
+'       o RunSQL: primary dispatcher for SQL commands, SELECT queries,
 '         placeholder substitution, environment setup, and cleanup
-'       • PassesFilter / GetExcelFilePath: determine execution eligibility
+'       o PassesFilter / GetExcelFilePath: determine execution eligibility
 '         and resolve multi-source file paths
 '
 '   - Algorithmic engines:
-'       • Iterative Search (ID -> Data)
-'       • Recursive Search (parent/child traversal with cycle detection)
-'       • Sequential Edges (A -> B -> C)
-'       • Enumeration Mode (mathematical range expansion)
-'       • N-Level Clustering (CLUSTER1…CLUSTERn) with dynamic sorting
+'       o Iterative Search (ID -> Data)
+'       o Recursive Search (parent/child traversal with cycle detection)
+'       o Sequential Edges (A -> B -> C)
+'       o Enumeration Mode (mathematical range expansion)
+'       o N-Level Clustering (CLUSTER1...CLUSTERn) with dynamic sorting
 '
 '   - Publishing & automation:
-'       • Publish, PublishViews, PublishAllViews, PublishAsDirectedGraph,
+'       o Publish, PublishViews, PublishAllViews, PublishAsDirectedGraph,
 '         PublishAsUndirectedGraph, PublishAllViewsAsDirectedGraph,
 '         PublishAllViewsAsUndirectedGraph
-'       • SQL-driven headless rendering and file-naming overrides
+'       o SQL-driven headless rendering and file-naming overrides
 '
 '   - Worksheet integration:
-'       • Populate Data worksheet rows using dataWorksheet UDT
-'       • Map SQL worksheet geometry using sqlWorksheet UDT
-'       • Load SQL field names, placeholders, and limits via sqlFieldName UDT
+'       o Populate Data worksheet rows using dataWorksheet UDT
+'       o Map SQL worksheet geometry using sqlWorksheet UDT
+'       o Load SQL field names, placeholders, and limits via sqlFieldName UDT
 '
 '   - Stability & resilience:
-'       • Connection pooling, retry logic, and stale-connection detection
-'       • Null-safe field accessors and semantic error classification
-'       • SleepMilliseconds throttling to avoid COM collisions
+'       o Connection pooling, retry logic, and stale-connection detection
+'       o Null-safe field accessors and semantic error classification
+'       o SleepMilliseconds throttling to avoid COM collisions
 '
 ' ARCHITECTURAL NOTES:
 '   - SQL subsystem is Windows-only due to ADO dependency; macOS execution
@@ -53,54 +53,54 @@ Attribute VB_Name = "modWorksheetSQL"
 '
 ' VERSION NOTES:
 '   - v6.0.00 (May 14, 2023):
-'       • Added SQL clustering and subclustering support (CLUSTER / SUBCLUSTER fields)
-'       • Added full pseudo-SQL automation suite:
+'       o Added SQL clustering and subclustering support (CLUSTER / SUBCLUSTER fields)
+'       o Added full pseudo-SQL automation suite:
 '           RESET, PREVIEW, PREVIEW AS DIRECTED/UNDIRECTED,
 '           PUBLISH, PUBLISH AS DIRECTED/UNDIRECTED,
 '           PUBLISH ALL VIEWS, PUBLISH ALL VIEWS AS DIRECTED/UNDIRECTED
-'       • Added SQL filtering support (filter columns to control execution)
-'       • Added SQL label-splitting logic for multi-line labels with alignment options
-'       • Added new SQL sample workbooks demonstrating clustering and automation
+'       o Added SQL filtering support (filter columns to control execution)
+'       o Added SQL label-splitting logic for multi-line labels with alignment options
+'       o Added new SQL sample workbooks demonstrating clustering and automation
 '
 '   - v7.0.0 (Dec 4, 2024):
-'       • Added SQL pop-up editor for large SQL statements
-'       • Added Copy-to-Clipboard for SQL statements
-'       • Added SET DATA FILE pseudo-SQL command
-'       • Added support for CLUSTER LABEL and SUBCLUSTER LABEL in SQL
-'       • Added RunSQLAsExtension utility for running SQL from the Extension tab
+'       o Added SQL pop-up editor for large SQL statements
+'       o Added Copy-to-Clipboard for SQL statements
+'       o Added SET DATA FILE pseudo-SQL command
+'       o Added support for CLUSTER LABEL and SUBCLUSTER LABEL in SQL
+'       o Added RunSQLAsExtension utility for running SQL from the Extension tab
 '
 '   - v7.2.0 (Mar 14, 2025):
-'       • Added support for recursive SQL queries (base case + recursive member)
-'       • Added four new SQL-related settings for recursive keyword customization
+'       o Added support for recursive SQL queries (base case + recursive member)
+'       o Added four new SQL-related settings for recursive keyword customization
 '
 '   - v8.0.0 (Aug 27, 2025):
-'       • Added SQL connection pooling to mitigate slow ADO connections
-'       • Added default data directory + default workbook support
-'       • Added CREATE EDGES syntax for automatic A->B->C edge generation
-'       • Added CREATE RANK syntax for rank-group subgraphs
-'       • Added SQL editor access button (`[...]`)
+'       o Added SQL connection pooling to mitigate slow ADO connections
+'       o Added default data directory + default workbook support
+'       o Added CREATE EDGES syntax for automatic A->B->C edge generation
+'       o Added CREATE RANK syntax for rank-group subgraphs
+'       o Added SQL editor access button (`[...]`)
 '
 '   - v10.0.0 (Jan 23, 2026):
-'       • Added support for Microsoft Access (.accdb/.mdb) SQL data sources
-'       • Added SQL enumeration mode (range-based result generation)
-'       • Added iterative query-set execution with dynamic placeholder substitution
-'       • Added SQL error logging to external log file
-'       • Added ADO hardening and reliability improvements
-'       • Added environment documentation to SQL log-to-file feature
-'       • Fixed breaking issue: clustering now groups by CLUSTER (not CLUSTER LABEL)
+'       o Added support for Microsoft Access (.accdb/.mdb) SQL data sources
+'       o Added SQL enumeration mode (range-based result generation)
+'       o Added iterative query-set execution with dynamic placeholder substitution
+'       o Added SQL error logging to external log file
+'       o Added ADO hardening and reliability improvements
+'       o Added environment documentation to SQL log-to-file feature
+'       o Fixed breaking issue: clustering now groups by CLUSTER (not CLUSTER LABEL)
 '
 '   - v10.1.0 (Feb 9, 2026):
-'       • Added Concatenation Mode for iterative SQL queries
-'       • Added floating action buttons for SQL rows (edit/run/status)
+'       o Added Concatenation Mode for iterative SQL queries
+'       o Added floating action buttons for SQL rows (edit/run/status)
 '
 '   - v10.2.0 (Feb 27, 2026):
-'       • Added SQL placeholder substitution via SET PLACEHOLDER name = value
-'       • Added filename sanitization for SQL-driven exports
+'       o Added SQL placeholder substitution via SET PLACEHOLDER name = value
+'       o Added filename sanitization for SQL-driven exports
 '
 '   - v10.3.0 (Apr 3, 2026):
-'       • Added support for n-level SQL clustering (CLUSTER1, CLUSTER2, …)
-'       • Added {label} placeholder for cluster label formatting
-'       • Updated format-string parsing for HTML-like syntax
+'       o Added support for n-level SQL clustering (CLUSTER1, CLUSTER2, ...)
+'       o Added {label} placeholder for cluster label formatting
+'       o Updated format-string parsing for HTML-like syntax
 '
 ' USAGE:
 '   - Invoke RunSQL to execute all SQL rows or a specific row.
@@ -1302,7 +1302,7 @@ Private Sub ProcessInClassicMode( _
     If idList Is Nothing Or idList.count = 0 Then Exit Sub
 
     Dim id As Variant, rsData As Object
-    For Each id In idList.Keys
+    For Each id In idList.keys
         Set rsData = RunParameterizedQuery(conn, ctx, dataTemplate, id)
         If Not rsData Is Nothing Then
             If rsData.State = ObjectStateEnum.adStateOpen Then
@@ -2304,7 +2304,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
     If clusterList.count > 0 Then
         ' Attach subcluster dictionaries to each cluster
-        For Each clusterKey In clusterList.Keys()
+        For Each clusterKey In clusterList.keys()
             Set clusterInstance = clusterList.item(clusterKey)
             Set clusterInstance.subclusters = GetSubClusterInfoForCluster( _
                                                 rs, _
@@ -2314,7 +2314,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
     End If
 
     ' Emit clusters (with or without subclusters)
-    For Each clusterKey In clusterList.Keys()
+    For Each clusterKey In clusterList.keys()
 
         clusterCnt = clusterCnt + 1
         Set clusterRecord = clusterList.item(CStr(clusterKey))
@@ -2343,7 +2343,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
             ' Has subclusters: group rows by cluster + subcluster
             subclusterCnt = 0
 
-            For Each subclusterKey In clusterRecord.subclusters.Keys()
+            For Each subclusterKey In clusterRecord.subclusters.keys()
 
                 Set subclusterRecord = clusterRecord.subclusters.item(subclusterKey)
 
@@ -2407,7 +2407,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
     Set orphanClusterList = GetOrphanSubClusterInfo(rs, ctx.fields)
     subclusterCnt = 0
 
-    For Each subclusterKey In orphanClusterList.Keys()
+    For Each subclusterKey In orphanClusterList.keys()
 
         Set subclusterRecord = orphanClusterList.item(subclusterKey)
 
@@ -2493,7 +2493,7 @@ Private Sub ProcessClusterYesSubclusterNo( _
     Dim clusterRecord As Cluster
 
     ' Emit each cluster block
-    For Each clusterKey In clusterList.Keys()
+    For Each clusterKey In clusterList.keys()
 
         clusterCnt = clusterCnt + 1
         Set clusterRecord = clusterList.item(CStr(clusterKey))
@@ -2579,7 +2579,7 @@ Private Sub ProcessClusterNoSubclusterYes( _
     Dim subclusterRecord As Cluster
 
     ' Emit each subcluster block
-    For Each subclusterKey In subclusterList.Keys()
+    For Each subclusterKey In subclusterList.keys()
 
         subclusterCnt = subclusterCnt + 1
         Set subclusterRecord = subclusterList.item(CStr(subclusterKey))
@@ -4017,7 +4017,7 @@ Public Sub RunSQLAsExtension(Optional ByVal rowNumber As Long = 0)
     originalEnableEvents = Application.enableEvents
     Application.enableEvents = False
 
-    ' Execute ALL the SQL commands — pass the row number
+    ' Execute ALL the SQL commands - pass the row number
     RunSQL rowNumber
     
     ' Refresh the ribbon controls based on SQL execution activity
@@ -4208,7 +4208,7 @@ Private Sub ApplyPlaceholders(ByRef sqlText As String, ByRef placeholders As Dic
     If placeholders Is Nothing Then Exit Sub
     If placeholders.count = 0 Then Exit Sub
 
-    For Each key In placeholders.Keys
+    For Each key In placeholders.keys
         token = "{" & CStr(key) & "}"
         sqlText = replace(sqlText, token, placeholders(key), , , vbTextCompare)
     Next key

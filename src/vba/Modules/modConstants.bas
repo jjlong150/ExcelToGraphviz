@@ -2,7 +2,7 @@ Attribute VB_Name = "modConstants"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modConstants
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Bootstrap / Global Constants
 '
 ' ROLE:
@@ -14,14 +14,14 @@ Attribute VB_Name = "modConstants"
 '
 ' RESPONSIBILITIES:
 '   - Provide a single authoritative source for:
-'       • Worksheet names (data, graph, settings, source, sql, styles, svg)
-'       • Toggle values (yes/no, show/hide, directed/undirected, etc.)
-'       • Graphviz layout identifiers and attribute keywords
-'       • Style Designer cell mappings and attribute names
-'       • SQL extension field names (cluster levels, placeholders, iteration,
+'       o Worksheet names (data, graph, settings, source, sql, styles, svg)
+'       o Toggle values (yes/no, show/hide, directed/undirected, etc.)
+'       o Graphviz layout identifiers and attribute keywords
+'       o Style Designer cell mappings and attribute names
+'       o SQL extension field names (cluster levels, placeholders, iteration,
 '         enumeration, concatenation, CREATE EDGES, CREATE RANK, etc.)
-'       • Exchange import/export settings
-'       • Ribbon control IDs for all tabs (Graphviz, Launchpad, Styles,
+'       o Exchange import/export settings
+'       o Ribbon control IDs for all tabs (Graphviz, Launchpad, Styles,
 '         Style Designer, SQL, SVG, Source, Exchange)
 '   - Ensure cross-module consistency by eliminating string literals scattered
 '     across the codebase.
@@ -78,7 +78,7 @@ Public Const FLAG_COMMENT As String = "#"
 
 ' Commonly reused strings
 Public Const COMMA As String = ","
-Public Const DOT As String = "."
+Public Const dot As String = "."
 Public Const SEMICOLON As String = ";"
 Public Const GRAPHVIZ_EXTENSION As String = ".gv"
 Public Const GREATER_THAN As String = ">"

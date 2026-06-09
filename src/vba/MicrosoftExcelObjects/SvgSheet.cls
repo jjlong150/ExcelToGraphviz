@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: SvgSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / SVG
 '
 ' ROLE:
@@ -28,19 +28,19 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXTUAL NAVIGATION:
-'       • Activates the SVG Ribbon tab when the sheet is selected
-'       • Invalidates Edit/Clipboard controls to reflect cursor position
+'       o Activates the SVG Ribbon tab when the sheet is selected
+'       o Invalidates Edit/Clipboard controls to reflect cursor position
 '
 '   - INTERACTIVE EDITING:
-'       • Injects a floating pencil-icon button beside Replace cells
-'       • Launches CellValueEditForm for multi-line CSS/JS/XML editing
+'       o Injects a floating pencil-icon button beside Replace cells
+'       o Launches CellValueEditForm for multi-line CSS/JS/XML editing
 '
 '   - UI STATE MANAGEMENT:
-'       • Cleans up injected shapes on selection changes
-'       • Handles macOS Ribbon activation via deferred OnTime scheduling
+'       o Cleans up injected shapes on selection changes
+'       o Handles macOS Ribbon activation via deferred OnTime scheduling
 '
 '   - UX RESPONSIVENESS:
-'       • Ensures smooth interaction when navigating or editing rules
+'       o Ensures smooth interaction when navigating or editing rules
 '
 ' RELATED WIKI PAGES:
 '   - SVG Post-Processing

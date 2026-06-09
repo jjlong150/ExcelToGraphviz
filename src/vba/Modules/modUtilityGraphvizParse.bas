@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityGraphvizParse"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityGraphvizParse
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Graphviz DOT Parser
 '
 ' ROLE:
@@ -13,23 +13,23 @@ Attribute VB_Name = "modUtilityGraphvizParse"
 '
 ' RESPONSIBILITIES:
 '   - Attribute parsing:
-'       • ParseAttributeString: convert raw attribute text into key/value pairs
-'       • AddPipeDelimitersToAttributeString: delimiter-insertion engine that
-'         handles quoted values, HTML labels, nested <…> and <<…>> constructs,
+'       o ParseAttributeString: convert raw attribute text into key/value pairs
+'       o AddPipeDelimitersToAttributeString: delimiter-insertion engine that
+'         handles quoted values, HTML labels, nested <...> and <<...>> constructs,
 '         and mixed separators (; , space)
-'       • ParsePipedAttributeString: final dictionary construction with
+'       o ParsePipedAttributeString: final dictionary construction with
 '         duplicate-key overwrite semantics
 '
 '   - Arrowhead parsing:
-'       • ParseGraphvizArrowheads: split concatenated arrowhead strings into
+'       o ParseGraphvizArrowheads: split concatenated arrowhead strings into
 '         up to three valid Graphviz arrowhead tokens
-'       • ParseArrowheadsRecursive: recursive backtracking parser to resolve
+'       o ParseArrowheadsRecursive: recursive backtracking parser to resolve
 '         ambiguous prefix matches
 '
 '   - Packmode parsing:
-'       • ParseGraphvizPackmode: validate and decompose Graphviz packmode
+'       o ParseGraphvizPackmode: validate and decompose Graphviz packmode
 '         strings into Mode, Flags, Suffix, and IsValid fields
-'       • Supports simple modes (node, cluster, graph, array) and extended
+'       o Supports simple modes (node, cluster, graph, array) and extended
 '         array forms (array_ctblr8, array_u, etc.)
 '
 ' ARCHITECTURAL NOTES:

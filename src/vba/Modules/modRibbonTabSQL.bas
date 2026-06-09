@@ -145,7 +145,7 @@ Private Sub sqlFilterValue_getItemLabel(ByVal control As IRibbonControl, ByVal i
     If index = 0 Then
         label = vbNullString
     Else
-        label = filterValues.Keys()(index - 1)
+        label = filterValues.keys()(index - 1)
     End If
 End Sub
 
@@ -154,7 +154,7 @@ Private Sub sqlFilterValue_onAction(ByVal control As IRibbonControl, ByVal contr
     If index = 0 Then
         SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value = vbNullString
     Else
-        SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value = filterValues.Keys()(index - 1)
+        SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value = filterValues.keys()(index - 1)
     End If
 End Sub
 
@@ -167,7 +167,7 @@ Private Sub sqlFilterValue_getSelectedItemIndex(ByVal control As IRibbonControl,
         Dim itemIndex As Long
         itemIndex = 1
         returnedVal = 0
-        For Each key In filterValues.Keys()
+        For Each key In filterValues.keys()
             If CStr(key) = Trim$(SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value) Then
                 returnedVal = itemIndex
             End If

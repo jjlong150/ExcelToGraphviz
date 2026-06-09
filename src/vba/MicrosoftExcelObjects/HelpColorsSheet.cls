@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: HelpColorsSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Reference
 '
 ' ROLE:
@@ -29,17 +29,17 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Launchpad Ribbon tab when the sheet is selected
-'       • Ensures worksheet navigation and settings tools are accessible
+'       o Activates the Launchpad Ribbon tab when the sheet is selected
+'       o Ensures worksheet navigation and settings tools are accessible
 '
 '   - INTERACTIVE COLOR INJECTION:
-'       • Captures hyperlink clicks via Worksheet_FollowHyperlink
-'       • Passes the selected scheme to SetStyleDesignerColorScheme
-'       • Enables "one-click" palette application for rapid styling
+'       o Captures hyperlink clicks via Worksheet_FollowHyperlink
+'       o Passes the selected scheme to SetStyleDesignerColorScheme
+'       o Enables "one-click" palette application for rapid styling
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 ' USAGE:
 '   - Fires automatically when the user navigates to the Colors reference sheet

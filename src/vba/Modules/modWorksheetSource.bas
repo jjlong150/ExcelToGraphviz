@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetSource"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetSource
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / Source
 '
 ' ROLE:
@@ -13,26 +13,26 @@ Attribute VB_Name = "modWorksheetSource"
 '
 ' RESPONSIBILITIES:
 '   - Source display and editing:
-'       • DisplaySourceInWorksheet: populate the Source sheet with DOT code
+'       o DisplaySourceInWorksheet: populate the Source sheet with DOT code
 '         using high-performance array transfers
-'       • UpdateSourceWorksheetLineNumbers: maintain synchronized line numbers
-'       • ClearSourceWorksheet: purge prior content while preserving headers
+'       o UpdateSourceWorksheetLineNumbers: maintain synchronized line numbers
+'       o ClearSourceWorksheet: purge prior content while preserving headers
 '
 '   - External editor integration:
-'       • LaunchGVEdit: attempt to launch gvedit.exe when available on PATH
+'       o LaunchGVEdit: attempt to launch gvedit.exe when available on PATH
 '
 '   - File export:
-'       • SourceWorksheetToFile: export worksheet DOT to UTF-8 (BOM-free on Windows)
-'       • StringToFile: export raw DOT strings with cross-platform encoding rules
+'       o SourceWorksheetToFile: export worksheet DOT to UTF-8 (BOM-free on Windows)
+'       o StringToFile: export raw DOT strings with cross-platform encoding rules
 '
 '   - Clipboard integration:
-'       • CopySourceCodeToClipboard: aggregate DOT source and copy to clipboard
+'       o CopySourceCodeToClipboard: aggregate DOT source and copy to clipboard
 '         (Windows-only)
 '
 '   - Direct rendering pipelines:
-'       • CreateGraphFromSourceToWorksheet: render DOT from worksheet into Graph sheet
-'       • VisualizeGraph: render DOT from a raw string
-'       • CreateGraphFromSourceToFile: publish rendered diagrams to disk
+'       o CreateGraphFromSourceToWorksheet: render DOT from worksheet into Graph sheet
+'       o VisualizeGraph: render DOT from a raw string
+'       o CreateGraphFromSourceToFile: publish rendered diagrams to disk
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses sourceWorksheet UDT + Named Range API to remain independent of
@@ -639,8 +639,12 @@ Public Sub CreateGraphFromSourceToFile()
     Dim ini As settings
     ini = GetSettings(DataSheet.name)
 
+    ' Get file output settings
+    Dim output As FileOutput
+    output = GetSettingsForFileOutput()
+    
     ' Determine output directory, and build file names
-    If ini.output.directory = vbNullString Then
+    If output.directory = vbNullString Then
         EmitMessage GetMessage("msgboxNoDirectorySpecified")
         SettingsSheet.Activate
         ActiveSheet.Range("OutputDirectory").Activate
@@ -652,7 +656,7 @@ Public Sub CreateGraphFromSourceToFile()
     styleColumn = GetSettingColNum(SETTINGS_STYLES_COL_SHOW_STYLE)
     
     ' Compose the filename
-    If Not FileLocationProvided(ini) Then
+    If Not FileLocationProvided(output) Then
         Exit Sub
     End If
 
@@ -661,7 +665,7 @@ Public Sub CreateGraphFromSourceToFile()
     Set graphvizObj = New Graphviz
 
     ' Create the filenames
-    graphvizObj.OutputDirectory = ini.output.directory
+    graphvizObj.OutputDirectory = output.directory
     graphvizObj.FilenameBase = GetFilenameBase(ini, styleColumn)
     graphvizObj.GraphFormat = ini.graph.imageTypeFile
     

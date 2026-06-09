@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: StyleDesignerSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Style Designer
 '
 ' ROLE:
@@ -30,31 +30,31 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE RIBBON ACTIVATION:
-'       • Activates the Style Designer Ribbon tab on entry
-'       • Surfaces color, font, attribute, and image-handling tools
+'       o Activates the Style Designer Ribbon tab on entry
+'       o Surfaces color, font, attribute, and image-handling tools
 '
 '   - REAL-TIME PREVIEW ENGINE:
-'       • Calls RenderPreview on activation
-'       • Routes Worksheet_Change events to:
-'           – RenderPreviewFromLists (label/UI-driven changes)
-'           – RenderPreviewFromFormatString (raw DOT edits)
-'           – RefreshControlsImageScale / RefreshControlsImagePosition
+'       o Calls RenderPreview on activation
+'       o Routes Worksheet_Change events to:
+'           - RenderPreviewFromLists (label/UI-driven changes)
+'           - RenderPreviewFromFormatString (raw DOT edits)
+'           - RefreshControlsImageScale / RefreshControlsImagePosition
 '
 '   - BI-DIRECTIONAL EDITING:
-'       • Supports UI-friendly attribute lists
-'       • Supports direct DOT format-string editing with live feedback
+'       o Supports UI-friendly attribute lists
+'       o Supports direct DOT format-string editing with live feedback
 '
 '   - IMAGE-AWARE CONTROL SYNC:
-'       • Automatically refreshes scale/position controls when image names
+'       o Automatically refreshes scale/position controls when image names
 '         change, ensuring UI consistency with rendered output
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 '   - ERROR-HARDENED EVENT MANAGEMENT:
-'       • Disables Application.EnableEvents during updates
-'       • Uses a recovery block to guarantee event-state restoration
+'       o Disables Application.EnableEvents during updates
+'       o Uses a recovery block to guarantee event-state restoration
 '
 ' USAGE:
 '   - Fires automatically when navigating to the Style Designer sheet

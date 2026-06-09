@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityEnvironment"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityEnvironment
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Environment & OS Integration
 '
 ' ROLE:
@@ -12,16 +12,16 @@ Attribute VB_Name = "modUtilityEnvironment"
 '
 ' RESPONSIBILITIES:
 '   - PATH utilities:
-'       • SearchPathForFile: Boolean existence check across PATH segments
-'       • FindFileOnPath: Return fully-qualified path to a discovered file
-'       • Normalize PATH entries (trim, strip quotes, enforce separators)
+'       o SearchPathForFile: Boolean existence check across PATH segments
+'       o FindFileOnPath: Return fully-qualified path to a discovered file
+'       o Normalize PATH entries (trim, strip quotes, enforce separators)
 '   - User and environment helpers:
-'       • GetUsername: Cached username retrieval (Application.Username on Windows,
+'       o GetUsername: Cached username retrieval (Application.Username on Windows,
 '         AppleScript via MacScript on macOS)
-'       • GetEnvVarSeparator: Platform-appropriate PATH delimiter
+'       o GetEnvVarSeparator: Platform-appropriate PATH delimiter
 '   - Temp directory management:
-'       • SetTempDirectory: OS-specific temp directory resolution
-'       • GetTempDirectory: Cached retrieval for downstream consumers
+'       o SetTempDirectory: OS-specific temp directory resolution
+'       o GetTempDirectory: Cached retrieval for downstream consumers
 '
 ' ARCHITECTURAL NOTES:
 '   - Fully cross-platform: Windows and macOS branches via conditional compilation.

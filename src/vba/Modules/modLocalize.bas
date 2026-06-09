@@ -2,7 +2,7 @@ Attribute VB_Name = "modLocalize"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modLocalize
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Locale / Localization Subsystem
 '
 ' ROLE:
@@ -12,19 +12,19 @@ Attribute VB_Name = "modLocalize"
 '
 ' RESPONSIBILITIES:
 '   - Locale caching:
-'       • Build O(1) lookup dictionaries for active and master locales
-'       • Maintain fallback chain: Active -> Master -> Key
+'       o Build O(1) lookup dictionaries for active and master locales
+'       o Maintain fallback chain: Active -> Master -> Key
 '   - Global translation pipeline:
-'       • Rehydrate caches on language change
-'       • Localize all functional worksheets in dependency-safe order
-'       • Update Ribbon captions, UserForms, and Named Ranges
+'       o Rehydrate caches on language change
+'       o Localize all functional worksheets in dependency-safe order
+'       o Update Ribbon captions, UserForms, and Named Ranges
 '   - Worksheet-specific localization:
-'       • About, Console, Data, Graph, Source, SQL, SVG
-'       • Styles and Style Designer (INDIRECT-sensitive)
-'       • Help: Attributes, Colors, Shapes
+'       o About, Console, Data, Graph, Source, SQL, SVG
+'       o Styles and Style Designer (INDIRECT-sensitive)
+'       o Help: Attributes, Colors, Shapes
 '   - Diagnostic modes:
-'       • Verbose mode for key-based auditing
-'       • Safe fallback to prevent blank UI labels
+'       o Verbose mode for key-based auditing
+'       o Safe fallback to prevent blank UI labels
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses Scripting.Dictionary for high-performance lookup.

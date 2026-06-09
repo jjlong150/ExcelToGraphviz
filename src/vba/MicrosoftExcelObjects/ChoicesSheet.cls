@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: ChoicesSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Internal
 '
 ' ROLE:
@@ -29,16 +29,16 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - DATA ISOLATION:
-'       • Hosts transient lists used for dropdown population
-'       • Keeps Data and Styles sheets free of intermediate calculations
+'       o Hosts transient lists used for dropdown population
+'       o Keeps Data and Styles sheets free of intermediate calculations
 '
 '   - DROPDOWN SYNCHRONIZATION:
-'       • Maintains RANGE_STYLE_NAMES and other Named Ranges
-'       • Supports dynamic resizing and sorting triggered by selection changes
+'       o Maintains RANGE_STYLE_NAMES and other Named Ranges
+'       o Supports dynamic resizing and sorting triggered by selection changes
 '
 '   - PERFORMANCE OPTIMIZATION:
-'       • Provides a fast, hidden workspace for recalculating filtered lists
-'       • Ensures Data-sheet dropdowns remain instantaneous and context-aware
+'       o Provides a fast, hidden workspace for recalculating filtered lists
+'       o Ensures Data-sheet dropdowns remain instantaneous and context-aware
 '
 ' USAGE:
 '   - Never interacted with directly by users

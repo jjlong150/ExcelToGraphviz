@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: ConsoleSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Diagnostics
 '
 ' ROLE:
@@ -28,19 +28,19 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Console Ribbon tab when the sheet is selected
-'       • Surfaces log-management tools (Clear Log, Export, Verbose Mode)
+'       o Activates the Console Ribbon tab when the sheet is selected
+'       o Surfaces log-management tools (Clear Log, Export, Verbose Mode)
 '
 '   - LOGGING TARGET:
-'       • Serves as the destination for EmitMessage, EmitDiagnostic, and
+'       o Serves as the destination for EmitMessage, EmitDiagnostic, and
 '         Graphviz console output captured during rendering
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 '   - UI STATE MANAGEMENT:
-'       • Ensures Console-specific Ribbon controls remain synchronized with
+'       o Ensures Console-specific Ribbon controls remain synchronized with
 '         the active worksheet context
 '
 ' USAGE:

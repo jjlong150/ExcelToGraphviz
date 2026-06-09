@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelPicture"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelPicture
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER: Utility / Excel Interop
 '
 ' ROLE:
@@ -12,12 +12,12 @@ Attribute VB_Name = "modUtilityExcelPicture"
 '
 ' RESPONSIBILITIES:
 '   - Picture insertion:
-'       • InsertPicture: add raster or vector images at a target cell's position
+'       o InsertPicture: add raster or vector images at a target cell's position
 '         using original dimensions, optional linking, and optional AltText
 '   - Picture deletion:
-'       • DeletePictures: remove pictures whose bounding cells intersect a range
-'       • DeleteCellPictures: remove images anchored to a specific cell
-'       • DeleteAllPictures: remove all msoPicture and msoGraphic shapes
+'       o DeletePictures: remove pictures whose bounding cells intersect a range
+'       o DeleteCellPictures: remove images anchored to a specific cell
+'       o DeleteAllPictures: remove all msoPicture and msoGraphic shapes
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses Shapes.AddPicture for full compatibility with PNG, JPG, GIF, BMP,

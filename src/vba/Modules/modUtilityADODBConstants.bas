@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityADODBConstants"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityADODBConstants
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / ADO SQL / Late-binding Constants
 '
 ' ROLE:
@@ -13,21 +13,21 @@ Attribute VB_Name = "modUtilityADODBConstants"
 '
 ' RESPONSIBILITIES:
 '   - Provide local definitions of ADO enum values:
-'       • Eliminates "magic numbers" in SQL engine and connection pool
-'       • Prevents compile-time failures when ADO library references are missing
+'       o Eliminates "magic numbers" in SQL engine and connection pool
+'       o Prevents compile-time failures when ADO library references are missing
 '   - Enable late-bound ADO:
-'       • ADODB.Connection
-'       • ADODB.Recordset
-'       • ADODB.Stream
+'       o ADODB.Connection
+'       o ADODB.Recordset
+'       o ADODB.Stream
 '   - Support cross-module consumers:
-'       • SQL engine (iterative SQL, enumeration SQL, placeholder SQL)
-'       • ExecuteAndCapture (stream handling)
-'       • Connection pool (cursor/lock settings)
-'       • Diagnostic logging
+'       o SQL engine (iterative SQL, enumeration SQL, placeholder SQL)
+'       o ExecuteAndCapture (stream handling)
+'       o Connection pool (cursor/lock settings)
+'       o Diagnostic logging
 '
 ' ARCHITECTURAL NOTES:
 '   - Windows-only subsystem; ADO is not available on macOS.
-'   - Contains no executable logic—constants only.
+'   - Contains no executable logic-constants only.
 '   - Ensures version-agnostic behavior across Office/ACE provider changes.
 '
 ' USAGE:

@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelOptimize"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelOptimize
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Excel Performance
 '
 ' ROLE:
@@ -12,10 +12,10 @@ Attribute VB_Name = "modUtilityExcelOptimize"
 '
 ' RESPONSIBILITIES:
 '   - OptimizeCode_Begin:
-'       • Disable ScreenUpdating to prevent UI redraws
-'       • Disable events to avoid triggering Worksheet_Change/SelectionChange
+'       o Disable ScreenUpdating to prevent UI redraws
+'       o Disable events to avoid triggering Worksheet_Change/SelectionChange
 '   - OptimizeCode_End:
-'       • Restore events and screen updating to their prior state
+'       o Restore events and screen updating to their prior state
 '
 ' ARCHITECTURAL NOTES:
 '   - Designed for short-lived performance windows around high-volume cell
@@ -27,7 +27,7 @@ Attribute VB_Name = "modUtilityExcelOptimize"
 ' USAGE:
 '   - Wrap bulk operations:
 '         OptimizeCode_Begin
-'         ' … heavy work …
+'         ' ... heavy work ...
 '         OptimizeCode_End
 '
 ' RELATED WIKI PAGES:

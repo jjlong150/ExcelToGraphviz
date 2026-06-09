@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: HelpAttributesSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Reference
 '
 ' ROLE:
@@ -29,16 +29,16 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Launchpad Ribbon tab when the sheet is selected
-'       • Ensures worksheet-level tools are immediately accessible
+'       o Activates the Launchpad Ribbon tab when the sheet is selected
+'       o Ensures worksheet-level tools are immediately accessible
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 '   - REFERENCE SUPPORT:
-'       • Serves as the lookup table for Graphviz attribute definitions
-'       • Supports Style Designer workflows that rely on attribute metadata
+'       o Serves as the lookup table for Graphviz attribute definitions
+'       o Supports Style Designer workflows that rely on attribute metadata
 '
 ' USAGE:
 '   - Fires automatically when the user navigates to the Attributes reference

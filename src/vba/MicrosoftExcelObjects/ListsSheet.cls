@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: ListsSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Internal
 '
 ' ROLE:
@@ -28,17 +28,17 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Launchpad Ribbon tab when the sheet is selected
-'       • Ensures worksheet-level utilities and settings tools are accessible
+'       o Activates the Launchpad Ribbon tab when the sheet is selected
+'       o Ensures worksheet-level utilities and settings tools are accessible
 '
 '   - CONFIGURATION AUTHORITY:
-'       • Hosts static and dynamic lists for Settings dropdowns
-'       • Stores macOS font lists used by GetMacFontList and fallback logic
-'       • Provides validation sources for Style Designer and Data sheet controls
+'       o Hosts static and dynamic lists for Settings dropdowns
+'       o Stores macOS font lists used by GetMacFontList and fallback logic
+'       o Provides validation sources for Style Designer and Data sheet controls
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 ' USAGE:
 '   - Fires automatically when navigating to the Lists sheet

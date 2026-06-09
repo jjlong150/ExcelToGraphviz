@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityADODBConnectionPool"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityADODBConnectionPool
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / ADO SQL / Connection Pooling
 '
 ' ROLE:
@@ -13,19 +13,19 @@ Attribute VB_Name = "modUtilityADODBConnectionPool"
 '
 ' RESPONSIBILITIES:
 '   - Connection pooling:
-'       • Maintain late-bound ADO connections keyed by file path
-'       • Enforce freshness via timestamp-based TTL checks
-'       • Provide safe-mode, non-pooled connections for recovery paths
+'       o Maintain late-bound ADO connections keyed by file path
+'       o Enforce freshness via timestamp-based TTL checks
+'       o Provide safe-mode, non-pooled connections for recovery paths
 '   - Provider negotiation:
-'       • Auto-detect newest available OLEDB provider (ACE -> Jet fallback)
+'       o Auto-detect newest available OLEDB provider (ACE -> Jet fallback)
 '   - Resilience and diagnostics:
-'       • Retry-based open logic for transient locks and latency
-'       • Defensive close logic to prevent lingering file handles
-'       • Emit diagnostic telemetry for provider failures and stale handles
+'       o Retry-based open logic for transient locks and latency
+'       o Defensive close logic to prevent lingering file handles
+'       o Emit diagnostic telemetry for provider failures and stale handles
 '   - Integration:
-'       • SQL Engine (iterative SQL, enumeration, placeholder SQL, batch execution)
-'       • Ribbon controls (pool reset, dev-mode toggles)
-'       • Settings and Diagnostics worksheets
+'       o SQL Engine (iterative SQL, enumeration, placeholder SQL, batch execution)
+'       o Ribbon controls (pool reset, dev-mode toggles)
+'       o Settings and Diagnostics worksheets
 '
 ' ARCHITECTURAL NOTES:
 '   - Late-bound ADO for cross-version compatibility.
@@ -358,7 +358,7 @@ Public Sub CleanupConnectionPool()
     Dim entry As Variant
     
     If Not ConnectionPool Is Nothing Then
-        For Each key In ConnectionPool.Keys
+        For Each key In ConnectionPool.keys
             entry = ConnectionPool.item(key)
             Set conn = entry(0)
             SafeCloseConnection conn

@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelColorPicker"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelColorPicker
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Excel UI / Color Selection
 '
 ' ROLE:
@@ -13,19 +13,19 @@ Attribute VB_Name = "modUtilityExcelColorPicker"
 '
 ' RESPONSIBILITIES:
 '   - Color selection:
-'       • ShowColorChooser: unified entry point for Excel dialog, Windows API,
+'       o ShowColorChooser: unified entry point for Excel dialog, Windows API,
 '         or macOS AppleScript color pickers
-'       • Validate and parse #RRGGBB hex input
-'       • Return selected color as VBA RGB Long
+'       o Validate and parse #RRGGBB hex input
+'       o Return selected color as VBA RGB Long
 '   - Windows API integration:
-'       • Declare and configure ChooseColorA dialog
-'       • Populate custom-color memory block
-'       • Initialize dialog with RGB seed color
+'       o Declare and configure ChooseColorA dialog
+'       o Populate custom-color memory block
+'       o Initialize dialog with RGB seed color
 '   - macOS integration:
-'       • Invoke AppleScriptTask-based color picker
-'       • Parse returned RGB triplet
+'       o Invoke AppleScriptTask-based color picker
+'       o Parse returned RGB triplet
 '   - Format conversion:
-'       • RGBToHex: convert VBA RGB Long -> #RRGGBB
+'       o RGBToHex: convert VBA RGB Long -> #RRGGBB
 '
 ' ARCHITECTURAL NOTES:
 '   - Fully cross-platform: Excel dialog (Windows/macOS), Windows API

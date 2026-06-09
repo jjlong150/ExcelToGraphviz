@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetStyleDesigner"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetStyleDesigner
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / Style Designer
 '
 ' ROLE:
@@ -13,26 +13,26 @@ Attribute VB_Name = "modWorksheetStyleDesigner"
 '
 ' RESPONSIBILITIES:
 '   - Live preview engine:
-'       • RenderElement orchestrates DOT generation and Graphviz rendering
-'       • GeneratePreviewGraph builds complete preview graphs with captions
-'       • PreviewStyle executes the full render pipeline and injects images
+'       o RenderElement orchestrates DOT generation and Graphviz rendering
+'       o GeneratePreviewGraph builds complete preview graphs with captions
+'       o PreviewStyle executes the full render pipeline and injects images
 '
 '   - Attribute synthesis:
-'       • GetNodeStyle / GetEdgeStyle / GetClusterStyle aggregate UI inputs
-'       • AddAttribute / AddAttributeGroup / AddStyleAttribute construct
+'       o GetNodeStyle / GetEdgeStyle / GetClusterStyle aggregate UI inputs
+'       o AddAttribute / AddAttributeGroup / AddStyleAttribute construct
 '         syntactically valid Graphviz attribute strings
 '
 '   - UI integration:
-'       • Manages label fields, dropdowns, gradient controls, shape galleries
-'       • Handles dynamic visibility of controls (e.g., gradient, image options)
+'       o Manages label fields, dropdowns, gradient controls, shape galleries
+'       o Handles dynamic visibility of controls (e.g., gradient, image options)
 '
 '   - Rendering environment:
-'       • GetRenderInfo summarizes active Graphviz engine settings
-'       • Supports HTML-like labels, image paths, rankdir, splines, and layout
+'       o GetRenderInfo summarizes active Graphviz engine settings
+'       o Supports HTML-like labels, image paths, rankdir, splines, and layout
 '
 '   - Persistence:
-'       • Writes composed styles back to the Styles worksheet
-'       • Supports preview-image caching and cleanup
+'       o Writes composed styles back to the Styles worksheet
+'       o Supports preview-image caching and cleanup
 '
 ' ARCHITECTURAL NOTES:
 '   - Integrates tightly with Graphviz (dot) via the Graphviz class wrapper
@@ -41,32 +41,32 @@ Attribute VB_Name = "modWorksheetStyleDesigner"
 '   - Designed for real-time feedback with minimal worksheet flicker
 '
 ' VERSION NOTES:
-'   - v5.5.00–v5.8.00 (2022–2023):
-'       • Added font preview images and dynamic font pruning
-'       • Added metric measurement support (mm -> inches)
-'       • Added solid-fill gradient support (Weight %)
-'       • Improved color/shape galleries and preview rendering
+'   - v5.5.00-v5.8.00 (2022-2023):
+'       o Added font preview images and dynamic font pruning
+'       o Added metric measurement support (mm -> inches)
+'       o Added solid-fill gradient support (Weight %)
+'       o Improved color/shape galleries and preview rendering
 '
-'   - v6.0.00–v6.1.01 (2023–2024):
-'       • Major performance improvements to Style Designer tab loading
-'       • Added caching of color and font preview images
-'       • Added progress indicators during large gallery loads
-'       • Added Mrecord to the list of supported shapes
+'   - v6.0.00-v6.1.01 (2023-2024):
+'       o Major performance improvements to Style Designer tab loading
+'       o Added caching of color and font preview images
+'       o Added progress indicators during large gallery loads
+'       o Added Mrecord to the list of supported shapes
 '
 '   - v8.0.0 (Aug 27, 2025):
-'       • Replaced dropdowns with Ribbon galleries for colors, fonts, shapes
-'       • Added RGB color picker (Windows + macOS)
-'       • Improved preview rendering and iconography
-'       • Added style-saving enhancements and auto-refresh of previews
-'       • Added relative image-path extraction for portability
+'       o Replaced dropdowns with Ribbon galleries for colors, fonts, shapes
+'       o Added RGB color picker (Windows + macOS)
+'       o Improved preview rendering and iconography
+'       o Added style-saving enhancements and auto-refresh of previews
+'       o Added relative image-path extraction for portability
 '
-'   - v9.0.0–v9.1.0 (Dec 2025–Jan 2026):
-'       • Updated font gallery logic and expanded font list
-'       • Improved font preview rendering and deduplication
+'   - v9.0.0-v9.1.0 (Dec 2025-Jan 2026):
+'       o Updated font gallery logic and expanded font list
+'       o Improved font preview rendering and deduplication
 '
 '   - v10.1.0 (Feb 9, 2026):
-'       • Added floating action buttons for editing and refreshing styles
-'       • Restored Image Zoom dropdown list with 5%–150% range
+'       o Added floating action buttons for editing and refreshing styles
+'       o Restored Image Zoom dropdown list with 5%-150% range
 '
 ' USAGE:
 '   - Called whenever a Style Designer control changes or when the user
@@ -1020,7 +1020,7 @@ End Function
 '   1. STROKE & COLOR: Maps core aesthetics including color schemes, pen
 '      width, and multi-color edge gradients (via 'AddAttributeGroup').
 '   2. STRUCTURAL GEOMETRY: Configures edge direction, weight, and
-'      logically validates 'radius'—ensuring it is numeric and greater
+'      logically validates 'radius'-ensuring it is numeric and greater
 '      than zero before inclusion.
 '   3. ARROWHEAD DYNAMICS: Orchestrates complex arrow configurations for
 '      both head and tail, allowing for multi-part arrow shapes.
@@ -1482,6 +1482,10 @@ Public Sub SaveToStylesWorksheet()
             ' Add default values for the view columns
             SetStyleViewDefaults row, styles
         End If
+        
+        ' "styles" sheet has been modified, invalidate caches
+        InvalidateSettings
+        InvalidateStyleCache
         Application.enableEvents = enableEvents
     End If
     

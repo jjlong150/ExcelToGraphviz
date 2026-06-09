@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelCellButtons"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcelCellButtons
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Excel UI / Floating Buttons Engine
 '
 ' ROLE:
@@ -13,17 +13,17 @@ Attribute VB_Name = "modUtilityExcelCellButtons"
 '
 ' RESPONSIBILITIES:
 '   - Button creation:
-'       • CreateOneFloatingButton: render a rounded-rectangle shape with
+'       o CreateOneFloatingButton: render a rounded-rectangle shape with
 '         icon glyph, styling, and assigned macro
-'       • Compute per-cell offsets for precise placement
-'       • Auto-delete existing buttons with the same name
+'       o Compute per-cell offsets for precise placement
+'       o Auto-delete existing buttons with the same name
 '   - Button orchestration:
-'       • UpdateFloatingButtonsOnSheet: evaluate ButtonConfig arrays,
+'       o UpdateFloatingButtonsOnSheet: evaluate ButtonConfig arrays,
 '         validate per-row conditions, and create buttons when appropriate
-'       • Support optional validation functions via Application.Run
+'       o Support optional validation functions via Application.Run
 '   - Button lifecycle:
-'       • GetButtonNamesFromConfigs: extract button names for cleanup
-'       • RemoveFloatingButtons: delete all shapes matching supplied names
+'       o GetButtonNamesFromConfigs: extract button names for cleanup
+'       o RemoveFloatingButtons: delete all shapes matching supplied names
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses Segoe UI Symbol glyphs for consistent, cross-platform iconography.
@@ -138,7 +138,7 @@ Public Sub UpdateFloatingButtonsOnSheet( _
     ByVal Target As Range, _
     ByRef configs() As ButtonConfig)
 
-    ' Early exits — common safety checks
+    ' Early exits - common safety checks
     If Target Is Nothing Then Exit Sub
     If Target.Cells.CountLarge > 1 Or Target.Cells.count = 0 Then Exit Sub
     If ws.ProtectContents Then Exit Sub

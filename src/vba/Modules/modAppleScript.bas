@@ -2,14 +2,14 @@ Attribute VB_Name = "modAppleScript"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modAppleScript
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / macOS Interop
 '
 ' ROLE:
 '   Sandbox-safe gateway for executing AppleScript handlers from VBA. Provides
 '   a unified, defensive wrapper around AppleScriptTask to enable file dialogs,
 '   color pickers, font enumeration, path resolution, and Graphviz execution
-'   on macOS—restoring feature parity with Windows.
+'   on macOS-restoring feature parity with Windows.
 '
 ' RESPONSIBILITIES:
 '   - Route all macOS system calls through a single, registered AppleScript
@@ -17,11 +17,11 @@ Attribute VB_Name = "modAppleScript"
 '   - Provide RunAppleScriptTask as a hardened wrapper around AppleScriptTask,
 '     returning vbNullString on failure to prevent VBA runtime errors.
 '   - Support higher-level features that depend on AppleScript:
-'       • Font enumeration (Style Designer)
-'       • RGB color picker (Style Designer)
-'       • File dialogs (Source Save, SQL datasource selection)
-'       • Graphviz execution and path resolution
-'       • Console availability checks
+'       o Font enumeration (Style Designer)
+'       o RGB color picker (Style Designer)
+'       o File dialogs (Source Save, SQL datasource selection)
+'       o Graphviz execution and path resolution
+'       o Console availability checks
 '
 ' INTERACTIONS:
 '   - Ribbon Tabs: Launchpad (console visibility), Style Designer (color picker,
@@ -31,7 +31,7 @@ Attribute VB_Name = "modAppleScript"
 '
 ' CROSS-PLATFORM NOTES:
 '   - macOS-only subsystem; excluded entirely on Windows via #If Mac.
-'   - Script versioning (v1–v3+) determines feature availability (e.g., RGB
+'   - Script versioning (v1-v3+) determines feature availability (e.g., RGB
 '     picker introduced in script v3).
 '   - All failures return vbNullString to avoid Excel for Mac crash scenarios.
 '

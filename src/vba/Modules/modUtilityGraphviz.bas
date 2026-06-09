@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityGraphviz"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityGraphviz
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Bootstrap / Graphviz Presence
 '
 ' ROLE:
@@ -12,9 +12,9 @@ Attribute VB_Name = "modUtilityGraphviz"
 '
 ' RESPONSIBILITIES:
 '   - AlertGraphvizNotFound:
-'       • Emit a localized message indicating that the requested Graphviz
+'       o Emit a localized message indicating that the requested Graphviz
 '         engine (dot, neato, fdp, etc.) was not found
-'       • Perform platform-specific handling (Windows implemented; macOS
+'       o Perform platform-specific handling (Windows implemented; macOS
 '         placeholder pending port)
 '
 ' ARCHITECTURAL NOTES:

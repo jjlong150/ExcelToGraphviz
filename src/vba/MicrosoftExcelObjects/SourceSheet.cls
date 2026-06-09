@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: SourceSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Source
 '
 ' ROLE:
@@ -27,19 +27,19 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the Source Ribbon tab when the sheet is selected
-'       • Surfaces Copy, Preview, Wrap, and Export controls
+'       o Activates the Source Ribbon tab when the sheet is selected
+'       o Surfaces Copy, Preview, Wrap, and Export controls
 '
 '   - AUTOMATED LINE INDEXING:
-'       • Calls UpdateSourceWorksheetLineNumbers on Worksheet_Change
-'       • Maintains the left-hand gutter for readability and debugging
+'       o Calls UpdateSourceWorksheetLineNumbers on Worksheet_Change
+'       o Maintains the left-hand gutter for readability and debugging
 '
 '   - PERFORMANCE OPTIMIZATION:
-'       • Wraps updates in OptimizeCode_Begin / OptimizeCode_End
-'       • Prevents screen flicker and unnecessary recalculation
+'       o Wraps updates in OptimizeCode_Begin / OptimizeCode_End
+'       o Prevents screen flicker and unnecessary recalculation
 '
 '   - UX HYGIENE:
-'       • Resets selection to A1 on activation for a consistent starting point
+'       o Resets selection to A1 on activation for a consistent starting point
 '
 ' USAGE:
 '   - Fires automatically when navigating to the Source worksheet

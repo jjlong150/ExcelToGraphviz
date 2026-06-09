@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:         Excel to Graphviz
 ' WORKBOOK MODULE: ThisWorkbook
-' COPYRIGHT:       Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:       Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:           Relationship Visualizer / Application Lifecycle
 '
 ' ROLE:
@@ -30,24 +30,24 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - ENVIRONMENT BOOTSTRAPPING:
-'       • Caches temporary directory and username for high-frequency access
-'       • Minimizes repeated system calls during rendering and SQL operations
+'       o Caches temporary directory and username for high-frequency access
+'       o Minimizes repeated system calls during rendering and SQL operations
 '
 '   - GRAPHVIZ PIPELINE VALIDATION:
-'       • Windows: auto-detects dot.exe, normalizes paths, validates existence
-'       • macOS: verifies AppleScriptTask bridge version and Excel version parity
+'       o Windows: auto-detects dot.exe, normalizes paths, validates existence
+'       o macOS: verifies AppleScriptTask bridge version and Excel version parity
 '
 '   - RESOURCE MANAGEMENT:
-'       • Creates cache directories for Ribbon color/font images
-'       • Tears down ADO connection pools on close (Windows only)
+'       o Creates cache directories for Ribbon color/font images
+'       o Tears down ADO connection pools on close (Windows only)
 '
 '   - WORKSPACE SYNCHRONIZATION:
-'       • Restores worksheet visibility based on saved settings
-'       • Ensures UI contract consistency across sessions
+'       o Restores worksheet visibility based on saved settings
+'       o Ensures UI contract consistency across sessions
 '
 '   - PLATFORM UNIFICATION:
-'       • Maintains a single codebase for Windows (32/64-bit) and macOS
-'       • Uses conditional compilation for platform-specific logic
+'       o Maintains a single codebase for Windows (32/64-bit) and macOS
+'       o Uses conditional compilation for platform-specific logic
 '
 ' USAGE:
 '   - Fires automatically on workbook open and close
@@ -206,5 +206,9 @@ Private Sub Workbook_Open()
     ' Sync the worksheet visibility with the saved values (in case someone hides
     ' worksheets manually).
     ShowOrHideWorksheets
+    
+    ' Settings are cached using lazy intialization. This call indicates the settings
+    ' need to be loaded upon first reference.
+    InvalidateSettings
 End Sub
 

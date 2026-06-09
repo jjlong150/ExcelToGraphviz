@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityString"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityString
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / String Processing
 '
 ' ROLE:
@@ -13,26 +13,26 @@ Attribute VB_Name = "modUtilityString"
 '
 ' RESPONSIBILITIES:
 '   - Basic predicates:
-'       • StartsWith / EndsWith: trimmed, case-insensitive comparisons
+'       o StartsWith / EndsWith: trimmed, case-insensitive comparisons
 '   - Quoting helpers:
-'       • AddQuotes: wrap text in double quotes
-'       • AddQuotesConditionally: quote only when non-alphanumeric characters appear
+'       o AddQuotes: wrap text in double quotes
+'       o AddQuotesConditionally: quote only when non-alphanumeric characters appear
 '   - Delimiter extraction:
-'       • GetStringBetweenDelimiters: extract inner content when wrapped by
+'       o GetStringBetweenDelimiters: extract inner content when wrapped by
 '         caller-supplied left/right delimiters
-'       • GetStringTokenAtPosition: positional token retrieval
-'       • AddNameValue: append name=value pairs to attribute strings
+'       o GetStringTokenAtPosition: positional token retrieval
+'       o AddNameValue: append name=value pairs to attribute strings
 '
 '   - Text wrapping and multiline handling:
-'       • WrapText: concatenate a range and wrap to fixed width
-'       • SplitMultilineText: normalize symbolic breaks (\n, \r, \l, <br/>) and
+'       o WrapText: concatenate a range and wrap to fixed width
+'       o SplitMultilineText: normalize symbolic breaks (\n, \r, \l, <br/>) and
 '         wrap each segment
-'       • SplitText: wrap a single string into segments with caller-supplied
+'       o SplitText: wrap a single string into segments with caller-supplied
 '         line endings
-'       • GetTextSegment: core word-boundary-aware segmenter
+'       o GetTextSegment: core word-boundary-aware segmenter
 '
 '   - Graphviz-safe scrubbing:
-'       • ScrubText: normalize LF, escape quotes, and convert "" -> blank
+'       o ScrubText: normalize LF, escape quotes, and convert "" -> blank
 '
 ' ARCHITECTURAL NOTES:
 '   - All wrapping routines collapse multiple spaces and preserve word

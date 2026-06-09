@@ -2,7 +2,7 @@ Attribute VB_Name = "modLocaleAudit"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modLocaleAudit
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Locale / Maintenance Utilities
 '
 ' ROLE:
@@ -13,15 +13,15 @@ Attribute VB_Name = "modLocaleAudit"
 '
 ' RESPONSIBILITIES:
 '   - Key auditing:
-'       • Compare locale worksheets against the master key list
-'       • Detect out-of-sync rows and report discrepancies
+'       o Compare locale worksheets against the master key list
+'       o Detect out-of-sync rows and report discrepancies
 '   - Synchronization:
-'       • Rebuild locale sheets to match master ordering
-'       • Insert missing keys with default English text
-'       • Flag untranslated rows for downstream filtering
+'       o Rebuild locale sheets to match master ordering
+'       o Insert missing keys with default English text
+'       o Flag untranslated rows for downstream filtering
 '   - Structural preservation:
-'       • Maintain row-to-row alignment across all locale sheets
-'       • Ensure control IDs, compact labels, verbose labels, screentips,
+'       o Maintain row-to-row alignment across all locale sheets
+'       o Ensure control IDs, compact labels, verbose labels, screentips,
 '         and supertips remain in consistent column positions
 '
 ' ARCHITECTURAL NOTES:
@@ -134,7 +134,7 @@ Public Sub SyncLocaleToMaster(ByVal masterSheet As String, ByVal sheetToSync As 
     ' sheet to sync. Include the row number, and a value which can be filtered on
     ' which identifies the row as needing to be translated.
     Dim dictKey As Variant
-    For Each dictKey In masterDictionary.Keys()
+    For Each dictKey In masterDictionary.keys()
         SetCell sheetToSync, row, 1, dictKey    ' Control ID
         SetCell sheetToSync, row, 2, GetCell(masterSheet, masterDictionary.item(dictKey), 2) ' Compact Control Labels
         SetCell sheetToSync, row, 3, GetCell(masterSheet, masterDictionary.item(dictKey), 3) ' Verbose Control Labels

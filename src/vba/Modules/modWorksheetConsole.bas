@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetConsole"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetConsole
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / Console
 '
 ' ROLE:
@@ -13,18 +13,18 @@ Attribute VB_Name = "modWorksheetConsole"
 '
 ' RESPONSIBILITIES:
 '   - Console lifecycle:
-'       • ClearConsoleWorksheet: purge prior command/output history
-'       • SaveConsoleToFile / ConsoleWorksheetToFile: export logs to UTF-8
-'       • CopyConsoleToClipboard (Windows): aggregate and copy log text
+'       o ClearConsoleWorksheet: purge prior command/output history
+'       o SaveConsoleToFile / ConsoleWorksheetToFile: export logs to UTF-8
+'       o CopyConsoleToClipboard (Windows): aggregate and copy log text
 '
 '   - Logging:
-'       • DisplayTextOnConsoleWorksheet: log CLI command + parsed output
-'       • LogToConsoleWorksheet: append raw diagnostic text
-'       • Platform-aware delimiter handling (vbCr on macOS, vbLf on Windows)
-'       • High-speed bulk writes using Application.Transpose
+'       o DisplayTextOnConsoleWorksheet: log CLI command + parsed output
+'       o LogToConsoleWorksheet: append raw diagnostic text
+'       o Platform-aware delimiter handling (vbCr on macOS, vbLf on Windows)
+'       o High-speed bulk writes using Application.Transpose
 '
 '   - Verbose-mode logic:
-'       • RunGraphvizInVerboseMode: enable Graphviz "-v" only when
+'       o RunGraphvizInVerboseMode: enable Graphviz "-v" only when
 '         Console is visible and user settings permit verbose logging
 '
 ' ARCHITECTURAL NOTES:

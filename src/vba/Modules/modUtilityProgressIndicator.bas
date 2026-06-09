@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityProgressIndicator"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityProgressIndicator
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Excel UI / Feedback
 '
 ' ROLE:
@@ -11,12 +11,12 @@ Attribute VB_Name = "modUtilityProgressIndicator"
 '
 ' RESPONSIBILITIES:
 '   - UpdateProgressIndicator:
-'       • Update percentage text and bar width
-'       • Repaint form to ensure immediate visual feedback
+'       o Update percentage text and bar width
+'       o Repaint form to ensure immediate visual feedback
 '   - ShowProgressIndicator:
-'       • Display modeless progress form with caller-supplied title
+'       o Display modeless progress form with caller-supplied title
 '   - HideProgressIndicator:
-'       • Unload the form and release UI resources
+'       o Unload the form and release UI resources
 '
 ' ARCHITECTURAL NOTES:
 '   - Modeless display allows workflows to continue executing without blocking.
@@ -31,7 +31,7 @@ Attribute VB_Name = "modUtilityProgressIndicator"
 '
 ' USAGE:
 '   - Wrap long operations:
-'         ShowProgressIndicator "Exporting…"
+'         ShowProgressIndicator "Exporting..."
 '         UpdateProgressIndicator pct
 '         HideProgressIndicator
 '

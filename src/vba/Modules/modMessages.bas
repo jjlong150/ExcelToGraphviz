@@ -2,7 +2,7 @@ Attribute VB_Name = "modMessages"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modMessages
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Core Infrastructure / Diagnostics
 '
 ' ROLE:
@@ -13,18 +13,18 @@ Attribute VB_Name = "modMessages"
 '
 ' RESPONSIBILITIES:
 '   - Multi-channel dispatch:
-'       • Console worksheet logging (timestamped, normalized)
-'       • Status bar notifications (non-blocking)
-'       • Message box alerts (optional title + button set)
+'       o Console worksheet logging (timestamped, normalized)
+'       o Status bar notifications (non-blocking)
+'       o Message box alerts (optional title + button set)
 '   - Behavior gating:
-'       • Reads SETTINGS_ERROR_* toggles to determine active channels
-'       • Supports silent automation workflows (no pop-ups)
+'       o Reads SETTINGS_ERROR_* toggles to determine active channels
+'       o Supports silent automation workflows (no pop-ups)
 '   - Severity framework:
-'       • Extensible enum (Info, Warning, Error, Critical)
-'       • Consistent labeling across all output surfaces
+'       o Extensible enum (Info, Warning, Error, Critical)
+'       o Consistent labeling across all output surfaces
 '   - Message normalization:
-'       • Collapses CR/LF/tab variants
-'       • Ensures clean, single-line console output
+'       o Collapses CR/LF/tab variants
+'       o Ensures clean, single-line console output
 '
 ' ARCHITECTURAL NOTES:
 '   - Designed for cross-module use: rendering pipeline, import/export,

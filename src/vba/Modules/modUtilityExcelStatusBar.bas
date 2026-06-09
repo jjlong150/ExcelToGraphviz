@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelStatusBar"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityStatusBar
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Excel UI / Feedback
 '
 ' ROLE:
@@ -11,13 +11,13 @@ Attribute VB_Name = "modUtilityExcelStatusBar"
 '
 ' RESPONSIBILITIES:
 '   - UpdateStatusBar:
-'       • Set Application.StatusBar to a caller-supplied message
-'       • Yield control via DoEvents to ensure immediate UI update
+'       o Set Application.StatusBar to a caller-supplied message
+'       o Yield control via DoEvents to ensure immediate UI update
 '   - UpdateStatusBarForNSeconds:
-'       • Display a message for a fixed duration using Application.OnTime
-'       • Automatically schedule ClearStatusBar
+'       o Display a message for a fixed duration using Application.OnTime
+'       o Automatically schedule ClearStatusBar
 '   - ClearStatusBar:
-'       • Restore Excel's native status bar behavior
+'       o Restore Excel's native status bar behavior
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses Application.StatusBar = False to return control to Excel.

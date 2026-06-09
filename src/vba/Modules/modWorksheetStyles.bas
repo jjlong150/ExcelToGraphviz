@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetStyles"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetStyles
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / Styles
 '
 ' ROLE:
@@ -13,20 +13,20 @@ Attribute VB_Name = "modWorksheetStyles"
 '
 ' RESPONSIBILITIES:
 '   - Visual rendering:
-'       • Convert DOT format strings into PNG thumbnails via Graphviz
-'       • Handle per-row preview generation and full-gallery batch refresh
+'       o Convert DOT format strings into PNG thumbnails via Graphviz
+'       o Handle per-row preview generation and full-gallery batch refresh
 '
 '   - Worksheet layout:
-'       • Auto-size rows to fit rendered images
-'       • Compute preview-column placement dynamically
+'       o Auto-size rows to fit rendered images
+'       o Compute preview-column placement dynamically
 '
 '   - Round-trip editing:
-'       • Restore saved styles back into the Style Designer
-'       • Parse DOT attribute strings into Designer UI fields
+'       o Restore saved styles back into the Style Designer
+'       o Parse DOT attribute strings into Designer UI fields
 '
 '   - State management:
-'       • Clear previews, purge images, and maintain workbook responsiveness
-'       • Display progress indicators during bulk rendering
+'       o Clear previews, purge images, and maintain workbook responsiveness
+'       o Display progress indicators during bulk rendering
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses the Graphviz class for rendering and console capture
@@ -450,7 +450,7 @@ Public Sub RestoreStyleDesigner()
     
     ' Iterate the dictionary to restore values into the correct settings cells
     Dim key As Variant
-    For Each key In attributeDictionary.Keys
+    For Each key In attributeDictionary.keys
         RestoreStyleDesignerSetting mode, CStr(key), CStr(attributeDictionary(key))
     Next key
     Set attributeDictionary = Nothing

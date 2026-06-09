@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityADODBDiagnosticLogger"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityADODBDiagnosticLogger
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / ADO SQL / Message Logging
 '
 ' ROLE:

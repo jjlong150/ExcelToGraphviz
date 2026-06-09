@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityUTF8File"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityUTF8File
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / File I/O
 '
 ' ROLE:
@@ -12,31 +12,31 @@ Attribute VB_Name = "modUtilityUTF8File"
 '
 ' RESPONSIBILITIES:
 '   - UTF-8 writing (BOM-free):
-'       • WriteTextToUTF8FileFileWithoutBOM: generate UTF-8 files without the
+'       o WriteTextToUTF8FileFileWithoutBOM: generate UTF-8 files without the
 '         EF BB BF signature required by Graphviz's strict parsers
-'       • Implements dual-stream ADODB pipeline (Text -> Binary) to strip BOM
+'       o Implements dual-stream ADODB pipeline (Text -> Binary) to strip BOM
 '
 '   - UTF-8 writing (with BOM):
-'       • WriteTextToUTF8FileFileWithBOM: produce standard UTF-8 files with
+'       o WriteTextToUTF8FileFileWithBOM: produce standard UTF-8 files with
 '         ADO-generated BOM for external editors and log viewers
 '
 '   - UTF-8 reading:
-'       • ReadUTF8File: load UTF-8 text using ADODB.Stream on Windows or
+'       o ReadUTF8File: load UTF-8 text using ADODB.Stream on Windows or
 '         line-input fallback on macOS
 '
 ' ARCHITECTURAL NOTES:
 '   - Windows:
-'       • Uses late-bound ADODB.Stream for high-performance Unicode I/O
-'       • Charset = "UTF-8" ensures correct encoding and BOM handling
-'       • Binary stream copy removes BOM cleanly for Graphviz ingestion
+'       o Uses late-bound ADODB.Stream for high-performance Unicode I/O
+'       o Charset = "UTF-8" ensures correct encoding and BOM handling
+'       o Binary stream copy removes BOM cleanly for Graphviz ingestion
 '
 '   - macOS:
-'       • Sandbox-safe fallback using native Line Input loops
-'       • Ensures core read capability even without ADODB support
+'       o Sandbox-safe fallback using native Line Input loops
+'       o Ensures core read capability even without ADODB support
 '
 '   - Data integrity:
-'       • Preserves full Unicode range for multi-language labels
-'       • Ensures deterministic output for DOT rendering pipelines
+'       o Preserves full Unicode range for multi-language labels
+'       o Ensures deterministic output for DOT rendering pipelines
 '
 ' USAGE:
 '   - BOM-free writer is used for DOT files consumed by Graphviz engines

@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilitySleep"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilitySleep
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Timing & Execution Control
 '
 ' ROLE:
@@ -12,9 +12,9 @@ Attribute VB_Name = "modUtilitySleep"
 '
 ' RESPONSIBILITIES:
 '   - SleepMilliseconds:
-'       • Implement a busy-wait loop using Timer + DoEvents
-'       • Avoid Win32 Sleep API to maintain macro-security compatibility
-'       • Provide predictable millisecond-scale delays for throttling
+'       o Implement a busy-wait loop using Timer + DoEvents
+'       o Avoid Win32 Sleep API to maintain macro-security compatibility
+'       o Provide predictable millisecond-scale delays for throttling
 '
 ' ARCHITECTURAL NOTES:
 '   - Windows-only implementation (Timer resolution differs on macOS).

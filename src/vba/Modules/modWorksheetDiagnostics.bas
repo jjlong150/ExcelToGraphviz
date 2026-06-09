@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetDiagnostics"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetDiagnostics
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER: Relationship Visualizer / Sheets / Diagnostics
 '
 ' ROLE:
@@ -13,27 +13,27 @@ Attribute VB_Name = "modWorksheetDiagnostics"
 '
 ' RESPONSIBILITIES:
 '   - System auditing:
-'       • ReportDiagnostics: collect OS, Excel, workbook, username, and
+'       o ReportDiagnostics: collect OS, Excel, workbook, username, and
 '         Graphviz version data
-'       • Validate Temp, Font-cache, Color-cache, and image-path directories
-'       • Populate DIAGNOSTICS_ fields with environment state
+'       o Validate Temp, Font-cache, Color-cache, and image-path directories
+'       o Populate DIAGNOSTICS_ fields with environment state
 '
 '   - macOS bridge validation:
-'       • Confirm AppleScript sandbox folder
-'       • Detect ExcelToGraphviz.applescript and query its version
-'       • Clear Mac-specific fields on Windows
+'       o Confirm AppleScript sandbox folder
+'       o Detect ExcelToGraphviz.applescript and query its version
+'       o Clear Mac-specific fields on Windows
 '
 '   - Cache hygiene:
-'       • DeleteFolderContents: purge directory contents cross-platform
-'       • ClearFontImageFolder / ClearColorsImageFolder: reset Style Designer
+'       o DeleteFolderContents: purge directory contents cross-platform
+'       o ClearFontImageFolder / ClearColorsImageFolder: reset Style Designer
 '         preview caches
 '
 '   - Graphviz connectivity:
-'       • GetGraphvizVersion: run "dot -V" via ExecuteAndCapture (Windows) or
+'       o GetGraphvizVersion: run "dot -V" via ExecuteAndCapture (Windows) or
 '         RunAppleScriptTask (macOS)
 '
 '   - Worksheet maintenance:
-'       • ClearDiagnostics: wipe stale diagnostic values prior to a new audit
+'       o ClearDiagnostics: wipe stale diagnostic values prior to a new audit
 '
 ' ARCHITECTURAL NOTES:
 '   - Integrates tightly with DIAGNOSTICS_ Named Range API for structured

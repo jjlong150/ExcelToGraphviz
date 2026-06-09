@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityFileSystem"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityFileSystem
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / File System
 '
 ' ROLE:
@@ -12,16 +12,16 @@ Attribute VB_Name = "modUtilityFileSystem"
 '
 ' RESPONSIBILITIES:
 '   - Existence checks:
-'       • DirectoryExists: macOS via AppleScriptTask; Windows via FileSystemObject
-'       • FileExists: macOS via AppleScriptTask; Windows via FileSystemObject
+'       o DirectoryExists: macOS via AppleScriptTask; Windows via FileSystemObject
+'       o FileExists: macOS via AppleScriptTask; Windows via FileSystemObject
 '   - File and directory operations:
-'       • DeleteFile: wrapper over Kill with defensive error handling
-'       • CreateDirectory: wrapper over MkDir with suppressed errors
+'       o DeleteFile: wrapper over Kill with defensive error handling
+'       o CreateDirectory: wrapper over MkDir with suppressed errors
 '   - Text I/O:
-'       • WriteTextToFile: overwrite-mode text output using FreeFile
-'       • ReadFileToString: macOS line-by-line Input; Windows via OpenTextFile
+'       o WriteTextToFile: overwrite-mode text output using FreeFile
+'       o ReadFileToString: macOS line-by-line Input; Windows via OpenTextFile
 '   - Enumerations:
-'       • IOMode and FileFormat enums mirror VBScript/OpenTextFile semantics
+'       o IOMode and FileFormat enums mirror VBScript/OpenTextFile semantics
 '
 ' ARCHITECTURAL NOTES:
 '   - macOS uses AppleScriptTask to bypass sandbox restrictions for file

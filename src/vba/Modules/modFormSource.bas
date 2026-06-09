@@ -2,7 +2,7 @@ Attribute VB_Name = "modFormSource"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    DotFormSource
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     UI / Forms Subsystem
 '
 ' ROLE:
@@ -11,13 +11,13 @@ Attribute VB_Name = "modFormSource"
 '
 ' RESPONSIBILITIES:
 '   - Form lifecycle management:
-'       • show/hide the DOT Source Viewer
-'       • clear/reset the multiline text surface
+'       o show/hide the DOT Source Viewer
+'       o clear/reset the multiline text surface
 '   - Localization:
-'       • apply translated captions to Copy and Word-Wrap controls
+'       o apply translated captions to Copy and Word-Wrap controls
 '   - Source presentation:
-'       • inject generated DOT source into the form when visible
-'       • normalize line endings for consistent display
+'       o inject generated DOT source into the form when visible
+'       o normalize line endings for consistent display
 '
 ' ARCHITECTURAL NOTES:
 '   - Lightweight controller invoked by modRibbonTabSource and modCreateGraph.

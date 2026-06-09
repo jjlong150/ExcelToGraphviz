@@ -2,7 +2,7 @@ Attribute VB_Name = "modWorksheetSQLClusters"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modWorksheetSQLClusters
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Relationship Visualizer / Sheets / SQL
 '
 ' ROLE:
@@ -12,23 +12,23 @@ Attribute VB_Name = "modWorksheetSQLClusters"
 '
 ' RESPONSIBILITIES:
 '   - Multi-level detection:
-'       • DetectMultiLevel and DetectMaxLevels probe CLUSTER1…CLUSTERn fields
+'       o DetectMultiLevel and DetectMaxLevels probe CLUSTER1...CLUSTERn fields
 '         and determine the active hierarchy depth.
 '
 '   - Hierarchy orchestration:
-'       • ProcessMultiLevelRecordset performs delta-driven open/close logic,
+'       o ProcessMultiLevelRecordset performs delta-driven open/close logic,
 '         maintains per-level counters, and ensures structural continuity.
 '
 '   - Cluster emission:
-'       • EmitClusterOpen / EmitClusterClose write Graphviz subgraph braces,
+'       o EmitClusterOpen / EmitClusterClose write Graphviz subgraph braces,
 '         labels, styles, attributes, and tooltips with suffix-aware formatting.
 '
 '   - Token substitution:
-'       • ProcessClusterProperty applies {cluster}, {subcluster}, and {level}
+'       o ProcessClusterProperty applies {cluster}, {subcluster}, and {level}
 '         placeholders for dynamic naming and styling.
 '
 '   - Data emission:
-'       • EmitRows / EmitOneRow map SQL records into the Data worksheet while
+'       o EmitRows / EmitOneRow map SQL records into the Data worksheet while
 '         filtering structural fields and applying enumeration and wrapping rules.
 '
 ' ARCHITECTURAL NOTES:
@@ -39,10 +39,10 @@ Attribute VB_Name = "modWorksheetSQLClusters"
 '
 ' VERSION NOTES:
 '   - v10.3.0 (Apr 3, 2026):
-'       • Introduced full N-level clustering (CLUSTER1, CLUSTER2, …)
-'       • Added per-level label/style/attribute/tooltip fields
-'       • Added {label} placeholder support for cluster label formatting
-'       • Added revised format-string parsing for HTML-like syntax
+'       o Introduced full N-level clustering (CLUSTER1, CLUSTER2, ...)
+'       o Added per-level label/style/attribute/tooltip fields
+'       o Added {label} placeholder support for cluster label formatting
+'       o Added revised format-string parsing for HTML-like syntax
 '
 ' USAGE:
 '   - Automatically invoked by RunSQL when CLUSTER1 is detected.
@@ -239,7 +239,7 @@ End Sub
 '
 ' USAGE:
 '   - Called at the start of 'ProcessMultiLevelRecordset'.
-'   - Enables "Zero-Configuration" hierarchies—just add columns to your
+'   - Enables "Zero-Configuration" hierarchies-just add columns to your
 '     SQL and the engine adapts.
 ' ==========================================================================
 Private Function DetectMaxLevels(ByVal rs As Object, prefix As String, levelLimit As Long) As Long
@@ -442,8 +442,8 @@ End Sub
 '      values and ensuring mathematical directionality (start vs stop).
 '   2. LOOP ENUMERATION: Supports "Enumeration Mode" within a cluster,
 '      allowing a single SQL record to generate a sequenced range of nodes.
-'   3. STATE INJECTION: Passes the current clustering context—including
-'      'levelNumber', 'absoluteClusterCount', and 'relativeClusterCount'—
+'   3. STATE INJECTION: Passes the current clustering context-including
+'      'levelNumber', 'absoluteClusterCount', and 'relativeClusterCount'-
 '      down to the atomic 'EmitOneRow' writer.
 '   4. GOVERNOR COMPLIANCE: Tracks the total 'ctx.loop.count' against
 '      system limits to ensure stability in high-density graphs.

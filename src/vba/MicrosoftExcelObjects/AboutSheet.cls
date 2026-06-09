@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: AboutSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Info
 '
 ' ROLE:
@@ -29,19 +29,19 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE NAVIGATION:
-'       • Activates the About Ribbon tab when the sheet is selected
-'       • Ensures licensing, credits, and version information are visible
+'       o Activates the About Ribbon tab when the sheet is selected
+'       o Ensures licensing, credits, and version information are visible
 '
 '   - LOCALIZATION TARGET:
-'       • Receives translated legal text via modLocalize.LocalizeWorksheetAbout
-'       • Updates credits and licensing paragraphs based on active language
+'       o Receives translated legal text via modLocalize.LocalizeWorksheetAbout
+'       o Updates credits and licensing paragraphs based on active language
 '
 '   - PLATFORM-SAFE RIBBON ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 '   - UI STATE MANAGEMENT:
-'       • Ensures About-specific Ribbon controls are synchronized with focus
+'       o Ensures About-specific Ribbon controls are synchronized with focus
 '
 ' USAGE:
 '   - Fires automatically when the user selects the Info/About worksheet

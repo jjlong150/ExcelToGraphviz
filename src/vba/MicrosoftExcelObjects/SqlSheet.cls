@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: SqlSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / SQL
 '
 ' ROLE:
@@ -31,27 +31,27 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE RIBBON ACTIVATION:
-'       • Activates the SQL Ribbon tab on entry
-'       • Invalidates Edit Cell and Clipboard controls to sync with cursor
+'       o Activates the SQL Ribbon tab on entry
+'       o Invalidates Edit Cell and Clipboard controls to sync with cursor
 '
 '   - FLOATING UI ENGINE:
-'       • Uses Worksheet_SelectionChange to purge and recreate floating
+'       o Uses Worksheet_SelectionChange to purge and recreate floating
 '         Run/Edit/Status buttons
-'       • Positions buttons using ButtonConfig metadata (HOffset/VOffset)
-'       • Uses Unicode iconography (ChrW) for high-resolution, zero-dependency
+'       o Positions buttons using ButtonConfig metadata (HOffset/VOffset)
+'       o Uses Unicode iconography (ChrW) for high-resolution, zero-dependency
 '         button visuals
 '
 '   - ROW-LEVEL VALIDATION:
-'       • Binds ValidationFunc (e.g., IsSqlRowActive) to Run buttons
-'       • Prevents execution on comment rows, blank rows, or invalid SQL
+'       o Binds ValidationFunc (e.g., IsSqlRowActive) to Run buttons
+'       o Prevents execution on comment rows, blank rows, or invalid SQL
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 '   - UI HYGIENE & STATE MANAGEMENT:
-'       • Invalidates Ribbon controls on selection changes and deactivation
-'       • Ensures SQL-specific UI does not leak into other worksheets
+'       o Invalidates Ribbon controls on selection changes and deactivation
+'       o Ensures SQL-specific UI does not leak into other worksheets
 '
 ' USAGE:
 '   - Fires automatically when navigating to or interacting with the SQL sheet
