@@ -494,9 +494,9 @@ End Function
 
 Private Function GetFontImagePath(fontName As String, imageSize As FontPreviewSize)
     If imageSize = FontPreviewLarge Then
-        GetFontImagePath = GetFontImageDir() & Application.pathSeparator & fontName & " - AaBbCc" & DOT & RIBBON_EXT_FONT
+        GetFontImagePath = GetFontImageDir() & Application.pathSeparator & fontName & " - AaBbCc" & dot & RIBBON_EXT_FONT
     Else
-        GetFontImagePath = GetFontImageDir() & Application.pathSeparator & fontName & DOT & RIBBON_EXT_FONT
+        GetFontImagePath = GetFontImageDir() & Application.pathSeparator & fontName & dot & RIBBON_EXT_FONT
     End If
 End Function
 
@@ -634,7 +634,7 @@ Private Sub FontGetOrCreateImage( _
     ' Build full path to the image file
     Dim imageFile As String
     imageFile = GetFontImageDir() & Application.pathSeparator & _
-                fontName & filenameSuffix & DOT & RIBBON_EXT_FONT
+                fontName & filenameSuffix & dot & RIBBON_EXT_FONT
 
     ' Try loading an existing image
     Set image = SafeLoadPicture(imageFile)
@@ -723,24 +723,45 @@ Private Function BuildFontPreviewDot( _
     isLarge = (imageSize = FontPreviewLarge)
 
     Dim labelText As String
-    Dim base As String
+    Dim dot As String
 
     If isLarge Then
-        base = "digraph g{ bgcolor=""#F5F5F5"" pad=0 margin=0 a[" & _
-               " shape=none dpi=96 penwidth=0"
         labelText = "Aa Bb Cc"
+    
+        dot = "digraph g { " & _
+              "bgcolor=white; " & _
+              "pad=0; margin=0; " & _
+              "node [shape=rect style=filled color=""#E0E0E0"" fillcolor=""white"" height=0.375 width=1.125 fixedsize=true" & _
+              "      penwidth=1 margin=0.18 dpi=192 fontsize=14]; "
     Else
-        base = "digraph g{ bgcolor=gray pad=0 margin=0 a[" & _
-               " shape=square style=filled fillcolor=white fontcolor=black" & _
-               " fontsize=38 dpi=96 height=0.48 width=0.48 fixedsize=true penwidth=0"
         labelText = "A"
+    
+        ' Windows and Mac use different colors in the ribbon tab backgrounds
+        Dim bgcolor As String
+#If Mac Then
+        bgcolor = "#F3F3F3"
+#Else
+        bgcolor = "white"
+#End If
+    
+        dot = "digraph g { " & _
+              "bgcolor=""{bgcolor}""; pad=0; margin=0; " & _
+              "node [shape=square style=filled fillcolor=""{bgcolor}"" fontcolor=black " & _
+              "      fontsize=38 fixedsize=true width=0.48 height=0.48 " & _
+              "      penwidth=0 margin=0.05 labelloc=c labeljust=c dpi=192]; "
+              
+        dot = replace(dot, "{bgcolor}", bgcolor, 1, -1, vbTextCompare)
     End If
 
+    ' Add font name if not default
     If fontName <> "Times-Roman" Then
-        base = base & " fontname=" & AddQuotesConditionally(fontName)
+        dot = dot & "node [fontname=" & AddQuotesConditionally(fontName) & "]; "
     End If
 
-    BuildFontPreviewDot = base & " label=" & AddQuotes(labelText) & " ]; }"
+    ' Add the label
+    dot = dot & "a [label=" & AddQuotes(labelText) & "]; }"
+
+    BuildFontPreviewDot = dot
 End Function
 
 '@Ignore ProcedureNotUsed, ParameterNotUsed
@@ -2839,7 +2860,7 @@ Private Function ProcessFontList(ByVal rawFonts As Variant) As Variant
     If dict.count = 0 Then
         result = Array("")
     Else
-        result = dict.Keys
+        result = dict.keys
         SortStringArray result
     End If
 
@@ -3148,7 +3169,7 @@ End Function
 Private Sub ColorSetImageFile(ByRef color As ColorInfo)
     Dim colorCacheKey As String
     colorCacheKey = ColorGetCacheKey(color)
-    color.imageFile = GetColorImageDir() & Application.pathSeparator & LCase$(colorCacheKey) & DOT & RIBBON_EXT_COLOR
+    color.imageFile = GetColorImageDir() & Application.pathSeparator & LCase$(colorCacheKey) & dot & RIBBON_EXT_COLOR
     color.imageFile = replace(color.imageFile, "#", vbNullString)
 End Sub
 
@@ -3264,7 +3285,7 @@ Private Function ColorGetIndex(ByVal cellName As String) As Long
     ColorGetIndex = index
 End Function
 
-Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoints As Single = 15) As Boolean
+Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoints As Single = 30) As Boolean
     ColorCreateThumbnail = False
     
     If color.RGB < 0 Or color.RGB > &HFFFFFF Then Exit Function
@@ -3275,36 +3296,88 @@ Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoi
     
     On Error GoTo ErrorHandler
     
-    Dim borderRGB As Long
-    Select Case LCase$(color.name)
-        Case "transparent", "invis", "none" ' Put red border around "invisible" colors
-            borderRGB = RGB(255, 0, 0)
-        Case Else
-            borderRGB = RGB(200, 200, 200)  ' Put light gray border around all the rest
-    End Select
-
-    ' Chart attributes are in points. e.g. 15 points = 20 pixels
+    ' Create a square chart
     Dim chartObj As ChartObject
     Set chartObj = StyleDesignerSheet.ChartObjects.Add(0, 0, sizePoints, sizePoints)
-    
-    ' Set the background fill color of the chart to the fill color
-    ' passed to this function, then write the chart out as
-    ' an image file.
+
     With chartObj.Chart
         .ChartArea.format.Fill.visible = msoTrue
-        .ChartArea.format.Fill.ForeColor.RGB = color.RGB
-        
-        ' Light gray border for visibility
+#If Mac Then
+        .ChartArea.format.Fill.ForeColor.RGB = RGB(235, 235, 235)   ' Gray
+        .ChartArea.Border.color = RGB(235, 235, 235)
+#Else
+       .ChartArea.format.Fill.ForeColor.RGB = RGB(255, 255, 255)   ' White
+        .ChartArea.Border.color = RGB(255, 255, 255)
+#End If
         .ChartArea.Border.LineStyle = xlContinuous
-        .ChartArea.Border.color = borderRGB
         .ChartArea.Border.Weight = xlThin
-    
-        ' Optional: Uncomment to remove plot area border if not needed
-        '.PlotArea.Border.LineStyle = xlNone
-    
-        .HasLegend = False
         
-        DoEvents    ' Give chart time to render
+        .HasLegend = False
+        .HasTitle = False
+        
+        ' Add a single point to plot
+        .ChartType = xlXYScatter
+        .SeriesCollection.NewSeries
+        .SeriesCollection(1).XValues = Array(1)
+        .SeriesCollection(1).Values = Array(1)
+        
+        ' Format the marker as a circle
+        With .SeriesCollection(1)
+            .MarkerStyle = xlMarkerStyleCircle
+            .MarkerForegroundColor = color.RGB
+            .MarkerBackgroundColor = color.RGB
+            .MarkerSize = sizePoints * 0.75    ' scale circle to 75% of thumbnail size to leave room for shadow
+            
+            ' Circle border (outline)
+            With .format.line
+                .visible = msoTrue
+                
+                Dim r As Long, g As Long, b As Long
+                r = color.RGB And &HFF
+                g = (color.RGB \ &H100) And &HFF
+                b = (color.RGB \ &H10000) And &HFF
+            
+                ' Perceived brightness (0-255)
+                Dim brightness As Double
+                brightness = 0.299 * r + 0.587 * g + 0.114 * b
+                
+                Select Case LCase$(color.name)
+                    Case "transparent", "invis", "none"
+                        .ForeColor.RGB = RGB(255, 0, 0) ' Use red border to highlight invisible colors
+                        .Weight = 1.25
+                    Case Else
+                        If brightness > 200 Then
+                            ' Auto-darken border for very light colors
+                            .ForeColor.RGB = RGB(r * 0.6, g * 0.6, b * 0.6)
+                        Else
+                            .ForeColor.RGB = color.RGB
+                        End If
+                        .Weight = 0.75
+                End Select
+                .DashStyle = msoLineSolid
+            End With
+
+#If Mac Then
+            ' Shadows don't look good on Mac, only add them on Windows
+#Else
+            ' Add a soft drop shadow
+            With .format.Shadow
+                .visible = msoTrue
+                .style = msoShadowStyleOuterShadow
+                .Blur = 4                       ' softness of the shadow
+                .Transparency = 0.4
+                .OffsetX = 2
+                .OffsetY = 2
+                .ForeColor.RGB = RGB(0, 0, 0)   ' Black
+            End With
+#End If
+        End With
+
+        ' Remove axes and gridlines
+        .Axes(xlCategory).Delete
+        .Axes(xlValue).Delete
+        
+        DoEvents
         
         .Export fileName:=color.imageFile
         
@@ -3316,9 +3389,9 @@ Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoi
             ColorCreateThumbnail = True
         End If
     End With
-    
+
     chartObj.Delete
-    
+
 Cleanup:
     Set chartObj = Nothing
     Exit Function
