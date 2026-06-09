@@ -12,18 +12,18 @@ Attribute VB_Name = "modExecuteAndCapture"
 '
 ' RESPONSIBILITIES:
 '   - Spawn external processes silently:
-'       • CreateProcessA with hidden window (SW_HIDE)
-'       • Inheritable pipe handles for StdOut and StdErr
+'       o CreateProcessA with hidden window (SW_HIDE)
+'       o Inheritable pipe handles for StdOut and StdErr
 '   - Real-time stream capture:
-'       • Non-blocking PeekNamedPipe polling
-'       • Chunked 4096-byte reads to prevent pipe saturation
-'       • Continuous draining during process execution to avoid 4KB deadlock
+'       o Non-blocking PeekNamedPipe polling
+'       o Chunked 4096-byte reads to prevent pipe saturation
+'       o Continuous draining during process execution to avoid 4KB deadlock
 '   - Cross-platform resilience:
-'       • macOS stub implementation to avoid unsupported WinAPI calls
-'       • PtrSafe/LongPtr parity for 32/64-bit Office
+'       o macOS stub implementation to avoid unsupported WinAPI calls
+'       o PtrSafe/LongPtr parity for 32/64-bit Office
 '   - Resource hygiene:
-'       • Deterministic closing of process, thread, and pipe handles
-'       • Safe ByRef return of both output streams
+'       o Deterministic closing of process, thread, and pipe handles
+'       o Safe ByRef return of both output streams
 '
 ' ARCHITECTURAL NOTES:
 '   - Based on Christos Samaras' MIT-licensed implementation; heavily hardened
@@ -371,6 +371,12 @@ Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String
         ' Close handles to process and threads
         CloseHandle pi.hProcess
         CloseHandle pi.hThread
+    Else
+        ' CreateProcess failed: the write ends were never inherited by a child
+        ' process, so close them here to avoid leaking the handles on every
+        ' failed render (e.g. a misconfigured GraphvizPath).
+        CloseHandle hStdOutWrite
+        CloseHandle hStdErrWrite
     End If
     
     ' Close handles to pipes
