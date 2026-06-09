@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilityExcelCell"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modUtilityExcel
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Excel Interop
 '
 ' ROLE:
@@ -12,15 +12,15 @@ Attribute VB_Name = "modUtilityExcelCell"
 '
 ' RESPONSIBILITIES:
 '   - Typed cell accessors:
-'       • GetCellLong, GetCellString, GetCellBoolean, GetCellUCase
-'       • GetCell(row, col) with trimming and normalization
+'       o GetCellLong, GetCellString, GetCellBoolean, GetCellUCase
+'       o GetCell(row, col) with trimming and normalization
 '   - Cell mutation helpers:
-'       • SetCell, SetCellString, ClearCell, ClearNamedCellContents
-'       • ToggleCell and Toggle for boolean-driven value switching
+'       o SetCell, SetCellString, ClearCell, ClearNamedCellContents
+'       o ToggleCell and Toggle for boolean-driven value switching
 '   - File ingestion:
-'       • ReadFileIntoCell: binary-safe file read into a worksheet cell
+'       o ReadFileIntoCell: binary-safe file read into a worksheet cell
 '   - Directory selection:
-'       • SelectDirectoryToCell: integrates ChooseDirectory with worksheet storage
+'       o SelectDirectoryToCell: integrates ChooseDirectory with worksheet storage
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses ActiveWorkbook.Sheets.[_Default] for late-bound sheet resolution.
@@ -40,36 +40,75 @@ Attribute VB_Name = "modUtilityExcelCell"
 
 Option Explicit
 
+' -----------------------------------------------------------------------------
+' WORKSHEET RESOLUTION CACHE
+'
+' Every cell accessor below used to re-walk the full COM chain
+'   ActiveWorkbook.Sheets.[_Default](worksheetName)
+' on every single call. During graph generation the parsing pipeline reads tens
+' of thousands of cells (multiple passes over the data sheet, each row touching
+' ~11 columns), and AutoDraw re-runs the whole pipeline on every keystroke in
+' Automatic mode, so that collection lookup was being paid repeatedly for the
+' same sheet.
+'
+' ResolveSheet caches the last resolved worksheet and reuses it while the request
+' is for the same sheet name in the same active workbook. The cache is validated
+' on every call by an object-identity check that the cached parent is still
+' ActiveWorkbook plus an exact name match. If either check fails the sheet is
+' re-resolved from scratch, so the returned object is always identical to the
+' original direct lookup -- the optimisation only removes repeated collection
+' traversal and never changes which cell is read or written.
+' -----------------------------------------------------------------------------
+Private mCachedWorkbook As Object
+Private mCachedSheetName As String
+Private mCachedSheet As Object
+
+Private Function ResolveSheet(ByVal worksheetName As String) As Object
+    If Not mCachedSheet Is Nothing Then
+        If mCachedSheetName = worksheetName Then
+            If mCachedWorkbook Is ActiveWorkbook Then
+                Set ResolveSheet = mCachedSheet
+                Exit Function
+            End If
+        End If
+    End If
+
+    Set mCachedWorkbook = ActiveWorkbook
+    Set mCachedSheet = ActiveWorkbook.Sheets.[_Default](worksheetName)
+    mCachedSheetName = worksheetName
+    Set ResolveSheet = mCachedSheet
+End Function
+
 Public Function GetCellLong(ByVal worksheetName As String, ByVal cellName As String) As Long
-    GetCellLong = CLng(ActiveWorkbook.worksheets.[_Default](worksheetName).Range(cellName).value)
+    GetCellLong = CLng(ResolveSheet(worksheetName).Range(cellName).value)
 End Function
 
 Public Function GetCellString(ByVal worksheetName As String, ByVal cellName As String) As String
-    GetCellString = ActiveWorkbook.worksheets.[_Default](worksheetName).Range(cellName).value
+    GetCellString = ResolveSheet(worksheetName).Range(cellName).value
 End Function
 
 Public Function GetCell(ByVal worksheetName As String, ByVal row As Long, ByVal col As Long) As String
-    GetCell = Trim$(ActiveWorkbook.Sheets.[_Default](worksheetName).Cells(row, col).value)
+    GetCell = Trim$(ResolveSheet(worksheetName).Cells(row, col).value)
 End Function
 
 Public Sub SetCell(ByVal worksheetName As String, ByVal row As Long, ByVal col As Long, ByVal cellValue As Variant)
-    ActiveWorkbook.worksheets.[_Default](worksheetName).Cells(row, col).value = cellValue
+    ResolveSheet(worksheetName).Cells(row, col).value = cellValue
 End Sub
 
 Public Sub ClearCell(ByVal worksheetName As String, ByVal row As Long, ByVal col As Long)
-    ActiveWorkbook.worksheets.[_Default](worksheetName).Cells(row, col).ClearContents
+    ResolveSheet(worksheetName).Cells(row, col).ClearContents
 End Sub
 
 Public Function GetCellUCase(ByVal worksheetName As String, ByVal row As Long, ByVal col As Long) As String
-    GetCellUCase = UCase$(Trim$(ActiveWorkbook.Sheets.[_Default](worksheetName).Cells(row, col).value))
+    GetCellUCase = UCase$(Trim$(ResolveSheet(worksheetName).Cells(row, col).value))
 End Function
 
 Public Sub SetCellString(ByVal worksheetName As String, ByVal cellName As String, ByVal cellValue As String)
-    ActiveWorkbook.worksheets.[_Default](worksheetName).Range(cellName).value = cellValue
+    ResolveSheet(worksheetName).Range(cellName).value = cellValue
 End Sub
 
 Public Sub ClearNamedCellContents(ByVal worksheetName As String, ByVal cellName As String)
-    ActiveWorkbook.worksheets.[_Default](worksheetName).Range(cellName).ClearContents
+    ResolveSheet(worksheetName).Range(cellName).ClearContents
 End Sub
 
 Public Function GetCellBoolean(ByVal worksheetName As String, ByVal cellName As String) As Boolean
@@ -135,4 +174,5 @@ Public Function Toggle(ByVal bool As Boolean, ByVal trueValue As String, ByVal f
     End If
 
 End Function
+
 
