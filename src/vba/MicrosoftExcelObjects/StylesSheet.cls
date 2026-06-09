@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 ' =============================================================================
 ' PROJECT:          Excel to Graphviz
 ' WORKSHEET MODULE: StylesSheet
-' COPYRIGHT:        Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT:        Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:            Relationship Visualizer / Sheets / Styles
 '
 ' ROLE:
@@ -28,28 +28,28 @@ Attribute VB_Exposed = True
 '
 ' KEY RESPONSIBILITIES:
 '   - CONTEXT-AWARE RIBBON ACTIVATION:
-'       • Activates the Styles Ribbon tab on entry
-'       • Invalidates the Edit-Style control to match the active row
+'       o Activates the Styles Ribbon tab on entry
+'       o Invalidates the Edit-Style control to match the active row
 '
 '   - INTERACTIVE PREVIEW ENGINE:
-'       • Uses Worksheet_SelectionChange to purge and recreate floating
+'       o Uses Worksheet_SelectionChange to purge and recreate floating
 '         Preview/Edit buttons
-'       • Calls PreviewStyleForCurrentRow for instant thumbnail rendering
+'       o Calls PreviewStyleForCurrentRow for instant thumbnail rendering
 '
 '   - DESIGNER INTEGRATION:
-'       • Provides a direct pathway to RestoreStyleDesigner for GUI-based
+'       o Provides a direct pathway to RestoreStyleDesigner for GUI-based
 '         editing of existing style strings
 '
 '   - REACTIVE METADATA MODEL:
-'       • Monitors header edits (E1:AZ1) and triggers RefreshRibbon to keep
+'       o Monitors header edits (E1:AZ1) and triggers RefreshRibbon to keep
 '         galleries, pickers, and Style Designer controls synchronized
 '
 '   - DATA HYGIENE:
-'       • Uses IsStylesRowActive to suppress UI noise on header/comment rows
+'       o Uses IsStylesRowActive to suppress UI noise on header/comment rows
 '
 '   - PLATFORM-SAFE ACTIVATION:
-'       • Uses Application.OnTime on macOS to avoid Ribbon race conditions
-'       • Performs immediate activation on Windows for seamless transitions
+'       o Uses Application.OnTime on macOS to avoid Ribbon race conditions
+'       o Performs immediate activation on Windows for seamless transitions
 '
 ' USAGE:
 '   - Fires automatically when navigating to the Styles worksheet
@@ -86,17 +86,74 @@ End Sub
 
 ' ==========================================================================
 ' PROCEDURE: Worksheet_Change
+'
 ' PURPOSE:
-'   Synchronizes the Ribbon UI when style metadata or headers are modified.
+'   Responds to edits made on the Styles sheet by invalidating caches,
+'   refreshing UI elements when necessary, and updating the live preview for
+'   style rows. Ensures that all dependent systems (Ribbon, preview engine,
+'   settings cache) remain synchronized with user edits.
+'
+' PERFORMANCE FEATURES:
+'   - Targeted event handling: Exits early for multi-cell edits, inactive
+'     rows, or non-style-related changes to avoid unnecessary processing.
+'   - Scoped Ribbon refresh: Only triggers a Ribbon update when view-switch
+'     headings (E1:AZ1) are modified.
+'   - Minimal preview updates: Re-renders only the affected style row when
+'     the style name or format column changes.
 '
 ' TECHNICAL WORKFLOW:
-'   1. INTERSECT CHECK: Specifically watches the horizontal header range
-'      (E1:AZ1) for edits.
-'   2. UI REDRAW: Disables events and calls 'RefreshRibbon' to update
-'      the visual state of the application.
+'   1. ERROR TRAP:
+'        - Routes unexpected errors to ErrorHandler for safe recovery.
+'
+'   2. CACHE INVALIDATION:
+'        - Calls InvalidateStyleCache to force regeneration of style lists.
+'        - Calls InvalidateSettings to ensure configuration is rebuilt on
+'          next access.
+'
+'   3. RIBBON REFRESH:
+'        - If the change intersects E1:AZ1 (view switch headings), disables
+'          events, calls RefreshRibbon, and skips further processing.
+'
+'   4. MULTI-CELL EDIT CHECK:
+'        - Exits immediately when more than one cell is changed.
+'
+'   5. ROW VALIDATION:
+'        - Uses IsStylesRowActive() to skip blank or commented-out rows.
+'
+'   6. PREVIEW UPDATE:
+'        - If the edited column is either:
+'            o SETTINGS_STYLES_COL_STYLE  (style name)
+'            o SETTINGS_STYLES_COL_FORMAT (format string)
+'          then calls PreviewStyleForRow for the affected row.
+'
+'   7. CLEAN EXIT:
+'        - Re-enables Application.EnableEvents and exits normally.
+'
+'   8. ERROR HANDLING:
+'        - Emits a diagnostic message including sheet name and error details.
+'        - Clears the error and resumes at CleanExit to restore event state.
+'
+' USAGE:
+'   - Automatically invoked by Excel whenever a user edits the Styles sheet.
+'   - Maintains synchronization between worksheet edits, Ribbon state,
+'     preview rendering, and cached settings.
+'
+' DEPENDENCIES:
+'   - InvalidateStyleCache
+'   - InvalidateSettings
+'   - RefreshRibbon
+'   - IsStylesRowActive
+'   - GetSettingColNum
+'   - PreviewStyleForRow
+'   - EmitMessage
+'   - Named Ranges: E1:AZ1 (view switch headings)
+'
 ' ==========================================================================
 Private Sub Worksheet_Change(ByVal Target As Range)
     On Error GoTo ErrorHandler
+
+    InvalidateStyleCache
+    InvalidateSettings
 
     ' Detect changes in the view switch headings
     If Not Intersect(Target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
@@ -104,7 +161,15 @@ Private Sub Worksheet_Change(ByVal Target As Range)
         RefreshRibbon
     End If
 
-    If IsStylesRowActive(Target.row) Then
+    ' Exit if multiple cells selected
+    If Target.Cells.CountLarge > 1 Then GoTo CleanExit
+    
+    ' Exit if row is blank or commented out
+    If Not IsStylesRowActive(Target.row) Then GoTo CleanExit
+    
+    ' Update the preview if the style name or the format changed
+    If Target.Column = GetSettingColNum(SETTINGS_STYLES_COL_STYLE) Or _
+        Target.Column = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT) Then
         PreviewStyleForRow Target.row
     End If
     
