@@ -1,8 +1,11 @@
 {
-  "cache_buster": "2024-05-22-T1430-FORCE-REBUILD",
+  "cache_buster": "2026-06-09-T0000-STRUCTURE‑CHANGE",
   "exclusions": [
-    "**/Class Modules/**",
-    "**/Microsoft Excel Objects/**"
+    "**/MicrosoftExcelObjects/**",
+    "**/ClassModules/Dictionary.cls",
+    "**/ClassModules/Stopwatch.cls",
+    "**/Modules/JsonConverter.bas",
+    "**/Forms/**"
   ],
   "repo_notes": [
     { "content": "The project is an Excel-based wrapper for Graphviz. Every documentation page must respect the distinction between Excel (the UI and Data layer) and Graphviz (the rendering engine)." },
@@ -15,7 +18,7 @@
     { "content": "Community Feedback: Mention that community feedback and feature requests are captured via GitHub issues, and via Giscus-powered comments on the official website blog pages." },
     { "content": "Version Awareness: Reference v8.0+ enhancements including Style Designer galleries, Graphviz.cls refactor, SQL connection pooling, unlimited CLUSTERn, SVG editor form, silent mode, and new ribbon tabs (Info, Console, Diagnostics, Styles)." },
     { "content": "Common Pitfalls and Best Practices: Include Graphviz node ID rules (must start with letter or underscore, quote digits), layout reproducibility tips (start=regular), SVG image embedding via base64 in post-processor, and named-range contract for safe sheet modifications." },
-    { "content": "Project structure update: All VBA source files are now organized in CamelCase directories (e.g., ClassModules, MicrosoftExcelObjects) to improve cross-platform compatibility." }
+    { "content": "Project structure: All VBA source files are organized in CamelCase directories (ClassModules, MicrosoftExcelObjects, Modules, Forms). Exclusions intentionally drop the analysis-noise: the MicrosoftExcelObjects worksheet code-behind (including the per-locale data sheets), the vendored JsonConverter.bas (third-party VBA-JSON library), and the generic Dictionary.cls/Stopwatch.cls helpers. The architecturally significant classes (Graphviz.cls execution wrapper, Cluster.cls, Style.cls) remain indexed." }
   ],
   "pages": [
     {
