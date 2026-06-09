@@ -206,7 +206,7 @@ Public Sub RenderGraph()
         m_graphvizMessages = dotOutput
     End If
 #Else
-    GraphvizCommand = m_graphvizPath & m_graphLayout & " " & Chr$(34) & m_graphvizFilename & Chr$(34) & " -T" & m_graphFormat & " -o " & Chr$(34) & m_diagramFilename & Chr$(34) & verboseFlag & " " & m_commandLineParameters
+    GraphvizCommand = Chr$(34) & m_graphvizPath & m_graphLayout & Chr$(34) & " " & Chr$(34) & m_graphvizFilename & Chr$(34) & " -T" & m_graphFormat & " -o " & Chr$(34) & m_diagramFilename & Chr$(34) & verboseFlag & " " & m_commandLineParameters
     
     Dim stdOut As String
     Dim stdErr As String
@@ -218,6 +218,10 @@ Public Sub RenderGraph()
 #End If
     
 EndRenderGraph:
+    If err.number <> 0 Then
+        EmitMessage err.number & " " & err.Description, "Graphviz.RenderGraph()"
+        err.Clear
+    End If
     On Error GoTo 0
     
 End Sub
@@ -298,8 +302,9 @@ Private Function SanitizeFilename(ByVal s As String) As String
         ' Windows: these characters are forbidden in filenames
         invalidChars = Array("\", "/", ":", "*", "?", """", "<", ">", "|")
     Else
-        ' macOS: only ":" is forbidden in filenames
-        invalidChars = Array(":")
+        ' macOS: ":" is forbidden in filenames; also strip double quotes so the
+        ' filename cannot break the AppleScript "do shell script" quoting.
+        invalidChars = Array(":", """")
     End If
 
     ' Replace invalid characters with underscore
