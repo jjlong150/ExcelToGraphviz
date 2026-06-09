@@ -2,53 +2,53 @@ Attribute VB_Name = "modExchangeImport"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modExchangeImport
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Utility / Exchange Subsystem
 '
 ' ROLE:
 '   High-fidelity JSON import engine for the Relationship Visualizer. Restores
-'   workbook state — metadata, worksheet layouts, settings, data, styles, SQL,
-'   and SVG directives — from a structured E2GXF exchange file.
+'   workbook state - metadata, worksheet layouts, settings, data, styles, SQL,
+'   and SVG directives - from a structured E2GXF exchange file.
 '
 ' RESPONSIBILITIES:
 '   - Validate and parse JSON:
-'       • UTF-8 ingestion with carriage-return normalization
-'       • E2GXF metadata verification (name/type/version)
+'       o UTF-8 ingestion with carriage-return normalization
+'       o E2GXF metadata verification (name/type/version)
 '   - Ordered restoration pipeline:
-'       • metadata -> layouts -> settings -> worksheet content
-'       • recalculates dependent formulas when required
+'       o metadata -> layouts -> settings -> worksheet content
+'       o recalculates dependent formulas when required
 '   - Worksheet content import:
-'       • data -> row-level graph entities
-'       • styles -> style definitions + view switches
-'       • sql -> SQL statements, datasource paths, status fields
-'       • svg -> find/replace directives
+'       o data -> row-level graph entities
+'       o styles -> style definitions + view switches
+'       o sql -> SQL statements, datasource paths, status fields
+'       o svg -> find/replace directives
 '   - Settings restoration:
-'       • Graphviz engine, splines, rankdir, transparency, run mode
-'       • Style Designer suffixes, format-inclusion rules, extra attributes
-'       • Console routing, debug switches, worksheet visibility
-'       • Language, command-line parameters, picture name
+'       o Graphviz engine, splines, rankdir, transparency, run mode
+'       o Style Designer suffixes, format-inclusion rules, extra attributes
+'       o Console routing, debug switches, worksheet visibility
+'       o Language, command-line parameters, picture name
 '   - Post-import actions:
-'       • rebuild style previews
-'       • refresh Ribbon state
-'       • regenerate active graph
+'       o rebuild style previews
+'       o refresh Ribbon state
+'       o regenerate active graph
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses JsonConverter for parsing and Dictionary-based traversal.
 '   - macOS: Uses sandbox-safe file selection.
 '   - Windows: Uses native file dialogs and UTF-8 readers.
-'   - Backward-compatible with v7.x–v10.x export schemas.
+'   - Backward-compatible with v7.x-v10.x export schemas.
 '   - Deep integration with:
-'       • modDataTypes (settings, dataRow, StylesRow, sqlRow, svgRow)
-'       • modUtilityWorksheet (column/row mapping)
-'       • modCreateGraph (post-import rendering)
+'       o modDataTypes (settings, dataRow, StylesRow, sqlRow, svgRow)
+'       o modUtilityWorksheet (column/row mapping)
+'       o modCreateGraph (post-import rendering)
 '
 ' USAGE:
 '   - Invoked by the Exchange ribbon tab.
 '   - Restores a fully self-describing JSON file suitable for:
-'       • backup/restore
-'       • version control
-'       • cross-machine migration
-'       • automated graph-generation pipelines
+'       o backup/restore
+'       o version control
+'       o cross-machine migration
+'       o automated graph-generation pipelines
 '
 ' RELATED WIKI PAGES:
 '   - Exchange Format Specification
@@ -205,7 +205,7 @@ End Sub
 Private Sub ImportMetadata(ByVal dictionaryObj As Dictionary)
     
     Dim key As Variant
-    For Each key In dictionaryObj.Keys()
+    For Each key In dictionaryObj.keys()
         Select Case key
             '@Ignore EmptyCaseBlock
             Case JSON_METADATA_NAME
@@ -236,7 +236,7 @@ Private Sub ImportContent(ByVal dictionaryObj As Dictionary, ByRef ini As settin
 
     ' Each worksheet has its own section in the json object
     Dim worksheetName As Variant
-    For Each worksheetName In dictionaryObj.Keys()
+    For Each worksheetName In dictionaryObj.keys()
         Select Case worksheetName
             Case WORKSHEET_DATA
                 If exchange.data.include Then
@@ -245,12 +245,12 @@ Private Sub ImportContent(ByVal dictionaryObj As Dictionary, ByRef ini As settin
             
             Case WORKSHEET_SQL
                 If exchange.sql.include Then
-                    ImportContentSql ini, exchange, dictionaryObj.item(worksheetName)
+                    ImportContentSql exchange, dictionaryObj.item(worksheetName)
                 End If
             
             Case WORKSHEET_SVG
                 If exchange.svg.include Then
-                    ImportContentSvg ini, exchange, dictionaryObj.item(worksheetName)
+                    ImportContentSvg exchange, dictionaryObj.item(worksheetName)
                 End If
             
             Case WORKSHEET_STYLES
@@ -275,7 +275,7 @@ Private Sub ImportSettings(ByVal dictionaryObj As Dictionary, ByRef exchange As 
     
     ' Settings are organized based upon what worksheet they live on
     Dim worksheetName As Variant
-    For Each worksheetName In dictionaryObj.Keys()
+    For Each worksheetName In dictionaryObj.keys()
         Select Case worksheetName
             Case WORKSHEET_DATA
                  ImportSettingsData dictionaryObj.item(worksheetName)
@@ -746,7 +746,7 @@ Private Sub ImportLayouts(ByVal dictionaryObj As Dictionary, ByRef exchange As E
     Dim key As Variant
     Dim worksheetName As String
     
-    For Each key In dictionaryObj.Keys()
+    For Each key In dictionaryObj.keys()
         worksheetName = key
             
         ' Set the row heights
@@ -1099,7 +1099,7 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
         
         DataSheet.Cells.item(row, 1).EntireRow.ClearContents
 
-        For Each key In rows.item(i).Keys()
+        For Each key In rows.item(i).keys()
             Select Case key
                 Case JSON_HIDDEN
                     DataSheet.rows.item(row).Hidden = rows.item(i)(key)
@@ -1153,16 +1153,20 @@ Private Function DictionaryToAttributes(ByVal dictionaryObj As Dictionary) As St
     DictionaryToAttributes = vbNullString
     
     Dim key As Variant
-    For Each key In dictionaryObj.Keys()
+    For Each key In dictionaryObj.keys()
         DictionaryToAttributes = DictionaryToAttributes & " " & key & "=" & AddQuotesConditionally(dictionaryObj.item(key))
     Next
     
     DictionaryToAttributes = Trim$(DictionaryToAttributes)
 End Function
 
-Public Sub ClearWorksheetSql(ByRef ini As settings)
+Public Sub ClearWorksheetSql()
     Dim lastColumn As Long
     Dim cellRange As String
+    
+    ' Obtain sql worksheet layout
+    Dim sql As sqlWorksheet
+    sql = GetSettingsForSqlWorksheet()
     
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
@@ -1171,22 +1175,26 @@ Public Sub ClearWorksheetSql(ByRef ini As settings)
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
-    If lastRow < ini.sql.firstRow Then
-        lastRow = ini.sql.firstRow
+    If lastRow < sql.firstRow Then
+        lastRow = sql.firstRow
     End If
     
     ' Determine the columns to clear
-    lastColumn = GetLastColumn(SqlSheet.name, ini.sql.headingRow)
+    lastColumn = GetLastColumn(SqlSheet.name, sql.headingRow)
 
     ' Remove any existing content
-    cellRange = "A" & ini.sql.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
+    cellRange = "A" & sql.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
     SqlSheet.Range(cellRange).ClearContents
     SqlSheet.rows.UseStandardHeight = True
 End Sub
 
-Public Sub ClearWorksheetSvg(ByRef ini As settings)
+Public Sub ClearWorksheetSvg()
     Dim lastColumn As Long
     Dim cellRange As String
+    
+    ' Obtain the layout of the svg worksheet
+    Dim svg As svgWorksheet
+    svg = GetSettingsForSvgWorksheet()
     
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
@@ -1195,15 +1203,15 @@ Public Sub ClearWorksheetSvg(ByRef ini As settings)
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
-    If lastRow < ini.svg.firstRow Then
-        lastRow = ini.svg.firstRow
+    If lastRow < svg.firstRow Then
+        lastRow = svg.firstRow
     End If
     
     ' Determine the columns to clear
-    lastColumn = GetLastColumn(SvgSheet.name, ini.svg.headingRow)
+    lastColumn = GetLastColumn(SvgSheet.name, svg.headingRow)
 
     ' Remove any existing content
-    cellRange = "A" & ini.svg.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
+    cellRange = "A" & svg.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
     SvgSheet.Range(cellRange).ClearContents
     SvgSheet.rows.UseStandardHeight = True
 End Sub
@@ -1224,10 +1232,10 @@ Public Sub ClearWorksheetStyles(ByRef ini As settings)
     End If
     
     ' Determine the columns to clear
-    lastColumn = GetLastColumn(StylesSheet.name, ini.sql.headingRow)
+    lastColumn = GetLastColumn(StylesSheet.name, ini.styles.headingRow)
 
     ' Remove any existing content
-    cellRange = "A" & ini.sql.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
+    cellRange = "A" & ini.styles.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
     StylesSheet.Range(cellRange).ClearContents
     StylesSheet.rows.UseStandardHeight = True
 End Sub
@@ -1248,19 +1256,23 @@ Public Sub ClearWorksheetData(ByRef ini As settings)
     End If
     
     ' Determine the columns to clear
-    lastColumn = GetLastColumn(DataSheet.name, ini.sql.headingRow)
+    lastColumn = GetLastColumn(DataSheet.name, ini.data.headingRow)
 
     ' Remove any existing content
-    cellRange = "A" & ini.sql.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
+    cellRange = "A" & ini.data.firstRow & ":" & ConvertColumnNumberToLetters(lastColumn) & lastRow
     DataSheet.Range(cellRange).ClearContents
     DataSheet.rows.UseStandardHeight = True
 End Sub
 
-Private Sub ImportContentSql(ByRef ini As settings, ByRef exchange As ExchangeOptions, ByVal rows As Collection)
+Private Sub ImportContentSql(ByRef exchange As ExchangeOptions, ByVal rows As Collection)
     Dim i As Long
     Dim firstRow As Long
     Dim key As Variant
     Dim row As Long
+    
+    ' Obtain sql worksheet layout
+    Dim sqlLayout As sqlWorksheet
+    sqlLayout = GetSettingsForSqlWorksheet()
     
     ' First possible row after headings = 2
     '@Ignore AssignmentNotUsed
@@ -1273,8 +1285,8 @@ Private Sub ImportContentSql(ByRef ini As settings, ByRef exchange As ExchangeOp
     
     Select Case exchange.sql.action
         Case IMPORT_REPLACE
-            firstRow = ini.sql.firstRow
-            ClearWorksheetSql ini
+            firstRow = sqlLayout.firstRow
+            ClearWorksheetSql
 
         Case IMPORT_APPEND
             firstRow = lastRow + 1
@@ -1293,7 +1305,7 @@ Private Sub ImportContentSql(ByRef ini As settings, ByRef exchange As ExchangeOp
         End Select
 
         SqlSheet.Cells.item(row, 1).EntireRow.ClearContents
-        For Each key In rows.item(i).Keys()
+        For Each key In rows.item(i).keys()
             Select Case key
                 Case JSON_HIDDEN
                     SqlSheet.rows.item(row).Hidden = rows.item(i)(key)
@@ -1303,17 +1315,17 @@ Private Sub ImportContentSql(ByRef ini As settings, ByRef exchange As ExchangeOp
                         
                 Case JSON_ENABLED
                     If Not rows.item(i)(JSON_ENABLED) Then
-                        SqlSheet.Cells.item(row, ini.sql.flagColumn).value = FLAG_COMMENT
+                        SqlSheet.Cells.item(row, sqlLayout.flagColumn).value = FLAG_COMMENT
                     End If
                     
                 Case JSON_SQL_SQL_STATEMENT
-                    SqlSheet.Cells.item(row, ini.sql.sqlStatementColumn).value = rows.item(i)(key)
+                    SqlSheet.Cells.item(row, sqlLayout.sqlStatementColumn).value = rows.item(i)(key)
                     
                 Case JSON_SQL_EXCEL_FILE
-                    SqlSheet.Cells.item(row, ini.sql.excelFileColumn).value = rows.item(i)(key)
+                    SqlSheet.Cells.item(row, sqlLayout.excelFileColumn).value = rows.item(i)(key)
                     
                 Case JSON_SQL_STATUS
-                    SqlSheet.Cells.item(row, ini.sql.statusColumn).value = rows.item(i)(key)
+                    SqlSheet.Cells.item(row, sqlLayout.statusColumn).value = rows.item(i)(key)
                     
                 Case JSON_SQL_FILTERS
                     Dim filterValues As Collection
@@ -1332,12 +1344,16 @@ Private Sub ImportContentSql(ByRef ini As settings, ByRef exchange As ExchangeOp
     Next i
 End Sub
 
-Private Sub ImportContentSvg(ByRef ini As settings, ByRef exchange As ExchangeOptions, ByVal rows As Collection)
+Private Sub ImportContentSvg(ByRef exchange As ExchangeOptions, ByVal rows As Collection)
     Dim i As Long
     Dim firstRow As Long
     Dim key As Variant
     Dim row As Long
     
+    ' Obtain layout of svg worksheet
+    Dim svg As svgWorksheet
+    svg = GetSettingsForSvgWorksheet()
+
     ' First possible row after headings = 2
     '@Ignore AssignmentNotUsed
     firstRow = 2
@@ -1349,8 +1365,8 @@ Private Sub ImportContentSvg(ByRef ini As settings, ByRef exchange As ExchangeOp
     
     Select Case exchange.svg.action
         Case IMPORT_REPLACE
-            firstRow = ini.svg.firstRow
-            ClearWorksheetSvg ini
+            firstRow = svg.firstRow
+            ClearWorksheetSvg
 
         Case IMPORT_APPEND
             firstRow = lastRow + 1
@@ -1369,7 +1385,7 @@ Private Sub ImportContentSvg(ByRef ini As settings, ByRef exchange As ExchangeOp
         End Select
 
         SvgSheet.Cells.item(row, 1).EntireRow.ClearContents
-        For Each key In rows.item(i).Keys()
+        For Each key In rows.item(i).keys()
             Select Case key
                 Case JSON_HIDDEN
                     SvgSheet.rows.item(row).Hidden = rows.item(i)(key)
@@ -1379,14 +1395,14 @@ Private Sub ImportContentSvg(ByRef ini As settings, ByRef exchange As ExchangeOp
                         
                 Case JSON_ENABLED
                     If Not rows.item(i)(JSON_ENABLED) Then
-                        SvgSheet.Cells.item(row, ini.svg.flagColumn).value = FLAG_COMMENT
+                        SvgSheet.Cells.item(row, svg.flagColumn).value = FLAG_COMMENT
                     End If
                     
                 Case JSON_SVG_FIND
-                    SvgSheet.Cells.item(row, ini.svg.findColumn).value = rows.item(i)(key)
+                    SvgSheet.Cells.item(row, svg.findColumn).value = rows.item(i)(key)
                     
                 Case JSON_SVG_REPLACE
-                    SvgSheet.Cells.item(row, ini.svg.replaceColumn).value = rows.item(i)(key)
+                    SvgSheet.Cells.item(row, svg.replaceColumn).value = rows.item(i)(key)
             End Select
         Next
     Next i
@@ -1444,7 +1460,7 @@ Private Sub ImportContentStyles(ByRef ini As settings, ByRef exchange As Exchang
         End Select
             
         StylesSheet.Cells.item(row, 1).EntireRow.ClearContents
-        For Each key In rows.item(rowIndex).Keys()
+        For Each key In rows.item(rowIndex).keys()
             Select Case key
                 Case JSON_HIDDEN
                     StylesSheet.rows.item(row).Hidden = rows.item(rowIndex)(key)

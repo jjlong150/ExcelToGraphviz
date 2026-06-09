@@ -2,32 +2,32 @@ Attribute VB_Name = "modExchangeExport"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modExchangeExport
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:    Utility / Exchange Subsystem
 '
 ' ROLE:
 '   High-fidelity JSON export engine for the Relationship Visualizer. Converts
-'   workbook state — data, styles, SQL, SVG, worksheet layouts, and settings —
+'   workbook state - data, styles, SQL, SVG, worksheet layouts, and settings -
 '   into a structured, portable JSON document suitable for archival, migration,
 '   automation, or cross-machine synchronization.
 '
 ' RESPONSIBILITIES:
 '   - Serialize worksheet content:
-'       • data -> row-level graph entities
-'       • styles -> style definitions + view switches
-'       • sql -> SQL statements, datasource paths, status fields
-'       • svg -> find/replace directives
+'       o data -> row-level graph entities
+'       o styles -> style definitions + view switches
+'       o sql -> SQL statements, datasource paths, status fields
+'       o svg -> find/replace directives
 '   - Serialize workbook configuration:
-'       • Graphviz options (engine, splines, rankdir, transparency, etc.)
-'       • Style Designer suffixes, format-inclusion rules, extra attributes
-'       • Console routing (status bar, message box, console worksheet)
-'       • Worksheet visibility toggles and column-visibility settings
-'       • Language, layouts, and metadata
+'       o Graphviz options (engine, splines, rankdir, transparency, etc.)
+'       o Style Designer suffixes, format-inclusion rules, extra attributes
+'       o Console routing (status bar, message box, console worksheet)
+'       o Worksheet visibility toggles and column-visibility settings
+'       o Language, layouts, and metadata
 '   - Generate a complete JSON document containing:
-'       • metadata section (user, OS, Excel version, timestamp)
-'       • content section (worksheet rows)
-'       • settings section (graph, styles, console, debug, language)
-'       • layouts section (row/column mappings for all sheets)
+'       o metadata section (user, OS, Excel version, timestamp)
+'       o content section (worksheet rows)
+'       o settings section (graph, styles, console, debug, language)
+'       o layouts section (row/column mappings for all sheets)
 '
 ' ARCHITECTURAL NOTES:
 '   - Uses late-bound Scripting.Dictionary for cross-version compatibility.
@@ -36,18 +36,18 @@ Attribute VB_Name = "modExchangeExport"
 '   - Silent Mode: Honors message-routing settings; suppresses overwrite prompts
 '     when message boxes are disabled.
 '   - Deep integration with:
-'       • modDataTypes (settings, dataRow, StylesRow, sqlRow, svgRow)
-'       • modUtilityJson (ConvertToJson)
-'       • modUtilityWorksheet (layout discovery)
-'       • modUtilityFileSystem (file existence, UTF-8 writing)
+'       o modDataTypes (settings, dataRow, StylesRow, sqlRow, svgRow)
+'       o modUtilityJson (ConvertToJson)
+'       o modUtilityWorksheet (layout discovery)
+'       o modUtilityFileSystem (file existence, UTF-8 writing)
 '
 ' USAGE:
 '   - Invoked by the Exchange ribbon tab.
 '   - Produces a fully self-describing JSON file suitable for:
-'       • backup/restore
-'       • version control
-'       • automated graph generation pipelines
-'       • cross-machine migration
+'       o backup/restore
+'       o version control
+'       o automated graph generation pipelines
+'       o cross-machine migration
 '
 ' RELATED WIKI PAGES:
 '   - Exchange Format Specification
@@ -141,7 +141,7 @@ Private Function GetAllDataAsJson() As String
     
     ' Export 'sql' worksheet
     If GetSettingBoolean(SETTINGS_TOOLS_EXCHANGE_SQL_WORKSHEET) Then
-        worksheetDictionary.Add WORKSHEET_SQL, GetSqlRows(ini, exchange)
+        worksheetDictionary.Add WORKSHEET_SQL, GetSqlRows(exchange)
         includeWorksheets = True
     End If
     
@@ -205,16 +205,20 @@ Private Function GetDataRows(ByRef ini As settings, ByRef exchange As ExchangeOp
     Set GetDataRows = Items
 End Function
 
-Private Function GetSqlRows(ByRef ini As settings, ByRef exchange As ExchangeOptions) As Collection
+Private Function GetSqlRows(ByRef exchange As ExchangeOptions) As Collection
     Dim sql As sqlRow
     Dim Items As Collection
     Set Items = New Collection
     Dim dictionaryObj As Dictionary
 
+    ' Obtain sql worksheet layout
+    Dim sqlLayout As sqlWorksheet
+    sqlLayout = GetSettingsForSqlWorksheet()
+    
     ' Iterate through the rows of data
     Dim row As Long
-    For row = ini.sql.firstRow To ini.sql.lastRow
-        sql = GetSqlRow(ini, row)
+    For row = sqlLayout.firstRow To sqlLayout.lastRow
+        sql = GetSqlRow(sqlLayout, row)
         Set dictionaryObj = ConvertSqlRowToDictionary(exchange, sql, row)
         If dictionaryObj.count > 0 Then
             Items.Add dictionaryObj
@@ -230,10 +234,14 @@ Private Function GetSvgRows(ByRef ini As settings, ByRef exchange As ExchangeOpt
     Set Items = New Collection
     Dim dictionaryObj As Dictionary
 
+    ' Obtain layout of the svg worksheet
+    Dim svgLayout As svgWorksheet
+    svgLayout = GetSettingsForSvgWorksheet()
+    
     ' Iterate through the rows of data
     Dim row As Long
-    For row = ini.svg.firstRow To ini.svg.lastRow
-        svg = GetSvgRow(ini, row)
+    For row = svgLayout.firstRow To svgLayout.lastRow
+        svg = GetSvgRow(svgLayout, row)
         Set dictionaryObj = ConvertSvgRowToDictionary(exchange, svg, row)
         If dictionaryObj.count > 0 Then
             Items.Add dictionaryObj
@@ -268,10 +276,16 @@ Private Function GetWorksheetLayouts(ByRef ini As settings) As Dictionary
     Dim dictionaryObj As Dictionary
     Set dictionaryObj = New Dictionary
     
+    Dim sql As sqlWorksheet
+    sql = GetSettingsForSqlWorksheet()
+    
+    Dim svg As svgWorksheet
+    svg = GetSettingsForSvgWorksheet()
+    
     dictionaryObj.Add WORKSHEET_DATA, GetLayoutData(ini)
     dictionaryObj.Add WORKSHEET_STYLES, GetLayoutStyles(ini)
-    dictionaryObj.Add WORKSHEET_SQL, GetLayoutSql(ini)
-    dictionaryObj.Add WORKSHEET_SVG, GetLayoutSvg(ini)
+    dictionaryObj.Add WORKSHEET_SQL, GetLayoutSql(sql)
+    dictionaryObj.Add WORKSHEET_SVG, GetLayoutSvg(svg)
     dictionaryObj.Add WORKSHEET_SOURCE, GetLayoutSource(ini)
 
     Set GetWorksheetLayouts = dictionaryObj
@@ -389,20 +403,20 @@ Private Function GetLayoutSource(ByRef ini As settings) As Dictionary
     Set GetLayoutSource = dictionaryObj
 End Function
 
-Private Function GetLayoutSql(ByRef ini As settings) As Dictionary
+Private Function GetLayoutSql(ByRef sql As sqlWorksheet) As Dictionary
     Dim rowItems As Collection
     Set rowItems = New Collection
     
-    rowItems.Add GetLayoutRowData(SqlSheet.name, JSON_HEADING, ini.sql.headingRow)
-    rowItems.Add GetLayoutRowData(SqlSheet.name, JSON_FIRST, ini.sql.firstRow)
+    rowItems.Add GetLayoutRowData(SqlSheet.name, JSON_HEADING, sql.headingRow)
+    rowItems.Add GetLayoutRowData(SqlSheet.name, JSON_FIRST, sql.firstRow)
     
     Dim columnItems As Collection
     Set columnItems = New Collection
     
-    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_FLAG, ini.sql.headingRow, ini.sql.flagColumn)
-    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_SQL_STATEMENT, ini.sql.headingRow, ini.sql.sqlStatementColumn)
-    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_EXCEL_FILE, ini.sql.headingRow, ini.sql.excelFileColumn)
-    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_STATUS, ini.sql.headingRow, ini.sql.statusColumn)
+    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_FLAG, sql.headingRow, sql.flagColumn)
+    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_SQL_STATEMENT, sql.headingRow, sql.sqlStatementColumn)
+    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_EXCEL_FILE, sql.headingRow, sql.excelFileColumn)
+    columnItems.Add GetLayoutColumnData(SqlSheet.name, JSON_LAYOUT_SQL_STATUS, sql.headingRow, sql.statusColumn)
     
     Dim dictionaryObj As Dictionary
     Set dictionaryObj = New Dictionary
@@ -413,19 +427,19 @@ Private Function GetLayoutSql(ByRef ini As settings) As Dictionary
     Set GetLayoutSql = dictionaryObj
 End Function
 
-Private Function GetLayoutSvg(ByRef ini As settings) As Dictionary
+Private Function GetLayoutSvg(ByRef svg As svgWorksheet) As Dictionary
     Dim rowItems As Collection
     Set rowItems = New Collection
     
-    rowItems.Add GetLayoutRowData(SvgSheet.name, JSON_HEADING, ini.svg.headingRow)
-    rowItems.Add GetLayoutRowData(SvgSheet.name, JSON_FIRST, ini.svg.firstRow)
+    rowItems.Add GetLayoutRowData(SvgSheet.name, JSON_HEADING, svg.headingRow)
+    rowItems.Add GetLayoutRowData(SvgSheet.name, JSON_FIRST, svg.firstRow)
     
     Dim columnItems As Collection
     Set columnItems = New Collection
     
-    columnItems.Add GetLayoutColumnData(SvgSheet.name, JSON_LAYOUT_SVG_FLAG, ini.svg.headingRow, ini.svg.flagColumn)
-    columnItems.Add GetLayoutColumnData(SvgSheet.name, JSON_LAYOUT_SVG_FIND, ini.svg.headingRow, ini.svg.findColumn)
-    columnItems.Add GetLayoutColumnData(SvgSheet.name, JSON_LAYOUT_SVG_REPLACE, ini.svg.headingRow, ini.svg.replaceColumn)
+    columnItems.Add GetLayoutColumnData(SvgSheet.name, JSON_LAYOUT_SVG_FLAG, svg.headingRow, svg.flagColumn)
+    columnItems.Add GetLayoutColumnData(SvgSheet.name, JSON_LAYOUT_SVG_FIND, svg.headingRow, svg.findColumn)
+    columnItems.Add GetLayoutColumnData(SvgSheet.name, JSON_LAYOUT_SVG_REPLACE, svg.headingRow, svg.replaceColumn)
     
     Dim dictionaryObj As Dictionary
     Set dictionaryObj = New Dictionary
@@ -453,11 +467,14 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     Dim graphToFile As Dictionary
     Set graphToFile = New Dictionary
     
-    graphToFile.Add JSON_SETTINGS_DIRECTORY, ini.output.directory
-    graphToFile.Add JSON_SETTINGS_FILE_NAME_PREFIX, ini.output.fileNamePrefix
+    Dim output As FileOutput
+    output = GetSettingsForFileOutput()
+    
+    graphToFile.Add JSON_SETTINGS_DIRECTORY, output.directory
+    graphToFile.Add JSON_SETTINGS_FILE_NAME_PREFIX, output.fileNamePrefix
     graphToFile.Add JSON_SETTINGS_IMAGE_TYPE, ini.graph.imageTypeFile
-    graphToFile.Add JSON_SETTINGS_APPEND_OPTIONS, ini.output.appendOptions
-    graphToFile.Add JSON_SETTINGS_APPEND_TIME_STAMP, ini.output.appendTimeStamp
+    graphToFile.Add JSON_SETTINGS_APPEND_OPTIONS, output.appendOptions
+    graphToFile.Add JSON_SETTINGS_APPEND_TIME_STAMP, output.appendTimeStamp
 
     ' Layout
     Dim layout As Dictionary
@@ -1046,20 +1063,20 @@ Private Function GetStylesRow(ByRef ini As settings, ByVal row As Long) As Style
 
 End Function
 
-Private Function GetSqlRow(ByRef ini As settings, ByVal row As Long) As sqlRow
+Private Function GetSqlRow(ByRef sql As sqlWorksheet, ByVal row As Long) As sqlRow
 
-    GetSqlRow.comment = SqlSheet.Cells.item(row, ini.sql.flagColumn).value
-    GetSqlRow.excelFile = SqlSheet.Cells.item(row, ini.sql.excelFileColumn).value
-    GetSqlRow.sqlStatement = SqlSheet.Cells.item(row, ini.sql.sqlStatementColumn).value
-    GetSqlRow.status = SqlSheet.Cells.item(row, ini.sql.statusColumn).value
+    GetSqlRow.comment = SqlSheet.Cells.item(row, sql.flagColumn).value
+    GetSqlRow.excelFile = SqlSheet.Cells.item(row, sql.excelFileColumn).value
+    GetSqlRow.sqlStatement = SqlSheet.Cells.item(row, sql.sqlStatementColumn).value
+    GetSqlRow.status = SqlSheet.Cells.item(row, sql.statusColumn).value
 
 End Function
 
-Private Function GetSvgRow(ByRef ini As settings, ByVal row As Long) As svgRow
+Private Function GetSvgRow(ByRef svg As svgWorksheet, ByVal row As Long) As svgRow
 
-    GetSvgRow.comment = SvgSheet.Cells.item(row, ini.svg.flagColumn).value
-    GetSvgRow.find = SvgSheet.Cells.item(row, ini.svg.findColumn).value
-    GetSvgRow.replace = SvgSheet.Cells.item(row, ini.svg.replaceColumn).value
+    GetSvgRow.comment = SvgSheet.Cells.item(row, svg.flagColumn).value
+    GetSvgRow.find = SvgSheet.Cells.item(row, svg.findColumn).value
+    GetSvgRow.replace = SvgSheet.Cells.item(row, svg.replaceColumn).value
 
 End Function
 

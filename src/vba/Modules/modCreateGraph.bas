@@ -2,7 +2,7 @@ Attribute VB_Name = "modCreateGraph"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modCreateGraph
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Logic / Transformation Pipeline
 '
 ' ROLE:
@@ -14,12 +14,12 @@ Attribute VB_Name = "modCreateGraph"
 '
 ' RESPONSIBILITIES:
 '   - Manage the complete graph-generation pipeline:
-'       • Worksheet parsing and validation
-'       • Style and view resolution
-'       • DOT synthesis (ConvertDataWorksheetToGvSource)
-'       • Temporary file creation and cleanup
-'       • Graphviz execution (Graphviz.cls)
-'       • Image insertion, scaling, and naming
+'       o Worksheet parsing and validation
+'       o Style and view resolution
+'       o DOT synthesis (ConvertDataWorksheetToGvSource)
+'       o Temporary file creation and cleanup
+'       o Graphviz execution (Graphviz.cls)
+'       o Image insertion, scaling, and naming
 '   - Provide AutoDraw reactivity for live preview during data entry.
 '   - Support batch export across multiple Views, including filename token
 '     substitution (%D, %T, %V, %W, %E, %S) and timestamp/option appending.
@@ -233,7 +233,7 @@ End Sub
 Public Sub CreateGraphWorksheet()
 Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
 
-    On Error Resume Next
+    On Error GoTo ErrorHandler
     
 #If Mac Then
     ' For some reason, my Mac fails when I code it as "#If Not Mac Then"
@@ -244,16 +244,20 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     timex.start
 #End If
     
+    ' Objects needed for control flow or cleanup
+    Dim ini As settings
+    Dim graphvizObj As Graphviz
+    Dim shapeObject As shape
+
     ' Clear the status bar
     ClearStatusBar
 
     ' Read in the runtime settings
-    Dim ini As settings
     ini = GetSettings(GetDataWorksheetName())
 
     If Not WorksheetExists(ini.data.worksheetName) Then
         EmitMessage GetMessage("msgboxNoDataToGraph")
-        Exit Sub
+        GoTo Cleanup
     End If
 
     ' Remove any existing graph image from the target worksheet
@@ -272,7 +276,6 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     DeleteAllPictures displayDataSheetName
 
     ' Instantiate a Graphviz Object
-    Dim graphvizObj As Graphviz
     Set graphvizObj = New Graphviz
     
     ' Build the file names
@@ -292,10 +295,11 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Create the '.gv' Graphviz source code file from the relationships in the
     ' data worksheet
     Dim graphvizSource As String
+    
     If Not ConvertDataWorksheetToGvSource(ini, ini.styles.selectedViewColumn, graphvizSource) Then
         ' Report errors to the user
         ShowColumn ini.data.worksheetName, ini.data.errorMessageColumn, True
-        Exit Sub
+        GoTo Cleanup
     End If
     
     ' Display source if debugging
@@ -305,9 +309,6 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     graphvizObj.graphvizSource = graphvizSource
     graphvizObj.SourceToFile
     
-    ' Display source if debugging
-    ShowSource graphvizSource
-
     ' Hide the messages column
     ShowColumn ini.data.worksheetName, ini.data.errorMessageColumn, False
 
@@ -324,7 +325,6 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     DisplayTextOnConsoleWorksheet graphvizObj.GraphvizCommand, graphvizObj.GraphvizMessages
         
     '@Ignore VariableNotUsed
-    Dim shapeObject As shape
     Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True, "Graph image created from data worksheet data.")
     
     ' Scale the graph to the zoom percentage specified
@@ -335,23 +335,39 @@ Attribute CreateGraphWorksheet.VB_ProcData.VB_Invoke_Func = " \n14"
     If ini.graph.pictureName <> vbNullString Then
         ActiveSheet.Pictures(ActiveSheet.Pictures.count).name = ini.graph.pictureName
     End If
-    Set shapeObject = Nothing
-
-    ' Delete the temporary files
-    DeleteFile graphvizObj.GraphvizFilename
-    DeleteFile graphvizObj.DiagramFilename
     
-    ' Clean up
+Cleanup:
+    On Error Resume Next
+    If Not graphvizObj Is Nothing Then
+        DeleteFile graphvizObj.GraphvizFilename
+        DeleteFile graphvizObj.DiagramFilename
+    End If
     Set graphvizObj = Nothing
+    Set shapeObject = Nothing
+    On Error GoTo 0
     
 #If Mac Then
     ' For some reason, my Mac fails when I code it as "#If Not Mac Then"
 #Else
-    timex.stop_it
-    Application.StatusBar = timex.Elapsed_sec & " seconds"
+    If Not timex Is Nothing Then
+        timex.stop_it
+        Application.StatusBar = timex.Elapsed_sec & " seconds"
+    End If
 #End If
+
+    Exit Sub
     
+ErrorHandler:
     On Error GoTo 0
+    
+    Dim msg As String
+    msg = "An error occurred while creating the graph:" & vbCrLf & vbCrLf & _
+          err.Description & vbCrLf & vbCrLf & _
+          "(Error #" & err.number & ")"
+    
+    EmitMessage msg
+    
+    Resume Cleanup   ' Ensure temp files are cleaned up
 End Sub
 
 ' ==========================================================================
@@ -400,13 +416,17 @@ Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn A
         Exit Sub
     End If
 
+    ' Get file output settings
+    Dim output As FileOutput
+    output = GetSettingsForFileOutput()
+
     ' Determine output directory, and build file names
-    If ini.output.directory = vbNullString Then
-        ini.output.directory = vbNullString = ActiveWorkbook.path
+    If output.directory = vbNullString Then
+        output.directory = ActiveWorkbook.path
     End If
 
     ' Validate filename info
-    If Not FileLocationProvided(ini) Then
+    If Not FileLocationProvided(output) Then
         Exit Sub
     End If
 
@@ -427,7 +447,7 @@ Public Sub CreateGraphFile(ByVal firstViewColumn As Long, ByVal lastViewColumn A
         Set graphvizObj = New Graphviz
         
         ' Build the file names
-        graphvizObj.OutputDirectory = ini.output.directory
+        graphvizObj.OutputDirectory = output.directory
         graphvizObj.FilenameBase = GetFilenameBase(ini, viewColumn)
         graphvizObj.GraphFormat = ini.graph.imageTypeFile
 #If Mac Then
@@ -557,17 +577,17 @@ End Function
 '   - Strategy: Prevents VBA runtime errors during binary execution by
 '     validating paths at the UI/Logic boundary.
 ' ==========================================================================
-Public Function FileLocationProvided(ByRef ini As settings) As Boolean
+Public Function FileLocationProvided(ByRef output As FileOutput) As Boolean
     FileLocationProvided = True
     
     ' Validate that the output directory exists
-    If Not DirectoryExists(ini.output.directory) Then
-        EmitMessage replace(GetMessage("msgboxDirDoesNotExist"), "{dir}", ini.output.directory), buttons:=vbCritical
+    If Not DirectoryExists(output.directory) Then
+        EmitMessage replace(GetMessage("msgboxDirDoesNotExist"), "{dir}", output.directory), buttons:=vbCritical
         FileLocationProvided = False
     End If
 
     ' Get the base value of the file name
-    If ini.output.fileNamePrefix = vbNullString Then
+    If output.fileNamePrefix = vbNullString Then
         EmitMessage GetMessage("msgboxPrefixNotSpecified"), buttons:=vbCritical
         FileLocationProvided = False
     End If
@@ -601,25 +621,28 @@ End Function
 ' ==========================================================================
 Public Function GetFilenameBase(ByRef ini As settings, ByVal showStyleColumn As Long) As String
 
-    Dim fileBase As String
-
+    ' Get file output settings
+    Dim output As FileOutput
+    output = GetSettingsForFileOutput()
+    
     ' Build up the file name from the user-specified prefix
-    fileBase = ini.output.fileNamePrefix
+    Dim fileBase As String
+    fileBase = output.fileNamePrefix
     
     ' Include Timestamp if desired
-    If ini.output.appendTimeStamp Then
+    If output.appendTimeStamp Then
         If InStr(fileBase, "%D") Or InStr(fileBase, "%T") Then
             ' Substitute date for %D
             If InStr(fileBase, "%D") Then
-                fileBase = replace(fileBase, "%D", ini.output.date)
+                fileBase = replace(fileBase, "%D", output.date)
             End If
             
             ' Substitute time for %D
             If InStr(fileBase, "%T") Then
-                fileBase = replace(fileBase, "%T", ini.output.time)
+                fileBase = replace(fileBase, "%T", output.time)
             End If
         Else
-            fileBase = fileBase & " " & ini.output.date & " " & ini.output.time
+            fileBase = fileBase & " " & output.date & " " & output.time
         End If
     End If
 
@@ -638,7 +661,7 @@ Public Function GetFilenameBase(ByRef ini As settings, ByVal showStyleColumn As 
     End If
     
     ' Include Graphing Options if desired
-    If ini.output.appendOptions Then
+    If output.appendOptions Then
         If InStr(fileBase, "%E") Or InStr(fileBase, "%S") Then
             ' Substitute Graph engine for %E
             If InStr(fileBase, "%E") Then
@@ -2014,8 +2037,8 @@ End Function
 '
 '   3. BLANK-LABEL OVERRIDE:
 '        - When edge labels are enabled and the main label is blank:
-'             • If 'blankEdgeLabels' = TRUE, emits the Graphviz "\E" token.
-'             • Otherwise, emits an empty formatted label.
+'             o If 'blankEdgeLabels' = TRUE, emits the Graphviz "\E" token.
+'             o Otherwise, emits an empty formatted label.
 '
 '   4. SANITIZATION:
 '        - All emitted label values pass through 'FormatLabel' (or AddQuotes
@@ -2154,11 +2177,11 @@ End Function
 '
 '   2. FALLBACK ATTRIBUTE EMISSION:
 '        - If a placeholder is *not* present:
-'             • Emits "label=" when node labels are enabled and the data
+'             o Emits "label=" when node labels are enabled and the data
 '               label is non-blank.
-'             • Emits an explicit empty label ("") when labels are enabled
+'             o Emits an explicit empty label ("") when labels are enabled
 '               but 'blankNodeLabels' is FALSE.
-'             • Emits "xlabel=" when external labels are enabled and data
+'             o Emits "xlabel=" when external labels are enabled and data
 '               exists in the xLabel field.
 '
 '   3. SANITIZATION:
@@ -2595,8 +2618,8 @@ End Function
 ' TECHNICAL WORKFLOW:
 '   1. TRIGGER: Executed when a row is classified as 'TYPE_NATIVE'
 '      (typically identified by the '>' character in the Item column).
-'   2. INJECTION: Retrieves the 'label' field—which contains the raw DOT
-'      syntax—and prepends the current level of indentation.
+'   2. INJECTION: Retrieves the 'label' field-which contains the raw DOT
+'      syntax-and prepends the current level of indentation.
 '   3. TERMINATION: Appends a newline to ensure the next DOT statement
 '      starts on a fresh line in the Source Viewer.
 '
@@ -2627,13 +2650,13 @@ End Function
 '
 '   2. CONTEXT-SENSITIVE LABEL SYNTHESIS:
 '        - KEYWORD_NODE:
-'             • Passes the assembled template to FormatNodeLabels, which
+'             o Passes the assembled template to FormatNodeLabels, which
 '               expands placeholders and emits node-label attributes.
 '        - KEYWORD_EDGE:
-'             • Passes the template to FormatEdgeLabels for multi-positional
+'             o Passes the template to FormatEdgeLabels for multi-positional
 '               edge-label synthesis.
 '        - KEYWORD_GRAPH:
-'             • If a graph-level label exists, delegates to FormatGraphLabels
+'             o If a graph-level label exists, delegates to FormatGraphLabels
 '               for placeholder expansion or fallback label emission.
 '
 '   3. DOT SYNTAX GENERATION:
@@ -2648,8 +2671,8 @@ End Function
 '     clearing defaults via an empty keyword block (e.g., node []; has no
 '     reset effect). To disable previously established defaults, you must
 '     either:
-'         • explicitly override each attribute with new values, or
-'         • open a new subgraph { ... } to create a fresh attribute scope.
+'         o explicitly override each attribute with new values, or
+'         o open a new subgraph { ... } to create a fresh attribute scope.
 '     These are the only mechanisms Graphviz provides for neutralizing
 '     inherited keyword defaults.
 ' ==========================================================================

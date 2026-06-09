@@ -2,7 +2,7 @@ Attribute VB_Name = "modDataTypes"
 ' =============================================================================
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modDataTypes
-' COPYRIGHT: Copyright (c) 2015–2026 Jeffrey J. Long. All rights reserved.
+' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
 ' LAYER:     Bootstrap / Type System
 '
 ' ROLE:
@@ -13,19 +13,19 @@ Attribute VB_Name = "modDataTypes"
 '
 ' RESPONSIBILITIES:
 '   - Provide strongly-typed structures for:
-'       • Worksheet schemas (data, styles, sql, svg, source)
-'       • Runtime graph options (graphOptions)
-'       • File output and command-line settings
-'       • SQL extension field names and execution parameters
-'       • Style Designer attribute sets and label groups
-'       • Exchange import/export configuration
-'       • Row-level data models for data, styles, SQL, and SVG worksheets
+'       o Worksheet schemas (data, styles, sql, svg, source)
+'       o Runtime graph options (graphOptions)
+'       o File output and command-line settings
+'       o SQL extension field names and execution parameters
+'       o Style Designer attribute sets and label groups
+'       o Exchange import/export configuration
+'       o Row-level data models for data, styles, SQL, and SVG worksheets
 '   - Serve as the canonical contract surface for all transformation pipelines:
-'       • ConvertDataWorksheetToGvSource
-'       • CreateGraphWorksheet / CreateGraphFile
-'       • SQL execution engine (iterative, recursive, enumeration, placeholder)
-'       • Style Designer preview and format restoration
-'       • Exchange import/export serialization
+'       o ConvertDataWorksheetToGvSource
+'       o CreateGraphWorksheet / CreateGraphFile
+'       o SQL execution engine (iterative, recursive, enumeration, placeholder)
+'       o Style Designer preview and format restoration
+'       o Exchange import/export serialization
 '   - Eliminate reliance on loosely-typed Variant dictionaries by providing
 '     explicit, documented fields for every subsystem.
 '
@@ -236,14 +236,13 @@ Public Type ExchangeOptions
 End Type
 
 ' Working variables for the run-time options on the "settings" worksheet
+' Descoped from all-inclusive to just what is needed for visual rendering
+' to reduce unnecessary calls which slow execution on older machines.
 Public Type settings
     graph As graphOptions                        ' Runtime graph options
     styles As stylesWorksheet                    ' "styles" worksheet settings
     data As dataWorksheet                        ' "data" Worksheet settings
     source As sourceWorksheet                    ' "source" Worksheet settings
-    sql As sqlWorksheet                          ' "sql" Worksheet settings
-    svg As svgWorksheet                          ' "svg" Worksheet settings
-    output As FileOutput                         ' File output settings
     CommandLine As CommandLine                   ' Extra settings for the command line
     console As consoleOptions                    ' console toggle switches
 End Type
