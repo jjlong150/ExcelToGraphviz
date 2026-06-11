@@ -166,37 +166,18 @@ Public Function getRowType(ByVal worksheetName As String, ByVal row As Long) As 
 End Function
 
 ' ==========================================================================
-' PROCEDURE: InvalidateStyleCache
-'
+' SUB: InvalidateStyleCache
 ' PURPOSE:
-'   Marks the style cache as invalid, ensuring that the next call to
-'   getMatchingStyles() triggers a full rebuild of the style dictionary
-'   rather than returning previously cached results.
-'
-' PERFORMANCE FEATURES:
-'   - Constant-time invalidation: Only flips a Boolean flag; no memory
-'     deallocation or dictionary clearing is performed here.
-'   - Deferred recomputation: Avoids unnecessary work by allowing the cache
-'     to be rebuilt lazily on demand.
-'
-' TECHNICAL WORKFLOW:
-'   1. Sets cacheIsValid = False.
-'   2. Leaves existing cached dictionaries intact; they will be replaced
-'      automatically when next accessed.
-'
-' USAGE:
-'   - Called whenever the Styles worksheet is modified (cell edits, row
-'     insertions, deletions, or structural changes).
-'   - Typically invoked from Worksheet_Change, Ribbon callbacks, or any
-'     routine that updates style definitions.
-'
-' DEPENDENCIES:
-'   - Module-level Boolean: cacheIsValid
-'   - Module-level Dictionary: styleCache (implicitly affected on next use)
-'
+'   Clears the cache so that getMatchingStyles will rebuild fresh data
+'   the next time it is called.
+'   Call this whenever styles are added, modified, or deleted on the Styles sheet.
 ' ==========================================================================
 Public Sub InvalidateStyleCache()
     cacheIsValid = False
+    
+    If Not styleCache Is Nothing Then
+        styleCache.RemoveAll
+    End If
 End Sub
 
 ' ==========================================================================
@@ -236,17 +217,25 @@ End Sub
 ' ==========================================================================
 Public Function getMatchingStyles(ByVal rowType As String) As Dictionary
     
+    ' Skip special row types
+    If rowType = TYPE_BLANK_ROW Or rowType = TYPE_GRAPH Then
+        Set getMatchingStyles = New Dictionary
+        Exit Function
+    End If
+    
+    ' Initialize cache
     If styleCache Is Nothing Then
         Set styleCache = New Dictionary
         cacheIsValid = False
     End If
     
+    ' Return from cache if possible
     If cacheIsValid And styleCache.Exists(rowType) Then
         Set getMatchingStyles = styleCache(rowType)
         Exit Function
     End If
     
-    ' === Build dictionary ===
+    ' === Build dictionary for this rowType ===
     Dim styles As stylesWorksheet
     styles = GetSettingsForStylesWorksheet()
     

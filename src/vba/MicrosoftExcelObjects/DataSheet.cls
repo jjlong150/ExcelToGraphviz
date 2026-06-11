@@ -134,26 +134,32 @@ Private Sub Worksheet_Deactivate()
 End Sub
 
 ' ==========================================================================
-' PROCEDURE: Worksheet_SelectionChange
+' SUB: Worksheet_SelectionChange
 ' PURPOSE:
-'   Orchestrates the context-sensitive "Style Name" dropdown list.
+'   Dynamically updates the Style Name dropdown list (data validation)
+'   whenever the user selects a cell in the Style column.
 '
-' TECHNICAL WORKFLOW:
-'   1. TARGET VALIDATION: Exit early if multiple cells are selected or if
-'      the cursor is outside the 'Style Name' column.
-'   2. CONTEXT ANALYSIS: Calls 'getRowType' to determine the row's logical
-'      role (Node, Edge, Subgraph Open/Close, etc.).
-'   3. STYLE FILTERING: Retrieves a filtered Dictionary of style names
-'      via 'getMatchingStyles' relevant only to that row type.
-'   4. CACHE SYNCHRONIZATION:
-'      - Clears and repopulates the 'Choices' worksheet with matching keys.
-'      - Resizes the 'StyleNames' Named Range to fit the new result set.
-'      - Performs an 'xlAscending' sort to ensure a clean user interface.
-'   5. RESOURCE HYGIENE: Explicitly destroys objects to prevent memory leaks.
+' BEHAVIOR:
+'   - Clears the previous list and rebuilds it based on the current row's type.
+'   - Only processes rows that support styling (skips blank rows and graphs).
+'   - Relies on getMatchingStyles() which returns a pre-sorted, cached list.
 '
-' USAGE:
-'   - Ensures that Edge styles never appear for Nodes, and vice versa.
-'   - Provides the "Intelligent Data Entry" experience.
+' PERFORMANCE DESIGN:
+'   - Multiple early-exit conditions to minimize unnecessary work.
+'   - Temporarily disables ScreenUpdating, Calculation, and Events.
+'   - Uses pre-sorted data from getMatchingStyles (no redundant sorting here).
+'
+' WORKFLOW:
+'   1. Early exits for irrelevant selections.
+'   2. Clear existing named range contents.
+'   3. Determine rowType using getRowType().
+'   4. Retrieve (cached) style list via getMatchingStyles().
+'   5. Write styles to ChoicesSheet and resize the named range.
+'
+' DEPENDENCIES:
+'   - RANGE_STYLE_NAMES (workbook named range)
+'   - getMatchingStyles() function (provides cached + sorted results)
+'   - getRowType(), GetSettingColNum()
 ' ==========================================================================
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     ' Exit if multiple cells selected
@@ -172,44 +178,47 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     Dim rowType As String
     rowType = getRowType(ActiveSheet.name, Target.row)
     
+    ' Skip rows that don't use styles
+    If rowType = TYPE_BLANK_ROW Or rowType = TYPE_GRAPH Then Exit Sub
+        
+    ' Adjust Excel Performance Settings
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+    Application.enableEvents = False
+    
+    On Error GoTo CleanExit
+    
     ' Use a dictionary to load the unique style names for this row type
     Dim styleNames As Dictionary
     Set styleNames = getMatchingStyles(rowType)
     
-    If styleNames.count > 0 Then
-        ' For rows which can be styled
-        If rowType <> TYPE_BLANK_ROW And rowType <> TYPE_GRAPH Then
-            ' Paste the dictionary keys into the named range associated with the
-            ' Style Name dropdown list
-            ChoicesSheet.Cells.item(1, 1).Resize(styleNames.count, 1).Value2 = Application.WorksheetFunction.Transpose(styleNames.keys)
-            
-            ' Adjust the size of the named range to match the number of values
-            Dim namedRange As name
-            Set namedRange = ActiveWorkbook.names.[_Default](RANGE_STYLE_NAMES)
-            
-            With namedRange
-                '@Ignore ImplicitDefaultMemberAccess
-                .RefersTo = .RefersToRange.Resize(styleNames.count, 1)
-            End With
-            
-            ' Sort the values within the named range
-            Dim columnRange As String
-            columnRange = "A1:A" & styleNames.count
-            
-            ChoicesSheet.sort.SortFields.Clear
-            ChoicesSheet.sort.SortFields.Add key:=Range("A1"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
-            With ChoicesSheet.sort
-                .SetRange Range(columnRange)
-                .Header = xlNo
-                .MatchCase = False
-                .orientation = xlTopToBottom
-                .SortMethod = xlPinYin
-                .Apply
-            End With
-        End If
-    End If
+    If styleNames.count = 0 Then GoTo CleanExit
     
-    ' Don't leak memory
+    ' Populate Dropdown List
+    With ChoicesSheet
+        Dim count As Long
+        count = styleNames.count
+        
+        ' Write the (already sorted) styles
+        .Cells(1, 1).Resize(count, 1).Value2 = _
+            Application.WorksheetFunction.Transpose(styleNames.keys)
+        
+        ' Update named range size
+        Dim namedRange As name
+        Set namedRange = ActiveWorkbook.names(RANGE_STYLE_NAMES)
+        
+        With namedRange
+            .RefersTo = .RefersToRange.Resize(count, 1)
+        End With
+    End With
+    
+CleanExit:
+    ' Restore Excel settings
+    Application.enableEvents = True
+    Application.Calculation = xlCalculationAutomatic
+    Application.ScreenUpdating = True
+    
+    ' Clean up objects
     Set namedRange = Nothing
     Set styleNames = Nothing
 End Sub
