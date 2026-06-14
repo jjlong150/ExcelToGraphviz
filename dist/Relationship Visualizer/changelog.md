@@ -1,5 +1,34 @@
 # Change Log
 
+## Version 10.5.0
+
+This release focuses on usability enhancements, performance improvements, and important bug fixes.
+
+**Usability Improvements**
+- **Improved Style Designer ribbon galleries** - Increased readability and usability of the color and font galleries. Font name previews now use black text on white background for better contrast, and color swatches have been enlarged and changed to filled circles. [(#24)](https://github.com/jjlong150/ExcelToGraphviz/issues/24)  
+  **Note:** You must clear your image cache to see these changes:
+  - Go to the **Launchpad** tab -> make the `Diagnostics` worksheet visible.
+  - Go to the **Diagnostics** tab -> click **Delete Colors** and **Delete Fonts** buttons.
+  - Close and reopen the workbook, then switch to the `Style Designer` worksheet to regenerate the previews.
+
+**Performance Improvements**
+- **Improved Style Name dropdown performance** - Significantly optimized dropdown population using bulk array reads and per-rowType caching. Much faster response when switching between rows. [(#25)](https://github.com/jjlong150/ExcelToGraphviz/issues/25)
+
+- **Improved data cell read performance** - Optimized how cell values are read during graph generation. This greatly reduces overhead during automatic rendering and makes editing much more responsive on large sheets. [(#19)](https://github.com/jjlong150/ExcelToGraphviz/issues/19)
+
+- **Improved AutoDraw / rendering performance** - Removed unnecessary loading of SQL and SVG settings during normal worksheet rendering. Combined with the cell read optimizations, this results in faster graph generation. [(#20)](https://github.com/jjlong150/ExcelToGraphviz/issues/20)
+
+**Bug Fixes**
+- **Improved error handling in CreateGraphWorksheet** - Refined error handling so that issues during graph rendering (file operations, Graphviz execution, picture insertion, etc.) are no longer silently suppressed. Errors are now properly surfaced for easier diagnosis. [(#18)](https://github.com/jjlong150/ExcelToGraphviz/issues/18)
+
+- **Fixed duplicate DOT string updates** - Optimized `CreateGraphWorksheet` to send the DOT string to the Source viewer only once per render instead of twice. [(#21)](https://github.com/jjlong150/ExcelToGraphviz/issues/21)
+
+- **Fixed default output directory handling** - Corrected logic so that when no output directory is specified, graphs are now properly saved next to the workbook (as originally intended). [(#17)](https://github.com/jjlong150/ExcelToGraphviz/issues/17)
+
+- **Fixed exported VBA file encoding** - Removed extended characters from all source code comments so that exported `.bas` and `.cls` files display correctly on GitHub. Files are now consistently saved in Windows-1252 (ANSI) without encoding issues. [(#23)](https://github.com/jjlong150/ExcelToGraphviz/issues/23)
+
+- **DeepWiki indexing cleaned up** - Fixed mismatched folder names that caused routine files to be indexed. The exclusions were corrected, the guidance note clarified, and the cache refreshed. This removes about two dozen noise files while keeping the existing 27‑page structure intact. [(#22)](https://github.com/jjlong150/ExcelToGraphviz/issues/22)
+
 ## Version 10.4.0
 
 This release provides several small but meaningful usability improvements.
