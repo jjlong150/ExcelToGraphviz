@@ -1,5 +1,34 @@
 # Changelog
 
+## Version 10.5.0 - June 14, 2026
+
+This release focuses on usability enhancements, performance improvements, and important bug fixes.
+
+**Usability Improvements**
+- **Improved Style Designer ribbon galleries** - Increased readability and usability of the color and font galleries. Font name previews now use black text on white background for better contrast, and color swatches have been enlarged and changed to filled circles. [(#24)](https://github.com/jjlong150/ExcelToGraphviz/issues/24)  
+  **Note:** You must clear your image cache to see these changes:
+  - Go to the **Launchpad** tab -> make the `Diagnostics` worksheet visible.
+  - Go to the **Diagnostics** tab -> click **Delete Colors** and **Delete Fonts** buttons.
+  - Close and reopen the workbook, then switch to the `Style Designer` worksheet to regenerate the previews.
+
+**Performance Improvements**
+- **Improved Style Name dropdown performance** - Significantly optimized dropdown population using bulk array reads and per-rowType caching. Much faster response when switching between rows. [(#25)](https://github.com/jjlong150/ExcelToGraphviz/issues/25)
+
+- **Improved data cell read performance** - Optimized how cell values are read during graph generation. This greatly reduces overhead during automatic rendering and makes editing much more responsive on large sheets. [(#19)](https://github.com/jjlong150/ExcelToGraphviz/issues/19)
+
+- **Improved AutoDraw / rendering performance** - Removed unnecessary loading of SQL and SVG settings during normal worksheet rendering. Combined with the cell read optimizations, this results in faster graph generation. [(#20)](https://github.com/jjlong150/ExcelToGraphviz/issues/20)
+
+**Bug Fixes**
+- **Improved error handling in CreateGraphWorksheet** - Refined error handling so that issues during graph rendering (file operations, Graphviz execution, picture insertion, etc.) are no longer silently suppressed. Errors are now properly surfaced for easier diagnosis. [(#18)](https://github.com/jjlong150/ExcelToGraphviz/issues/18)
+
+- **Fixed duplicate DOT string updates** - Optimized `CreateGraphWorksheet` to send the DOT string to the Source viewer only once per render instead of twice. [(#21)](https://github.com/jjlong150/ExcelToGraphviz/issues/21)
+
+- **Fixed default output directory handling** - Corrected logic so that when no output directory is specified, graphs are now properly saved next to the workbook (as originally intended). [(#17)](https://github.com/jjlong150/ExcelToGraphviz/issues/17)
+
+- **Fixed exported VBA file encoding** - Removed extended characters from all source code comments so that exported `.bas` and `.cls` files display correctly on GitHub. Files are now consistently saved in Windows-1252 (ANSI) without encoding issues. [(#23)](https://github.com/jjlong150/ExcelToGraphviz/issues/23)
+
+- **DeepWiki indexing cleaned up** - Fixed mismatched folder names that caused routine files to be indexed. The exclusions were corrected, the guidance note clarified, and the cache refreshed. This removes about two dozen noise files while keeping the existing 27‑page structure intact. [(#22)](https://github.com/jjlong150/ExcelToGraphviz/issues/22)
+
 ## Version 10.4.0 - April 26, 2026
 
 This release provides several small but meaningful usability improvements.
@@ -11,7 +40,6 @@ The Relationship Visualizer received the following improvements:
 - **Enhanced placeholder engine for labels** - Node, edge, cluster, and graph label builders now support template‑driven placeholders (`{label}`, `{xlabel}`, `{taillabel}`, `{headlabel}`), allowing `styles` worksheet formats to dynamically expand or fall back to data‑layer values. 
 
 - **Smoother, cleaner AutoDraw updates** - `AutoDraw` has been revamped so graph updates now happen across more events in a single clean pass, without screen flashes or repeated triggers. The result is a more consistent, more polished *live preview* experience while you edit your data.
-
 
 - **Smarter preview updates in the Styles sheet** - The preview image now updates automatically whenever you modify a style row (node, edge, or cluster), giving you instant visual feedback as you fine‑tune your formatting.
 
@@ -27,7 +55,7 @@ This release continues to expand the **SQL capabilities** of the Relationship Vi
 
 The Relationship Visualizer received the following improvements:
 
-- **Added support for “n” levels of clusters** – Previously, automatic clustering was limited to two levels via the `CLUSTER` and `SUBCLUSTER` column names. SQL clustering now supports an open‑ended number of levels by using integer‑suffixed field names. [(#13, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/13)
+- **Added support for “n” levels of clusters** – Previously, automatic clustering was limited to two levels via the `CLUSTER` and `SUBCLUSTER` column names. SQL clustering now supports an open‑ended number of levels by using integer‑suffixed field names. [(#13)](https://github.com/jjlong150/ExcelToGraphviz/issues/13)
 
   For example:
   
@@ -36,11 +64,11 @@ The Relationship Visualizer received the following improvements:
   Each level supports its own label, tooltip, style name, and attributes (e.g., `[CLUSTER1 LABEL]`, `[CLUSTER1 STYLE NAME]`, `[CLUSTER1 ATTRIBUTES]`, `[CLUSTER1 TOOLTIP]`).
 
 - **Added `{label}` placeholder in cluster labels** – Introduced a `{label}` substitution token for cluster labels. This update allows HTML‑like formatting strings to be stored in the saved style format, enabling enhancements such as embedding an image next to the label value. When the graph is rendered, the label value from the `data` worksheet replaces the `{label}` placeholder.
-  [(#14, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/14) 
+  [(#14)](https://github.com/jjlong150/ExcelToGraphviz/issues/14) 
 
-- **Revised format‑string parsing** – Updated the logic that interprets saved style formats to correctly recognize HTML‑like syntax and pass it through to the Style Designer when the **Edit Style** button is used.  [(#15, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/15) 
+- **Revised format‑string parsing** – Updated the logic that interprets saved style formats to correctly recognize HTML‑like syntax and pass it through to the Style Designer when the **Edit Style** button is used.  [(#15)](https://github.com/jjlong150/ExcelToGraphviz/issues/15) 
 
-- **Revised refresh‑all‑previews behavior** – Removed the progress‑bar dialog displayed when refreshing all style previews. Percent‑complete progress is now shown in the status bar. [(#16, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/16)
+- **Revised refresh‑all‑previews behavior** – Removed the progress‑bar dialog displayed when refreshing all style previews. Percent‑complete progress is now shown in the status bar. [(#16)](https://github.com/jjlong150/ExcelToGraphviz/issues/16)
 
 ## Version 10.2.0 – February 27, 2026
 
@@ -82,20 +110,20 @@ This release focuses primarily on expanding and strengthening the **SQL capabili
 
 The Relationship Visualizer received the following improvements:
 
-- Added support for using **Microsoft Access** (`.accdb` / `.mdb`) files as SQL data sources. [(#5, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/5) 
-- Added SQL **enumeration** support for generating range‑based result sets (e.g. `from x to y by z`). [(#6, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/6)  
-- Added SQL **iterative query‑set** execution with dynamic placeholder substitution. It allows a result from one query to be used as a parameter in a second query. [(#7, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/7) 
-- Added SQL **error logging** to capture query failures in an external log file. [(#9, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/9)
-- Improved usability by abbreviating long file‑system paths in the `SQL` and `Graphviz` ribbon tabs. [(#10, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/10)  
-- Implemented a comprehensive set of **ADO SQL hardening changes**, improving reliability, determinism, and fault‑tolerance across the entire execution pipeline. [(#11, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/11)  
-- Expanded the SQL log‑to‑file feature to include **environment documentation**, improving diagnostics and reproducibility. [(#12, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/12)
+- Added support for using **Microsoft Access** (`.accdb` / `.mdb`) files as SQL data sources. [(#5)](https://github.com/jjlong150/ExcelToGraphviz/issues/5) 
+- Added SQL **enumeration** support for generating range‑based result sets (e.g. `from x to y by z`). [(#6)](https://github.com/jjlong150/ExcelToGraphviz/issues/6)  
+- Added SQL **iterative query‑set** execution with dynamic placeholder substitution. It allows a result from one query to be used as a parameter in a second query. [(#7)](https://github.com/jjlong150/ExcelToGraphviz/issues/7) 
+- Added SQL **error logging** to capture query failures in an external log file. [(#9)](https://github.com/jjlong150/ExcelToGraphviz/issues/9)
+- Improved usability by abbreviating long file‑system paths in the `SQL` and `Graphviz` ribbon tabs. [(#10)](https://github.com/jjlong150/ExcelToGraphviz/issues/10)  
+- Implemented a comprehensive set of **ADO SQL hardening changes**, improving reliability, determinism, and fault‑tolerance across the entire execution pipeline. [(#11)](https://github.com/jjlong150/ExcelToGraphviz/issues/11)  
+- Expanded the SQL log‑to‑file feature to include **environment documentation**, improving diagnostics and reproducibility. [(#12)](https://github.com/jjlong150/ExcelToGraphviz/issues/12)
 
 **Defect Fixes**
 
 The following defects were corrected:
 
-- Addressed an intermittent SQL execution failure caused by underlying COM/Automation instability in VBA. [(#4, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/4) 
-- **Breaking change**: SQL query clustering previously grouped results by **CLUSTER LABEL** instead of **CLUSTER**, and failed when cluster labels were null. [(#8, closed)](https://github.com/jjlong150/ExcelToGraphviz/issues/8) 
+- Addressed an intermittent SQL execution failure caused by underlying COM/Automation instability in VBA. [(#4)](https://github.com/jjlong150/ExcelToGraphviz/issues/4) 
+- **Breaking change**: SQL query clustering previously grouped results by **CLUSTER LABEL** instead of **CLUSTER**, and failed when cluster labels were null. [(#8)](https://github.com/jjlong150/ExcelToGraphviz/issues/8) 
 
   The fix correctly groups by **CLUSTER**, but this correction is **not backward‑compatible** and may alter the structure of existing graphs that relied on the prior (incorrect) behavior. You will have to modify cluster-oriented SQL statements if you use this feature.
 
