@@ -1,4 +1,6 @@
-# Security Considerations for Macro‑Enabled Excel Workbooks
+# Security 
+
+## Excel Macro‑Enabled Workbook Considerations
 
 When deciding whether to trust a macro‑enabled Excel workbook (such as an `.xlsm` file) downloaded from the Internet, several security factors should be evaluated to minimize risk. Macro‑enabled workbooks contain executable VBA code, which can pose significant security threats if malicious or poorly vetted.
 
