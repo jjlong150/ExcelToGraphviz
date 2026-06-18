@@ -14,6 +14,9 @@ import 'vitepress-plugin-blog/style.css'
 // Import our own styles (make sure this is after the blog styles so it can override them if needed)
 import './style.css'
 
+// custom CSS
+import './style/print.css'
+
 const blogTheme = withBlogTheme(DefaultTheme)
 
 export default {

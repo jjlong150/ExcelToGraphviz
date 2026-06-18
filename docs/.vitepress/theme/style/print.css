@@ -1,0 +1,11 @@
+@media print {
+  .VPNav, .VPLocalNav, .VPDocFooter, .VPSidebar {
+    display: none !important;
+  }
+  /* Ensure TOC stays visible */
+  .table-of-contents,
+  .vp-doc ul.table-of-contents {
+    display: block !important;
+    visibility: visible !important;
+  }
+}
