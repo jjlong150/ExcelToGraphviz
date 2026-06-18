@@ -9,7 +9,8 @@
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "export-pdf": "press-export-pdf export ."
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,8 @@
   "devDependencies": {
     "@types/node": "^25.5.0",
     "@vitejs/plugin-vue": "^6.0.5",
-    "vitepress": "^1.6.4"
+    "vitepress": "^1.6.4",
+    "vitepress-export-pdf": "^1.0.0"
   },
   "dependencies": {
     "@giscus/vue": "^3.1.1",
