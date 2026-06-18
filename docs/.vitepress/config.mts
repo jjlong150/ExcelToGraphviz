@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { blogPlugin } from 'vitepress-plugin-blog/plugin'
 import sidebar from './sidebar.mts'
+import { joinURL, withoutTrailingSlash } from 'ufo'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -42,7 +43,14 @@ export default defineConfig({
   base: '/',
   lang: 'en-US',
   title: "Excel to Graphviz",
-  description: "Excel to Graphviz Relationship Visualizer",
+  description: "Convert Excel data into professional Graphviz relationship diagrams. Free Relationship Visualizer tool.",
+
+  sitemap: {
+    hostname: 'https://exceltographviz.com'
+  },
+
+  lastUpdated: true,
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -101,7 +109,12 @@ export default defineConfig({
   },
 
   transformPageData(pageData) {
-    // Hide sidebar-based Prev/Next links on blog posts only
+    const canonicalUrl = joinURL(
+      'https://exceltographviz.com',
+      withoutTrailingSlash(pageData.filePath.replace(/(index)?\.md$/, ''))
+    )
+
+    // === Blog logic ===
     const isBlogPost = 
       pageData.frontmatter?.blogPost === true ||
       pageData.relativePath?.startsWith('blog/posts/')
@@ -109,10 +122,43 @@ export default defineConfig({
     if (isBlogPost) {
       pageData.frontmatter.prev = false
       pageData.frontmatter.next = false
-      // Optional: also hide the right "On this page" outline
-      // pageData.frontmatter.aside = false
+      // pageData.frontmatter.aside = false // uncomment if you want to hide outline too
     }
 
+    // === SEO Meta Tags ===
+    pageData.frontmatter.head ??= []
+
+    pageData.frontmatter.head.push(
+    // Google Search Console Verification Tag
+    ['meta', { 
+      name: 'google-site-verification', 
+      content: 'Nk5wPIfa_duB_rD_ceHGXUhbTQhLn-aDcK8SpbhMiIg' 
+    }],
+
+    // Canonical URL
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+
+      // Open Graph
+      ['meta', { property: 'og:title', content: pageData.title }],
+      ['meta', { property: 'og:description', content: pageData.description || '' }],
+      ['meta', { property: 'og:url', content: canonicalUrl }],
+      ['meta', { property: 'og:type', content: isBlogPost ? 'article' : 'website' }],
+      
+      // Twitter / X Cards
+      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+      ['meta', { name: 'twitter:title', content: pageData.title }],
+      ['meta', { name: 'twitter:description', content: pageData.description || '' }]
+    )
+
+    // Homepage social image
+    if (pageData.frontmatter.layout === 'home') {
+      pageData.frontmatter.head.push(
+        ['meta', { property: 'og:image', content: 'https://exceltographviz.com/hero.png' }],
+        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/hero.png' }]
+      )
+    } 
+  
     return pageData
   }
 })
+
