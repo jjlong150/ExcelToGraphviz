@@ -135,6 +135,12 @@ export default defineConfig({
       content: 'Nk5wPIfa_duB_rD_ceHGXUhbTQhLn-aDcK8SpbhMiIg' 
     }],
 
+    // Bing Webmaster Tools Verification Tag
+    ['meta', {
+      name: 'msvalidate.01',
+      content: '170417B93AA71CAAE347C7AD019A4460'
+    }],
+
     // Canonical URL
       ['link', { rel: 'canonical', href: canonicalUrl }],
 
