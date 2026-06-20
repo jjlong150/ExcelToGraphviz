@@ -129,19 +129,19 @@ export default defineConfig({
     pageData.frontmatter.head ??= []
 
     pageData.frontmatter.head.push(
-    // Google Search Console Verification Tag
-    ['meta', { 
-      name: 'google-site-verification', 
-      content: 'Nk5wPIfa_duB_rD_ceHGXUhbTQhLn-aDcK8SpbhMiIg' 
-    }],
+      // Google Search Console Verification Tag
+      ['meta', { 
+        name: 'google-site-verification', 
+        content: 'Nk5wPIfa_duB_rD_ceHGXUhbTQhLn-aDcK8SpbhMiIg' 
+      }],
 
-    // Bing Webmaster Tools Verification Tag
-    ['meta', {
-      name: 'msvalidate.01',
-      content: '170417B93AA71CAAE347C7AD019A4460'
-    }],
+      // Bing Webmaster Tools Verification Tag
+      ['meta', {
+        name: 'msvalidate.01',
+        content: '170417B93AA71CAAE347C7AD019A4460'
+      }],
 
-    // Canonical URL
+      // Canonical URL
       ['link', { rel: 'canonical', href: canonicalUrl }],
 
       // Open Graph
@@ -149,20 +149,32 @@ export default defineConfig({
       ['meta', { property: 'og:description', content: pageData.description || '' }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
       ['meta', { property: 'og:type', content: isBlogPost ? 'article' : 'website' }],
-      
+      ['meta', { property: 'og:site_name', content: 'Excel to Graphviz' }],
+      ['meta', { property: 'og:locale', content: 'en_US' }], 
+           
       // Twitter / X Cards
       ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
       ['meta', { name: 'twitter:title', content: pageData.title }],
-      ['meta', { name: 'twitter:description', content: pageData.description || '' }]
+      ['meta', { name: 'twitter:description', content: pageData.description || '' }],
+      ['meta', { name: 'twitter:site', content: '@exceltographviz' }]
     )
 
-    // Homepage social image
+    // === Social Image Handling ===
     if (pageData.frontmatter.layout === 'home') {
+      // Homepage uses hero image
       pageData.frontmatter.head.push(
         ['meta', { property: 'og:image', content: 'https://exceltographviz.com/hero.png' }],
-        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/hero.png' }]
+        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/hero.png' }],
+        ['meta', { property: 'og:image:width', content: '1200' }],
+        ['meta', { property: 'og:image:height', content: '630' }]
       )
-    } 
+    } else {
+      // All other pages use social-default.png
+      pageData.frontmatter.head.push(
+        ['meta', { property: 'og:image', content: 'https://exceltographviz.com/social-default.png' }],
+        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-default.png' }]
+      )
+    }
   
     return pageData
   }
