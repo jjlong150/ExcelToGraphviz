@@ -161,7 +161,7 @@ export default defineConfig({
 
     // === Social Image Handling ===
     if (pageData.frontmatter.layout === 'home') {
-      // Homepage uses hero image
+      // Homepage uses social-hero image
       pageData.frontmatter.head.push(
         ['meta', { property: 'og:image', content: 'https://exceltographviz.com/social-hero.png' }],
         ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-hero.png' }],
@@ -180,6 +180,210 @@ export default defineConfig({
       )
     }
   
+    // === JSON-LD Structured Data ===
+    const isHome = pageData.frontmatter.layout === 'home'
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": isHome
+        ? "WebSite"
+        : isBlogPost
+          ? "Article"
+          : "WebPage",
+      "headline": pageData.title,
+      "description": pageData.description || "",
+      "url": canonicalUrl,
+      ...(isBlogPost && {
+        "datePublished": pageData.frontmatter.date || undefined,
+        "dateModified": pageData.frontmatter.lastUpdated || undefined
+      }),
+      "author": {
+        "@type": "Person",
+        "name": "Jeffrey Long",
+        "url": "https://exceltographviz.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Excel to Graphviz",
+        "url": "https://exceltographviz.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://exceltographviz.com/logo.png"
+        }
+      }
+    }
+
+    pageData.frontmatter.head.push([
+      'script',
+      { type: 'application/ld+json' },
+      JSON.stringify(jsonLd)
+    ])
+
+    // === SoftwareApplication JSON-LD (only on download page) ===
+    if (pageData.relativePath === 'download/index.md') {
+      const softwareJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Excel to Graphviz Relationship Visualizer",
+        "operatingSystem": "Windows, macOS",
+        "applicationCategory": "UtilityApplication",
+        "description": "A VBA-powered Excel tool that converts spreadsheet relationships into Graphviz diagrams.",
+        "softwareVersion": "10.5.0",
+        "downloadUrl": "https://exceltographviz.com/download/",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Jeffrey Long",
+          "url": "https://exceltographviz.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Excel to Graphviz",
+          "url": "https://exceltographviz.com"
+        }
+      }
+
+      pageData.frontmatter.head.push([
+        'script',
+        { type: 'application/ld+json' },
+        JSON.stringify(softwareJsonLd)
+      ])
+    }
+
+    if (pageData.relativePath === 'install-win/index.md') {
+      const howToJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Install Excel to Graphviz Relationship Visualizer on Windows",
+        "description": "Step-by-step instructions for installing Graphviz, configuring command-line tools, downloading the Relationship Visualizer assets, unblocking the spreadsheet, and enabling macros in Excel.",
+        "totalTime": "PT15M",
+        "tool": [
+          { "@type": "HowToTool", "name": "Microsoft Excel" },
+          { "@type": "HowToTool", "name": "Graphviz" }
+        ],
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Download and install Graphviz",
+            "text": "Download the 32-bit or 64-bit Graphviz EXE installer and ensure the Graphviz bin directory is added to the PATH."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Open Command Prompt as Administrator",
+            "text": "Run Command Prompt using 'Run as Administrator', then execute 'dot -c' to register plugins and 'dot -V' to confirm the installation."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Download the Relationship Visualizer assets",
+            "text": "Download RelationshipVisualizer.zip from SourceForge and optionally validate SHA1 or MD5 checksums."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Extract the files",
+            "text": "Extract all files from the ZIP archive to a local directory."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Unblock the spreadsheet file",
+            "text": "Right-click Relationship Visualizer.xlsm, open Properties, and check the Unblock box before clicking OK."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Enable macros and open Excel",
+            "text": "Enable VBA macros in Excel’s Trust Center, then open Relationship Visualizer.xlsm and allow macros when prompted."
+          }
+        ]
+      }
+
+      pageData.frontmatter.head.push([
+        'script',
+        { type: 'application/ld+json' },
+        JSON.stringify(howToJsonLd)
+      ])
+    }
+
+    if (pageData.relativePath === 'install-mac/index.md') {
+      const howToJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Install Excel to Graphviz Relationship Visualizer on macOS",
+        "description": "Step-by-step instructions for installing Graphviz using Homebrew, configuring plugins, preparing the AppleScript file, and enabling macros in Excel on macOS.",
+        "totalTime": "PT15M",
+        "tool": [
+          { "@type": "HowToTool", "name": "Microsoft Excel" },
+          { "@type": "HowToTool", "name": "Graphviz" },
+          { "@type": "HowToTool", "name": "Terminal" }
+        ],
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Install Graphviz using Homebrew",
+            "text": "Run the command 'brew install graphviz' to install Graphviz on macOS."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Configure Graphviz plugins",
+            "text": "Open a Terminal window and run 'sudo dot -c' to register Graphviz plugins. Enter your administrator password when prompted."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Confirm Graphviz installation",
+            "text": "Run 'dot -V' to confirm Graphviz is installed and responding with a version number."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Download RelationshipVisualizer.zip",
+            "text": "Download the RelationshipVisualizer.zip file from SourceForge, which contains the spreadsheet, AppleScript file, documentation, and samples."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Unzip the downloaded file",
+            "text": "Extract the contents of RelationshipVisualizer.zip to any local directory."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Determine the path to the dot command",
+            "text": "Run 'which dot' in Terminal to determine the installation path of the Graphviz dot command."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Edit ExcelToGraphviz.applescript if needed",
+            "text": "If the dot command is not located at /usr/local/bin/dot, edit ExcelToGraphviz.applescript and update the path on line 2 to match the output of 'which dot'."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Copy the AppleScript file to the Excel sandbox folder",
+            "text": "Copy ExcelToGraphviz.applescript to ~/Library/Application Scripts/com.microsoft.Excel to comply with macOS sandboxing rules."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Open Relationship Visualizer.xlsm in Excel",
+            "text": "Double-click Relationship Visualizer.xlsm to open it in Excel."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Enable macros in Excel",
+            "text": "Grant permission for macros to run when prompted, as the tool requires VBA macros to function."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Save the spreadsheet as a template",
+            "text": "Use 'File -> Save as Template...' to save the workbook as an Excel Macro-Enabled Template (.xltm) for future use."
+          }
+        ]
+      }
+
+      pageData.frontmatter.head.push([
+        'script',
+        { type: 'application/ld+json' },
+        JSON.stringify(howToJsonLd)
+      ])
+    }
+
     return pageData
   }
 })
