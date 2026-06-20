@@ -163,16 +163,20 @@ export default defineConfig({
     if (pageData.frontmatter.layout === 'home') {
       // Homepage uses hero image
       pageData.frontmatter.head.push(
-        ['meta', { property: 'og:image', content: 'https://exceltographviz.com/hero.png' }],
-        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/hero.png' }],
+        ['meta', { property: 'og:image', content: 'https://exceltographviz.com/social-hero.png' }],
+        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-hero.png' }],
         ['meta', { property: 'og:image:width', content: '1200' }],
-        ['meta', { property: 'og:image:height', content: '630' }]
+        ['meta', { property: 'og:image:height', content: '630' }],
+        ['meta', { property: 'og:image:alt', content: 'Excel to Graphviz Relationship Visualizer' }]
       )
     } else {
       // All other pages use social-default.png
       pageData.frontmatter.head.push(
         ['meta', { property: 'og:image', content: 'https://exceltographviz.com/social-default.png' }],
-        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-default.png' }]
+        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-default.png' }],
+        ['meta', { property: 'og:image:width', content: '1200' }],
+        ['meta', { property: 'og:image:height', content: '630' }],
+        ['meta', { property: 'og:image:alt', content: 'Excel to Graphviz Relationship Visualizer' }]
       )
     }
   
