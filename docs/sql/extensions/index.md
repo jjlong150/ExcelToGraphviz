@@ -1,3 +1,8 @@
+---
+title: SQL Extensions for Diagram Generation
+description: Explore custom SQL extensions that simplify node creation, clustering, label formatting, and other diagram‑building tasks.
+---
+
 # SQL Extensions
 
 SQL extensions provide small, declarative utilities that simplify common graph‑building tasks in the **Relationship Visualizer**.  

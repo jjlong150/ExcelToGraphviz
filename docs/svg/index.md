@@ -1,3 +1,8 @@
+---
+title: Post‑Process SVG Files for Better Output
+description: Learn how to enhance Graphviz‑generated SVG files using the svg worksheet, including find/replace rules, styling adjustments, JavaScript injection, animation, and best‑practice post‑processing techniques.
+---
+
 # Post‑Process SVG Files
 
 Graphviz can generate SVG output using the `Publish` and `Publish all views` features.

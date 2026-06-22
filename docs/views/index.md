@@ -1,3 +1,8 @@
+---
+title: Create Views for Focused Diagram Outputs
+description: Learn how to build custom Views that filter nodes, edges, and clusters using style switches—allowing you to highlight specific relationships, explore subsets of large datasets, and generate line‑specific or category‑specific Graphviz diagrams.
+---
+
 # Create Views
 
 The Relationship Visualizer is capable of handling much larger data sets than can be easily viewed. As data sets grow, it often becomes useful to focus on specific portions of the information. The Relationship Visualizer supports this by providing view controls on the `styles` worksheet, where **Yes** and **No** switches determine which data styles are included in the graph.

@@ -1,3 +1,8 @@
+---
+title: Use the DOT Message Console
+description: Review Graphviz warnings, errors, and diagnostic messages to troubleshoot diagram rendering issues.
+---
+
 # DOT Message Console
 
 The `console` worksheet shows the messages emitted by the `dot` command when Graphviz runs.

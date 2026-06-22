@@ -1,3 +1,8 @@
+---
+title: Advanced Graphviz Topics and Techniques
+description: Explore advanced Graphviz features such as subgraphs, ranking, layout tuning, and complex styling for expert‑level diagrams.
+---
+
 # Advanced Graphviz Topics
 
 This section describes several miscellaneous Graphviz features that can be used to create more elaborate graphs.

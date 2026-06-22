@@ -1,3 +1,8 @@
+---
+title: Install Relationship Visualizer on macOS
+description: Complete macOS installation guide for Relationship Visualizer, including Homebrew Graphviz setup, plugin configuration, AppleScript sandboxing, and enabling the Excel add‑in securely.
+---
+
 # macOS Installation Instructions
 
 ## Brief Instructions

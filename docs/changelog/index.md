@@ -1,3 +1,8 @@
+---
+title: Changelog and Release History
+description: Review version history, new features, improvements, and bug fixes across all releases of Relationship Visualizer, updated with each new build.
+---
+
 # Changelog
 
 ## Version 10.5.0 - June 14, 2026

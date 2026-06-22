@@ -1,3 +1,8 @@
+---
+title: Import Data from JSON
+description: Learn how to import JSON files to recreate diagrams, restore saved states, or collaborate across environments.
+---
+
 # Importing JSON Data
 
 The Import function works the opposite of the Export function. It reads a JSON file which has been exported by the Relationship Visualizer to reconstitute the JSON data into a Relationship Visualizer spreadsheet.

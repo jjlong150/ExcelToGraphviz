@@ -1,3 +1,8 @@
+---
+title: Run Diagnostics to Troubleshoot Issues
+description: Use built‑in diagnostic tools to identify configuration problems, missing data, or rendering errors.
+---
+
 # Diagnostics Worksheet
 
 ## The `diagnostics` Worksheet

@@ -1,3 +1,8 @@
+---
+title: Configure Relationship Visualizer Settings
+description: Learn how to adjust global settings, preferences, and behavior for the Relationship Visualizer.
+---
+
 # Changing Master Settings
 
 The `settings` worksheet is where you can customize overarching settings which control how the graph is created, specify directories containing images to use in the graph, control how long the graphing engine is allowed to run, specify Graphviz command line parameters, and modify the order in which the worksheet columns are laid out. 

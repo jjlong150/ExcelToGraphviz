@@ -1,3 +1,8 @@
+---
+title: Using the Launchpad to Build Graphs
+description: Learn how to use the Launchpad ribbon tab to control worksheet visibility, access styling tools, manage data exchange, view Graphviz output, adjust settings, and navigate key features of Relationship Visualizer.
+---
+
 # Launchpad
 
 The **Launchpad** provides a convenient way to manage worksheet visibility, allowing you to focus on a small set of worksheets or hide those you rarely use.

@@ -1,3 +1,8 @@
+---
+title: Create Your First Graph
+description: Step‑by‑step guidance for creating your first Graphviz diagram from Excel data, including setup, data entry, and rendering.
+---
+
 # Creating Graphs
 
 Building a graph with the **Relationship Visualizer** spreadsheet is a simple, structured process. You learn the basic vocabulary, create a workbook, enter your data, apply style, and then publish or refine the output. 

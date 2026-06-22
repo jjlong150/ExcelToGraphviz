@@ -1,3 +1,8 @@
+---
+title: Acknowledgements
+description: Acknowledge the contributors, open‑source libraries, and Graphviz‑related tools that power the Excel‑based Relationship Visualizer.
+---
+
 # Credits
 
 ## Thank You

@@ -1,3 +1,8 @@
+---
+title: Install Relationship Visualizer
+description: Start here to install Relationship Visualizer on Windows or macOS. Choose your platform to follow the correct setup steps, system requirements, and Graphviz installation guidance.
+---
+
 # Installation Instructions
 
 **Relationship Visualizer** is a single Excel workbook that runs on both Microsoft Windows and Apple macOS<sup>1</sup>.

@@ -1,3 +1,8 @@
+---
+title: Using the Style Designer
+description: Learn how to create and customize Graphviz node, edge, and cluster styles using the Style Designer, including colors, shapes, fonts, gradients, borders, and preview rendering.
+---
+
 # Style Designer
 
 The Graphviz DOT language includes many attributes that control the appearance of nodes and edges. The `style designer` worksheet helps you compose style specifications without needing to know every detail of the DOT language. 

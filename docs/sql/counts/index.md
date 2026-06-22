@@ -1,3 +1,8 @@
+---
+title: Substitute Counts into Labels
+description: Automatically insert counts into strings using SQL extensions to create dynamic, data‑driven diagram annotations.
+---
+
 # Count Substitution
 
 Several substitution strings are available for inserting count values as clusters, subclusters, and records are iterated over. Before data is written to the `data` worksheet, a find‑and‑replace operation substitutes each placeholder with the current counter value. These counters are useful for preserving sort order or for appending values to style names so each cluster or subcluster can receive a distinct style.

@@ -1,3 +1,8 @@
+---
+title: Entering Data in the Data Worksheet
+description: Learn how to structure the Data worksheet with nodes, edges, and attributes to generate clean, well‑organized Graphviz diagrams from Excel.
+---
+
 # The `data` Worksheet
 
 The `data` worksheet is the core worksheet you will use to create graphs. 

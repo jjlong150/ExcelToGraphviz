@@ -1,3 +1,8 @@
+---
+title: Exchange Data Using JSON Files
+description: Learn how to export and import JSON files to share diagrams, preserve data, or integrate with version control.
+---
+
 # Exchange Data Using JSON Files
 
 There are several drawbacks to using an Excel workbook as your Graphviz IDE:

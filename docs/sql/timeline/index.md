@@ -1,3 +1,8 @@
+---
+title: Create Timelines and Roadmaps with SQL
+description: Use SQL queries to build timeline and roadmap diagrams that show sequences, milestones, and dependencies.
+---
+
 # Combining Iteration and Enumeration to Build Roadmap Timelines
 
 Previous examples focused on [iteration](../iterate/) (processing what already exists in the data) and [enumeration](../enumerate/) (sequentially generating what should exist). A roadmap requires both. Real‑world timelines rarely contain perfectly aligned events: some years have many activities, others have none, and events may span multiple quarters or depend on one another. To visualize this cleanly, Relationship Visualizer must combine synthetic structure with data‑driven detail.

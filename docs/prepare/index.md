@@ -1,3 +1,8 @@
+---
+title: Create a New Workbook for Graph Building
+description: Learn how to create a new Relationship Visualizer workbook, save it as a macro‑enabled file, resolve Excel security prompts, and ensure the custom Graphviz ribbon loads correctly.
+---
+
 # Create a New Workbook
 
 The first action is to launch Microsoft Excel. When Excel starts, it will suggest sample spreadsheets you can create. This will contain the `Relationship Visualizer` template which you saved as a template as part of the installation steps. 

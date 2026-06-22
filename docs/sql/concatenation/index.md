@@ -1,3 +1,8 @@
+---
+title: Concatenate Values into Labels
+description: Combine multiple fields into a single label using SQL concatenation extensions for cleaner diagram output.
+---
+
 # Concatenating Records into a Single Entry
 
 We’ve shown how iteration identifies distinct values in a dataset and then loops through those values to run a second SQL statement that generates a subgroup for each one. **Concatenation** extends this pattern by combining the iterated values into a single string that can be used directly as a node label. Instead of emitting one row per item, you can aggregate related values—such as countries in a continent, members of a team, or songs on a playlist—into a single, well‑structured label.

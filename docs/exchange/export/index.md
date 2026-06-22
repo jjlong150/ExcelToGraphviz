@@ -1,3 +1,8 @@
+---
+title: Export Data to JSON
+description: Export your workbook data and diagram configuration to JSON for sharing, backups, or automated workflows.
+---
+
 # Exporting Data to JSON format
 
 You can export all of the data, or only selected portions, depending on how you intend to use it. Exporting subsets is especially useful when working in teams—for example, you can export just the style definitions to share with others, or export individual team members’ data and combine it into a larger workbook using the **Append** option during import.

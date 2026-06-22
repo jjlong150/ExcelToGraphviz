@@ -109,6 +109,7 @@ export default defineConfig({
   },
 
   transformPageData(pageData) {
+    
     const canonicalUrl = joinURL(
       'https://exceltographviz.com',
       withoutTrailingSlash(pageData.filePath.replace(/(index)?\.md$/, ''))
@@ -128,6 +129,10 @@ export default defineConfig({
     // === SEO Meta Tags ===
     pageData.frontmatter.head ??= []
 
+    // === Allow per-page overrides for OG/Twitter titles ===
+    const ogTitle = pageData.frontmatter?.ogTitle || pageData.title
+    const twitterTitle = pageData.frontmatter?.twitterTitle || ogTitle
+
     pageData.frontmatter.head.push(
       // Google Search Console Verification Tag
       ['meta', { 
@@ -145,7 +150,7 @@ export default defineConfig({
       ['link', { rel: 'canonical', href: canonicalUrl }],
 
       // Open Graph
-      ['meta', { property: 'og:title', content: pageData.title }],
+      ['meta', { property: 'og:title', content: ogTitle }],
       ['meta', { property: 'og:description', content: pageData.description || '' }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
       ['meta', { property: 'og:type', content: isBlogPost ? 'article' : 'website' }],
@@ -154,31 +159,30 @@ export default defineConfig({
            
       // Twitter / X Cards
       ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-      ['meta', { name: 'twitter:title', content: pageData.title }],
+      ['meta', { name: 'twitter:title', content: twitterTitle }],
       ['meta', { name: 'twitter:description', content: pageData.description || '' }],
       ['meta', { name: 'twitter:site', content: '@exceltographviz' }]
     )
 
+    // === Allow per-page overrides for social images ===
+    const customOgImage = pageData.frontmatter?.ogImage
+    const customTwitterImage = pageData.frontmatter?.twitterImage
+
     // === Social Image Handling ===
-    if (pageData.frontmatter.layout === 'home') {
-      // Homepage uses social-hero image
-      pageData.frontmatter.head.push(
-        ['meta', { property: 'og:image', content: 'https://exceltographviz.com/social-hero.png' }],
-        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-hero.png' }],
-        ['meta', { property: 'og:image:width', content: '1200' }],
-        ['meta', { property: 'og:image:height', content: '630' }],
-        ['meta', { property: 'og:image:alt', content: 'Excel to Graphviz Relationship Visualizer' }]
-      )
-    } else {
-      // All other pages use social-default.png
-      pageData.frontmatter.head.push(
-        ['meta', { property: 'og:image', content: 'https://exceltographviz.com/social-default.png' }],
-        ['meta', { name: 'twitter:image', content: 'https://exceltographviz.com/social-default.png' }],
-        ['meta', { property: 'og:image:width', content: '1200' }],
-        ['meta', { property: 'og:image:height', content: '630' }],
-        ['meta', { property: 'og:image:alt', content: 'Excel to Graphviz Relationship Visualizer' }]
-      )
-    }
+    const defaultImage = pageData.frontmatter.layout === 'home'
+      ? 'https://exceltographviz.com/social-hero.png'
+      : 'https://exceltographviz.com/social-default.png'
+
+    const ogImage = customOgImage || defaultImage
+    const twitterImage = customTwitterImage || ogImage
+
+    pageData.frontmatter.head.push(
+      ['meta', { property: 'og:image', content: ogImage }],
+      ['meta', { name: 'twitter:image', content: twitterImage }],
+      ['meta', { property: 'og:image:width', content: '1200' }],
+      ['meta', { property: 'og:image:height', content: '630' }],
+      ['meta', { property: 'og:image:alt', content: 'Excel to Graphviz Relationship Visualizer' }]
+    )
   
     // === JSON-LD Structured Data ===
     const isHome = pageData.frontmatter.layout === 'home'

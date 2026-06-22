@@ -1,3 +1,8 @@
+---
+title: View Internal Lists and Metadata
+description: Explore the internal configuration lists used by Relationship Visualizer, including values that support styling, dropdowns, and Graphviz rendering options.
+---
+
 # Lists Worksheet
 
 ## The `lists` Worksheet

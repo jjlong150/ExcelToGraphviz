@@ -1,7 +1,8 @@
 ---
-title: Blog
 aside: false
 sidebar : true
+title: Relationship Visualizer Blog
+description: Read announcements, tutorials, and feature highlights for Relationship Visualizer, including tips for building clearer Excel‑to‑Graphviz diagrams.
 ---
 
 # Blog

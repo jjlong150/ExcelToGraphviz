@@ -1,3 +1,8 @@
+---
+title: Understanding the Workbook Structure
+description: Learn how each worksheet and ribbon tab in the Relationship Visualizer workbook works—from data entry and styling to SQL import, SVG post‑processing, DOT source, settings, and built‑in help resources.
+---
+
 # Workbook
 
 The **Relationship Visualizer** is a macro‑enabled Excel workbook that lets you collect data using Excel’s familiar table format while taking advantage of its full range of functions.

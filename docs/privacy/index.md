@@ -1,3 +1,8 @@
+---
+title: Privacy Policy
+description: Learn how Relationship Visualizer handles privacy, including its no‑data‑collection design, lack of analytics, and use of local Excel workbooks.
+---
+
 # Privacy
 
 I respect your privacy and keep this site as simple and transparent as possible. This page explains what information is collected, how it is used, and what is *not* collected.

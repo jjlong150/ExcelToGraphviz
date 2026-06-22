@@ -1,3 +1,8 @@
+---
+title: Build Organization Charts Using SQL
+description: Learn how to generate clean, hierarchical organization charts using SQL queries and Relationship Visualizer.
+---
+
 # Creating Organization Charts
 
 A frequent question is: *“Can you create organization charts using the Relationship Visualizer?”*  

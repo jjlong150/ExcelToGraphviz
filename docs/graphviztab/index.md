@@ -1,3 +1,8 @@
+---
+title: Using the Graphviz Tab to Render Diagrams
+description: Explore the Graphviz tab features for rendering, previewing, exporting, and troubleshooting your generated diagrams.
+---
+
 # The `Graphviz` Ribbon Tab
 
 Now that you understand the basics of the `data` worksheet, let's explore the features available in the `Graphviz` ribbon tab. 

@@ -1,3 +1,8 @@
+---
+title: Cluster Nodes Using SQL
+description: Group related nodes into clusters using SQL extensions to improve diagram readability and structure.
+---
+
 # Grouping Data into Clusters and Subclusters
 
 One extension adds the ability to scan SQL statements for specific field names that signal grouping values to be wrapped into a **cluster** or **subcluster** (a cluster within a cluster). The syntax remains pure SQL, but certain field names are reserved and given special meaning.

@@ -1,3 +1,8 @@
+---
+title: MIT License
+description: View the MIT open‑source license governing the use, distribution, and modification of Relationship Visualizer.
+---
+
 # License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the [MIT License](https://github.com/jjlong150/ExcelToGraphviz/blob/main/LICENSE).

@@ -1,3 +1,8 @@
+---
+title: Core Concepts for Building Graphs
+description: Learn the core concepts behind turning Excel data into Graphviz diagrams, including data flow, styling, layout engines, and how Relationship Visualizer structures a graph.
+---
+
 # Core Concepts
 
 The simplest way to draw a graph is to place values in the `Item` and the `Related Item` columns. 

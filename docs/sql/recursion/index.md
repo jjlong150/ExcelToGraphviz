@@ -1,3 +1,8 @@
+---
+title: Traverse Trees with Recursive SQL
+description: Use recursive SQL queries to build hierarchical diagrams such as org charts, trees, and nested structures.
+---
+
 # Traverse Trees Recursively
 
 A frequent question is: *“Can you create tree‑traversal graphs using the Relationship Visualizer?”*  

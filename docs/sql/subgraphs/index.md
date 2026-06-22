@@ -1,3 +1,8 @@
+---
+title: Align Nodes Using Subgraphs
+description: Use SQL extensions to align nodes horizontally or vertically by generating structured subgraphs.
+---
+
 # Align Nodes on the Same Level
 
 Ranking is useful whenever you want certain nodes to align visually in a consistent row or column. By placing nodes into a shared subgraph with a defined rank, you can control the layout and make structural relationships easier to understand. Common scenarios include:

@@ -1,3 +1,8 @@
+---
+title: SQL Syntax Reference
+description: A complete reference for SQL syntax supported by Relationship Visualizer, including functions, operators, and extensions.
+---
+
 # SQL Syntax Reference
 
 **Structured Query Language (SQL)** is one of the primary languages used to retrieve and manipulate data in relational systems. Microsoft Excel is often used in a similar fashion, storing information in worksheets that resemble database tables: columns with headers and many rows of data beneath them.

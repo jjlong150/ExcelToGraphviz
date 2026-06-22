@@ -1,3 +1,8 @@
+---
+title: Query Excel Data Using SQL
+description: Learn how to use SQL queries to filter, join, and transform Excel data before generating Graphviz diagrams.
+---
+
 # Using SQL
 
 Unlock the power of SQL to extract and visualize data from your Excel spreadsheets with **Relationship Visualizer**. 

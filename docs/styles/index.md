@@ -1,3 +1,8 @@
+---
+title: Style Gallery for Graphviz Diagrams
+description: Learn how to define, edit, preview, and manage node, edge, and cluster styles using the styles worksheet and Styles ribbon tab, including view switches, cluster naming, and integration with the Style Designer.
+---
+
 # Style Gallery
 
 A key component of the Relationship Visualizer is the `styles` worksheet, where you can create style definitions for nodes, edges, and clusters. Conceptually, it works much like an HTML Cascading Style Sheet: you define a style name and specify how that style should appear (shape, color, font, and so on). Once defined, a style can be applied to any number of nodes or edges in the `data` worksheet.

@@ -1,3 +1,7 @@
+---
+title: About Relationship Visualizer
+description: Learn about the copyright, author contact information, and repositories of Relationship Visualizer.
+---
 # Excel to Graphviz
 
 ## Copyright

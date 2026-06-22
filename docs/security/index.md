@@ -1,3 +1,8 @@
+---
+title: Security and File Integrity
+description: Guidance on verifying downloads, checking file hashes, and understanding security practices that protect users when installing Relationship Visualizer.
+---
+
 # Security 
 
 ## Excel Macro‑Enabled Workbook Considerations

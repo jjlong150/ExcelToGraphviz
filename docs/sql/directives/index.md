@@ -1,3 +1,8 @@
+---
+title: Use SQL Directives to Control Diagram Output
+description: Learn how SQL directives influence node creation, edge behavior, and layout rules in your generated diagrams.
+---
+
 # Directives
 
 The Relationship Visualizer has additional directives which look like SQL which can be used to enhance the batch processing capabilities. Think of them as extensions to SQL.

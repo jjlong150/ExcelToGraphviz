@@ -1,3 +1,8 @@
+---
+title: Iterate SQL Results for Diagram Patterns
+description: Learn how to iterate SQL results to generate repeated diagram structures or patterned node sequences.
+---
+
 # Iterate SQL Results
 
 **Iterative** SQL queries allow a query to use a result value produced by a previous parent query.

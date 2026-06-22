@@ -1,3 +1,8 @@
+---
+title: Key Graphviz and Diagram Terminology
+description: Learn the essential concepts behind Graphviz—nodes, edges, labels, splines, ports, clusters, and layout engines—with clear examples to help you interpret and design effective diagrams.
+---
+
 # Terminology
 
 In mathematics and computer science, **graph theory** is the study of graphs—mathematical structures used to model pairwise relationships between objects.

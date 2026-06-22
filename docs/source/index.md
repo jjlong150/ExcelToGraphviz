@@ -1,3 +1,8 @@
+---
+title: View Generated DOT Source Code
+description: Inspect the DOT source code behind your diagram to understand structure, debug issues, or customize output.
+---
+
 # Viewing DOT Source Code
 
 The Relationship Visualizer is designed to let you create Graphviz graphs without needing to learn the [DOT Language](https://graphviz.org/doc/info/lang.html). However, it can also serve as an effective learning tool for DOT itself. This topic explains how to access the DOT source code generated from the Excel worksheets and passed to the Graphviz layout engine. These capabilities allow you to build relationship graphs and then examine the underlying code that produces them.

@@ -1,3 +1,8 @@
+---
+title: Install Relationship Visualizer on Windows
+description: Complete Windows installation guide for Relationship Visualizer, including Graphviz setup, PATH configuration, plugin registration, file unblocking, and enabling Excel macros securely.
+---
+
 # Microsoft Windows Installation Instructions
 
 ## Brief Instructions

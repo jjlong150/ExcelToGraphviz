@@ -1,3 +1,8 @@
+---
+title: Chain Nodes Automatically with SQL
+description: Generate chained node sequences using SQL extensions to simplify timeline, workflow, and process diagrams.
+---
+
 # Chain Nodes Using Edges
 
 Chaining nodes is especially useful whenever your data represents an ordered sequence. Even a simple column of values can become a meaningful visual path once edges are created automatically. Common scenarios include:

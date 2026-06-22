@@ -1,3 +1,8 @@
+---
+title: Information and About Page
+description: View version information, licensing details, and open‑source acknowledgements for the Excel‑to‑Graphviz Relationship Visualizer.
+---
+
 # Info Worksheet
 
 ## The `info` Worksheet
