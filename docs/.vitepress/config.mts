@@ -146,6 +146,12 @@ export default defineConfig({
         content: '170417B93AA71CAAE347C7AD019A4460'
       }],
 
+      // Yandex Tools Verification Tag
+      ['meta', {
+        name: 'yandex-verification',
+        content: '1f2054ab09c0647a'
+      }],
+
       // Canonical URL
       ['link', { rel: 'canonical', href: canonicalUrl }],
 
