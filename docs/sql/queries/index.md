@@ -17,32 +17,31 @@ The `SQL - World Map` directory contains:
 
 An example of the `countries` workbook appears as follows:
 
-![](./countries.png)
-
+![Sample countries.xlsx worksheet showing a table of countries, their continent assignments, and related metadata used for SQL‑driven graph generation.](./countries.png)
 
 ## Style Elements
 
-If we file on the `Continent` column we see there are 7 continents.
+If we filter on the `Continent` column we see there are 7 continents.
 
-![](./continent-filter.png)
+![Excel filter dropdown on the Continent column showing the seven distinct continent names.](./continent-filter.png)
 
 Using the [Style Designer](../../designer/) we create a unique style for each country by assigning different Fill Colors. The styles are stored on the [styles](../../styles/) worksheet using the Continent Name as the Style Name.
 
-This snipped from the `styles` worksheet shows the 7 node style definitions which correspond to the continent names.
+This snippet from the `styles` worksheet shows the 7 node style definitions which correspond to the continent names.
 
-![](./continent-styles.png)
+![Styles worksheet excerpt showing seven node style definitions, each using a continent name and a unique fill color.](./continent-styles.png)
 
 ## Building the SQL Queries and Directives
 
 Next, open `Relationship Visualizer.xlsm` workbook. From the Launchpad ribbon tab select `SQL`. 
 
-![](./launchpad-sql.png)
+![Launchpad ribbon tab with the SQL button highlighted, used to open the SQL worksheet.](./launchpad-sql.png)
 
 The `sql` worksheet will appear. You’ll rows containing SQL statements, and some additional directives which. These queries extract values from the `countries` workbook and are used to generate a graph showing continents, countries, and their shared borders.
 
 The `sql` worksheet appears as follows:
 
-![](./sql-worksheet.png)
+![SQL worksheet showing multiple SQL query rows, directive columns, and configuration fields used to generate the world‑map graph.](./sql-worksheet.png)
 
 ### Specify the Data Source
 
@@ -109,17 +108,17 @@ WHERE [ISO] IS NOT NULL
 
 At this point our queries are complete. Press the `Run SQL Commands` button.
 
-![](./run-sql-button.png)
+![Run SQL Commands button on the SQL worksheet ribbon group, used to execute all SQL statements in sequence.](./run-sql-button.png)
 
 The SQL commands are run in sequence from top to bottom. Results are written to the `data` worksheet, and the query result status is displayed in column D such as:
 
-![](./query-status.png)
+![Query status column showing success messages for each SQL statement executed on the SQL worksheet.](./query-status.png)
 
 If we switch worksheets to the `data` worksheet, it appears as follows:
 
-![](./data-results.png)
+![Data worksheet showing the fully populated SQL output table with ITEM, RELATED ITEM, and style attributes ready for graph generation.](./data-results.png)
 
-The data is all present and in the appropriate columns for graphing. In this example **678 rows of data have been created using 4 SQL statements!** 
+The data is all present and in the appropriate columns for graphing. In this example **678 rows of data have been created using 4 SQL statements!**
 
 ### Graph the Data
 
@@ -127,9 +126,8 @@ Press the `Refresh` button to graph the data. Since this is a large data set, be
 
 When Graphviz completes its work, you should see a logical world graph which appears as follows :
 
-![](./data-graph.png)
+![World‑map graph generated from SQL output, showing continents and countries with continent‑based colors and shared‑border connections.](./data-graph.png)
 
 *Options used: Worksheet = `graph`, Zoom = 45%, layout=fdp, splines=true, graphtype=undirected.*
 
 In a few short minutes we have gone from tabular Excel data to a graph visualization.
-

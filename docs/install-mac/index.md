@@ -71,18 +71,18 @@ A video capture of a homebrew Graphviz installation can be viewed at <https://ww
 
 You must have installer write privileges to configure the Graphviz plugins.
 
-1.  Open a `Terminal` window
-2.  Enter the command `sudo dot -c`
-3.  Enter the administrator password when prompted
+1. Open a `Terminal` window  
+2. Enter the command `sudo dot -c`  
+3. Enter the administrator password when prompted  
 
-| ![](./terminal-window-sudo-c.png) |
+| ![macOS Terminal window showing the `sudo dot -c` command used to configure Graphviz plugins.](./terminal-window-sudo-c.png) |
 | ------- |
 
 ### Confirm Graphviz version
 
 While you still have the terminal window open, issue the command `dot -V` (uppercase V). If Graphviz is properly installed, it will emit a version number such as 2.44.1.
 
-| ![](./terminal-window-dot-v.png) |
+| ![macOS Terminal window showing the `dot -V` command and the resulting Graphviz version output.](./terminal-window-dot-v.png) |
 | ------- |
 
 To see the list of configured plugins type the command
@@ -91,10 +91,10 @@ To see the list of configured plugins type the command
 
 where the -v is lowercase. The screen will appear as follows:
 
-| ![](./terminal-window-dot-plugins.png) |
+| ![macOS Terminal window showing verbose `dot -v` output listing configured Graphviz plugins.](./terminal-window-dot-plugins.png) |
 | ------- |
 
-At this point Graphviz is waiting for more input. Hitting the Command key + .(dot/period) key will break you from the dot program.
+At this point Graphviz is waiting for more input. Hitting the Command key + . (dot/period) key will break you from the dot program.
 
 To see the list of command line options you can enter the command
 
@@ -102,7 +102,7 @@ To see the list of command line options you can enter the command
 
 The screen will appear as follows:
 
-| ![](./terminal-window-dot-question.png) |
+| ![macOS Terminal window showing the `dot -?` command output listing available Graphviz command‑line options.](./terminal-window-dot-question.png) |
 | ------- |
 
 *Congratulations! Graphviz is installed properly.*
@@ -129,23 +129,24 @@ in the terminal window to see where dot is installed.
 
 If you get a response other than `/usr/local/bin/dot`, then you must edit the file `ExcelToGraphviz.applescript` and change the path in the command on line 2 from `/usr/local/bin/dot` to the path where dot is installed on your Mac.
 
-| ![](./edit-applescript.png) |
+| ![Editing the ExcelToGraphviz.applescript file in Script Editor, showing the line where the dot executable path must be updated.](./edit-applescript.png) |
 | ------- |
 
 ### Copy Applescript script to sandbox folder
 
-Copy file `ExcelToGraphviz.applescript` to folder `~/Library/Application Scripts/com.microsoft.Excel`
+Copy file `ExcelToGraphviz.applescript` to folder  
+`~/Library/Application Scripts/com.microsoft.Excel`
 
 Now the script file is ready and tested we must copy it into the correct location. Follow the steps below to copy and paste it into this exact location.
 
-1.  Open a Finder Window
-2.  Hold the `Alt` key and click `Go` in the Finder menu bar
-3.  Click `Library`
-4.  Click `Application Scripts` (if it exists; if not create this folder)
-5.  Click `com.microsoft.Excel` if it exists; if not create this folder (note: Capital letter `E`)
-6.  Copy the file `ExcelToGraphviz.applescript` to the folder `com.microsoft.Excel`
+1. Open a Finder Window  
+2. Hold the `Alt` key and click `Go` in the Finder menu bar  
+3. Click `Library`  
+4. Click `Application Scripts` (if it exists; if not create this folder)  
+5. Click `com.microsoft.Excel` if it exists; if not create this folder (note: Capital letter `E`)  
+6. Copy the file `ExcelToGraphviz.applescript` to the folder `com.microsoft.Excel`
 
-| ![](./excel-applescript-sandbox.png) |
+| ![Finder window showing the com.microsoft.Excel sandbox folder containing the ExcelToGraphviz.applescript file.](./excel-applescript-sandbox.png) |
 | ------- |
 
 ::: tip Microsoft Excel Sandboxing Explained
@@ -168,26 +169,25 @@ Open the file `Relationship Visualizer.xlsm` in Excel by double clicking on the 
 
 Excel to Graphviz performs its work using VBA macros. When you launch the file, you will receive warnings of the macros and must give permission for the macros to run.
 
-| ![](./enable-macros.png) |
-| ------- |
+![Excel security warning dialog prompting the user to enable macros when opening the workbook.](./enable-macros.png)
 
 ### Save `Relationship Visualizer.xlsm` as a template.
 
 Once you enable the macros, the full spreadsheet appears as:
 
-| ![](./macros-enabled.png) |
+| ![Excel workbook with macros enabled, showing the full Relationship Visualizer interface and ribbon tabs.](./macros-enabled.png) |
 | ------- |
 
 Perform a "File -\> Save As" operation. Save the workbook as a template so you can use the template to create more workbooks instead of starting from scratch. A template allows you to avoid having to make a copy of a file and clearing out old content.
 
 From the `File` menu, select `Save as Template…`
 
-| ![](./save-as-template.png) |
+| ![Excel File menu on macOS with the Save as Template option highlighted.](./save-as-template.png) |
 | ------- |
 
 When the file save dialog appears, provide a “Save As” name (e.g., Relationship Visualizer) and specify the file format as “Excel Macro-Enabled Template (.xltm)”.
 
-| ![](./save-as-dialog.png) |
+| ![macOS Save dialog showing the Save As field and the Excel Macro‑Enabled Template (.xltm) file format selected.](./save-as-dialog.png) |
 | ------- |
 
 Note that Excel automatically specifies the Microsoft Office Templates directory.

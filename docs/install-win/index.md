@@ -40,9 +40,10 @@ Steps to Install **Excel to Graphviz** on Microsoft Windows
 
 #### Step 1. Download Graphviz Media
 
-Download the installation media from the Windows section of the Graphviz download page at [https://graphviz.org/download/](https://graphviz.org/download/) which appears as:
+Download the installation media from the Windows section of the Graphviz download page at  
+[https://graphviz.org/download/](https://graphviz.org/download/) which appears as:
 
-| ![](./download_graphviz.png) |
+| ![Graphviz download page showing the Windows installer section with available MSI packages.](./download_graphviz.png) |
 | -------------------------------------------------- |
 
 You will be presented with two links: Win32 for the 32-bit installer and x64 for the 64-bit installer. Choose the link that corresponds with the Windows architecture of your machine.
@@ -64,7 +65,7 @@ Follow the steps on [this page](../blocked/) to learn how to override the block 
 
 Click on `Open file` to run the installer.
 
-| ![](./open_file.png) |
+| ![Microsoft Edge download bar showing the completed Graphviz installer with the "Open file" button highlighted.](./open_file.png) |
 | -------------------------------------------------- |
 
 A User Access Control warning will now take over the screen and ask
@@ -79,13 +80,13 @@ Press the `Yes` button, and the Graphviz installer will begin to run.
 
 Select `Next >` on the **"Welcome to Graphviz Setup"** splash page.
 
-![](./graphviz_welcome.png)
+![Graphviz installer Welcome screen on Windows showing the initial setup page with the Next button.](./graphviz_welcome.png)
 
 #### Step 4 - Accept the License Agreement
 
 Accept the License Agreement by pressing the `I Agree` button.
 
-![](./graphviz_agree.png)
+![Graphviz installer License Agreement screen with the I Agree button highlighted.](./graphviz_agree.png)
 
 #### Step 5 - Modify PATH
 
@@ -93,19 +94,19 @@ The Graphviz `bin` directory needs to be on your system PATH.
 
 Select the radio button `Add Graphviz to the system PATH for all users`, then click the `Next >` button.
 
-![](./graphviz_addtopath.png)
+![Graphviz installer screen showing the option to add Graphviz to the system PATH for all users.](./graphviz_addtopath.png)
 
 #### Step 6 - Specify Installation Folder
 
 Specify the folder where Graphviz should be installed. Select the `Everyone` radio button, and then select the `Next >` button.
 
-![](./graphviz_choose_folder.png)
+![Graphviz installer screen showing the installation folder selection and the “Everyone” option selected.](./graphviz_choose_folder.png)
 
 #### Step 7 - Press the `Install` button
 
 Choose the Start Menu Folder and press the `Install` button.
 
-![](./graphviz_choose_start_menu.png)
+![Graphviz installer screen showing the Start Menu folder selection and the Install button.](./graphviz_choose_start_menu.png)
 
 #### Step 8 - Monitor Progress
 
@@ -115,7 +116,7 @@ The installer will copy the files and make Windows configuration changes. A stat
 
 Once the **Completing Graphviz Setup** screen appears press the `Finish` button. The software is installed.
 
-![](./graphviz_complete.png)
+![Graphviz installer completion screen showing the Finish button.](./graphviz_complete.png)
 
 #### Step 10 - Restart Microsoft Windows (Optional)
 
@@ -135,12 +136,11 @@ Testing the command line programs prior to using the spreadsheet can help ensure
 
 #### Step 1 - Open a Command Prompt
 
-Open a Command Prompt window using the `Run as Administrator` option. 
+Open a Command Prompt window using the `Run as Administrator` option.
 
 Click on the Windows Start Menu icon and begin to type `Command Prompt`. When the `Command Prompt` App appears choose the `Run as administrator` option.
 
-| ![](./search_for_command_prompt.png) |
-| -------------------------------------------------- |
+![Windows Start Menu search results showing Command Prompt with the “Run as administrator” option.](./search_for_command_prompt.png)
 
 #### Step 2 - Run as Administrator
 
@@ -156,8 +156,7 @@ Press the `Yes` button.
 
 A command prompt window appears. Confirm that the word **Administrator** appears in the Window title.
 
-| ![](./command_new.png) |
-| -------------------------------------------------- |
+![Windows Command Prompt window running with elevated Administrator privileges, as indicated in the title bar.](./command_new.png)
 
 #### Step 4 - Display Graphviz Version
 
@@ -171,8 +170,7 @@ noting that the `-V` switch (for version) should be in uppercase, not lowercase.
 
 in similar fashion to the screen print below:
 
-| ![](./command_dot_version.png) |
-| -------------------------------------------------- |
+![Windows Command Prompt showing the `dot -V` command and the resulting Graphviz version output.](./command_dot_version.png)
 
 If you receive the message:
 
@@ -197,8 +195,7 @@ Configure the plugins by entering the command
 
 No messages are written when the command executes; the screen will look as follows:
 
-| ![](./command_dot_configure_plugins.png) |
-| -------------------------------------------------- |
+![Windows Command Prompt showing the `dot -c` command used to configure Graphviz plugins, with no output displayed.](./command_dot_configure_plugins.png)
 
 #### Step 6 - View the Plugins List
 
@@ -208,8 +205,7 @@ To see the list of configured plugins type the command
 
 where the `-v` is **lowercase**. The screen will appear as follows:
 
-| ![](./command_dot_verify_configuration.png) |
-| -------------------------------------------------- |
+![Windows Command Prompt showing verbose `dot -v` output listing the configured Graphviz plugins.](./command_dot_verify_configuration.png)
 
 At this point Graphviz is waiting for more input. Pressing the `Ctrl` + `C` keys will break you from the `dot` program.
 
@@ -221,42 +217,40 @@ To see the list of command line options you can enter the command
 
 The screen will appear as follows:
 
-| ![](./command_dot_help.png) |
-| -------------------------------------------------- |
+![Windows Command Prompt showing the `dot -?` help output listing available Graphviz command‑line options.](./command_dot_help.png)
 
 **Congratulations!** Graphviz is installed properly.
 
 ### Download the Relationship Visualizer Assets
 
-The *Relationship Visualizer:* is distributed as a Zip file which is hosted at SourceForge, as SourceForge provides virus scanning of assets, and provides checksums to help confirm that files have not been tampered with during download.
+The *Relationship Visualizer* is distributed as a Zip file which is hosted at SourceForge, as SourceForge provides virus scanning of assets, and provides checksums to help confirm that files have not been tampered with during download.
 
 Obtain `RelationshipVisualizer.zip` from [SourceForge](https://sourceforge.net/projects/relationship-visualizer/) by clicking the large green `Download` button.
 
-| ![](./sourceforge.png) |
+| ![SourceForge project page for Relationship Visualizer showing the large green Download button.](./sourceforge.png) |
 | -------------------------------------------------- |
 
 *Optional, but recommended:* Validate `SHA1` and/or `MD5` checksums available [here](https://sourceforge.net/projects/relationship-visualizer/files/) against the file downloaded.
 
-| ![](./sourceforge_checksums.png) |
+| ![SourceForge file listing showing available SHA1 and MD5 checksums for verifying downloaded assets.](./sourceforge_checksums.png) |
 | -------------------------------------------------- |
 
 ### Extract Files From Zip File
 
 Extract all files to a local directory.
 
-  | ![](./extract_zip_file.png) |
-  | -------------------------------------------------- |
+![Windows File Explorer showing the extracted contents of RelationshipVisualizer.zip.](./extract_zip_file.png)
   
 ### Unblock the Spreadsheet File
 
 In the directory where you extracted the files, right mouse click (or `Alt+Enter`) on `Relationship Visualizer.xlsm` and select `Properties`.
 
-| ![](./right_click_properties.png) |
+| ![Right‑click context menu in Windows File Explorer with Properties selected for Relationship Visualizer.xlsm.](./right_click_properties.png) |
 | -------------------------------------------------- |
 
 Check `Unblock` at the bottom of the `Properties` dialog, click `Apply`, then click **OK**.
 
-| ![](./unblock_file.png) |
+| ![Windows Properties dialog for Relationship Visualizer.xlsm showing the Unblock checkbox at the bottom.](./unblock_file.png) |
 | -------------------------------------------------- |
 
 ### Open Microsoft Excel
@@ -267,12 +261,12 @@ The Relationship Visualizer is a VBA-enabled spreadsheet. If you do not trust VB
 
 From the `File` menu, select `Options` in the lower left corner.
 
-| ![](./excel_file_options.png) |
+| ![Microsoft Excel File menu on Windows with the Options command highlighted in the lower-left corner.](./excel_file_options.png) |
 | -------------------------------------------------- |
 
 The `Excel Options` dialog will be displayed. The left column has categories of options. Choose `Trust Center`, then press the `Trust Center Settings...` button.
 
-| ![](./excel_options.png) |
+| ![Excel Options dialog showing Trust Center selected in the left navigation and the Trust Center Settings button.](./excel_options.png) |
 | -------------------------------------------------- |
 
 The left column list of categories will change to the Trust Center categories. Select `Macro Settings`.
@@ -283,30 +277,30 @@ If you do not want to turn on unlimited macro access, you can choose the `
 
 Click 'OK' to close the Trust Center Settings dialog, then click `OK` to close the `Excel Options` dialog.
 
-| ![](./excel_enable_macros.png) |
+| ![Excel Trust Center Macro Settings screen showing the option to enable VBA macros selected.](./excel_enable_macros.png) |
 | -------------------------------------------------- |
 
 #### Step 2 - Open Workbook
 
-In the root directory of the Relationship Visualizer distribution there is a macro-enabled Excel spreadsheet named `Relationship Visualizer.xlsm`. Double-click the mouse on the file to launch Excel. 
+In the root directory of the Relationship Visualizer distribution there is a macro-enabled Excel spreadsheet named `Relationship Visualizer.xlsm`. Double-click the mouse on the file to launch Excel.
 
 If you get the message `SECURITY WARNING Macros have been disabled [Enable Content]` click the `Enable Content` button. Enabling macro support is necessary to use the Relationship Visualizer spreadsheet.
 
-| ![](./excel_macros_disabled.png) |
+| ![Microsoft Excel security warning banner showing “Macros have been disabled” with an Enable Content button.](./excel_macros_disabled.png) |
 | -------------------------------------------------- |
 
 #### Step 3 - Save the File as a Workbook Template
 
-Perform a `File` -> `Save As` operation. 
+Perform a `File` → `Save As` operation. 
 
-| ![](./save_as_template.png) |
+| ![Excel Save As dialog showing the option to save the workbook as a macro‑enabled template.](./save_as_template.png) |
 | -------------------------------------------------- |
 
-Change the file extension from `Excel Macro-Enabled Workbook (*.xlsm)` to `Excel Macro-Enabled Template (*.xltm)`
+Change the file extension from `Excel Macro-Enabled Workbook (*.xlsm)` to `Excel Macro-Enabled Template (*.xltm)`.
 
-The file will be automatically stored in your custom office templates directory (This PC > Documents > Custom Office Templates).
+The file will be automatically stored in your custom Office templates directory (This PC > Documents > Custom Office Templates).
 
 If you select `File` from the menu you will now see `Relationship Visualizer` as a choice. You can choose this template any time in the future when you want to create a fresh new copy of the Relationship Visualizer spreadsheet.
 
-| ![](./template_list.png) |
+| ![Excel New screen showing the Relationship Visualizer template listed among available custom templates.](./template_list.png) |
 | -------------------------------------------------- |

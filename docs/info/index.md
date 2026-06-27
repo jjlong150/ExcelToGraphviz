@@ -9,11 +9,11 @@ description: View version information, licensing details, and open‑source ackn
 
 The `info` worksheet is reached from the `Help` section of the [Launchpad](../launchpad/) ribbon tab.
 
-![](./launchpad-ribbon-tab-info-button.png)
+![Screenshot of the Launchpad ribbon tab highlighting the Info button.](./launchpad-ribbon-tab-info-button.png)
 
 The `info` worksheet provides information about the spreadsheet, the internal technology incorporated into the tool, and the associated Open Source licenses and [acknowledgements](../acknowledge/) required to reuse the Open Source components in a license-compliant manner.
 
-![](./info-worksheet.png)
+![Screenshot of the info worksheet showing version, license, and acknowledgements information.](./info-worksheet.png)
 
 ## The `Info` Ribbon Tab
 
@@ -21,35 +21,36 @@ The `Info` ribbon tab is activated whenever the `Info` worksheet is activated. I
 
 `Windows`
 
-![](./info-ribbon-tab.png)
+![Screenshot of the Info ribbon tab on Windows.](./info-ribbon-tab.png)
 
 `macOS`
 
-![](./mac_ribbon_info.png)
+![Screenshot of the Info ribbon tab on macOS.](./mac_ribbon_info.png)
 
 It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
+
 | Group | Controls  | Description |
 | :---- | :--- | :--- |
-| [Legal](#legal) |  ![](./info-ribbon-tab-legal.png) | The `Legal` section provides a quick overall summary of the tool's name, copyright, and Open Source license. |
+| [Legal](#legal) |  ![Legal group icons.](./info-ribbon-tab-legal.png) | The `Legal` section provides a quick overall summary of the tool's name, copyright, and Open Source license. |
 | | |
-| [Repositories](#repositories) | ![](./info-ribbon-tab-repositories.png) | The `Repositories` section provides web links to the **official** web pages and repositories for the Relationship Visualizer tool. |
+| [Repositories](#repositories) | ![Repositories group icons.](./info-ribbon-tab-repositories.png) | The `Repositories` section provides web links to the **official** web pages and repositories for the Relationship Visualizer tool. |
 | | |
-| [Author](#author) | ![](./info-ribbon-tab-author.png) | Contact information for reaching the author of this tool.
+| [Author](#author) | ![Author group icons.](./info-ribbon-tab-author.png) | Contact information for reaching the author of this tool. |
 | | |
-| [Donate](#donate) | ![](./info-ribbon-tab-donate.png) | If you would like to show your appreciation for this **free** tool, you can buy the author a coffee through the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website. |
+| [Donate](#donate) | ![Donate group icons.](./info-ribbon-tab-donate.png) | If you would like to show your appreciation for this **free** tool, you can buy the author a coffee through the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website. |
 | | |
-| [Help](#help) | ![](./info-ribbon-tab-help.png) | Provides a link to the `Help` content for the `Info` worksheet (i.e. this web page). |
+| [Help](#help) | ![Help group icons.](./info-ribbon-tab-help.png) | Provides a link to the `Help` content for the `Info` worksheet (i.e. this web page). |
 
 ### Legal
 
-| ![](./info-ribbon-tab-legal.png) |
+| ![Legal group icons.](./info-ribbon-tab-legal.png) |
 | -------------------------------------------------- |
 
 The `Legal` section provides a quick overall summary of the tool's name, copyright, and Open Source license.
 
 ### Repositories
 
-| ![](./info-ribbon-tab-repositories.png) |
+| ![Repositories group icons.](./info-ribbon-tab-repositories.png) |
 | -------------------------------------------------- |
 
 The `Repositories` section provides web links to the **official** web pages and repositories for the Relationship Visualizer tool.
@@ -68,7 +69,7 @@ At this time, there are **no** author‑sanctioned clones of these repositories.
 
 ### Author
 
-| ![](./info-ribbon-tab-author.png) |
+| ![Author group icons.](./info-ribbon-tab-author.png) |
 | -------------------------------------------------- |
 
 If you would like to learn more about the author of this tool and website you may visit his LinkedIn profile. You can also reach him by email.
@@ -80,7 +81,7 @@ If you would like to learn more about the author of this tool and website you ma
 
 ### Donate
 
-| ![](./info-ribbon-tab-donate.png) |
+| ![Donate group icons.](./info-ribbon-tab-donate.png) |
 | -------------------------------------------------- |
 
 Excel to Graphviz / Relationship Visualizer is **free** software. However, it does cost the author personal money and time to provide this software for free.
@@ -95,7 +96,7 @@ FYI - 10 years, 10,000+ downloads, and a grand total of 2 coffees donated 😔
 
 ### Help
 
-| ![](./info-ribbon-tab-help.png) |
+| ![Help group icons.](./info-ribbon-tab-help.png) |
 | -------------------------------------------------- |
 
 Provides a link to the `Help` content for the `Info` worksheet (i.e. this web page).

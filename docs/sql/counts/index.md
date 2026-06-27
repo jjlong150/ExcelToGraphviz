@@ -79,7 +79,7 @@ We would need to create 4 cluster style definitions based on these results.
 
 The cluster and subcluster style names will be modified at run-time to end with a begin/end suffix. The suffix values are configurable via the `Styles` ribbon tab.
 
-![](./cluster-prefix-suffix.png)
+![Screenshot of the Relationship Visualizer Styles ribbon tab showing prefix and suffix settings for cluster and subcluster style names.](./cluster-prefix-suffix.png)
 
 The `Style Name` names needed are `Continent_1 Begin`, `Continent_2 Begin`, `Region_1 Begin`, `Region_2 Begin`, with matching paired style names to close the cluster, i.e. `Continent_1 End`, `Continent_2 End`, `Region_1 End`, `Region_2 End`, with matching 
 
@@ -93,7 +93,7 @@ Use US census information to depict the 50 US states, grouping the states by by 
 
 This is the Excel worksheet to graph:
 
-![](./usa-census-regions.png)
+![Excel worksheet showing U.S. states grouped by census regions and census divisions, used as input data for the SQL clustering example.](./usa-census-regions.png)
 
 This SQL statement will process the requirements. It combines [clusters, subclusters](../clustering/), [split text](../labelsplit/) and count substitution.
 
@@ -127,7 +127,7 @@ ORDER BY
 
 This is the graph produced by the data plus the SQL query.
 
-![](./usa-states-by-census-regions.png)
+![Graphviz diagram of the 50 U.S. states grouped by census region and census division, styled using cluster and subcluster count substitution.](./usa-states-by-census-regions.png)
 
 ### Try it Yourself
 

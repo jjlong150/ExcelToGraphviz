@@ -57,14 +57,14 @@ A sample dataset of historical data is used purely for demonstration. This data 
 
 Assume you have an Excel workbook with a worksheet named `US Executive Branch` containing columns such as **Name**, **Title**, **Department**, and **Reports To**. The data appears as follows:
 
-| ![](./SampleData.png) |
+| ![Sample dataset screenshot showing rows of Name, Title, Department, and Reports To fields for members of the U.S. Executive Branch.](./SampleData.png) |
 | --------------------- |
 
 ## Standard Query
 
 The traditional way to graph this data was to use a query such as:
 
-``` sql
+```sql
 SELECT [Reports To ID] AS [ITEM],    [ID]        AS [RELATED ITEM], 
        [Department]    AS [CLUSTER], 'Border 2 ' AS [CLUSTER STYLE NAME]
 FROM   [US Executive Branch$]
@@ -74,7 +74,7 @@ which relates the `Reports To ID` to the `ID`, and clusters the nodes by Departm
 
 Running the SQL produces the following (undirected) graph:
 
-![](./Example01.png)
+![Graphviz output showing the full Executive Branch organization chart as node ids generated from a simple Reports‑To relationship query, with nodes clustered by department.](./Example01.png)
 
 The issue with this approach is that it graphs the entire organization. For instance, if you only want to graph the department heads, there isn't a specific column in the data to filter by.
 
@@ -99,17 +99,17 @@ SELECT
 
 ### Where Value
 
-In  this query we are using `ID = 1` (*President of the United States*), and a `Max Depth = 1`. The graph changes to:
+In this query we are using `ID = 1` (*President of the United States*), and a `Max Depth = 1`. The graph changes to:
 
-![](./Example02-1-1.png)
+![Graphviz output showing a one‑level hierarchy beneath the President, limited by Max Depth = 1.](./Example02-1-1.png)
 
 If we change the `Max Depth` to `2`, the graph changes to:
 
-![](./Example02-1-2.png)
+![Graphviz output showing a two‑level hierarchy beneath the President, expanding the organizational structure further.](./Example02-1-2.png)
 
-Likewise we can choose the `ID` of department head and obtain the organzation chart for a single department. `15` is the `ID` for the head of the *Department of the Interior*. If we change the `WHERE VALUE` in query to `15`, and `MAX DEPTH` to `2`, the query becomes:
+Likewise we can choose the `ID` of a department head and obtain the organization chart for a single department. `15` is the `ID` for the head of the *Department of the Interior*. If we change the `WHERE VALUE` in the query to `15`, and `MAX DEPTH` to `2`, the query becomes:
 
-``` sql
+```sql
 SELECT 
   'SELECT [ID], [Reports To ID] AS [ITEM],    [ID] AS [RELATED ITEM], 
                 [Department]    AS [CLUSTER], ''Border 2 '' AS [CLUSTER STYLE NAME]
@@ -122,7 +122,7 @@ SELECT
 
 and the graph changes to:
 
-![](./Example02-15-2.png)
+![Graphviz output showing the Department of the Interior hierarchy, limited to two reporting levels beneath the department head.](./Example02-15-2.png)
 
 ## Styling the Nodes
 
@@ -132,7 +132,7 @@ The tree structure has been determined, now we want to create styled nodes with 
 
 The first step is to create a style definition on the `styles` worksheet. We use the `style designer` tab to create a style named `Department` which appears as follows:
 
-![](./department.png)
+![Style Designer screenshot showing the Department style definition, including fill color, border settings, and text formatting options.](./department.png)
 
 ### Label Text Format
 
@@ -225,21 +225,21 @@ The reason for this repeated syntax is related to the dual-query nature of a rec
 
 - The *Base Case* query uses 1 single quote to denote a string.
 
-    ``` sql
+    ```sql
     '<<b>' & [Name] & '</b><br/><br/>' & [Title] & '>' AS [LABEL], 
     '25'         AS [SPLIT LENGTH],
     ```
 
 - The *Recursive Member* query uses 2 single quotes to denote a string within the `TREE QUERY` string (i.e. strings within a string require 2 single quotes).
 
-    ``` sql
+    ```sql
     ''<<b>'' & [Name] & ''</b><br/><br/>'' & [Title] & ''>'' AS [LABEL], 
     ''25''         AS [SPLIT LENGTH],
     ```
 
 When we run the query, the nodes are output as:
 
-![](./Example03-15.png)
+![Graphviz output showing styled nodes generated from the recursive tree query, with bold names and titles rendered using HTML-like labels.](./Example03-15.png)
 
 ### Combining the Edges and Nodes
 
@@ -280,19 +280,19 @@ WHERE [ID] = '15'
 
 The organization chart for the *Department of the Interior* `ID=15` appears as:
 
-![](./Example04-15-2.png)
+![Graphviz output showing the Department of the Interior organization chart, with the department head at the top and two reporting levels displayed.](./Example04-15-2.png)
 
-Running the queries starting with the *President of the United States* (`ID=1`) and `Max Depth = 1` shows the Presidents cabinet.
+Running the queries starting with the *President of the United States* (`ID=1`) and `Max Depth = 1` shows the President’s cabinet.
 
-![](./Example04-1-1.png)
+![Graphviz output showing the President’s immediate cabinet members, limited to one reporting level.](./Example04-1-1.png)
 
-with `Max Depth = 2` we see the Secretaries and Deputy Secretaries
+With `Max Depth = 2` we see the Secretaries and Deputy Secretaries.
 
-![](./Example04-1-2.png)
+![Graphviz output showing two reporting levels beneath the President, including Secretaries and Deputy Secretaries.](./Example04-1-2.png)
 
 Specifying `Max Depth = 0` removes the depth limit, and we get the full organization chart.
 
-![](./Example04-1-0.png)
+![Graphviz output showing the complete Executive Branch organization chart with no depth limit applied.](./Example04-1-0.png)
 
 ## Sample Content
 

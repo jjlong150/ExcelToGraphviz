@@ -9,43 +9,44 @@ description: Use built‑in diagnostic tools to identify configuration problems,
 
 The `diagnostics` worksheet is reached from the `Maintenance` section of the [Launchpad](../launchpad/) ribbon tab.
 
-![](./launchpad-ribbon-tab-diagnostics.png)
+![Launchpad ribbon tab with the Diagnostics button highlighted, used to open the diagnostics worksheet.](./launchpad-ribbon-tab-diagnostics.png)
 
 The `diagnostics` worksheet key information about the workbook and the environment in which it is being run. 
 
 The information displayed on the `diagnostics` worksheet includes:
-- The workbook file name
-- The Operating System (Windows 64-bit, Windows 32-bit, Mac)
-- The version of Graphviz installed
-- Directories for temporary files
+- The workbook file name  
+- The Operating System (Windows 64-bit, Windows 32-bit, Mac)  
+- The version of Graphviz installed  
+- Directories for temporary files  
 - Directories containing cached images displayed by the `style designer`
 
 The `diagnostics` worksheet appears as follows (on Windows):
 
-![](./diagnostics-worksheet.png)
+![Diagnostics worksheet on Windows showing environment details such as OS version, Graphviz version, temp directories, cache paths, and workbook metadata.](./diagnostics-worksheet.png)
 
 ## The `Diagnostics` Ribbon Tab
 
 The `Diagnostics` ribbon tab is activated whenever the `diagnostics` worksheet is activated from the [Launchpad](../launchpad/). It appears as follows:
 
-`Windows`
-![](./diagnostics-ribbon-tab.png)
+`Windows`  
+![Diagnostics ribbon tab on Windows showing maintenance tools such as Refresh, Clear Cache, and environment reporting commands.](./diagnostics-ribbon-tab.png)
 
-`macOS`
-![](./mac_ribbon_diagnostics.png)
+`macOS`  
+![Diagnostics ribbon tab on macOS showing equivalent maintenance and environment tools adapted for the macOS interface.](./mac_ribbon_diagnostics.png)
 
 It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
-| Group | Controls  | Description |
+
+| Group | Controls | Description |
 | :---: | :-- | :-- |
-| [Diagnostics](#diagnostics) | ![](./diagnostics-ribbon-tab-diagnostics.png) | Refreshes key information about the workbook and the environment in which it is being run.  |
+| [Diagnostics](#diagnostics) | ![Diagnostics ribbon tab icon used to refresh environment information.](./diagnostics-ribbon-tab-diagnostics.png) | Refreshes key information about the workbook and the environment in which it is being run. |
 | | |
-| [Image Cache](#image-cache) | ![](./diagnostics-ribbon-tab-image-cache.png) | Provides an easy way to delete the images created by the **Style Designer** which are preview thumbnails for fonts and colors. |
+| [Image Cache](#image-cache) | ![Image Cache ribbon tab icon showing controls for deleting cached color and font preview images.](./diagnostics-ribbon-tab-image-cache.png) | Provides an easy way to delete the images created by the **Style Designer** which are preview thumbnails for fonts and colors. |
 | | |
-| [Help](#help) | ![](./diagnostics-ribbon-tab-help.png) | Provides a link to the `Help` content for the `diagnostics` worksheet (i.e. this web page). |
+| [Help](#help) | ![Help ribbon tab icon used to open the diagnostics worksheet help content.](./diagnostics-ribbon-tab-help.png) | Provides a link to the `Help` content for the `diagnostics` worksheet (i.e. this web page). |
 
 ### Diagnostics
 
-| ![](./diagnostics-ribbon-tab-diagnostics.png) |
+| ![Diagnostics ribbon tab showing the Diagnostics command button used to refresh environment information.](./diagnostics-ribbon-tab-diagnostics.png) |
 | -------------------------------------------------- |
 
 Refreshes the diagnostics values displayed. Useful if you have changed something on your system such as installing a different version of Graphviz, and you want to confirm what is being used.
@@ -56,7 +57,7 @@ Refreshes the diagnostics values displayed. Useful if you have changed something
 
 ### Image Cache
 
-| ![](./diagnostics-ribbon-tab-image-cache.png) |
+| ![Diagnostics ribbon tab showing the Image Cache controls, including Delete Colors and Delete Fonts buttons.](./diagnostics-ribbon-tab-image-cache.png) |
 | -------------------------------------------------- |
 
 Provides an easy way to delete the images created by the **Style Designer** which are preview thumbnails for fonts and colors.
@@ -70,11 +71,11 @@ Note that image files are cached in memory if you visit the *Style Designer* wor
 
 ### Help
 
-| ![](./diagnostics-ribbon-tab-help.png) |
+| ![Diagnostics ribbon tab showing the Help button, which opens the diagnostics worksheet help content.](./diagnostics-ribbon-tab-help.png) |
 | -------------------------------------------------- |
 
 Provides a link to the `Help` content for the `diagnostics` worksheet (i.e. this web page).
 
-| Name       | Control Type  | Description                                                                                                                                                                                                                        |
-| ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Help | Button        | Provides a link to this web page. |
+| Name | Control Type | Description |
+|------|--------------|-------------|
+| Help | Button       | Provides a link to this web page. |

@@ -11,24 +11,23 @@ You may export the entire workbook to a `JSON` file and later import only the se
 
 Here are example snippets of exported workbook contents:
 
-
 Make the selections of the data you wish to export, and press the `Export JSON` button
 
-![](../../media/bddf27390423201e36b72341e87823e5.png)
+![Export JSON button on the Exchange ribbon used to write workbook data to a JSON file.](../../media/bddf27390423201e36b72341e87823e5.png)
 
 You will be prompted to specify the name of a JSON file that the data should be written to. Enter a file name and press the `Save` button.
 
 `Windows`
 
-![](../../media/8670de49c6cbbde7ff3719a4f51dffcb.png)
+![Windows Save As dialog prompting for a JSON file name.](../../media/8670de49c6cbbde7ff3719a4f51dffcb.png)
 
 `macOS`
 
-![](./mac_export_save_as.png)
+![macOS Save As dialog prompting for a JSON file name.](./mac_export_save_as.png)
 
 Once the data is written to the file you will receive a pop-up message such as:
 
-![](../../media/6cca3bec16b578f942f1edd935ef8bce.png)
+![Confirmation dialog indicating that JSON export completed successfully.](../../media/6cca3bec16b578f942f1edd935ef8bce.png)
 
 Press the **OK** button, and you are done.
 
@@ -36,7 +35,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## Graphing Options
 
-![](../../media/exchange_graphing_options.png)
+![Example of exported JSON showing graphing options section.](../../media/exchange_graphing_options.png)
 
 ```json
 {
@@ -67,7 +66,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## Workbook Metadata
 
-![](../../media/exchange_workbook_metadata.png)
+![Example of exported JSON showing workbook metadata section.](../../media/exchange_workbook_metadata.png)
 
 ```json
 {
@@ -87,7 +86,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## Worksheet Layouts
 
-![](../../media/exchange_worksheet_layouts.png)
+![Example of exported JSON showing worksheet layout definitions.](../../media/exchange_worksheet_layouts.png)
 
 ```json
 {
@@ -148,7 +147,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## 'data' Worksheet
 
-![](../../media/exchange_data_worksheet.png)
+![Example of exported JSON showing the contents of the `data` worksheet.](../../media/exchange_data_worksheet.png)
 
 ```json
   "content": {
@@ -215,7 +214,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## 'styles' Worksheet
 
-![](../../media/exchange_styles_worksheet.png)
+![Example of exported JSON showing the contents of the `styles` worksheet.](../../media/exchange_styles_worksheet.png)
 
 ```json
 {
@@ -259,7 +258,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## 'sql' Worksheet
 
-![](../../media/exchange_sql_worksheet.png)
+![Example of exported JSON showing the contents of the `sql` worksheet.](../../media/exchange_sql_worksheet.png)
 
 ```json
     "content": {
@@ -330,7 +329,7 @@ The sections which follow provide samples of the JSON exported.
 
 ## 'svg' Worksheet
 
-![](../../media/exchange_svg_worksheet.png)
+![Example of exported JSON showing the contents of the `svg` worksheet.](../../media/exchange_svg_worksheet.png)
 
 ```json
 {

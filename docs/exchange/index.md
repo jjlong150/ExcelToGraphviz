@@ -14,9 +14,9 @@ There are several drawbacks to using an Excel workbook as your Graphviz IDE:
 
 These limitations made it clear that a text‑based representation of the workbook’s data, styles, and settings was needed. The features that support exporting and importing this information are provided on the **Exchange** ribbon tab. There is no associated worksheet, as data exchange operates directly on the internal contents of the workbook.
 
-Let’s look at an existing spreadsheet and walk through exporting it from one workbook and importing it into another using the Exchange logic. The **Exchange** tab is not associated with a worksheet, and appears as follows:
+Let's look at an existing spreadsheet and walk through exporting it from one workbook and importing it into another using the Exchange logic. The **Exchange** tab is not associated with a worksheet, and appears as follows:
 
-![](../media/949ef9f37a36b537ffeff2c6fbdeafc1.png)
+![Screenshot of the Relationship Visualizer Exchange ribbon tab showing JSON export and import controls.](../media/949ef9f37a36b537ffeff2c6fbdeafc1.png)
 
 ## The `Exchange` Ribbon Tab
 
@@ -24,11 +24,11 @@ The `Exchange` ribbon tab appears as follows, and is organized as illustrated
 
 `Windows`
 
-![](../media/bddf27390423201e36b72341e87823e5.png)
+![Windows version of the Relationship Visualizer Exchange ribbon tab showing JSON export, import, and data exchange controls.](../media/bddf27390423201e36b72341e87823e5.png)
 
 `macOS`
 
- ![](./mac_ribbon_exchange.png)
+![macOS version of the Relationship Visualizer Exchange ribbon tab showing JSON export, import, and data exchange controls.](./mac_ribbon_exchange.png)
 
 ### Ribbon Controls
 

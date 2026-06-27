@@ -19,13 +19,13 @@ It is where you list the nodes and edge relationships that form the basis of you
 
 This worksheet is described in greater detail in [Creating Your First Graph](../create/#creating-your-first-graph).
 
-![](../media/workbook_data.png)
+![Screenshot of the `data` worksheet showing node and edge relationship entries.](../media/workbook_data.png)
 
 ## `graph` Worksheet
 
 The `graph` worksheet displays the image representation of the data from the `data` worksheet whenever the output worksheet is set to `graph` and the **Refresh** button is pressed. This sheet also provides zoom‑in, zoom‑out, and scrolling capabilities for navigating large graphs.
 
-![](../media/worksheet_graph.png)
+![Screenshot of the `graph` worksheet showing a rendered Graphviz diagram with zoom and scroll controls.](../media/worksheet_graph.png)
 
 ## `styles` Worksheet
 
@@ -37,7 +37,7 @@ Once defined, a style can be easily associated with multiple nodes or edges in t
 
 This worksheet is described in greater detail in [Using the `styles` Worksheet](../styles/#the-styles-worksheet).
 
-![](../media/dcde3f7ff71b545453bdd5fa2fd82a07.png)
+![Screenshot of the `styles` worksheet showing style definitions for nodes and edges.](../media/dcde3f7ff71b545453bdd5fa2fd82a07.png)
 
 ## `style designer` Worksheet
 
@@ -47,7 +47,7 @@ The `style designer` lets you adjust settings through dropdown lists and immedia
 
 This worksheet is described in more detail in [Using the `style designer` Worksheet](../designer/#using-the-style-designer-worksheet).
 
-![](../media/2ab22529af1205854596d94b455856ee.png)
+![Screenshot of the `style designer` worksheet showing visual controls and a live preview for node, edge, and cluster styles.](../media/2ab22529af1205854596d94b455856ee.png)
 
 ## `sql` Worksheet
 
@@ -55,7 +55,7 @@ The `sql` worksheet provides the capability to run SQL statements that pull data
 
 This worksheet is described in more detail in [Using SQL](../sql/).
 
-![](../sql/sql-worksheet.png)
+![Screenshot of the `sql` worksheet showing SQL statements, status columns, and execution controls.](../sql/sql-worksheet.png)
 
 ::: details SQL is not available on Mac OS
 Microsoft does not provide the libraries required to execute SQL statements on macOS. As a result, the `sql` worksheet is not visible when using the Relationship Visualizer on Mac OS.
@@ -67,7 +67,7 @@ The `svg` worksheet provides tools for performing find‑and‑replace operation
 
 This worksheet is described in more detail in [Post‑processing SVG Files](../svg/).
 
-![](../svg/svg-worksheet.png)
+![Screenshot of the `svg` worksheet showing find/replace rules for SVG post‑processing.](../svg/svg-worksheet.png)
 
 ## `source` Worksheet
 
@@ -77,7 +77,7 @@ It also provides links to Graphviz editing and rendering tools, allowing you to 
 
 This worksheet is described in more detail in [Viewing DOT Source Code](../source/).
 
-![](../source/source_worksheet_process_example.png)
+![Screenshot of the `source` worksheet showing generated DOT source and links to Graphviz editing/rendering tools.](../source/source_worksheet_process_example.png)
 
 ## `settings` Worksheet
 
@@ -85,13 +85,13 @@ The `settings` worksheet provides options for customizing how Graphviz runs, sto
 
 This worksheet is described in more detail in [Changing Master Settings](../settings/).
 
-![](../media/622c7309f0be9d5168052f5ae0133e5e.png)
+![Screenshot of the `settings` worksheet showing master configuration options and persistent ribbon settings.](../media/622c7309f0be9d5168052f5ae0133e5e.png)
 
 ## `HELP - shapes` Worksheet
 
 The `HELP - shapes` worksheet provides a glossary of the node shapes supported by Graphviz, along with their corresponding shape names.
 
-![](../media/07d3778963879ccc5d2c6f424938c0f8.png)
+![Screenshot of the HELP – shapes worksheet showing the list of Graphviz-supported node shapes with visual samples.](../media/07d3778963879ccc5d2c6f424938c0f8.png)
 
 ## `HELP - colors` Worksheet
 
@@ -99,19 +99,19 @@ The `HELP - colors` worksheet provides a glossary of the color schemes and color
 
 This worksheet is also used to generate the preview images shown in the color dropdown lists on the `style designer` tab.
 
-![](../media/2f4e53246ea661ec31e649afadc364af.png)
+![Screenshot of the HELP – colors worksheet showing Graphviz color schemes with indexed palette swatches.](../media/2f4e53246ea661ec31e649afadc364af.png)
 
 ## `HELP - attributes` Worksheet
 
 The `HELP - attributes` worksheet provides detailed descriptions of Graphviz language attributes, along with a cross‑reference showing where each attribute is used and which Graphviz layout engines recognize it.
 
-![](../media/d9928b534dff8c8167be874c5bea5704.png)
+![Screenshot of the HELP – attributes worksheet showing attribute descriptions and layout engine cross‑references.](../media/d9928b534dff8c8167be874c5bea5704.png)
 
 ## `info` Worksheet
 
 The `info` worksheet provides the Relationship Visualizer version number, contact information for the program’s author, and the licenses for both the Relationship Visualizer and the open‑source components it incorporates.
 
-![](../media/3950ea8ccb505d74e8f77635c9317ab6.png)
+![Screenshot of the `info` worksheet showing version information, author contact details, and license text.](../media/3950ea8ccb505d74e8f77635c9317ab6.png)
 
 ## Fluent UI Ribbon Tabs
 
@@ -123,7 +123,7 @@ The Relationship Visualizer extends Excel’s ribbon interface with additional t
 
 The `Graphviz` tab provides action buttons for creating graphs, along with numerous Graphviz options that control how the graph will be rendered. See [The `Graphviz` Ribbon Tab](../create/#the-graphviz-ribbon-tab) for full details.
 
-![](../media/ffd0f7a7dc56590fe9658b5db6b40a53.png)
+![Screenshot of the `Graphviz` ribbon tab showing graph creation commands and Graphviz rendering options.](../media/ffd0f7a7dc56590fe9658b5db6b40a53.png)
 
 ## `Style Designer` Tab
 
@@ -131,7 +131,7 @@ The `Style Designer` ribbon tab contains the action buttons and settings used to
 
 The `Style Designer` ribbon tab is explained in more detail in [Using the `style designer` Worksheet](../designer/#ribbon-controls).
 
-![](../media/5220106244e0f94f3a635a1064e95802.png)
+![Screenshot of the `Style Designer` ribbon tab showing controls for node, edge, and cluster style creation.](../media/5220106244e0f94f3a635a1064e95802.png)
 
 ## `SQL` Tab
 
@@ -139,7 +139,7 @@ The `SQL` tab provides action buttons and run‑time options for working with th
 
 See the section [SQL Ribbon Controls](../sql/#the-sql-ribbon-tab) for full details.
 
-![](../media/c5d8b738013cadd2922353dab98502b3.png)
+![Screenshot of the `SQL` ribbon tab showing controls for executing SQL statements and managing run‑time options.](../media/c5d8b738013cadd2922353dab98502b3.png)
 
 ## `SVG` Tab
 
@@ -147,15 +147,15 @@ The `SVG` tab provides action buttons and run‑time options for working with th
 
 See the section [The `SVG` Ribbon Tab](../svg/#the-svg-ribbon-tab) for full details.
 
-![](../media/ribbon_svg.png)
+![Screenshot of the `SVG` ribbon tab showing controls for SVG post‑processing and worksheet actions.](../media/ribbon_svg.png)
 
 ## `Source` Tab
 
 The `Source` tab provides action buttons and run‑time options for working with the `source` worksheet. It includes controls for creating, viewing, and saving Graphviz source code generated from the information in the `data` worksheet. The `source` worksheet uses this tab exclusively.
 
-The `Source` ribbon tab is explained in more detail in [Viewing DOT Source Code](../source/). See [The `Source` Ribbon Tab](../source/#the-source-ribbon-tab) for full details.
+The `Source` ribbon tab is explained in more detail in [Viewing DOT Source Code](../source/). See [The `Source` Ribbon Tab`](../source/#the-source-ribbon-tab) for full details.
 
-![](../media/886998ce0b76966ec23ee35eeb025b82.png)
+![Screenshot of the `Source` ribbon tab showing controls for generating, viewing, and saving DOT source code.](../media/886998ce0b76966ec23ee35eeb025b82.png)
 
 ## `Exchange` Tab
 
@@ -163,10 +163,10 @@ The `Exchange` tab provides action buttons and run‑time options for exporting 
 
 See [The `Exchange` Ribbon Tab](../exchange/#the-exchange-ribbon-tab) for more details.
 
-![](../media/ribbon_exchange.png)
+![Screenshot of the `Exchange` ribbon tab showing controls for exporting and importing JSON data.](../media/ribbon_exchange.png)
 
 ## Tooltips
 
 All ribbon controls include tool tips that explain their purpose, such as the example shown below for the `dot` layout button on the `Graphviz` ribbon tab. Pause the mouse pointer over any control to display its tool tip.
 
-![](../media/8b599d5bccdd09a30e10c5e61b31c3ac.png)
+![Screenshot of a tooltip for the `dot` layout button on the `Graphviz` ribbon tab, showing descriptive help text.](../media/8b599d5bccdd09a30e10c5e61b31c3ac.png)

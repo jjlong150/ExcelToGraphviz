@@ -50,6 +50,6 @@ strict digraph "Relationship Visualizer"
 
 Producing this graph:
 
-![](./edge-chain.png)
+![Graphviz output of a simple left‑to‑right directed chain showing nodes A, B, C, and D connected sequentially using the Relationship Visualizer DOT source.](./edge-chain.png)
 
 

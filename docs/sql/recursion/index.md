@@ -51,7 +51,7 @@ Assume you have an Excel workbook with a worksheet named `Routes` containing 2 c
 
 The data appears as:
 
-![](./exampledata.png)
+![Example worksheet showing a Routes table with two columns, From Node and To Node, listing node pairs in random order.](./exampledata.png)
 
 ### Use Case 1 - Graph Everything
 
@@ -61,7 +61,7 @@ The simplest way to graph this data is to use the following SQL query:
 SELECT [From Node] AS [ITEM], [To Node] AS [RELATED ITEM] FROM [Routes$]
 ```
 
-![](./uc1.png)
+![Graphviz output for Use Case 1 showing a full route graph generated directly from 'From Node' to 'To Node' pairs.](./uc1.png)
 
 The issue with this query is that it only displays the entire graph and cannot be used to extract a subset tree. Lets resolve the issue by using a Tree Query.
 
@@ -78,7 +78,7 @@ SELECT
   'To Node'   AS [WHERE COLUMN]
 ```
 
-![](./uc2.png)
+![Graphviz output for Use Case 2 showing a forward‑search tree beginning at node A0 and expanding through all reachable downstream nodes.](./uc2.png)
 
 Notice that this graph looks very similar to the graph in Use Case 1, however nodes `A15` and `A16` are not present as there are no branches originating from node `A0` which connect to `A15` or `A16`.
 
@@ -96,7 +96,7 @@ SELECT
   3           AS [MAX DEPTH]
 ```
 
-![](./uc3.png)
+![Graphviz output for Use Case 3 showing a forward‑search tree from A0 limited to three recursion levels.](./uc3.png)
 
 Notice that the tree stops after 3 levels of branches originating from node `A0` have been recursed.
 
@@ -115,7 +115,7 @@ SELECT
   'From Node' AS [WHERE COLUMN]
 ```
 
-![](./uc4.png)
+![Graphviz output for Use Case 4 showing a backward‑search tree tracing all upstream nodes that eventually lead to node A9.](./uc4.png)
 
 Notice in this Use Case the graph stops when node `A9` is reached. In this example node `A16` is present because it connects directly to node `A9`. Nodes `A6`, `A7`, and `A8` are not present as those routes never connect to node `A9`.
 
@@ -133,7 +133,7 @@ SELECT
   3           AS [MAX DEPTH]
 ```
 
-![](./uc5.png)
+![Graphviz output for Use Case 5 showing a backward‑search tree toward node A9, limited to three recursion levels.](./uc5.png)
 
 Notice in this Use Case that 3 levels of branches preceding node `A9` are present. The connection between node `A1` and `A4` is not present because the `MAX DEPTH` limit was reached with node `A1`, therefore `A1` was not recursed to determine its connections.
 
@@ -174,7 +174,7 @@ SELECT
 
 ```
 
-![](./uc6.png)
+![Graphviz output for Use Case 6 showing the full route graph with blue edges highlighting three upstream levels leading to A9 and red edges highlighting three downstream levels branching from A9.](./uc6.png)
 
 ## Try it Yourself
 

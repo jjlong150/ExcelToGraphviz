@@ -7,7 +7,7 @@ description: Step‑by‑step guidance for creating your first Graphviz diagram 
 
 Building a graph with the **Relationship Visualizer** spreadsheet is a simple, structured process. You learn the basic vocabulary, create a workbook, enter your data, apply style, and then publish or refine the output. 
 
-![](./xls2gvworkflow.png)
+![Workflow diagram showing how the Relationship Visualizer converts Excel workbook data into a styled Graphviz graph, from entering nodes and edges to publishing the final diagram.](./xls2gvworkflow.png)
 
 This page walks through the full workflow and links to focused topics that explain each step in detail.
 

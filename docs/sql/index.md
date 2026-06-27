@@ -392,11 +392,11 @@ In your Relationship Visualizer workbook, use the Launchpad to show the `sql` wo
 
 `Launchpad`
 
-![](./launchpad-sql.png)
+![Launchpad showing the SQL button used to open the sql worksheet.](./launchpad-sql.png)
 
 `SQL Worksheet`
 
-![](./sql-worksheet.png)
+![SQL worksheet displayed in the Relationship Visualizer, showing SQL query rows and controls.](./sql-worksheet.png)
 
 ### Write Your SQL Query
 
@@ -523,30 +523,29 @@ The result of the SQL query. The value will be either:
 
 The `SQL` ribbon tab is activated whenever the `sql` worksheet is activated. It appears as follows:
 
-![](./sql-ribbon.png)
+![SQL ribbon tab displayed when the sql worksheet is active.](./sql-ribbon.png)
 
 It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
 
 | Group                               | Controls                            | Description |
 | :----                               | :---                                | :---        | 
-| [SQL](#sql)                         | ![](./sql-group-sql.png)            | The **SQL** controls let you execute the queries defined on this worksheet and manage the status information associated with each statement. |
+| [SQL](#sql)                         | ![SQL group controls including Run SQL and Clear Status buttons.](./sql-group-sql.png)            | The **SQL** controls let you execute the queries defined on this worksheet and manage the status information associated with each statement. |
 |                                     |                                     | |
-| [Edit](#edit)                       | ![](./sql-group-edit.png)           | Provides tools to help get around Excel's inability to display large amounts of cell text. |
+| [Edit](#edit)                       | ![Edit group controls for expanding and editing long SQL cell text.](./sql-group-edit.png)           | Provides tools to help get around Excel's inability to display large amounts of cell text. |
 |                                     |                                     | |
-| [Graphviz](#graphviz)               | ![](./sql-group-graphviz.png)       | The `sql` worksheet includes several convenience buttons designed to streamline graph generation after running SQL queries. |
+| [Graphviz](#graphviz)               | ![Graphviz group controls for generating graphs from SQL results.](./sql-group-graphviz.png)       | The `sql` worksheet includes several convenience buttons designed to streamline graph generation after running SQL queries. |
 |                                     |                                     | |
-| [Filter](#filter)                   | ![](./sql-group-filter.png)         | The **Filter** controls allow you to limit which rows are processed when running SQL statements.  |
+| [Filter](#filter)                   | ![Filter group controls for selecting which SQL rows to process.](./sql-group-filter.png)         | The **Filter** controls allow you to limit which rows are processed when running SQL statements.  |
 |                                     |                                     | |
-| [Data File](#data-file)             | ![](./sql-group-datafile.png)       | The **Data File** controls let you point your SQL queries at external Excel workbooks. |
+| [Data File](#data-file)             | ![Data File group controls for selecting external Excel workbooks as SQL sources.](./sql-group-datafile.png)       | The **Data File** controls let you point your SQL queries at external Excel workbooks. |
 |                                     |                                     | |
-| [Connection Pool](#connection-pool) | ![](./sql-group-connectionpool.png) | The Connection Pool group manages how ADO workbook connections are reused, opened, and closed during SQL batch execution to improve performance and control file access. |
+| [Connection Pool](#connection-pool) | ![Connection Pool group controls for managing ADO workbook connections.](./sql-group-connectionpool.png) | The Connection Pool group manages how ADO workbook connections are reused, opened, and closed during SQL batch execution to improve performance and control file access. |
 |                                     |                                     | |
-| [Help](#help)                       | ![](./sql-group-help.png)           | Provides a link to the `Help` content for the `sql` worksheet (i.e. this web page). |
-
+| [Help](#help)                       | ![Help group button linking to SQL worksheet documentation.](./sql-group-help.png)           | Provides a link to the `Help` content for the `sql` worksheet (i.e. this web page). |
 
 ### SQL
 
-| ![](./sql-group-sql.png) |
+| ![SQL group controls including Run SQL Commands and Clear Status buttons.](./sql-group-sql.png) |
 | ------------------------ |
 
 The **SQL** controls let you execute the queries defined on this worksheet and manage the status information associated with each statement.
@@ -558,21 +557,19 @@ The **SQL** controls let you execute the queries defined on this worksheet and m
 
 ### Edit
 
-| ![](./sql-group-edit.png) |
+| ![Edit group controls for expanding and editing long SQL cell text.](./sql-group-edit.png) |
 | -------------------------------------------------- |
 
 Provides tools to help get around Excel's inability to display large amounts of cell text.
 
-| Label       | Control Type  | Description                                                                                                                                                                                                                        |
-| ----------- | :-----------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Edit SQL Statement | Button | Launches the [Edit Text](#the-edit-sql-statement-form) form with the contents of the currently selected cell.<br/><br/>A second location where the **Edit SQL Statement** button appears is as a floating pencil button on the right side of any selected SQL cell.&nbsp;&nbsp;&nbsp;![](./pencil-button.png) <br/><br/>Clicking the pencil button performs the same action as selecting the **Edit SQL Statement** button in the Ribbon. |
-| Copy to Clipboard | Button        | Copies the contents of the cell as straight text to the Microsoft Windows clipboard, so it can be pasted into an external editor.<br/><br/>Characters such as quotes are not escaped as would occur when using Excel's copy (Ctrl+C). |
-
-
+| Label             | Control Type | Description                                                                                                                                                                                                                        |
+| ----------------- | :----------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Edit SQL Statement | Button       | Launches the [Edit Text](#the-edit-sql-statement-form) form with the contents of the currently selected cell.<br/><br/>A second location where the **Edit SQL Statement** button appears is as a floating pencil button on the right side of any selected SQL cell.&nbsp;&nbsp;&nbsp;![Floating pencil button used to open the Edit SQL Statement form.](./pencil-button.png) <br/><br/>Clicking the pencil button performs the same action as selecting the **Edit SQL Statement** button in the Ribbon. |
+| Copy to Clipboard | Button       | Copies the contents of the cell as straight text to the Microsoft Windows clipboard, so it can be pasted into an external editor.<br/><br/>Characters such as quotes are not escaped as would occur when using Excel's copy (Ctrl+C). |
 
 ### Graphviz
 
-| ![](./sql-group-graphviz.png) |
+| ![Graphviz group controls for generating graphs from SQL results.](./sql-group-graphviz.png) |
 | -------------------------------------------------- |
 
 Convenience buttons designed to streamline graph generation after running SQL queries. These controls mirror the commands on the Graphviz ribbon tab but place them closer to where SQL work is performed:
@@ -587,35 +584,35 @@ Convenience buttons designed to streamline graph generation after running SQL qu
 
 The **Filter** controls allow you to limit which rows are processed when running SQL statements. This is especially useful when working with large datasets or when you want to preview results for a specific subset of data.
 
-| ![](./sql-group-filter.png) |
+| ![Filter group controls for selecting a filter column and value before running SQL statements.](./sql-group-filter.png) |
 | --------------------------- |
 
 | Label         | Control Type   | Description                                                                                                                                                                                                 |
 | ------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Filter Column | Dropdown list  | Lists column letters **E–Z**. Select the column you want to filter on.                                                                                                                                      |
 | Filter Value  | Dropdown list  | Displays all unique (de‑duplicated) values found in the selected **Filter Column**. When a value is chosen, SQL statements will run **only** on rows where that column matches the selected value.          |
-| Refresh       | Button         | Updates the **Filter Value** list. Use this after changing data in the selected Filter Column to ensure the dropdown reflects the latest values. 
+| Refresh       | Button         | Updates the **Filter Value** list. Use this after changing data in the selected Filter Column to ensure the dropdown reflects the latest values. |
 
 ### Data File
 
 The **Data File** controls let you point your SQL queries at external Excel workbooks. This is especially useful when your data is stored in multiple files—such as monthly extracts, departmental exports, or versioned snapshots—and you want to run the same SQL queries against each file without rewriting anything.
 
-| ![](./sql-group-datafile.png) |
+| ![Data File group controls for selecting a data directory and choosing an Excel file as the SQL source.](./sql-group-datafile.png) |
 | ----------------------------- |
 
 
-| Label             | Control Type | Description                                                                                                      |
-| ----------------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Get Data Directory | Button       | Opens a directory‑picker dialog. When a folder is selected, its path replaces the “Get Data Directory” label.   |
-| File Name          | Dropdown list | Lists the Excel files found in the selected directory that are suitable for running Excel SQL queries against. This list is only visible when a data directory has been specified.<br/><br/><b>NOTE:</b> Entries in the file name column, and `SET DATA FILE` statements take precedence when resolving conflicts over which data source to use. |
-| Reset | Button | Clears the data directory and file name selections. This button is only visible when selections have been made |
+| Label              | Control Type   | Description                                                                                                      |
+| ------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Get Data Directory | Button         | Opens a directory‑picker dialog. When a folder is selected, its path replaces the “Get Data Directory” label.   |
+| File Name          | Dropdown list  | Lists the Excel files found in the selected directory that are suitable for running Excel SQL queries against. This list is only visible when a data directory has been specified.<br/><br/><b>NOTE:</b> Entries in the file name column, and `SET DATA FILE` statements take precedence when resolving conflicts over which data source to use. |
+| Reset              | Button         | Clears the data directory and file name selections. This button is only visible when selections have been made. |
 
 **Why would I use this?**  
 Many workflows produce recurring Excel extracts—for example, one workbook per month, quarter, or reporting cycle. By selecting a directory and choosing a file from the dropdown, you can run the *same* SQL queries against each extract in turn. This makes it easy to compare periods, regenerate graphs for new data, or batch‑process multiple datasets without modifying your SQL.
 
 ### Connection Pool
 
-| ![](./sql-group-connectionpool.png) |
+| ![Connection Pool group controls for managing pooled ADO workbook connections.](./sql-group-connectionpool.png) |
 | ----------------------------------- |
 
 The **Connection Pool** group manages how ADO workbook connections are reused, opened, and closed during SQL batch execution to improve performance and control file access. 
@@ -624,7 +621,7 @@ Connection pooling was added in Version 7.0 in response to a March 2025 Office u
 
 Workbook connections are now reused across all SQL statements during a `Run SQL Statements` batch run.  
 
-Users can choose to close connections after batch execution or keep them open until manually closed or until the workbook exits.  
+Users can choose to close connections after batch execution or keep them open until manually closed or until the workbook exits.
 
 **Note:** Keeping connections open may improve performance but can prevent access to referenced workbooks.
 
@@ -643,12 +640,12 @@ However, if you need to open, edit, or replace any referenced workbooks, you may
 
 Provides a link to the `Help` content for the `sql` worksheet (i.e. this web page).
 
-| ![](./sql-group-help.png) |
+| ![Help group button linking to SQL worksheet documentation.](./sql-group-help.png) |
 | ------------------------ |
 
-| Label       | Control Type  | Description                                                                                                                                                                                                                        |
-| ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Help | Button        | Provides a link to this web page. |
+| Label | Control Type | Description |
+| ------ | ------------- | ------------ |
+| Help | Button | Provides a link to this web page. |
 
 ## The `Edit SQL Statement` Form
 
@@ -656,9 +653,8 @@ Excel rows can hold a great deal of information, but cells have their quirks. Ea
 
 To address this, Version 7 introduced an `Edit SQL Statement` form. When you press the **Edit SQL Statement** button, a modal window opens containing the full text of the currently selected cell, making it easier to view and edit long content without fighting Excel’s display constraints. 
 
-![](./sql-popup.png)
+![Edit SQL Statement popup form showing full SQL text with scrollbars.](./sql-popup.png)
 
 Horizontal and vertical scroll bars are provided to help navigate the text. You can change the text within the form. 
 
 Pressing the `Save` button transfers the contents from the form back to the active cell.
-

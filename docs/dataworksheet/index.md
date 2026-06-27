@@ -98,5 +98,5 @@ The columns for `Tail Label` (C), `External Label` (E), `Head Label` (F), `Toolt
 
 You can quickly toggle the visibility of these columns by selecting the column name from the list in the dropdown menu beneath the `Show Columns` button in the **'data' Worksheet** group' on the right side of the Ribbon.
 
-![](./show_columns.png)
+![Screenshot of the Relationship Visualizer 'Show Columns' menu in Excel, displaying options to reveal hidden data columns such as Tail Label, External Label, Head Label, Tooltip, and Messages.](./show_columns.png)
 

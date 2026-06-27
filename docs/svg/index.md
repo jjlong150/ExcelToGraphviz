@@ -20,7 +20,7 @@ Post‑processing refers to the transformations applied to an SVG *after* Graphv
 
 The animated GIF below shows a Graphviz‑generated SVG with post‑processing applied to add animation.
 
-![](./animated-svg.gif)
+![Animated GIF demonstrating an SVG with post‑processing animation applied.](./animated-svg.gif)
 
 Post‑processing allows you to apply additional styling to nodes, edges, polygons, and polylines. It also enables the insertion of JavaScript for interactive behaviors such as click‑event animations and zooming. In short, post‑processing turns a technically valid SVG into a polished, presentation‑ready graphic.
 
@@ -34,11 +34,11 @@ Post‑processing is **disabled by default** and must be explicitly enabled.
 
 The `svg` worksheet is reached from the `Post-processing` section of the [Launchpad](../launchpad/) ribbon tab.
 
-![](./launchpad-ribbon-tab-svg-button.png)
+![Launchpad ribbon tab showing the SVG button.](./launchpad-ribbon-tab-svg-button.png)
 
 The default `svg` worksheet appears as follows:
 
-![](./svg-worksheet.png)
+![Default SVG worksheet showing Find/Replace rows and comment column.](./svg-worksheet.png)
 
 The `svg` Worksheet has the following columns:
 
@@ -63,28 +63,27 @@ The `SVG` ribbon tab is activated whenever the `svg` worksheet is activated. It 
 
 `Windows`
 
-![](./svg-ribbon-tab.png)
+![SVG ribbon tab on Windows.](./svg-ribbon-tab.png)
 
 `macOS`
 
-![](./mac_ribbon_svg.png)
+![SVG ribbon tab on macOS.](./mac_ribbon_svg.png)
 
 It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
 
 | Group               | Controls                          | Description |
 | :----               | :---                              | :--- |
-| [SVG](#svg)         | ![](./svg-ribbon-tab-svg.png)     | Controls when post-processing is performed. |
+| [SVG](#svg)         | ![SVG group icons.](./svg-ribbon-tab-svg.png)     | Controls when post-processing is performed. |
 |                     |                                   ||
-| [Edit](#edit)       | ![](./svg-ribbon-tab-edit.png)    | Provides tools to help get around Excel's inability to display large amounts of cell text. |
+| [Edit](#edit)       | ![Edit group icons.](./svg-ribbon-tab-edit.png)    | Provides tools to help get around Excel's inability to display large amounts of cell text. |
 |                     |                                   ||
-| [Publish](#publish) | ![](./svg-ribbon-tab-publish.png) | Provides convenience buttons to invoke the [publishing buttons](../publish/#graph-to-file-all-views-to-file) which reside on the `Graphviz` ribbon tab. |
+| [Publish](#publish) | ![Publish group icons.](./svg-ribbon-tab-publish.png) | Provides convenience buttons to invoke the [publishing buttons](../publish/#graph-to-file-all-views-to-file) which reside on the `Graphviz` ribbon tab. |
 |                     |                                   ||
-| [Help](#help)       | ![](./svg-ribbon-tab-help.png)    | Provides a link to the `Help` content for the `svg` worksheet (i.e. this web page). |
-
+| [Help](#help)       | ![Help group icons.](./svg-ribbon-tab-help.png)    | Provides a link to the `Help` content for the `svg` worksheet (i.e. this web page). |
 
 ### SVG
 
-| ![](./svg-ribbon-tab-svg.png) |
+| ![SVG group icons.](./svg-ribbon-tab-svg.png) |
 |-------------------------------|
 
 Controls when post-processing is performed.
@@ -95,19 +94,19 @@ Controls when post-processing is performed.
 
 ### Edit
 
-| ![](./svg-ribbon-tab-edit.png) |
+| ![Edit group icons.](./svg-ribbon-tab-edit.png) |
 | -------------------------------------------------- |
 
 Provides tools to help get around Excel's inability to display large amounts of cell text.
 
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Edit Text | Button        | Launches the [Edit Text](./#the-edit-text-form) form with the contents of the currently selected cell. <br/><br/>A second location where the **Edit Text** button appears is as a floating pencil button on the right side of any selected `Replace` cell.&nbsp;&nbsp;&nbsp;![](./pencil-button.png)<br/><br/>Clicking the pencil button performs the same action as selecting the **Edit Text** button in the Ribbon. |
+| Edit Text | Button        | Launches the [Edit Text](./#the-edit-text-form) form with the contents of the currently selected cell. <br/><br/>A second location where the **Edit Text** button appears is as a floating pencil button on the right side of any selected `Replace` cell.&nbsp;&nbsp;&nbsp;![Floating pencil edit button.](./pencil-button.png)<br/><br/>Clicking the pencil button performs the same action as selecting the **Edit Text** button in the Ribbon. |
 | Copy to Clipboard | Button        | Copies the contents of the cell as straight text to the Microsoft Windows clipboard, so it can be pasted into an external editor.<br/><br/>Characters such as quotes are not escaped as would occur when using Excel's copy (Ctrl+C). |
 
 ### Publish
 
-| ![](./svg-ribbon-tab-publish.png) |
+| ![Publish group icons.](./svg-ribbon-tab-publish.png) |
 | -------------------------------------------------- |
 
 Provides convenience buttons to invoke the [publishing buttons](../publish/#graph-to-file-all-views-to-file) which reside on the `Graphviz` ribbon tab. As you tune your post-processing code, having these buttons eliminates the need to bounce back and forth to the `Graphviz` ribbon tab.
@@ -119,7 +118,7 @@ Provides convenience buttons to invoke the [publishing buttons](../publish/#grap
 
 ### Help
 
-| ![](./svg-ribbon-tab-help.png) |
+| ![Help group icons.](./svg-ribbon-tab-help.png) |
 | -------------------------------------------------- |
 
 Provides a link to the `Help` content for the `svg` worksheet (i.e. this web page).
@@ -134,7 +133,7 @@ Excel rows can hold a great deal of information, but cells have their quirks. Ea
 
 To address this, Version 7 introduced an `Edit Text` form. When you press the **Edit Text** button, a modal window opens containing the full text of the currently selected cell, making it easier to view and edit long content without fighting Excel’s display constraints. 
 
-![](./svg-edit-text-form.png)
+![Screenshot of the Edit Text form showing a large text area with scrollbars displaying the contents of a cell.](./svg-edit-text-form.png)
 
 Horizontal and vertical scroll bars are provided to help navigate the text. You can change the text within the form. 
 
@@ -173,4 +172,3 @@ Post‑processing is a powerful feature, but it works best when the Find/Replace
 
 - **Validate the final SVG.**  
   After post‑processing, open the SVG in a browser or viewer to confirm that the XML remains well‑formed and that the intended visual changes appear correctly.
-

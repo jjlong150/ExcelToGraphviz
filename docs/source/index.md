@@ -53,58 +53,53 @@ The Relationship Visualizer includes a worksheet named `source`, which displays 
 
 The `source` worksheet is hidden by default. To reveal it, select the **source** button in the **Graphviz dot** section of the `Launchpad` tab.
 
-![](./launchpad_source.png)
+![Launchpad ribbon showing the Source button highlighted.](./launchpad_source.png)
 
 Click the `source` worksheet to make it the active sheet. When `source` is active, the `Source` ribbon tab is automatically displayed. It appears as follows:
 
 `Windows`
 
-![](./ribbon_source_tab.png)
+![Source ribbon tab on Windows.](./ribbon_source_tab.png)
 
 `macOS`
 
-![](./mac_ribbon_source.png)
-
+![Source ribbon tab on macOS.](./mac_ribbon_source.png)
 
 The next image shows the default DOT code when the `data` worksheet does not contain any content. As you create a graph the source worksheet will update.
 
-![](./source_worksheet_default.png)
-
+![Default source worksheet showing empty DOT graph structure.](./source_worksheet_default.png)
 
 Switch to the `data` worksheet and build a graph. Consider the following example:
 
-![](./data_worksheet_process_example.png)
+![Data worksheet example showing process flow entries.](./data_worksheet_process_example.png)
 
 When we switch back to the `source` worksheet the Graphviz source code appears as:
 
-![](./source_worksheet_process_example.png)
-
-
+![Source worksheet showing generated DOT code for the example process graph.](./source_worksheet_process_example.png)
 
 ## The `Source` Ribbon Tab
 
 Now that you understand the basics of viewing Graphviz source code, let us look at the features contained in the `Source` ribbon tab. The `Source` ribbon tab is activated whenever the `source` worksheet is activated. It appears as follows:
 
-![](./ribbon_source_tab.png)
-
+![Source ribbon tab on Windows.](./ribbon_source_tab.png)
 
 It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
 
 | Group                           | Controls  | Description |
 | :----                           | :--- | :--- |
-| [Source](#source)               | ![](./group_source.png) | Controls for viewing and saving `DOT` source code. |
+| [Source](#source)               | ![Source group icons.](./group_source.png) | Controls for viewing and saving `DOT` source code. |
 | | |
-| [Clipboard](#clipboard)         | ![](./group_clipboard.png) | Controls for copying the `DOT` source to the clipboard. |
+| [Clipboard](#clipboard)         | ![Clipboard group icons.](./group_clipboard.png) | Controls for copying the `DOT` source to the clipboard. |
 | | |
-| [Graphviz](#graphviz)           | ![](./group_graphviz.png) | Generates a graph from the Graphviz data on the `source` worksheet using the settings on the `Graphviz` ribbon tab. |
+| [Graphviz](#graphviz)           | ![Graphviz group icons.](./group_graphviz.png) | Generates a graph from the Graphviz data on the `source` worksheet using the settings on the `Graphviz` ribbon tab. |
 | | |
-| [Web Resources](#web-resources) | ![](./group_web_resources.png) | Six buttons which can launch the user's default browser and display a web page pertaining to a Graphviz topic.
+| [Web Resources](#web-resources) | ![Web Resources group icons.](./group_web_resources.png) | Six buttons which can launch the user's default browser and display a web page pertaining to a Graphviz topic. |
 | | |
-| [Help](#help)                   | ![](./group_help.png) | Provides a link to the `Help` content for the `Source` worksheet (i.e. this web page). |
+| [Help](#help)                   | ![Help group icons.](./group_help.png) | Provides a link to the `Help` content for the `Source` worksheet (i.e. this web page). |
 
 ### Source
 
-| ![](./group_source.png) |
+| ![Source group icons.](./group_source.png) |
 | -------------------------------------------------- |
 
 Controls for viewing and saving `DOT` source code.
@@ -119,13 +114,13 @@ Controls for viewing and saving `DOT` source code.
 
 The pop-up version of the DOT source code appears as follows:
 
-![](./source_popup.png)
+![Pop-up window showing DOT source code with controls for font size, copy, and word wrap.](./source_popup.png)
 
 The form is primarily read-only, however you can enlarge or shrink the font size, copy the contents to the clipboard, and word-wrap long text.
 
 ### Clipboard
 
-| ![](./group_clipboard.png) |
+| ![Clipboard group icons.](./group_clipboard.png) |
 | -------------------------------------------------- |
 
 Controls for copying the `DOT` source to the clipboard. This capability is only present on Windows, as the Windows API code it relies on is not present on macOS.
@@ -133,15 +128,15 @@ Controls for copying the `DOT` source to the clipboard. This capability is only 
 | Label                    | Control Type | Description                                                          |
 | ------------------------ | ------------ | -------------------------------------------------------------------- |
 | Copy Source to Clipboard | Button       | Selects all the Graphviz source code and copies it to the clipboard. |
-| Cut                      | Button       | Standard Excel cell-based `Cut`                                                 |
-| Copy                     | Button       | Standard Excel cell-based `Copy`                                                |
-| Paste                    | Button       | Standard Excel cell-based `Paste`                                               |
+| Cut                      | Button       | Standard Excel cell-based `Cut`                                      |
+| Copy                     | Button       | Standard Excel cell-based `Copy`                                     |
+| Paste                    | Button       | Standard Excel cell-based `Paste`                                    |
 
 ### Graphviz
 
 Utilility to visualize the source code as a Graphvis graph. T
 
-| ![](./group_graphviz.png) |
+| ![Graphviz group icons.](./group_graphviz.png) |
 | -------------------------------------------------- |
 
 | Label                 | Control Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -159,7 +154,7 @@ Changes to the DOT source code are not reflected on the `data` worksheet. Any ch
 
 ### Web Resources
 
-| ![](./group_web_resources.png) |
+| ![Web Resources group icons.](./group_web_resources.png) |
 | -------------------------------------------------- |
 
 The `Web Resources` group dynamically supports six buttons which can launch the user's default browser and display a web page. Button text, tool tips, and the URL are specified in the `settings` worksheet. The worksheet as distributed contains links to Graphviz documentation and online Graphviz rendering tools.
@@ -177,11 +172,11 @@ The default settings are:
 
 The values associated with these buttons can be changed to suit your own preferences. These links are located in the `settings` worksheet in the `Ribbon Options` location, in the `Source` tab
 
-![](../media/0b68f0d48b59aaabb0bc2f22bbd08195.png)
+![Screenshot of the settings worksheet showing Ribbon Options for Web Resources.](../media/0b68f0d48b59aaabb0bc2f22bbd08195.png)
 
 ### Help
 
-| ![](./group_help.png) |
+| ![Help group icons.](./group_help.png) |
 | -------------------------------------------------- |
 
 Provides a link to the `Help` content for the `Source` worksheet (i.e. this web page).
@@ -189,7 +184,6 @@ Provides a link to the `Help` content for the `Source` worksheet (i.e. this web 
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Help | Button        | Provides a link to this web page. |
-
 
 ## Interactive Graphviz over the Internet
 

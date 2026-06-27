@@ -11,11 +11,11 @@ To import a JSON file, start by choosing the sections which you want included. J
 
 A key difference for importing worksheets comes via the import option dropdown lists.
 
-![](../../media/exchange_import_options.png)
+![Exchange ribbon import options showing selectable workbook sections for JSON import in Relationship Visualizer.](../../media/exchange_import_options.png)
 
 `data`, `styles`, `sql`, and `svg` worksheets choices have Import of Append and Replace.
 
-![](../../media/exchange_import_dropdowns.png)
+![Dropdown menus showing Append and Replace import modes for data, styles, SQL, and SVG worksheets in Relationship Visualizer.](../../media/exchange_import_dropdowns.png)
 
 These are mutually exclusive choices that allow you to specify whether to replace the contents in the worksheet, or append the data in the worksheet. **Replace** is the default, and is intended for loading the data into an empty worksheet. **Append** is useful for consolidating data when multiple people are preparing the data.
 
@@ -23,12 +23,12 @@ For example, assume a husband and wife each prepare a family tree of their ances
 
 Once you have selected your Import, press the `Import JSON` button.
 
-![](../../media/exchange_import_json.png)
+![Import JSON button on the Exchange ribbon tab used to load a JSON data exchange file into Relationship Visualizer.](../../media/exchange_import_json.png)
 
 You will be prompted to **Choose an Excel to Graphviz data exchange file**
 
-![](../../media/e92f7b2b8650392ddb0ac3818ffb4e2f.png)
+![File selection dialog prompting the user to choose a JSON data exchange file for import into Relationship Visualizer.](../../media/e92f7b2b8650392ddb0ac3818ffb4e2f.png)
 
 Select the file and press the `OK` button. The data will be imported (which may take several seconds). If the `Automatic Refresh` checkbox on the Graphviz tab is checked, the Relationship Visualizer will graph the data to the worksheet, otherwise press the `Refresh Graph` button to see the graph.
 
-![](../../media/aa15bddb7bbdcca777cc1a4a8787596d.png)
+![Graphviz tab showing the Automatic Refresh and Refresh Graph controls used to update the visualization after importing JSON data.](../../media/aa15bddb7bbdcca777cc1a4a8787596d.png)

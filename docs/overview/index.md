@@ -17,13 +17,13 @@ The `data` worksheet is where you specify the relationships to be graphed.
 
 Large data-driven graphs can be constructed easily by simply supplying two columns of data, as shown below:
 
-![](./large_graph_no_style.png)
+![Graphviz diagram displayed in Excel showing a large unstyled relationship graph generated from two-column data in the Relationship Visualizer.](./large_graph_no_style.png)
 
 ## Display Graphs
 
 The Relationship Visualizer leverages Excel's zoom in/zoom out, and scrolling capabilities to display graphs in a `graph` worksheet.
 
-![](./large_graph_no_style_zoom_out.png)
+![Zoomed-out view of a large Graphviz diagram in the Relationship Visualizer's graph worksheet, demonstrating Excel's scroll and zoom capabilities.](./large_graph_no_style_zoom_out.png)
 
 ## Choose Graph Options
 
@@ -31,7 +31,7 @@ The Relationship Visualizer enhances Excel's menu bar and provides all its User 
 
 Here is the screen tip displayed when the mouse hovers over the `dot` layout control.
 
-![](./graphviz_ribbon_tooltip.png)
+![Screen tip in the Relationship Visualizer Ribbon showing the description for the Graphviz 'dot' layout option.](./graphviz_ribbon_tooltip.png)
 
 Changing Graphviz options in the Ribbon Tab allows for different Graphviz interpretations of the data. Let's explore examples of *Layout*, *Graph Direction* and *Edge Appearance*.
 
@@ -41,14 +41,14 @@ The `layout` attribute selects the Graphviz engine that arranges your graph. Dif
 
 Graph layout can be selected with a single button click. 
 
-![](./graphviz_ribbon_layout.png)
+![Ribbon controls in the Relationship Visualizer showing Graphviz layout engine options such as dot, neato, fdp, sfdp, circo, and others.](./graphviz_ribbon_layout.png)
 
 Choices include:
 | Button | `layout=` | Button | `layout=` | Button | `layout=` |
 | :-: | :-: | :-: | :-: | :-: | :-: |
-| ![](./layout_dot_24px.png) | [dot](../terminology/#dot) | ![](./layout_twopi_24px.png) | [twopi](../terminology/#twopi) | ![](./material_apps_24px.png) | [osage](../terminology/#osage) |
-| ![](./layout_fdp_24px.png) | [fdp](../terminology/#fdp) | ![](./layout_neato_2_24px.png) | [neato](../terminology/#neato) | ![](./material_space_dashboard_24px.png) | [patchwork](../terminology/#patchwork) |
-| ![](./layout_sfdp_24px.png)| [sfdp](../terminology/#sfdp) | ![](./layout_circo_2_24px.png) | [circo](../terminology/#circo) | |
+| ![Icon representing Graphviz layout=dot (hierarchical layout engine).](./layout_dot_24px.png) | [dot](../terminology/#dot) | ![Icon representing Graphviz layout=twopi (radial layout engine).](./layout_twopi_24px.png) | [twopi](../terminology/#twopi) | ![Icon representing Graphviz layout=osage (cluster/partition layout engine).](./material_apps_24px.png) | [osage](../terminology/#osage) |
+| ![Icon representing Graphviz layout=fdp (force-directed layout engine).](./layout_fdp_24px.png) | [fdp](../terminology/#fdp) | ![Icon representing Graphviz layout=neato (spring-model layout engine).](./layout_neato_2_24px.png) | [neato](../terminology/#neato) | ![Icon representing Graphviz layout=patchwork (treemap-style layout engine).](./material_space_dashboard_24px.png) | [patchwork](../terminology/#patchwork) |
+| ![Icon representing Graphviz layout=sfdp (scalable force-directed layout engine).](./layout_sfdp_24px.png) | [sfdp](../terminology/#sfdp) | ![Icon representing Graphviz layout=circo (circular layout engine).](./layout_circo_2_24px.png) | [circo](../terminology/#circo) | |
 
 ### Edge Appearance
 
@@ -56,39 +56,39 @@ The `splines` attribute controls how Graphviz draws edges between nodes. It dete
 
 You select how edges are drawn using the `Splines` buttons. 
 
-![](./graphviz_ribbon_splines.png)
+![Ribbon controls in the Relationship Visualizer for selecting Graphviz edge spline styles including line, spline, ortho, polyline, curved, and none.](./graphviz_ribbon_splines.png)
 
 Choices include:
 
 | Button | `splines=` | Button | `splines=` |
 | :-: | :-: | :-: | :-: |
-| ![](./material_call_made_24px.png) | [false (alias=line)](../terminology/#line)| ![](./material_arrow_top_right_24px.png) | [ortho](../terminology/#ortho) |
-| ![](./material_tactic_24px.png) | [true (alias=spline)](../terminology/#spline) | ![](./material_turn_slight_right_24px.png) | [polyline](../terminology/#polyline) |
-| ![](./material_switch_access_shortcut_24px.png)| [curved](../terminology/#curved) | ![](./material_block_24px.png) | [none](../terminology/#none) |
+| ![Icon representing Graphviz splines=false (straight line edges).](./material_call_made_24px.png) | [false (alias=line)](../terminology/#line) | ![Icon representing Graphviz splines=ortho (orthogonal edges).](./material_arrow_top_right_24px.png) | [ortho](../terminology/#ortho) |
+| ![Icon representing Graphviz splines=true (smooth spline edges).](./material_tactic_24px.png) | [true (alias=spline)](../terminology/#spline) | ![Icon representing Graphviz splines=polyline (straight segments).](./material_turn_slight_right_24px.png) | [polyline](../terminology/#polyline) |
+| ![Icon representing Graphviz splines=curved (rounded edges).](./material_switch_access_shortcut_24px.png) | [curved](../terminology/#curved) | ![Icon representing Graphviz splines=none (no edges drawn).](./material_block_24px.png) | [none](../terminology/#none) |
 
 This images shows the previous graph with the edges changed from `true`, to `ortho`, which causes straight lines with 90 degree corners.
 
-![](./large_graph_no_style_zoom_out_tb_ortho.png)
+![Graphviz diagram rendered with orthogonal edges using the Relationship Visualizer, showing straight lines with 90-degree turns.](./large_graph_no_style_zoom_out_tb_ortho.png)
  
 ### Graph Direction
 
-The `rankdir` attribute controls the overall direction in which the graph is laid out. It tells Graphviz whether to arrange ranks from top to bottom, bottom to top, left to right, or right to left. Changing this setting rotates the diagram’s flow without altering the underlying structure of the graph.
+The `rankdir` attribute controls the overall direction in which the graph is laid out. It tells Graphviz whether to arrange ranks from top to bottom, bottom to top, left to right, or right to left. Changing this setting rotates the diagram's flow without altering the underlying structure of the graph.
 
 [Graph direction](../create/#layout-options) can be selected with a single button click. 
 
-![](./graphviz_ribbon_rankdir.png)
+![Ribbon controls in the Relationship Visualizer for selecting Graphviz rank direction options such as top-to-bottom, bottom-to-top, left-to-right, and right-to-left.](./graphviz_ribbon_rankdir.png)
 
 Choices include:
 | Button | `rankdir=` | Direction |
 | :----: | :-: | --------------|
-| ![](./rankdir_tb_24px.png) | `tb` | Top to Botton |
-| ![](./rankdir_bt_24px.png) | `bt` | Bottom to Top |
-| ![](./rankdir_lr_24px.png) | `lr` | Left to Right |
-| ![](./rankdir_rl_24px.png) | `rl` | Right to Left |
+| ![Icon representing Graphviz rankdir=tb for top-to-bottom graph direction.](./rankdir_tb_24px.png) | `tb` | Top to Bottom |
+| ![Icon representing Graphviz rankdir=bt for bottom-to-top graph direction.](./rankdir_bt_24px.png) | `bt` | Bottom to Top |
+| ![Icon representing Graphviz rankdir=lr for left-to-right graph direction.](./rankdir_lr_24px.png) | `lr` | Left to Right |
+| ![Icon representing Graphviz rankdir=rl for right-to-left graph direction.](./rankdir_rl_24px.png) | `rl` | Right to Left |
 
 Here we see the direction of the previous graph has changed from *Left to Right*, to *Top to Bottom*.
 
-![](./large_graph_no_style_zoom_out_tb.png)
+![Graphviz diagram displayed in top-to-bottom orientation after changing the rankdir setting in the Relationship Visualizer.](./large_graph_no_style_zoom_out_tb.png)
 
 [Learn more...](../workbook/#fluent-ui-ribbon-tabs)
 
@@ -98,7 +98,7 @@ The Relationship Visualizer makes it easy to create combinations of Graphviz sty
 
 Here the `style designer` is being used to create a style of edge which is dark green (Green4) in color, and does not have an arrow head.
 
-![](./style_designer_edge.png)
+![Style designer worksheet in the Relationship Visualizer showing a custom edge style with dark green color and no arrowhead.](./style_designer_edge.png)
 
 [Learn more...](../tutorial/#using-the-style-designer-worksheet)
 
@@ -108,11 +108,11 @@ The Green Line on the London Underground is the "District" line. We click the `A
 
 Notice that Style Names have been created for each of the subway lines, and set to their designated color. We will see them used just ahead.
 
-![](./styles_worksheet.png)
+![Styles worksheet in the Relationship Visualizer showing saved style definitions for London Underground lines, each with a preview of its Graphviz formatting.](./styles_worksheet.png)
 
 Cluster and node formats are created in similar fashion. This image shows the other elements which have been defined to depict the London Underground. For example, stations are depicted with a square shape, and interchanges are depicted by a circle.
 
-![](./styles_worksheet_nodes.png)
+![Styles worksheet showing node and cluster style definitions for London Underground diagrams, including square station nodes and circular interchange nodes.](./styles_worksheet_nodes.png)
 
 [Learn more...](../styles/)
 
@@ -122,7 +122,7 @@ Styles are applied to data rows via a `Style Name` column on the `data` workshee
 
 In the image below each subway line is now depicted in its assigned colors, and shapes imply if a stop is a regular station, or an interchange.
 
-![](./styles_applied.png)
+![Graphviz diagram of the London Underground with styles applied, showing colored lines and node shapes representing stations and interchanges.](./styles_applied.png)
 
 ## Cluster Elements
 
@@ -130,7 +130,7 @@ The Relationship Visualizer lets you easily cluster nodes by adding rows contain
 
 This graph depicts different areas of London, and the postal districts in which the stations are located.
 
-![](./clusters.png)
+![Graphviz diagram showing London areas grouped into clusters, with postal districts and stations visually organized using cluster boundaries.](./clusters.png)
 
 ## Split Data into Views
 
@@ -138,14 +138,13 @@ The Relationship Visualizer allows you to have multiple views of the same data b
 
 In this example the `styles` worksheet modified to have one column per subway line, which only enables the styles for that subway line.
 
-![](./view_columns.png)
+![Styles worksheet configured with one column per subway line, enabling view-based filtering in the Relationship Visualizer.](./view_columns.png)
 
 The column names appear in a `View` dropdown list on the `Graphviz` tab. Selecting a view name redraws the graph to include only the styles where a value of yes is present in that column.
 
 In the image below, selecting the "DLR" subway line from the `View` dropdown highlights the areas of London served by the DLR and its stations, while filtering out the rest of the London Underground.
 
-
-![](./dlr_view.png)
+![Graphviz diagram filtered to show only the DLR line using the Relationship Visualizer's View dropdown, highlighting its stations and routes.](./dlr_view.png)
 
 [Learn more...](../views/)
 
@@ -161,7 +160,7 @@ You can publish graphs in the following formats: `bmp`, `gif`, `jpg`, `pdf`, `pn
 
 You can publish a single graph, or use the `Publish all views` button to automatically cycle through all the view names, publishing each view as its own file. In this example, Windows Explorer displays the results after all the various London Underground lines have been published as graphs.
 
-![](./file_explorer.png)
+![Graphviz diagram filtered to show only the DLR line using the Relationship Visualizer's View dropdown, highlighting its stations and routes.](./file_explorer.png)
 
 [Learn more...](../publish/)
 
@@ -175,7 +174,7 @@ The Relationship Visualizer provides a tooltips column where you can provide inf
 
 In this example, we see a graph of the DLR Line exported in SVG format. When hovering over the **Star Lane** station, a pop-up displays its village, district, postal code, latitude, and longitude.
 
-![](./svg_tooltip.png)
+![SVG export of the DLR line showing a tooltip popup for the Star Lane station with location and metadata details.](./svg_tooltip.png)
 
 ### Add Animation
 
@@ -183,15 +182,15 @@ The Relationship Visualizer provides simple post-processing support via a worksh
 
 The `svg` worksheet containing the find/replace strings appears as follows:
 
-![](./svg_postprocess.png)
+![SVG post-processing worksheet in the Relationship Visualizer showing find/replace rules used to inject JavaScript for animation.](./svg_postprocess.png)
 
 After post-processing (triggered by graphing to a file), we see that buttons have been added to the SVG file.
 
-![](./svg_animation_added.png)
+![SVG file after post-processing, displaying added interactive buttons for animation controls.](./svg_animation_added.png)
 
 And in the animation below, we see how clicking a node triggers an animation to enlarge the node, and animate the edge connections from the node.
 
-![](./svg_animation.gif)
+![Animated SVG demonstration showing a node enlarging and its connected edges animating when clicked.](./svg_animation.gif)
 
 [Learn more...](../svg/)
 
@@ -206,9 +205,9 @@ In our London Underground example, we have a `London Underground Data.xlsx` work
  
 They appear as follows:
 
-![](./london_tube_lines_xlsx.png)
+![Excel worksheet listing London tube line connections used as source data for edge relationships in the Relationship Visualizer.](./london_tube_lines_xlsx.png)
 
-![](./london_tube_stations_xslx.png)
+![Excel worksheet listing London Underground stations with metadata used to generate node labels and styles.](./london_tube_stations_xslx.png)
 
 We write a SQL statement to extract data for **edge** relationships:
 
@@ -226,7 +225,7 @@ FROM   [London stations$]
 
 The `sql` worksheet in the Relationship Visualizer appears as:
 
-![](./sql_edges_and_nodes.png)
+![SQL worksheet in the Relationship Visualizer showing SQL statements used to import edge and node data from external Excel workbooks.](./sql_edges_and_nodes.png)
 
 Pressing a button executes the SQL statements, which import the data and map it to the appropriate columns for visualization. It really is that simple!
 
@@ -236,7 +235,7 @@ Pressing a button executes the SQL statements, which import the data and map it 
 
 The Relationship Visualizer provides capabilities to generate a text-based representation of the data, styles, and settings in a JSON format. The features supporting the export and import of spreadsheet data are found in the `Exchange` workbook tab.
 
-![](./data_exchange.png)
+![Exchange tab in the Relationship Visualizer showing JSON export and import options for data, styles, and settings.](./data_exchange.png)
 
 [Learn more...](../exchange/)
 
@@ -252,11 +251,11 @@ You can save this source code to a file or copy it to the clipboard for use in a
 
 An example appears as follows:
 
-![](./view_source.png)
+![Source worksheet displaying the Graphviz DOT code generated from the Relationship Visualizer's data worksheet.](./view_source.png)
 
 A pop-up source window can be launched, enabling you to view the source while simultaneously examining your data or graph. Below is an example of the source displayed in the pop-up window.
 
-![](./view_source_popup.png)
+![Pop-up window showing Graphviz DOT source code alongside the Relationship Visualizer workbook for side-by-side review.](./view_source_popup.png)
 
 [Learn more...](../source/)
 
@@ -264,19 +263,19 @@ A pop-up source window can be launched, enabling you to view the source while si
 
 The `HELP - attributes` worksheet provides a list of the `dot` attributes along with columns which can be filtered by layout (dot, fdp, etc.), and attribute type (node, edge, graph).
 
-![](./help_attributes.png)
+![HELP – attributes worksheet listing Graphviz DOT attributes with filters for layout engines and attribute types.](./help_attributes.png)
 
 ### Learn Colors
 
 The `HELP - colors` worksheet provides a visual reference of all the color schemes and colors which Graphviz supports.
 
-![](./help_colors.png)
+![HELP – colors worksheet showing all Graphviz color schemes and color names as a visual reference.](./help_colors.png)
 
 ### Learn Shapes
 
 The `HELP - shapes` worksheet provides a visual reference of all the node shapes which Graphviz supports.
 
-![](./help_shapes.png)
+![HELP – shapes worksheet displaying all Graphviz node shapes supported by the DOT language.](./help_shapes.png)
 
 ## Diagnose Problems
 
@@ -286,7 +285,7 @@ The `HELP - shapes` worksheet provides a visual reference of all the node shapes
 
 In the example below, `dot` has been executed in `verbose` mode. The `console` worksheet displays `dot`'s diagnostic messages. Notably, the node warnings indicate that two nodes have very long labels exceeding the fixed width of the shape used to depict stations.
 
-![](./console.png)
+![Console worksheet showing verbose Graphviz 'dot' command output, including warnings about long node labels.](./console.png)
 
 [Learn more...](../console/)
 
@@ -294,7 +293,7 @@ In the example below, `dot` has been executed in `verbose` mode. The `console` w
 
 The Relationship Visualizer includes a diagnostics worksheet that provides essential information on software versions and directory paths, useful for troubleshooting and addressing questions.
 
-![](./diagnostics_worksheet.png)
+![Diagnostics worksheet displaying software version information and directory paths for troubleshooting the Relationship Visualizer.](./diagnostics_worksheet.png)
 
 [Learn more...](../diagnostics/)
 
@@ -314,17 +313,17 @@ The Relationship Visualizer provides the following language translations:
 
 Simply pick your desired language from the `Launchpad` ribbon tab.
 
-![](./launchpad_language.png)
+![Launchpad ribbon tab showing language selection options for the Relationship Visualizer.](./launchpad_language.png)
 
 For example, changing the language to Polski (Polish) makes the `Launchpad` ribbon tab appears as:
 
-![](./launchpad_language_polski.png)
+![Launchpad ribbon tab displayed in Polish after selecting the Polski language option.](./launchpad_language_polski.png)
 
 ### Edit Language Translations
 
 Translations were performed by machine and may contain minor errors. Fortunately, all language translations are contained in worksheets. From the `Launchpad`, you can unhide the appropriate worksheet and edit the translation as needed.
 
-![](./language_polski.png)
+![Worksheet containing editable Polish language translations for the Relationship Visualizer interface.](./language_polski.png)
 
 [Learn more...](../launchpad/)
 
@@ -338,7 +337,7 @@ Graphviz uses inches as its unit of measurement for shapes. The `Launchpad` will
 
 The Relationship Visualizer includes an `info` worksheet that provides details about the spreadsheet, the internal technology incorporated into the tool, and the associated open-source licenses and acknowledgements needed to reuse the open-source components in a license-compliant manner.
 
-![](./info_worksheet.png)
+![Info worksheet showing licensing details, acknowledgements, and technology information for the Relationship Visualizer.](./info_worksheet.png)
 
 [Learn more...](../info/)
 

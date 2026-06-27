@@ -11,37 +11,37 @@ The `console` worksheet shows the messages emitted by the `dot` command when Gra
 
 The `console` worksheet is reached from the `Graphviz dot` section of the [Launchpad](../launchpad/) ribbon tab.
 
-![](./launchpad-ribbon-tab-console-button.png)
+![Screenshot of the Launchpad ribbon tab highlighting the Console button.](./launchpad-ribbon-tab-console-button.png)
 
 Messages in the shaded rows are the `dot` commands issued when a Graphviz visualization is requested using the `dot` command. The messages emitted by `dot` are displayed against a white background. You have the choice of standard or verbose messages. You can also restrict the messages to the most recent dot invocation or append them in a running log.
 
-![](./console-worksheet.png)
+![Screenshot of the console worksheet showing dot commands and emitted messages.](./console-worksheet.png)
 
 ## The `Console` Ribbon Tab
 
 The **Console** ribbon tab is activated whenever the *console* worksheet is opened from the [Launchpad](../launchpad/). It appears as follows:
 
-`Windows`
-![](./console-ribbon-tab.png)
+`Windows`  
+![Screenshot of the Console ribbon tab on Windows.](./console-ribbon-tab.png)
 
-`macOS`
-![](./mac_ribbon_console.png)
+`macOS`  
+![Screenshot of the Console ribbon tab on macOS.](./mac_ribbon_console.png)
 
 It contains the following groups, each of which is explained in the sections that follow. You may jump directly to any group using the links in this table:
 
 | Group | Controls  |
 | :---- | :--- |
-| [Console Switches](#console-switches) | ![](./console-ribbon-tab-console-switches.png) |
+| [Console Switches](#console-switches) | ![Console Switches group icons.](./console-ribbon-tab-console-switches.png) |
 | | |
-| [Console Text](#console-text) | ![](./console-ribbon-tab-console-text.png) |
+| [Console Text](#console-text) | ![Console Text group icons.](./console-ribbon-tab-console-text.png) |
 | | |
-| [Critical Messages](#critical-messages) | ![](./console-ribbon-tab-critical-messages.png) |
+| [Critical Messages](#critical-messages) | ![Critical Messages group icons.](./console-ribbon-tab-critical-messages.png) |
 | | |
-| [Help](#help) | ![](./console-ribbon-tab-help.png) |
+| [Help](#help) | ![Help group icon.](./console-ribbon-tab-help.png) |
 
 ### Console Switches
 
-| ![](./console-ribbon-tab-console-switches.png) |
+| ![Console Switches group icons.](./console-ribbon-tab-console-switches.png) |
 | -------------------------------------------------- |
 
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
@@ -52,7 +52,7 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Console Text
 
-| ![](./console-ribbon-tab-console-text.png) |
+| ![Console Text group icons.](./console-ribbon-tab-console-text.png) |
 | -------------------------------------------------- |
 
 | Name       | Control Type  | Description                                                                                                                                                                                                                        |
@@ -63,9 +63,8 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Critical Messages
 
-| ![](./console-ribbon-tab-critical-messages.png) |
+| ![Critical Messages group icons.](./console-ribbon-tab-critical-messages.png) |
 | -------------------------------------------------- |
-
 
 | Name                         | Control Type | Description                                                                                           |
 | ----------------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
@@ -77,7 +76,7 @@ These buttons operate independently. You can deselect all of them to run silentl
 
 ### Help
 
-| ![](./console-ribbon-tab-help.png) |
+| ![Help group icon.](./console-ribbon-tab-help.png) |
 | -------------------------------------------------- |
 
 Provides a link to the `Help` content for the `console` worksheet (i.e. this web page).

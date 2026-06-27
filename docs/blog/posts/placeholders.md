@@ -43,7 +43,7 @@ Create a style named **Rocket** using `shape=plaintext` and an HTML-like label t
 
 Build this style on the **style designer** tab:
 
-| ![](../images/placeholder-designer.png) |
+| ![Style designer worksheet showing a plaintext label template using an emoji and the {label} placeholder.](../images/placeholder-designer.png) |
 | :-------------------------------------- |
 
 ::: tip
@@ -58,11 +58,11 @@ Emoji fonts are OS‑dependent. Use any emoji‑capable font installed on your s
 
 Save the style to the `styles` worksheet:
 
-![](../images/placeholder-style.png)
+![Styles worksheet showing the saved Rocket style with an emoji-based HTML-like label template.](../images/placeholder-style.png)
 
 When the graph is visualized, `{label}` is replaced with the actual value and the result appears on the `data` worksheet like this:
 
-![](../images/placeholder-rendered.png)
+![Rendered Graphviz output showing the emoji-enhanced label where the {label} placeholder has been substituted with actual data.](../images/placeholder-rendered.png)
 
 ::: info Color vs. Black and White
 Emojis show up in full color when you publish SVG and PDF, but image formats like PNG, JPG, GIF, and BMP flatten them into black‑and‑white because those exports rasterize the emoji font.

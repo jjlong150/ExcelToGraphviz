@@ -214,13 +214,13 @@ ORDER BY [Year] ASC
 
 produces the following chain of edges from year to year.
 
-![](./timeline.png)
+![Timeline diagram showing sequential edges between Unix shell introduction years, generated using CREATE EDGES in Relationship Visualizer.](./timeline.png)
 
 ### Step 6 – Connect the subgroups to the timeline
 
 This step combines the SQL statements from Step 5 and Step 6. The resulting graph becomes:
 
-![](./timeline_and_subgraphs.png)
+![Graphviz diagram showing Unix shell subgroups connected to a chronological timeline, combining CREATE RANK and CREATE EDGES output.](./timeline_and_subgraphs.png)
 
 ### Step 7 – Depict relationships between items
 
@@ -258,12 +258,11 @@ It is a simple change to add the following SQL statement:
 SELECT [From Shell] AS [ITEM], 
        [To Shell]   AS [RELATED ITEM] 
 FROM   [evolution$]
-
 ```
 
 which changes the graph to:
 
-![](./shell_evolution.png)
+![Graphviz diagram showing evolutionary relationships between Unix shells, with edges drawn from each predecessor shell to its successor.](./shell_evolution.png)
 
 ### Step 8 – Add style and adjust layout
 
@@ -271,7 +270,7 @@ The last step is to create styles and apply them to the nodes and edges. This is
 
 The fully styled graph becomes:
 
-![](./complete_graph.png)
+![Fully styled Graphviz diagram showing the complete Unix shell evolution timeline with ranked subgroups, evolutionary edges, and applied visual styles.](./complete_graph.png)
 
 ## Try it Yourself
 

@@ -31,11 +31,11 @@ The [Overview](../overview/) page shows several illustrations of a graph of the 
 
 We began by creating edge styles using the official London Underground line colors.
 
-![](./underground_styles.png)
+![Screenshot showing the style definitions for London Underground line colors.](./underground_styles.png)
 
 These styles were applied to a data set of the subway stations and the station‑to‑next‑station relationships that connect each station to the next. The graph of the complete London Underground appears as:
 
-![](./underground_all.png)
+![Screenshot of the full London Underground graph with all lines displayed in their official colors.](./underground_all.png)
 
 This gives us a full data set and a complete graph, with each connection styled according to its line color. But what if we want to view only a single subway line?
 
@@ -47,17 +47,17 @@ Let us create a view that restricts the graph to only the **Bakerloo** subway li
 
 **Step 2** — Copy Column E (with the heading **All**) and insert the copy as Column F. The `styles` worksheet will then appear as follows:
 
-![](./underground_insert_column.png)
+![Screenshot of the styles worksheet after inserting a new View column.](./underground_insert_column.png)
 
 **Step 3** — Change the heading in cell F1 to **Bakerloo**, and change all the switches in Column F from **Yes** to **No** for every row where the `Style Type` is `edge`, **except** for the row whose style name is **Bakerloo**.
 
 The `styles` worksheet should now appear as:
 
-![](./underground_bakerloo.png)
+![Screenshot of the styles worksheet showing only the Bakerloo edge style enabled in the new View column.](./underground_bakerloo.png)
 
 **Step 4** — We now need to change a setting on the `Graphviz` ribbon tab so the Relationship Visualizer uses only the styles enabled with **Yes** in Column F. Switch to the `data` worksheet. The `data` worksheet should appear as follows:
 
-![](./underground_view_dropdown_list.png)
+![Screenshot of the data worksheet showing the View dropdown list with the new Bakerloo option.](./underground_view_dropdown_list.png)
 
 **Step 5** — Notice that **Bakerloo** now appears as a value in the dropdown list. The selections in this list are refreshed automatically whenever a new View column is added to the `styles` worksheet.
 
@@ -65,8 +65,7 @@ Change the selected `View` from **All** to **Bakerloo** on the `Graphviz` ribbon
 
 **Step 6** — Press the `Refresh` button. The new graph for the Bakerloo view does **not** appear as we might expect. All stations are still visible, and most are no longer connected to anything. What gives?
 
-
-![](./underground_bakerloo_island_nodes.png)
+![Screenshot of the graph showing isolated nodes when only Bakerloo edges are enabled.](./underground_bakerloo_island_nodes.png)
 
 The reason is that we filtered the **edges**, but we did not filter the **nodes**. Every station still has a node style set to **Yes** in the selected View column, so Graphviz dutifully draws all of them. However, because only the Bakerloo edges remain enabled, most stations no longer have any connecting relationships. The result is a graph full of isolated nodes. To fix this, we must also restrict the node styles so that only the stations belonging to the Bakerloo line are included in the view.
 
@@ -74,11 +73,11 @@ The Relationship Visualizer includes switches that can automatically remove thes
 
 **Step 7** - Remove the check mark on the `Graphviz` ribbon from the `Nodes` - `Include stand-alone nodes` switch control. This means only include nodes that have an edge connection to another node.
 
-![](./underground_remove_island_nodes.png)
+![Screenshot of the Graphviz ribbon showing the Include stand‑alone nodes option being disabled.](./underground_remove_island_nodes.png)
 
-**Step 7** — Remove the check mark on the `Graphviz` ribbon from the `Nodes` → `Include stand‑alone nodes` switch. This tells the Relationship Visualizer to include only those nodes that have at least one edge connection to another node.
+**Step 8** — Remove the check mark on the `Graphviz` ribbon from the `Nodes` → `Include stand‑alone nodes` switch. This tells the Relationship Visualizer to include only those nodes that have at least one edge connection to another node.
 
-![](./underground_bakerloo_line.png)
+![Screenshot of the Bakerloo-only graph after removing stand‑alone nodes.](./underground_bakerloo_line.png)
 
 Notice that the various clusters have disappeared along with the stations and interchanges that do not participate in a Bakerloo‑style relationship. This happens because the Relationship Visualizer is now excluding stand‑alone nodes, and Graphviz performs its own additional filtering: it will not draw a cluster that contains no nodes. The result is a clean graph showing only the stations and connections that belong to the Bakerloo line.
 
@@ -86,15 +85,15 @@ Notice that the various clusters have disappeared along with the stations and in
 
 **Step 9** — Repeat Steps 2 and 3 for all the remaining Underground lines. The `styles` worksheet should now show a diagonal pattern of **Yes** values across the View columns, and will appear similar to the following:
 
-![](./underground_styles_all_lines.png)
+![Screenshot of the styles worksheet showing a diagonal pattern of Yes values across all line-specific View columns.](./underground_styles_all_lines.png)
 
 The list of available views on the Graphviz tab expands automatically to match the new column headings. It will appear as:
 
-![](./all_views_list.png)
+![Screenshot of the Graphviz View dropdown list showing all Underground line views.](./all_views_list.png)
 
 **Step 10** — Pick another subway line, such as **DLR**. The graph updates to:
 
-![](./underground_dlr_line.png)
+![Screenshot of the DLR-only graph showing stations and edges for the DLR line.](./underground_dlr_line.png)
 
 You now have the ability to switch between subway lines using a single shared data set. You can also use the `Publish all views` button to quickly generate one output file per view, allowing you to produce a complete set of line‑specific graphs with a single command.
 

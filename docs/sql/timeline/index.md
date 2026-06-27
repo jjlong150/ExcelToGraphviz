@@ -56,7 +56,7 @@ This timeline is composed of a set of 20 hypothetical events which are tracked t
 
 The roadmap begins by giving the graph a title derived from the earliest and latest years in the dataset. This ensures the diagram is self‑describing and automatically adapts as new events are added. The title is styled separately so it appears as a page‑level heading in the final visualization.
 
-``` sql
+```sql
 SELECT 'graph'                                                              AS [Item], 
        CStr(MIN([StartYear])) & ' - ' & CStr(MAX([StartYear])) & ' Roadmap' AS [Label], 
        'Page Title'                                                         AS [Style Name] 
@@ -65,13 +65,13 @@ FROM   [timeline$]
 
 Which appears as:
 
-![](./title.png)
+![Graphviz output showing the generated page‑level title derived from the earliest and latest years in the dataset.](./title.png)
 
 ### Step 2 — Create a Continuous Year Backbone
 
 A roadmap must show every year in the planning horizon, not just the years that contain events. **Enumeration** is used to generate a complete numeric sequence from the minimum start year to the maximum end year. This produces a clean chain of year‑to‑year edges, filling in any gaps where no events occur.
 
-``` sql
+```sql
 SELECT TRUE AS [ENUMERATE], MIN(CLng([StartYear])) AS [START AT], MAX(CLng([EndYear])) AS [STOP AT], 1 AS [STEP BY], 
        '{step}' AS [Item], 'Transparent Edge' AS [Style Name],
        TRUE AS [CREATE EDGES]
@@ -81,13 +81,13 @@ WHERE  IsNumeric([StartYear])
 
 These edges are styled with a **transparent** appearance so they provide structure without overwhelming the event‑level details.
 
-![](./backbone_plain.png)
+![Graphviz output showing a continuous sequence of transparent year‑to‑year edges forming the roadmap backbone.](./backbone_plain.png)
 
 ### Step 3 — Style the Year Nodes
 
 Once the year nodes have been generated, a second **enumerated** query applies a consistent style to each one. 
 
-``` sql
+```sql
 SELECT TRUE AS [ENUMERATE], MIN(CLng([StartYear])) AS [START AT], MAX(CLng([EndYear])) AS [STOP AT], 1 AS [STEP BY], 
        '{step}' AS [Item], 
        '{step}' AS [Label], 
@@ -98,7 +98,7 @@ WHERE  IsNumeric([StartYear])
 
 This separates the visual identity of the timeline backbone from the event nodes that will be added later. Labels are applied directly from the enumerated step value, ensuring each year is clearly marked.
 
-![](./backbone_styled.png)
+![Graphviz output showing styled year nodes applied across the continuous backbone, each labeled with its corresponding year.](./backbone_styled.png)
 
 ### Step 4 — Connect Multi‑Quarter Events
 
@@ -107,7 +107,7 @@ Many events span multiple quarters or even multiple years. To represent this, th
 - They use the event’s status to determine styling
 - A split length of 20 characters is applied to improve readability when labels are long.
 
-``` sql
+```sql
 SELECT [EventID] & '_Start'            AS [Item], 
        [EventID] & '_End'              AS [Related Item],
        [EventID] & ' - ' & [EventName] AS [Label] , 
@@ -123,7 +123,7 @@ ORDER BY [StartYear]    DESC,
 
 This produces a clear visual representation of duration: long events will stretch across the timeline, while shorter events will appear more compact.
 
-![](./start_to_end.png)
+![Graphviz output showing start‑to‑end edges for multi‑quarter events, each labeled with the event name and styled by status.](./start_to_end.png)
 
 ### Step 5 — Handle Single‑Quarter Events
 
@@ -145,13 +145,13 @@ ORDER BY [StartYear]    ASC,
 
 This preserves the visual semantics of “this event occurs entirely at this point in time” while still allowing the event to be styled and labeled consistently.
 
-![](./start_to_start.png)
+![Graphviz output showing single‑quarter events represented as start‑to‑start edges, labeled and styled according to event status.](./start_to_start.png)
 
 ### Step 6 — Add Dependency Edges
 
 Roadmaps often include dependencies: one event must finish before another can begin. These relationships are drawn by joining the dependencies worksheet to the timeline data and determining whether the dependency should originate from the event’s start or end node.
 
-``` sql
+```sql
 SELECT 
     'dependency' AS [Label],
     SWITCH(
@@ -173,7 +173,7 @@ AND d.[Before the Start Of] IS NOT NULL;
 
 The resulting edges are styled distinctly so dependencies stand out from duration edges and timeline structure.
 
-![](./dependencies.png)
+![Graphviz output showing dependency edges linking prerequisite events to the events that rely on them, styled distinctly from duration edges.](./dependencies.png)
 
 ### Step 7 — Group Events by Year Using Iteration
 
@@ -211,7 +211,7 @@ For each year:
 This ensures that events align vertically with the year in which they occur, producing a clean, structured layout.
 
 
-![](./grouped_by_year.png)
+![Graphviz output showing events grouped by year, with each year forming its own horizontal rank for improved readability.](./grouped_by_year.png)
 
 ### Step 8 — Style the Event Nodes
 
@@ -219,9 +219,9 @@ Finally, the roadmap applies styles to the event start and end nodes. Events tha
 
 #### Start Quarter
 
-![](./start.png)
+![Graphviz output showing event start nodes styled with rounded shapes and labeled with year and quarter.](./start.png)
 
-``` sql
+```sql
 SELECT [EventID] & '_Start'                AS [Item], 
        [StartYear] & '\n' & [StartQuarter] AS [Label], 
        'Start'                             AS [Style Name] 
@@ -231,9 +231,9 @@ WHERE  [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]
 
 #### End Quarter
 
-![](./finish.png)
+![Graphviz output showing event end nodes styled with square shapes and labeled with year and quarter.](./finish.png)
 
-``` sql
+```sql
 SELECT [EventID] & '_End'                AS [Item], 
        [EndYear] & '\n' & [EndQuarter]   AS [Label], 
        'Finish'                          AS [Style Name] 
@@ -243,9 +243,9 @@ WHERE  [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]
 
 #### Same Quarter
 
-![](./same.png)
+![Graphviz output showing single‑quarter event nodes styled with a unified hexagon shape and labeled with year and quarter.](./same.png)
 
-``` sql
+```sql
 SELECT [EventID] & '_Start'                AS [Item], 
        [StartYear] & '\n' & [StartQuarter] AS [Label],  
        'Same'                              AS [Style Name] 
@@ -257,7 +257,7 @@ Node labels include both the year and quarter, making it easy to see exactly whe
 
 The finished, complete roadmap appears as:
 
-![](./complete_timeline.png)
+![Graphviz output showing the fully assembled roadmap with styled year nodes, event nodes, duration edges, and dependency edges.](./complete_timeline.png)
 
 ## Try it Yourself
 

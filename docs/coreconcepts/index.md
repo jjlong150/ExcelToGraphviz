@@ -15,7 +15,7 @@ For our first graph, we will draw an _'a' is related to 'b'_ relationship.
 
 The results should resemble the following example:
 
-![](./first_graph.png)
+![Screenshot of the first simple graph showing node 'a' connected to node 'b'.](./first_graph.png)
 
 _Graphviz Source_
 
@@ -43,7 +43,7 @@ Next, lets expand upon the graph we just created to have additional relationship
 
 The Excel data appears as shown on rows 3-5. The Excel worksheet now looks like:
 
-![](../media/f4f912714826d55f8e73d9b767f4a088.png)
+![Screenshot of the Excel data showing rows for a→b, b→c, and c→a relationships.](../media/f4f912714826d55f8e73d9b767f4a088.png)
 
 _Graphviz Source_
 
@@ -60,7 +60,7 @@ digraph "Relationship Visualizer"
 
 Now, let us add data into the `Label` column to label the relationships. Fill in Column D as shown below. Press the `Refresh Graph` button, and the Excel worksheet now looks like:
 
-![](../media/8f0481849c081a24edc4a502224161e5.png)
+![Screenshot of the Excel worksheet showing labeled edges for a→b, b→c, and c→a.](../media/8f0481849c081a24edc4a502224161e5.png)
 
 _Graphviz Source_
 
@@ -79,7 +79,7 @@ The graph is how we want to see it, but the nodes need to be labeled. We do not 
 
 To label the nodes we will add 3 node definitions to the "data worksheet (rows 6, 7, 8) and press the `Refresh Graph` button. The Excel worksheet now looks like:
 
-![](../media/3bd5c434221f90b9ea8c636eda70ccf3.png)
+![Screenshot of the Excel worksheet showing node definitions for a = Alpha, b = Bravo, and c = Charlie.](../media/3bd5c434221f90b9ea8c636eda70ccf3.png)
 
 _Graphviz Source_
 
@@ -101,7 +101,7 @@ Next we will apply a pre-defined style to the nodes. Later on we will learn how 
 
 On rows 7, 8, and 9 tab to the `Style Name` column. A dropdown list will appear. Select the style `Medium Square`. The Excel worksheet now looks like:
 
-![](../media/apply_a_node_style.png)
+![Screenshot of the Excel worksheet showing nodes styled with the “Medium Square” predefined node style.](../media/apply_a_node_style.png)
 
 _Graphviz Source_
 
@@ -126,7 +126,7 @@ On rows 3, 4, and 5 move to the `Style Name` column. A dropdown list will appear
 
 The Excel worksheet now looks like:
 
-![](../media/apply_an_edge_style.png)
+![Screenshot of the Excel worksheet showing edges styled with the “Flow – Positive” predefined edge style.](../media/apply_an_edge_style.png)
 
 _Graphviz Source_
 
@@ -150,7 +150,7 @@ On rows 5 move to the `Attributes` column. Enter the value `color="red"`. The ed
 
 The Excel worksheet now looks like:
 
-![](../media/apply_an_edge_attribute.png)
+![Screenshot of the Excel worksheet showing one edge with an overridden red color attribute.](../media/apply_an_edge_attribute.png)
 
 _Graphviz Source_
 
@@ -174,7 +174,7 @@ Sometimes you might want to control where the edges begin or end. You can do tha
 
 Lets change row 5 from the example above to have the edge from "c" to "a" exit from the east port of "c", and enter the east port of "a". The `Item` is now specified as `c:e`, and the Related Item is specified as `a:e` as shown in row 5. Press the `Refresh Graph` button, and the Excel worksheet now looks like:
 
-![](../media/specify_ports.png)
+![Screenshot of the Excel worksheet showing use of ports c:e and a:e on an edge.](../media/specify_ports.png)
 
 _Graphviz Source_
 
@@ -194,7 +194,7 @@ digraph "Relationship Visualizer"
 
 Graphviz has a `weight` attribute which tells it to favor straighter lines. Lets add the attribute on rows 3, and 4 to tidy up the diagram. In the `Attributes` column add the value `weight=10`. The graph now appears as:
 
-![](../media/add_weight.png)
+![Screenshot of the Excel worksheet showing straighter edges after applying weight=10.](../media/add_weight.png)
 
 _Graphviz Source_
 
@@ -218,7 +218,7 @@ _Notice that if you hover the mouse over a Ribbon control a tooltip of help will
 
 Once you click `Delete all data` the `data` worksheet is reset to blank form. 
 
-![](./delete_all_data.png)
+![Screenshot of the Delete all data button and resulting cleared worksheet.](./delete_all_data.png)
 
 ## Specify Clusters
 
@@ -228,7 +228,7 @@ If you wish to cluster some elements of the graph you can do so by adding a row 
 
 For example, this Excel worksheet does not have clusters.
 
-![](../media/d0011b67a73a9e14312423b01c73fcfb.png)
+![Screenshot of worksheet showing simple unclustered graph data.](../media/d0011b67a73a9e14312423b01c73fcfb.png)
 
 _Graphviz Source_
 
@@ -246,7 +246,7 @@ To cluster nodes a0, a1, and a2, calling the cluster "process \#1" the worksheet
 
 Press the `Refresh Graph` button, and the Excel worksheet now looks like:
 
-![](../media/7f02cd43f77aa9e1cd511d5e443b3bdf.png)
+![Screenshot of worksheet showing clustered nodes a0–a2 labeled process #1.](../media/7f02cd43f77aa9e1cd511d5e443b3bdf.png)
 
 _Graphviz Source_
 
@@ -268,7 +268,7 @@ Graphviz permits clusters within clusters. Let us extend the example by adding a
 
 Press the `Refresh Graph` button, and the Excel worksheet now looks like:
 
-![](../media/1df108aa9f36e24f4f7958f5fe999189.png)
+![Screenshot of worksheet showing nested clusters process #1 and process #2.](../media/1df108aa9f36e24f4f7958f5fe999189.png)
 
 _Graphviz Source_
 
@@ -290,7 +290,7 @@ Graphviz does not limit the number of clusters you can have. In this example, we
 
 Press the `Refresh Graph` button, and the Excel worksheet now looks like:
 
-![](../media/0edd4afd935217ae92566ab83893fae8.png)
+![Screenshot of worksheet showing three clusters: process #1, process #2, and process #3.](../media/0edd4afd935217ae92566ab83893fae8.png)
 
 _Graphviz Source_
 
@@ -323,7 +323,7 @@ Graphviz will not draw the graph if there is a mismatch between the number of op
 
 Another feature of the Relationship Visualizer is the ability to specify a comma-separated list of Item names and have a relationship created for each Item. For example, we can say that Mr. Brady is the father of Greg, Peter, and Bobby on one row as follows:
 
-![](../media/d58e637f465efc9ac6a115a7077d477a.png)
+![Screenshot of worksheet showing comma-separated Related Items Greg, Peter, Bobby.](../media/d58e637f465efc9ac6a115a7077d477a.png)
 
 _Graphviz Source_
 
@@ -338,7 +338,7 @@ digraph "Relationship Visualizer"
 
 The comma-separated list can also appear in the `Item` column, such as:
 
-![](../media/220ca8476484163f0a3de41b90ad84be.png)
+![Screenshot of worksheet showing comma-separated Items Marcia, Jan, Cindy.](../media/220ca8476484163f0a3de41b90ad84be.png)
 
 _Graphviz Source_
 
@@ -353,7 +353,7 @@ digraph "Relationship Visualizer"
 
 Or a comma-separated list can be used in both the `Item`, and the `Related Item` column such as the parental relationship below:
 
-![](../media/ac01a7b46880bb75a0764b30bbbf38bb.png)
+![Screenshot of worksheet showing comma-separated Items and Related Items for full Brady family relationships.](../media/ac01a7b46880bb75a0764b30bbbf38bb.png)
 
 _Graphviz Source_
 
@@ -374,4 +374,3 @@ digraph "Relationship Visualizer"
     "Mrs. Brady" -> Cindy;
 }
 ```
-

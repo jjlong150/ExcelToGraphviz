@@ -9,7 +9,7 @@ The Graphviz DOT language includes many attributes that control the appearance o
 
 The worksheet appears as follows:
 
-![](../media/2ab22529af1205854596d94b455856ee.png)
+![Screenshot of the Style Designer worksheet showing controls for node and edge appearance, including shape, fill color, border, font, and preview panel.](../media/2ab22529af1205854596d94b455856ee.png)
 
 ## Overview
 
@@ -30,32 +30,31 @@ The Style Designer ribbon tab provides three dynamic design modes, controlled by
 
 Displays the Graphviz node-related attributes.
 
-*Windows*
-![](../media/5942f9304940804ae6f4c88f8ec908b5.png)
+*Windows*  
+![Windows Style Designer ribbon in Node mode, showing controls for shape, fill color, border, font, and node-specific attributes.](../media/5942f9304940804ae6f4c88f8ec908b5.png)
 
-*macOS*
-
-![](./mac_ribbon_designer_node.png)
+*macOS*  
+![macOS Style Designer ribbon in Node mode, showing node appearance controls adapted to the macOS ribbon layout.](./mac_ribbon_designer_node.png)
 
 #### `Edge` design mode
 
 Displays the Graphviz edge-related attributes.
 
-*Windows*
-![](../media/ddd0c44da5d53751183543e74b115945.png)
+*Windows*  
+![Windows Style Designer ribbon in Edge mode, showing controls for arrowheads, line style, color, and edge label formatting.](../media/ddd0c44da5d53751183543e74b115945.png)
 
-*macOS*
-![](./mac_ribbon_designer_edge.png)
+*macOS*  
+![macOS Style Designer ribbon in Edge mode, showing edge styling controls in the macOS ribbon layout.](./mac_ribbon_designer_edge.png)
 
 #### `Cluster` design mode
 
 Displays the Graphviz cluster-related attributes.
 
-*Windows*
-![](../media/f9c206dc8e27b4d1445f20f86cc01213.png)
+*Windows*  
+![Windows Style Designer ribbon in Cluster mode, showing controls for cluster borders, background color, padding, and label formatting.](../media/f9c206dc8e27b4d1445f20f86cc01213.png)
 
-*macOS*
-![](./mac_ribbon_designer_cluster.png)
+*macOS*  
+![macOS Style Designer ribbon in Cluster mode, showing cluster appearance controls adapted to the macOS ribbon layout.](./mac_ribbon_designer_cluster.png)
 
 You define styles by making selections on the **Style Designer** ribbon tab. As you choose options, a format string is generated, and a sample rendering of the node, edge, or cluster is produced using the graphing engine and spline values from the **Graphviz** ribbon tab (explained later).
 
@@ -67,7 +66,7 @@ In each design mode, you can experiment with different values until you achieve 
 
 The **Label Fields** let you define text that appears in the preview image on nodes, edges, or clusters. 
 
-![](./label_fields.png)
+![Screenshot of the Label Fields panel showing editable text fields used to define node, edge, or cluster labels in the Style Designer.](./label_fields.png)
 
 The fields shown depend on the current **design mode** and what Graphviz supports in that context:
 
@@ -85,11 +84,11 @@ Each label field has an associated **check box**:
 
 Suppose you are defining an edge style to represent a zero‑to‑one relationship. By entering the caption **“0:1”** in the *Head Label* field and checking its box, the label will be included in the style definition. Whenever this "Zero to One" edge style is used, the “0:1” caption will automatically appear next to the arrowhead.
 
-![](./label_text.png)
+![Screenshot of the Style Designer showing the Head Label field populated with “0:1” and the preview panel displaying the label next to the arrowhead.](./label_text.png)
 
 ### Style Name
 
-![](./style_name.png)
+![Screenshot of the Style Name field in the Style Designer, showing where a new or existing style’s name is entered.](./style_name.png)
 
 This cell contains either:
 - The name you want to assign to a **new** style definition.
@@ -99,7 +98,7 @@ This cell contains either:
 
 As you make selections the **Format String** cell builds a list of Graphviz style attributes and writes them to the large cell below:
 
-![](./format_string.png)
+![Screenshot of the Format String field showing automatically generated Graphviz attributes based on the selected style options.](./format_string.png)
 
 The **Format String** cell is also an **active cell**, meaning you can edit it directly to fine‑tune settings beyond the options provided in the drop‑down lists.
 
@@ -121,7 +120,7 @@ The large **Save** button, along with the **Save to 'styles'** button in the Rib
 
 For example, the image below shows three **Node** style definitions created with the **Style Designer** and saved on the **Styles** worksheet:
 
-![](./save_styles.png)
+![Screenshot of the Styles worksheet showing multiple saved node style definitions created with the Style Designer, each with its own name and Graphviz format string.](./save_styles.png)
 
 ## Color
 
@@ -141,7 +140,7 @@ This may sound complicated, so let’s simplify:
 - This worksheet lists all supported Graphviz color schemes (267 in total).  
 - Each scheme contains between 3 and 656 colors.
 
-![](./help_colors.png)
+![Screenshot of the HELP – colors worksheet showing the full list of Graphviz color schemes, each with its indexed palette of swatches.](./help_colors.png)
 
 This worksheet is used behind the scenes to generate preview images for color choices.
 
@@ -171,27 +170,27 @@ The **Style Designer** ribbon provides a large **Color Scheme** button and color
 
 Clicking the **Color Scheme** button opens a gallery where you can choose a scheme:
 
-![](./color_scheme_button.png)
+![Screenshot of the Color Scheme gallery button used to open the list of available Graphviz color schemes.](./color_scheme_button.png)
 
 When you select a scheme, all color‑related drop‑down lists are refreshed to display the colors for that scheme.
 
 For example, choosing **`greens3`** 
 
-![](./color_scheme_green3.png)
+![Screenshot showing the greens3 color scheme selected, with its three green palette options.](./color_scheme_green3.png)
 
 updates the lists to values `1`, `2`, and `3`, displays color icons, and adds the attribute `colorscheme=greens3` to the **Format String**.
 
-![](./color_scheme_green3_choices.png)
+![Screenshot of the updated color drop‑down lists showing values 1–3 with green color swatches after selecting greens3.](./color_scheme_green3_choices.png)
 
 If you switch to another scheme, the lists refresh again. 
 
 For example, after selecting **`greens3`**, 
 
-![](./color_scheme_rdbu11.png)
+![Screenshot showing the rdbu11 color scheme selected, with its eleven red‑to‑blue diverging palette options.](./color_scheme_rdbu11.png)
 
 choosing **`rdbu11`** updates the lists to values `1` through `11`, displays color icons, and adds `colorscheme=rdbu11` to the **Format String**.
 
-![](./color_scheme_rdbu11_choices.png)
+![Screenshot of the updated color drop‑down lists showing values 1–11 with red‑to‑blue swatches after selecting rdbu11.](./color_scheme_rdbu11_choices.png)
 
 ### Selecting a Pre-defined Color
 
@@ -199,7 +198,7 @@ You choose colors by clicking on any of the color drop‑down arrows to open a g
 
 Hovering over a color shows its name, such as *HotPink1* in the example below:
 
-![](./color_scheme_x11_choices.png)
+![Screenshot of the color gallery showing X11 color options, with the HotPink1 swatch highlighted and its name displayed on hover.](./color_scheme_x11_choices.png)
 
 When you click on a color, the **Style Designer** ribbon updates to show both the color and its name. 
 
@@ -207,21 +206,21 @@ The color name is added as an attribute in the **Format String**, and a preview 
 
 In the example below, `HotPink1` has been selected as the font color:
 
-![](./color_scheme_x11_hotpink1.png)
+![Screenshot of the Style Designer ribbon showing HotPink1 selected as the font color, with the preview panel updated accordingly.](./color_scheme_x11_hotpink1.png)
 
 ### Selecting a Color Using RGB (Red Green Blue) Values
 
-In addition to choosing from predefined color schemes, you can specify a custom color using the **Color Dialog**.  To the right of each color choice dropdown is a small button with color icon which appears as:
+In addition to choosing from predefined color schemes, you can specify a custom color using the **Color Dialog**. To the right of each color choice dropdown is a small button with a color icon which appears as:
 
-![](./color_picker_button.png)
+![Screenshot of the color‑picker button used to open the operating system’s native color selection dialog.](./color_picker_button.png)
 
 This dialog provides a native interface for selecting colors on your operating system:
 
 | **Windows 11 Color Dialog** | **macOS Color Dialog** |
 | :---: | :---: |
-| ![](./color_picker_hotpink1.png) | ![](./mac_designer_color_picker.png)  |
+| ![Windows 11 color picker dialog showing RGB sliders and custom color options.](./color_picker_hotpink1.png) | ![macOS system color picker showing color wheel, sliders, and palette options.](./mac_designer_color_picker.png) |
 
-The **Color Dialog** is initialized to the currently chosen color.  
+The **Color Dialog** is initialized to the currently chosen color.
 
 If a named color from a color scheme is selected, it is automatically converted to RGB when the Color Dialog is displayed.  
 
@@ -237,20 +236,20 @@ When you select a color in the dialog:
 
 In the example below, both the **Font Name** and the **Font Color** have been specified, with the font color defined as an RGB value:
 
-![](./color_picker_barbie_pink.png)
+![Screenshot of the Style Designer showing a custom RGB font color (#FE0079) applied, with the preview panel reflecting the updated font name and color.](./color_picker_barbie_pink.png)
 
 ## Labels
 
 You can design styles which format label text using the following controls:
 
-- Color
-- Font
-- Font size
-- Bold
-- Italic
+- Color  
+- Font  
+- Font size  
+- Bold  
+- Italic  
 - Label Location
 
-| ![](./label_appearance.png) |
+| ![Screenshot of the label appearance controls in the Style Designer, showing options for font, size, color, bold, italic, and label placement.](./label_appearance.png) |
 | -- |
 
 ### Label Fonts
@@ -266,7 +265,7 @@ These preview images are cached for future use. You may notice a slight delay th
 
 An example **Font Name** gallery on Windows 11 appears as follows:
 
-![](./font_gallery.png)
+![Screenshot of the Windows 11 Font Name gallery showing preview tiles for each font, with “Aa Bb Cc” rendered in the corresponding typeface.](./font_gallery.png)
 
 ### Selecting a Font
 
@@ -281,13 +280,13 @@ When you choose a font (e.g., `Comic Sans MS`):
 
 For example:
 
-![](./font_comic_sans.png)
+![Screenshot of the Style Designer showing Comic Sans MS selected as the font, with the preview panel updated to display labels in that typeface.](./font_comic_sans.png)
 
 ### Label Location
 
 Text can be aligned relative to the borders of a shape or cluster. Alignment is available as follows via the alignment buttons:
 
-| ![](./text_alignment.png) |
+| ![Screenshot of label alignment controls showing options for top, middle, bottom, left, center, and right alignment.](./text_alignment.png) |
 | --- |
 
 | Position| Node |  Cluster |
@@ -310,14 +309,14 @@ For example, rectangles may represent processes, ellipses may represent entities
 
 ### Specifying a shape
 
-Click on the `Shape` drop-down button. 
+Click on the `Shape` drop‑down button. 
 
-| ![](./shape_button.png) |
+| ![Screenshot of the Shape drop‑down button used to open the gallery of Graphviz-supported node shapes.](./shape_button.png) |
 | --- |
 
 A gallery of shapes supported by Graphviz is presented showing a sample image of the shape. 
 
-![](./shape_gallery.png)
+![Screenshot of the Shape gallery displaying all Graphviz-supported node shapes, each shown with a rendered preview.](./shape_gallery.png)
 
 Here we pick one of the rectangle shapes. When you select a shape:
 
@@ -325,20 +324,20 @@ Here we pick one of the rectangle shapes. When you select a shape:
 - The shape name is added as an attribute in the **Format String** (e.g., `shape=rect`).  
 - A preview image is generated to show how the node will appear when rendered by Graphviz.
 
-![](./shape_rect.png)
+![Screenshot of the Style Designer showing the rectangle shape selected, with the preview panel updated to display a rectangular node.](./shape_rect.png)
 
 ### Polygon Shapes
 
 Polygon shapes are unique from other shapes in Graphviz and have extra attributes which control how the polygon is created.
 
-If you select 'polygon' as the shape the ribbon will change dynamically to present additional choices as shown below:
+If you select `polygon` as the shape the ribbon will change dynamically to present additional choices as shown below:
 
-| ![](./polygon_choose.png) |
+| ![Screenshot of the Style Designer showing the polygon shape selected, prompting additional polygon‑specific options.](./polygon_choose.png) |
 | --- |
 
 Selecting `polygon` changes the ribbon to appear as:
 
-| ![](./polygon_options.png) |
+| ![Screenshot of the polygon options panel, showing controls for sides, skew, distortion, rotation, and peripheries.](./polygon_options.png) |
 | --- |
 
 ---
@@ -349,19 +348,19 @@ Positive values skew top of polygon to right; negative values skew the top of th
 
 #### Positive Skew
 
-|![](./polygon_skew_positive.png)|
+| ![Screenshot of a polygon node rendered with positive skew, showing the top edge slanted to the right.](./polygon_skew_positive.png) |
 | --- | 
 
-![](../media/dc4cfbe9033894c44f26b7011d5ccdc4.png)
+![Graphviz-rendered polygon with skew=1, showing a right‑leaning top edge.](../media/dc4cfbe9033894c44f26b7011d5ccdc4.png)
 
 `shape="polygon" skew="1"`
 
 #### Negative Skew
 
-|![](./polygon_skew_negative.png)|
+| ![Screenshot of a polygon node rendered with negative skew, showing the top edge slanted to the left.](./polygon_skew_negative.png) |
 | --- | 
 
-![](../media/1bc5be00cf87ddb3b4899d29550a465e.png)
+![Graphviz-rendered polygon with skew=-1, showing a left‑leaning top edge.](../media/1bc5be00cf87ddb3b4899d29550a465e.png)
 
 `shape="polygon" skew="-1"`
 
@@ -373,21 +372,22 @@ Positive values cause top part of the polygon to be larger than bottom; negative
 
 #### Positive Distortion
 
-|![](./polygon_distortion_positive.png)|
+| ![Screenshot of a polygon node rendered with positive distortion, showing a wider top and narrower bottom.](./polygon_distortion_positive.png) |
 | --- | 
 
-![](../media/d3a16d0b5a88e15e39c7af65c7b96df1.png)
+![Graphviz-rendered polygon with distortion=1 and regular=No, producing a top‑heavy shape.](../media/d3a16d0b5a88e15e39c7af65c7b96df1.png)
 
-shape="polygon" distortion="1" regular="No"
+`shape="polygon" distortion="1" regular="No"`
 
 #### Negative Distortion
 
-|![](./polygon_distortion_negative.png)|
+| ![Screenshot of a polygon node rendered with negative distortion, showing a narrower top and wider bottom.](./polygon_distortion_negative.png) |
 | --- | 
 
-![](../media/6b48aeeda4f98ec38d07b5c4f4ff5f15.png)
+![Graphviz-rendered polygon with distortion=-1 and regular=No, producing a bottom‑heavy shape.](../media/6b48aeeda4f98ec38d07b5c4f4ff5f15.png)
 
-shape="polygon" distortion="-1" regular="No"
+`shape="polygon" distortion="-1" regular="No"`
+
 
 ---
 
@@ -395,11 +395,11 @@ shape="polygon" distortion="-1" regular="No"
 
 | + | skew="-1" | skew="0" | skew="1" |
 | :---: | :--: | :--: | :--: |
-| **distortion="1"** | ![](../media/131fde8d0c21cbde937f364e790d1251.png) | ![](../media/cf4e5073a7590e1b3aaa95805918337d.png) | ![](../media/3e48a62a8c4e79fcd6db37bef589d1bf.png) |
+| **distortion="1"** | ![Graphviz-rendered polygon with distortion=1 and skew=-1, producing a top‑heavy shape leaning left.](../media/131fde8d0c21cbde937f364e790d1251.png) | ![Graphviz-rendered polygon with distortion=1 and skew=0, producing a symmetrical top‑heavy shape.](../media/cf4e5073a7590e1b3aaa95805918337d.png) | ![Graphviz-rendered polygon with distortion=1 and skew=1, producing a top‑heavy shape leaning right.](../media/3e48a62a8c4e79fcd6db37bef589d1bf.png) |
 | | | |
-| **distortion="0"** | ![](../media/e89d2bd25615a593144342db8bc4cd95.png) | ![](../media/085340ed0d232965f7cf3bfd96545943.png) | ![](../media/b902f48209f1013c10632a421a6028d3.png) |
+| **distortion="0"** | ![Graphviz-rendered polygon with distortion=0 and skew=-1, showing a neutral-height shape leaning left.](../media/e89d2bd25615a593144342db8bc4cd95.png) | ![Graphviz-rendered polygon with distortion=0 and skew=0, showing a neutral, symmetrical polygon.](../media/085340ed0d232965f7cf3bfd96545943.png) | ![Graphviz-rendered polygon with distortion=0 and skew=1, showing a neutral-height shape leaning right.](../media/b902f48209f1013c10632a421a6028d3.png) |
 | | | |
-| **distortion="-1"** | ![](../media/1af1b897c26ed637e15a9837381b48e3.png) | ![](../media/8b96cb5b58691ead550f6659056cb5e9.png) | ![](../media/1c8348e5974113e435f37510ec0553f8.png) |
+| **distortion="-1"** | ![Graphviz-rendered polygon with distortion=-1 and skew=-1, producing a bottom‑heavy shape leaning left.](../media/1af1b897c26ed637e15a9837381b48e3.png) | ![Graphviz-rendered polygon with distortion=-1 and skew=0, producing a symmetrical bottom‑heavy shape.](../media/8b96cb5b58691ead550f6659056cb5e9.png) | ![Graphviz-rendered polygon with distortion=-1 and skew=1, producing a bottom‑heavy shape leaning right.](../media/1c8348e5974113e435f37510ec0553f8.png) |
 
 ---
 
@@ -407,8 +407,8 @@ shape="polygon" distortion="-1" regular="No"
 
 If true, forces the polygon to be regular, i.e., the vertices of the polygon will lie on a circle whose center is the center of the node.
 
-| ![](./polygon_regular.png) |
-| --- | 
+| ![Screenshot of a regular polygon node, showing evenly spaced vertices positioned on a circular boundary.](./polygon_regular.png) |
+| --- |
 
 `shape="polygon" regular="Yes"`
 
@@ -428,25 +428,25 @@ The **sides** attribute controls the number of polygon sides used when drawing a
 
 When you set **sides**, the chosen value is displayed in the **Style Designer** ribbon, added to the **Format String** (e.g., `sides=6`), and shown in the preview image.
 
-![](./polygon_sides_choices.png)
+![Screenshot of the polygon sides drop‑down list showing selectable values for the number of polygon sides.](./polygon_sides_choices.png)
 
 #### sides=8
 
-| ![](./polygon_sides_8.png) | 
+| ![Screenshot of the Style Designer showing an 8‑sided polygon selected, with the preview panel displaying an octagonal node.](./polygon_sides_8.png) | 
 | --- | 
 
-![](../media/3f571210fe7626b7f0ab1375cf89e992.png) 
+![Graphviz-rendered polygon with sides=8 and regular=yes, producing a symmetric octagon.](../media/3f571210fe7626b7f0ab1375cf89e992.png) 
 
-`shape="polygon" sides="8" regular=yes"`
+`shape="polygon" sides="8" regular="yes"`
 
-Elipses/circles can also be skewed and distorted to create unique shapes.
+Ellipses/circles can also be skewed and distorted to create unique shapes.
 
-| ![](./polygon_sides_1.png) | 
+| ![Screenshot of the Style Designer showing sides=1 selected, which produces an ellipse or circle depending on regular mode.](./polygon_sides_1.png) | 
 | --- | 
 
 #### sides=1, with skew and distortion
 
-![](./polygon_sides_1_skew.png) 
+![Screenshot of a highly distorted and skewed ellipse created using sides=1, skew=1, and distortion=-1.](./polygon_sides_1_skew.png) 
 
 `shape=polygon sides=1 skew=1 distortion="-1" regular=no`
 
@@ -454,7 +454,7 @@ Elipses/circles can also be skewed and distorted to create unique shapes.
 
 #### Polygon Rotation
 
-The **orientation** attribute controls the rotation angle of a node shape. 
+The **orientation** attribute controls the rotation angle of a node shape.  
 It determines how the shape is drawn relative to its default position.
 
 - **orientation=0** (default)  
@@ -466,22 +466,22 @@ It determines how the shape is drawn relative to its default position.
 
 - **interaction with regular polygons**  
   - When used with polygon shapes (via the **sides** attribute), orientation rotates the polygon around its center.  
-  - For any number of polygon sides, 0 degrees rotation results in a flat base.
+  - For any number of polygon sides, 0 degrees rotation results in a flat base.  
   - This is useful for aligning triangles, diamonds, or other polygons to match the desired layout.
 
 When you set **orientation**, the chosen value is displayed in the **Style Designer** ribbon, added to the **Format String** (e.g., `orientation=90`), and shown in the preview image.
 
 | 5-sided regular polygon with no rotation | 5-sided regular polygon rotated 36 degrees clockwise |
 | :--: | :--: |
-| ![](./polygon_rotation_0.png) | ![](./polygon_rotation_36.png) |
+| ![Graphviz-rendered 5‑sided regular polygon with orientation=0, showing a flat base and upright alignment.](./polygon_rotation_0.png) | ![Graphviz-rendered 5‑sided regular polygon rotated 36 degrees clockwise, showing the shape tilted diagonally.](./polygon_rotation_36.png) |
 | | |
-| ![](./polygon_rotation_0_preview.png) | ![](./polygon_rotation_36_preview.png) |
+| ![Preview panel showing the unrotated 5‑sided polygon as rendered by the Style Designer.](./polygon_rotation_0_preview.png) | ![Preview panel showing the 5‑sided polygon rotated 36 degrees clockwise as rendered by the Style Designer.](./polygon_rotation_36_preview.png) |
 
 ## Dimensions
 
 In Graphviz, you can control the **height** and **width** of node shapes to adjust their overall size. These attributes ensure that shapes are scaled consistently and remain readable in your diagram.
 
-| ![](./dimensions.png) |
+| ![Screenshot of the Style Designer dimensions controls showing height and width settings for node sizing.](./dimensions.png) |
 | --- |
 
 ### Shape Height and Width
@@ -527,19 +527,19 @@ The **fixedsize** attribute controls whether a node’s shape is drawn at a fixe
 
 When you enable **fixedsize**, the chosen values are displayed in the **Style Designer** ribbon, added to the **Format String** (e.g., `shape=rect height=1 width="1.5" fixedsize=True`), and shown in the preview image.
 
-![](./shape_dimensions.png)
+![Screenshot of the Style Designer showing fixed height and width settings applied to a rectangular node, with the preview panel reflecting the locked dimensions.](./shape_dimensions.png)
 
 ## Borders 
 
 ### Border Styles
 
-Up to 3 border styles are selectable and are additive making it possible to have styles such as bold edge and rounded corners. When you click on any of the 'Border Style' drop-down lists you will be presented with the list of choices along with a sample image of the style.
+Up to 3 border styles are selectable and are additive, making it possible to have styles such as bold edge and rounded corners. When you click on any of the **Border Style** drop‑down lists you will be presented with the list of choices along with a sample image of the style.
 
-![](./border_styles.png)
+![Screenshot of the border style gallery showing selectable options such as solid, dashed, rounded, and bold, each with a preview.](./border_styles.png)
 
-In this example `Style 1` as `rounded` to give the rectangle rounded corners.
+In this example `Style 1` is set to `rounded` to give the rectangle rounded corners.
 
-![](./border_styles_rounded.png)
+![Screenshot of a rectangular node with rounded corners applied using the rounded border style.](./border_styles_rounded.png)
 
 The **Style Designer** provides an adaptive interface for applying multiple border styles.  
 As you make selections, additional style options appear dynamically:
@@ -550,7 +550,7 @@ As you make selections, additional style options appear dynamically:
 
 This adaptive behavior makes it easy to combine multiple visual effects without cluttering the interface.
 
-![](./border_styles_rounded_dashed.png)
+![Screenshot of a node with both rounded and dashed border styles applied, demonstrating layered border effects.](./border_styles_rounded_dashed.png)
 
 ### Border Color
 
@@ -560,13 +560,13 @@ The **Border Color** controls allow you to specify the color of a node shape or 
 
 For example:
 
-![](./border_color.png)
+![Screenshot of the Style Designer showing the border color picker applied to a rectangular node, with the preview panel reflecting the selected border color.](./border_color.png)
 
-### Border Pen Width
+#### Border Pen Width
 
 The **penwidth** attribute controls the thickness of lines used to draw node borders and edges.
 
-![](../media/f7211d46e2acc6a5c48f05c3cf74ea74.png)
+![Graphviz-rendered comparison of border thicknesses demonstrating different penwidth values.](../media/f7211d46e2acc6a5c48f05c3cf74ea74.png)
 
 - **penwidth=1.0** (default)  
   - Standard line thickness.  
@@ -584,13 +584,13 @@ The **penwidth** attribute controls the thickness of lines used to draw node bor
 
 For example:
 
-![](./border_penwidth.png)
+![Screenshot of the Style Designer showing a node with increased border pen width applied, with the preview panel reflecting the thicker outline.](./border_penwidth.png)
 
 ### Border Peripheries
 
 The **peripheries** attribute controls how many borders (or outlines) are drawn around a node shape.
 
-![](../media/9e94e4e8656094038ea4f27b5e8c2a56.png)
+![Screenshot of peripheries dropdown list showing 1 to 5 concentric borders to illustrate the peripheries attribute.](../media/9e94e4e8656094038ea4f27b5e8c2a56.png)
 
 - **peripheries=1** (default)  
   - A single border is drawn around the shape.  
@@ -604,13 +604,13 @@ The **peripheries** attribute controls how many borders (or outlines) are drawn 
 
 For example:
 
-![](./border_peripheries.png)
+![Screenshot of the Style Designer showing a node with 2 peripheries applied, with the preview panel displaying concentric borders.](./border_peripheries.png)
 
 ## Fills
 
 ### Fill Color
 
-The **fillcolor** attribute controls the interior color of a node shape or cluster.  It determines how the inside of the shape is rendered, providing contrast with the border and improving visual clarity.
+The **fillcolor** attribute controls the interior color of a node shape or cluster. It determines how the inside of the shape is rendered, providing contrast with the border and improving visual clarity.
 
 Fill colors can be selected from predefined color schemes or refined using the **Color Dialog**.
 
@@ -619,26 +619,26 @@ They are often used to group related nodes, highlight important elements, or imp
 When you specify a fill color:
 
 - The chosen color is displayed in the **Style Designer** ribbon, and the `Fill Color` caption changes to the name or RGB value of the color chosen.  
-- A new dropdown for `Gradient Fill Color` appears below the fill color.
+- A new dropdown for `Gradient Fill Color` appears below the fill color.  
 - The color name or RGB value is added as an attribute in the **Format String** (e.g., `fillcolor=DodgerBlue`).  
 - A preview image is generated to show how the node will appear when rendered by Graphviz.
 
 For example:
 
-![](./color_fillcolor.png)
+![Screenshot of the Style Designer showing a selected fill color applied to a node, with the preview panel updated to reflect the chosen interior color.](./color_fillcolor.png)
 
 ### Gradient Fill Color
 
 Notice that the ribbon dynamically changes once a `Fill Color` is specified to display a new choice for `Gradient Fill Color`.
 
-| ![](../media/ac5bcee724d834ed7725b6e3a1db389f.png)|
+| ![Screenshot of the Style Designer ribbon showing the newly revealed Gradient Fill Color dropdown after a primary fill color is selected.](../media/ac5bcee724d834ed7725b6e3a1db389f.png) |
 | --- |
 
 A `Gradient Fill Color` allows you to select a second color which the Fill Color will gradually transition to. If you select `HotPink` as the `Gradient Fill Color` the preview image changes to look like:
 
-![](../media/01dfe10d95d9076008cee3003c05b52d.png)
+![Graphviz-rendered node showing a gradient transition from the primary fill color to HotPink.](../media/01dfe10d95d9076008cee3003c05b52d.png)
 
-Another set of dynamic changes occur as three additional choices `Type`, `Angle`, and `Weight` appear to the right of the fill color selections. These choices allow you to define how the gradient transition occurs. 
+Another set of dynamic changes occur as three additional choices — **Type**, **Angle**, and **Weight** — appear to the right of the fill color selections. These choices allow you to define how the gradient transition occurs.
 
 ### Gradient Type
 
@@ -648,13 +648,13 @@ Gradient types can be used to highlight relationships, emphasize categories, or 
 
 The Gradient Type is either `filled` (i.e., linear) or `radial`.
 
-![](../media/c6de51ed69e5ddbb83de8ab31a145357.png)
+![Screenshot of the Style Designer showing the gradient type selector with options for filled (linear) and radial gradients.](../media/c6de51ed69e5ddbb83de8ab31a145357.png)
 
 The differences are illustrated below:
 
-| `gradienttype=filled`   | `gradienttype=radial`  |
+| `gradienttype=filled` | `gradienttype=radial` |
 | :---: | :---: |
-| ![](./gradient_filled.png) | ![](./gradient_radial.png) |
+| ![Graphviz-rendered node with a linear gradient transitioning smoothly from one color to another.](./gradient_filled.png) | ![Graphviz-rendered node with a radial gradient transitioning outward from a central color.](./gradient_radial.png) |
 
 ### Gradient Angle
 
@@ -675,9 +675,9 @@ By adjusting the gradient angle, you can control the visual flow of color transi
 
 For example, if you change the Gradient Angle to 90 degrees, the preview images now appear as:
 
-| `gradienttype=filled gradientangle=90`  | `gradienttype=radial gradientangle=90`     |
+| `gradienttype=filled gradientangle=90` | `gradienttype=radial gradientangle=90` |
 | :---: | :---: |
-| ![](./gradient_filled_angle090.png) | ![](./gradient_radial_angle090.png) |
+| ![Graphviz-rendered node with a linear gradient rotated 90 degrees, producing a top‑to‑bottom color transition.](./gradient_filled_angle090.png) | ![Graphviz-rendered node with a radial gradient rotated 90 degrees, shifting the gradient’s focal point accordingly.](./gradient_radial_angle090.png) |
 
 ### Gradient Weight
 
@@ -695,7 +695,7 @@ For example, specifying a gradient weight of 20% for the fill color is specified
 
 and the image appears as:
 
-| ![](./gradient_filled_weight20.png)   | 
+| ![Graphviz-rendered node showing a linear gradient where DodgerBlue dominates at 20% weight before transitioning to HotPink.](./gradient_filled_weight20.png) |
 | :--: |
 
 By adjusting the gradient weight, you can highlight one color more strongly, create subtle shading effects, or achieve balanced transitions between multiple colors.
@@ -704,11 +704,13 @@ By adjusting the gradient weight, you can highlight one color more strongly, cre
 
 Gradient Angle can be combined with the Gradient Weight to rotate the position of the color split, as in these examples where the gradient weight of the blue fillcolor is 20%:
 
-| `gradientangle=0`  | `gradientangle=90`  | `gradientangle=180` | `gradientangle=270` |
+| `gradientangle=0` | `gradientangle=90` | `gradientangle=180` | `gradientangle=270` |
 | :---: | :---: | :---: | :---: |
-| ![](./gradient_filled_weight20_angle000.png) | ![](./gradient_filled_weight20_angle090.png) | ![](./gradient_filled_weight20_angle180.png) | ![](./gradient_filled_weight20_angle270.png) |
-| `gradientangle=45`  | `gradientangle=135`  | `gradientangle=225` | `gradientangle=315` |
-| ![](./gradient_filled_weight20_angle045.png) | ![](./gradient_filled_weight20_angle135.png) | ![](./gradient_filled_weight20_angle225.png) | ![](./gradient_filled_weight20_angle315.png) |
+| ![Graphviz-rendered node with a 20% blue gradient weight and a 0‑degree angle, producing a left‑to‑right color transition.](./gradient_filled_weight20_angle000.png) | ![Graphviz-rendered node with a 20% blue gradient weight and a 90‑degree angle, producing a top‑to‑bottom transition.](./gradient_filled_weight20_angle090.png) | ![Graphviz-rendered node with a 20% blue gradient weight and a 180‑degree angle, producing a right‑to‑left transition.](./gradient_filled_weight20_angle180.png) | ![Graphviz-rendered node with a 20% blue gradient weight and a 270‑degree angle, producing a bottom‑to‑top transition.](./gradient_filled_weight20_angle270.png) |
+
+| `gradientangle=45` | `gradientangle=135` | `gradientangle=225` | `gradientangle=315` |
+| :---: | :---: | :---: | :---: |
+| ![Graphviz-rendered node with a 20% blue gradient weight and a 45‑degree diagonal gradient.](./gradient_filled_weight20_angle045.png) | ![Graphviz-rendered node with a 20% blue gradient weight and a 135‑degree diagonal gradient.](./gradient_filled_weight20_angle135.png) | ![Graphviz-rendered node with a 20% blue gradient weight and a 225‑degree diagonal gradient.](./gradient_filled_weight20_angle225.png) | ![Graphviz-rendered node with a 20% blue gradient weight and a 315‑degree diagonal gradient.](./gradient_filled_weight20_angle315.png) |
 
 ## Images
 
@@ -743,42 +745,41 @@ By choosing the appropriate path type, you can balance **portability** (relative
 
 ### Add an image path
 
-Switch to the `settings` worksheet and locate the "Image Path:" setting in the 'Graph Options' section. To the right of the cell is a button with three dots […]. If you press that button it will bring up the standard directory selection dialog which you can use to choose the directory where the images are stored. Navigate to the directory and press the "OK" button to transfer the path to the cell.
+Switch to the `settings` worksheet and locate the "Image Path:" setting in the **Graph Options** section. To the right of the cell is a button with three dots […]. If you press that button it will bring up the standard directory selection dialog which you can use to choose the directory where the images are stored. Navigate to the directory and press the "OK" button to transfer the path to the cell.
 
-![](../media/6c9b1c72a6c130a6ee8b4410456ac9b9.png)
+![Screenshot of the settings worksheet showing the Image Path field and the browse button used to select an image directory.](../media/6c9b1c72a6c130a6ee8b4410456ac9b9.png)
 
 Your settings should appear like this:
 
-![](../media/5917de49831274d8adc04972405be847.png)
+![Screenshot of the settings worksheet after an image directory has been selected, with the Image Path field populated.](../media/5917de49831274d8adc04972405be847.png)
 
 ### Specify an image
 
 Image name is an option on the `style designer` worksheet that is useful when you want to create a common style definition where all nodes of a given style use a common icon. For example, it is possible to depict computers with one image, depict databases with another image, and depict computer programmers with yet another image.
 
+**Step 1** – Define a shape. For this example a rectangle will be used.
 
-**Step 1** - Define a shape. For this example a rectangle will be used.
+![Screenshot of the Style Designer showing a rectangular node before an image is applied.](./image_start.png)
 
-![](./image_start.png)
+**Step 2** – Look to the far right side of the Ribbon to find the image controls.
 
-**Step 2** - Look to the far right side of the Ribbon to find the image controls.
-
-| ![](./image_controls.png)   | 
+| ![Screenshot of the Style Designer ribbon showing the image controls section, including the Choose Image button.](./image_controls.png) |
 | :--: |
 
-Press the `Choose Image` button
+Press the `Choose Image` button.
 
 Navigate to the directory containing the images and choose an image. A small image is selected in order to demonstrate scaling and placement.
 
-![](./image_select_a_file.png)
+![Screenshot of the file selection dialog showing a list of available images to choose from.](./image_select_a_file.png)
 
 The image by default is placed in the center of the node. For example:
 
-| ![](./image_center.png)   | 
+| ![Graphviz preview showing the selected image centered inside a rectangular node.](./image_center.png) |
 | :--: |
 
 With the image selected, the Ribbon adapts to display additional options which can be used to scale the image, or position the image within the shape.
 
-| ![](./image_scal_and_position.png)   | 
+| ![Screenshot of the Style Designer ribbon showing additional image scaling and positioning controls after an image is selected.](./image_scal_and_position.png) |
 | :--: |
 
 ---
@@ -789,26 +790,25 @@ Adjust the image by clicking the radio buttons in the **Scale** group. Only one 
 
 | Scale   | Radio Button | Preview | Description |
 | :---:   | :---: | :---: | :--- |
-| **height**  | ![](./image_scale_height.png) | ![](./image_scale_height_preview.png) | Stretch image to fill node height; width remains unchanged. |
+| **height**  | ![Height scaling radio button selected.](./image_scale_height.png) | ![Preview showing the image stretched to fill the node height while width remains unchanged.](./image_scale_height_preview.png) | Stretch image to fill node height; width remains unchanged. |
 | | | | |
-| **width**   | ![](./image_scale_width.png) | ![](./image_scale_width_preview.png) | Stretch image to fill node width; height remains unchanged. |
+| **width**   | ![Width scaling radio button selected.](./image_scale_width.png) | ![Preview showing the image stretched to fill the node width while height remains unchanged.](./image_scale_width_preview.png) | Stretch image to fill node width; height remains unchanged. |
 | | | | |
-| **aspect**  | ![](./image_scale_aspect.png) | ![](./image_scale_aspect_preview.png) | Uniformly scale image to fit node while preserving aspect ratio. |
+| **aspect**  | ![Aspect scaling radio button selected.](./image_scale_aspect.png) | ![Preview showing the image uniformly scaled to fit the node while preserving aspect ratio.](./image_scale_aspect_preview.png) | Uniformly scale image to fit node while preserving aspect ratio. |
 | | | | |
-| **both**    | ![](./image_scale_both.png) | ![](./image_scale_both_preview.png) |  Stretch image to fill both width and height of node; aspect ratio may distort. |
+| **both**    | ![Both‑dimensions scaling radio button selected.](./image_scale_both.png) | ![Preview showing the image stretched to fill both width and height of the node, potentially distorting aspect ratio.](./image_scale_both_preview.png) | Stretch image to fill both width and height of node; aspect ratio may distort. |
 | | | | |
-| **natural** | ![](./image_scale_natural.png) | ![](./image_scale_natural_preview.png) | Use image’s natural size; node expands to fit (default). |
+| **natural** | ![Natural scaling radio button selected.](./image_scale_natural.png) | ![Preview showing the image displayed at its natural size, with the node expanding to fit.](./image_scale_natural_preview.png) | Use image’s natural size; node expands to fit (default). |
 
-No scaling (i.e. "natural" scaling) will be used in order to demonstrate how to position images which are smaller than the node.
+No scaling (i.e., **natural** scaling) will be used in order to demonstrate how to position images which are smaller than the node.
 
 ---
 
 ### Adjust the Image Position
 
-The **Position** group contains nine toggle buttons that work in **radio button fashion**.  Selecting any button automatically unselects the previously chosen option.
+The **Position** group contains nine toggle buttons that work in **radio button fashion**. Selecting any button automatically unselects the previously chosen option.
 
 These buttons correspond to the nine possible locations where images can be placed relative to the cell or shape via the **imagepos** attribute:
-
 
 | + | Left | Center | Right |
 | :--: | :--: | :--: | :--: |
@@ -822,11 +822,11 @@ You can reposition the image within the node by selecting a Position radio butto
 
 | Position | Buttons pressed | Preview Image |
 | :--: | :--: | :--: |
-|Default | ![](./image_position_default.png)     | ![](./image_position_default_preview.png) | 
+| Default | ![Position control showing the middle‑center button selected.](./image_position_default.png) | ![Preview showing the image centered within the node.](./image_position_default_preview.png) |
 | | | |
-| Top Left | ![](./image_position_tl.png) | ![](./image_position_tl_preview.png) | 
+| Top Left | ![Position control showing the top‑left button selected.](./image_position_tl.png) | ![Preview showing the image placed at the top‑left corner of the node.](./image_position_tl_preview.png) |
 | | | |
-| Bottom Center | ![](./image_position_bc.png) | ![](./image_position_bc_preview.png)  | 
+| Bottom Center | ![Position control showing the bottom‑center button selected.](./image_position_bc.png) | ![Preview showing the image placed at the bottom‑center of the node.](./image_position_bc_preview.png) |
 
 ## Edges
 
@@ -849,19 +849,19 @@ To create an edge style definition in the **Style Designer** worksheet:
 
 The style designer worksheet appearance changes to look as follows:
 
-![](./edge_reset.png)
+![Screenshot of the Style Designer after switching to Edge mode and pressing Reset, showing edge‑specific controls and an empty preview.](./edge_reset.png)
 
 ### Edge Labels
 
 Labels for edges are specified in the same way as labels for nodes, with the same styling options (e.g., font, color, size).  
 
-| ![](./edge_labels.png) |
+| ![Screenshot of the Style Designer showing edge label controls, including font, color, and toggle options for decorate and float.](./edge_labels.png) |
 | :--: |
 
 However, edge labels include two additional toggle attributes:
 
-- **Decorate** - draws a line from the edge to its label, visually connecting the text to the edge.  
-- **Float** - allows the label to float freely near the edge rather than being anchored to a fixed position.
+- **Decorate** — draws a line from the edge to its label, visually connecting the text to the edge.  
+- **Float** — allows the label to float freely near the edge rather than being anchored to a fixed position.
 
 These options are available as toggle buttons in the **Style Designer** ribbon.  
 When selected, they are added to the **Format String** (e.g., `decorate=true, float=true`) and shown in the preview image.
@@ -876,14 +876,14 @@ These attributes control the visual appearance and relative importance of edges 
   - Common values include `solid`, `dashed`, `dotted`, `bold`, and `tapered`.  
   - For example, `style=dashed` produces a broken line, while `style=bold` thickens the edge for emphasis.  
 
-![](./edge_style_style.png)
+![Screenshot of the Style Designer showing edge style options such as solid, dashed, dotted, bold, and tapered.](./edge_style_style.png)
 
 - **Penwidth**  
   - Specifies the thickness of the edge line.  
   - Larger values produce heavier lines, useful for highlighting important connections.  
   - Example: `penwidth=2.0` doubles the default line thickness.  
 
-![](./edge_style_penwidth.png)
+![Screenshot of the Style Designer showing the penwidth control for adjusting edge line thickness.](./edge_style_penwidth.png)
 
 - **Weight**  
   - Influences how strongly the edge affects the layout.  
@@ -900,7 +900,7 @@ Edge colors are specified in the same way as node colors, with support for both 
 
 - **Multiple Colors (up to 3)**  
   - Specify up to three colors; Graphviz renders the edge as parallel lines in the given colors.  
-  - Example: `color="Blue:Red:DarkGreen""`  
+  - Example: `color="Blue:Red:DarkGreen"`  
 
 - **Color Schemes**  
   - Choose colors from Graphviz’s predefined schemes (e.g., `rdbu11`, `greens3`).  
@@ -911,23 +911,23 @@ Edge colors are specified in the same way as node colors, with support for both 
 
 When you set edge colors, the chosen values are displayed in the **Style Designer** ribbon, added to the **Format String** (e.g., `color="red:yellow"`), and shown in the preview image.
 
-For Example:
+For example:
 
 | # Colors | Selection | Preview |
 | :-: | :-: | :-: |
-| 1 | ![](./edge_color_1.png) | ![](./edge_color_1_preview.png) |
-| | | | 
-| 2 | ![](./edge_color_2.png) | ![](./edge_color_2_preview.png) | 
-| | | | 
-| 3 | ![](./edge_color_3.png) | ![](./edge_color_3_preview.png) | 
+| 1 | ![Screenshot of the Style Designer showing a single edge color selected.](./edge_color_1.png) | ![Preview showing an edge rendered with one solid color.](./edge_color_1_preview.png) |
+| | | |
+| 2 | ![Screenshot of the Style Designer showing two edge colors selected.](./edge_color_2.png) | ![Preview showing an edge rendered as two parallel colored lines.](./edge_color_2_preview.png) |
+| | | |
+| 3 | ![Screenshot of the Style Designer showing three edge colors selected.](./edge_color_3.png) | ![Preview showing an edge rendered as three parallel colored lines.](./edge_color_3_preview.png) |
 
 ### Edge Direction
 
-The Graphviz **dir** attribute controls the arrowheads drawn on an edge. 
+The Graphviz **dir** attribute controls the arrowheads drawn on an edge.
 
-In the **Style Designer** worksheet, this is managed through four toggle buttons in the **Direction** group that act in radio button fashion - selecting one option automatically clears the previous choice.
+In the **Style Designer** worksheet, this is managed through four toggle buttons in the **Direction** group that act in radio button fashion — selecting one option automatically clears the previous choice.
 
-| ![](./edge_direction.png) |
+| ![Screenshot of the Style Designer showing the Direction group with radio‑style buttons for forward, back, both, and none.](./edge_direction.png) |
 | :--: |
 
 Supported values are:
@@ -956,21 +956,21 @@ When you select a direction, the chosen value is displayed in the **Style Design
 
 | Direction | Ribbon | Preview |
 | :-- | :-- | :--: |
-| `dir=none` | ![](./edge_direction_none.png)  | ![](./edge_direction_none_preview.png)|
+| `dir=none` | ![Ribbon showing the None direction selected.](./edge_direction_none.png) | ![Preview showing an edge with no arrowheads.](./edge_direction_none_preview.png) |
 | | |
-| `dir=forward` | ![](./edge_direction_forward.png) | ![](./edge_direction_forward_preview.png)|
+| `dir=forward` | ![Ribbon showing the Forward direction selected.](./edge_direction_forward.png) | ![Preview showing an edge with an arrowhead at the target end.](./edge_direction_forward_preview.png) |
 | | |
-| `dir=back` | ![](./edge_direction_back.png)  | ![](./edge_direction_back_preview.png)|
+| `dir=back` | ![Ribbon showing the Back direction selected.](./edge_direction_back.png) | ![Preview showing an edge with an arrowtail at the source end.](./edge_direction_back_preview.png) |
 | | |
-| `dir=both` | ![](./edge_direction_both.png)  | ![](./edge_direction_both_preview.png)|
+| `dir=both` | ![Ribbon showing the Both direction selected.](./edge_direction_both.png) | ![Preview showing an edge with arrowheads at both ends.](./edge_direction_both_preview.png) |
 
 > Arrowhead and arrowtail styles will be described in detail in a later section.
 
 ### Arrow Size
 
-The **arrowsize** attribute scales the size of an edge’s arrowhead or arrowtail.  
+The **arrowsize** attribute scales the size of an edge’s arrowhead or arrowtail.
 
-![](./edge_arrowsize.png)
+![Screenshot of the Style Designer showing the arrowsize control used to scale arrowheads and arrowtails.](./edge_arrowsize.png)
 
 It acts as a simple multiplier applied to the base size of the selected arrow style.
 
@@ -989,14 +989,14 @@ The selected value is shown in the **Style Designer** ribbon, added to the **For
 
 ### Arrow Heads
 
-Arrowheads are a popular styling option for edges, and Graphviz provides a robust set of shapes to choose from.  
+Arrowheads are a popular styling option for edges, and Graphviz provides a robust set of shapes to choose from.
 
 You may stack multiple arrowhead types to create custom designs. For example:
 
-| 1 Arrow Head | 2 Arrow Heads| 3 Arrow Heads |
+| 1 Arrow Head | 2 Arrow Heads | 3 Arrow Heads |
 | :-: | :-: | :-: |
-|  ![](./edge_1arrowhead.png)   |  ![](./edge_2arrowheads.png)     |   ![](./edge_3arrowheads.png)    |
-|`arrowhead="normal"` | `arrowhead="normalodot"`| `arrowhead="normalodotcurve"` |
+| ![Preview of an edge using a single normal arrowhead.](./edge_1arrowhead.png) | ![Preview of an edge using a stacked normal + odot arrowhead.](./edge_2arrowheads.png) | ![Preview of an edge using a stacked normal + odot + curve arrowhead.](./edge_3arrowheads.png) |
+| `arrowhead="normal"` | `arrowhead="normalodot"` | `arrowhead="normalodotcurve"` |
 
 The Relationship Visualizer ribbon supports up to **three stacked arrowheads**:
 
@@ -1004,13 +1004,13 @@ The Relationship Visualizer ribbon supports up to **three stacked arrowheads**:
 - After selecting a **second** arrowhead, a **third dropdown** becomes available.  
 - Each dropdown represents one position in the stack, allowing you to build compound arrowhead shapes.
 
-These selections apply to the end(s) of the edge based on the `dir` setting (e.g., `forward`, `back`, or `both`).  
+These selections apply to the end(s) of the edge based on the `dir` setting (e.g., `forward`, `back`, or `both`).
 
 Arrowhead and arrowtail styles are added to the **Format String** (e.g., `arrowhead=diamond`, `arrowtail="dotvee"`), and the preview updates accordingly.
 
-Each change updates the **Edge Format String** and renders a sample graph showing how the edge will appear based on the current **Layout Engine** and **Splines** settings on the `settings` worksheet.  
+Each change updates the **Edge Format String** and renders a sample graph showing how the edge will appear based on the current **Layout Engine** and **Splines** settings on the `settings` worksheet.
 
-Be aware that the visual result may vary depending on how different layout engines handle splines, head ports, and tail ports.  
+Be aware that the visual result may vary depending on how different layout engines handle splines, head ports, and tail ports.
 
 For more details on these settings, see the section [Graph Options](#graph-options).
 
@@ -1028,14 +1028,14 @@ Graphviz provides a rich collection of arrowhead and arrowtail glyphs that you c
 
 The following gallery shows the complete set of arrow glyphs supported by Graphviz. These shapes can be used for both **arrowheads** and **arrowtails**, and up to three may be combined in sequence to form a compound style. Use this reference to explore the available options and choose the combinations that best fit your diagram’s purpose.
 
-![](./edge_glyphs.png)
+![Gallery of all Graphviz arrowhead and arrowtail glyphs, displayed in their standard forms for reference.](./edge_glyphs.png)
 
 The arrowhead and arrowtail glyphs shown above use the standard Graphviz names.  
-From left to right, each glyph is labeled with its corresponding attribute value  
+From left to right, each glyph is labeled with its corresponding attribute value:
 
 | Left + Right | Left Only | Right Only |
 | :-- | :-- | :-- |
-| `none`| `dot`| `odot` |
+| `none` | `dot` | `odot` |
 | `normal` | `lnormal` | `rnormal` |
 | `onormal` | `olnormal` | `ornormal` |
 | `box` | `lbox` | `rbox` |
@@ -1056,21 +1056,19 @@ Use these names when specifying `arrowhead`, `arrowtail`, or stacked combination
 
 These controls provide assistance in defining the head and tail attributes for an edge.
 
-| ![](../media/192ac17604bd3f022781b2a3f0cc9d30.png) |
-|----------------------------------------------------|
+![Screenshot of the Style Designer showing head and tail configuration controls for edge labels and endpoint styling.](../media/192ac17604bd3f022781b2a3f0cc9d30.png)
 
 ### Label Font Name, Font Size, and Font Color
 
 These attributes provide a way to differentiate the text at the end of the edges where they meet the node.
 
-| ![](../media/c1a002afde1e098c2d4bba08205953d2.png) |
-|----------------------------------------------------|
+![Screenshot of the Style Designer ribbon showing controls for labelfontname, labelfontsize, and labelfontcolor.](../media/c1a002afde1e098c2d4bba08205953d2.png)
 
-Appears as: 
+Appears as:
 
-![](../media/d3146f7f10011c4c1738cdf5094d75f6.png)
+![Preview showing an edge with styled head and tail labels using Arial font, size 8, and blue text.](../media/d3146f7f10011c4c1738cdf5094d75f6.png)
 
-With Format string: 
+With Format string:
 
 `labelfontname="Arial" labelfontsize="8" labelfontcolor="Blue"`
 
@@ -1084,16 +1082,15 @@ Imagine standing at the spot where the edge meets the node. Now imagine a line p
 - **Positive numbers** rotate the label **to the left**
 - **Negative numbers** rotate the label **to the right**
 
-By changing the angle, you choose which “side” of the node the label appears on. 
+By changing the angle, you choose which “side” of the node the label appears on.
 
 For example, setting the label angle to 90 degrees:
 
-| ![](../media/ca5ea6312ec3189666321a1ff2d628fa.png) |
-|----------------------------------------------------|
+![Screenshot of the Style Designer showing labelangle set to 90 degrees with corresponding font controls.](../media/ca5ea6312ec3189666321a1ff2d628fa.png)
 
-Appears as: 
+Appears as:
 
-![](../media/e144fb147a088b5a29a80cf391fc6488.png)
+![Preview showing a head or tail label positioned 90 degrees from the edge’s attachment point, styled in Arial 8pt blue text.](../media/e144fb147a088b5a29a80cf391fc6488.png)
 
 With Format String:
 
@@ -1106,20 +1103,19 @@ With Format String:
 Instead of setting the distance directly in points, `labeldistance` acts as a **scaling factor**.  
 Graphviz starts from a built‑in base distance (about **10 points**), and your value multiplies that distance:
 
-- A value of **1.0** keeps the default spacing
-- A value of **2.0** places the label about twice as far away
-- A value of **0.5** moves it to about half the default distance
+- A value of **1.0** keeps the default spacing  
+- A value of **2.0** places the label about twice as far away  
+- A value of **0.5** moves it to about half the default distance  
 
 A **point** is a standard typographic unit: there are **72 points in one inch**, so these changes adjust the label’s distance in small, predictable steps.
 
 In short, `labeldistance` tells Graphviz to move the label **closer or farther** from the node by scaling the default distance.
 
-| ![](../media/db3e619448238b58510db873ac3c9fd9.png) |
-|----------------------------------------------------|
+![Screenshot of the Style Designer showing the labeldistance control set to a custom value, along with label font options.](../media/db3e619448238b58510db873ac3c9fd9.png)
 
-For example, `labeldistance=3` appears as: 
+For example, `labeldistance=3` appears as:
 
-![](../media/4096c8a32f9f7f755dd5db3d68f7513d.png)
+![Preview showing a head or tail label positioned farther from the node due to labeldistance=3, styled in Arial 8pt blue text.](../media/4096c8a32f9f7f755dd5db3d68f7513d.png)
 
 With Format String:
 
@@ -1131,12 +1127,11 @@ Used together, `labelangle` and `labeldistance` let you control both **where** a
 
 This example depicts when `labelangle=` and `labeldistance=` attributes are used together.
 
-| ![](../media/876f4b9d1dbfa27bfbfab33744b07bfb.png) |
-|----------------------------------------------------|
+![Screenshot of the Style Designer showing labelangle and labeldistance set together, with font options visible.](../media/876f4b9d1dbfa27bfbfab33744b07bfb.png)
 
-Appears as: 
+Appears as:
 
-![](../media/726ea98317e2b666d5c3143d436e03a3.png)
+![Preview showing a head or tail label positioned using both labelangle=90 and labeldistance=3, styled in Arial 8pt blue text.](../media/726ea98317e2b666d5c3143d436e03a3.png)
 
 With Format String:
 
@@ -1148,11 +1143,11 @@ Indicates where on the head node to attach the head of the edge. In the default 
 
 If a compass point is used, it must be one of the following: `n`, `ne`, `e`, `se`, `s`, `sw`, `w`, `nw`, `c`, or `_`. A compass point adjusts the edge’s attachment point so that it aims for the specified location on the port—or, if no port name is provided, on the node itself. The compass point `c` targets the center of the node or port. The compass point `_` instructs Graphviz to choose the side of the port that lies on the exterior of the node; if no such side exists, the center is used instead. When a port name is supplied without a compass point, the default value is `_`.
 
-![](../media/c95b15302b40b1b8de2dba65904a38ba.png) 
+![Screenshot of the Style Designer showing the headport control set to a compass point value.](../media/c95b15302b40b1b8de2dba65904a38ba.png)
 
 Appears As:
 
-![](../media/9761139853713845c282cc6de415edaf.png)
+![Preview showing an edge attached to the north side of the head node using headport=n, with styled label text.](../media/9761139853713845c282cc6de415edaf.png)
 
 With Format String:
 
@@ -1164,16 +1159,15 @@ Indicates where on the tail node to attach the tail of the edge.
 
 If a compass point is used, it must be one of the following: `n`, `ne`, `e`, `se`, `s`, `sw`, `w`, `nw`, `c`, or `_`. A compass point modifies edge placement so that the edge aims for the specified point on the port—or, if no port name is supplied, on the node itself. The compass point `c` targets the center of the node or port. The compass point `_` indicates that Graphviz should choose the side of the port that lies on the exterior of the node; if no such side exists, the center is used instead. When a port name is provided without a compass point, the default compass point is `_`.
 
-![](../media/52950a49b2df611060bed2131269abbe.png) 
+![Screenshot of the Style Designer showing the tailport gallery control.](../media/52950a49b2df611060bed2131269abbe.png)
 
-Appears as: 
+Appears as:
 
-![](../media/9c7559d33c6e09fe77a9644cca7559a8.png)
+![Preview showing an edge attached to the south side of the tail node using tailport=s, with styled label text.](../media/9c7559d33c6e09fe77a9644cca7559a8.png)
 
 With Format String:
 
 `labelfontname=Arial labelfontsize=8 labelfontcolor=Blue headport=n tailport=s`
-
 
 ### Clipping Behavior
 
@@ -1188,10 +1182,10 @@ Graphviz uses *clipping* to decide how far an edge (its spline and arrowhead) ru
 
 | Buttons | Preview |
 | :-----: | :-----: |
-| ![](./clip-true-true.png)   | ![](./tailclip-true-headclip-true.png)                                            |
-|                             | Edge head **is** clipped at the node |
-| ![](./clip-false-true.png)  | ![](./tailclip-true-headclip-false.png)                                           |
-|                             | Edge head **is not** clipped at the node |
+| ![Ribbon controls showing headclip=true and tailclip=true selected.](./clip-true-true.png) | ![Preview showing the edge head clipped at the node boundary.](./tailclip-true-headclip-true.png) |
+|  | Edge head **is** clipped at the node |
+| ![Ribbon controls showing headclip=false and tailclip=true selected.](./clip-false-true.png) | ![Preview showing the edge head extending into the node interior.](./tailclip-true-headclip-false.png) |
+|  | Edge head **is not** clipped at the node |
 
 ### Tail Clip
 
@@ -1200,37 +1194,36 @@ Graphviz uses *clipping* to decide how far an edge (its spline and arrowhead) ru
 - When `tailclip=true` (the default), Graphviz clips the spline at the boundary of the tail node. The edge meets the node at its outline.
 - When `tailclip=false`, the spline is allowed to extend into the node, so the edge may appear to start from a point inside the node.
 
-
 | Buttons | Preview |
-| :-----: | :-----:|
-| ![](./clip-true-true.png)   | ![](./tailclip-true-headclip-true.png)                                            |
-|                             | Edge tail **is** clipped at the node |
-| ![](./clip-true-false.png)  | ![](./tailclip-false-headclip-true.png)                                           |
-|                             | Edge tail **is not** clipped at the node      |
+| :-----: | :-----: |
+| ![Ribbon controls showing tailclip=true and headclip=true selected.](./clip-true-true.png) | ![Preview showing the edge tail clipped at the node boundary.](./tailclip-true-headclip-true.png) |
+|  | Edge tail **is** clipped at the node |
+| ![Ribbon controls showing tailclip=false and headclip=true selected.](./clip-true-false.png) | ![Preview showing the edge tail extending into the node interior.](./tailclip-false-headclip-true.png) |
+|  | Edge tail **is not** clipped at the node |
 
 ## Clusters
 
-Clusters can have styles just as nodes and edges do.  
+Clusters can have styles just as nodes and edges do.
 
 To create a cluster style definition in the **Style Designer** worksheet:
 
 1. Change the **Design Mode Element** to **Cluster**.  
-   - This switches the ribbon controls to attributes appropriate for clusters (e.g., `Labels`, `Borders`, `Fill`, `arrowhead`).  
+   - This switches the ribbon controls to attributes appropriate for clusters (e.g., `Labels`, `Borders`, `Fill`).  
    - Node‑specific attributes such as `shape` will no longer be available.  
-   - Edge‑specific attributes such as `arrowhead`, `arrowtail` will no longer be available.  
+   - Edge‑specific attributes such as `arrowhead`, `arrowtail` will no longer be available.
 
 2. Press the **Reset** button.  
    - This clears all style values carried over from node definitions.  
-   - Starting from a clean slate ensures that only edge‑specific attributes are applied.  
+   - Starting from a clean slate ensures that only cluster‑specific attributes are applied.
 
 3. Use the ribbon, preview image, and format string just as you did for nodes and edges.  
    - The selected attributes are displayed in the ribbon.  
-   - The **Format String** is updated with edge attributes (e.g., `color=blue, style=dashed`).  
+   - The **Format String** is updated with cluster attributes (e.g., `color=blue, style=dashed`).  
    - The preview image shows exactly how Graphviz will render the cluster. There are seven shapes of various sizes to simulate how a cluster might be used.
 
-The style designer worksheet appearance changes to look as follows:
+The Style Designer worksheet appearance changes to look as follows:
 
-![](./edge_reset.png)
+![Screenshot of the Style Designer after switching to Cluster mode and resetting attributes, showing cluster‑specific controls and preview shapes.](./edge_reset.png)
 
 ### Color Scheme
 
@@ -1246,8 +1239,7 @@ Nodes allow you to left‑justify, center, or right‑justify their labels. Clus
 
 The following example shows the alignment buttons set to place the cluster label in the bottom right of the cluster:
 
-| ![](./cluster_alignment_bottom_right.png) |
-| :--: |
+![Screenshot of the Style Designer showing cluster label alignment controls set to bottom‑right.](./cluster_alignment_bottom_right.png)
 
 ### Borders
 
@@ -1261,10 +1253,10 @@ Fill colors and gradient fills for a cluster’s rectangle are defined the same 
 
 If the layout on the Graphviz ribbon tab is set to the [osage](../create/#graph-layout) layout, an additional **Packing** group of controls will appear, as shown in the example below:
 
-| ![](./cluster_packing.png) |
+| ![Screenshot of the Style Designer showing the cluster packing controls available when using the osage layout.](./cluster_packing.png) |
 | :--: |
 
-These controls let you adjust how nodes within clusters, or clusters within clusters are arranged relative to one another in the final layout.
+These controls let you adjust how nodes within clusters, or clusters within clusters, are arranged relative to one another in the final layout.
 
 Two options are provided:
 
@@ -1276,47 +1268,46 @@ Two options are provided:
   
   When **array** is selected, the Packing group expands to provide additional controls, as shown below:
 
-    | ![](./cluster_packing_array.png) |
+    | ![Screenshot of the Style Designer showing expanded array‑mode packing controls, including component count, alignment, sorting, and column‑major options.](./cluster_packing_array.png) |
     | :--: |
 
-  Additional choices include:
-  - **No. of components** - How many components (nodes or clusters) to place before starting a new row or column.
-  - **Node alignment** - How nodes should be aligned within each cluster:  
-    - Top  (`packmode=array_t`)
-    - Middle (`packmode=array`)
-    - Bottom (`packmode=array_b`)
-    - Left (`packmode=array_l`)
-    - Right (`packmode=array_r`).
-  - **Sort using `sortv`** (`packmode=array_u`) - Sorts components based on their `sortv` attribute.
-  - **Column‑major order** (`packmode=array_c`) - Lays out components column‑by‑column instead of row‑by‑row.
+Additional choices include:
+- **No. of components** - How many components (nodes or clusters) to place before starting a new row or column.
+- **Node alignment** - How nodes should be aligned within each cluster:  
+  - Top  (`packmode=array_t`)
+  - Middle (`packmode=array`)
+  - Bottom (`packmode=array_b`)
+  - Left (`packmode=array_l`)
+  - Right (`packmode=array_r`).
+- **Sort using `sortv`** (`packmode=array_u`) - Sorts components based on their `sortv` attribute.
+- **Column‑major order** (`packmode=array_c`) - Lays out components column‑by‑column instead of row‑by‑row.
 
-  `packmode` array flags can be combined to apply multiple effects at once. For example, the selections shown below:
+`packmode` array flags can be combined to apply multiple effects at once. For example, the selections shown below:
 
-  | ![](./cluster_packing_example.png) |
-  | :--: |
+| ![Screenshot of the Style Designer showing multiple array‑mode packing flags selected, including column‑major, top alignment, left alignment, sortv, and a component count of 4.](./cluster_packing_example.png) |
+| :--: |
 
-    produce the Format String `pack=9 packmode=array_ctlu4` which breaks down as follows:
-  - **`pack=9`** - Sets the margin around the nodes to 1/8".
-  - **`packmode=array_ctlu4`** - Applies several array‑mode flags at once:
-    - `u` - Sort components by their `sortv` attribute.
-    - `c` - Use column‑major order.
-    - `l` - Align nodes along the **left** edge within each column.
-    - `t` - Align nodes along the **top** edge within each row.
-    - `4` - Each column can contain **4** node or cluster objects (this example shows nodes).
+  produce the Format String `pack=9 packmode=array_ctlu4` which breaks down as follows:
+- **`pack=9`** - Sets the margin around the nodes to 1/8".
+- **`packmode=array_ctlu4`** - Applies several array‑mode flags at once:
+  - `u` - Sort components by their `sortv` attribute.
+  - `c` - Use column‑major order.
+  - `l` - Align nodes along the **left** edge within each column.
+  - `t` - Align nodes along the **top** edge within each row.
+  - `4` - Each column can contain **4** node or cluster objects (this example shows nodes).
 
-  Together, these flags sort the nodes, arrange them column‑by‑column with four rows per column, and align them to the top and left within the grid.
+Together, these flags sort the nodes, arrange them column‑by‑column with four rows per column, and align them to the top and left within the grid.
 
-  The preview of the cluster appears as:
+The preview of the cluster appears as:
 
-  | `pack=9 packmode=array_ctlu4`      |
-  | :--------------------------------: |
-  | ![](./cluster_packing_preview.png) |
+| `pack=9 packmode=array_ctlu4` |
+| :---------------------------: |
+| ![Preview showing nodes arranged using pack=9 and packmode=array_ctlu4, with column‑major ordering, top and left alignment, sortv ordering, and four components per column.](./cluster_packing_preview.png) |
 
+Here are additional examples:
 
-  Here are additional examples:
-
-  | `packmode=clust`                  | `packmode=array_2` | `packmode=array_c2` | `packmode=array_cu2` |
-  | :-------------------------------: | :--: | :--: | :--: |
-  | ![](./cluster_packmode_array.png) | ![](./cluster_packmode_array2.png) | ![](./cluster_packmode_arrayc2.png) | ![](./cluster_packmode_arraycu2.png) |
-  | Best fit distribution | 2 Columns in row major order | 2 Rows in column major order | 2 Rows in column major order, sorted |
+| `packmode=clust` | `packmode=array_2` | `packmode=array_c2` | `packmode=array_cu2` |
+| :---------------: | :----------------: | :------------------: | :-------------------: |
+| ![Preview of clusters arranged using packmode=clust, showing a best‑fit natural grouping layout.](./cluster_packmode_array.png) | ![Preview of clusters arranged using packmode=array_2, showing two columns in row‑major order.](./cluster_packmode_array2.png) | ![Preview of clusters arranged using packmode=array_c2, showing two rows in column‑major order.](./cluster_packmode_arrayc2.png) | ![Preview of clusters arranged using packmode=array_cu2, showing two rows in column‑major order with sortv‑based ordering.](./cluster_packmode_arraycu2.png) |
+| Best fit distribution | 2 Columns in row major order | 2 Rows in column major order | 2 Rows in column major order, sorted |
 
