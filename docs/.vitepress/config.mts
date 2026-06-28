@@ -28,7 +28,10 @@ export default defineConfig({
   
   head: [
     // Favicon (browser tab icon)
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon',             href: '/favicon.ico',          sizes: '32x32',   type: 'image/x-icon' }],
+    ['link', { rel: 'icon',             href: '/favicon-32x32.png',    sizes: '32x32',   type: 'image/png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    ['link', { rel: 'icon',             href: '/favicon-192x192.png',  sizes: '192x192', type: 'image/png' }],
 
     // Simple Analytics
     // This script is added to the head of the HTML document to enable Simple Analytics tracking on the site.
