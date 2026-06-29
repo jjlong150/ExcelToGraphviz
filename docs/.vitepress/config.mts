@@ -113,10 +113,15 @@ export default defineConfig({
 
   transformPageData(pageData) {
     
-    const canonicalUrl = joinURL(
-      'https://exceltographviz.com',
-      withoutTrailingSlash(pageData.filePath.replace(/(index)?\.md$/, ''))
-    )
+    const siteUrl = 'https://exceltographviz.com'
+
+    // Modern clean canonical URL (no trailing slash)
+    let path = pageData.relativePath
+      .replace(/\.md$/, '')
+      .replace(/index$/, '')
+      .replace(/\/$/, '')
+
+    const canonicalUrl = path ? `${siteUrl}/${path}` : siteUrl
 
     // === Blog logic ===
     const isBlogPost = 
