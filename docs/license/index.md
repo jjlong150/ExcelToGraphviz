@@ -1,6 +1,6 @@
 ---
 title: MIT License
-description: View the MIT open‑source license governing the use, distribution, and modification of Relationship Visualizer.
+description: View the MIT open-source license governing the use, distribution, and modification of Relationship Visualizer.
 ---
 
 # License
