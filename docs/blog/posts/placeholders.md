@@ -1,6 +1,6 @@
 ---
 blogPost: true
-title: New Feature: Label Templates
+title: New Label Template Feature
 description: New support for label placeholders in node, edge, and cluster labels.
 date: 2026-04-27
 author: jjlong150
