@@ -1,6 +1,6 @@
 ---
 title: Run Diagnostics to Troubleshoot Issues
-description: Use built‑in diagnostic tools to identify configuration problems, missing data, or rendering errors.
+description: Use built-in diagnostic tools to identify configuration problems, and manage image caches.
 ---
 
 # Diagnostics Worksheet

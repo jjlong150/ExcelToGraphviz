@@ -1,6 +1,6 @@
 ---
 title: Create Views for Focused Diagram Outputs
-description: Learn how to build custom Views that filter nodes, edges, and clusters using style switches—allowing you to highlight specific relationships, explore subsets of large datasets, and generate line‑specific or category‑specific Graphviz diagrams.
+description: Build custom Views that filter nodes, edges, and clusters using style switches to highlight relationships, explore subsets, and generate focused Graphviz diagrams.
 ---
 
 # Create Views

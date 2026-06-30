@@ -1,8 +1,8 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 
-title: Excel to Graphviz - Relationship Visualizer
-description: Transform Excel data into clear Graphviz graph diagrams. Free, easy‑to‑use tool for visualizing relationships, hierarchies, and networks directly from spreadsheets.
+title: Relationship Visualizer
+description: Turn Excel data into clear Graphviz diagrams with a free, easy‑to‑use tool for visualizing relationships, hierarchies, and networks from spreadsheets.
 
 layout: home
 markdownStyles: true

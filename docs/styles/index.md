@@ -1,6 +1,6 @@
 ---
 title: Style Gallery for Graphviz Diagrams
-description: Learn how to define, edit, preview, and manage node, edge, and cluster styles using the styles worksheet and Styles ribbon tab, including view switches, cluster naming, and integration with the Style Designer.
+description: Manage node, edge, and cluster styles using the styles worksheet and Styles ribbon, with view switches, cluster naming, and Style Designer integration.
 ---
 
 # Style Gallery

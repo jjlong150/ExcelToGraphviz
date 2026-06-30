@@ -1,6 +1,6 @@
 ---
 title: Using the Style Designer
-description: Learn how to create and customize Graphviz node, edge, and cluster styles using the Style Designer, including colors, shapes, fonts, gradients, borders, and preview rendering.
+description: Use the Style Designer to build Graphviz node, edge, and cluster styles with colors, shapes, fonts, gradients, borders, and live preview rendering.
 ---
 
 # Style Designer

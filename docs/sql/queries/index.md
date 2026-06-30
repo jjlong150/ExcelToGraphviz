@@ -1,6 +1,6 @@
 ---
 title: SQL to Graph Example
-description: Learn how to build a complete Graphviz diagram from Excel data using SQL—defining styles, creating nodes and edges, applying directives, importing results, and generating a visualization.
+description: Use SQL to turn Excel or Access data into Graphviz diagrams. Create nodes and edges, apply directives, import results, and generate visualizations.
 ---
 
 # SQL to Graph Example

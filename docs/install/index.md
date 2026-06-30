@@ -1,6 +1,6 @@
 ---
 title: Install Relationship Visualizer
-description: Start here to install Relationship Visualizer on Windows or macOS. Choose your platform to follow the correct setup steps, system requirements, and Graphviz installation guidance.
+description: Install Relationship Visualizer on Windows or macOS. Select your platform for setup steps, system requirements, and Graphviz installation guidance.
 ---
 
 # Installation Instructions

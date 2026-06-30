@@ -1,6 +1,6 @@
 ---
 title: Core Concepts for Building Graphs
-description: Learn the core concepts behind turning Excel data into Graphviz diagrams, including data flow, styling, layout engines, and how Relationship Visualizer structures a graph.
+description: Learn how Excel data becomes Graphviz diagrams. Covers data flow, styling, layout engines, and how Relationship Visualizer produces a graph.
 ---
 
 # Core Concepts

@@ -1,6 +1,6 @@
 ---
 title: Download Relationship Visualizer
-description: Download the Relationship Visualizer ZIP package from SourceForge, including the main workbook, sample files, and secure checksums. Requires Graphviz; see installation instructions for Windows and macOS.
+description: Download the Relationship Visualizer ZIP from SourceForge with the workbook, samples, and checksums. Requires Graphviz; see Windows and macOS install instructions.
 ---
 
 # Download

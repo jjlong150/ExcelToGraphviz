@@ -1,6 +1,6 @@
 ---
 title: Add Style to Your Graphviz Diagrams
-description: Learn how to create reusable Graphviz styles for nodes, edges, and clusters, organize them in the styles worksheet, and apply them to highlight specific data.
+description: Explore styling in Relationship Visualizer. Jump to the Style Designer, Style Gallery, or Create Views topics to learn more.
 ---
 # Adding Style
 
