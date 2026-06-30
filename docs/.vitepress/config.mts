@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { blogPlugin } from 'vitepress-plugin-blog/plugin'
 import sidebar from './sidebar.mts'
-import { joinURL, withoutTrailingSlash } from 'ufo'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -73,7 +72,10 @@ export default defineConfig({
     
     externalLinkIcon: true,
     
-    logo: "/logo.png",
+    logo: {
+      src: "/logo.png",
+      alt: "Excel to Graphviz Logo"
+    },
 
     sidebar,
 
