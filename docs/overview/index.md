@@ -1,6 +1,6 @@
 ---
 title: Relationship Visualizer Spreadsheet Overview
-description: See how Relationship Visualizer converts Excel data into clear Graphviz diagrams with layouts, styles, views, publishing tools, SVG enhancements, SQL import, and diagnostics.
+description: See screen captures of Relationship Visualizer tools which turn Excel data into stylish Graphviz diagrams. 
 ---
 
 # Overview

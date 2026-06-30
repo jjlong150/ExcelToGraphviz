@@ -1,6 +1,6 @@
 ---
-title: Using the Launchpad to Build Graphs
-description: Use the Launchpad ribbon to control worksheet visibility, access styling tools, manage data exchange, view Graphviz output, adjust settings, and navigate key features.
+title: Using the Launchpad to Reveal Features
+description: Use the Launchpad ribbon to control worksheet visibility of styling tools, data exchange, Graphviz console output, and language settings.
 ---
 
 # Launchpad

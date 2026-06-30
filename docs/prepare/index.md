@@ -1,6 +1,6 @@
 ---
-title: Create a New Workbook for Graph Building
-description: Create a new Relationship Visualizer workbook, save it as a macro‑enabled file, resolve Excel security prompts, and ensure the custom Graphviz ribbon loads correctly.
+title: Create a New Workbook for Building Graphs
+description: Create a new Relationship Visualizer macro-enabled workbook, resolve Excel security prompts, and ensure the custom Graphviz ribbon loads correctly.
 ---
 
 # Create a New Workbook

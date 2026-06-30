@@ -1,6 +1,6 @@
 ---
 title: Post‑Process SVG Files for Better Output
-description: Enhance Graphviz‑generated SVGs with the svg worksheet using find/replace rules, styling tweaks, JavaScript injection, animation, and reliable post‑processing techniques.
+description: Enhance Graphviz SVGs using the svg worksheet with find/replace rules, styling tweaks, JS injection, animation, and post-processing techniques.
 ---
 
 # Post‑Process SVG Files
