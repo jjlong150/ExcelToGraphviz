@@ -1,6 +1,6 @@
 ---
 blogPost: true
-title: Enrich Your Graphviz Diagrams with High-Quality Images
+title: Enrich Your Diagrams with Images
 description: A curated list of excellent free icon sources to make your Graphviz diagrams more expressive and professional.
 date: 2026-05-02
 author: jjlong150

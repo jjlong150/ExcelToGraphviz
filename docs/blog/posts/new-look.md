@@ -1,6 +1,6 @@
 ---
 blogPost: true
-title: A Fresh New Look for the Excel to Graphviz Website
+title: A Fresh New Look for the Website
 description: This website has a new look, and a new engine.
 date: 2026-03-27
 author: jjlong150

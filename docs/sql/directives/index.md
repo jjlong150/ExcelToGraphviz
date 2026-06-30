@@ -1,5 +1,5 @@
 ---
-title: Use SQL Directives to Control Diagram Output
+title: Orchestrating Output with SQL Directives
 description: Learn how SQL directives influence node creation, edge behavior, and layout rules in your generated diagrams.
 ---
 
