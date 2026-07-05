@@ -49,7 +49,17 @@ export default defineConfig({
   description: "Convert Excel data into professional Graphviz relationship diagrams. Free Relationship Visualizer tool.",
 
   sitemap: {
-    hostname: 'https://exceltographviz.com'
+    hostname: 'https://exceltographviz.com',
+    // Keep these out of the sitemap even though the files/routes still exist:
+    // - tutorial/ is a legacy hard-linked URL that's noindexed and just
+    //   redirects (see tutorial/index.md frontmatter) - never offer it up
+    //   for indexing.
+    // - toc.html is only used internally when generating the PDF version of
+    //   the site and is never linked from the nav/sidebar.
+    transformItems: (items) =>
+      items.filter(
+        (item) => !['tutorial/', 'toc.html'].includes(item.url)
+      )
   },
 
   lastUpdated: true,
@@ -117,19 +127,32 @@ export default defineConfig({
   transformPageData(pageData) {
     
     const siteUrl = 'https://exceltographviz.com'
+    const relativePath = pageData.relativePath
 
-    // Modern clean canonical URL (no trailing slash)
-    let path = pageData.relativePath
-      .replace(/\.md$/, '')
-      .replace(/index$/, '')
-      .replace(/\/$/, '')
-
-    const canonicalUrl = path ? `${siteUrl}/${path}` : siteUrl
-
-    // === Blog logic ===
+    // === Blog logic (computed early - canonical path building needs it) ===
     const isBlogPost = 
       pageData.frontmatter?.blogPost === true ||
       pageData.relativePath?.startsWith('blog/posts/')
+
+    // Build the canonical URL so it matches the URL actually served
+    // (and therefore matches sitemap.xml):
+    //   - blog posts (compiled by vitepress-plugin-blog as flat files, not
+    //     directory routes) -> https://site/blog/posts/foo.html
+    //   - other directory-style pages (foo/index.md, index.md) ->
+    //     https://site/foo/ (trailing slash kept, no .html)
+    //   - anything else already a literal route (e.g. toc.html) -> as-is
+    let canonicalPath
+    if (isBlogPost && relativePath.endsWith('.md')) {
+      canonicalPath = relativePath.replace(/\.md$/, '.html')
+    } else if (relativePath.endsWith('.md')) {
+      canonicalPath = relativePath
+        .replace(/\.md$/, '')
+        .replace(/index$/, '') // leaves a trailing slash, or '' for the homepage
+    } else {
+      canonicalPath = relativePath
+    }
+
+    const canonicalUrl = `${siteUrl}/${canonicalPath}`
 
     if (isBlogPost) {
       pageData.frontmatter.prev = false
@@ -180,6 +203,15 @@ export default defineConfig({
       ['meta', { name: 'twitter:description', content: pageData.description || '' }],
       ['meta', { name: 'twitter:site', content: '@exceltographviz' }]
     )
+
+    // === Per-page robots override (e.g. noindex, nofollow on redirect stubs
+    // like /tutorial/) ===
+    if (pageData.frontmatter?.robots) {
+      pageData.frontmatter.head.push([
+        'meta',
+        { name: 'robots', content: pageData.frontmatter.robots }
+      ])
+    }
 
     // === Allow per-page overrides for social images ===
     const customOgImage = pageData.frontmatter?.ogImage
