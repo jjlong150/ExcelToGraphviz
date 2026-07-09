@@ -7,9 +7,257 @@ description: See screen captures of Relationship Visualizer tools which turn Exc
 
 See how the **Relationship Visualizer** turns raw data into clean, meaningful graph diagrams, with styles, views, and publishing built into the workflow.
 
-This quick 2-minute video gives a feel for what's possible.
+This quick 2-minute [video](https://youtu.be/0T0CMk4Y3Ls) gives a feel for what's possible.
 
 <YouTube id="0T0CMk4Y3Ls" />
+
+Ready to explore further? 
+
+Use the cards below to jump straight to examples by topic. 
+
+::: tip Building the Graph
+
+Get data onto the page and shape the layout.
+
+<div class="advanced-grid">
+  <a class="advanced-card" href="#enter-data">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-excel">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" />
+        <path d="M10 12l4 5" />
+        <path d="M10 17l4 -5" />
+      </svg>
+    </span>
+    Enter Data
+  </a>
+  <a class="advanced-card" href="#display-graphs">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M10 5a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M6 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M10 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M18 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M2 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M14 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M5 17l2 -3" />
+        <path d="M9 10l2 -3" />
+        <path d="M13 7l2 3" />
+        <path d="M17 14l2 3" />
+        <path d="M15 14l-2 3" />
+        <path d="M9 14l2 3" />
+      </svg>
+    </span>
+    Display Graphs
+  </a>
+  <a class="advanced-card" href="#choose-graph-options">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-automation">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M13 20.693c-.905 .628 -2.36 .292 -2.675 -1.01a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.492 .362 1.716 2.219 .674 3.03" />
+        <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+        <path d="M17 22l5 -3l-5 -3l0 6" />
+      </svg>
+    </span>
+    Choose Graph Options
+  </a>
+  <a class="advanced-card" href="#cluster-elements">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M8 8h8v8h-8l0 -8" />
+        <path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" />
+      </svg>
+    </span>
+    Cluster Elements
+  </a>
+</div>
+:::
+
+::: tip Styling
+
+Apply consistent styles and control visibility.
+
+<div class="advanced-grid">
+  <a class="advanced-card" href="#design-styles">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-palette">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+        <path d="M7.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M11.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M15.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      </svg>
+    </span>
+    Design Styles
+  </a>
+  <a class="advanced-card" href="#save-styles">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+        <path d="M10 14a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M14 4l0 4l-6 0l0 -4" />
+      </svg>
+    </span>
+    Save Styles
+  </a>
+  <a class="advanced-card" href="#apply-styles">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-paint">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M5 5a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2l0 -2" />
+        <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+        <path d="M10 16a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -4" />
+      </svg>
+    </span>
+    Apply Styles
+  </a>
+  <a class="advanced-card" href="#split-data-into-views">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chart-dots">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 3v18h18" />
+        <path d="M7 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M17 7a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M12 15a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M10.16 10.62l2.34 2.88" />
+        <path d="M15.088 13.328l2.837 -4.586" />
+      </svg>
+    </span>
+    Split Data into Views
+  </a>
+</div>
+:::
+
+::: tip Publishing
+
+Export a finished graph to share.
+
+<div class="advanced-grid">
+  <a class="advanced-card" href="#publish-graphs">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-down-icon lucide-image-down">
+        <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/>
+        <path d="m14 19 3 3v-5.5"/>
+        <path d="m17 22 3-3"/>
+        <circle cx="9" cy="9" r="2"/>
+      </svg>
+    </span>
+    Publish Graphs
+  </a>
+  <a class="advanced-card" href="#enhance-svg-output">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-svg">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+        <path d="M4 20.25c0 .414 .336 .75 .75 .75h1.25a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-1a1 1 0 0 1 -1 -1v-1a1 1 0 0 1 1 -1h1.25a.75 .75 0 0 1 .75 .75" />
+        <path d="M10 15l2 6l2 -6" />
+        <path d="M20 15h-1a2 2 0 0 0 -2 2v2a2 2 0 0 0 2 2h1v-3" />
+      </svg>
+    </span>
+    Enhance SVG Output
+  </a>
+</div>
+:::
+
+::: tip Data Exchange
+
+Move data in and out using SQL or JSON.
+
+<div class="advanced-grid">
+  <a class="advanced-card" href="#sql-data-import">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3" />
+        <path d="M4 6v6c0 1.657 3.582 3 8 3m8 -3.5v-5.5" />
+        <path d="M4 12v6c0 1.657 3.582 3 8 3" />
+        <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M20.2 20.2l1.8 1.8" />
+      </svg>
+    </span>
+    SQL Data Import
+  </a>
+  <a class="advanced-card" href="#json-export-import">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-braces-icon lucide-file-braces">
+        <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+        <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+        <path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/>
+        <path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/>
+      </svg>
+    </span>
+    JSON File Export/Import
+  </a>
+</div>
+:::
+
+::: tip Learning & Reference
+
+Learn `dot`, troubleshoot, and tweak settings.
+
+<div class="advanced-grid">
+  <a class="advanced-card" href="#learn-the-dot-language">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-cog-icon lucide-monitor-cog">
+        <path d="M12 17v4"/>
+        <path d="m14.305 7.53.923-.382"/>
+        <path d="m15.228 4.852-.923-.383"/>
+        <path d="m16.852 3.228-.383-.924"/>
+        <path d="m16.852 8.772-.383.923"/>
+        <path d="m19.148 3.228.383-.924"/>
+        <path d="m19.53 9.696-.382-.924"/>
+        <path d="m20.772 4.852.924-.383"/>
+        <path d="m20.772 7.148.924.383"/>
+        <path d="M22 13v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/>
+        <path d="M8 21h8"/>
+        <circle cx="18" cy="6" r="3"/>
+      </svg>
+    </span>
+    Learn the `dot` Language
+  </a>
+  <a class="advanced-card" href="#diagnose-problems">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-stethoscope">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 4h-1a2 2 0 0 0 -2 2v3.5a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1" />
+        <path d="M8 15a6 6 0 1 0 12 0v-3" />
+        <path d="M11 3v2" />
+        <path d="M6 3v2" />
+        <path d="M18 10a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      </svg>
+    </span>
+    Diagnose Problems
+  </a>
+  <a class="advanced-card" href="#internationalization">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-world">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+        <path d="M3.6 9h16.8" /><path d="M3.6 15h16.8" />
+        <path d="M11.5 3a17 17 0 0 0 0 18" />
+        <path d="M12.5 3a17 17 0 0 1 0 18" />
+      </svg>
+    </span>
+    Internationalization
+  </a>
+  <a class="advanced-card" href="#information-and-acknowledgements">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-info-circle">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+        <path d="M12 9h.01" />
+        <path d="M11 12h1v4h1" />
+      </svg>
+    </span>
+    Information and Acknowledgements
+  </a>
+</div>
+:::
 
 ## Enter Data
 
@@ -100,7 +348,7 @@ Here the `style designer` is being used to create a style of edge which is dark 
 
 ![Style designer worksheet in the Relationship Visualizer showing a custom edge style with dark green color and no arrowhead.](./style_designer_edge.png)
 
-[Learn more...](../tutorial/#using-the-style-designer-worksheet)
+[Learn more...](../designer)
 
 ## Save Styles
 
