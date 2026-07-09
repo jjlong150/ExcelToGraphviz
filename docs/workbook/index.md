@@ -47,7 +47,7 @@ The `style designer` lets you adjust settings through dropdown lists and immedia
 
 This worksheet is described in more detail in [Using the `style designer` Worksheet](../designer/#using-the-style-designer-worksheet).
 
-![Screenshot of the `style designer` worksheet showing visual controls and a live preview for node, edge, and cluster styles.](../media/2ab22529af1205854596d94b455856ee.png)
+![Screenshot of the `style designer` worksheet showing visual controls and a live preview for node, edge, and cluster styles.](./styledesigner.png)
 
 ## `sql` Worksheet
 
