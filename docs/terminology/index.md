@@ -1,6 +1,12 @@
 ---
 title: Key Graphviz and Diagram Terminology
 description: Learn core Graphviz concepts of nodes, edges, labels, splines, ports, clusters, and layout engines through practical examples and diagrams.
+prev:
+  text: 'Creating Graphs'
+  link: '/create/'
+next:
+  text: 'Create a New Workbook'
+  link: '/prepare/'
 ---
 
 # Terminology

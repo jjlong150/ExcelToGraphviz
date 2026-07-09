@@ -1,6 +1,9 @@
 ---
 title: Create a New Workbook for Building Graphs
 description: Create a new Relationship Visualizer macro-enabled workbook, resolve Excel security prompts, and ensure the custom Graphviz ribbon loads correctly.
+prev:
+  text: 'Terminology'
+  link: '/terminology/'
 ---
 
 # Create a New Workbook
