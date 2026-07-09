@@ -48,7 +48,7 @@ Shows the worksheets used to create style definitions, and save them for use in 
 
 | Label | Control Type  | Description |
 | ----- | ------------- | --------------------------------- |
-| style designer  | Toggle Button        | Show/Hide the [style designer](../designer) worksheet. |
+| style designer  | Toggle Button        | Show/Hide the [style designer](../designer/) worksheet. |
 | styles  | Toggle Button        | Show/Hide the [styles](../styles/) worksheet. |
 
 ## Data Exchange

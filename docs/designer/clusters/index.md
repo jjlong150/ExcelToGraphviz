@@ -53,7 +53,7 @@ Fill colors and gradient fills for a cluster’s rectangle are defined the same 
 
 ## Packing Options
 
-If the layout on the Graphviz ribbon tab is set to the [osage](../create/#graph-layout) layout, an additional **Packing** group of controls will appear, as shown in the example below:
+If the layout on the Graphviz ribbon tab is set to the [osage](../../create/#graph-layout) layout, an additional **Packing** group of controls will appear, as shown in the example below:
 
 | ![Screenshot of the Style Designer showing the cluster packing controls available when using the osage layout.](./cluster_packing.png) |
 | :--: |

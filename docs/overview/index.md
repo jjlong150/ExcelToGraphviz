@@ -348,7 +348,7 @@ Here the `style designer` is being used to create a style of edge which is dark 
 
 ![Style designer worksheet in the Relationship Visualizer showing a custom edge style with dark green color and no arrowhead.](./style_designer_edge.png)
 
-[Learn more...](../designer)
+[Learn more...](../designer/)
 
 ## Save Styles
 
