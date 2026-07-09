@@ -19,9 +19,9 @@ export default defineUserConfig({
                   '!/changelog/**',
                   '!/tutorial/**'],
 
-  outFile: 'Relationship Visualizer.pdf',
+  outFile: 'relationship_visualizer.pdf',
 
-  outDir: '../dist/pdf',
+  outDir: './download',
 
   puppeteerLaunchOptions: {
     headless: true,
