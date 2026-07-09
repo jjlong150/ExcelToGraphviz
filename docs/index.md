@@ -36,28 +36,33 @@ features:
     title: Apply Style
     details: Fast, expressive graph styling with a built-in style designer and CSS-like styles gallery
     link: /addstyle/
+    linkText: Explore styling
   - icon:
       dark: /image-down.svg
       light: /image-down.svg
     title: Publish Graphs
     details: Export as image, PDF, SVG, and add animation to SVGs
     link: /publish/
+    linkText: See publishing options
   - icon:
       dark: /database-search.svg
       light: /database-search.svg
     title: Manipulate Data Using SQL
     details: Use SQL to retrieve and filter data from Excel and Access (Windows)
     link: /sql/
+    linkText: Learn SQL support
   - icon:
       dark: /monitor-cog.svg
       light: /monitor-cog.svg
     title: View Graphviz Source
     details: Inspect and export the raw DOT source code
     link: /source/
+    linkText: View DOT source
   - icon:
       dark: /file-braces.svg
       light: /file-braces.svg
     title: Exchange Data Using JSON
     details: Version-control friendly JSON format for workbook data
     link: /exchange/
+    linkText: Learn JSON exchange
 ---
