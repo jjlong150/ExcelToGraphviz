@@ -1,20 +1,20 @@
 ---
-title: Query Excel Data Using SQL
+title: SQL Tools
 description: Learn how to use SQL queries to filter, join, and transform Excel data before generating Graphviz diagrams.
 ---
 
-# Using SQL
+# SQL Tools
 
-Unlock the power of SQL to extract and visualize data from your Excel spreadsheets with **Relationship Visualizer**. 
+Relationship Visualizer can query data from Excel spreadsheets and Access databases using standard SQL. You can pull data from either source, or combine both, before generating Graphviz diagrams.
 
-This *optional feature*<sup>[1]</sup> lets you write SQL queries to pull data from multiple worksheets and generate Graphviz graphs with ease.
+This feature is *optional* and available only on Windows.<sup>1</sup> It lets you write SQL queries that span multiple worksheets or tables and produce graph‑ready results.
 
-Ideal for users familiar with SQL, it provides a fast and flexible way to:
+Use SQL when you want to:
 
-- Combine data from multiple Excel worksheets using SQL queries  
-- Batch‑process queries to aggregate information across several workbooks  
-- Streamline repetitive data‑preparation and transformation tasks
-
+- Combine data from several Excel worksheets  
+- Query Access tables directly  
+- Mix Excel and Access data within a workflow 
+- Automate repetitive data‑preparation tasks
 
 ::: tip SQL Topics
 
