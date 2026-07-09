@@ -71,6 +71,7 @@ export default defineConfig({
       { text: "Resources",
             items: [
               { text: 'About', link: '/about/' },
+              { text: 'Pricing', link: '/pricing/' },
               { text: 'License', link: '/license/' },
               { text: 'Privacy', link: '/privacy/' },
               { text: 'Security', link: '/security/' },
@@ -99,7 +100,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://buymeacoffee.com/exceltographviz',
+      pattern: '/pricing/#supporting-the-project',
       text: 'Find this tool helpful? Consider supporting its development.'
     },
 
@@ -272,8 +273,8 @@ export default defineConfig({
       JSON.stringify(jsonLd)
     ])
 
-    // === SoftwareApplication JSON-LD (only on download page) ===
-    if (pageData.relativePath === 'download/index.md') {
+// === SoftwareApplication JSON-LD (Download and Pricing pages) ===
+if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
       const softwareJsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",

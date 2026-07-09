@@ -21,7 +21,7 @@ const html = `
     <tr><td><strong>Sleek UI</strong></td><td>Custom Excel ribbon tabs across all worksheets</td></tr>
     <tr><td><strong>Multilingual</strong></td><td>English · French · German · Italian · Polish</td></tr>
 
-    <tr><td><strong>Absolutely Free</strong></td><td>Free to use · No license required · Donations appreciated</td></tr>
+    <tr><td><strong>Absolutely Free</strong></td><td><a href="./pricing">Free to use</a> · No license required</td></tr>
     <tr><td><strong>Open Source</strong></td><td>MIT License</td></tr>
     <tr><td><strong>Rich Code Documentation</strong></td><td><a href="https://deepwiki.com/jjlong150/ExcelToGraphviz" target="_blank" rel="noopener">AI-powered DeepWiki</a></td></tr>
     <tr><td><strong>Award Winning</strong></td><td>SourceForge Community Choice Award</td></tr>
