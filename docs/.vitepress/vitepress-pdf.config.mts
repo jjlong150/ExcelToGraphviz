@@ -21,7 +21,7 @@ export default defineUserConfig({
 
   outFile: 'relationship_visualizer.pdf',
 
-  outDir: './download',
+  outDir: './public',
 
   puppeteerLaunchOptions: {
     headless: true,

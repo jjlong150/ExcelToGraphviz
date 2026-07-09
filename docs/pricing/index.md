@@ -16,7 +16,7 @@ You get the complete workbook, every worksheet, and every feature described in t
 - The core graphing engine that turns your Excel data into clean, meaningful Graphviz diagrams.
 - The [Style Designer](../designer/), [SQL import](../sql/), [JSON exchange](../exchange/), and [SVG post‑processing](../svg/) tools.
 - More than a dozen sample workbooks that show real modeling patterns you can adapt to your own projects.
-- A full <a href="../download/relationship_visualizer.pdf" target="_blank" rel="noopener">PDF version of this website</a> for offline reference.
+- A full <a href="/relationship_visualizer.pdf" target="_blank" rel="noopener">PDF version of this website</a> for offline reference.
 - No account, no email signup, no license key.
 - No expiration date, no feature limits, no watermarks.
 - No ads on this site, and no telemetry in the tool. See the [Privacy](../privacy/) page for details.

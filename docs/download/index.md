@@ -24,7 +24,7 @@ Relationship Visualizer requires **Graphviz** to be installed on your system. Be
 If you prefer offline documentation, you can also download a full PDF version of this website. It provides all core pages, examples, and reference material in a single file.
 
 <center>
-  <a href="../download/relationship_visualizer.pdf" target="_blank" rel="noopener"
+  <a href="/relationship_visualizer.pdf" target="_blank" rel="noopener"
      style="display:inline-block; padding:10px 18px; background:#4A90E2; color:white; border-radius:6px; text-decoration:none; font-weight:600;">
     Download Documentation PDF
   </a>
