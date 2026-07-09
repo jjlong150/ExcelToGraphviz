@@ -1,7 +1,7 @@
 {
   "name": "exceltographviz",
   "version": "1.0.0",
-  "description": "--- home: true heroText: Excel to Graphviz heroImage: /exceltographiz.png tagline: See the relationships",
+  "description": "VitePress documentation site for Excel to Graphviz Relationship Visualizer.",
   "main": "index.js",
   "directories": {
     "doc": "docs"
