@@ -22,7 +22,6 @@ export const routeOrder = [
 
   // === Creating Graphs ===
   '/create/index.html',
-  '/terminology/index.html',
   '/prepare/index.html',
   '/dataworksheet/index.html',
   '/graphviztab/index.html',
@@ -31,6 +30,16 @@ export const routeOrder = [
   // === Customizing Graphs ===
   '/addstyle/index.html',
   '/designer/index.html',
+  '/designer/color/index.html',
+  '/designer/labels/index.html',
+  '/designer/shapes/index.html',
+  '/designer/dimensions/index.html',
+  '/designer/borders/index.html',
+  '/designer/fills/index.html',
+  '/designer/images/index.html',
+  '/designer/edges/index.html',
+  '/designer/head-tail/index.html',
+  '/designer/clusters/index.html',
   '/styles/index.html',
   '/views/index.html',
 
@@ -39,24 +48,20 @@ export const routeOrder = [
   '/svg/index.html',
   '/advanced/index.html',
 
-  // === Tools & Extensions ===
-  '/source/index.html',
-  '/console/index.html',
-
   // === SQL ===
   '/sql/index.html',
   '/sql/queries/index.html',
   '/sql/extensions/index.html',
   '/sql/directives/index.html',
-  '/sql/clustering/index.html',
   '/sql/counts/index.html',
   '/sql/labelsplit/index.html',
-  '/sql/chaining/index.html',
-  '/sql/subgraphs/index.html',
-  '/sql/recursion/index.html',
-  '/sql/iterate/index.html',
   '/sql/enumerate/index.html',
   '/sql/concatenation/index.html',
+  '/sql/clustering/index.html',
+  '/sql/subgraphs/index.html',
+  '/sql/chaining/index.html',
+  '/sql/recursion/index.html',
+  '/sql/iterate/index.html',
 
   // === SQL Examples ===
   '/sql/orgcharts/index.html',
@@ -68,19 +73,28 @@ export const routeOrder = [
   '/exchange/export/index.html',
   '/exchange/import/index.html',
 
-  // === Reference & Misc ===
+   // === Tools & Extensions ===
+  '/source/index.html',
+  '/console/index.html',
+
+  // === Maintenance ===
   '/diagnostics/index.html',
   '/lists/index.html',
+
+  // === Settings ===
+  '/settings/index.html',
+ 
+  // === References ===
+  '/terminology/index.html',
   '/info/index.html',
 
-  // === Settings & Legal ===
-  '/settings/index.html',
-  
   // === Security & Privacy ===
   '/security/index.html',
   '/privacy/index.html',
-  
+ 
+  // === Pricing ===
+  '/pricing/index.html',
+
   // === Acknowledgements & Contributors ===
   '/acknowledge/index.html'
 ]
-
