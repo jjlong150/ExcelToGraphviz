@@ -2,7 +2,7 @@
 blogPost: true
 title: Exploring diagrams just got easier
 description: A new tool bar, fit-to-window controls, and pan-and-drag features have been added to the SVG viewer.
-date: 2026-09-01
+date: 2026-09-03
 author: jjlong150
 tags: ['publish', 'interactive', 'post-processing', 'svg', 'v11.0']
 published: true

@@ -2,7 +2,7 @@
 blogPost: true
 title: Relationship Visualizer 11.0 Is Here
 description: Relationship Visualizer 11.0 adds Knowledge Graph export, a big-diagram SVG viewer, and a reorganized ribbon. Here's what's new, at a glance.
-date: 2026-09-01
+date: 2026-09-02
 author: jjlong150
 tags: ['release', 'v11.0', 'announcement']
 published: true

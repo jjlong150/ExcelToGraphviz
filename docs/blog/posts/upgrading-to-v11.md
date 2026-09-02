@@ -5,7 +5,7 @@ description: A short, practical checklist of v11.0's low-impact breaking changes
 date: 2026-09-01
 author: jjlong150
 tags: ['upgrade-guide', 'v11.0']
-published: true
+published: false
 readingTime: true
 sidebar: false
 ---

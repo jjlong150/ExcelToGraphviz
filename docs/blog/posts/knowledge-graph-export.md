@@ -2,7 +2,7 @@
 blogPost: true
 title: From Spreadsheet to Knowledge Graph
 description: Relationship Visualizer 11.0 exports Excel data as a structured, AI-ready Knowledge Graph in JSON, pulled right from your spreadsheet.
-date: 2026-09-01
+date: 2026-09-02
 author: jjlong150
 tags: ['knowledge-graph', 'ai', 'json', 'v11.0']
 published: true

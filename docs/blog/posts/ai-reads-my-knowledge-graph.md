@@ -2,7 +2,7 @@
 blogPost: true
 title: I Let an AI Read My Knowledge Graph
 description: I handed a rock-band knowledge graph to Claude and Grok with no hints and asked them to find the story. One of them found one I didn't know was there.
-date: 2026-09-01
+date: 2026-09-02
 author: jjlong150
 tags: ['knowledge-graph', 'ai', 'case-study', 'v11.0']
 published: true
