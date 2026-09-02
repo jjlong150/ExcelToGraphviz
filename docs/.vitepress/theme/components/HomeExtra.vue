@@ -6,16 +6,18 @@
 
 <script setup>
 const html = `
-  <h2>Turn Spreadsheets into Beautiful Graphviz Diagrams</h2>
-  <p>The <strong>Relationship Visualizer</strong> spreadsheet transforms your Excel tables into clear, professional <strong>Graphviz diagrams</strong> in seconds. Say goodbye to manual drawing tools — simply enter your data as rows (e.g., "A is related to B"), and watch graphs appear automatically.</p>
+  <h2>Turn Spreadsheets into Graphviz Diagrams and AI-Ready Knowledge Graphs</h2>
+  <p>The <strong>Relationship Visualizer</strong> spreadsheet transforms your Excel tables into clear, professional <strong>Graphviz diagrams</strong> in seconds. Say goodbye to manual drawing tools — simply enter your data as rows (e.g., "A is related to B"), and watch graphs appear automatically. That same data can also be exported as a structured <strong>Knowledge Graph</strong> in JSON, ready to hand to an AI tool instead of rendering as a picture.</p>
 
   <h3>Why Users Love It</h3>
-  <p>Whether you're mapping data flows, organization charts, process workflows, timelines, or dependency diagrams, the Relationship Visualizer turns complex relationships into clear, expressive diagrams.</p>
+  <p>Whether you're mapping data flows, organization charts, process workflows, timelines, or dependency diagrams, the Relationship Visualizer turns complex relationships into clear, expressive diagrams — or into a typed Knowledge Graph an AI can actually reason over.</p>
 
   <table class="features-table">
     <tr><td><strong>Draws as you type</strong></td><td>Live Graphviz rendering as data changes</td></tr>
     <tr><td><strong>Powerful styling</strong></td><td>Colors, shapes, fonts, arrows, and reusable CSS-like styles</td></tr>
-    <tr><td><strong>Advanced features</strong></td><td>SQL queries, SVG animation, DOT preview, and JSON exchange</td></tr>
+    <tr><td><strong>Knowledge Graph export</strong></td><td><a href="./knowledge-graphs/">AI-ready JSON</a> with typed properties, built from the same data as your diagrams</td></tr>
+    <tr><td><strong>Interactive SVG diagrams</strong></td><td><a href="./svg/">Pan, zoom, filter, and highlight</a> — built into every exported SVG</td></tr>
+    <tr><td><strong>Advanced features</strong></td><td>SQL queries, DOT preview, and JSON workbook exchange</td></tr>
 
     <tr><td><strong>Cross-platform</strong></td><td>Works on Windows and macOS</td></tr>
     <tr><td><strong>Sleek UI</strong></td><td>Custom Excel ribbon tabs across all worksheets</td></tr>

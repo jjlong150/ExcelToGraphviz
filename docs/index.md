@@ -2,18 +2,18 @@
 # https://vitepress.dev/reference/default-theme-home-page
 
 title: Relationship Visualizer
-description: Turn Excel data into clear Graphviz diagrams with a free, easy‑to‑use tool for visualizing relationships, hierarchies, and networks from spreadsheets.
+description: Turn Excel data into clear Graphviz diagrams and AI‑ready Knowledge Graphs with a free, easy‑to‑use tool for visualizing relationships, hierarchies, and networks from spreadsheets.
 
 layout: home
 markdownStyles: true
 
 hero:
-  name: "Excel to Graphviz"
-  text: "Relationship Visualizer"
-  tagline: Turn your Excel data into clear, professional relationship diagrams with Graphviz
+  name: "Relationship Visualizer"
+  text: ""
+  tagline: Turn your Excel data into clear Graphviz diagrams and AI-ready Knowledge Graphs.
   image:
     src: /hero.png
-    alt: Excel to Graphviz Relationship Diagram Example
+    alt: Relationship Visualizer Diagram Example
   actions:
     - theme: brand
       text: Download Now
@@ -23,13 +23,6 @@ hero:
       link: /overview/
 
 features:
-  - icon:
-      dark: /share-2.svg
-      light: /share-2.svg
-    title: Foundations
-    details: Essential concepts and workflow for creating Graphviz diagrams from Excel
-    link: /overview/
-    linkText: Learn the basics
   - icon:
       dark: /palette.svg
       light: /palette.svg
@@ -41,9 +34,16 @@ features:
       dark: /image-down.svg
       light: /image-down.svg
     title: Publish Graphs
-    details: Export as image, PDF, SVG, and add animation to SVGs
+    details: Export as image, PDF, or an interactive SVG with pan, zoom, filter, and highlight built in
     link: /publish/
     linkText: See publishing options
+  - icon:
+      dark: /share-2.svg
+      light: /share-2.svg
+    title: Knowledge Graph Export
+    details: Export the same data as an AI-ready Knowledge Graph in JSON, with typed properties
+    link: /knowledge-graphs/
+    linkText: Explore Knowledge Graphs
   - icon:
       dark: /database-search.svg
       light: /database-search.svg

@@ -84,7 +84,7 @@ If you would like to learn more about the author of this tool and website you ma
 | ![Donate group icons.](./info-ribbon-tab-donate.png) |
 | -------------------------------------------------- |
 
-Excel to Graphviz / Relationship Visualizer is **free** software. However, it does cost the author personal money and time to provide this software for free.
+Relationship Visualizer is **free** software. However, it does cost the author personal money and time to provide this software for free.
 
 If you would like to show your appreciation for this **free** tool, you can buy the author a coffee through the [Buy Me A Coffee](https://buymeacoffee.com/exceltographviz) website.
 

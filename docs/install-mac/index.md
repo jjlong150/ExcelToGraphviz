@@ -7,7 +7,7 @@ description: macOS installation guide for Relationship Visualizer. Homebrew Grap
 
 ## Brief Instructions
 
-Perform these steps to install **Excel to Graphviz** on **macOS**
+Perform these steps to install **Relationship Visualizer** on **macOS**
 
 1.  Use [Homebrew](https://formulae.brew.sh/formula/graphviz) to download and install **Graphviz** using the Install command:
 
@@ -109,7 +109,7 @@ The screen will appear as follows:
 
 ### Download file `RelationshipVisualizer.zip` from SourceForge.net
 
-**Excel to Graphviz** is exclusively hosted on SourceForge.net. If you obtained a copy from any source other than direct download from SourceForge.net, then I suggest that you download the latest version from at <https://sourceforge.net/projects/relationship-visualizer/>
+**Relationship Visualizer** is exclusively hosted on SourceForge.net. If you obtained a copy from any source other than direct download from SourceForge.net, then I suggest that you download the latest version from at <https://sourceforge.net/projects/relationship-visualizer/>
 
 ### Unzip file `RelationshipVisualizer.zip` 
 
@@ -167,7 +167,7 @@ Open the file `Relationship Visualizer.xlsm` in Excel by double clicking on the 
 
 ### Enable Macros
 
-Excel to Graphviz performs its work using VBA macros. When you launch the file, you will receive warnings of the macros and must give permission for the macros to run.
+Relationship Visualizer performs its work using VBA macros. When you launch the file, you will receive warnings of the macros and must give permission for the macros to run.
 
 ![Excel security warning dialog prompting the user to enable macros when opening the workbook.](./enable-macros.png)
 

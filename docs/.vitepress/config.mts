@@ -45,7 +45,7 @@ export default defineConfig({
   ],
   base: '/',
   lang: 'en-US',
-  title: "Excel to Graphviz",
+  title: "Relationship Visualizer",
   description: "Convert Excel data into professional Graphviz relationship diagrams. Free Relationship Visualizer tool.",
 
   sitemap: {
@@ -85,7 +85,7 @@ export default defineConfig({
     
     logo: {
       src: "/logo.png",
-      alt: "Excel to Graphviz Logo"
+      alt: "Relationship Visualizer Logo"
     },
 
     sidebar,
@@ -195,7 +195,7 @@ export default defineConfig({
       ['meta', { property: 'og:description', content: pageData.description || '' }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
       ['meta', { property: 'og:type', content: isBlogPost ? 'article' : 'website' }],
-      ['meta', { property: 'og:site_name', content: 'Excel to Graphviz' }],
+      ['meta', { property: 'og:site_name', content: 'Relationship Visualizer' }],
       ['meta', { property: 'og:locale', content: 'en_US' }], 
            
       // Twitter / X Cards
@@ -231,7 +231,7 @@ export default defineConfig({
       ['meta', { name: 'twitter:image', content: twitterImage }],
       ['meta', { property: 'og:image:width', content: '1200' }],
       ['meta', { property: 'og:image:height', content: '630' }],
-      ['meta', { property: 'og:image:alt', content: 'Excel to Graphviz Relationship Visualizer' }]
+      ['meta', { property: 'og:image:alt', content: 'Relationship Visualizer' }]
     )
   
     // === JSON-LD Structured Data ===
@@ -258,7 +258,7 @@ export default defineConfig({
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Excel to Graphviz",
+        "name": "Relationship Visualizer",
         "url": "https://exceltographviz.com",
         "logo": {
           "@type": "ImageObject",
@@ -278,11 +278,11 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
       const softwareJsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "Excel to Graphviz Relationship Visualizer",
+        "name": "Relationship Visualizer",
         "operatingSystem": "Windows, macOS",
         "applicationCategory": "UtilityApplication",
         "description": "A VBA-powered Excel tool that converts spreadsheet relationships into Graphviz diagrams.",
-        "softwareVersion": "10.5.0",
+        "softwareVersion": "11.0.0",
         "downloadUrl": "https://exceltographviz.com/download/",
         "offers": {
           "@type": "Offer",
@@ -296,7 +296,7 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Excel to Graphviz",
+          "name": "Relationship Visualizer",
           "url": "https://exceltographviz.com"
         }
       }
@@ -312,7 +312,7 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
       const howToJsonLd = {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        "name": "Install Excel to Graphviz Relationship Visualizer on Windows",
+        "name": "Install Relationship Visualizer on Windows",
         "description": "Step-by-step instructions for installing Graphviz, configuring command-line tools, downloading the Relationship Visualizer assets, unblocking the spreadsheet, and enabling macros in Excel.",
         "totalTime": "PT15M",
         "tool": [
@@ -364,7 +364,7 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
       const howToJsonLd = {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        "name": "Install Excel to Graphviz Relationship Visualizer on macOS",
+        "name": "Install Relationship Visualizer on macOS",
         "description": "Step-by-step instructions for installing Graphviz using Homebrew, configuring plugins, preparing the AppleScript file, and enabling macros in Excel on macOS.",
         "totalTime": "PT15M",
         "tool": [

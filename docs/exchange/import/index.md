@@ -25,7 +25,7 @@ Once you have selected your Import, press the `Import JSON` button.
 
 ![Import JSON button on the Exchange ribbon tab used to load a JSON data exchange file into Relationship Visualizer.](../../media/exchange_import_json.png)
 
-You will be prompted to **Choose an Excel to Graphviz data exchange file**
+You will be prompted to **Choose a Relationship Visualizer data exchange file**
 
 ![File selection dialog prompting the user to choose a JSON data exchange file for import into Relationship Visualizer.](../../media/e92f7b2b8650392ddb0ac3818ffb4e2f.png)
 

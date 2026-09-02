@@ -11,7 +11,7 @@ The `RelationshipVisualizer.zip` file contains the main spreadsheet, license inf
 
 <center>
 
-[![Download Excel to Graphviz](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)
+[![Download Relationship Visualizer](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download)
 
 </center>
 

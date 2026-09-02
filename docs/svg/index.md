@@ -20,7 +20,7 @@ Post‑processing refers to the transformations applied to an SVG *after* Graphv
 
 The animated GIF below shows a Graphviz‑generated SVG with post‑processing applied to add animation.
 
-![Animated GIF demonstrating an SVG with post‑processing animation applied.](./animated-svg.gif)
+![Animated GIF demonstrating an SVG with post‑processing animation applied.](./svg-viewer.gif)
 
 Post‑processing allows you to apply additional styling to nodes, edges, polygons, and polylines. It also enables the insertion of JavaScript for interactive behaviors such as click‑event animations and zooming. In short, post‑processing turns a technically valid SVG into a polished, presentation‑ready graphic.
 
@@ -28,7 +28,11 @@ The `svg` worksheet defines a series of **Find** and **Replace** operations, wit
 
 When SVG post‑processing is active, each newly created SVG file is loaded into memory, and the `svg` worksheet is processed from top to bottom. Each row’s **Find** value is searched for in the SVG’s XML, and any matches are replaced with the corresponding **Replace** value.
 
-Post‑processing is **disabled by default** and must be explicitly enabled.
+Post‑processing is **disabled by default** and must be explicitly enabled by clicking the toggle switch in the ribbon tab. 
+
+When enabling post-processing you will be asked to provide explicit permission via the dialog box shown below:
+
+![](./accept-risk.png)
 
 ## The `svg` Worksheet
 
@@ -73,7 +77,7 @@ It contains the following groups, each of which is explained in the sections tha
 
 | Group               | Controls                          | Description |
 | :----               | :---                              | :--- |
-| [SVG](#svg)         | ![SVG group icons.](./svg-ribbon-tab-svg.png)     | Controls when post-processing is performed. |
+| [SVG](#svg)         | ![SVG group icons.](./svg-ribbon-tab-svg.png)![SVG group icons.](./svg-ribbon-tab-svg-on.png)     | Controls when post-processing is performed. |
 |                     |                                   ||
 | [Edit](#edit)       | ![Edit group icons.](./svg-ribbon-tab-edit.png)    | Provides tools to help get around Excel's inability to display large amounts of cell text. |
 |                     |                                   ||

@@ -1,13 +1,13 @@
 ---
 title: Pricing
-description: Excel to Graphviz Relationship Visualizer is completely free, with no trial, no tiers, and no paywalls.
+description: Relationship Visualizer is completely free, with no trial, no tiers, and no paywalls.
 ---
 
 # Pricing
 
 ## It's Absolutely Free
 
-Excel to Graphviz / Relationship Visualizer is free. Not a free trial, not a limited tier with an upsell waiting at the end. Just free, and it always has been.
+Relationship Visualizer is free. Not a free trial, not a limited tier with an upsell waiting at the end. Just free, and it always has been.
 
 ## What's Included
 
@@ -23,7 +23,7 @@ You get the complete workbook, every worksheet, and every feature described in t
 
 ## Why It's Free
 
-Excel to Graphviz is open source under the [MIT License](../license/). It has been maintained and shared this way for more than 10 years. During that time it has reached more than 10,000 downloads and earned a SourceForge Community Choice award. The tool is useful, and there has never been a reason to put it behind a paywall.
+Relationship Visualizer is open source under the [MIT License](../license/). It has been maintained and shared this way for more than 10 years. During that time it has reached more than 10,000 downloads and earned a SourceForge Community Choice award. The tool is useful, and there has never been a reason to put it behind a paywall.
 
 ## Supporting the Project
 
@@ -60,7 +60,7 @@ Good feedback is its own kind of thank‑you and helps the tool evolve.
 
 ::: tip Donate Money
 ☕ **[Buy me a coffee](https://buymeacoffee.com/exceltographviz)**  
-Excel to Graphviz is completely free, but the project still incurs real costs — web hosting, domain fees, and the Microsoft licenses used to build and maintain the tool. Monetary contributions are entirely optional, but always appreciated.
+Relationship Visualizer is completely free, but the project still incurs real costs — web hosting, domain fees, and the Microsoft licenses used to build and maintain the tool. Monetary contributions are entirely optional, but always appreciated.
 :::
 
 None of this is required to use the tool, now or ever. But every small action helps keep the project discoverable in an increasingly AI‑filtered web.

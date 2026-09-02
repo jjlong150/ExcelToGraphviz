@@ -7,6 +7,6 @@ description: Read announcements, tutorials, and feature highlights for Relations
 
 # Blog
 
-News, helpful tips, and practical tricks for getting the most from **Excel to Graphviz**.
+News, helpful tips, and practical tricks for getting the most from **Relationship Visualizer**.
 
 <BlogIndex />

@@ -45,6 +45,8 @@ export const routeOrder = [
 
   // === Publishing Graphs ===
   '/publish/index.html',
+  '/knowledge-graphs/index.html',
+  '/knowledge-graphs/tutorial/index.html',
   '/svg/index.html',
   '/advanced/index.html',
 

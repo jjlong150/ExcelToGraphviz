@@ -23,7 +23,7 @@ Review the project’s [Changelog](/changelog/), which documents the history of 
 
 Evaluate the repository’s visibility and engagement. A well‑maintained project with stars, forks, active issues, and community participation is less likely to host malicious or abandoned code.
 
-- The *Excel to Graphviz Relationship Visualizer* has published releases on **SourceForge** continuously since **October 17, 2015**.
+- The *Relationship Visualizer* has published releases on **SourceForge** continuously since **October 17, 2015**.
 - It holds a **five‑star rating** on SourceForge.
 - SourceForge has awarded it a **Community Choice** badge, recognizing open‑source projects that have reached the milestone of **10,000 total downloads**.
 
@@ -40,7 +40,7 @@ Review the project’s [Issues Log](https://github.com/jjlong150/ExcelToGraphviz
 
 **Review the macro code** before enabling it.
 
-- The VBA macro source code for the *Excel to Graphviz Relationship Visualizer* workbook is published on GitHub at
+- The VBA macro source code for the *Relationship Visualizer* workbook is published on GitHub at
     
   <https://github.com/jjlong150/ExcelToGraphviz/tree/main/src>  
   
@@ -49,7 +49,7 @@ Review the project’s [Issues Log](https://github.com/jjlong150/ExcelToGraphviz
 **Open the workbook in a protected environment** and inspect the VBA code (Alt+F11 in Excel). Look for suspicious or unexpected actions such as:
 
 - **Network connections** (e.g., accessing external URLs).  
-  - The *Excel to Graphviz Relationship Visualizer* includes hyperlinks to online help resources and Graphviz rendering sites, but does not perform automated network calls.
+  - The *Relationship Visualizer* includes hyperlinks to online help resources and Graphviz rendering sites, but does not perform automated network calls.
 
 - **File system modifications** (e.g., creating, deleting, or altering files).  
   - The workbook generates text and image files as part of its normal operation.
@@ -59,7 +59,7 @@ Review the project’s [Issues Log](https://github.com/jjlong150/ExcelToGraphviz
 
 If you lack VBA expertise, **consider using online tools or sandbox environments** to analyze the code for malicious behavior.
 
-All macros in the *Excel to Graphviz Relationship Visualizer* undergo static code analysis using [RubberduckVBA](https://rubberduckvba.com/) prior to publication. Rubberduck provides inspections, code metrics, and quality checks that help ensure maintainability and reduce the likelihood of hidden or unsafe behavior.
+All macros in the *Relationship Visualizer* undergo static code analysis using [RubberduckVBA](https://rubberduckvba.com/) prior to publication. Rubberduck provides inspections, code metrics, and quality checks that help ensure maintainability and reduce the likelihood of hidden or unsafe behavior.
 
 ## Verify Files
 
@@ -67,7 +67,7 @@ One of the most important security steps is knowing **exactly where the file cam
 
 ### Use only official releases
 
-Official releases of the *Excel to Graphviz Relationship Visualizer* workbook are published exclusively on:
+Official releases of the *Relationship Visualizer* workbook are published exclusively on:
 
 - **SourceForge** → <https://sourceforge.net/projects/relationship-visualizer/>
 - **GitHub** → <https://github.com/jjlong150/ExcelToGraphviz/releases>
@@ -162,7 +162,7 @@ Alternatively, use a **cloud-based or disposable environment** (e.g., Windows Sa
 
 Evaluate whether the workbook’s functionality **requires macros**. If the workbook can be used without enabling macros, it’s safer to leave them disabled.
 
-- The *Excel to Graphviz Relationship Visualizer* workbook is fully dependent on enabled macros.
+- The *Relationship Visualizer* workbook is fully dependent on enabled macros.
 - If you cannot enable macros, the software cannot operate.
 
 ## Review Documentation
@@ -170,7 +170,7 @@ Evaluate whether the workbook’s functionality **requires macros**. If the work
 Check whether the repository provides **clear documentation** explaining the macro’s purpose and functionality. A lack of transparent, well‑structured documentation is a red flag.
 
 - Comprehensive end‑user documentation is published at [https://exceltographviz.com](https://exceltographviz.com).
-- The *Excel to Graphviz Relationship Visualizer* source code is fully documented, though the codebase contains thousands of lines of VBA and the comments are primarily written for maintenance and support.
+- The *Relationship Visualizer* source code is fully documented, though the codebase contains thousands of lines of VBA and the comments are primarily written for maintenance and support.
 - In addition, the project now includes DeepWiki-generated documentation at [https://deepwiki.com/jjlong150/ExcelToGraphviz](https://deepwiki.com/jjlong150/ExcelToGraphviz), offering structured, cross‑linked explanations of modules, workflows, and internal architecture to help users and developers understand how the system operates.
 
 ## Check Community Feedback
@@ -186,7 +186,7 @@ Look for **user feedback** in the project’s issue trackers, discussions, and s
 
 Confirm that the repository is **actively maintained**. Abandoned projects or outdated files may contain unpatched vulnerabilities or rely on deprecated dependencies.
 
-- The *Excel to Graphviz Relationship Visualizer* has published:
+- The *Relationship Visualizer* has published:
   - Downloadable runtime files on [SourceForge](https://sourceforge.net/projects/relationship-visualizer/) continuously since **October 17, 2015**.
   - Exported VBA code and website markdown content on [GitHub](https://github.com/jjlong150/ExcelToGraphviz) since **February 11, 2022**.
 
@@ -200,7 +200,7 @@ When possible, explore trusted, well‑established libraries or tools rather tha
 
 ## Practical Steps
 
-**Download cautiously**: Only download from the project’s official SourceForge or GitHub pages — avoid third‑party mirrors or unverified sources.
+**Download cautiously**: Only download from the project’s official SourceForge or GitHub pages. Avoid third‑party mirrors or unverified sources.
 
 **Back up data**: Ensure important files are backed up before opening any macro‑enabled workbook to minimize risk in case of corruption or unexpected behavior.
 
@@ -215,6 +215,47 @@ Treat any of the following as a warning sign and proceed with extreme caution:
 - Poorly rated, unverified, or inactive repositories.
 - Antivirus warnings or negative community reports.
 
+## Generated SVG File Security
+
+The *Relationship Visualizer* workbook can optionally postprocess the SVG diagrams it generates, injecting interactive controls (zoom, pan, layer filtering, and connection highlighting) directly into the exported file. This is a **separate security surface** from the macro‑enabled workbook itself: it concerns the diagrams the workbook *produces*, not the workbook you download and open.
+
+### How SVG Postprocessing Works
+
+Postprocessing applies find/replace rules to the raw SVG text that Graphviz produces, inserting a `<style>` block and a `<script>` block that add the interactive toolbar and navigation features described in [Post-process SVG Files](/svg/).
+
+Because this works by inserting text into the file, it is, by design, a mechanism for injecting arbitrary JavaScript.
+
+### What This Means
+
+- **The injected script executes automatically** whenever the resulting SVG is opened in a context that runs scripts. For example, a direct browser tab, an `<object>` or `<iframe>` embed, or an SVG inlined into an HTML page.
+- **It does not execute** when the SVG is referenced via an `<img>` tag, since browsers disable scripting in that context.
+- **It runs with the privileges of whatever is hosting it.** If the SVG is inlined into a web page, the script has the same DOM and cookie access as the rest of that page.
+
+Most people don't expect an `.svg` file to run code the way a `.js` or `.html` file can. Treat any SVG exported with postprocessing enabled accordingly. The file is functionally closer to a small web page than to a static image.
+
+::: warning Postprocessing rules are trusted code, not a style preference
+Whoever controls the find/replace rules controls what code runs in every diagram the workbook produces. If a postprocessing configuration is ever shared, exported, or imported between users, treat it with the same scrutiny you'd apply to a macro‑enabled workbook because functionally, it is one.
+:::
+
+### Mitigations
+
+- **Off by default.** Postprocessing must be explicitly enabled before any script is injected.
+- **Explicit confirmation required.** Enabling postprocessing shows a confirmation dialog stating plainly that it injects JavaScript which runs automatically when the SVG is opened, and requires the user to confirm they understand this before proceeding.
+- **No dynamic attribute‑string injection in the built‑in controls.** The default interactive toolbar binds every event handler with `addEventListener` rather than building `onclick="..."` attributes from concatenated strings, thus closing off a classic injection‑prone pattern.
+- **Native OS and Office prompts still apply.** Opening a file saved from Excel VBA, or double‑clicking a downloaded SVG, still triggers Windows' and Microsoft Office's own security prompts, independent of anything the workbook does.
+
+::: tip If you only use the default export
+If you never enable SVG postprocessing, none of this applies. Your diagrams are static images with no embedded script, the same as any Graphviz output.
+:::
+
+### Recommendations
+
+- Don't enable postprocessing on a shared or multi‑user workbook unless everyone who might generate diagrams from it should be trusted to control what code runs in the output.
+- Don't import postprocessing rule sets from a source you wouldn't trust to hand you a `.js` file directly.
+- If you distribute SVGs generated with postprocessing enabled, let recipients know the file contains executable script; particularly if they're used to treating `.svg` as a plain image format.
+
+For the full list of interactive features postprocessing adds, see [Post-process SVG Files](/svg/).
+
 ## Conclusion
 
-By combining these practices - verifying the source, reviewing documentation, inspecting code, using secure environments, and staying cautious - you can make an informed decision about trusting a macro‑enabled Excel workbook from SourceForge or GitHub. When in doubt, seek guidance from a cybersecurity professional or avoid enabling macros altogether.
+By combining these practices - verifying the source, reviewing documentation, inspecting code, understanding what generated files can do, using secure environments, and staying cautious - you can make an informed decision about trusting a macro‑enabled Excel workbook from SourceForge or GitHub. When in doubt, seek guidance from a cybersecurity professional or avoid enabling macros altogether.

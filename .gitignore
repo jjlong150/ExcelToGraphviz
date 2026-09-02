@@ -1,5 +1,7 @@
 .DS_Store
 node_modules
+.claude
+.claude/worktrees
 .vscode
 .vitepress/dist
 .vitepress/cache

@@ -5,7 +5,7 @@ description: Learn how to export diagrams as images, SVG files, or animations, a
 
 # Publishing Graphs
 
-One of the strengths of the Relationship Visualizer is its ability to handle large datasets and let Graphviz determine an efficient layout automatically. However, graphs with substantial amounts of data can become quite large—often far beyond what can be comfortably viewed within Excel.
+One of the strengths of the Relationship Visualizer is its ability to handle large datasets and let Graphviz determine an efficient layout automatically. However, graphs with substantial amounts of data can become quite large, often far beyond what can be comfortably viewed within Excel.
 
 Publishing the graph to an external file is often the most practical way to work with these larger diagrams. Saving the output allows you to archive versions of the graph as your data evolves, share the results with colleagues who may not be using Excel, and review the structure of the graph independently of the workbook.
 
@@ -18,9 +18,9 @@ Use **Publish** when you want to work with the graph outside of Excel—whether 
 
 ## Setting Output File Options
 
-You must specify a directory where you want graph files written to, and provide a filename prefix for the file. Select the `Get Directory` button in the `Publish` group on the `Graphviz` ribbon tab.
+You must specify a directory where you want graph files written to, and provide a filename prefix for the file. Select the `Get Directory` button in the `File Output` group on the `Data` ribbon tab.
 
-| ![Graphviz ribbon showing the Get Directory button used to choose an output folder.](./publish-get-directory-button.png) |
+| ![Data ribbon tab showing the Get Directory button used to choose an output folder.](./publish-get-directory-button.png) |
 | --------------------------------------- |
 
 A directory-picking dialog will appear:
@@ -60,19 +60,31 @@ Graphviz provides numerous file formats that the diagrams can be written as, suc
 
 ![Dropdown list showing available output file formats such as PNG, PDF, GIF, and JPEG.](./publish-file-extensions.png)
 
+## Choosing a Render Engine
+
+| ![Renderer group on the Data ribbon tab, showing the the Cairo, GD, and GDI+ renderer options.](./publish-renderer.png) |
+| --------------------------------------- |
+
+The same `File Output` group also lets you choose which Graphviz renderer produces the output file: `Cairo`, `GD`, `GDI+` (Windows only), or `Quartz` (macOS only). If you notice differences in font rendering, image handling, or output quality between machines, try switching render engines here.
+
 ## Publish / Publish all views
 
-Press the `Publish` button.
+`Publish` is a split button, in the `Publish` group on the `Data` ribbon tab. Pressing the main button generates output using your current settings; opening its dropdown (the small `v` arrow) offers an `Open after publishing` option, which automatically opens the generated file once it's written.
 
-| ![Publish button on the Graphviz ribbon used to generate the output file.](./publish-publish-button.png) |
+| ![Publish group on the Data ribbon tab, showing the Publish split button, Publish all views button, and the Graph (.svg), DOT (.gv), and Knowledge (.json) checkboxes.](./publish-group-v11.png) |
 | --------------------------------------- |
 
 A graph is generated in the same manner as when `Refresh` is pressed; however, it is not displayed in the Excel workbook. Instead, a message appears in the Excel status bar indicating the name of the file that was created and the folder where it was saved.
 
-You may also choose to have one file per view created by selecting the `Publish all views` button.
+Alongside `Publish` and `Publish all views` are three checkboxes that control which output files are created each time you publish:
 
-| ![Publish all views button used to generate one output file per view.](./publish-publish-all-views-button.png) |
-| --------------------------------------- |
+- **Graph** (`.svg`, or whatever format you chose above) - writes the rendered diagram to disk.
+- **DOT** (`.gv`) - writes the raw Graphviz `dot` source alongside the rendered diagram.
+- **Knowledge** (`.json`) - writes a [Knowledge Graph](/knowledge-graphs/) JSON export alongside the rendered diagram.
+
+Check any combination of these to produce exactly the output files you need, all from a single publish.
+
+You may also choose to have one file per view created by selecting the `Publish all views` button.
 
 The list of views will be iterated in a loop, and a file will be published based on the yes/no switches specified for that view. The View Name will be appended to the file prefix allowing you to tell the graphs apart.
 

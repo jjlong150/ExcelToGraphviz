@@ -7,7 +7,7 @@ description: Install Relationship Visualizer on Windows with Graphviz setup, PAT
 
 ## Brief Instructions
 
-Steps to Install **Excel to Graphviz** on Microsoft Windows
+Steps to Install **Relationship Visualizer** on Microsoft Windows
 
 1. [Download and Install *Graphviz*](./#download-and-install-graphviz) 
    - Choose and run either the 32-bit or 64-bit [Graphviz EXE Installer](https://graphviz.org/download/).

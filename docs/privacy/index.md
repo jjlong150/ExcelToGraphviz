@@ -29,7 +29,7 @@ For more details, you can review the Simple Analytics approach to privacy at: [h
 
 ## Third‑Party Libraries
 
-**Excel to Graphviz / Relationship Visualizer** incorporates third‑party libraries and resources that may be distributed under licenses different from this software’s own (see [Credits](../acknowledge/)). These licenses are generally compatible with the MIT License, though I am not a lawyer.
+**Relationship Visualizer** incorporates third‑party libraries and resources that may be distributed under licenses different from this software’s own (see [Credits](../acknowledge/)). These licenses are generally compatible with the MIT License, though I am not a lawyer.
 
 ## External Links
 

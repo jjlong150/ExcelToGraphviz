@@ -13,13 +13,13 @@ The `data` Worksheet has 11 columns (A-K):
 
 | A | B | C | D | E | F | G | H | I | J | K |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [Indicator](./#indicator) | [Item](./#item) | [Tail Label](./#tail-label) | [Label](./#label) | [External Label](./#external-label) | [Head Label](./#head-label) | [Tooltip](./#tooltip) | [Related Item](./#related-item) | [Style Name](./#style-name) | [Attributes](./#attributes) | [Messages](./#messages) |
+| [Indicator](./#indicator) | [Item](./#item) | [Tail Label](./#tail-label) | [Label](./#label) | [External Label](./#external-label) | [Head Label](./#head-label) | [Tooltip](./#tooltip) | [Related Item](./#related-item) | [Style Name](./#style-name) | [Attributes](./#attributes) | [Properties](./#properties) |
 
 ## Indicator
 
 The `Indicator` column is used to draw special attention to a row.
 - A `#` hash character treats the row as a comment. The text in the row will turn green, and no data in this row will be included in the graph. 
-- An `!` exclamation mark character will appear if errors are detected in your data on this row. The row will turn red, and an error message will be displayed in the [Messages](./#messages) column.
+- An `!` exclamation mark character will appear if errors are detected in your data on this row. The row will turn red, and an error message will be reported via the `console` worksheet or a message box, depending on your message-routing settings on the [Console](../console/) ribbon tab.
 
 ## Item
 
@@ -83,20 +83,26 @@ The `Attributes` column provides a means to add extra elements of style which wi
 - Optional column.
 - Inclusion in graph can be toggled on/off.
 
-## Messages
+## Properties
 
-When the graphing macros run, they check for common data mistakes, such as specifying only one node for an edge.
+The `Properties` column lets you attach your own free-form, typed key/value properties to a node or edge, beyond the built-in `Label`, `Tooltip`, and `Style Name` fields. These properties have no effect on the rendered Graphviz diagram; instead they're included in the JSON produced by the [Knowledge Graph](/knowledge-graphs/) export, letting the exported graph carry richer, structured data than the visual diagram alone.
 
-If mistakes are found, they are reported in this column. Additionally, an exclamation mark (!) is placed in the `Indicator` column, and the row is highlighted in red to draw your attention to the error.
+Write properties the same way you'd write extra Graphviz attributes: space-, comma-, or semicolon-separated `key=value` pairs, quoting any value that contains spaces or punctuation.
 
-- Column is hidden by default.
-- Column is shown if an error is detected.
+```
+weight=200 domestic=true opened=2019-03-14 contribution="buy me a coffee"
+```
+
+On export, each value is typed rather than flattened to plain text — the row above comes out as a real number, a real boolean, a date-valued string, and a quoted string. Properties follow the same graph → node/edge → row inheritance used for labels and tooltips, so you can set a default once at the `node[]` or `edge[]` level and override it only where it needs to differ.
+
+- Optional column.
+- Inclusion in the Knowledge Graph export can be toggled on/off.
 
 ## Show Hidden Columns
 
-The columns for `Tail Label` (C), `External Label` (E), `Head Label` (F), `Tooltip` (G), and `Messages` (K) are hidden by default, since they are less frequently used. 
+The columns for `Tail Label` (C), `External Label` (E), `Head Label` (F), and `Tooltip` (G) are hidden by default, since they are less frequently used. 
 
-You can quickly toggle the visibility of these columns by selecting the column name from the list in the dropdown menu beneath the `Show Columns` button in the **'data' Worksheet** group' on the right side of the Ribbon.
+You can quickly toggle the visibility of these (and any other) columns by selecting the column name from the list in the dropdown menu beneath the `Show Columns` button in the **'data' Worksheet** group on the `Data` ribbon tab. The menu is organized into labeled sections — Comment, Item, Label, Style, and Knowledge — to make columns easier to find.
 
-![Screenshot of the Relationship Visualizer 'Show Columns' menu in Excel, displaying options to reveal hidden data columns such as Tail Label, External Label, Head Label, Tooltip, and Messages.](./show_columns.png)
+![Screenshot of the Relationship Visualizer 'Show Columns' menu in Excel, displaying options to reveal hidden data columns such as Tail Label, External Label, Head Label, and Tooltip.](./show_columns.png)
 

@@ -20,7 +20,7 @@ const docsSidebar = [
         items: [
           { text: 'New Workbook', link: '/prepare/' },
           { text: 'Data Worksheet', link: '/dataworksheet/' },
-          { text: 'Graphviz Tab', link: '/graphviztab/' },
+          { text: 'Data & Graphviz Tabs', link: '/graphviztab/' },
           { text: 'Core Concepts', link: '/coreconcepts/' }
         ]
       },
@@ -50,6 +50,14 @@ const docsSidebar = [
         ]
       },
       { text: 'Publishing Graphs', link: '/publish/' },
+      {
+        text: 'Knowledge Graph Export',
+        link: '/knowledge-graphs/',
+        collapsed: true,
+        items: [
+          { text: 'Tutorial: Musicians to Bands', link: '/knowledge-graphs/tutorial/' }
+        ]
+      },
       { text: 'SVG Post-Processing', link: '/svg/' },
       { text: 'Advanced Graphviz Topics', link: '/advanced/' }
     ]

@@ -20,7 +20,7 @@ The author, Jeffrey Long, extends special thanks to:
 
 ## Third-Party Notices
 
-**Excel to Graphviz / Relationship Visualizer** incorporates third‑party libraries and resources that may be distributed under licenses different from this software’s own. These licenses are assumed compatible with the MIT License, though I am not a lawyer.
+**Relationship Visualizer** incorporates third‑party libraries and resources that may be distributed under licenses different from this software’s own. These licenses are assumed compatible with the MIT License, though I am not a lawyer.
 
 ::: warning Credit is given where credit is due
 If I’ve unintentionally missed a required notice, please [let me know](mailto:relationship.visualizer@gmail.com).
