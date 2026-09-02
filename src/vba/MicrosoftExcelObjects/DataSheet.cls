@@ -77,9 +77,9 @@ Option Explicit
 ' ==========================================================================
 Private Sub Worksheet_Activate()
 #If Mac Then
-    Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabGraphviz"
+    Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabData"
 #Else
-    ActivateTabGraphviz
+    ActivateTabData
 #End If
     Application.StatusBar = False
 End Sub
@@ -108,8 +108,7 @@ End Sub
 '   - Provides the live-update behavior for users editing graph data.
 '   - Integrates seamlessly with manual/auto toggling.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Private Sub Worksheet_Change(ByVal Target As Range)
+Private Sub Worksheet_Change(ByVal target As Range)
     If Application.enableEvents = False Then Exit Sub
     If SettingsSheet.Range(SETTINGS_RUN_MODE).value <> TOGGLE_AUTO Then Exit Sub
     AutoDraw
@@ -161,28 +160,28 @@ End Sub
 '   - getMatchingStyles() function (provides cached + sorted results)
 '   - getRowType(), GetSettingColNum()
 ' ==========================================================================
-Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+Private Sub Worksheet_SelectionChange(ByVal target As Range)
     ' Exit if multiple cells selected
-    If Target.Cells.CountLarge > 1 Then Exit Sub
+    If target.Cells.CountLarge > 1 Then Exit Sub
     
     ' Exit if the cell is outside the Style Name column
-    If Target.Column <> GetSettingColNum(SETTINGS_DATA_COL_STYLE) Then Exit Sub
+    If target.Column <> GetSettingColNum(SETTINGS_DATA_COL_STYLE) Then Exit Sub
     
     ' Clear the named range which is associated with the Style Name dropdown list
     ChoicesSheet.Range(RANGE_STYLE_NAMES).ClearContents
     
     ' Exit if heading row
-    If Target.row = 1 Then Exit Sub
+    If target.row = 1 Then Exit Sub
     
     ' Examine the row and determine how it is being used
     Dim rowType As String
-    rowType = getRowType(ActiveSheet.name, Target.row)
+    rowType = getRowType(ActiveSheet.name, target.row)
     
     ' Skip rows that don't use styles
-    If rowType = TYPE_BLANK_ROW Or rowType = TYPE_GRAPH Then Exit Sub
-        
+    If rowType = TYPE_BLANK_ROW Then Exit Sub
+
     ' Adjust Excel Performance Settings
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     Application.Calculation = xlCalculationManual
     Application.enableEvents = False
     
@@ -192,15 +191,15 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     Dim styleNames As Dictionary
     Set styleNames = getMatchingStyles(rowType)
     
-    If styleNames.count = 0 Then GoTo CleanExit
+    If styleNames.Count = 0 Then GoTo CleanExit
     
     ' Populate Dropdown List
     With ChoicesSheet
-        Dim count As Long
-        count = styleNames.count
+        Dim Count As Long
+        Count = styleNames.Count
         
         ' Write the (already sorted) styles
-        .Cells(1, 1).Resize(count, 1).Value2 = _
+        .Cells(1, 1).Resize(Count, 1).Value2 = _
             Application.WorksheetFunction.Transpose(styleNames.keys)
         
         ' Update named range size
@@ -208,7 +207,7 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
         Set namedRange = ActiveWorkbook.names(RANGE_STYLE_NAMES)
         
         With namedRange
-            .RefersTo = .RefersToRange.Resize(count, 1)
+            .RefersTo = .RefersToRange.Resize(Count, 1)
         End With
     End With
     
@@ -216,7 +215,7 @@ CleanExit:
     ' Restore Excel settings
     Application.enableEvents = True
     Application.Calculation = xlCalculationAutomatic
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
     
     ' Clean up objects
     Set namedRange = Nothing

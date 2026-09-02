@@ -88,7 +88,6 @@ End Property
 '     a tab before the Ribbon is fully rendered.
 ' ==========================================================================
 Public Sub ribbon_onLoad(ByVal ribbon As IRibbonUI)
-    '@Ignore ValueRequired
     myRibbon = ribbon
     LoadFontImageCache
     ColorLoadImageCache
@@ -125,7 +124,7 @@ Public Sub ribbon_activateTab()
     
     ' Show the appropriate tab for the worksheet displayed
     Select Case ActiveSheet.name
-        Case DataSheet.name:            ActivateTabGraphviz
+        Case DataSheet.name:            ActivateTabData
         Case AboutSheet.name:           ActivateTabAbout
         Case ConsoleSheet.name:         ActivateTabConsole
         Case DiagnosticsSheet.name:     ActivateTabDiagnostics
@@ -139,20 +138,20 @@ Public Sub ribbon_activateTab()
         Case LocaleFrFrSheet.name:      ActivateTabLaunchpad
         Case LocaleItItSheet.name:      ActivateTabLaunchpad
         Case LocalePlPlSheet.name:      ActivateTabLaunchpad
-        Case SettingsSheet.name:        ActivateTabLaunchpad
+        Case SettingsSheet.name:        ActivateTabSettings
         Case StyleDesignerSheet.name:   ActivateTabStyleDesigner
         Case StylesSheet.name:          ActivateTabStyles
         Case SourceSheet.name:          ActivateTabSource
         Case SqlSheet.name:             ActivateTabSql
         Case SvgSheet.name:             ActivateTabSvg
-        Case Else:                      ActivateTabGraphviz
+        Case Else:                      ActivateTabData
     End Select
              
     Exit Sub
 
 ErrorHandler:
-    If err.number > 0 Then
-        err.Clear
+    If Err.number > 0 Then
+        Err.Clear
         Resume Next
     End If
 End Sub
@@ -191,6 +190,12 @@ Public Sub ribbon_getVisible(ByVal control As IRibbonControl, ByRef visible As V
             visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_DIAGNOSTICS)
         Case RIBBON_TAB_EXCHANGE
             visible = GetSettingBoolean(SETTINGS_TABS_TOGGLE_EXCHANGE)
+        Case RIBBON_TAB_GRAPHVIZ
+            visible = GetSettingBoolean(SETTINGS_TABS_TOGGLE_GRAPHVIZ)
+        Case RIBBON_TAB_KNOWLEDGE
+            visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_KNOWLEDGE)
+        Case RIBBON_TAB_SETTINGS
+            visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SETTINGS)
         Case RIBBON_TAB_SOURCE
             visible = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SOURCE)
         Case RIBBON_TAB_SQL
@@ -226,21 +231,21 @@ End Sub
 Public Sub RefreshRibbon()
     On Error GoTo ErrorHandler
     If myRibbon Is Nothing Then
-        ' This message cannot be localized due to error state.
-        EmitMessage "Error refreshing the ribbon. Save and reopen this file."
+        ' Pull localized message directly from a range due to error state.
+        EmitMessage SettingsSheet.Range("ErrorRefreshingTheRibbon").Value2
     Else
         myRibbon.Invalidate
-        If err.number <> 0 Then
-            ' This message cannot be localized due to error state.
-            EmitMessage "Lost the Ribbon object. Save this file, close worksbook, and reopen."
+        If Err.number <> 0 Then
+            ' Pull localized message directly from a range due to error state.
+            EmitMessage SettingsSheet.Range("LostTheRibbonObject").Value2
         End If
     End If
 
     Exit Sub
 
 ErrorHandler:
-    If err.number > 0 Then
-        err.Clear
+    If Err.number > 0 Then
+        Err.Clear
         Resume Next
     End If
 End Sub
@@ -267,14 +272,14 @@ End Sub
 Public Sub InvalidateRibbonControl(ByVal controlName As String)
     On Error GoTo ErrorHandler
     If myRibbon Is Nothing Then
-        ' This message cannot be localized due to error state.
-        UpdateStatusBar replace("Error updating the ribbon for control named '{controlName}'. Save and reopen this file.", "{controlName}", controlName)
+        ' Pull localized message directly from a range due to error state.
+        UpdateStatusBar replace(SettingsSheet.Range("ErrorUpdatingTheRibbonForControl").Value2, "{controlName}", controlName)
     Else
         myRibbon.InvalidateControl controlName
     End If
 ErrorHandler:
-    If err.number > 0 Then
-        err.Clear
+    If Err.number > 0 Then
+        Err.Clear
         Resume Next
     End If
 End Sub
@@ -300,14 +305,14 @@ End Sub
 Public Sub ActivateTab(ByVal tabName As String)
     On Error GoTo ErrorHandler
     If myRibbon Is Nothing Then
-        ' This message cannot be localized due to error state.
-        UpdateStatusBar replace("Error activating a ribbon tab named '{tabName}'. Save and reopen this file.", "{tabName}", tabName)
+        ' Pull localized message directly from a range due to error state.
+        UpdateStatusBar replace(SettingsSheet.Range("ErrorActivatingARibbonTab").Value2, "{tabName}", tabName)
     Else
         myRibbon.ActivateTab tabName
     End If
 ErrorHandler:
-    If err.number > 0 Then
-        err.Clear
+    If Err.number > 0 Then
+        Err.Clear
         Resume Next
     End If
 End Sub
@@ -384,6 +389,10 @@ Public Sub ActivateTabDiagnostics()
     ActivateTab RIBBON_TAB_DIAGNOSTICS
 End Sub
 
+Public Sub ActivateTabSettings()
+    ActivateTab RIBBON_TAB_SETTINGS
+End Sub
+
 Public Sub ActivateTabStyleDesigner()
     ActivateTab RIBBON_TAB_STYLE_DESIGNER
 End Sub
@@ -400,11 +409,20 @@ Public Sub ActivateTabExchange()
     ActivateTab RIBBON_TAB_EXCHANGE
 End Sub
 
+Public Sub ActivateTabGraphviz()
+    ActivateTab RIBBON_TAB_GRAPHVIZ
+End Sub
+
+Public Sub ActivateTabKnowledge()
+    ActivateTab RIBBON_TAB_KNOWLEDGE
+End Sub
+
 Public Sub ActivateTabLaunchpad()
     ActivateTab RIBBON_TAB_WORKSHEETS
 End Sub
 
-Public Sub ActivateTabGraphviz()
-    ActivateTab RIBBON_TAB_GRAPHVIZ
+Public Sub ActivateTabData()
+    ActivateTab RIBBON_TAB_DATA
 End Sub
+
 

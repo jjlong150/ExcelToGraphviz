@@ -13,10 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
-
-'@IgnoreModule HungarianNotation
-'@Folder("Relationship Visualizer.Forms.CellValueEdit")
+' Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved
 
 Option Explicit
 

@@ -133,7 +133,7 @@ End Enum
 ' "visible=false" to prevent the user from attempting to use it.
 Private scriptVersion As Long
 
-Public Sub SetScriptVersion(ByVal version As Long)
+Private Sub SetScriptVersion(ByVal version As Long)
     scriptVersion = version
 End Sub
 
@@ -146,7 +146,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for colorScheme
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub colorScheme_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     If Left$(itemId, 4) = "cs_x" Then Exit Sub ' Blank gallery image selected
     
@@ -175,25 +174,21 @@ Private Sub colorScheme_onAction(ByVal control As IRibbonControl, ByVal itemId A
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub colorScheme_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub colorScheme_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("cs_", DESIGNER_COLOR_SCHEME)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for fontColor
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontColor_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_FONT_COLOR, COLOR_BLACK, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub null_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = vbNullString
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontColor_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_LABEL_FONT_COLOR) Then
         ColorGetImage DESIGNER_FONT_COLOR, COLOR_BLACK, returnedVal
@@ -202,7 +197,6 @@ Private Sub labelFontColor_getImage(ByVal control As IRibbonControl, ByRef retur
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontColor_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     If index = 0 Then
         ClearStyleDesignerSetting DESIGNER_FONT_COLOR
@@ -214,14 +208,12 @@ Private Sub fontColor_onAction(ByVal control As IRibbonControl, ByVal itemId As 
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontColor_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveColor index, DESIGNER_EDGE_LABEL_FONT_COLOR
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_COLOR
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub colorPicker_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = ColorPickerGetVisible(control.id)
 End Sub
@@ -258,7 +250,6 @@ Private Function ColorPickerGetVisible(controlId As String) As Boolean
     ColorPickerGetVisible = visible
 End Function
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub color_getItemImage(ByVal control As IRibbonControl, ByVal index As Long, ByRef image As Variant)
     ' Get the color scheme
     Dim color As ColorInfo
@@ -306,15 +297,14 @@ Private Sub ColorGetImage(ByVal cellName As String, ByVal defaultColor As String
     ColorGetOrCreateImage color, image
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub color_getItemCount(ByVal control As IRibbonControl, ByRef count As Variant)
+Private Sub color_getItemCount(ByVal control As IRibbonControl, ByRef Count As Variant)
     ' Lazy creation of colorImageCache dictionary
     If colorImageCache Is Nothing Then
         Set colorImageCache = New Dictionary
     End If
     
     ' Load the array of color names, and obtain the quantity of colors
-    count = LoadColorNameArray()
+    Count = LoadColorNameArray()
     
     ' See comment at top of module regarding variable "kolorScheme"
     kolorScheme = GetColorScheme()
@@ -322,23 +312,23 @@ Private Sub color_getItemCount(ByVal control As IRibbonControl, ByRef count As V
     ' Hack to disable loading the hidden dropdowns
     If StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER Then
         If control.id = RIBBON_CTL_EDGE_COLOR1 Or control.id = RIBBON_CTL_EDGE_COLOR2 Or control.id = RIBBON_CTL_EDGE_COLOR3 Or control.id = RIBBON_CTL_EDGE_LABEL_FONT_COLOR Then
-            count = 0
+            Count = 0
         End If
         
         If control.id = RIBBON_CTL_GRADIENT_FILL_COLOR And CellIsEmpty(DESIGNER_FILL_COLOR) Then
-            count = 0
+            Count = 0
         End If
         
     ElseIf StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_EDGE Then
         If control.id = RIBBON_CTL_FILL_COLOR Or control.id = RIBBON_CTL_GRADIENT_FILL_COLOR Or control.id = RIBBON_CTL_BORDER_COLOR Then
-            count = 0
+            Count = 0
         ElseIf control.id = RIBBON_CTL_EDGE_COLOR2 Then
             If CellIsEmpty(DESIGNER_EDGE_COLOR_1) Then
-                count = 0
+                Count = 0
             End If
         ElseIf control.id = RIBBON_CTL_EDGE_COLOR3 Then
             If CellIsEmpty(DESIGNER_EDGE_COLOR_2) Then
-                count = 0
+                Count = 0
             End If
         End If
     End If
@@ -374,7 +364,7 @@ Private Function LoadColorNameArray() As Long
     End Select
 End Function
 
-Public Sub color_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub color_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     Dim cellName As String
     Dim cellValue As String
     
@@ -417,7 +407,6 @@ Public Sub color_getLabel(ByVal control As IRibbonControl, ByRef label As Varian
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub color_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
     ' See comment at top of module regarding variable "kolorScheme"
     Dim color As ColorInfo
@@ -425,12 +414,10 @@ Private Sub color_getItemLabel(ByVal control As IRibbonControl, ByVal index As L
     label = ColorGetNameByIndex(color, index)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontColor_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_FONT_COLOR)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontColor_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_EDGE_LABEL_FONT_COLOR)
 End Sub
@@ -438,17 +425,14 @@ End Sub
 ' ===========================================================================
 ' Callbacks for borderColor
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderColor_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_BORDER_COLOR, COLOR_BLACK, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderColor_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_BORDER_COLOR)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderColor_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveColor index, DESIGNER_BORDER_COLOR
     InvalidateRibbonControl RIBBON_CTL_BORDER_COLOR
@@ -524,8 +508,7 @@ Private Sub AddToFontCache(fontName As String, imageSize As FontPreviewSize)
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub fontName_getItemCount(ByVal control As IRibbonControl, ByRef count As Variant)
+Private Sub fontName_getItemCount(ByVal control As IRibbonControl, ByRef Count As Variant)
     
     ' Cache the list of fonts in an array
     If IsEmpty(fontList) Then
@@ -539,23 +522,23 @@ Private Sub fontName_getItemCount(ByVal control As IRibbonControl, ByRef count A
     End If
     
     If IsEmpty(fontList) Then
-        count = 0
+        Count = 0
     Else
-        count = (UBound(fontList) - LBound(fontList) + 1)
-        If count > 1000 Then    ' Microsoft caps dropdown lists at 1000 items
-            count = 1000
+        Count = (UBound(fontList) - LBound(fontList) + 1)
+        If Count > 1000 Then    ' Microsoft caps dropdown lists at 1000 items
+            Count = 1000
         End If
     End If
     
     ' Hack to disable loading the font which will not be displayed
     If StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER Then
         If control.id = RIBBON_CTL_LABEL_FONT_NAME Then
-            count = 0
+            Count = 0
         End If
     End If
 End Sub
 
-Public Sub fontName_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub fontName_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_FONT_NAME)
     If Len(fontName) = 0 Then
@@ -565,7 +548,6 @@ Public Sub fontName_getLabel(ByVal control As IRibbonControl, ByRef returnedVal 
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontName_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef returnedVal As Variant)
     If index = 0 Then
         returnedVal = "Times-Roman"
@@ -574,7 +556,6 @@ Private Sub fontName_getItemLabel(ByVal control As IRibbonControl, ByVal index A
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontName_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveStyleDesignerSetting DESIGNER_FONT_NAME, FontGetNameByIndex(index)
     RenderPreview
@@ -582,12 +563,10 @@ Private Sub fontName_onAction(ByVal control As IRibbonControl, ByVal itemId As S
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_NAME
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontName_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef listIndex As Variant)
     listIndex = FontGetIndexByName(StyleDesignerSetting(DESIGNER_FONT_NAME))
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontName_getImage(ByVal control As IRibbonControl, ByRef image As Variant)
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_FONT_NAME)
@@ -596,7 +575,6 @@ Private Sub fontName_getImage(ByVal control As IRibbonControl, ByRef image As Va
     FontGetOrCreateImage fontName, image, FontPreviewSmall
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontName_getItemImage(ByVal control As IRibbonControl, ByVal index As Long, ByRef image As Variant)
     If index < 0 Then Exit Sub
     ' Get the font name
@@ -646,7 +624,6 @@ Private Sub FontGetOrCreateImage( _
         If fontName_createItemImage(fontName, imageFile, RIBBON_EXT_FONT, imageSize) Then
             Set image = SafeLoadPicture(imageFile)
         End If
-
         Application.StatusBar = False
     End If
 
@@ -685,8 +662,8 @@ Private Function fontName_createItemImage( _
 
     With gv
         .GraphvizPath = SettingsSheet.Range(SETTINGS_GV_PATH).Value2
-        .OutputDirectory = GetTempDirectory()
-        .FilenameBase = fontName
+        .outputDirectory = GetTempDirectory()
+        .filenameBase = fontName
         .GraphFormat = imageFormat
         .Verbose = console.graphvizVerbose
         .CaptureMessages = console.logToConsole
@@ -711,7 +688,7 @@ Cleanup:
     Exit Function
 
 ErrorHandler:
-    Debug.Print "fontName_createItemImage Error: " & err.Description
+    EmitMessageSilent "fontName_createItemImage Error: " & Err.Description, esError
     Resume Cleanup
 End Function
 
@@ -764,14 +741,13 @@ Private Function BuildFontPreviewDot( _
     BuildFontPreviewDot = dot
 End Function
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontName_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveStyleDesignerSetting DESIGNER_EDGE_LABEL_FONT_NAME, FontGetNameByIndex(index)
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABEL_FONT_NAME
     RenderPreview
 End Sub
 
-Public Sub labelFontName_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub labelFontName_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_EDGE_LABEL_FONT_NAME)
     If Len(fontName) = 0 Then ' Revert to designer font name
@@ -785,7 +761,6 @@ Public Sub labelFontName_getLabel(ByVal control As IRibbonControl, ByRef returne
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontName_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef listIndex As Variant)
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_EDGE_LABEL_FONT_NAME)
@@ -796,7 +771,6 @@ Private Sub labelFontName_getSelectedItemIndex(ByVal control As IRibbonControl, 
     listIndex = FontGetIndexByName(fontName)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontName_getImage(ByVal control As IRibbonControl, ByRef image As Variant)
     Dim fontName As String
     fontName = StyleDesignerSetting(DESIGNER_EDGE_LABEL_FONT_NAME)
@@ -832,12 +806,10 @@ End Function
 ' ===========================================================================
 ' Callbacks for fontSize
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontSize_getItemCount(ByVal control As IRibbonControl, ByRef listSize As Variant)
-    listSize = ListsSheet.Range(LISTS_FONT_SIZES).count + 1
+    listSize = ListsSheet.Range(LISTS_FONT_SIZES).Count + 1
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontSize_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
     If index = 0 Then
         label = "14"
@@ -846,7 +818,6 @@ Private Sub fontSize_getItemLabel(ByVal control As IRibbonControl, ByVal index A
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontSize_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     If index = 0 Then
         ClearStyleDesignerSetting DESIGNER_FONT_SIZE
@@ -856,17 +827,14 @@ Private Sub fontSize_onAction(ByVal control As IRibbonControl, ByVal itemId As S
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontSize_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetListIndex(LISTS_FONT_SIZES, DESIGNER_FONT_SIZE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontSize_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetListIndex(LISTS_FONT_SIZES, DESIGNER_EDGE_LABEL_FONT_SIZE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelFontSize_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     If index = 0 Then
         ClearStyleDesignerSetting DESIGNER_EDGE_LABEL_FONT_SIZE
@@ -879,74 +847,63 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeWeight
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeWeight_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "weight_", DESIGNER_EDGE_WEIGHT
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeWeight_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeWeight_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("weight_", DESIGNER_EDGE_WEIGHT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for edgeLabelAngle
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeLabelAngle_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "angle_", DESIGNER_EDGE_LABEL_ANGLE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeLabelAngle_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeLabelAngle_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("angle_", DESIGNER_EDGE_LABEL_ANGLE)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for edgeLabelDistance
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeLabelDistance_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "distance_", DESIGNER_EDGE_LABEL_DISTANCE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeLabelDistance_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeLabelDistance_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("distance_", DESIGNER_EDGE_LABEL_DISTANCE)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for borderPenWidth
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderPenWidth_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "bw_", DESIGNER_BORDER_PEN_WIDTH
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub borderPenWidth_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub borderPenWidth_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("bw_", DESIGNER_BORDER_PEN_WIDTH)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for borderPeripheries
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderPeripheries_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "p_", DESIGNER_BORDER_PERIPHERIES
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub borderPeripheries_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub borderPeripheries_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("p_", DESIGNER_BORDER_PERIPHERIES)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderPeripheries_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
@@ -954,7 +911,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for designModeNode
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designModeNode_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_MODE, KEYWORD_NODE
     ShowLabelRows KEYWORD_NODE
@@ -963,7 +919,6 @@ Private Sub designModeNode_onAction(ByVal control As IRibbonControl, ByVal press
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designModeNode_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
@@ -971,7 +926,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for designModeEdge
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designModeEdge_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_MODE, KEYWORD_EDGE
     ShowLabelRows KEYWORD_EDGE
@@ -980,7 +934,6 @@ Private Sub designModeEdge_onAction(ByVal control As IRibbonControl, ByVal press
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designModeEdge_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_EDGE
 End Sub
@@ -988,7 +941,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for designModeCluster
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designModeCluster_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_MODE, KEYWORD_CLUSTER
     ShowLabelRows KEYWORD_CLUSTER
@@ -997,13 +949,12 @@ Private Sub designModeCluster_onAction(ByVal control As IRibbonControl, ByVal pr
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designModeCluster_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER
 End Sub
 
 Public Sub ShowLabelRows(ByVal designerMode As String)
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
     Dim labelRow As Long
     Dim xlabelRow As Long
@@ -1048,7 +999,7 @@ Public Sub ShowLabelRows(ByVal designerMode As String)
             StyleDesignerSheet.CheckBoxes("IncludeHeadLabelCheckBox").visible = False
     End Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
 Public Sub ColorLoadImageCache()
@@ -1057,8 +1008,8 @@ Public Sub ColorLoadImageCache()
     color.scheme = GetColorScheme()
     
     ' Load the array of color names, and obtain the quantity of colors
-    Dim count As Long
-    count = LoadColorNameArray()
+    Dim Count As Long
+    Count = LoadColorNameArray()
     
     ' Lazy creation of colorImageCache dictionary
     If colorImageCache Is Nothing Then
@@ -1119,17 +1070,14 @@ End Sub
 ' ===========================================================================
 ' Callbacks for fillColor
 
-'@Ignore ProcedureNotUsed
 Private Sub fillColor_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_FILL_COLOR, vbNullString, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fillColor_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_FILL_COLOR)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fillColor_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveColor index, DESIGNER_FILL_COLOR
     If CellIsEmpty(DESIGNER_FILL_COLOR) Then
@@ -1142,17 +1090,14 @@ End Sub
 ' ===========================================================================
 ' Callbacks for gradientFillColor
 
-'@Ignore ProcedureNotUsed
 Private Sub gradientFillColor_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_GRADIENT_FILL_COLOR, vbNullString, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillColor_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_GRADIENT_FILL_COLOR)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillColor_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveColor index, DESIGNER_GRADIENT_FILL_COLOR
     If CellIsEmpty(DESIGNER_GRADIENT_FILL_COLOR) Then
@@ -1162,7 +1107,6 @@ Private Sub gradientFillColor_onAction(ByVal control As IRibbonControl, ByVal it
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillColor_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     If CellIsEmpty(DESIGNER_FILL_COLOR) Then
         visible = False
@@ -1171,7 +1115,6 @@ Private Sub gradientFillColor_getVisible(ByVal control As IRibbonControl, ByRef 
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillColorPicker_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     If CellIsEmpty(DESIGNER_FILL_COLOR) Then
         visible = False
@@ -1187,18 +1130,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for gradientFillType
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillType_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "ft_", DESIGNER_GRADIENT_FILL_TYPE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub gradientFillType_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub gradientFillType_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("ft_", DESIGNER_GRADIENT_FILL_TYPE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillType_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = Not CellIsEmpty(DESIGNER_GRADIENT_FILL_COLOR)
 End Sub
@@ -1213,18 +1153,15 @@ End Function
 ' ===========================================================================
 ' Callbacks for gradientFillAngle
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillAngle_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "a_", DESIGNER_GRADIENT_FILL_ANGLE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub gradientFillAngle_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub gradientFillAngle_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("a_", DESIGNER_GRADIENT_FILL_ANGLE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillAngle_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = Not CellIsEmpty(DESIGNER_GRADIENT_FILL_COLOR)
 End Sub
@@ -1232,18 +1169,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for GradientFillWeight
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillWeight_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "gw_", DESIGNER_GRADIENT_FILL_WEIGHT
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub gradientFillWeight_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub gradientFillWeight_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("gw_", DESIGNER_GRADIENT_FILL_WEIGHT)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub gradientFillWeight_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = Not CellIsEmpty(DESIGNER_GRADIENT_FILL_COLOR)
 End Sub
@@ -1251,7 +1185,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for labelJustification
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub labelJustification_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER
 End Sub
@@ -1259,49 +1192,42 @@ End Sub
 ' ===========================================================================
 ' Callbacks for headPort
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeHeadPort_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "hp_", DESIGNER_EDGE_HEAD_PORT
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeHeadPort_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeHeadPort_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("hp_", DESIGNER_EDGE_HEAD_PORT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for tailPort
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeTailPort_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "tp_", DESIGNER_EDGE_TAIL_PORT
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeTailPort_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeTailPort_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("tp_", DESIGNER_EDGE_TAIL_PORT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for edgeStyle
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeStyle_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "es_", DESIGNER_EDGE_STYLE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeStyle_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeStyle_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("es_", DESIGNER_EDGE_STYLE)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for nodeShape
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeShape_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "s_", DESIGNER_NODE_SHAPE
     StyleDesignerSheet.Range("NodeSides,NodeOrientation,NodeRegular,NodeSkew,NodeDistortion").ClearContents
@@ -1309,7 +1235,7 @@ Private Sub nodeShape_onAction(ByVal control As IRibbonControl, ByVal itemId As 
     RenderPreview
 End Sub
 
-Public Sub nodeShape_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub nodeShape_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim shape As String
     shape = StyleDesignerSetting(DESIGNER_NODE_SHAPE)
     If Len(shape) = 0 Then
@@ -1319,14 +1245,12 @@ Public Sub nodeShape_getLabel(ByVal control As IRibbonControl, ByRef returnedVal
     End If
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub nodeShape_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub nodeShape_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("s_", DESIGNER_NODE_SHAPE)
 End Sub
 
 ' GetVisible callback for polygon shape
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeShape_isPolygon(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_NODE_SHAPE) = GRAPHVIZ_SHAPE_POLYGON
 End Sub
@@ -1334,35 +1258,30 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeSides
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeSides_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "si_", DESIGNER_NODE_SIDES
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub nodeSides_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub nodeSides_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("si_", DESIGNER_NODE_SIDES)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for nodeRotation
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeRotation_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "r_", DESIGNER_NODE_ORIENTATION
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub nodeRotation_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub nodeRotation_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("r_", DESIGNER_NODE_ORIENTATION)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for borderStyle1
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderStyle1_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "bs1_", DESIGNER_BORDER_STYLE1
     If CellIsEmpty(DESIGNER_BORDER_STYLE1) Then
@@ -1373,15 +1292,13 @@ Private Sub borderStyle1_onAction(ByVal control As IRibbonControl, ByVal itemId 
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub borderStyle1_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub borderStyle1_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("bs1_", DESIGNER_BORDER_STYLE1)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for BorderStyle2
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderStyle2_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "bs2_", DESIGNER_BORDER_STYLE2
     If CellIsEmpty(DESIGNER_BORDER_STYLE2) Then
@@ -1391,12 +1308,10 @@ Private Sub borderStyle2_onAction(ByVal control As IRibbonControl, ByVal itemId 
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub borderStyle2_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub borderStyle2_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("bs2_", DESIGNER_BORDER_STYLE2)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderStyle2_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_BORDER_STYLE1)
 End Sub
@@ -1404,18 +1319,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for borderStyle3
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderStyle3_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "bs3_", DESIGNER_BORDER_STYLE3
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub borderStyle3_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub borderStyle3_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("bs3_", DESIGNER_BORDER_STYLE3)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub borderStyle3_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_BORDER_STYLE2)
 End Sub
@@ -1423,18 +1335,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeHeight
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeHeight_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "h_", DESIGNER_NODE_HEIGHT
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub nodeHeight_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub nodeHeight_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("h_", DESIGNER_NODE_HEIGHT)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeHeight_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = Not IsTrue(DESIGNER_NODE_METRIC)
 End Sub
@@ -1442,13 +1351,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeHeightMetric
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeHeightMetric_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "mmh_", DESIGNER_NODE_HEIGHT
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeHeightMetric_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim metricEnabled As Boolean
     metricEnabled = (StyleDesignerSetting(DESIGNER_NODE_METRIC) = TOGGLE_YES)
@@ -1468,7 +1375,6 @@ Private Sub nodeHeightMetric_getSelectedItemIndex(ByVal control As IRibbonContro
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeHeightMetric_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = IsTrue(DESIGNER_NODE_METRIC)
 End Sub
@@ -1476,18 +1382,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeWidth
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeWidth_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "w_", DESIGNER_NODE_WIDTH
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub nodeWidth_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub nodeWidth_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("w_", DESIGNER_NODE_WIDTH)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeWidth_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = Not IsTrue(DESIGNER_NODE_METRIC)
 End Sub
@@ -1495,13 +1398,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeWidthMetric
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeWidthMetric_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "mmw_", DESIGNER_NODE_WIDTH
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeWidthMetric_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim metricEnabled As Boolean
     metricEnabled = (StyleDesignerSetting(DESIGNER_NODE_METRIC) = TOGGLE_YES)
@@ -1521,7 +1422,6 @@ Private Sub nodeWidthMetric_getSelectedItemIndex(ByVal control As IRibbonControl
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeWidthMetric_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = IsTrue(DESIGNER_NODE_METRIC)
 End Sub
@@ -1529,31 +1429,26 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeFixedSize
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeFixedSize_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "fs_", DESIGNER_NODE_FIXED_SIZE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub nodeFixedSize_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub nodeFixedSize_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = LCase$("fs_" & StyleDesignerSetting(DESIGNER_NODE_FIXED_SIZE))
 End Sub
 
 ' ===========================================================================
 ' Callbacks for edgeColor1
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor1_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_EDGE_COLOR_1, COLOR_BLACK, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor1_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_EDGE_COLOR_1)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor1_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     Application.enableEvents = False
     
@@ -1578,17 +1473,14 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeColor2
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_EDGE_COLOR_2, vbNullString, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_EDGE_COLOR_2)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     Application.enableEvents = False
     
@@ -1607,7 +1499,6 @@ Private Sub edgeColor2_onAction(ByVal control As IRibbonControl, ByVal itemId As
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_COLOR_1) Then
         returnedVal = False
@@ -1616,7 +1507,6 @@ Private Sub edgeColor2_getVisible(ByVal control As IRibbonControl, ByRef returne
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor2Picker_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_COLOR_1) Then
         returnedVal = False
@@ -1632,17 +1522,14 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeColor3
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor3_getImage(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ColorGetImage DESIGNER_EDGE_COLOR_3, vbNullString, returnedVal
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor3_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef index As Variant)
     index = ColorGetIndex(DESIGNER_EDGE_COLOR_3)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor3_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveColor index, DESIGNER_EDGE_COLOR_3
     InvalidateRibbonControl RIBBON_CTL_EDGE_COLOR3
@@ -1650,7 +1537,6 @@ Private Sub edgeColor3_onAction(ByVal control As IRibbonControl, ByVal itemId As
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor3_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_COLOR_2) Then
         returnedVal = False
@@ -1659,7 +1545,6 @@ Private Sub edgeColor3_getVisible(ByVal control As IRibbonControl, ByRef returne
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeColor3Picker_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_COLOR_2) Then
         returnedVal = False
@@ -1671,10 +1556,10 @@ Private Sub edgeColor3Picker_getVisible(ByVal control As IRibbonControl, ByRef r
     returnedVal = returnedVal And ColorPickerGetVisible(control.id)
 #End If
 End Sub
+
 ' ===========================================================================
 ' Callbacks for Arrow Tail
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub groupArrowHead_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Dim direction As String
     Dim mode As String
@@ -1688,12 +1573,10 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeArrowHead1
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowHead1_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowHead1_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("h1_", DESIGNER_EDGE_ARROW_HEAD_1)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowHead1_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     Dim newValue As String
     newValue = Mid$(itemId, Len("h1_") + 1)
@@ -1710,15 +1593,14 @@ Private Sub edgeArrowHead1_onAction(ByVal control As IRibbonControl, ByVal itemI
     InvalidateRibbonControl RIBBON_CTL_EDGE_ARROW_HEAD3
     RenderPreview
 End Sub
+
 ' ===========================================================================
 ' Callbacks for edgeArrowHead2
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowHead2_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowHead2_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("h2_", DESIGNER_EDGE_ARROW_HEAD_2)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowHead2_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     Dim newValue As String
     newValue = Mid$(itemId, Len("h2_") + 1)
@@ -1735,7 +1617,6 @@ Private Sub edgeArrowHead2_onAction(ByVal control As IRibbonControl, ByVal itemI
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowHead2_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_EDGE_ARROW_HEAD_1)
 End Sub
@@ -1743,18 +1624,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeArrowHead3
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowHead3_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowHead3_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("h3_", DESIGNER_EDGE_ARROW_HEAD_3)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowHead3_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "h3_", DESIGNER_EDGE_ARROW_HEAD_3
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowHead3_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_EDGE_ARROW_HEAD_2)
 End Sub
@@ -1762,7 +1640,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for Arrow Tail
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub groupArrowTail_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Dim direction As String
     Dim mode As String
@@ -1778,12 +1655,10 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeArrowTail1
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowTail1_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowTail1_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("t1_", DESIGNER_EDGE_ARROW_TAIL_1)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowTail1_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     Dim newValue As String
     newValue = Mid$(itemId, Len("t1_") + 1)
@@ -1801,15 +1676,14 @@ Private Sub edgeArrowTail1_onAction(ByVal control As IRibbonControl, ByVal itemI
     RefreshControlsEdgeDirection
     RenderPreview
 End Sub
+
 ' ===========================================================================
 ' Callbacks for edgeArrowTail2
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowTail2_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowTail2_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("t2_", DESIGNER_EDGE_ARROW_TAIL_2)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowTail2_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     Dim newValue As String
     newValue = Mid$(itemId, Len("t2_") + 1)
@@ -1826,7 +1700,6 @@ Private Sub edgeArrowTail2_onAction(ByVal control As IRibbonControl, ByVal itemI
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowTail2_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_EDGE_ARROW_TAIL_1)
 End Sub
@@ -1834,18 +1707,15 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeArrowTail3
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowTail3_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowTail3_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("t3_", DESIGNER_EDGE_ARROW_TAIL_3)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowTail3_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "t3_", DESIGNER_EDGE_ARROW_TAIL_3
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowTail3_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_EDGE_ARROW_TAIL_2)
 End Sub
@@ -1853,7 +1723,7 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeDirection
 
-Public Sub RefreshControlsEdgeDirection()
+Private Sub RefreshControlsEdgeDirection()
     InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION
     InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_FORWARD
     InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_BACK
@@ -1863,7 +1733,6 @@ Public Sub RefreshControlsEdgeDirection()
     InvalidateRibbonControl RIBBON_CTL_EDGE_DIRECTION_PLACEHOLDER1
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     Dim direction As String
     If pressed Then
@@ -1912,8 +1781,7 @@ Private Sub edgeDirection_onAction(ByVal control As IRibbonControl, ByVal presse
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeDirection_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub edgeDirection_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     If StyleDesignerSheet.Range(DESIGNER_EDGE_DIRECTION).value = vbNullString And control.id = "ed_forward" Then
         pressed = True
     Else
@@ -1921,16 +1789,13 @@ Public Sub edgeDirection_getPressed(ByVal control As IRibbonControl, ByRef press
     End If
 End Sub
 
-
-'@Ignore ParameterNotUsed
-Public Sub edgeDirection_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeDirection_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("ed_", DESIGNER_EDGE_DIRECTION)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for edgeArrowSize
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowSize_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim direction As String
     direction = StyleDesignerSetting(DESIGNER_EDGE_DIRECTION)
@@ -1938,41 +1803,35 @@ Private Sub edgeArrowSize_getVisible(ByVal control As IRibbonControl, ByRef retu
     returnedVal = (direction <> GRAPHVIZ_DIR_NONE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeArrowSize_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "as_", DESIGNER_EDGE_ARROW_SIZE
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgeArrowSize_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub edgeArrowSize_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("as_", DESIGNER_EDGE_ARROW_SIZE)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for edgePenWidth
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgePenWidth_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "ew_", DESIGNER_EDGE_PEN_WIDTH
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub edgePenWidth_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
-    itemId = "ew_" & format(StyleDesignerSheet.Range(DESIGNER_EDGE_PEN_WIDTH).value, "0.0")
+Private Sub edgePenWidth_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+    itemId = "ew_" & Format(StyleDesignerSheet.Range(DESIGNER_EDGE_PEN_WIDTH).value, "0.0")
 End Sub
 
 ' ===========================================================================
 ' Callbacks for nodeImageName
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeImageName_onChange(ByVal control As IRibbonControl, ByVal Text As String)
     SaveStyleDesignerSetting DESIGNER_NODE_IMAGE_NAME, Text
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeImageName_getText(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_NODE_IMAGE_NAME)
 End Sub
@@ -1980,13 +1839,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeImageRelativePath
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeImageRelativePath_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_NODE_IMAGE_RELATIVE_PATH, Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeImageRelativePath_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_NODE_IMAGE_RELATIVE_PATH) = TOGGLE_YES
 End Sub
@@ -1995,13 +1852,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeRegular
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub regular_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_NODE_REGULAR, Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub regular_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_NODE_REGULAR) = TOGGLE_YES
 End Sub
@@ -2009,13 +1864,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeSkew
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeSkew_onChange(ByVal control As IRibbonControl, ByVal Text As String)
     SaveStyleDesignerSetting DESIGNER_NODE_SKEW, Text
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeSkew_getText(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_NODE_SKEW)
 End Sub
@@ -2023,13 +1876,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for nodeDistortion
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeDistortion_onChange(ByVal control As IRibbonControl, ByVal Text As String)
     SaveStyleDesignerSetting DESIGNER_NODE_DISTORTION, Text
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeDistortion_getText(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_NODE_DISTORTION)
 End Sub
@@ -2038,7 +1889,6 @@ End Sub
 ' Callbacks for nodeImageChoose
 
 ' Handles the node image selection action from the ribbon
-' @param control The IRibbonControl that triggered the action
 Private Sub nodeImageChoose_onAction(ByVal control As IRibbonControl)
     Dim selectedPath As String
     selectedPath = SelectImageFile()
@@ -2066,7 +1916,6 @@ Private Sub nodeImageChoose_onAction(ByVal control As IRibbonControl)
 End Sub
 
 ' Selects an image file and returns its path
-' @returns String The selected file path or empty string if cancelled
 Private Function SelectImageFile() As String
 #If Mac Then
     SelectImageFile = RunAppleScriptTask("chooseImageFile", "Select an image file")
@@ -2217,7 +2066,6 @@ End Function
 ' ===========================================================================
 ' Callbacks for nodeImage dynamic controls
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeImage_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = Not CellIsEmpty(DESIGNER_NODE_IMAGE_NAME) And StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
@@ -2238,8 +2086,7 @@ Public Sub RefreshControlsImagePosition()
     InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_POSITION_BOTTOM_RIGHT
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub imagepos_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub imagepos_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.id, Len("imagepos_") + 1))
     Else
@@ -2249,8 +2096,7 @@ Public Sub imagepos_onAction(ByVal control As IRibbonControl, ByVal pressed As B
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub imagepos_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub imagepos_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     If StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_POSITION).value = LCase$(Mid$(control.id, Len("imagepos_") + 1)) Then
         pressed = True
     Else
@@ -2270,8 +2116,7 @@ Public Sub RefreshControlsImageScale()
     InvalidateRibbonControl RIBBON_CTL_NODE_IMAGE_SCALE_BOTH
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub imagescale_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub imagescale_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value = CStr(LCase$(Mid$(control.id, Len("is_") + 1)))
     Else
@@ -2281,8 +2126,7 @@ Public Sub imagescale_onAction(ByVal control As IRibbonControl, ByVal pressed As
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub imagescale_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub imagescale_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     If LCase$(CStr(StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_SCALE).value)) = Mid$(LCase$(CStr(control.id)), Len("is_") + 1) Then
         pressed = True
     Else
@@ -2294,7 +2138,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeHeadClip
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeHeadClip_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         ClearStyleDesignerSetting DESIGNER_EDGE_HEAD_CLIP
@@ -2304,7 +2147,6 @@ Private Sub edgeHeadClip_onAction(ByVal control As IRibbonControl, ByVal pressed
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeHeadClip_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_HEAD_CLIP) Then
         returnedVal = True
@@ -2316,7 +2158,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeTailClip
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeTailClip_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         ClearStyleDesignerSetting DESIGNER_EDGE_TAIL_CLIP
@@ -2326,7 +2167,6 @@ Private Sub edgeTailClip_onAction(ByVal control As IRibbonControl, ByVal pressed
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeTailClip_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If CellIsEmpty(DESIGNER_EDGE_TAIL_CLIP) Then
         returnedVal = True
@@ -2338,13 +2178,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeDecorate
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeDecorate_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SetToggleValue StyleDesignerSheet.Range(DESIGNER_EDGE_DECORATE), pressed
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeDecorate_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetCellBoolean(StyleDesignerSheet.name, DESIGNER_EDGE_DECORATE)
 End Sub
@@ -2352,13 +2190,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for edgeLabelFloat
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeLabelFloat_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SetToggleValue StyleDesignerSheet.Range(DESIGNER_EDGE_LABEL_FLOAT), pressed
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub edgeLabelFloat_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetCellBoolean(StyleDesignerSheet.name, DESIGNER_EDGE_LABEL_FLOAT)
 End Sub
@@ -2401,6 +2237,7 @@ Public Sub ClearStyleRibbonFields()
     ClearStyleDesignerRanges
     ClearStyleDesignerLabels
     ClearStyleDesignerStyleName
+    ClearStyleDesignerStyleDescription
     CheckRelativePathCheckbox
     OptimizeCode_End
     RenderPreview
@@ -2437,24 +2274,25 @@ Public Sub ClearStyleDesignerStyleName()
     StyleDesignerSheet.Range(DESIGNER_STYLE_NAME_TEXT).Value2 = vbNullString    ' Can't use ClearContents on merged cells
 End Sub
 
+Public Sub ClearStyleDesignerStyleDescription()
+    StyleDesignerSheet.Range(DESIGNER_STYLE_DESCRIPTION).Value2 = vbNullString  ' Can't use ClearContents on merged cells
+End Sub
+
 Public Sub CheckRelativePathCheckbox()
     SaveStyleDesignerSetting DESIGNER_NODE_IMAGE_RELATIVE_PATH, TOGGLE_YES
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub clearStyleRibbon_onAction(ByVal control As IRibbonControl)
+Public Sub clearStyleRibbon_onAction(ByVal control As IRibbonControl)
     ClearStyleRibbon
 End Sub
 
 ' ===========================================================================
 ' Callbacks for saveToStylesWorksheet
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub saveToStylesWorksheet_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_FORMAT_STRING)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub saveToStylesWorksheet_onAction(ByVal control As IRibbonControl)
     SaveToStylesWorksheet
 End Sub
@@ -2462,12 +2300,10 @@ End Sub
 ' ===========================================================================
 ' Callbacks for copyToClipboard
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub copyToClipboard_onAction(ByVal control As IRibbonControl)
-    StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).Copy
+    StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).copy
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub copyToClipboard_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not CellIsEmpty(DESIGNER_FORMAT_STRING)
 End Sub
@@ -2475,14 +2311,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for alignTop
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub alignTop_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_LABEL_LOCATION, Toggle(pressed, ALIGN_TOP, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_ALIGN_BOTTOM
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub alignTop_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_LABEL_LOCATION) = ALIGN_TOP
 End Sub
@@ -2490,14 +2324,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for alignBottom
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub alignBottom_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_LABEL_LOCATION, Toggle(pressed, ALIGN_BOTTOM, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_ALIGN_TOP
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub alignBottom_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_LABEL_LOCATION) = ALIGN_BOTTOM
 End Sub
@@ -2505,14 +2337,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for justifyLeft
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub justifyLeft_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_LABEL_JUSTIFICATION, Toggle(pressed, JUSTIFY_LEFT, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_JUSTIFY_RIGHT
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub justifyLeft_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_LABEL_JUSTIFICATION) = JUSTIFY_LEFT
 End Sub
@@ -2520,14 +2350,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for justifyRight
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub justifyRight_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_LABEL_JUSTIFICATION, Toggle(pressed, JUSTIFY_RIGHT, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_JUSTIFY_LEFT
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub justifyRight_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_LABEL_JUSTIFICATION) = JUSTIFY_RIGHT
 End Sub
@@ -2535,13 +2363,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for fontBold
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontBold_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_FONT_BOLD, Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontBold_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetCellBoolean(StyleDesignerSheet.name, DESIGNER_FONT_BOLD)
 End Sub
@@ -2549,13 +2375,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for fontItalic
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontItalic_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_FONT_ITALIC, Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     RenderPreview
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub fontItalic_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetCellBoolean(StyleDesignerSheet.name, DESIGNER_FONT_ITALIC)
 End Sub
@@ -2563,25 +2387,21 @@ End Sub
 ' ===========================================================================
 ' Group visibility callbacks
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupLabels_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or _
               StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupBorders_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or _
               StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupFillColor_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE Or _
               StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupGradientFillColor_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = False
     
@@ -2593,33 +2413,23 @@ Private Sub designerGroupGradientFillColor_getVisible(ByVal control As IRibbonCo
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupNodeShape_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupNodeDimensions_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupNodeImage_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_NODE
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupEdgeStyle_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_EDGE
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub designerGroupEdgeColors_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
-    visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_EDGE
-End Sub
-
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub designerGroupEdgeArrows_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_EDGE
 End Sub
 
@@ -2648,7 +2458,7 @@ Public Sub RenderPreview()
 #End If
 End Sub
 
-Private Sub SaveColor(ByVal index As Long, ByVal cellName As String)
+Public Sub SaveColor(ByVal index As Long, ByVal cellName As String)
     If index = 0 Then
         ClearStyleDesignerSetting cellName
         Exit Sub
@@ -2681,8 +2491,8 @@ Private Function GetListIndex(ByVal listName As String, ByVal cellName As String
     On Error Resume Next
     Dim cellValue As String
     cellValue = LCase$(CStr(StyleDesignerSetting(cellName)))
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Function
     End If
     On Error GoTo 0
@@ -2692,8 +2502,8 @@ Private Function GetListIndex(ByVal listName As String, ByVal cellName As String
     ' Iterating arrays is faster than iterating cells
     Dim listArray As Variant
     listArray = Application.WorksheetFunction.Transpose(ListsSheet.Range(listName))
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Function
     End If
     On Error GoTo 0
@@ -2710,7 +2520,7 @@ Private Function GetListIndex(ByVal listName As String, ByVal cellName As String
     Next i
 End Function
 
-Public Sub SetStyleDesignerNodeShape(ByVal shapeName As String)
+Private Sub SetStyleDesignerNodeShape(ByVal shapeName As String)
 
     ' Ensure we are in "node" mode
     SaveStyleDesignerSetting DESIGNER_MODE, KEYWORD_NODE
@@ -2767,15 +2577,15 @@ Public Sub RenderPreviewFromFormatString()
     InvalidateRibbonControl RIBBON_CTL_COPY_TO_CLIPBOARD
 End Sub
 
-Public Sub ribbon_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub ribbon_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetLabel(control.id)
 End Sub
 
-Public Sub ribbon_getScreenTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub ribbon_getScreenTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetScreentip(control.id)
 End Sub
 
-Public Sub ribbon_getSuperTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub ribbon_getSuperTip(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetSupertip(control.id)
 End Sub
 
@@ -2809,15 +2619,15 @@ Private Function GetWindowsFontList() As Variant
     End If
 
     Dim fonts() As String
-    Dim i As Long, count As Long
+    Dim i As Long, Count As Long
 
     On Error GoTo ErrorHandler
 
-    count = tmpFontList.ListCount
-    If count = 0 Then GoTo ErrorHandler
+    Count = tmpFontList.ListCount
+    If Count = 0 Then GoTo ErrorHandler
 
-    ReDim fonts(1 To count)
-    For i = 1 To count
+    ReDim fonts(1 To Count)
+    For i = 1 To Count
         fonts(i) = tmpFontList.List(i)
     Next i
 
@@ -2857,7 +2667,7 @@ Private Function ProcessFontList(ByVal rawFonts As Variant) As Variant
     Next i
 
     Dim result As Variant
-    If dict.count = 0 Then
+    If dict.Count = 0 Then
         result = Array("")
     Else
         result = dict.keys
@@ -2958,18 +2768,31 @@ Public Function GetFontImageDir() As String
     GetFontImageDir = fontImageDir
 End Function
 
+Public Sub CreateHtmlTempDir()
+    CreateDirectory GetHtmlTempDir()
+End Sub
+
+Public Function GetHtmlTempDir() As String
+    Dim htmlTempDir As String
+#If Mac Then
+    htmlTempDir = GetTempDirectory()
+#Else
+    htmlTempDir = Environ$("AppData")
+#End If
+    GetHtmlTempDir = htmlTempDir & Application.pathSeparator & PRODUCT_TEMPDIR
+End Function
+
 ' ===========================================================================
 ' Callbacks for Help
 
-'@Ignore ParameterNotUsed
-Public Sub designerHelp_onAction(ByVal control As IRibbonControl)
+Private Sub designerHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLStyleDesignerTab").Value2, NewWindow:=True
 End Sub
 
 ' ===========================================================================
 ' Callbacks for Pack / Packmode
 
-Public Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Dim isClusterMode As Boolean
     Dim isOsageEngine As Boolean
 
@@ -3001,7 +2824,7 @@ Public Sub designerGroupPack_getVisible(ByVal control As IRibbonControl, ByRef v
     End Select
 End Sub
 
-Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
+Private Sub clusterMargin_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
     Dim prefix As String
     Dim marginValue As String
 
@@ -3021,12 +2844,7 @@ Public Sub clusterMargin_onAction(ByVal control As IRibbonControl, id As String,
     End If
 End Sub
 
-Public Sub clusterMargin_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = GetListIndex("Margin", DESIGNER_CLUSTER_MARGIN)
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     Dim prefix As String
 
     Select Case control.id
@@ -3042,82 +2860,80 @@ Public Sub clusterMargin_GetSelectedItemID(ByVal control As IRibbonControl, ByRe
     itemId = prefix & StyleDesignerSetting(DESIGNER_CLUSTER_MARGIN)
 End Sub
 
-Public Sub clusterPackmode_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
+Private Sub clusterPackmode_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_PACKMODE, Mid$(id, Len("packmode_") + 1)
     RefreshControlsPackmode
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub clusterPackmode_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub clusterPackmode_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("packmode_", DESIGNER_CLUSTER_PACKMODE)
 End Sub
 
-Public Sub arraySplit_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
+Private Sub arraySplit_onAction(ByVal control As IRibbonControl, id As String, ByVal index As Integer)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_SPLIT, Mid$(id, Len("arraySplit_") + 1)
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub arraySplit_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub arraySplit_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = GetSelectedItemID("arraySplit_", DESIGNER_CLUSTER_ARRAY_SPLIT)
 End Sub
 
-Public Sub arrayAlignTop_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub arrayAlignTop_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_ALIGN, Toggle(pressed, GRAPHVIZ_PACKMODE_ALIGN_TOP, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_BOTTOM
     RenderPreview
 End Sub
 
-Public Sub arrayAlignTop_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub arrayAlignTop_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_CLUSTER_ARRAY_ALIGN) = GRAPHVIZ_PACKMODE_ALIGN_TOP
 End Sub
 
-Public Sub array_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub array_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_MODE) = KEYWORD_CLUSTER And _
         StyleDesignerSetting(DESIGNER_CLUSTER_PACKMODE) = GRAPHVIZ_PACKMODE_ARRAY
 End Sub
 
-Public Sub arrayAlignBottom_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub arrayAlignBottom_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_ALIGN, Toggle(pressed, GRAPHVIZ_PACKMODE_ALIGN_BOTTOM, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_ARRAY_ALIGN_TOP
     RenderPreview
 End Sub
 
-Public Sub arrayAlignBottom_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub arrayAlignBottom_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_CLUSTER_ARRAY_ALIGN) = GRAPHVIZ_PACKMODE_ALIGN_BOTTOM
 End Sub
 
-Public Sub arrayJustifyLeft_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub arrayJustifyLeft_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_JUSTIFY, Toggle(pressed, GRAPHVIZ_PACKMODE_JUSTIFY_LEFT, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_ARRAY_JUSTIFY_RIGHT
     RenderPreview
 End Sub
 
-Public Sub arrayJustifyLeft_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub arrayJustifyLeft_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_CLUSTER_ARRAY_JUSTIFY) = GRAPHVIZ_PACKMODE_JUSTIFY_LEFT
 End Sub
 
-Public Sub arrayJustifyRight_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub arrayJustifyRight_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_JUSTIFY, Toggle(pressed, GRAPHVIZ_PACKMODE_JUSTIFY_RIGHT, vbNullString)
     InvalidateRibbonControl RIBBON_CTL_ARRAY_JUSTIFY_LEFT
     RenderPreview
 End Sub
 
-Public Sub arrayJustifyRight_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub arrayJustifyRight_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = StyleDesignerSetting(DESIGNER_CLUSTER_ARRAY_JUSTIFY) = GRAPHVIZ_PACKMODE_JUSTIFY_RIGHT
 End Sub
 
-Public Sub arraySort_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub arraySort_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_SORT, Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     RenderPreview
 End Sub
 
-Public Sub arraySort_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub arraySort_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = IsTrue(DESIGNER_CLUSTER_ARRAY_SORT)
 End Sub
 
-Public Sub arrayMajor_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub arrayMajor_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SaveStyleDesignerSetting DESIGNER_CLUSTER_ARRAY_MAJOR, GRAPHVIZ_PACKMODE_MAJOR_COLUMN
     Else
@@ -3126,7 +2942,7 @@ Public Sub arrayMajor_onAction(ByVal control As IRibbonControl, ByVal pressed As
     RenderPreview
 End Sub
 
-Public Sub arrayMajor_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub arrayMajor_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Select Case LCase$(StyleDesignerSetting(DESIGNER_CLUSTER_ARRAY_MAJOR))
         Case GRAPHVIZ_PACKMODE_MAJOR_COLUMN
             returnedVal = True
@@ -3135,7 +2951,7 @@ Public Sub arrayMajor_getPressed(ByVal control As IRibbonControl, ByRef returned
     End Select
 End Sub
 
-Public Sub colorScheme_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub colorScheme_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     Dim colorScheme As String
     colorScheme = StyleDesignerSetting(DESIGNER_COLOR_SCHEME)
     If colorScheme = vbNullString Then
@@ -3301,12 +3117,12 @@ Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoi
     Set chartObj = StyleDesignerSheet.ChartObjects.Add(0, 0, sizePoints, sizePoints)
 
     With chartObj.Chart
-        .ChartArea.format.Fill.visible = msoTrue
+        .ChartArea.Format.Fill.visible = msoTrue
 #If Mac Then
-        .ChartArea.format.Fill.ForeColor.RGB = RGB(235, 235, 235)   ' Gray
+        .ChartArea.Format.Fill.ForeColor.RGB = RGB(235, 235, 235)   ' Gray
         .ChartArea.Border.color = RGB(235, 235, 235)
 #Else
-       .ChartArea.format.Fill.ForeColor.RGB = RGB(255, 255, 255)   ' White
+       .ChartArea.Format.Fill.ForeColor.RGB = RGB(255, 255, 255)   ' White
         .ChartArea.Border.color = RGB(255, 255, 255)
 #End If
         .ChartArea.Border.LineStyle = xlContinuous
@@ -3329,7 +3145,7 @@ Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoi
             .MarkerSize = sizePoints * 0.75    ' scale circle to 75% of thumbnail size to leave room for shadow
             
             ' Circle border (outline)
-            With .format.line
+            With .Format.line
                 .visible = msoTrue
                 
                 Dim r As Long, g As Long, b As Long
@@ -3361,7 +3177,7 @@ Private Function ColorCreateThumbnail(color As ColorInfo, Optional ByVal sizePoi
             ' Shadows don't look good on Mac, only add them on Windows
 #Else
             ' Add a soft drop shadow
-            With .format.Shadow
+            With .Format.Shadow
                 .visible = msoTrue
                 .style = msoShadowStyleOuterShadow
                 .Blur = 4                       ' softness of the shadow
@@ -3763,7 +3579,7 @@ Private Sub RefreshControlsGradientFill()
     InvalidateRibbonControl RIBBON_CTL_GRADIENT_FILL_ANGLE
 End Sub
 
-Public Sub RefreshStyleDesignerRibbon()
+Private Sub RefreshStyleDesignerRibbon()
     InvalidateRibbonControl RIBBON_GRP_LABELS
     InvalidateRibbonControl RIBBON_CTL_LABEL_JUSTIFICATION
     InvalidateRibbonControl RIBBON_GRP_BORDERS
@@ -3939,19 +3755,17 @@ End Function
 ' ===========================================================================
 ' Callbacks for radius
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub radius_onAction(ByVal control As IRibbonControl, ByVal itemId As String, ByVal index As Long)
     SaveSelectedItem itemId, "radius_", DESIGNER_EDGE_RADIUS
     InvalidateRibbonControl "radius"
     RenderPreview
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub radius_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub radius_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "radius_" & GetRadius()
 End Sub
 
-Public Sub radius_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub radius_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     label = GetLabel("radius") & GetRadius()
 End Sub
 

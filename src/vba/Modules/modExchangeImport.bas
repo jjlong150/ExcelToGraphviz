@@ -148,7 +148,7 @@ Private Function TryParseJson(ByVal jsonString As String) As Object
 
 parseExit:
     Dim errorMsg As String
-    errorMsg = GetMessage("msgboxCannotImportJSON") & vbNewLine & vbNewLine & err.Description
+    errorMsg = GetMessage("msgboxCannotImportJSON") & vbNewLine & vbNewLine & Err.Description
     EmitMessage errorMsg
     
 End Function
@@ -207,23 +207,14 @@ Private Sub ImportMetadata(ByVal dictionaryObj As Dictionary)
     Dim key As Variant
     For Each key In dictionaryObj.keys()
         Select Case key
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_NAME
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_TYPE
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_VERSION
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_USER
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_DATE
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_TIME
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_EXCEL
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_OS
-            '@Ignore EmptyCaseBlock
             Case JSON_METADATA_FILENAME
             Case Else
                 EmitMessage GetMessage("msgboxUnexpectedMetaData") & vbNewLine & vbNewLine & key & "=" & dictionaryObj.item(key)
@@ -255,9 +246,13 @@ Private Sub ImportContent(ByVal dictionaryObj As Dictionary, ByRef ini As settin
             
             Case WORKSHEET_STYLES
                 If exchange.styles.include Then
-                    ImportContentStyles ini, exchange, dictionaryObj.item(worksheetName)
                     StylesSheet.Activate
+                    ScrollRowIntoView 2, StylesSheet, True
                     ClearStylesPreview
+                    DoEvents
+                    Application.enableEvents = False
+                    ImportContentStyles ini, exchange, dictionaryObj.item(worksheetName)
+                    Application.enableEvents = True
                     GenerateStylesPreviewAll
                     ClearStatusBar
                 End If
@@ -529,6 +524,12 @@ Private Sub ImportSettingsData(ByVal dictionaryObj As Dictionary)
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_GRAPH_TO_WORKSHEET) Then
         Set section = dictionaryObj.item(JSON_SETTINGS_SECTION_GRAPH_TO_WORKSHEET)
         RestoreSetting SETTINGS_RUN_MODE, section.item(JSON_SETTINGS_RUN_MODE)
+        
+        ' v11.0 Added
+        If section.Exists(JSON_SETTINGS_JSON_VIEWER) Then
+            RestoreSetting SETTINGS_JSON_VIEWER, section.item(JSON_SETTINGS_JSON_VIEWER)
+        End If
+        
         RestoreSetting SETTINGS_IMAGE_TYPE, section.item(JSON_SETTINGS_IMAGE_TYPE)
         RestoreSetting SETTINGS_IMAGE_WORKSHEET, section.item(JSON_SETTINGS_IMAGE_WORKSHEET)
         
@@ -541,11 +542,28 @@ Private Sub ImportSettingsData(ByVal dictionaryObj As Dictionary)
                     
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_GRAPH_TO_FILE) Then
         Set section = dictionaryObj.item(JSON_SETTINGS_SECTION_GRAPH_TO_FILE)
-        RestoreSetting SETTINGS_OUTPUT_DIRECTORY, section.item(JSON_SETTINGS_DIRECTORY)
+        
+        RestoreSetting SETTINGS_OUTPUT_DIRECTORY, ""
+        ' v11.0 - This can cause the directory to be set to someplace inaccessible. Set it to blank
+        ' and the spreadsheet will default to the current directory. Uncomment statement below to
+        ' restore the behavior prior to v11.0
+        'RestoreSetting SETTINGS_OUTPUT_DIRECTORY, section.item(JSON_SETTINGS_DIRECTORY)
         RestoreSetting SETTINGS_FILE_NAME, section.item(JSON_SETTINGS_FILE_NAME_PREFIX)
         RestoreSetting SETTINGS_FILE_FORMAT, section.item(JSON_SETTINGS_IMAGE_TYPE)
         RestoreSetting SETTINGS_APPEND_OPTIONS, BooleanToYesNo(section.item(JSON_SETTINGS_APPEND_OPTIONS))
         RestoreSetting SETTINGS_APPEND_TIMESTAMP, BooleanToYesNo(section.item(JSON_SETTINGS_APPEND_TIME_STAMP))
+        
+        ' Added V11.0
+        If section.Exists(JSON_SETTINGS_PUBLISH_DOT) Then RestoreSetting SETTINGS_PUBLISH_DOT, BooleanToYesNo(section.item(JSON_SETTINGS_PUBLISH_DOT))
+        If section.Exists(JSON_SETTINGS_PUBLISH_GRAPH) Then RestoreSetting SETTINGS_PUBLISH_GRAPHVIZ, BooleanToYesNo(section.item(JSON_SETTINGS_PUBLISH_GRAPH))
+        If section.Exists(JSON_SETTINGS_OPEN_AFTER_PUBLISH) Then RestoreSetting SETTINGS_OPEN_AFTER_PUBLISH, BooleanToYesNo(section.item(JSON_SETTINGS_OPEN_AFTER_PUBLISH))
+        If section.Exists(JSON_SETTINGS_PUBLISH_KG) Then RestoreSetting SETTINGS_PUBLISH_KNOWLEDGE, BooleanToYesNo(section.item(JSON_SETTINGS_PUBLISH_KG))
+        If section.Exists(JSON_SETTINGS_PUBLISH_MINIFY_JSON) Then RestoreSetting SETTINGS_KNOWLEDGE_MINIFY, BooleanToYesNo(section.item(JSON_SETTINGS_PUBLISH_MINIFY_JSON))
+        If section.Exists(JSON_SETTINGS_PUBLISH_INDENT_JSON) Then SettingsSheet.Range(SETTINGS_KNOWLEDGE_INDENT) = CLng(section.item(JSON_SETTINGS_PUBLISH_INDENT_JSON))
+        If section.Exists(JSON_SETTINGS_RENDER_CAIRO) Then RestoreSetting SETTINGS_RENDER_CAIRO, BooleanToYesNo(section.item(JSON_SETTINGS_RENDER_CAIRO))
+        If section.Exists(JSON_SETTINGS_RENDER_GD) Then RestoreSetting SETTINGS_RENDER_GD, BooleanToYesNo(section.item(JSON_SETTINGS_RENDER_GD))
+        If section.Exists(JSON_SETTINGS_RENDER_GDIPLUS) Then RestoreSetting SETTINGS_RENDER_GDIPLUS, BooleanToYesNo(section.item(JSON_SETTINGS_RENDER_GDIPLUS))
+        If section.Exists(JSON_SETTINGS_RENDER_QUARTZ) Then RestoreSetting SETTINGS_RENDER_QUARTZ, BooleanToYesNo(section.item(JSON_SETTINGS_RENDER_QUARTZ))
     End If
     
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_LAYOUT) Then
@@ -599,6 +617,14 @@ Private Sub ImportSettingsData(ByVal dictionaryObj As Dictionary)
             RestoreSetting SETTINGS_NODE_LABELS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_NODE_LABELS))
             RestoreSetting SETTINGS_NODE_XLABELS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_NODE_XLABELS))
             RestoreSetting SETTINGS_BLANK_NODE_LABELS, subSection.item(JSON_SETTINGS_BLANK_NODE_LABELS)
+            
+            ' V11.0 Added
+            If section.Exists(JSON_SETTINGS_INCLUDE_NODE_TOOLTIPS) Then
+                RestoreSetting SETTINGS_NODE_TOOLTIPS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_NODE_TOOLTIPS))
+            End If
+            If section.Exists(JSON_SETTINGS_BLANK_NODE_TOOLTIPS) Then
+                RestoreSetting SETTINGS_BLANK_NODE_TOOLTIPS, subSection.item(JSON_SETTINGS_BLANK_NODE_TOOLTIPS)
+            End If
         End If
     
         If section.Exists(JSON_SETTINGS_SECTION_EDGES) Then
@@ -612,24 +638,87 @@ Private Sub ImportSettingsData(ByVal dictionaryObj As Dictionary)
             RestoreSetting SETTINGS_EDGE_XLABELS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_EDGE_XLABELS))
             RestoreSetting SETTINGS_EDGE_PORTS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_EDGE_PORTS))
             RestoreSetting SETTINGS_BLANK_EDGE_LABELS, subSection.item(JSON_SETTINGS_BLANK_EDGE_LABELS)
+            
+            ' V11.0 Added
+            If subSection.Exists(JSON_SETTINGS_INCLUDE_EDGE_TOOLTIPS) Then
+                RestoreSetting SETTINGS_EDGE_TOOLTIPS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_EDGE_TOOLTIPS))
+            End If
+            If subSection.Exists(JSON_SETTINGS_BLANK_EDGE_TOOLTIPS) Then
+                RestoreSetting SETTINGS_BLANK_EDGE_TOOLTIPS, subSection.item(JSON_SETTINGS_BLANK_EDGE_TOOLTIPS)
+            End If
+        End If
+        
+        ' V11.0 Added
+        If section.Exists(JSON_SETTINGS_SECTION_CLUSTERS) Then
+            Set subSection = section.item(JSON_SETTINGS_SECTION_CLUSTERS)
+            
+            If subSection.Exists(JSON_SETTINGS_INCLUDE_CLUSTER_LABELS) Then
+                RestoreSetting SETTINGS_CLUSTER_LABELS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_CLUSTER_LABELS))
+            End If
+            If subSection.Exists(JSON_SETTINGS_BLANK_CLUSTER_LABELS) Then
+                RestoreSetting SETTINGS_BLANK_CLUSTER_LABEL, subSection.item(JSON_SETTINGS_BLANK_CLUSTER_LABELS)
+            End If
+            If subSection.Exists(JSON_SETTINGS_INCLUDE_CLUSTER_TOOLTIPS) Then
+                RestoreSetting SETTINGS_CLUSTER_TOOLTIPS, BooleanToIncludeExclude(subSection.item(JSON_SETTINGS_INCLUDE_CLUSTER_TOOLTIPS))
+            End If
+            If subSection.Exists(JSON_SETTINGS_BLANK_CLUSTER_TOOLTIPS) Then
+                RestoreSetting SETTINGS_BLANK_CLUSTER_TOOLTIP, subSection.item(JSON_SETTINGS_BLANK_CLUSTER_TOOLTIPS)
+            End If
         End If
     End If
     
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_STYLES) Then
         Set section = dictionaryObj.item(JSON_SETTINGS_SECTION_STYLES)
-        RestoreSetting SETTINGS_STYLES_COL_SHOW_STYLE, section.item(JSON_SETTINGS_SELECTED_VIEW_COLUMN)
+        
+        Dim firstYesNoColumn As Long
+        firstYesNoColumn = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
+        
+        ' If selectedViewColumn is in the JSON file, get the value so it can be compared to the default value
+        ' in the spreadsheet it is being imported into.
+        Dim selectedViewColumn As Long
+        selectedViewColumn = 0
+        If section.Exists(JSON_SETTINGS_SELECTED_VIEW_COLUMN) Then
+            selectedViewColumn = ConvertColumnLetterToNumber(section.item(JSON_SETTINGS_SELECTED_VIEW_COLUMN))
+        End If
+        
+        ' Handle the case where columns have been added, shifting the view columns to the right of
+        ' their location in the exported file. Ideally we would have an offset from the first yes/no
+        ' column and could always place the view column correctly in these situations, but older
+        ' versions exporting their information will not have this.
+        If selectedViewColumn >= firstYesNoColumn Then
+            RestoreSetting SETTINGS_STYLES_COL_SHOW_STYLE, section.item(JSON_SETTINGS_SELECTED_VIEW_COLUMN)
+        End If
+        
         RestoreSetting SETTINGS_INCLUDE_STYLE_FORMAT, BooleanToIncludeExclude(section.item(JSON_SETTINGS_INCLUDE_STYLE_FORMAT))
         RestoreSetting SETTINGS_INCLUDE_EXTRA_ATTRIBUTES, BooleanToIncludeExclude(section.item(JSON_SETTINGS_INCLUDE_EXTRA_ATTRIBUTES))
         
         ' Old exports do not have this value
+        ' V11.0 maps suffix open to affix open
         If section.Exists(JSON_SETTINGS_STYLES_SUFFIX_OPEN) Then
-            RestoreSetting SETTINGS_STYLES_SUFFIX_OPEN, section.item(JSON_SETTINGS_STYLES_SUFFIX_OPEN)
+            RestoreSetting SETTINGS_STYLES_AFFIX_OPEN, section.item(JSON_SETTINGS_STYLES_SUFFIX_OPEN)
         End If
         
         ' Old exports do not have this value
-        If section.Exists(SETTINGS_STYLES_SUFFIX_CLOSE) Then
-            RestoreSetting SETTINGS_STYLES_SUFFIX_CLOSE, section.item(JSON_SETTINGS_STYLES_SUFFIX_CLOSE)
+        ' V11.0 maps suffix close to affix close
+        If section.Exists(JSON_SETTINGS_STYLES_SUFFIX_CLOSE) Then
+            RestoreSetting SETTINGS_STYLES_AFFIX_CLOSE, section.item(JSON_SETTINGS_STYLES_SUFFIX_CLOSE)
         End If
+        
+        ' V11.0 Added new affix keys
+        If section.Exists(JSON_SETTINGS_STYLES_AFFIX_OPEN) Then
+            RestoreSetting SETTINGS_STYLES_AFFIX_OPEN, section.item(JSON_SETTINGS_STYLES_AFFIX_OPEN)
+        End If
+        
+        ' V11.0 Added new affix keys
+        If section.Exists(JSON_SETTINGS_STYLES_AFFIX_CLOSE) Then
+            RestoreSetting SETTINGS_STYLES_AFFIX_CLOSE, section.item(JSON_SETTINGS_STYLES_AFFIX_CLOSE)
+        End If
+        
+        ' V11.0 Added concatenation mask
+        If section.Exists(JSON_SETTINGS_STYLES_CONCAT_FORMAT) Then
+            RestoreSetting SETTINGS_STYLES_CONCAT_FORMAT, section.item(JSON_SETTINGS_STYLES_CONCAT_FORMAT)
+        End If
+
     End If
     
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_DEBUG) Then
@@ -660,7 +749,6 @@ Private Sub ImportSettingsData(ByVal dictionaryObj As Dictionary)
         RestoreSetting SETTINGS_DATA_SHOW_IS_RELATED_TO_ITEM, LCase$(section.item(JSON_DATA_RELATED_ITEM))
         RestoreSetting SETTINGS_DATA_SHOW_STYLE, LCase$(section.item(JSON_DATA_STYLE_NAME))
         RestoreSetting SETTINGS_DATA_SHOW_EXTRA_STYLE_ATTRIBUTES, LCase$(section.item(JSON_DATA_EXTRA_ATTRIBUTES))
-        RestoreSetting SETTINGS_DATA_SHOW_MESSAGES, LCase$(section.item(JSON_DATA_MESSAGE))
     End If
 
     If dictionaryObj.Exists(JSON_SETTINGS_SECTION_LANGUAGE) Then
@@ -784,7 +872,7 @@ Private Sub ImportLayoutsData(ByVal dictionaryObj As Dictionary)
 
     Dim i As Long
     
-    For i = 1 To columns.count
+    For i = 1 To columns.Count
         Select Case columns.item(i)(JSON_ID)
             Case JSON_DATA_FLAG
                 DataSheet.Cells.item(data.headingRow, data.flagColumn).value = columns.item(i)(JSON_HEADING)
@@ -846,11 +934,11 @@ Private Sub ImportLayoutsData(ByVal dictionaryObj As Dictionary)
                 DataSheet.columns.item(data.extraAttributesColumn).Hidden = columns.item(i)(JSON_HIDDEN)
                 DataSheet.columns.item(data.extraAttributesColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
             
-            Case JSON_DATA_MESSAGE
-                DataSheet.Cells.item(data.headingRow, data.errorMessageColumn).value = columns.item(i)(JSON_HEADING)
-                DataSheet.columns.item(data.errorMessageColumn).ColumnWidth = columns.item(i)(JSON_WIDTH)
-                DataSheet.columns.item(data.errorMessageColumn).Hidden = columns.item(i)(JSON_HIDDEN)
-                DataSheet.columns.item(data.errorMessageColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
+            Case JSON_DATA_PROPERTIES
+                DataSheet.Cells.item(data.headingRow, data.propertiesColumn).value = columns.item(i)(JSON_HEADING)
+                DataSheet.columns.item(data.propertiesColumn).ColumnWidth = columns.item(i)(JSON_WIDTH)
+                DataSheet.columns.item(data.propertiesColumn).Hidden = columns.item(i)(JSON_HIDDEN)
+                DataSheet.columns.item(data.propertiesColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
             
             Case JSON_DATA_GRAPH_DISPLAY_COLUMN
                 DataSheet.Cells.item(data.headingRow, data.graphDisplayColumn).value = columns.item(i)(JSON_HEADING)
@@ -876,7 +964,7 @@ Private Sub ImportLayoutsStyles(ByVal dictionaryObj As Dictionary)
     Dim offset As Long
     offset = -1
     
-    For i = 1 To columns.count
+    For i = 1 To columns.Count
         Select Case columns.item(i)(JSON_ID)
             Case JSON_STYLES_FLAG
                 StylesSheet.Cells.item(styles.headingRow, styles.flagColumn).value = columns.item(i)(JSON_HEADING)
@@ -889,6 +977,12 @@ Private Sub ImportLayoutsStyles(ByVal dictionaryObj As Dictionary)
                 StylesSheet.columns.item(styles.nameColumn).ColumnWidth = columns.item(i)(JSON_WIDTH)
                 StylesSheet.columns.item(styles.nameColumn).Hidden = columns.item(i)(JSON_HIDDEN)
                 StylesSheet.columns.item(styles.nameColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
+           
+            Case JSON_STYLES_DESCRIPTION
+                StylesSheet.Cells.item(styles.headingRow, styles.descriptionColumn).value = columns.item(i)(JSON_HEADING)
+                StylesSheet.columns.item(styles.descriptionColumn).ColumnWidth = columns.item(i)(JSON_WIDTH)
+                StylesSheet.columns.item(styles.descriptionColumn).Hidden = columns.item(i)(JSON_HIDDEN)
+                StylesSheet.columns.item(styles.descriptionColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
            
             Case JSON_STYLES_FORMAT
                 StylesSheet.Cells.item(styles.headingRow, styles.formatColumn).value = columns.item(i)(JSON_HEADING)
@@ -924,7 +1018,7 @@ Private Sub ImportLayoutsSql(ByVal dictionaryObj As Dictionary)
     
     Dim i As Long
     
-    For i = 1 To columns.count
+    For i = 1 To columns.Count
         Select Case columns.item(i)(JSON_ID)
             Case JSON_LAYOUT_SQL_FLAG
                 SqlSheet.Cells.item(sql.headingRow, sql.flagColumn).value = columns.item(i)(JSON_HEADING)
@@ -965,7 +1059,7 @@ Private Sub ImportLayoutsSvg(ByVal dictionaryObj As Dictionary)
     
     Dim i As Long
     
-    For i = 1 To columns.count
+    For i = 1 To columns.Count
         Select Case columns.item(i)(JSON_ID)
             Case JSON_LAYOUT_SVG_FLAG
                 SvgSheet.Cells.item(svg.headingRow, svg.flagColumn).value = columns.item(i)(JSON_HEADING)
@@ -999,7 +1093,7 @@ Private Sub ImportLayoutsSource(ByVal dictionaryObj As Dictionary)
     source = GetSettingsForSourceWorksheet()
     
     Dim i As Long
-    For i = 1 To columns.count
+    For i = 1 To columns.Count
         Select Case columns.item(i)(JSON_ID)
             Case JSON_SOURCE_LINE_NUMBER
                 SourceSheet.Cells.item(source.headingRow, source.lineNumberColumn).value = columns.item(i)(JSON_HEADING)
@@ -1024,7 +1118,7 @@ Private Sub ImportLayoutsRowHeights(ByRef worksheetName As String, ByVal diction
     Dim i As Long
 
     ' Set the row heights
-    For i = 1 To rows.count
+    For i = 1 To rows.Count
         Set row = rows.item(i)
         ActiveWorkbook.Sheets.[_Default](worksheetName).rows(row.item(JSON_ROW)).rowHeight = row.item(JSON_HEIGHT)
         ActiveWorkbook.Sheets.[_Default](worksheetName).rows(row.item(JSON_ROW)).Hidden = row.item(JSON_HIDDEN)
@@ -1058,6 +1152,7 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
     Dim key As Variant
     Dim row As Long
     Dim extraAttributes As String
+    Dim properties As String
     Dim dictionaryObj As Dictionary
     Dim firstRow As Long
     
@@ -1067,12 +1162,11 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
     SettingsSheet.Range("RunMode").value = "manual"
     
     ' First possible row = 1
-    '@Ignore AssignmentNotUsed
     firstRow = 1
     
     Dim lastRow As Long
     With DataSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     Select Case exchange.data.action
@@ -1085,7 +1179,7 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
     End Select
     
     ' Loop through all the objects in collection
-    For i = 1 To rows.count
+    For i = 1 To rows.Count
         Select Case exchange.data.action
             Case IMPORT_REPLACE
                 If rows.item(i).Exists(JSON_ROW) Then   ' If the row number is provided, use it
@@ -1140,6 +1234,11 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
                     Set dictionaryObj = rows.item(i)(key)
                     extraAttributes = DictionaryToAttributes(dictionaryObj)
                     DataSheet.Cells.item(row, ini.data.extraAttributesColumn).value = extraAttributes
+                    
+                Case JSON_DATA_PROPERTIES
+                    Set dictionaryObj = rows.item(i)(key)
+                    properties = SerializePropertyString(dictionaryObj)
+                    DataSheet.Cells.item(row, ini.data.propertiesColumn).value = properties
             End Select
         Next
     Next i
@@ -1150,14 +1249,33 @@ Private Sub ImportContentData(ByRef ini As settings, ByRef exchange As ExchangeO
 End Sub
 
 Private Function DictionaryToAttributes(ByVal dictionaryObj As Dictionary) As String
-    DictionaryToAttributes = vbNullString
-    
+    Dim result As String
     Dim key As Variant
-    For Each key In dictionaryObj.keys()
-        DictionaryToAttributes = DictionaryToAttributes & " " & key & "=" & AddQuotesConditionally(dictionaryObj.item(key))
-    Next
-    
-    DictionaryToAttributes = Trim$(DictionaryToAttributes)
+    Dim k As String
+    Dim value As String
+
+    result = vbNullString
+
+    For Each key In dictionaryObj.keys
+        k = CStr(key)
+        value = CStr(dictionaryObj.item(key))
+
+        Select Case LCase$(k)
+            Case "label", "xlabel", "taillabel", "headlabel", "tooltip"
+                ' Special HTML-like label handling
+                If IsLabelHTMLLike(value) Then
+                    result = result & " " & k & "=" & value
+                Else
+                    result = result & " " & k & "=" & AddQuotesConditionally(value)
+                End If
+
+            Case Else
+                ' Normal attribute handling
+                result = result & " " & k & "=" & AddQuotesConditionally(value)
+        End Select
+    Next key
+
+    DictionaryToAttributes = Trim$(result)
 End Function
 
 Public Sub ClearWorksheetSql()
@@ -1171,7 +1289,7 @@ Public Sub ClearWorksheetSql()
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With SqlSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -1199,7 +1317,7 @@ Public Sub ClearWorksheetSvg()
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With SvgSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -1223,7 +1341,7 @@ Public Sub ClearWorksheetStyles(ByRef ini As settings)
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With StylesSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -1247,7 +1365,7 @@ Public Sub ClearWorksheetData(ByRef ini As settings)
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With DataSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -1275,12 +1393,11 @@ Private Sub ImportContentSql(ByRef exchange As ExchangeOptions, ByVal rows As Co
     sqlLayout = GetSettingsForSqlWorksheet()
     
     ' First possible row after headings = 2
-    '@Ignore AssignmentNotUsed
     firstRow = 2
     
     Dim lastRow As Long
     With SqlSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     Select Case exchange.sql.action
@@ -1292,7 +1409,7 @@ Private Sub ImportContentSql(ByRef exchange As ExchangeOptions, ByVal rows As Co
             firstRow = lastRow + 1
     End Select
     
-    For i = 1 To rows.count
+    For i = 1 To rows.Count
         Select Case exchange.sql.action
             Case IMPORT_REPLACE
                 If rows.item(i).Exists(JSON_ROW) Then   ' If the row number is provided, use it
@@ -1355,12 +1472,11 @@ Private Sub ImportContentSvg(ByRef exchange As ExchangeOptions, ByVal rows As Co
     svg = GetSettingsForSvgWorksheet()
 
     ' First possible row after headings = 2
-    '@Ignore AssignmentNotUsed
     firstRow = 2
     
     Dim lastRow As Long
     With SvgSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     Select Case exchange.svg.action
@@ -1372,7 +1488,7 @@ Private Sub ImportContentSvg(ByRef exchange As ExchangeOptions, ByVal rows As Co
             firstRow = lastRow + 1
     End Select
     
-    For i = 1 To rows.count
+    For i = 1 To rows.Count
         Select Case exchange.svg.action
             Case IMPORT_REPLACE
                 If rows.item(i).Exists(JSON_ROW) Then   ' If the row number is provided, use it
@@ -1412,7 +1528,7 @@ Private Function GetStylesAppendRow(ByRef ini As settings) As Long
 
     Dim row As Long
     With StylesSheet.UsedRange
-        row = .Cells.item(.Cells.count).row
+        row = .Cells.item(.Cells.Count).row
     End With
 
     Do While row > ini.styles.firstRow
@@ -1431,12 +1547,14 @@ Private Sub ImportContentStyles(ByRef ini As settings, ByRef exchange As Exchang
     Dim switchIndex As Long
     Dim key As Variant
     Dim row As Long
+    Dim col As Long
     Dim switches As Collection
     Dim dictionaryObj As Dictionary
-    Dim format As String
+    Dim Format As String
+    Dim maxSwitchColumns As Long
+    maxSwitchColumns = 0
 
     ' First possible row after headings = 1
-    '@Ignore AssignmentNotUsed
     firstRow = 2
     
     Select Case exchange.styles.action
@@ -1447,7 +1565,7 @@ Private Sub ImportContentStyles(ByRef ini As settings, ByRef exchange As Exchang
             firstRow = GetStylesAppendRow(ini)
     End Select
     
-    For rowIndex = 1 To rows.count
+    For rowIndex = 1 To rows.Count
         Select Case exchange.styles.action
             Case IMPORT_REPLACE
                 If rows.item(rowIndex).Exists(JSON_ROW) Then   ' If the row number is provided, use it
@@ -1476,22 +1594,70 @@ Private Sub ImportContentStyles(ByRef ini As settings, ByRef exchange As Exchang
                 Case JSON_STYLES_NAME
                     StylesSheet.Cells.item(row, ini.styles.nameColumn).value = rows.item(rowIndex)(key)
                     
+                Case JSON_STYLES_DESCRIPTION
+                    StylesSheet.Cells.item(row, ini.styles.descriptionColumn).value = rows.item(rowIndex)(key)
+                    
                 Case JSON_STYLES_FORMAT
                     Set dictionaryObj = rows.item(rowIndex)(key)
-                    format = DictionaryToAttributes(dictionaryObj)
-                    StylesSheet.Cells.item(row, ini.styles.formatColumn).value = format
+                    Format = DictionaryToAttributes(dictionaryObj)
+                    StylesSheet.Cells.item(row, ini.styles.formatColumn).value = Format
                     
                 Case JSON_STYLES_TYPE
                     StylesSheet.Cells.item(row, ini.styles.typeColumn).value = rows.item(rowIndex)(key)
                 
                 Case JSON_STYLES_VIEW_SWITCHES
                     Set switches = rows.item(rowIndex)(JSON_STYLES_VIEW_SWITCHES)
-                    For switchIndex = 1 To switches.count
+
+                    ' Track maximum number of switch columns across all rows
+                    If switches.Count > maxSwitchColumns Then
+                        maxSwitchColumns = switches.Count
+                    End If
+
+                    For switchIndex = 1 To switches.Count
                         StylesSheet.Cells.item(row, (ini.styles.firstYesNoColumn + switchIndex - 1)).value = switches.item(switchIndex)
                     Next switchIndex
             End Select
         Next
     Next rowIndex
+    
+    ' Apply conditional formatting once across all yes/no columns
+    If maxSwitchColumns > 0 Then
+        Dim firstCol As Long
+        Dim lastCol As Long
+
+        firstCol = ini.styles.firstYesNoColumn
+        lastCol = ini.styles.firstYesNoColumn + maxSwitchColumns - 1
+
+        ApplyYesNoFormattingRange StylesSheet, firstCol, lastCol
+    End If
+End Sub
+
+Private Sub ApplyYesNoFormattingRange(ws As Worksheet, firstCol As Long, lastCol As Long)
+
+    Dim rng As Range
+    Dim fcYes As FormatCondition
+    Dim fcNo As FormatCondition
+
+    Set rng = ws.Range(ws.columns(firstCol), ws.columns(lastCol))
+
+    With rng
+        .FormatConditions.Delete
+
+        ' YES -> green
+        Set fcYes = .FormatConditions.Add(Type:=xlCellValue, _
+                                          Operator:=xlEqual, _
+                                          Formula1:="=""yes""")
+        fcYes.Interior.color = RGB(198, 239, 206)      ' light green fill
+        fcYes.Font.color = RGB(0, 97, 0)               ' dark green font (Excel default)
+        
+        ' NO -> red
+        Set fcNo = .FormatConditions.Add(Type:=xlCellValue, _
+                                         Operator:=xlEqual, _
+                                         Formula1:="=""no""")
+        fcNo.Interior.color = RGB(255, 199, 206)       ' light red fill
+        fcNo.Font.color = RGB(156, 0, 6)               ' dark red font (Excel default)
+    End With
+
 End Sub
 
 

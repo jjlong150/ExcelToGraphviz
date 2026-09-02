@@ -21,11 +21,16 @@ Attribute VB_Exposed = False
 ' ==========================================================================
 
 ''
+' The name of the style, preserving the lower and upper case lettering
+' used on the "styles" worksheet.
+'
+Public styleName As String
+
+''
 ' The category of the style.
 ' Expected values: TYPE_NODE ("node"), TYPE_EDGE ("edge"),
 ' TYPE_SUBGRAPH_OPEN ("{"), or TYPE_KEYWORD.
 '
-'@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
 Public styleType As String
 
 ''
@@ -33,8 +38,13 @@ Public styleType As String
 ' This string is injected directly into the DOT source during the
 ' 'ProcessNode' or 'ProcessEdge' phase.
 '
-'@Ignore VariableNotUsed, MoveFieldCloserToUsage, EncapsulatePublicField
 Public styleFormat As String
+
+''
+' A text description of the style. Typically used when generating JSON for
+' consumption by AI.
+'
+Public styleDescription As String
 
 
 

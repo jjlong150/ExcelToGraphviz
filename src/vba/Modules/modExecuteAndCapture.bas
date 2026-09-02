@@ -86,7 +86,6 @@ Option Explicit
 
 #If Mac Then
     Public Sub ExecuteAndCapture(ByVal CommandLine As String, ByRef stdOut As String, ByRef stdErr As String)
-        Debug.Print CommandLine
         stdOut = vbNullString
         stdErr = "ExecuteAndCapture subroutine is not implemented on MacOS"
     End Sub
@@ -435,14 +434,14 @@ Private Function ReadPipe(ByVal hPipe As Long) As String
     Loop While peeked = True And bytesAvail > 0
 End Function
 
-Private Function UTF8_To_String(bytes() As Byte, count As Long) As String
+Private Function UTF8_To_String(bytes() As Byte, Count As Long) As String
     Dim i As Long, c As Long
     Dim result As String
 
     result = ""
     i = 0
 
-    Do While i < count
+    Do While i < Count
         c = bytes(i)
 
         If c < &H80 Then

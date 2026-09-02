@@ -242,7 +242,7 @@ Public Sub LocalizeWorksheetData()
     DataSheet.Cells.item(dataWs.headingRow, dataWs.isRelatedToItemColumn).value = GetLabel(RIBBON_CTL_SHOW_IS_RELATED_TO_ITEM)
     DataSheet.Cells.item(dataWs.headingRow, dataWs.styleNameColumn).value = GetLabel(RIBBON_CTL_SHOW_STYLE)
     DataSheet.Cells.item(dataWs.headingRow, dataWs.extraAttributesColumn).value = GetLabel(RIBBON_CTL_SHOW_EXTRA_STYLE_ATTRIBUTES)
-    DataSheet.Cells.item(dataWs.headingRow, dataWs.errorMessageColumn).value = GetLabel(RIBBON_CTL_SHOW_MESSAGES)
+    DataSheet.Cells.item(dataWs.headingRow, dataWs.propertiesColumn).value = GetLabel(RIBBON_CTL_SHOW_PROPERTIES)
 End Sub
 
 ' ==========================================================================
@@ -390,6 +390,12 @@ Private Sub LocalizeWorksheetSettings()
     SettingsSheet.Range("TitleSettingsPicture").value = GetLabel("worksheetSettingsPictureName")
     SettingsSheet.Range("TitleSettingsPathToDot").value = GetLabel("worksheetSettingsPathToDot")
     SettingsSheet.Range("TitleSettingsCmdParms").value = GetLabel("worksheetSettingsAdditionalCmdParameters")
+
+    ' Error messages which have to persist if an error state resets the locale cache
+    SettingsSheet.Range("ErrorRefreshingTheRibbon").value = GetMessage("ErrorRefreshingTheRibbon")
+    SettingsSheet.Range("LostTheRibbonObject").value = GetMessage("LostTheRibbonObject")
+    SettingsSheet.Range("ErrorUpdatingTheRibbonForControl").value = GetMessage("ErrorUpdatingTheRibbonForControl")
+    SettingsSheet.Range("ErrorActivatingARibbonTab").value = GetMessage("ErrorActivatingARibbonTab")
 End Sub
 
 ' ==========================================================================
@@ -471,10 +477,11 @@ Private Sub LocalizeWorksheetStyleDesigner()
     StyleDesignerSheet.name = GetLabel("worksheetStyleDesignerName")
     StyleDesignerSheet.Range("TitleStyleDesignerLabelText").value = GetLabel("worksheetStyleDesignerLabelText")
     StyleDesignerSheet.Range("TitleStyleDesignerXlabelText").value = GetLabel("worksheetStyleDesignerXLabelText")
-    StyleDesignerSheet.Range("TitleStyleDesignerFormatString").value = GetLabel("worksheetStyleDesignerFormatString")
     StyleDesignerSheet.Range("TitleStyleDesignerTailLabelText").value = GetLabel("worksheetStyleDesignerTailLabelText")
     StyleDesignerSheet.Range("TitleStyleDesignerHeadLabelText").value = GetLabel("worksheetStyleDesignerHeadLabelText")
     StyleDesignerSheet.Range("TitleStyleDesignerStyleNameText").value = GetLabel("worksheetStyleDesignerStyleNameText")
+    StyleDesignerSheet.Range("TitleStyleDesignerDescriptionText").value = GetLabel("worksheetStyleDesignerDescriptionText")
+    StyleDesignerSheet.Range("TitleStyleDesignerFormatString").value = GetLabel("worksheetStyleDesignerFormatString")
     StyleDesignerSheet.buttons("StyleDesignerSaveButton").caption = GetLabel("worksheetStyleDesignerSaveButtonText")
 End Sub
 
@@ -535,7 +542,7 @@ Public Function LocalizeCacheKeys(ByVal worksheetName As String) As Dictionary
     ' Find last row with data
     Dim lastRow As Long
     With ActiveWorkbook.worksheets.[_Default](worksheetName).UsedRange
-        lastRow = .Cells(.Cells.count).row
+        lastRow = .Cells(.Cells.Count).row
     End With
 
     For row = 2 To lastRow

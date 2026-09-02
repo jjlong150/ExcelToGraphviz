@@ -15,8 +15,9 @@
 					<toggleButton id="toggleSvgSheet"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_find_replace_48px"  size="large" onAction="toggleSvg_onAction"    getPressed="toggleSvg_getPressed"/>
 				</group>
                 <group id="worksheetsGroupDebugging" getLabel="ribbon_getLabel" image="material_terminal_48px">
-					<toggleButton id="toggleSourceSheet"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_data_object_48px"     size="large" onAction="toggleSource_onAction" getPressed="toggleSource_getPressed"/>
-					<toggleButton id="toggleConsoleSheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_terminal_48px"        size="large" onAction="toggleConsole_onAction" getPressed="toggleConsole_getPressed" getVisible="toggleConsole_getVisible"/>
+					<toggleButton id="toggleGraphviz"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_network_node_48px"    size="large" onAction="toggleGraphviz_onAction" getPressed="toggleGraphviz_getPressed"/>
+					<toggleButton id="toggleSourceSheet"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_data_object_48px"     size="large" onAction="toggleSource_onAction"   getPressed="toggleSource_getPressed"/>
+					<toggleButton id="toggleConsoleSheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_terminal_48px"        size="large" onAction="toggleConsole_onAction"  getPressed="toggleConsole_getPressed" getVisible="toggleConsole_getVisible"/>
 					<separator id="worksheetsSeparator04"/>
 					<toggleButton id="helpAttributes" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_quick_reference_all_48px" size="large" onAction="helpAttributes_onAction" getPressed="helpAttributes_getPressed"/>
 					<toggleButton id="helpColors"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_palette_48px"             size="large" onAction="helpColors_onAction" getPressed="helpColors_getPressed"/>
@@ -53,51 +54,61 @@
 					<button id="worksheetsHelp"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="worksheetsHelp_onAction"/>
 				</group>
             </tab>
-   			<tab id="graphvizTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="graphvizTab">
+			<tab id="dataTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="renderTab">
 				<group id="graphvizGroup1" getLabel="ribbon_getLabel" image="material_refresh_48px">
-					<button id="graphToWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_refresh_48px" size="large" onAction="graphToWorksheet_onAction" getEnabled="graphToWorksheet_getEnabled"/>
+					<splitButton id="splitGraphToWorksheet" size="large" >
+                        <button id="graphToWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_refresh_48px" onAction="graphToWorksheet_onAction" getEnabled="graphToWorksheet_getEnabled"/>
+                        <menu id="graphToWorksheetOptions">
+                            <toggleButton id="graphAuto"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="graphAuto_onAction"        getPressed="graphAuto_getPressed"/>
+                        </menu>					
+                    </splitButton>
+					<splitButton id="splitShowJson" size="large" >
+                        <button id="showJson"         getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_network_intel_node_48px"  onAction="showJson_onAction"         getEnabled="showJson_getEnabled"/>
+                        <menu id="showJsonOptions">
+                            <toggleButton id="jsonViewerNew"     getLabel="ribbon_getLabel" getPressed="showJsonOptions_getToggleState" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showJsonOptions_onToggleChange"/>
+                            <toggleButton id="jsonViewerShared"  getLabel="ribbon_getLabel" getPressed="showJsonOptions_getToggleState" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showJsonOptions_onToggleChange"/>
+                            <menuSeparator id="showJsonSeparator" />
+                            <button id="jsonReopen"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_open_in_browser_24px"  onAction="jsonReopen_onAction" getEnabled="jsonReopen_getEnabled" />
+                        </menu>					
+                    </splitButton>
 					<separator id="Separator00"/>
-					<toggleButton id="graphAuto"        showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_autorenew_24px"  size="normal" onAction="graphAuto_onAction" getPressed="graphAuto_getPressed"/>
-					<toggleButton id="useDefinedStyles" showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_imagesearch_roller_16px"   size="normal" onAction="useDefinedStyles_onAction" getPressed="useDefinedStyles_getPressed"/>
-					<toggleButton id="useExtraStyles"   showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_highlight_24px"  size="normal" onAction="useExtraStyles_onAction"  getPressed="useExtraStyles_getPressed"/>
-					<separator id="Separator0a"/>
 					<dropDown id="graphZoomLevel" showLabel="false" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="graphZoomLevel_onAction" sizeString="XXXX" getSelectedItemID="graphZoomLevel_getSelectedItemID">
-						<item id="graphZoomLevel5" label="5%"/>
-						<item id="graphZoomLevel10" label="10%"/>
-						<item id="graphZoomLevel15" label="15%"/>
-						<item id="graphZoomLevel20" label="20%"/>
-						<item id="graphZoomLevel25" label="25%"/>
-						<item id="graphZoomLevel30" label="30%"/>
-						<item id="graphZoomLevel35" label="35%"/>
-						<item id="graphZoomLevel40" label="40%"/>
-						<item id="graphZoomLevel45" label="45%"/>
-						<item id="graphZoomLevel50" label="50%"/>
-						<item id="graphZoomLevel55" label="55%"/>
-						<item id="graphZoomLevel60" label="60%"/>
-						<item id="graphZoomLevel65" label="65%"/>
-						<item id="graphZoomLevel70" label="70%"/>
-						<item id="graphZoomLevel75" label="75%"/>
-						<item id="graphZoomLevel80" label="80%"/>
-						<item id="graphZoomLevel85" label="85%"/>
-						<item id="graphZoomLevel90" label="90%"/>
-						<item id="graphZoomLevel95" label="95%"/>
-						<item id="graphZoomLevel100" label="100%"/>
-						<item id="graphZoomLevel105" label="105%"/>
-						<item id="graphZoomLevel110" label="110%"/>
-						<item id="graphZoomLevel115" label="115%"/>
-						<item id="graphZoomLevel120" label="120%"/>
-						<item id="graphZoomLevel125" label="125%"/>
-						<item id="graphZoomLevel130" label="130%"/>
-						<item id="graphZoomLevel135" label="135%"/>
-						<item id="graphZoomLevel140" label="140%"/>
-						<item id="graphZoomLevel145" label="145%"/>
 						<item id="graphZoomLevel150" label="150%"/>
+						<item id="graphZoomLevel145" label="145%"/>
+						<item id="graphZoomLevel140" label="140%"/>
+						<item id="graphZoomLevel135" label="135%"/>
+						<item id="graphZoomLevel130" label="130%"/>
+						<item id="graphZoomLevel125" label="125%"/>
+						<item id="graphZoomLevel120" label="120%"/>
+						<item id="graphZoomLevel115" label="115%"/>
+						<item id="graphZoomLevel110" label="110%"/>
+						<item id="graphZoomLevel105" label="105%"/>
+						<item id="graphZoomLevel100" label="100%"/>
+						<item id="graphZoomLevel95"  label="95%"/>
+						<item id="graphZoomLevel90"  label="90%"/>
+						<item id="graphZoomLevel85"  label="85%"/>
+						<item id="graphZoomLevel80"  label="80%"/>
+						<item id="graphZoomLevel75"  label="75%"/>
+						<item id="graphZoomLevel70"  label="70%"/>
+						<item id="graphZoomLevel65"  label="65%"/>
+						<item id="graphZoomLevel60"  label="60%"/>
+						<item id="graphZoomLevel55"  label="55%"/>
+						<item id="graphZoomLevel50"  label="50%"/>
+						<item id="graphZoomLevel45"  label="45%"/>
+						<item id="graphZoomLevel40"  label="40%"/>
+						<item id="graphZoomLevel35"  label="35%"/>
+						<item id="graphZoomLevel30"  label="30%"/>
+						<item id="graphZoomLevel25"  label="25%"/>
+						<item id="graphZoomLevel20"  label="20%"/>
+						<item id="graphZoomLevel15"  label="15%"/>
+						<item id="graphZoomLevel10"  label="10%"/>
+						<item id="graphZoomLevel5"   label="5%"/>
 					</dropDown>
 					<box id="zoomBox" boxStyle="horizontal">
                         <button       id="graphZoomOut"     showLabel="false" getLabel="ribbon_getLabel"         getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_do_not_disturb_on_16px" size="normal" onAction="graphZoomOut_onAction" getEnabled="graphZoomOut_getEnabled"/>
                         <button       id="graphZoomIn"      showLabel="false" getLabel="ribbon_getLabel"         getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_add_circle_16px"  size="normal" onAction="graphZoomIn_onAction"  getEnabled="graphZoomIn_getEnabled"/>
                     </box>
-					<separator id="Separator00a"/>
+					<separator id="Separator0a"/>
 					<dropDown id="yesNoView" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="yesNoView_onAction" getItemCount="yesNoView_getItemCount" getItemLabel="yesNoView_getItemLabel" getSelectedItemIndex="yesNoView_getSelectedItemIndex">
 					</dropDown>
 					<dropDown id="imageFormat" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="imageFormat_onAction" sizeString="graph" getSelectedItemID="imageFormat_getSelectedItemID">
@@ -111,9 +122,19 @@
 					</dropDown>
 				</group>
 				<group id="graphvizGroup2" getLabel="ribbon_getLabel" image="material_file_save_48px">
-					<button id="graphToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_file_save_48px" size="large" onAction="graphToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+					<splitButton id="splitGraphToFile" size="large" >
+                        <button id="graphToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_file_save_48px" onAction="graphToFile_onAction" getEnabled="graphToFile_getEnabled"/>
+                        <menu id="graphToFileOptions">
+                            <toggleButton id="openAfterPublish" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="openAfterPublish_onAction" getPressed="openAfterPublish_getPressed"/>
+                        </menu>					
+                    </splitButton>
 					<button id="graphAllViewsToFile" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_auto_awesome_motion_48px" size="large" onAction="graphAllViewsToFile_onAction" getEnabled="graphToFile_getEnabled"/>
 					<separator id="Separator05"/>
+                    <checkBox id="publishGraphviz"  getLabel="publishGraphviz_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="publishGraphviz_onAction"  getPressed="publishGraphviz_getPressed"/>
+                    <checkBox id="publishDot"       getLabel="ribbon_getLabel"          getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="publishDot_onAction"       getPressed="publishDot_getPressed"/>
+                    <checkBox id="publishKnowledge" getLabel="ribbon_getLabel"          getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="publishKnowledge_onAction" getPressed="publishKnowledge_getPressed"/>
+                </group>
+				<group id="dataGroupFiles" getLabel="ribbon_getLabel" image="material_file_save_48px">
 					<box id="dirBox" boxStyle="horizontal">
                         <button id="getDir" getLabel="getDir_getLabel" getVisible="getDir_getVisible" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_file_open_24px" size="normal" onAction="getDir_onAction"/>
                         <labelControl id="getDirLabel" getLabel="getDirLabel_getLabel"/>
@@ -122,23 +143,122 @@
 						<editBox id="filePrefix" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onChange="filePrefix_onChange" getText="filePrefix_getText"/>
 						<labelControl id="dotLabel" label="."/>
 						<dropDown id="fileFormat" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" showLabel="false" onAction="fileFormat_onAction" sizeString="json" getSelectedItemID="fileFormat_getSelectedItemID">
-							<item id="ff_bmp" label="bmp"/>
-							<item id="ff_gif" label="gif"/>
-							<item id="ff_jpg" label="jpg"/>
-							<item id="ff_pdf" label="pdf"/>
-							<item id="ff_png" label="png"/>
-							<item id="ff_ps" label="ps"/>
-							<item id="ff_svg" label="svg"/>
+							<item id="ff_bmp"  label="bmp"/>
+							<item id="ff_gif"  label="gif"/>
+							<item id="ff_jpg"  label="jpg"/>
+							<item id="ff_pdf"  label="pdf"/>
+							<item id="ff_png"  label="png"/>
+							<item id="ff_ps"   label="ps"/>
+							<item id="ff_svg"  label="svg"/>
 							<item id="ff_tiff" label="tiff"/>
 							<item id="ff_json" label="json"/>
-							<item id="ff_dot" label="dot"/>
+							<item id="ff_dot"  label="dot"/>
 						</dropDown>
 					</box>
 					<menu id="fileNameOptions" getLabel="ribbon_getLabel">
 						<checkBox id="addTimestamp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="addTimestamp_onAction" getPressed="addTimestamp_getPressed"/>
 						<checkBox id="addOptions" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="addOptions_onAction" getPressed="addOptions_getPressed"/>
 					</menu>
+					<separator id="renderSeparator"/>
+					<checkBox id="renderCairo"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="renderCairo_onAction"   getPressed="renderCairo_getPressed"   getEnabled="renderCairo_getEnabled"/>
+					<checkBox id="renderGD"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="renderGD_onAction"      getPressed="renderGD_getPressed"      getEnabled="renderGD_getEnabled"/>
+					<checkBox id="renderGDIPlus" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="renderGDIPlus_onAction" getPressed="renderGDIPlus_getPressed" getEnabled="renderGDIPlus_getEnabled" getVisible="macHide_getVisible"/>
+					<checkBox id="renderQuartz"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="renderQuartz_onAction"  getPressed="renderQuartz_getPressed"  getEnabled="renderQuartz_getEnabled"  getVisible="macShow_getVisible"/>
 				</group>
+				    
+				<group id="dataGroupStyling" getLabel="ribbon_getLabel" image="material_refresh_48px">
+					<checkBox id="useDefinedStyles" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="useDefinedStyles_onAction" getPressed="useDefinedStyles_getPressed"/>
+					<checkBox id="useExtraStyles"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="useExtraStyles_onAction"   getPressed="useExtraStyles_getPressed"/>
+					<separator id="stylingSeparator"/>
+					<checkBox id="includeImagePath" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeImagePath_onAction" getPressed="includeImagePath_getPressed"/>
+					<checkBox id="transparent"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="transparent_onAction"      getPressed="transparent_getPressed"/>
+					<checkBox id="rotate"           getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="rotate_onAction"           getPressed="rotate_getPressed"/>
+                </group>
+                    					
+				<group id="graphvizGroup100" getLabel="ribbon_getLabel" image="material_lan_48px">
+					<menu id="nodeMenu" getLabel="ribbon_getLabel" image="node_oval">
+						<menuSeparator id="nodeMenu3" getTitle="ribbon_getLabel"/>
+						<checkBox id="includeOrphanNodes" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeOrphanNodes_onAction" getPressed="includeOrphanNodes_getPressed"/>
+						<menuSeparator id="nodeMenu1" getTitle="ribbon_getLabel"/>
+						<checkBox id="showNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeLabels_onAction" getPressed="showNodeLabels_getPressed"/>
+						<checkBox id="showNodeXLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeXLabels_onAction" getPressed="showNodeXLabels_getPressed"/>
+						<checkBox id="showNodeTooltips" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeTooltips_onAction" getPressed="showNodeTooltips_getPressed"/>
+						<menuSeparator id="blankNodeLabelMenu" getTitle="ribbon_getLabel"/>
+						<checkBox id="defaultNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="defaultNodeLabels_onAction" getPressed="defaultNodeLabels_getPressed"/>
+						<checkBox id="blankNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankNodeLabels_onAction" getPressed="blankNodeLabels_getPressed"/>
+						<menuSeparator id="blankNodeTooltipMenu" getTitle="ribbon_getLabel"/>
+						<checkBox id="omitNodeTooltips"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="omitNodeTooltips_onAction"  getPressed="omitNodeTooltips_getPressed"/>
+						<checkBox id="blankNodeTooltips" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankNodeTooltips_onAction" getPressed="blankNodeTooltips_getPressed"/>
+					</menu>
+					<menu id="edgeMenu" getLabel="ribbon_getLabel" image="edge_normal">
+						<menuSeparator id="graphMenu2" getTitle="ribbon_getLabel"/>
+						<checkBox id="strict" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="strict_onAction" getPressed="strict_getPressed"/>
+						<checkBox id="concentrate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="concentrate_onAction" getPressed="concentrate_getPressed"/>
+						<checkBox id="forceLabels"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="forceLabels_onAction"      getPressed="forceLabels_getPressed"/>
+						<menuSeparator id="edgeMenu3" getTitle="ribbon_getLabel"/>
+						<checkBox id="includeOrphanEdges" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeOrphanEdges_onAction" getPressed="includeOrphanEdges_getPressed"/>
+						<checkBox id="showPorts" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showPorts_onAction" getPressed="showPorts_getPressed"/>
+						<menuSeparator id="edgeMenu1" getTitle="ribbon_getLabel"/>
+						<checkBox id="showEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeLabels_onAction" getPressed="showEdgeLabels_getPressed"/>
+						<checkBox id="showEdgeXLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeXLabels_onAction" getPressed="showEdgeXLabels_getPressed"/>
+						<checkBox id="showEdgeHeadLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeHeadLabels_onAction" getPressed="showEdgeHeadLabels_getPressed"/>
+						<checkBox id="showEdgeTailLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeTailLabels_onAction" getPressed="showEdgeTailLabels_getPressed"/>
+						<checkBox id="showEdgeTooltips" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeTooltips_onAction" getPressed="showEdgeTooltips_getPressed"/>
+						<menuSeparator id="blankEdgeLabelMenu" getTitle="ribbon_getLabel"/>
+						<checkBox id="blankEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankEdgeLabels_onAction" getPressed="blankEdgeLabels_getPressed"/>
+						<checkBox id="defaultEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="defaultEdgeLabels_onAction" getPressed="defaultEdgeLabels_getPressed"/>
+						<menuSeparator id="blankEdgeTooltipMenu" getTitle="ribbon_getLabel"/>
+						<checkBox id="omitEdgeTooltips"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="omitEdgeTooltips_onAction"  getPressed="omitEdgeTooltips_getPressed"/>
+						<checkBox id="blankEdgeTooltips" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankEdgeTooltips_onAction" getPressed="blankEdgeTooltips_getPressed"/>
+					</menu>
+					<menu id="clusterMenu" getLabel="ribbon_getLabel" image="cluster_normal" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip">
+						<menuSeparator id="clusterMenu1" getTitle="ribbon_getLabel"/>
+						<checkBox id="showClusterLabels"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showClusterLabels_onAction"   getPressed="showClusterLabels_getPressed"/>
+						<checkBox id="showClusterTooltips" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showClusterTooltips_onAction" getPressed="showClusterTooltips_getPressed"/>
+						<menuSeparator id="blankClusterLabelMenu" getTitle="ribbon_getLabel"/>
+						<checkBox id="omitClusterLabels"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="omitClusterLabels_onAction"  getPressed="omitClusterLabels_getPressed"/>
+						<checkBox id="blankClusterLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankClusterLabels_onAction" getPressed="blankClusterLabels_getPressed"/>
+						<menuSeparator id="blankClusterTooltipMenu" getTitle="ribbon_getLabel"/>
+						<checkBox id="omitClusterTooltips"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="omitClusterTooltips_onAction"  getPressed="omitClusterTooltips_getPressed"/>
+						<checkBox id="blankClusterTooltips" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankClusterTooltips_onAction" getPressed="blankClusterTooltips_getPressed"/>
+					</menu>
+                </group>
+
+				<group id="renderGroupShowColumns" getLabel="ribbon_getLabel" image="material_view_column_24px">
+					<menu id="dataMenu"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_view_column_24px">
+                        <menuSeparator id="columnsFlag"         getTitle="ribbon_getLabel"/>
+						<checkBox id="ShowComment"              getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+                        <menuSeparator id="columnsItem"         getTitle="ribbon_getLabel"/>
+						<checkBox id="ShowItem"                 getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowIsRelatedToItem"      getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+                        <menuSeparator id="columnsLabel"        getTitle="ribbon_getLabel"/>
+						<checkBox id="ShowLabel"                getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowOutsideLabel"         getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowTooltip"              getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowTailLabel"            getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowHeadLabel"            getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+                        <menuSeparator id="columnsStyle"        getTitle="ribbon_getLabel"/>
+						<checkBox id="ShowStyle"                getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+						<checkBox id="ShowExtraStyleAttributes" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+                        <menuSeparator id="columnsKnowledge"    getTitle="ribbon_getLabel"/>
+						<checkBox id="ShowProperties"           getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
+					</menu>
+					<button id="clearWorksheetGraphs" showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_ink_eraser_24px"           size="normal" onAction="clearWorksheetGraphs_onAction"/>
+					<button id="clearData"            showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_delete_forever_red_24px" size="normal" onAction="clearData_onAction"/>
+                </group>
+                    
+				<group id="graphvizGroupDebug" getLabel="ribbon_getLabel" image="material_pest_control_48px">
+					<toggleButton id="toggleDebugLabels" showLabel="true" image="material_bug_report_24px" size="normal" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="toggleDebugLabels_onAction" getPressed="toggleDebugLabels_getPressed"/>
+					<toggleButton id="keepGvFile"        showLabel="true" image="material_convert_to_text_24px" size="normal" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="keepGvFile_onAction"   getPressed="keepGvFile_getPressed"/>
+					<button       id="clearMessages"     showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_delete_sweep_24px" onAction="clearMessages_onAction"/>
+				</group>
+				    
+				<group id="dataGroupHelp" getLabel="ribbon_getLabel" image="material_help_48px">
+					<button id="dataHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="dataHelp_onAction"/>
+				</group>
+			</tab>
+			    
+   			<tab id="graphvizTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="graphvizTab">
 				<group id="graphvizGroupLayout" getLabel="ribbon_getLabel" image="layout_twopi_48px">
                     <toggleButton id="layoutDot"       showLabel="true" image="layout_dot_24px"               getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="layout_onAction" getPressed="layout_getPressed" />
                     <toggleButton id="layoutFdp"       showLabel="true" image="layout_fdp_24px"               getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="layout_onAction" getPressed="layout_getPressed" />
@@ -152,19 +272,15 @@
 				</group>
 				<group id="graphvizGroupSpline" getLabel="ribbon_getLabel" image="material_tactic_24px"  getVisible="splines_getVisible">
                     <toggleButton id="splineFalse"     showLabel="true" image="material_call_made_24px"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-                     <toggleButton id="splineTrue"      showLabel="true" image="material_tactic_24px"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-                    <!--
-                    <toggleButton id="splineSpline"    showLabel="true" image="material_tactic_24px"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-                    -->
-                    <toggleButton id="splineCurved"    showLabel="true" image="material_switch_access_shortcut_24px"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-                   <!--
-					<toggleButton id="splineLine"      showLabel="true" image="material_call_made_24px"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-					-->
-                    <toggleButton id="splineOrtho"     showLabel="true" image="material_arrow_top_right_24px"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-                    <!--
+                    <toggleButton id="splineTrue"      showLabel="true" image="material_tactic_24px"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />                  
                     <toggleButton id="splineCompound"  showLabel="true" image="material_turn_slight_right_24px"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
-                    -->
+
+                    <toggleButton id="splineLine"      showLabel="true" image="material_call_made_24px"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
+                    <toggleButton id="splineSpline"    showLabel="true" image="material_tactic_24px"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
                     <toggleButton id="splinePolyline"  showLabel="true" image="material_turn_slight_right_24px"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
+                    
+                    <toggleButton id="splineCurved"    showLabel="true" image="material_switch_access_shortcut_24px"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />				
+                    <toggleButton id="splineOrtho"     showLabel="true" image="material_arrow_top_right_24px"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
                     <toggleButton id="splineNone"      showLabel="true" image="material_block_16px"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="splines_getVisible" onAction="splines_onAction" getPressed="splines_getPressed" />
 				</group>
 				<group id="graphvizGroupType" getLabel="ribbon_getLabel" getVisible="directed_getVisible" image="material_arrow_right_alt_48px">
@@ -173,9 +289,12 @@
 					<button       id="graphtypeDummyButton1" image="spacer_normal" size="normal" enabled="false" getVisible="rankdir_getVisible" />
 				</group>
 				<group id="graphvizGroupOutputOrder" getVisible="outputorder_getVisible" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_pill_off_48px">
-	                <toggleButton id="outputorderBreadthFirst" getVisible="outputorder_getVisible" showLabel="true" image="material_pill_24px"                 getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="outputorderBreadthFirst_onAction" getPressed="outputorderBreadthFirst_getPressed"/>
+	                <toggleButton id="outputorderBreadthFirst" getVisible="outputorder_getVisible" showLabel="true" image="material_fit_page_width_24px"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="outputorderBreadthFirst_onAction" getPressed="outputorderBreadthFirst_getPressed"/>
+	                <toggleButton id="outputorderDepthFirst"   getVisible="outputorder_getVisible" showLabel="true" image="material_fit_page_height_24px" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="outputorderDepthFirst_onAction" getPressed="outputorderDepthFirst_getPressed"/>
+					<button       id="outputorderDummyButton1" image="spacer_normal" size="normal" enabled="false" getVisible="rankdir_getVisible" />
 	                <toggleButton id="outputorderNodesFirst"   getVisible="outputorder_getVisible" showLabel="true" image="material_pill_off_nodesfirst_24px"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="outputorderNodesFirst_onAction"   getPressed="outputorderNodesFirst_getPressed" />
 	                <toggleButton id="outputorderEdgesFirst"   getVisible="outputorder_getVisible" showLabel="true" image="material_pill_off_edgesfirst_24px"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="outputorderEdgesFirst_onAction"   getPressed="outputorderEdgesFirst_getPressed"/>
+					<button       id="outputorderDummyButton2" image="spacer_normal" size="normal" enabled="false" getVisible="rankdir_getVisible" />
 				</group>
 				<group id="graphvizGroup4" getLabel="layoutOptions_getLabel" image="material_settings_b_roll_48px">
 	                <toggleButton id="rankdirTB"  showLabel="true"   image="rankdir_tb_24px" getVisible="rankdir_getVisible" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getPressed="rankdir_getPressed" onAction="rankdir_onAction" />
@@ -255,68 +374,6 @@
 						<item id="clusterrank_none"   label="none"/>
 					</dropDown>
 				</group>
-				<group id="graphvizGroup100" getLabel="ribbon_getLabel" image="material_lan_48px">
-					<menu id="graphMenu" getLabel="ribbon_getLabel" image="graph_normal" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip">
-						<menuSeparator id="graphMenu3" getTitle="ribbon_getLabel"/>
-						<checkBox id="center"           getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="center_onAction"           getPressed="center_getPressed"/>
-						<checkBox id="forceLabels"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="forceLabels_onAction"      getPressed="forceLabels_getPressed"/>
-						<checkBox id="rotate"           getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="rotate_onAction"           getPressed="rotate_getPressed"/>
-						<checkBox id="transparent"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="transparent_onAction"      getPressed="transparent_getPressed"/>
-						<checkBox id="includeImagePath" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeImagePath_onAction" getPressed="includeImagePath_getPressed"/>
-					</menu>
-					<menu id="nodeMenu" getLabel="ribbon_getLabel" image="node_oval">
-						<menuSeparator id="nodeMenu3" getTitle="ribbon_getLabel"/>
-						<checkBox id="includeOrphanNodes" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeOrphanNodes_onAction" getPressed="includeOrphanNodes_getPressed"/>
-						<menuSeparator id="nodeMenu1" getTitle="ribbon_getLabel"/>
-						<checkBox id="showNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeLabels_onAction" getPressed="showNodeLabels_getPressed"/>
-						<checkBox id="showNodeXLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showNodeXLabels_onAction" getPressed="showNodeXLabels_getPressed"/>
-						<menuSeparator id="nodeMenu2" getTitle="ribbon_getLabel"/>
-						<menu id="blankNodeLabelMenu" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="ActiveXTextBox">
-							<checkBox id="blankNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankNodeLabels_onAction" getPressed="blankNodeLabels_getPressed"/>
-							<checkBox id="defaultNodeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="defaultNodeLabels_onAction" getPressed="defaultNodeLabels_getPressed"/>
-						</menu>
-					</menu>
-					<menu id="edgeMenu" getLabel="ribbon_getLabel" image="edge_normal">
-						<menuSeparator id="graphMenu2" getTitle="ribbon_getLabel"/>
-						<checkBox id="strict" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="strict_onAction" getPressed="strict_getPressed"/>
-						<checkBox id="concentrate" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="concentrate_onAction" getPressed="concentrate_getPressed"/>
-						<menuSeparator id="edgeMenu3" getTitle="ribbon_getLabel"/>
-						<checkBox id="includeOrphanEdges" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="includeOrphanEdges_onAction" getPressed="includeOrphanEdges_getPressed"/>
-						<checkBox id="showPorts" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showPorts_onAction" getPressed="showPorts_getPressed"/>
-						<menuSeparator id="edgeMenu1" getTitle="ribbon_getLabel"/>
-						<checkBox id="showEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeLabels_onAction" getPressed="showEdgeLabels_getPressed"/>
-						<checkBox id="showEdgeXLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeXLabels_onAction" getPressed="showEdgeXLabels_getPressed"/>
-						<checkBox id="showEdgeHeadLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeHeadLabels_onAction" getPressed="showEdgeHeadLabels_getPressed"/>
-						<checkBox id="showEdgeTailLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="showEdgeTailLabels_onAction" getPressed="showEdgeTailLabels_getPressed"/>
-						<menuSeparator id="edgeMenu2" getTitle="ribbon_getLabel"/>
-						<menu id="blankEdgeLabelMenu" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" imageMso="TextEffectTracking">
-							<checkBox id="blankEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="blankEdgeLabels_onAction" getPressed="blankEdgeLabels_getPressed"/>
-							<checkBox id="defaultEdgeLabels" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="defaultEdgeLabels_onAction" getPressed="defaultEdgeLabels_getPressed"/>
-						</menu>
-					</menu>
-                </group>
-				<group id="graphvizGroup101" getLabel="ribbon_getLabel" image="material_widget_width_48px">
-					<menu id="dataMenu"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_view_column_24px">
-						<checkBox id="ShowComment"              getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowItem"                 getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowTailLabel"            getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowLabel"                getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowOutsideLabel"         getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowHeadLabel"            getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowTooltip"              getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowIsRelatedToItem"      getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowStyle"                getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowExtraStyleAttributes" getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-						<checkBox id="ShowMessages"             getLabel="ribbon_getLabel" onAction="showColumn_onAction" getPressed="showColumn_getPressed"/>
-					</menu>
-					<button id="clearWorksheetGraphs"   showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_ink_eraser_24px"           size="normal" onAction="clearWorksheetGraphs_onAction"/>
-					<button id="clearData"              showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_delete_forever_black_24px" size="normal" onAction="clearData_onAction"/>
-                </group>
-				<group id="graphvizGroupDebug" getLabel="ribbon_getLabel" image="material_pest_control_48px">
-					<toggleButton id="toggleDebugLabels" showLabel="true" image="material_bug_report_24px" size="normal" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="toggleDebugLabels_onAction" getPressed="toggleDebugLabels_getPressed"/>
-					<toggleButton id="keepGvFile"        showLabel="true" image="material_convert_to_text_24px" size="normal" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" onAction="keepGvFile_onAction"   getPressed="keepGvFile_getPressed"/>
-					<button       id="clearMessages"     showLabel="true" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_delete_sweep_24px" onAction="clearMessages_onAction"/>
-				</group>
 				<group id="graphvizGroup13" getLabel="ribbon_getLabel" image="material_help_48px">
 					<button id="graphvizHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="graphvizHelp_onAction"/>
 				</group>
@@ -331,8 +388,9 @@
 					<button id="stylesClear"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_clear_all_48px" size="large" onAction="stylesClear_onAction"/>
 				</group>
 				<group id="stylesGroup2" getLabel="ribbon_getLabel" image="material_edit_document_48px">
-				    <editBox id="stylesSuffixBegin" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXX" onChange="stylesSuffixBegin_onChange" getText="stylesSuffixBegin_getText"/>
-				    <editBox id="stylesSuffixEnd"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXX" onChange="stylesSuffixEnd_onChange"   getText="stylesSuffixEnd_getText"/>
+				    <editBox id="stylesConcat"      getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXXXX" onChange="stylesConcat_onChange"       getText="stylesConcat_getText"/>
+				    <editBox id="stylesSuffixBegin" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXXXX" onChange="stylesSuffixBegin_onChange"  getText="stylesSuffixBegin_getText"/>
+				    <editBox id="stylesSuffixEnd"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" sizeString="XXXXXXXXXXXXXXX" onChange="stylesSuffixEnd_onChange"    getText="stylesSuffixEnd_getText"/>
 				</group>						
 				<group id="stylesGroupHelp" getLabel="ribbon_getLabel" image="material_help_48px">
 					<button id="stylesHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="stylesHelp_onAction"/>
@@ -2797,7 +2855,12 @@
 			</tab>
 			<tab id="svgTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="svgTab">
 				<group id="svgGroup1" getLabel="ribbon_getLabel" image="material_find_replace_48px">
-                    <toggleButton id="svgPostprocess"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_toggle_on_24px" size="normal" getPressed="svgPostprocess_getPressed"      onAction="svgPostprocess_onAction"/>
+					<button id="svgTurnOn"  getLabel="ribbon_getLabel" image="material_toggle_off_48px" size="large" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="svgTurnOn_getVisible" onAction="svgTurnOn_onAction"/>
+					<button id="svgTurnOff" getLabel="ribbon_getLabel" image="material_toggle_on_48px"  size="large" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" getVisible="svgTurnOff_getVisible"  onAction="svgTurnOff_onAction"/>
+					<separator id="svgOnOff" />
+					<button id="svgOn"      getLabel="ribbon_getLabel" image="material_warning_red_48px" size="large" getVisible="svgOn_getVisible"/>
+					<button id="svgOff"     getLabel="ribbon_getLabel" image="material_warning_off_48px" size="large" getVisible="svgOff_getVisible"/>
+                    <!-- <toggleButton id="svgPostprocess"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_toggle_on_24px" size="normal" getPressed="svgPostprocess_getPressed"      onAction="svgPostprocess_onAction"/> -->
 				</group>
 				<group id="svgEditGroup" getLabel="ribbon_getLabel" image="material_edit_document_48px">
 					<button id="svgEditCell"            getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_edit_document_48px" size="large" onAction="svgEditCell_onAction"  getEnabled="svgEditCell_getEnabled"/>
@@ -2831,6 +2894,7 @@
 					<button id="consoleHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="consoleHelp_onAction"/>
 				</group>
 			</tab>
+			    
 			<tab id="sourceTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="sourceTab">
 				<group id="sourceGroup1" getLabel="ribbon_getLabel" image="material_save_48px">
 					<button id="sourceSave"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_save_48px" size="large" onAction="sourceSave_onAction" getEnabled="sourceSave_getEnabled"/>
@@ -2971,6 +3035,51 @@
 					<button id="diagnosticsHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="diagnosticsHelp_onAction"/>
 				</group>
 			</tab>
+            <tab id="settingsTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible" tag="settingsTab">
+                <group id="settingsOptionsGroup" getLabel="ribbon_getLabel" image="material_design_services_48px">
+                    <toggleButton id="settingsCommandOptions" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_settings_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+                    <toggleButton id="settingsGraphOptions"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_settings_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+                </group>
+                <group id="settingsDataGroup"    getLabel="ribbon_getLabel" image="material_settings_48px">
+                    <toggleButton id="settingsDataWorksheet"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_table_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+                    <toggleButton id="settingsDataTab"       getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+                    <toggleButton id="settingsGraphvizTab"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsConsoleGroup"      getLabel="ribbon_getLabel" image="material_terminal_48px">
+                    <toggleButton id="settingsConsoleTab"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsExchangeGroup"      getLabel="ribbon_getLabel" image="material_component_exchange_48px">
+                    <toggleButton id="settingsExchangeTab"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsExtensionsGroup"      getLabel="ribbon_getLabel" image="material_design_services_48px">
+                    <toggleButton id="settingsExtensionsTab" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsHelpUrlsGroup"      getLabel="ribbon_getLabel" image="material_http_48px">
+                    <toggleButton id="settingsHelpUrls"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_http_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsLaunchpadGroup"      getLabel="ribbon_getLabel" image="material_rocket_launch_48px">
+                    <toggleButton id="settingsLaunchpadTab"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsSourceGroup"      getLabel="ribbon_getLabel" image="material_data_object_48px">
+                    <toggleButton id="settingsSourceWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_table_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+                    <toggleButton id="settingsSourceTab"     getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsSqlGroup"      getLabel="ribbon_getLabel" image="material_database_search_48px" getVisible="macHide_getVisible" >
+                    <toggleButton id="settingsSqlWorksheet"  getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_table_48px" size="large"     onAction="settings_onAction" getPressed="settings_getPressed" getVisible="macHide_getVisible"/>
+                    <toggleButton id="settingsSqlTab"        getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed" getVisible="macHide_getVisible"/>
+                    <toggleButton id="settingsSqlKeywords"   getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_sql_48px" size="large"       onAction="settings_onAction" getPressed="settings_getPressed" getVisible="macHide_getVisible"/>
+				</group>
+                <group id="settingsStylesGroup"      getLabel="ribbon_getLabel" image="material_design_services_48px">
+                    <toggleButton id="settingsStylesWorksheet" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_table_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+                    <toggleButton id="settingsStylesTab"       getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+                <group id="settingsSVGGroup"      getLabel="ribbon_getLabel" image="material_find_replace_48px">
+                    <toggleButton id="settingsSVGTab"    getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_subheader_48px" size="large" onAction="settings_onAction" getPressed="settings_getPressed"/>
+				</group>
+				<group id="settingsGroupHelp" getLabel="ribbon_getLabel" image="material_help_48px">
+					<button id="settingsHelp" getLabel="ribbon_getLabel" getScreentip="ribbon_getScreenTip" getSupertip="ribbon_getSuperTip" image="material_help_48px" size="large" onAction="settingsHelp_onAction"/>
+				</group>
+            </tab>
 			<tab id="aboutTab" getLabel="ribbon_getLabel" getVisible="ribbon_getVisible">
 				<group id="aboutGroupLegalStuff" getLabel="ribbon_getLabel" >
                     <labelControl id="msgboxProductTitle"    getLabel="ribbon_getLabel"/>

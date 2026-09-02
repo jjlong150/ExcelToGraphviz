@@ -197,11 +197,15 @@ Private Sub Workbook_Open()
     End If
 #End If
 
-    ' Create directories where images of colors and fonts can be cached
+    ' Create directories where html, json, and images of colors and fonts can be cached
     ' This directory is created when the spreadsheet is launched so we don't
     ' waste cycles attempting to create it for every ribbon image of a color or font.
     CreateColorImageDir
     CreateFontImageDir
+    CreateHtmlTempDir
+    
+    ' Version 11 introduced a semaphore file to signal when gallery images are current
+    ClearStaleImageCaches
     
     ' Sync the worksheet visibility with the saved values (in case someone hides
     ' worksheets manually).
@@ -210,5 +214,65 @@ Private Sub Workbook_Open()
     ' Settings are cached using lazy intialization. This call indicates the settings
     ' need to be loaded upon first reference.
     InvalidateSettings
+End Sub
+
+' ==========================================================================
+' ROUTINE: ClearStaleImageCaches
+'
+' PURPOSE:
+'   Ensures that Style Designer image galleries (color palettes and font
+'   previews) remain synchronized with the current workbook version. Detects
+'   stale or missing cache folders via a lightweight semaphore file
+'   (version.properties) and performs a targeted cleanup when necessary.
+'   Guarantees that UI previews always reflect the latest assets without
+'   requiring manual user intervention.
+'
+' FUNCTIONAL WORKFLOW:
+'   1. SEMAPHORE RESOLUTION:
+'        - Computes the full path to version.properties inside each
+'          image-cache directory (colors and fonts).
+'        - Uses Application.pathSeparator for cross-platform correctness.
+'
+'   2. CACHE VALIDATION:
+'        - If version.properties is missing:
+'             o Treats the cache as stale or uninitialized.
+'             o Clears the corresponding image folder.
+'
+'   3. SEMAPHORE REPAIR:
+'        - Writes a fresh version.properties file containing:
+'             version=11.0
+'          establishing the cache version expected by the current workbook.
+'
+'   4. OUTPUT:
+'        - Leaves both image-cache directories in a known-good state with
+'          synchronized version markers.
+'
+' TECHNICAL NOTES:
+'   - version.properties acts as a simple, fast, cross-platform semaphore
+'     indicating that the cache was built by the current workbook version.
+'   - Clearing only when the semaphore is missing avoids unnecessary
+'     regeneration and improves performance during Style Designer operations.
+'   - DeepWiki Context: Implements the cache-validation rules described in
+'     the "Style Designer", "Image Assets", and "Cache Synchronization"
+'     documentation.
+' ==========================================================================
+Private Sub ClearStaleImageCaches()
+    Dim semaphoreFile As String
+    Dim sep As String
+    sep = Application.pathSeparator
+
+    ' Style Designer colorscheme galleries
+    semaphoreFile = GetColorImageDir & sep & "version.properties"
+    If Not FileExists(semaphoreFile) Then
+        ClearColorsImageFolder
+        WriteTextToFile "version=11.0", semaphoreFile
+    End If
+
+    ' Style Designer font preview image gallery
+    semaphoreFile = GetFontImageDir & sep & "version.properties"
+    If Not FileExists(semaphoreFile) Then
+        ClearFontImageFolder
+        WriteTextToFile "version=11.0", semaphoreFile
+    End If
 End Sub
 

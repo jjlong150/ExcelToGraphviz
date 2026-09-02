@@ -83,7 +83,7 @@ Public Sub ClearDataWorksheet(ByVal worksheetName As String)
 
     ' Determine the range of the cells which need to be cleared
     With ActiveWorkbook.worksheets.[_Default](worksheetName).UsedRange
-        lastRow = .Cells(.Cells.count).row
+        lastRow = .Cells(.Cells.Count).row
     End With
     
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -125,7 +125,6 @@ End Sub
 Public Function getRowType(ByVal worksheetName As String, ByVal row As Long) As String
 
     Dim rowType As String
-    '@Ignore AssignmentNotUsed
     rowType = TYPE_BLANK_ROW
     
     Dim dataItem As String
@@ -218,7 +217,7 @@ End Sub
 Public Function getMatchingStyles(ByVal rowType As String) As Dictionary
     
     ' Skip special row types
-    If rowType = TYPE_BLANK_ROW Or rowType = TYPE_GRAPH Then
+    If rowType = TYPE_BLANK_ROW Then
         Set getMatchingStyles = New Dictionary
         Exit Function
     End If
@@ -280,7 +279,7 @@ NextRow:
     Dim sortedDict As Dictionary
     Set sortedDict = New Dictionary
     
-    If dict.count > 0 Then
+    If dict.Count > 0 Then
         Dim sortedKeys As Variant
         sortedKeys = GetSortedKeys(dict)
         
@@ -323,7 +322,7 @@ End Function
 '
 '   2. KEY EXTRACTION:
 '        - Allocates a String array sized exactly to dict.Count.
-'        - Iterates the Dictionary’s Keys collection, copying each key into
+'        - Iterates the Dictionary's Keys collection, copying each key into
 '          the array in its native String form.
 '
 '   3. SORTING:
@@ -348,12 +347,12 @@ Private Function GetSortedKeys(ByVal dict As Dictionary) As Variant
     Dim keys() As String
     Dim i As Long
     
-    If dict.count = 0 Then
+    If dict.Count = 0 Then
         GetSortedKeys = Array()
         Exit Function
     End If
     
-    ReDim keys(0 To dict.count - 1)
+    ReDim keys(0 To dict.Count - 1)
     
     i = 0
     Dim key As Variant
@@ -396,8 +395,8 @@ End Function
 '
 '   3. PARTITIONING:
 '        - Moves two indices (i, j) inward:
-'            • i advances while arr(i) < pivot
-'            • j retreats while arr(j) > pivot
+'            - i advances while arr(i) < pivot
+'            - j retreats while arr(j) > pivot
 '        - Swaps elements when i <= j to maintain correct ordering.
 '
 '   4. RECURSION:

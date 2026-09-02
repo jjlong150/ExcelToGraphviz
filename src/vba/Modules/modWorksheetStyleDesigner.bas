@@ -124,17 +124,17 @@ Public Sub RenderElement(ByVal formatCellName As String, ByVal previewCellName A
     labels.label = Trim$(StyleDesignerSheet.Range(DESIGNER_LABEL_TEXT).value)
     Select Case elementType
         Case KEYWORD_NODE
-            labels.xLabel = Trim$(StyleDesignerSheet.Range(DESIGNER_XLABEL_TEXT).value)
-            labels.headLabel = vbNullString
-            labels.tailLabel = vbNullString
+            labels.xlabel = Trim$(StyleDesignerSheet.Range(DESIGNER_XLABEL_TEXT).value)
+            labels.headlabel = vbNullString
+            labels.taillabel = vbNullString
         Case KEYWORD_EDGE
-            labels.xLabel = Trim$(StyleDesignerSheet.Range(DESIGNER_XLABEL_TEXT).value)
-            labels.headLabel = Trim$(StyleDesignerSheet.Range(DESIGNER_HEAD_LABEL_TEXT).value)
-            labels.tailLabel = Trim$(StyleDesignerSheet.Range(DESIGNER_TAIL_LABEL_TEXT).value)
+            labels.xlabel = Trim$(StyleDesignerSheet.Range(DESIGNER_XLABEL_TEXT).value)
+            labels.headlabel = Trim$(StyleDesignerSheet.Range(DESIGNER_HEAD_LABEL_TEXT).value)
+            labels.taillabel = Trim$(StyleDesignerSheet.Range(DESIGNER_TAIL_LABEL_TEXT).value)
         Case KEYWORD_CLUSTER
-            labels.xLabel = vbNullString
-            labels.headLabel = vbNullString
-            labels.tailLabel = vbNullString
+            labels.xlabel = vbNullString
+            labels.headlabel = vbNullString
+            labels.taillabel = vbNullString
     End Select
 
     If createFormat Then
@@ -255,11 +255,11 @@ Public Function GeneratePreviewGraph(ByVal elementType As String, _
     End If
 
     If elementType = KEYWORD_NODE Then
-        dotSource = dotSource & "  %N1 [" & FormatLabel(GRAPHVIZ_LABEL, labels.label) & FormatOptionalLabel(GRAPHVIZ_XLABEL, labels.xLabel) & " " & styleAttributes & " ];" & vbNewLine
+        dotSource = dotSource & "  %N1 [" & FormatLabel(GRAPHVIZ_LABEL, labels.label) & FormatOptionalLabel(GRAPHVIZ_XLABEL, labels.xlabel) & " " & styleAttributes & " ];" & vbNewLine
         
     ElseIf elementType = KEYWORD_EDGE Then
         dotSource = dotSource & GetPreviewNodeEdge(GetPreviewNodeStyle("gray", "gray"))
-        dotSource = dotSource & " [" & FormatLabel(GRAPHVIZ_LABEL, labels.label) & FormatOptionalLabel(GRAPHVIZ_XLABEL, labels.xLabel) & FormatOptionalLabel("headlabel", labels.headLabel) & FormatOptionalLabel("taillabel", labels.tailLabel) & " " & styleAttributes & " ];" & vbNewLine
+        dotSource = dotSource & " [" & FormatLabel(GRAPHVIZ_LABEL, labels.label) & FormatOptionalLabel(GRAPHVIZ_XLABEL, labels.xlabel) & FormatOptionalLabel("headlabel", labels.headlabel) & FormatOptionalLabel("taillabel", labels.taillabel) & " " & styleAttributes & " ];" & vbNewLine
         
     ElseIf elementType = KEYWORD_CLUSTER Then
         dotSource = dotSource & "  subgraph cluster_1 { "
@@ -311,9 +311,9 @@ End Function
 Public Function GetRenderInfo() As String
     Dim label As String
     
-    Dim format As String
-    format = SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value
-    label = "-T" & format
+    Dim Format As String
+    Format = SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value
+    label = "-T" & Format
     
     Dim layout As String
     layout = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
@@ -543,7 +543,6 @@ End Function
 ' ==========================================================================
 Public Sub PreviewStyle(ByVal graphvizSource As String, ByVal targetCell As String)
     
-    '@Ignore UnhandledOnErrorResumeNext
     On Error Resume Next
     
     ' Instantiate a Graphviz object
@@ -551,8 +550,8 @@ Public Sub PreviewStyle(ByVal graphvizSource As String, ByVal targetCell As Stri
     Set graphvizObj = New Graphviz
     
     ' Prepare the file names
-    graphvizObj.OutputDirectory = GetTempDirectory()
-    graphvizObj.FilenameBase = "PreviewStyle"
+    graphvizObj.outputDirectory = GetTempDirectory()
+    graphvizObj.filenameBase = "PreviewStyle"
     graphvizObj.GraphFormat = SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value
 
     ' Remove any image from a previous run of the macro
@@ -575,10 +574,12 @@ Public Sub PreviewStyle(ByVal graphvizSource As String, ByVal targetCell As Stri
     DisplayTextOnConsoleWorksheet graphvizObj.GraphvizCommand, graphvizObj.GraphvizMessages
     
     ' Display the generated image
-    '@Ignore VariableNotUsed
     Dim shapeObject As shape
-    '@Ignore AssignmentNotUsed
-    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True, "Style designer preview image.")
+    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, _
+                                    ActiveSheet.Range(targetCell), _
+                                    False, _
+                                    True, _
+                                    GetMessage("InsertPictureAltTextDesigner"))
     Set shapeObject = Nothing
                     
     ' Delete the temporary files
@@ -623,7 +624,6 @@ Private Sub AddAttribute(ByRef styleAttributes As String, _
 
 End Sub
 
-'@Ignore UseMeaningfulName
 Public Sub AddAttributeGroup(ByRef styleAttributes As String, _
                              ByVal attrName As String, _
                              ByVal cellName1 As String, _
@@ -681,7 +681,6 @@ End Sub
 '   - Used for attributes that accept coordinate pairs or complex lists
 '     (e.g., width/height pairs or margin settings).
 ' ==========================================================================
-'@Ignore UseMeaningfulName
 Public Sub AddStyleAttribute(ByRef styleAttributes As String, _
                              ByVal cellName1 As String, _
                              ByVal cellName2 As String, _
@@ -759,7 +758,6 @@ End Sub
 '   - Central logic for rendering advanced background styles in the
 '     Style Designer.
 ' ==========================================================================
-'@Ignore UseMeaningfulName
 Public Sub AddFillColorAttribute(ByRef styleAttributes As String, _
                                       ByVal cellNameFillColor1 As String, _
                                       ByVal cellNameFillColor2 As String, _
@@ -812,7 +810,6 @@ End Sub
 '   - Helper function used to ensure the 'style' attribute is correctly
 '     synchronized with the selected color inputs.
 ' ==========================================================================
-'@Ignore UseMeaningfulName
 Public Function GetGradientType(ByVal cellNameFillColor1 As String, _
                                 ByVal cellNameFillColor2 As String, _
                                 ByVal cellNameGradientType As String) As String
@@ -860,7 +857,7 @@ End Function
 Private Function ConvertMillimetersToInches(ByVal mm As String) As String
     Dim inches As Double
     inches = CDbl(mm) / 25.4
-    ConvertMillimetersToInches = CStr(format(inches, "#0.0000"))
+    ConvertMillimetersToInches = CStr(Format(inches, "#0.0000"))
 End Function
 
 ' ==========================================================================
@@ -1311,7 +1308,6 @@ End Sub
 '   - Assigned to the checkbox macro on the StyleDesignerSheet.
 '   - Provides a user-friendly way to toggle advanced Graphviz configuration rows.
 ' ==========================================================================
-'@Ignore ProcedureNotUsed
 Public Sub StyleDesignerToggleShowSettings()
 
     Dim s As shape
@@ -1345,10 +1341,10 @@ End Sub
 '   4. REFRESH: Re-enables 'ScreenUpdating' to commit the visual changes.
 ' ==========================================================================
 Private Sub HideStyleDesignerSettings()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     DisplayStyleDesignerRows False
     StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).Select
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
 ' ==========================================================================
@@ -1369,10 +1365,10 @@ End Sub
 '      worksheet layout.
 ' ==========================================================================
 Private Sub ShowStyleDesignerSettings()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     DisplayStyleDesignerRows True
     StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).Select
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
 ' ==========================================================================
@@ -1405,97 +1401,107 @@ End Sub
 Public Sub SaveToStylesWorksheet()
     Dim row As Long
     Dim rowFocus As Long
-    Dim col As Long
     Dim styleName As String
     Dim styleType As String
-    
+    Dim clusterStyleName As String
     Dim insertRow As Boolean
-    insertRow = False
     
-    ' Unhide the styles sheet if hidden
+    ' Ensure Styles sheet is visible
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_STYLES).value = TOGGLE_HIDE Then
         SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_STYLES).value = TOGGLE_SHOW
     End If
     
-    ' Obtain the layout of the "styles' worksheet
+    ' Pause spreadsheet changes
+    Dim prevScreenUpdating As Boolean: prevScreenUpdating = Application.screenUpdating
+    Dim prevEnableEvents As Boolean: prevEnableEvents = Application.enableEvents
+    
+    Application.screenUpdating = False
+    Application.enableEvents = False
+        
+    ' Load schema
     Dim styles As stylesWorksheet
     styles = GetSettingsForStylesWorksheet()
     
-    ' Determine which type of style to add
+    ' Determine style type
     styleType = GetStyleDesignerStyleType()
     
-    ' Establish a style name, either user-specified, or generate one
+    ' Establish style name (user-specified or generated)
     styleName = Trim$(StyleDesignerSheet.Range("StyleNameText").value)
     If styleName = vbNullString Then
         styleName = CreateStyleName(styles)
     End If
     
-    ' Find the row where the style should be saved
+    ' Find existing row
     row = GetStyleRowForSave(styleName, styles)
+    
+    ' If SUBGRAPH_OPEN, also check the affix-expanded name
     If row = 0 And styleType = TYPE_SUBGRAPH_OPEN Then
-        row = GetStyleRowForSave(styleName & " " & styles.suffixOpen, styles)
+        clusterStyleName = BuildClusterStyleName(styleName, styles.concatFormat, styles.affixOpen)
+        row = GetStyleRowForSave(clusterStyleName, styles)
     End If
     
-    ' Style does not exist, insert a new one
+    ' Insert new row if not found
     If row = 0 Then
         insertRow = True
         row = GetStyleRowForInsert(styles)
     End If
     
-    ' Store the format from the Style Designer
-    StylesSheet.Cells.item(row, styles.formatColumn).value = StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value
+    ' Save format + description (always)
+    StylesSheet.Cells(row, styles.formatColumn).value = StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value
+    StylesSheet.Cells(row, styles.descriptionColumn).value = StyleDesignerSheet.Range(DESIGNER_STYLE_DESCRIPTION).value
     
-    ' Save the row number so we know where to place the focus if the DESIGNER_MODE = CLUSTER
     rowFocus = row
     
+    ' Handle new-row insertion
     If insertRow Then
-        Dim enableEvents As Boolean
-        enableEvents = Application.enableEvents
-        Application.enableEvents = False
+        ' Base row
+        StylesSheet.Cells(row, styles.nameColumn).value = styleName
+        StylesSheet.Cells(row, styles.formatColumn).value = StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value
+        StylesSheet.Cells(row, styles.typeColumn).value = styleType
         
-        ' Set the format string and the object type
-        StylesSheet.Cells.item(row, styles.nameColumn).value = styleName
-        StylesSheet.Cells.item(row, styles.formatColumn).value = StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value
-        StylesSheet.Cells.item(row, styles.typeColumn).value = styleType
-        
-        ' Add default values for the view columns
         SetStyleViewDefaults row, styles
         
-        ' If the style is CLUSTER we want to add a row for the subgraph-close, as it improves filtering capabilities
+        ' If CLUSTER mode, create OPEN + CLOSE rows
         If StyleDesignerSheet.Range(DESIGNER_MODE).value = KEYWORD_CLUSTER Then
-            If EndsWith(styleName, styles.suffixOpen) Then
-                styleName = Left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
-            End If
-            StylesSheet.Cells.item(row, styles.nameColumn).value = styleName & " " & styles.suffixOpen
-         
-            ' Last row information changed if a new style was appended
-            styles = GetSettingsForStylesWorksheet()
             
-            ' Look for a row that does not have a style name
+            ' OPEN style
+            clusterStyleName = BuildClusterStyleName(styleName, styles.concatFormat, styles.affixOpen)
+            StylesSheet.Cells(row, styles.nameColumn).value = Trim$(clusterStyleName)
+            
+            ' CLOSE style row
             row = GetStyleRowForInsert(styles)
-    
-            ' Set the format string and the object type
-            StylesSheet.Cells.item(row, styles.nameColumn).value = styleName & " " & styles.suffixClose
-            StylesSheet.Cells.item(row, styles.formatColumn).value = vbNullString
-            StylesSheet.Cells.item(row, styles.typeColumn).value = TYPE_SUBGRAPH_CLOSE
+            clusterStyleName = BuildClusterStyleName(styleName, styles.concatFormat, styles.affixClose)
             
-            ' Add default values for the view columns
+            StylesSheet.Cells(row, styles.nameColumn).value = Trim$(clusterStyleName)
+            StylesSheet.Cells(row, styles.formatColumn).value = vbNullString
+            StylesSheet.Cells(row, styles.typeColumn).value = TYPE_SUBGRAPH_CLOSE
+            
             SetStyleViewDefaults row, styles
         End If
         
         ' "styles" sheet has been modified, invalidate caches
         InvalidateSettings
         InvalidateStyleCache
-        Application.enableEvents = enableEvents
     End If
     
-    ' Put the focus on the cell where the style name has to be entered
+    ' Focus the name cell
     StylesSheet.Activate
     ActiveSheet.Cells(rowFocus, styles.nameColumn).Select
     
-    ' Generate a preview image on the styles worksheet
+    ' Generate preview
     GenerateStylesPreview rowFocus
+    
+    ' Resume spreadsheet changes
+    Application.enableEvents = prevEnableEvents
+    Application.screenUpdating = prevScreenUpdating
 End Sub
+
+Private Function BuildClusterStyleName(baseName As String, mask As String, affix As String) As String
+    Dim result As String
+    result = replace(mask, "{name}", baseName, 1, 1, vbTextCompare)
+    result = replace(result, "{affix}", affix, 1, 1, vbTextCompare)
+    BuildClusterStyleName = Trim$(result)
+End Function
 
 ' ==========================================================================
 ' PROCEDURE: SetStyleViewDefaults
@@ -1594,8 +1600,11 @@ End Function
 '     do not overwrite existing styles or system comments.
 ' ==========================================================================
 Private Function GetStyleRowForInsert(ByRef styles As stylesWorksheet) As Long
-    ' Look for a row that does not have a style name
     Dim row As Long
+    With StylesSheet.UsedRange
+        styles.lastRow = .Cells.item(.Cells.Count).row
+    End With
+    ' Look for a row that does not have a style name
     For row = styles.firstRow To styles.lastRow
         If StylesSheet.Cells.item(row, styles.flagColumn) <> FLAG_COMMENT And _
            StylesSheet.Cells.item(row, styles.nameColumn).value = vbNullString Then

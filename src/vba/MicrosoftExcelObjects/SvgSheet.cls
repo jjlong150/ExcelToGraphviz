@@ -107,8 +107,8 @@ End Sub
 '   4. LOGIC BINDING: Links the button to 'ShowSVGEditForm' for handling
 '      large blocks of XML or CSS.
 ' ==========================================================================
-Private Sub Worksheet_SelectionChange(ByVal Target As Range)
-    If Not TypeOf Target Is Range Then Exit Sub
+Private Sub Worksheet_SelectionChange(ByVal target As Range)
+    If Not TypeOf target Is Range Then Exit Sub
 
     ' Remove any existing Edit button
     On Error Resume Next
@@ -116,15 +116,15 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     Me.Shapes("SVGEditButton").Delete
     On Error GoTo 0
 
-    If Target.Cells.count = 1 Then
-        If Not Intersect(Target, Me.columns(svgLayoutColumn.replaceColumn)) Is Nothing Then
+    If target.Cells.Count = 1 Then
+        If Not Intersect(target, Me.columns(svgLayoutColumn.replaceColumn)) Is Nothing Then
             If Not Me.ProtectContents Then
                 On Error Resume Next
                 ' Add clickable pencil icon with subtle button look
                 Dim shp As shape
                 Set shp = Me.Shapes.AddShape(msoShapeRoundedRectangle, _
-                            Target.Left + Target.Width + 5, _
-                            Target.top + 1, 20, 20)
+                            target.Left + target.Width + 5, _
+                            target.Top + 1, 20, 20)
                 With shp
                     .name = "SVGEditButton"
                     .Fill.ForeColor.RGB = RGB(245, 245, 245)      ' very light gray background

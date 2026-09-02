@@ -74,6 +74,8 @@ Public Sub GenerateStylesPreviewAll()
     Dim styles As stylesWorksheet
     styles = GetSettingsForStylesWorksheet()
     
+    Dim styleName As String
+
     Dim styleCount As Long
     styleCount = styles.lastRow - styles.firstRow + 1
     
@@ -82,10 +84,63 @@ Public Sub GenerateStylesPreviewAll()
     ' Loop through the rows, generating preview images from the format strings
     Dim row As Long
     For row = styles.firstRow To styles.lastRow
-        Application.StatusBar = statusMsg & " " & format(((row - 1) * 100) / styleCount, "0") & "%"
-        GenerateStylesPreview row
-        DoEvents
+        styleName = StylesSheet.Cells.item(row, styles.nameColumn).value
+        If Len(styleName) > 0 Then  ' Skip blank rows
+            ScrollRowIntoView row, StylesSheet, True
+        
+            Application.StatusBar = statusMsg & " " & Format(((row - 1) * 100) / styleCount, "0") & "%"
+            GenerateStylesPreview row
+            DoEvents
+        End If
     Next row
+End Sub
+
+' ==========================================================================
+' FUNCTION: ScrollRowIntoView
+' PURPOSE:
+'   Safely scrolls the worksheet window displaying the specified sheet so
+'   that the target row becomes visible, regardless of which window or
+'   workbook is currently active.
+'
+' TECHNICAL WORKFLOW:
+'   1. WINDOW RESOLUTION:
+'      Retrieves the window associated with the target sheet's workbook
+'      instead of relying on ActiveWindow, ensuring correct behavior when
+'      invoked from ribbon commands or background contexts.
+'
+'   2. VIEWPORT CALCULATION:
+'      - If 'center' is False, the target row is scrolled to the top of the
+'        visible range.
+'      - If 'center' is True, the function computes a midpoint offset so the
+'        row appears centered within the viewport.
+'
+'   3. SCROLL APPLICATION:
+'      Applies the computed ScrollRow value, allowing Excel to clamp the
+'      position automatically near sheet boundaries.
+'
+' RESULT:
+'   Provides a reliable, non-intrusive method for bringing a row into view
+'   during preview generation or navigation workflows, even when the ribbon
+'   or another workbook has focus.
+' ==========================================================================
+Public Sub ScrollRowIntoView(targetRow As Long, targetSheet As Worksheet, _
+                             Optional center As Boolean = False)
+
+    Dim win As Window
+    
+    ' Get the window that is displaying the target sheet
+    Set win = targetSheet.Parent.Windows(1)
+    
+    If win Is Nothing Then Exit Sub
+    
+    If center Then
+        Dim visibleRows As Long
+        visibleRows = win.VisibleRange.rows.Count
+        
+        win.ScrollRow = Application.max(1, targetRow - (visibleRows \ 2))
+    Else
+        win.ScrollRow = targetRow
+    End If
 End Sub
 
 ' ==========================================================================
@@ -264,7 +319,6 @@ End Sub
 ' ==========================================================================
 Public Sub PreviewStyleAndAutosize(ByVal styleName As String, ByVal graphvizSource As String, ByVal targetCol As String, ByRef targetRow As Long)
     
-    '@Ignore UnhandledOnErrorResumeNext
     On Error Resume Next
     
     ' Instantiate a Graphviz object
@@ -272,8 +326,8 @@ Public Sub PreviewStyleAndAutosize(ByVal styleName As String, ByVal graphvizSour
     Set graphvizObj = New Graphviz
     
     ' Prepare the file names
-    graphvizObj.OutputDirectory = GetTempDirectory()
-    graphvizObj.FilenameBase = styleName
+    graphvizObj.outputDirectory = GetTempDirectory()
+    graphvizObj.filenameBase = styleName
     graphvizObj.GraphFormat = "png"
 
     ' Determine where to place the preview image
@@ -303,11 +357,12 @@ Public Sub PreviewStyleAndAutosize(ByVal styleName As String, ByVal graphvizSour
     DisplayTextOnConsoleWorksheet graphvizObj.GraphvizCommand, graphvizObj.GraphvizMessages
     
     ' Display the generated image
-    '@Ignore VariableNotUsed
     Dim shapeObject As shape
-    '@Ignore AssignmentNotUsed
-    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range(targetCell), False, True, _
-                                    "Image showing the rendering of style named " & styleName)
+    Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, _
+                                    ActiveSheet.Range(targetCell), _
+                                    False, _
+                                    True, _
+                                    GetMessage("InsertPictureAltTextPreviewStyle") & " " & styleName)
     Set shapeObject = Nothing
               
     ' Resize the row height to hold the image
@@ -426,8 +481,13 @@ Public Sub RestoreStyleDesigner()
     ' Establish the mode the Style Designer ribbon should switch to
     StyleDesignerSheet.Range(DESIGNER_MODE).value = UCase$(mode)
     
-    ' Restore the Style Name
+    ' Get the Style Description
+    Dim styleDescription As String
+    styleDescription = StylesSheet.Cells(row, GetSettingColNum(SETTINGS_STYLES_COL_DESCRIPTION)).value
+    
+    ' Restore the Style Name and Description
     StyleDesignerSheet.Range(DESIGNER_STYLE_NAME_TEXT).value = styleName
+    StyleDesignerSheet.Range(DESIGNER_STYLE_DESCRIPTION).value = styleDescription
 
     ' Reset all the Style Designer ribbon settings
     ClearStyleDesignerRanges
@@ -473,37 +533,122 @@ End Sub
 ' ==========================================================================
 ' FUNCTION: GetStyleNameForRestore
 ' PURPOSE:
-'   Cleans a style name from the Gallery for use in the Style Designer.
+'   Extracts the base style name from the Gallery entry for use in the
+'   Style Designer, interpreting affix placement via the configured mask.
 '
 ' TECHNICAL WORKFLOW:
-'   1. SCHEMA LOOKUP: Retrieves the 'Styles' sheet layout and defined
-'      suffixes (e.g., "_OPEN") via 'GetSettingsForStylesWorksheet'.
-'   2. DATA EXTRACTION: Trims and captures the raw 'styleName' and 'styleType'.
-'   3. SUFFIX STRIPPING:
+'   1. SCHEMA LOOKUP:
+'      Retrieves the 'Styles' sheet layout and defined affix mask and affix
+'      values via 'GetSettingsForStylesWorksheet'.
+'
+'   2. DATA EXTRACTION:
+'      Trims and captures the raw 'styleName' and 'styleType' from the
+'      worksheet row.
+'
+'   3. AFFIX INTERPRETATION:
 '      - Specifically checks for 'SUBGRAPH_OPEN' (Cluster) styles.
-'      - If the name ends with the global 'Open Suffix', it removes that
-'        suffix to return the user to the "root" style name.
-'   4. NORMALIZATION: Returns a clean, trimmed string ready for display in
+'      - Uses the affix mask (e.g., "{name} {affix}" or "{affix} {name}")
+'        to determine the affix's expected placement.
+'      - Parses the mask to isolate and extract the '{name}' component,
+'        even when the mask contains additional literal text.
+'
+'   4. NORMALIZATION:
+'      Returns a clean, trimmed base style name suitable for display in
 '      the Style Designer's input fields.
 ' ==========================================================================
-Private Function GetStyleNameForRestore(row As Long)
-    ' Obtain the layout of the "styles' worksheet
+
+Private Function GetStyleNameForRestore(row As Long) As String
     Dim styles As stylesWorksheet
     styles = GetSettingsForStylesWorksheet()
     
-    ' Get the Style Name
     Dim styleName As String
     styleName = Trim$(StylesSheet.Cells(row, styles.nameColumn).value)
     
     Dim styleType As String
     styleType = Trim$(StylesSheet.Cells(row, styles.typeColumn).value)
     
-    ' If the style is associated with a cluster, trim off the suffix
-    If styleType = TYPE_SUBGRAPH_OPEN And EndsWith(styleName, styles.suffixOpen) Then
-        styleName = Left(styleName, Len(styleName) - Len(styles.suffixOpen) - 1)
+    ' Only subgraph-open styles use the affix mask
+    If styleType = TYPE_SUBGRAPH_OPEN Then
+        Dim mask As String
+        Dim affix As String
+        
+        mask = styles.concatFormat      ' e.g. "{name} {affix}" or "{affix} {name}"
+        affix = styles.affixOpen        ' e.g. "_open"
+        
+        Dim baseName As String
+        baseName = ExtractBaseName(styleName, mask, affix)
+        
+        ' Fallback: if extraction fails or returns empty, try simple affix removal
+        If Len(Trim$(baseName)) = 0 Then
+            baseName = Trim$(replace(styleName, affix, "", 1, 1, vbTextCompare))
+        End If
+        
+        styleName = baseName
     End If
-
+    
     GetStyleNameForRestore = Trim$(styleName)
+End Function
+
+Public Function ExtractBaseName(fullName As String, mask As String, affix As String) As String
+    Dim workingMask As String
+    Dim leftLiteral As String
+    Dim rightLiteral As String
+    Dim namePart As String
+    Dim posLeft As Long
+    Dim posRight As Long
+    
+    ' ----------------------------------------------------------------------
+    ' STEP 1: Substitute the affix into the mask
+    ' ----------------------------------------------------------------------
+    workingMask = replace(mask, "{affix}", affix, 1, 1, vbTextCompare)
+    
+    ' ----------------------------------------------------------------------
+    ' STEP 2: Split the mask around {name}
+    '         This gives us the literal text before and after the name.
+    ' ----------------------------------------------------------------------
+    Dim nameTokenPos As Long
+    nameTokenPos = InStr(1, workingMask, "{name}", vbTextCompare)
+    
+    If nameTokenPos = 0 Then
+        ' Mask is malformed — cannot extract name
+        ExtractBaseName = Trim$(fullName)
+        Exit Function
+    End If
+    
+    leftLiteral = Left$(workingMask, nameTokenPos - 1)
+    rightLiteral = Mid$(workingMask, nameTokenPos + Len("{name}"))
+    
+    ' ----------------------------------------------------------------------
+    ' STEP 3: Remove left literal (if present)
+    ' ----------------------------------------------------------------------
+    If Len(leftLiteral) > 0 Then
+        posLeft = InStr(1, fullName, leftLiteral, vbTextCompare)
+        
+        If posLeft = 1 Then
+            ' Literal is at the beginning — strip it
+            fullName = Mid$(fullName, Len(leftLiteral) + 1)
+        ElseIf posLeft > 1 Then
+            ' Literal appears later — strip everything up to it
+            fullName = Mid$(fullName, posLeft + Len(leftLiteral))
+        End If
+    End If
+    
+    ' ----------------------------------------------------------------------
+    ' STEP 4: Remove right literal (if present)
+    ' ----------------------------------------------------------------------
+    If Len(rightLiteral) > 0 Then
+        posRight = InStr(1, fullName, rightLiteral, vbTextCompare)
+        
+        If posRight > 0 Then
+            namePart = Left$(fullName, posRight - 1)
+        Else
+            namePart = fullName
+        End If
+    Else
+        namePart = fullName
+    End If
+    
+    ExtractBaseName = Trim$(namePart)
 End Function
 
 ' ==========================================================================
@@ -583,7 +728,7 @@ Private Sub RestoreStyleDesignerSetting(mode As String, attributeName As String,
         Case GRAPHVIZ_WIDTH:          StyleDesignerSheet.Range(DESIGNER_NODE_WIDTH).value = attributeValue
         Case GRAPHVIZ_XLABEL:         ApplyLabelSetting DESIGNER_XLABEL_TEXT, DESIGNER_XLABEL_TEXT_INCLUDE, attributeValue
         Case Else
-            Debug.Print attributeName & " : " & attributeValue & " was not handled"
+            EmitMessageSilent attributeName & " : " & attributeValue & " was not handled", esWarning
     End Select
 End Sub
 

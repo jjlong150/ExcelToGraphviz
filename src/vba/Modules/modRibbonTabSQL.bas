@@ -68,14 +68,12 @@ Private excelFiles As Collection
 ' Ribbon callbacks for SQL Tab
 ' ===========================================================================
 
-'@Ignore ParameterNotUsed
-Public Sub sqlRun_onAction(ByVal control As IRibbonControl)
+Private Sub sqlRun_onAction(ByVal control As IRibbonControl)
     RunSQLAsExtension
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub sqlClearStatus_onAction(ByVal control As IRibbonControl)
+Private Sub sqlClearStatus_onAction(ByVal control As IRibbonControl)
     OptimizeCode_Begin
     ClearSQLStatus
     OptimizeCode_End
@@ -84,7 +82,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for sqlFilterColumn
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterColumn_getItemCount(ByVal control As IRibbonControl, ByRef listSize As Variant)
     If SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value = vbNullString Then
         Set filterValues = New Dictionary
@@ -94,7 +91,6 @@ Private Sub sqlFilterColumn_getItemCount(ByVal control As IRibbonControl, ByRef 
     listSize = 23   ' Represents columns E-Z
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterColumn_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
     If index = 0 Then
         label = vbNullString
@@ -103,7 +99,6 @@ Private Sub sqlFilterColumn_getItemLabel(ByVal control As IRibbonControl, ByVal 
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterColumn_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     If index = 0 Then
         SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value = vbNullString
@@ -117,7 +112,6 @@ Private Sub sqlFilterColumn_onAction(ByVal control As IRibbonControl, ByVal cont
     InvalidateRibbonControl RIBBON_CTL_SQL_FILTER_REFRESH
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterColumn_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value) = vbNullString Then
         returnedVal = 0
@@ -129,18 +123,16 @@ End Sub
 ' ===========================================================================
 ' Callbacks for sqlFilterValues
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterValue_getItemCount(ByVal control As IRibbonControl, ByRef listSize As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value) = vbNullString Then
         Set filterValues = New Dictionary
         listSize = 1
     Else
         Set filterValues = GetFilterValues(GetSettingColNum(SETTINGS_SQL_COL_FILTER))
-        listSize = filterValues.count + 1
+        listSize = filterValues.Count + 1
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterValue_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
     If index = 0 Then
         label = vbNullString
@@ -149,7 +141,6 @@ Private Sub sqlFilterValue_getItemLabel(ByVal control As IRibbonControl, ByVal i
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterValue_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     If index = 0 Then
         SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value = vbNullString
@@ -158,7 +149,6 @@ Private Sub sqlFilterValue_onAction(ByVal control As IRibbonControl, ByVal contr
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterValue_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value) = vbNullString Or Trim$(SettingsSheet.Range(SETTINGS_SQL_FILTER_VALUE).value) = vbNullString Then
         returnedVal = 0
@@ -176,7 +166,6 @@ Private Sub sqlFilterValue_getSelectedItemIndex(ByVal control As IRibbonControl,
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterValue_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = True
 End Sub
@@ -184,13 +173,11 @@ End Sub
 ' ===========================================================================
 ' Callbacks for sqlFilterRefresh
 
-'@Ignore ParameterNotUsed
-Public Sub sqlFilterRefresh_onAction(ByVal control As IRibbonControl)
+Private Sub sqlFilterRefresh_onAction(ByVal control As IRibbonControl)
     InvalidateRibbonControl RIBBON_CTL_SQL_FILTER_VALUE
     InvalidateRibbonControl RIBBON_CTL_SQL_FILTER_REFRESH
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlFilterRefresh_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not (SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).value = vbNullString)
 End Sub
@@ -203,7 +190,7 @@ Private Function GetFilterValues(ByVal filterColumn As Long) As Dictionary
     ' Determine the last row with data
     Dim lastRow As Long
     With SqlSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     Dim sqlRow As Long
@@ -223,8 +210,7 @@ End Function
 ' ===========================================================================
 ' Callbacks for sqlEditCell
 
-'@Ignore ParameterNotUsed
-Public Sub sqlEditCell_onAction(ByVal control As IRibbonControl)
+Private Sub sqlEditCell_onAction(ByVal control As IRibbonControl)
     CellValueEditForm.show
 End Sub
 
@@ -233,8 +219,7 @@ Public Sub ShowSQLEditForm()
     CellValueEditForm.show
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub sqlEditCell_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+Private Sub sqlEditCell_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
 
     Enabled = False
     
@@ -242,7 +227,7 @@ Public Sub sqlEditCell_getEnabled(ByVal control As IRibbonControl, ByRef Enabled
         Exit Sub
     End If
     
-    If Selection.Cells.count > 1 Then
+    If Selection.Cells.Count > 1 Then
         Exit Sub
     End If
     
@@ -259,15 +244,13 @@ End Sub
 ' ===========================================================================
 ' Callbacks for Help
 
-'@Ignore ParameterNotUsed
-Public Sub sqlHelp_onAction(ByVal control As IRibbonControl)
+Private Sub sqlHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLSqlTab").value, NewWindow:=True
 End Sub
 
 ' ===========================================================================
 ' Callbacks for Copy to Clipboard
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlClipboard_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
 #If Mac Then
     visible = False
@@ -276,8 +259,7 @@ Private Sub sqlClipboard_getVisible(ByVal control As IRibbonControl, ByRef visib
 #End If
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub sqlClipboard_onAction(ByVal control As IRibbonControl)
+Private Sub sqlClipboard_onAction(ByVal control As IRibbonControl)
 #If Not Mac Then
     
     If ClipBoard_SetData(ActiveCell.value) Then
@@ -292,14 +274,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for sqlConnPoolReset
 
-'@Ignore ParameterNotUsed
-Public Sub sqlConnPoolReset_onAction(ByVal control As IRibbonControl)
+Private Sub sqlConnPoolReset_onAction(ByVal control As IRibbonControl)
     CleanupConnectionPool
     InvalidateRibbonControl RIBBON_CTL_SQL_CONN_POOL_RESET
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub sqlConnPoolReset_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+Private Sub sqlConnPoolReset_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     If GetConnectionCount() > 0 Then
         Enabled = True
     Else
@@ -307,29 +287,25 @@ Public Sub sqlConnPoolReset_getEnabled(ByVal control As IRibbonControl, ByRef En
     End If
 End Sub
 
-Public Sub sqlConnPoolReset_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub sqlConnPoolReset_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetLabel(control.id) & " (" & GetConnectionCount() & ")"
 End Sub
 
 ' ===========================================================================
 ' Callbacks for sqlConnPoolDevMode
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlConnPoolDevMode_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_SQL_CLOSE_CONNECTIONS).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sqlConnPoolDevMode_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_SQL_CLOSE_CONNECTIONS)
 End Sub
 
-
 ' ===========================================================================
 ' Callbacks for datasourceDir
 
-'@Ignore ParameterNotUsed
-Public Sub datasourceDir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub datasourceDir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = True
     
     Dim dirName As String
@@ -344,8 +320,7 @@ Public Sub datasourceDir_getVisible(ByVal control As IRibbonControl, ByRef visib
     End If
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub datasourceDir_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub datasourceDir_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     Dim dirName As String
     dirName = Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY))
     If dirName = vbNullString Then
@@ -355,8 +330,7 @@ Public Sub datasourceDir_getLabel(ByVal control As IRibbonControl, ByRef label A
     End If
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub datasourceDir_onAction(ByVal control As IRibbonControl)
+Private Sub datasourceDir_onAction(ByVal control As IRibbonControl)
     ' Save the current directory
     Dim dirName As String
     dirName = Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY))
@@ -391,8 +365,7 @@ End Sub
 ' ===========================================================================
 ' Callbacks for datasourceDirLabel
 
-'@Ignore ParameterNotUsed
-Public Sub datasourceDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub datasourceDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     Dim fullPath As String
     Dim parts() As String
     Dim n As Long
@@ -426,8 +399,7 @@ End Sub
 ' ===========================================================================
 ' Callbacks for datasourceFile
 
-'@Ignore ParameterNotUsed
-Public Sub datasourceFile_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub datasourceFile_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)) = vbNullString Then
         visible = False
     Else
@@ -435,7 +407,6 @@ Public Sub datasourceFile_getVisible(ByVal control As IRibbonControl, ByRef visi
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceFile_getItemCount(ByVal control As IRibbonControl, ByRef listSize As Variant)
     Dim datasourceFolder As String
     datasourceFolder = Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY))
@@ -447,11 +418,10 @@ Private Sub datasourceFile_getItemCount(ByVal control As IRibbonControl, ByRef l
     If excelFiles Is Nothing Then
         listSize = 1
     Else
-        listSize = excelFiles.count + 1
+        listSize = excelFiles.Count + 1
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceFile_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
     If index = 0 Then
         label = GetLabel("datasourceSelectAFile")
@@ -460,7 +430,6 @@ Private Sub datasourceFile_getItemLabel(ByVal control As IRibbonControl, ByVal i
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceFile_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     If index = 0 Then
         SettingsSheet.Range(SETTINGS_DATASOURCE_FILE).value = vbNullString
@@ -469,7 +438,6 @@ Private Sub datasourceFile_onAction(ByVal control As IRibbonControl, ByVal contr
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceFile_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef itemIndex As Variant)
     Dim targetFile As String
     targetFile = Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_FILE).value)
@@ -484,13 +452,13 @@ Private Sub datasourceFile_getSelectedItemIndex(ByVal control As IRibbonControl,
         Exit Sub
     End If
     
-    If excelFiles.count = 0 Then
+    If excelFiles.Count = 0 Then
         itemIndex = 0
         Exit Sub
     End If
     
     Dim i As Long
-    For i = 1 To excelFiles.count
+    For i = 1 To excelFiles.Count
         If StrComp(excelFiles(i), targetFile, vbTextCompare) = 0 Then
             itemIndex = i
             Exit Sub
@@ -502,16 +470,7 @@ Private Sub datasourceFile_getSelectedItemIndex(ByVal control As IRibbonControl,
     itemIndex = 0
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub datasourceFile_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
-    If Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)) = vbNullString Then
-        Enabled = False
-    Else
-        Enabled = True
-    End If
-End Sub
-
-Public Sub GetDatasources(ByVal folderPath As String)
+Private Sub GetDatasources(ByVal folderPath As String)
     Set excelFiles = New Collection
 
     Dim fileName As String
@@ -530,7 +489,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for datasourceFileRefresh
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceFileRefresh_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)) = vbNullString Then
         visible = False
@@ -539,7 +497,6 @@ Private Sub datasourceFileRefresh_getVisible(ByVal control As IRibbonControl, By
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceFileRefresh_onAction(ByVal control As IRibbonControl)
     InvalidateRibbonControl "datasourceFile"
 End Sub
@@ -547,7 +504,6 @@ End Sub
 ' ===========================================================================
 ' Callbacks for datasourceFileRefresh
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceReset_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     If Trim$(SettingsSheet.Range(SETTINGS_DATASOURCE_DIRECTORY)) = vbNullString Then
         visible = False
@@ -556,7 +512,6 @@ Private Sub datasourceReset_getVisible(ByVal control As IRibbonControl, ByRef vi
     End If
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub datasourceReset_onAction(ByVal control As IRibbonControl)
     DatasourceDirectoryReset
     DatasourceFileReset

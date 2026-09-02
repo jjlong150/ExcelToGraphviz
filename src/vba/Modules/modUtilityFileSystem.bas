@@ -166,7 +166,7 @@ Public Function ReadFileToString(ByVal fileName As String) As String
 
     Dim textFile As Object
     
-    Set textFile = fileSystem.OpenTextFile(fileName, IOMode:=IOMode.ForReading, format:=FileFormat.TristateFalse)
+    Set textFile = fileSystem.OpenTextFile(fileName, IOMode:=IOMode.ForReading, Format:=FileFormat.TristateFalse)
     
     ReadFileToString = textFile.ReadAll
 
@@ -176,3 +176,49 @@ Public Function ReadFileToString(ByVal fileName As String) As String
 #End If
     
 End Function
+
+''
+' FILESYSTEM UTILITY: Cleanses filenames to prevent OS errors during I/O.
+' 1. Strips paths to isolate the filename.
+' 2. Replaces invalid characters (\, /, :, *, ?, ", <, >, |) with underscores.
+' 3. Windows Specific: Removes trailing dots or spaces which are invalid in Win32.
+'
+Public Function SanitizeFilename(ByVal s As String) As String
+    Dim sep As String
+    Dim parts() As String
+    Dim invalidChars As Variant
+    Dim ch As Variant
+    Dim fname As String
+
+    ' Determine platform path separator
+    sep = Application.pathSeparator
+
+    ' Extract only the filename if a full path was passed
+    parts = split(s, sep)
+    fname = parts(UBound(parts))
+
+    ' Platform-specific invalid filename characters
+    If sep = "\" Then
+        ' Windows: these characters are forbidden in filenames
+        invalidChars = Array("\", "/", ":", "*", "?", """", "<", ">", "|")
+    Else
+        ' macOS: ":" is forbidden in filenames; also strip double quotes so the
+        ' filename cannot break the AppleScript "do shell script" quoting.
+        invalidChars = Array(":", """")
+    End If
+
+    ' Replace invalid characters with underscore
+    For Each ch In invalidChars
+        fname = replace$(fname, ch, "_")
+    Next ch
+
+    ' Windows-specific trailing rules
+    If sep = "\" Then
+        Do While Len(fname) > 0 And (Right$(fname, 1) = "." Or Right$(fname, 1) = " ")
+            fname = Left$(fname, Len(fname) - 1)
+        Loop
+    End If
+
+    SanitizeFilename = fname
+End Function
+

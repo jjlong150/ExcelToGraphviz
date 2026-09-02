@@ -100,7 +100,7 @@ Public Sub FindAndReplaceSVG(ByVal svgFileIn As String, ByVal svgFileOut As Stri
     ' Determine the last row with data
     Dim lastRow As Long
     With SvgSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
     ' Loop through the data rows of SVG find/replace statements

@@ -57,6 +57,44 @@ Attribute VB_Name = "modUtilityGraphvizParse"
 
 Option Explicit
 
+' ==========================================================================
+' FUNCTION: ParseAttributeString
+'
+' PURPOSE:
+'   Converts a Graphviz-style attribute string into a Dictionary of key/value
+'   pairs for downstream processing. Serves as the initial parsing stage for
+'   all node, edge, and graph style pipelines, preserving placeholder tokens
+'   and raw attribute values for later normalization and synthesis.
+'
+' TECHNICAL WORKFLOW:
+'   1. INPUT TOKENIZATION:
+'        - Splits the incoming attribute string on whitespace boundaries.
+'        - Identifies tokens of the form key=value, preserving any quoted or
+'          HTML-label constructs (<...>) without modification.
+'
+'   2. KEY/VALUE EXTRACTION:
+'        - Separates each token into a key and value component.
+'        - Trims incidental whitespace and removes surrounding quotes only
+'          when appropriate, leaving placeholder tokens (e.g., {label}) intact.
+'
+'   3. DICTIONARY CONSTRUCTION:
+'        - Adds each extracted key/value pair to a new Dictionary.
+'        - Does not normalize keys; normalization is performed later by
+'          'NormalizeKeys' to enforce case-insensitive behavior.
+'
+'   4. PIPELINE INTEGRATION:
+'        - Returns the raw Dictionary for use by 'MergeAttributeSets',
+'          'NormalizeKeys', and the attribute handlers for node, edge, and
+'          graph label synthesis.
+'
+' TECHNICAL NOTES:
+'   - This function intentionally performs minimal transformation to preserve
+'     user-supplied formatting and placeholder tokens.
+'   - Quoting and HTML-label handling are deferred to 'FormatLabel' and
+'     'RebuildStyleAttributeString'.
+'   - DeepWiki Context: Implements the attribute-parsing rules described in
+'     the "Style Layers" and "Attribute Normalization" documentation.
+' ==========================================================================
 Public Function ParseAttributeString(ByVal attributes As String) As Dictionary
     Dim pipedAttributes As String
     pipedAttributes = AddPipeDelimitersToAttributeString(attributes)
@@ -228,8 +266,8 @@ Public Function ParseGraphvizArrowheads(strArrowheads As String) As String()
     Next base
     
     ' Convert collection to array for faster access
-    ReDim validArrowheads(0 To arrowheadList.count - 1)
-    For i = 1 To arrowheadList.count
+    ReDim validArrowheads(0 To arrowheadList.Count - 1)
+    For i = 1 To arrowheadList.Count
         validArrowheads(i - 1) = arrowheadList(i)
     Next i
     
@@ -364,15 +402,15 @@ Public Function ParseGraphvizPackmode(packmode As String) As Object
     ' Pattern: array(_[flags])?([0-9]+)?
     Set regex = CreateObject("VBScript.RegExp")
     With regex
-        .Pattern = "^array(_[a-z]*)?([0-9]+)?$"
+        .pattern = "^array(_[a-z]*)?([0-9]+)?$"
         .IgnoreCase = True
     End With
     
     If regex.Test(packmode) Then
         Set matches = regex.Execute(packmode)
-        If matches.count > 0 Then
+        If matches.Count > 0 Then
             result("Mode") = "array"
-            If matches(0).SubMatches.count >= 1 And Not IsEmpty(matches(0).SubMatches(0)) Then
+            If matches(0).SubMatches.Count >= 1 And Not IsEmpty(matches(0).SubMatches(0)) Then
                 Flags = Mid(matches(0).SubMatches(0), 2) ' Remove leading underscore
                 ' Validate flags (only 'u', 'c', 't', 'b', 'l', 'r' allowed)
                 Dim validFlags As String
@@ -386,15 +424,14 @@ Public Function ParseGraphvizPackmode(packmode As String) As Object
                 Next i
                 result("Flags") = Flags
             End If
-            If matches(0).SubMatches.count >= 2 And Not IsEmpty(matches(0).SubMatches(1)) Then
+            If matches(0).SubMatches.Count >= 2 And Not IsEmpty(matches(0).SubMatches(1)) Then
                 suffix = matches(0).SubMatches(1)
                 result("Suffix") = suffix
             End If
             result("IsValid") = True
-            'Debug.Print "Parsed as array mode: Mode=" & result("Mode") & ", Flags=" & result("Flags") & ", Suffix=" & result("Suffix")
         End If
     Else
-        Debug.Print "Invalid packmode string: " & packmode
+        EmitMessageSilent "Invalid packmode string: " & packmode, esWarning
     End If
     
     Set ParseGraphvizPackmode = result

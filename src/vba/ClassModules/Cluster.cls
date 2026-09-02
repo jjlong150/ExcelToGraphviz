@@ -31,7 +31,7 @@ Attribute VB_Exposed = False
 
 Public id As String
 Public label As String
-Public Tooltip As String
+Public tooltip As String
 Public styleName As String
 Public attributes As String
 Public subclusters As Dictionary

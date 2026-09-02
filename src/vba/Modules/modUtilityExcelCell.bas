@@ -91,6 +91,10 @@ Public Function GetCell(ByVal worksheetName As String, ByVal row As Long, ByVal 
     GetCell = Trim$(ResolveSheet(worksheetName).Cells(row, col).value)
 End Function
 
+Public Function GetCellLen(ByVal worksheetName As String, ByVal row As Long, ByVal col As Long) As Long
+    GetCellLen = Len(Trim$(ResolveSheet(worksheetName).Cells(row, col).value))
+End Function
+
 Public Sub SetCell(ByVal worksheetName As String, ByVal row As Long, ByVal col As Long, ByVal cellValue As Variant)
     ResolveSheet(worksheetName).Cells(row, col).value = cellValue
 End Sub
@@ -146,7 +150,6 @@ Public Sub ReadFileIntoCell(ByVal worksheetName As String, ByVal cellName As Str
         Dim stringToHoldFile As String
         
         ' Create a string with enough space to hold the file contents
-        '@Ignore AssignmentNotUsed
         stringToHoldFile = Space(FileLen(fileName))
         
         ' Read the entire file into the string

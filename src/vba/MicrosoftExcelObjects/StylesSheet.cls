@@ -149,28 +149,28 @@ End Sub
 '   - Named Ranges: E1:AZ1 (view switch headings)
 '
 ' ==========================================================================
-Private Sub Worksheet_Change(ByVal Target As Range)
+Private Sub Worksheet_Change(ByVal target As Range)
     On Error GoTo ErrorHandler
 
     InvalidateStyleCache
     InvalidateSettings
 
     ' Detect changes in the view switch headings
-    If Not Intersect(Target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
+    If Not Intersect(target, StylesSheet.Range("E1:AZ1")) Is Nothing Then
         Application.enableEvents = False
         RefreshRibbon
     End If
 
     ' Exit if multiple cells selected
-    If Target.Cells.CountLarge > 1 Then GoTo CleanExit
+    If target.Cells.CountLarge > 1 Then GoTo CleanExit
     
     ' Exit if row is blank or commented out
-    If Not IsStylesRowActive(Target.row) Then GoTo CleanExit
+    If Not IsStylesRowActive(target.row) Then GoTo CleanExit
     
     ' Update the preview if the style name or the format changed
-    If Target.Column = GetSettingColNum(SETTINGS_STYLES_COL_STYLE) Or _
-        Target.Column = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT) Then
-        PreviewStyleForRow Target.row
+    If target.Column = GetSettingColNum(SETTINGS_STYLES_COL_STYLE) Or _
+        target.Column = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT) Then
+        PreviewStyleForRow target.row
     End If
     
 CleanExit:
@@ -178,8 +178,8 @@ CleanExit:
     Exit Sub
 
 ErrorHandler:
-    EmitMessage "Sheet: StylesSheet - " & err.number & " " & err.Description
-    err.Clear
+    EmitMessage "Sheet: StylesSheet - " & Err.number & " " & Err.Description
+    Err.Clear
     Resume CleanExit
 End Sub
 
@@ -195,7 +195,7 @@ End Sub
 '      - Clears previous on-sheet buttons.
 '      - Re-injects 'Preview' and 'Edit' buttons next to the target format cell.
 ' ==========================================================================
-Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+Private Sub Worksheet_SelectionChange(ByVal target As Range)
     ' Exit if protected worksheet
     If Me.ProtectContents Then Exit Sub
     
@@ -210,7 +210,7 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
 
     ' Cleanup old buttons, and create new ones
     RemoveFloatingButtons Me, GetButtonNamesFromConfigs(configs)
-    UpdateFloatingButtonsOnSheet Me, Target, configs
+    UpdateFloatingButtonsOnSheet Me, target, configs
 End Sub
 
 ' ==========================================================================

@@ -124,7 +124,6 @@ Private Function GetAllDataAsJson() As String
     Set worksheetDictionary = New Dictionary
     
     Dim includeWorksheets As Boolean
-    '@Ignore AssignmentNotUsed
     includeWorksheets = False
     
     ' Export 'data' worksheet
@@ -166,7 +165,7 @@ Private Function GetAllDataAsJson() As String
         body.Add JSON_SECTION_LAYOUTS, GetWorksheetLayouts(ini)
     End If
     
-    GetAllDataAsJson = ConvertToJson(body, Whitespace:=2)
+    GetAllDataAsJson = ConvertToJson(body, whitespace:=2)
 End Function
 
 Private Function GetExportMetaData() As Dictionary
@@ -177,8 +176,8 @@ Private Function GetExportMetaData() As Dictionary
     dictionaryObj.Add JSON_METADATA_TYPE, JSON_METADATA_TYPE_VALUE
     dictionaryObj.Add JSON_METADATA_VERSION, JSON_METADATA_VERSION_VERSION
     dictionaryObj.Add JSON_METADATA_USER, Application.username
-    dictionaryObj.Add JSON_METADATA_DATE, format(date, "yyyy-mm-dd")
-    dictionaryObj.Add JSON_METADATA_TIME, format(time, "hh:mm:ss")
+    dictionaryObj.Add JSON_METADATA_DATE, Format(date, "yyyy-mm-dd")
+    dictionaryObj.Add JSON_METADATA_TIME, Format(time, "hh:mm:ss")
     dictionaryObj.Add JSON_METADATA_OS, Application.OperatingSystem
     dictionaryObj.Add JSON_METADATA_EXCEL, Application.version
     dictionaryObj.Add JSON_METADATA_FILENAME, ThisWorkbook.name
@@ -188,8 +187,8 @@ End Function
 
 Private Function GetDataRows(ByRef ini As settings, ByRef exchange As ExchangeOptions) As Collection
     Dim data As dataRow
-    Dim Items As Collection
-    Set Items = New Collection
+    Dim items As Collection
+    Set items = New Collection
     Dim dictionaryObj As Dictionary
 
     ' Iterate through the rows of data
@@ -197,18 +196,18 @@ Private Function GetDataRows(ByRef ini As settings, ByRef exchange As ExchangeOp
     For row = ini.data.firstRow To ini.data.lastRow
         data = GetDataRow(ini, ini.data.worksheetName, row)
         Set dictionaryObj = ConvertDataRowToDictionary(exchange, data, row)
-        If dictionaryObj.count > 0 Then
-            Items.Add dictionaryObj
+        If dictionaryObj.Count > 0 Then
+            items.Add dictionaryObj
         End If
     Next row
 
-    Set GetDataRows = Items
+    Set GetDataRows = items
 End Function
 
 Private Function GetSqlRows(ByRef exchange As ExchangeOptions) As Collection
     Dim sql As sqlRow
-    Dim Items As Collection
-    Set Items = New Collection
+    Dim items As Collection
+    Set items = New Collection
     Dim dictionaryObj As Dictionary
 
     ' Obtain sql worksheet layout
@@ -220,18 +219,18 @@ Private Function GetSqlRows(ByRef exchange As ExchangeOptions) As Collection
     For row = sqlLayout.firstRow To sqlLayout.lastRow
         sql = GetSqlRow(sqlLayout, row)
         Set dictionaryObj = ConvertSqlRowToDictionary(exchange, sql, row)
-        If dictionaryObj.count > 0 Then
-            Items.Add dictionaryObj
+        If dictionaryObj.Count > 0 Then
+            items.Add dictionaryObj
         End If
     Next row
 
-    Set GetSqlRows = Items
+    Set GetSqlRows = items
 End Function
 
 Private Function GetSvgRows(ByRef ini As settings, ByRef exchange As ExchangeOptions) As Collection
     Dim svg As svgRow
-    Dim Items As Collection
-    Set Items = New Collection
+    Dim items As Collection
+    Set items = New Collection
     Dim dictionaryObj As Dictionary
 
     ' Obtain layout of the svg worksheet
@@ -243,19 +242,19 @@ Private Function GetSvgRows(ByRef ini As settings, ByRef exchange As ExchangeOpt
     For row = svgLayout.firstRow To svgLayout.lastRow
         svg = GetSvgRow(svgLayout, row)
         Set dictionaryObj = ConvertSvgRowToDictionary(exchange, svg, row)
-        If dictionaryObj.count > 0 Then
-            Items.Add dictionaryObj
+        If dictionaryObj.Count > 0 Then
+            items.Add dictionaryObj
         End If
     Next row
 
-    Set GetSvgRows = Items
+    Set GetSvgRows = items
 End Function
 
 Private Function GetStylesRows(ByRef ini As settings, ByRef exchange As ExchangeOptions) As Collection
     Dim switches() As String
     Dim style As StylesRow
-    Dim Items As Collection
-    Set Items = New Collection
+    Dim items As Collection
+    Set items = New Collection
     Dim dictionaryObj As Dictionary
 
     ' Iterate through the rows of styles
@@ -264,12 +263,12 @@ Private Function GetStylesRows(ByRef ini As settings, ByRef exchange As Exchange
         style = GetStylesRow(ini, row)
         switches = GetStylesRowViews(ini, row)
         Set dictionaryObj = ConvertStylesRowToDictionary(exchange, style, switches, row)
-        If dictionaryObj.count > 0 Then
-            Items.Add dictionaryObj
+        If dictionaryObj.Count > 0 Then
+            items.Add dictionaryObj
         End If
     Next row
 
-    Set GetStylesRows = Items
+    Set GetStylesRows = items
 End Function
 
 Private Function GetWorksheetLayouts(ByRef ini As settings) As Dictionary
@@ -325,7 +324,7 @@ Private Function GetLayoutData(ByRef ini As settings) As Dictionary
     columnItems.Add GetLayoutColumnData(DataSheet.name, JSON_DATA_RELATED_ITEM, ini.data.headingRow, ini.data.isRelatedToItemColumn)
     columnItems.Add GetLayoutColumnData(DataSheet.name, JSON_DATA_STYLE_NAME, ini.data.headingRow, ini.data.styleNameColumn)
     columnItems.Add GetLayoutColumnData(DataSheet.name, JSON_DATA_EXTRA_ATTRIBUTES, ini.data.headingRow, ini.data.extraAttributesColumn)
-    columnItems.Add GetLayoutColumnData(DataSheet.name, JSON_DATA_MESSAGE, ini.data.headingRow, ini.data.errorMessageColumn)
+    columnItems.Add GetLayoutColumnData(DataSheet.name, JSON_DATA_PROPERTIES, ini.data.headingRow, ini.data.propertiesColumn)
     columnItems.Add GetLayoutColumnData(DataSheet.name, JSON_DATA_GRAPH_DISPLAY_COLUMN, ini.data.headingRow, ini.data.graphDisplayColumn)
     
     Dim dictionaryObj As Dictionary
@@ -349,6 +348,7 @@ Private Function GetLayoutStyles(ByRef ini As settings) As Dictionary
     
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_FLAG, ini.styles.headingRow, ini.styles.flagColumn)
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_NAME, ini.styles.headingRow, ini.styles.nameColumn)
+    columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_DESCRIPTION, ini.styles.headingRow, ini.styles.descriptionColumn)
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_FORMAT, ini.styles.headingRow, ini.styles.formatColumn)
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_TYPE, ini.styles.headingRow, ini.styles.typeColumn)
     
@@ -458,6 +458,9 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     Dim graphToWorksheet As Dictionary
     Set graphToWorksheet = New Dictionary
     
+    ' v11.0 Added
+    graphToWorksheet.Add JSON_SETTINGS_JSON_VIEWER, SettingsSheet.Range(SETTINGS_JSON_VIEWER).value
+    
     graphToWorksheet.Add JSON_SETTINGS_RUN_MODE, SettingsSheet.Range(SETTINGS_RUN_MODE).value
     graphToWorksheet.Add JSON_SETTINGS_IMAGE_TYPE, ini.graph.imageTypeWorksheet
     graphToWorksheet.Add JSON_SETTINGS_IMAGE_WORKSHEET, ini.graph.imageWorksheet
@@ -470,11 +473,25 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     Dim output As FileOutput
     output = GetSettingsForFileOutput()
     
+    ' v11.0 Added
+    graphToFile.Add JSON_SETTINGS_OPEN_AFTER_PUBLISH, GetSettingBoolean(SETTINGS_OPEN_AFTER_PUBLISH)
+    graphToFile.Add JSON_SETTINGS_PUBLISH_GRAPH, GetSettingBoolean(SETTINGS_PUBLISH_GRAPHVIZ)
+    graphToFile.Add JSON_SETTINGS_PUBLISH_DOT, GetSettingBoolean(SETTINGS_PUBLISH_DOT)
+    graphToFile.Add JSON_SETTINGS_PUBLISH_KG, GetSettingBoolean(SETTINGS_PUBLISH_KNOWLEDGE)
+    graphToFile.Add JSON_SETTINGS_PUBLISH_MINIFY_JSON, GetSettingBoolean(SETTINGS_KNOWLEDGE_MINIFY)
+    graphToFile.Add JSON_SETTINGS_PUBLISH_INDENT_JSON, CLng(SettingsSheet.Range(SETTINGS_KNOWLEDGE_INDENT))
+    
     graphToFile.Add JSON_SETTINGS_DIRECTORY, output.directory
     graphToFile.Add JSON_SETTINGS_FILE_NAME_PREFIX, output.fileNamePrefix
     graphToFile.Add JSON_SETTINGS_IMAGE_TYPE, ini.graph.imageTypeFile
     graphToFile.Add JSON_SETTINGS_APPEND_OPTIONS, output.appendOptions
     graphToFile.Add JSON_SETTINGS_APPEND_TIME_STAMP, output.appendTimeStamp
+    
+    ' v11.0 Added
+    graphToFile.Add JSON_SETTINGS_RENDER_CAIRO, GetSettingBoolean(SETTINGS_RENDER_CAIRO)
+    graphToFile.Add JSON_SETTINGS_RENDER_GD, GetSettingBoolean(SETTINGS_RENDER_GD)
+    graphToFile.Add JSON_SETTINGS_RENDER_GDIPLUS, GetSettingBoolean(SETTINGS_RENDER_GDIPLUS)
+    graphToFile.Add JSON_SETTINGS_RENDER_QUARTZ, GetSettingBoolean(SETTINGS_RENDER_QUARTZ)
 
     ' Layout
     Dim layout As Dictionary
@@ -527,6 +544,15 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     optionsGraph.Add JSON_SETTINGS_TRANSPARENT_BACKGROUND, ini.graph.transparentBackground
     optionsGraph.Add JSON_SETTINGS_INCLUDE_IMAGE_PATH, ini.graph.includeGraphImagePath
 
+    ' Options -> Clusters
+    Dim optionsClusters As Dictionary
+    Set optionsClusters = New Dictionary
+    
+    optionsClusters.Add JSON_SETTINGS_INCLUDE_CLUSTER_LABELS, ini.graph.includeClusterLabels
+    optionsClusters.Add JSON_SETTINGS_INCLUDE_CLUSTER_TOOLTIPS, ini.graph.includeClusterTooltips
+    optionsClusters.Add JSON_SETTINGS_BLANK_CLUSTER_LABELS, SettingsSheet.Range(SETTINGS_BLANK_CLUSTER_LABEL).value
+    optionsClusters.Add JSON_SETTINGS_BLANK_CLUSTER_TOOLTIPS, SettingsSheet.Range(SETTINGS_BLANK_CLUSTER_TOOLTIP).value
+    
     ' Options -> Nodes
     Dim optionsNodes As Dictionary
     Set optionsNodes = New Dictionary
@@ -534,7 +560,9 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     optionsNodes.Add JSON_SETTINGS_INCLUDE_ORPHAN_NODES, ini.graph.includeOrphanNodes
     optionsNodes.Add JSON_SETTINGS_INCLUDE_NODE_LABELS, ini.graph.includeNodeLabels
     optionsNodes.Add JSON_SETTINGS_INCLUDE_NODE_XLABELS, ini.graph.includeNodeXLabels
+    optionsNodes.Add JSON_SETTINGS_INCLUDE_NODE_TOOLTIPS, ini.graph.includeNodeTooltips
     optionsNodes.Add JSON_SETTINGS_BLANK_NODE_LABELS, SettingsSheet.Range(SETTINGS_BLANK_NODE_LABELS).value
+    optionsNodes.Add JSON_SETTINGS_BLANK_NODE_TOOLTIPS, SettingsSheet.Range(SETTINGS_BLANK_NODE_TOOLTIPS).value
 
     ' Options -> Edges
     Dim optionsEdges As Dictionary
@@ -545,15 +573,18 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     optionsEdges.Add JSON_SETTINGS_INCLUDE_ORPHAN_EDGES, ini.graph.includeOrphanEdges
     optionsEdges.Add JSON_SETTINGS_INCLUDE_EDGE_HEAD_LABELS, ini.graph.includeEdgeHeadLabels
     optionsEdges.Add JSON_SETTINGS_INCLUDE_EDGE_LABELS, ini.graph.includeEdgeLabels
+    optionsEdges.Add JSON_SETTINGS_INCLUDE_EDGE_TOOLTIPS, ini.graph.includeEdgeTooltips
     optionsEdges.Add JSON_SETTINGS_INCLUDE_EDGE_XLABELS, ini.graph.includeEdgeXLabels
     optionsEdges.Add JSON_SETTINGS_INCLUDE_EDGE_TAIL_LABELS, ini.graph.includeEdgeTailLabels
     optionsEdges.Add JSON_SETTINGS_INCLUDE_EDGE_PORTS, ini.graph.includeEdgePorts
     optionsEdges.Add JSON_SETTINGS_BLANK_EDGE_LABELS, SettingsSheet.Range(SETTINGS_BLANK_EDGE_LABELS).value
+    optionsEdges.Add JSON_SETTINGS_BLANK_EDGE_TOOLTIPS, SettingsSheet.Range(SETTINGS_BLANK_EDGE_TOOLTIPS).value
 
     ' Collect graph, nodes, and edge under the options parent
     options.Add JSON_SETTINGS_SECTION_GRAPH, optionsGraph
     options.Add JSON_SETTINGS_SECTION_NODES, optionsNodes
     options.Add JSON_SETTINGS_SECTION_EDGES, optionsEdges
+    options.Add JSON_SETTINGS_SECTION_CLUSTERS, optionsClusters
     
     ' Style
     Dim styles As Dictionary
@@ -561,8 +592,9 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     styles.Add JSON_SETTINGS_SELECTED_VIEW_COLUMN, SettingsSheet.Range(SETTINGS_STYLES_COL_SHOW_STYLE).value
     styles.Add JSON_SETTINGS_INCLUDE_STYLE_FORMAT, ini.graph.includeStyleFormat
     styles.Add JSON_SETTINGS_INCLUDE_EXTRA_ATTRIBUTES, ini.graph.includeExtraAttributes
-    styles.Add JSON_SETTINGS_STYLES_SUFFIX_OPEN, ini.styles.suffixOpen
-    styles.Add JSON_SETTINGS_STYLES_SUFFIX_CLOSE, ini.styles.suffixClose
+    styles.Add JSON_SETTINGS_STYLES_AFFIX_OPEN, ini.styles.affixOpen
+    styles.Add JSON_SETTINGS_STYLES_AFFIX_CLOSE, ini.styles.affixClose
+    styles.Add JSON_SETTINGS_STYLES_CONCAT_FORMAT, ini.styles.concatFormat
 
     ' Debug
     Dim debugOptions As Dictionary
@@ -595,7 +627,6 @@ Private Function GetSettingsDictionaryData(ByRef ini As settings) As Dictionary
     columns.Add JSON_DATA_RELATED_ITEM, SettingsSheet.Range(SETTINGS_DATA_SHOW_IS_RELATED_TO_ITEM).value
     columns.Add JSON_DATA_STYLE_NAME, SettingsSheet.Range(SETTINGS_DATA_SHOW_STYLE).value
     columns.Add JSON_DATA_EXTRA_ATTRIBUTES, SettingsSheet.Range(SETTINGS_DATA_SHOW_EXTRA_STYLE_ATTRIBUTES).value
-    columns.Add JSON_DATA_MESSAGE, SettingsSheet.Range(SETTINGS_DATA_SHOW_MESSAGES).value
 
     Dim worksheets As Dictionary
     Set worksheets = New Dictionary
@@ -893,20 +924,20 @@ Private Function ConvertDataRowToDictionary(ByRef exchange As ExchangeOptions, B
         dictionaryObj.Add JSON_DATA_LABEL, data.label
     End If
     
-    If data.xLabel <> vbNullString Then
-        dictionaryObj.Add JSON_DATA_OUTSIDE_LABEL, data.xLabel
+    If data.xlabel <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_OUTSIDE_LABEL, data.xlabel
     End If
     
-    If data.tailLabel <> vbNullString Then
-        dictionaryObj.Add JSON_DATA_TAIL_LABEL, data.tailLabel
+    If data.taillabel <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_TAIL_LABEL, data.taillabel
     End If
     
-    If data.headLabel <> vbNullString Then
-        dictionaryObj.Add JSON_DATA_HEAD_LABEL, data.headLabel
+    If data.headlabel <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_HEAD_LABEL, data.headlabel
     End If
     
-    If data.Tooltip <> vbNullString Then
-        dictionaryObj.Add JSON_DATA_TOOLTIP, data.Tooltip
+    If data.tooltip <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_TOOLTIP, data.tooltip
     End If
     
     If data.relatedItem <> vbNullString Then
@@ -919,6 +950,10 @@ Private Function ConvertDataRowToDictionary(ByRef exchange As ExchangeOptions, B
     
     If data.extraAttrs <> vbNullString Then
         dictionaryObj.Add JSON_DATA_EXTRA_ATTRIBUTES, ParseAttributeString(data.extraAttrs)
+    End If
+    
+    If data.properties <> vbNullString Then
+        dictionaryObj.Add JSON_DATA_PROPERTIES, ParsePropertyString(data.properties)
     End If
     
     Set ConvertDataRowToDictionary = dictionaryObj
@@ -950,12 +985,16 @@ Private Function ConvertStylesRowToDictionary(ByRef exchange As ExchangeOptions,
         dictionaryObj.Add JSON_STYLES_NAME, style.styleName
     End If
     
+    If style.Description <> vbNullString Then
+        dictionaryObj.Add JSON_STYLES_DESCRIPTION, style.Description
+    End If
+    
     If style.styleType <> vbNullString Then
         dictionaryObj.Add JSON_STYLES_TYPE, style.styleType
     End If
     
-    If style.format <> vbNullString Then
-        dictionaryObj.Add JSON_STYLES_FORMAT, ParseAttributeString(style.format)
+    If style.Format <> vbNullString Then
+        dictionaryObj.Add JSON_STYLES_FORMAT, ParseAttributeString(style.Format)
     End If
     
     Dim switchCollection As Collection
@@ -1054,11 +1093,12 @@ Private Function ConvertSvgRowToDictionary(ByRef exchange As ExchangeOptions, By
     Set ConvertSvgRowToDictionary = dictionaryObj
 End Function
 
-Private Function GetStylesRow(ByRef ini As settings, ByVal row As Long) As StylesRow
+Public Function GetStylesRow(ByRef ini As settings, ByVal row As Long) As StylesRow
 
     GetStylesRow.comment = StylesSheet.Cells.item(row, ini.styles.flagColumn).value
     GetStylesRow.styleName = StylesSheet.Cells.item(row, ini.styles.nameColumn).value
-    GetStylesRow.format = StylesSheet.Cells.item(row, ini.styles.formatColumn).value
+    GetStylesRow.Description = StylesSheet.Cells.item(row, ini.styles.descriptionColumn).value
+    GetStylesRow.Format = StylesSheet.Cells.item(row, ini.styles.formatColumn).value
     GetStylesRow.styleType = StylesSheet.Cells.item(row, ini.styles.typeColumn).value
 
 End Function
@@ -1111,8 +1151,8 @@ Private Function IsArrayAllocated(ByRef arr As Variant) As Boolean
 
     Exit Function
 ErrorHandler:
-    If err.number > 0 Then
-        err.Clear
+    If Err.number > 0 Then
+        Err.Clear
         Resume Next
     End If
 End Function

@@ -48,7 +48,6 @@ Public Function RangeToSubgraphWithRank(ByVal itemIds As Range, ByVal rankType A
 
     ' Ensure valid rankType
     Dim rankTypeOut As String
-    '@Ignore AssignmentNotUsed
     rankTypeOut = "same"
     
     Select Case UCase$(rankType)
@@ -132,9 +131,9 @@ Public Function RangeToHtmlTable(ByVal tableCells As Range) As String
     Dim rowIndex As Long
     Dim columnIndex As Long
   
-    For rowIndex = 1 To tableCells.rows.count
+    For rowIndex = 1 To tableCells.rows.Count
         htmlLabel = htmlLabel & "<tr>"
-        For columnIndex = 1 To tableCells.columns.count
+        For columnIndex = 1 To tableCells.columns.Count
             htmlLabel = htmlLabel & "<td>" & tableCells.Cells.item(rowIndex, columnIndex).value & "</td>"
         Next columnIndex
         htmlLabel = htmlLabel & "</tr>" & vbNewLine

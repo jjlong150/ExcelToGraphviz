@@ -107,16 +107,16 @@ End Sub
 '   4. ERROR RECOVERY: Uses a recovery block to log failures while
 '      guaranteeing the restoration of Excel's event state.
 ' ==========================================================================
-Private Sub Worksheet_Change(ByVal Target As Range)
+Private Sub Worksheet_Change(ByVal target As Range)
 
     On Error GoTo Whoa
 
     ' Detect changes in the NodeFormatString text box
-    If Not Intersect(Target, StyleDesignerSheet.Range("LabelText,XlabelText,TailLabelText,HeadLabelText")) Is Nothing Then
+    If Not Intersect(target, StyleDesignerSheet.Range("LabelText,XlabelText,TailLabelText,HeadLabelText")) Is Nothing Then
         Application.enableEvents = False
         RenderPreviewFromLists
         
-    ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING)) Is Nothing Then
+    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING)) Is Nothing Then
         Application.enableEvents = False
         If StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value = vbNullString Then
             ClearStyleRibbon
@@ -125,11 +125,11 @@ Private Sub Worksheet_Change(ByVal Target As Range)
             StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).Select
         End If
         
-    ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_ADD_CAPTION)) Is Nothing Then
+    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_ADD_CAPTION)) Is Nothing Then
         Application.enableEvents = False
         RenderPreview
 
-    ElseIf Not Intersect(Target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
+    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
         Application.enableEvents = False
         RefreshControlsImageScale
         RefreshControlsImagePosition
@@ -139,7 +139,7 @@ LetsContinue:
     Application.enableEvents = True
     Exit Sub
 Whoa:
-    EmitMessage "StyleDesignerSheet " & err.number & " " & err.Description
+    EmitMessage "StyleDesignerSheet " & Err.number & " " & Err.Description
     
     Resume LetsContinue
 

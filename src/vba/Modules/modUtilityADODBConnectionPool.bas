@@ -119,7 +119,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
     ' Preconditions
     ' ------------------------------------------------------------
     If Len(fileName) = 0 Then
-        err.Raise vbObjectError + 1001, , "Filename cannot be empty."
+        Err.Raise vbObjectError + 1001, , "Filename cannot be empty."
     End If
     
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -127,7 +127,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
         Dim message As String
         message = GetMessage("msgboxSqlFileNotFound")
         message = replace(message, "{filePath}", fileName)
-        err.Raise vbObjectError + 1002, , message
+        Err.Raise vbObjectError + 1002, , message
     End If
     
     If ConnectionPool Is Nothing Then
@@ -141,7 +141,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
     
     provider = DetectBestExcelProvider()
     If Len(provider) = 0 Then
-        err.Raise vbObjectError + 9001, , "No suitable OLEDB provider found on this system."
+        Err.Raise vbObjectError + 9001, , "No suitable OLEDB provider found on this system."
     End If
     
     ' =============================================================================
@@ -229,7 +229,7 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
             properties = vbNullString
 
        Case Else
-            err.Raise vbObjectError + 1003, , replace(GetMessage("msgboxSqlFileTypeNotSupported"), "{fileExtension}", fileExtension)
+            Err.Raise vbObjectError + 1003, , replace(GetMessage("msgboxSqlFileTypeNotSupported"), "{fileExtension}", fileExtension)
     End Select
     
     ' ------------------------------------------------------------
@@ -293,12 +293,12 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
             conn.Open fileName
         End If
         
-        If err.number = 0 Then Exit For
+        If Err.number = 0 Then Exit For
         
-        LogDiagnostic err.Description & " - getConnection.Open failed for file: " & fileName, _
-                      errorNumber:=err.number, attempt:=attempts
+        LogDiagnostic Err.Description & " - getConnection.Open failed for file: " & fileName, _
+                      errorNumber:=Err.number, attempt:=attempts
 
-        err.Clear
+        Err.Clear
         SleepMilliseconds RETRY_DELAY_MS
     Next attempts
     
@@ -327,9 +327,9 @@ Public Function getConnection(ByVal fileName As String, ByVal maxConnectionMinut
 
 ErrorHandler:
     SafeCloseConnection conn
-    err.Raise err.number, , "getConnection(): " & err.Description
+    Err.Raise Err.number, , "getConnection(): " & Err.Description
 #Else
-    err.Raise vbObjectError + 1003, , "ADO is not supported on macOS."
+    Err.Raise vbObjectError + 1003, , "ADO is not supported on macOS."
 #End If
 End Function
 
@@ -387,7 +387,7 @@ Public Function GetConnectionCount() As Long
     If ConnectionPool Is Nothing Then
         GetConnectionCount = 0
     Else
-        GetConnectionCount = ConnectionPool.count
+        GetConnectionCount = ConnectionPool.Count
     End If
 #End If
 End Function
@@ -443,7 +443,7 @@ Private Sub SafeCloseConnection(ByRef cn As Object)
         End If
         Set cn = Nothing
     End If
-    err.Clear
+    Err.Clear
 #End If
 End Sub
 
@@ -510,7 +510,7 @@ Private Function CreateSafeModeConnection(ByVal fileName As String, _
     Exit Function
 
 SafeModeError:
-    err.Raise err.number, , "Safe-mode connection failed: " & err.Description
+    Err.Raise Err.number, , "Safe-mode connection failed: " & Err.Description
 #End If
 End Function
 
@@ -567,8 +567,8 @@ Private Function ProviderExists(ByVal providerName As String) As Boolean
     Dim conn As Object
     Set conn = CreateObject("ADODB.Connection")
     conn.provider = providerName
-    ProviderExists = (err.number = 0)
-    err.Clear
+    ProviderExists = (Err.number = 0)
+    Err.Clear
     Set conn = Nothing
 #Else
     ProviderExists = False

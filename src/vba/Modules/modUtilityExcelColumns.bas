@@ -39,7 +39,7 @@ Public Function GetLastColumn(ByVal worksheetName As String, ByVal row As Long) 
 
     ' Determine which columns have data
     With ActiveWorkbook.worksheets.[_Default](worksheetName)
-        GetLastColumn = .Cells(row, .columns.count).End(xlToLeft).Column
+        GetLastColumn = .Cells(row, .columns.Count).End(xlToLeft).Column
     End With
 
 End Function
@@ -64,4 +64,14 @@ Public Function ConvertColumnNumberToLetters(ByVal ColumnNumber As Long) As Stri
     End If
 End Function
 
+Public Function ConvertColumnLetterToNumber(colLetter As String) As Long
+    Dim i As Long, result As Long
+    colLetter = UCase$(Trim$(colLetter))
+
+    For i = 1 To Len(colLetter)
+        result = result * 26 + (Asc(Mid$(colLetter, i, 1)) - 64)
+    Next i
+
+    ConvertColumnLetterToNumber = result
+End Function
 

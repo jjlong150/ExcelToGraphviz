@@ -133,7 +133,7 @@ End Sub
 Private Function FormatConsoleMessage(msg As String, sev As ErrorSeverity) As String
     ' Include the Locale-aware date and time
     Dim timestamp As String
-    timestamp = format$(Now, "")
+    timestamp = Format$(Now, "")
 
     ' Compose the final message
     FormatConsoleMessage = "[" & timestamp & "] " & _

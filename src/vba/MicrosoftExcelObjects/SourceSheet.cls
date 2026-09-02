@@ -85,7 +85,7 @@ End Sub
 '      the sequential numbering in the left-hand gutter.
 '   3. STATE RESTORATION: Re-enables Excel interaction via 'OptimizeCode_End'.
 ' ==========================================================================
-Private Sub Worksheet_Change(ByVal Target As Range)
+Private Sub Worksheet_Change(ByVal target As Range)
     OptimizeCode_Begin
     UpdateSourceWorksheetLineNumbers
     OptimizeCode_End

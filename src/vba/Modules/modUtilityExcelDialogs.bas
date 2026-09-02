@@ -65,7 +65,6 @@ Public Function ChooseDirectory(ByVal startDir As String) As String
         '  Get the number of the button chosen
         Dim selected As Long
         selected = fileDialogHandle.show
-        '@Ignore EmptyIfBlock
         If selected <> -1 Then
             ' User clicked on CANCEL)
         Else

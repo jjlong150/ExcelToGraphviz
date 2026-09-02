@@ -37,13 +37,11 @@ Option Explicit
 ' ===========================================================================
 ' Extensions Tab
 
-'@Ignore ParameterNotUsed
-Public Sub extTab_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub extTab_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = SettingsSheet.Range(SETTINGS_EXT_TAB_NAME).value
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub extTab_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub extTab_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = extTabGroup_getVisible(BUTTON_PREFIX_EXT_CODE, 6)
     If visible = False Then
         visible = extTabGroup_getVisible(BUTTON_PREFIX_EXT_WEB, 6)
@@ -54,27 +52,23 @@ End Sub
 ' Custom Code Group
 
 ' Group visibility
-'@Ignore ParameterNotUsed
-Public Sub extTab_codeGroup_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub extTab_codeGroup_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = extTabGroup_getVisible(BUTTON_PREFIX_EXT_CODE, 6)
 End Sub
 
 ' Group label
-'@Ignore ParameterNotUsed
-Public Sub extTab_codeGroup_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub extTab_codeGroup_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = SettingsSheet.Range(SETTINGS_EXT_TAB_GROUP_NAME_CODE).value
 End Sub
 
 ' Buttons which invoke subroutines
-'@Ignore ParameterNotUsed
-Public Sub extCode_onAction(ByVal control As IRibbonControl)
+Private Sub extCode_onAction(ByVal control As IRibbonControl)
     Dim subroutine As String
     subroutine = SettingsSheet.Range(control.id & BUTTON_SUFFIX_SUB).value
     Application.Run subroutine
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub extCode_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub extCode_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not (SettingsSheet.Range(control.id & BUTTON_SUFFIX_SUB).value = vbNullString)
 End Sub
 
@@ -82,25 +76,21 @@ End Sub
 ' Web Resources Group
 
 ' Group visibility
-'@Ignore ParameterNotUsed
-Public Sub extTab_webGroup_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub extTab_webGroup_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = extTabGroup_getVisible(BUTTON_PREFIX_EXT_WEB, 6)
 End Sub
 
 ' Group label
-'@Ignore ParameterNotUsed
-Public Sub extTab_webGroup_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub extTab_webGroup_getLabel(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = SettingsSheet.Range(SETTINGS_EXT_TAB_GROUP_NAME_WEB).value
 End Sub
 
 ' Buttons which invoke web hyperlinks
-'@Ignore ParameterNotUsed
-Public Sub extWeb_onAction(ByVal control As IRibbonControl)
+Private Sub extWeb_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range(control.id & BUTTON_SUFFIX_URL).value, NewWindow:=True
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub extWeb_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub extWeb_getEnabled(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Not (SettingsSheet.Range(control.id & BUTTON_SUFFIX_URL).value = vbNullString)
 End Sub
 

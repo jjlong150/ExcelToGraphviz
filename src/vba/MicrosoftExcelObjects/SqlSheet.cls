@@ -121,7 +121,7 @@ End Sub
 '      - INJECTION: Calls 'UpdateFloatingButtonsOnSheet' to recreate
 '        interactive "Run" and "Copy" buttons next to the selected row.
 ' ==========================================================================
-Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+Private Sub Worksheet_SelectionChange(ByVal target As Range)
     On Error Resume Next
     InvalidateRibbonControl RIBBON_CTL_SQL_EDIT_CELL
     InvalidateRibbonControl RIBBON_CTL_SQL_CLIPBOARD
@@ -136,7 +136,7 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     RemoveFloatingButtons Me, GetButtonNamesFromConfigs(configs)
 
     ' Create buttons using the shared utility
-    UpdateFloatingButtonsOnSheet Me, Target, configs
+    UpdateFloatingButtonsOnSheet Me, target, configs
 End Sub
 
 ' ==========================================================================

@@ -42,28 +42,29 @@ Private m_graphvizCommand As String
 Private m_graphvizPath As String
 Private m_filenameBase As String
 Private m_outputDirectory As String
+Private m_renderer As String
 
 ' --- Property Get/Let Blocks ---
 
 ' Where files should be written to
-Public Property Get OutputDirectory() As String
-    OutputDirectory = m_outputDirectory
+Public Property Get outputDirectory() As String
+    outputDirectory = m_outputDirectory
 End Property
 
-Public Property Let OutputDirectory(ByVal OutputDirectory As String)
-    m_outputDirectory = OutputDirectory
+Public Property Let outputDirectory(ByVal outputDirectory As String)
+    m_outputDirectory = outputDirectory
     InitializeGraphvizFilename
     InitializeDiagramFilename
 End Property
 
 ' Base portion of the file name (i.e. no extension)
 ' Triggers InitializeGraphvizFilename and InitializeDiagramFilename to maintain sync
-Public Property Get FilenameBase() As String
-    FilenameBase = m_filenameBase
+Public Property Get filenameBase() As String
+    filenameBase = m_filenameBase
 End Property
 
-Public Property Let FilenameBase(ByVal FilenameBase As String)
-    m_filenameBase = FilenameBase
+Public Property Let filenameBase(ByVal filenameBase As String)
+    m_filenameBase = filenameBase
     InitializeGraphvizFilename
     InitializeDiagramFilename
 End Property
@@ -162,6 +163,15 @@ Public Property Let GraphvizMessages(ByVal GraphvizMessages As String)
 End Property
 
 ' Graphviz Command
+Public Property Get Renderer() As String
+    Renderer = m_renderer
+End Property
+
+Public Property Let Renderer(ByVal Renderer As String)
+    m_renderer = Renderer
+End Property
+
+' Graphviz Command
 Public Property Get GraphvizCommand() As String
     GraphvizCommand = m_graphvizCommand
 End Property
@@ -194,10 +204,18 @@ Public Sub RenderGraph()
         verboseFlag = vbNullString
     End If
     
+    ' Renderer is an optional command line value
+    Dim Renderer As String
+    If m_renderer = "" Then
+        Renderer = ""
+    Else
+        Renderer = ":" & m_renderer
+    End If
+    
      ' Generate the diagram which corresponds to the Graphviz file
 #If Mac Then
-    GraphvizCommand = Chr$(34) & m_graphvizFilename & Chr$(34) & " -T" & m_graphFormat & " -o " & Chr$(34) & m_diagramFilename & Chr$(34) & verboseFlag & " " & m_commandLineParameters
-    
+    GraphvizCommand = Chr$(34) & m_graphvizFilename & Chr$(34) & " -T" & m_graphFormat & Renderer & " -o " & Chr$(34) & m_diagramFilename & Chr$(34) & verboseFlag & " " & m_commandLineParameters
+
     ' Execute the command
     Dim dotOutput As String
     dotOutput = RunAppleScriptTask("runDot", GraphvizCommand)
@@ -206,7 +224,7 @@ Public Sub RenderGraph()
         m_graphvizMessages = dotOutput
     End If
 #Else
-    GraphvizCommand = Chr$(34) & m_graphvizPath & m_graphLayout & Chr$(34) & " " & Chr$(34) & m_graphvizFilename & Chr$(34) & " -T" & m_graphFormat & " -o " & Chr$(34) & m_diagramFilename & Chr$(34) & verboseFlag & " " & m_commandLineParameters
+    GraphvizCommand = Chr$(34) & m_graphvizPath & m_graphLayout & Chr$(34) & " " & Chr$(34) & m_graphvizFilename & Chr$(34) & " -T" & m_graphFormat & Renderer & " -o " & Chr$(34) & m_diagramFilename & Chr$(34) & verboseFlag & " " & m_commandLineParameters
     
     Dim stdOut As String
     Dim stdErr As String
@@ -218,9 +236,9 @@ Public Sub RenderGraph()
 #End If
     
 EndRenderGraph:
-    If err.number <> 0 Then
-        EmitMessage err.number & " " & err.Description, "Graphviz.RenderGraph()"
-        err.Clear
+    If Err.number <> 0 Then
+        EmitMessage Err.number & " " & Err.Description, "Graphviz.RenderGraph()"
+        Err.Clear
     End If
     On Error GoTo 0
     
@@ -243,9 +261,9 @@ Public Sub SourceToFile()
 #End If
 
 WriteFailed:
-    If err.number > 0 Then
-        EmitMessage err.number & " " & err.Description, "Graphviz.SourceToFile()"
-        err.Clear
+    If Err.number > 0 Then
+        EmitMessage Err.number & " " & Err.Description, "Graphviz.SourceToFile()"
+        Err.Clear
     End If
     
     On Error GoTo 0
@@ -277,47 +295,3 @@ Private Sub Class_Initialize()
     m_filenameBase = "RelationshipVisualizer"
 End Sub
 
-''
-' FILESYSTEM UTILITY: Cleanses filenames to prevent OS errors during I/O.
-' 1. Strips paths to isolate the filename.
-' 2. Replaces invalid characters (\, /, :, *, ?, ", <, >, |) with underscores.
-' 3. Windows Specific: Removes trailing dots or spaces which are invalid in Win32.
-'
-Private Function SanitizeFilename(ByVal s As String) As String
-    Dim sep As String
-    Dim parts() As String
-    Dim invalidChars As Variant
-    Dim ch As Variant
-    Dim fname As String
-
-    ' Determine platform path separator
-    sep = Application.pathSeparator
-
-    ' Extract only the filename if a full path was passed
-    parts = split(s, sep)
-    fname = parts(UBound(parts))
-
-    ' Platform-specific invalid filename characters
-    If sep = "\" Then
-        ' Windows: these characters are forbidden in filenames
-        invalidChars = Array("\", "/", ":", "*", "?", """", "<", ">", "|")
-    Else
-        ' macOS: ":" is forbidden in filenames; also strip double quotes so the
-        ' filename cannot break the AppleScript "do shell script" quoting.
-        invalidChars = Array(":", """")
-    End If
-
-    ' Replace invalid characters with underscore
-    For Each ch In invalidChars
-        fname = replace$(fname, ch, "_")
-    Next ch
-
-    ' Windows-specific trailing rules
-    If sep = "\" Then
-        Do While Len(fname) > 0 And (Right$(fname, 1) = "." Or Right$(fname, 1) = " ")
-            fname = Left$(fname, Len(fname) - 1)
-        Loop
-    End If
-
-    SanitizeFilename = fname
-End Function

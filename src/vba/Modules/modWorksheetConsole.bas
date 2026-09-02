@@ -71,7 +71,7 @@ Public Sub ClearConsoleWorksheet()
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With ConsoleSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     ' Remove any existing content
@@ -122,7 +122,7 @@ Public Sub DisplayTextOnConsoleWorksheet(ByVal dotCommand As String, ByVal textB
     ' Initialize row counter to first unused row
     Dim row As Long
     With ConsoleSheet.UsedRange
-        row = .Cells.item(.Cells.count).row
+        row = .Cells.item(.Cells.Count).row
     End With
     
     ' Leave some white space between invocations
@@ -193,15 +193,11 @@ Public Sub LogToConsoleWorksheet(ByVal textBlob As String)
     ' Initialize row counter to first unused row
     Dim row As Long
     With ConsoleSheet.UsedRange
-        row = .Cells.item(.Cells.count).row + 1
+        row = .Cells.item(.Cells.Count).row + 1
     End With
     
     ' Leave some white space between invocations
-    'If row = 1 Then
-    '    row = row + 1
-    'Else
-    '    row = row + 2
-    'End If
+    'row = row + 1
     
     ' Split the text into an array of lines
     Dim parsedText As Variant
@@ -249,7 +245,7 @@ Public Sub CopyConsoleToClipboard()
     
     Dim lastRow As Long
     With ConsoleSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     Dim i As Long
@@ -298,7 +294,7 @@ Public Sub ConsoleWorksheetToFile(ByVal fileName As String)
     Dim rowNumber As Long
     Dim lastRow As Long
     With ConsoleSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
     
 #If Mac Then

@@ -36,8 +36,7 @@ Option Explicit
 ' ===========================================================================
 ' Callbacks for helpAttributes
 
-'@Ignore ParameterNotUsed
-Public Sub helpAttributes_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub helpAttributes_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_HELP_ATTRIBUTES).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_HELP_ATTRIBUTES).value = TOGGLE_SHOW Then
         HelpAttributesSheet.visible = True
@@ -49,16 +48,14 @@ Public Sub helpAttributes_onAction(ByVal control As IRibbonControl, ByVal presse
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub helpAttributes_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub helpAttributes_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_HELP_ATTRIBUTES)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for helpColors
 
-'@Ignore ParameterNotUsed
-Public Sub helpColors_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub helpColors_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_HELP_COLORS).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_HELP_COLORS).value = TOGGLE_SHOW Then
         HelpColorsSheet.visible = True
@@ -70,16 +67,14 @@ Public Sub helpColors_onAction(ByVal control As IRibbonControl, ByVal pressed As
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub helpColors_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub helpColors_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_HELP_COLORS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for helpShapes
 
-'@Ignore ParameterNotUsed
-Public Sub helpShapes_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub helpShapes_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_HELP_SHAPES).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_HELP_SHAPES).value = TOGGLE_SHOW Then
         HelpShapesSheet.visible = True
@@ -91,20 +86,19 @@ Public Sub helpShapes_onAction(ByVal control As IRibbonControl, ByVal pressed As
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub helpShapes_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub helpShapes_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_HELP_SHAPES)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleSettings
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSettings_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleSettings_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SETTINGS).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SETTINGS).value = TOGGLE_SHOW Then
         SettingsSheet.visible = True
         SettingsSheet.Activate
+        TabSelectCmdLineOptions
     Else
         SettingsSheet.visible = False
         DataSheet.Activate
@@ -112,16 +106,14 @@ Public Sub toggleSettings_onAction(ByVal control As IRibbonControl, ByVal presse
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSettings_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleSettings_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SETTINGS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleSource
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSource_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleSource_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SOURCE).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SOURCE).value = TOGGLE_SHOW Then
         Application.enableEvents = False
@@ -138,16 +130,14 @@ Public Sub toggleSource_onAction(ByVal control As IRibbonControl, ByVal pressed 
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSource_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleSource_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SOURCE)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleSql
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSql_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleSql_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SQL).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SQL).value = TOGGLE_SHOW Then
         SqlSheet.visible = True
@@ -159,8 +149,7 @@ Public Sub toggleSql_onAction(ByVal control As IRibbonControl, ByVal pressed As 
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSql_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleSql_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SQL)
 End Sub
 
@@ -183,8 +172,7 @@ Public Function enableConsole() As Boolean
 #End If
 End Function
 
-'@Ignore ParameterNotUsed
-Public Sub toggleConsole_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleConsole_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_CONSOLE).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_CONSOLE).value = TOGGLE_SHOW Then
         ConsoleSheet.visible = True
@@ -196,21 +184,18 @@ Public Sub toggleConsole_onAction(ByVal control As IRibbonControl, ByVal pressed
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleConsole_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleConsole_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_CONSOLE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Public Sub toggleConsole_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub toggleConsole_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = enableConsole()
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleSvg
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSvg_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleSvg_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SVG).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_SVG).value = TOGGLE_SHOW Then
         SvgSheet.visible = True
@@ -222,16 +207,14 @@ Public Sub toggleSvg_onAction(ByVal control As IRibbonControl, ByVal pressed As 
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleSvg_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleSvg_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_SVG)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleLists
 
-'@Ignore ParameterNotUsed
-Public Sub toggleLists_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleLists_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_LISTS).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_LISTS).value = TOGGLE_SHOW Then
         ListsSheet.visible = True
@@ -243,16 +226,14 @@ Public Sub toggleLists_onAction(ByVal control As IRibbonControl, ByVal pressed A
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleLists_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleLists_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_LISTS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleDiagnostics
 
-'@Ignore ParameterNotUsed
-Public Sub toggleDiagnostics_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleDiagnostics_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_DIAGNOSTICS).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_DIAGNOSTICS).value = TOGGLE_SHOW Then
         DiagnosticsSheet.visible = True
@@ -264,16 +245,14 @@ Public Sub toggleDiagnostics_onAction(ByVal control As IRibbonControl, ByVal pre
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleDiagnostics_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleDiagnostics_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_DIAGNOSTICS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleStyleDesigner
 
-'@Ignore ParameterNotUsed
-Public Sub toggleStyleDesigner_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleStyleDesigner_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_STYLE_DESIGNER).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_STYLE_DESIGNER).value = TOGGLE_SHOW Then
         StyleDesignerSheet.visible = True
@@ -285,16 +264,14 @@ Public Sub toggleStyleDesigner_onAction(ByVal control As IRibbonControl, ByVal p
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleStyleDesigner_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleStyleDesigner_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_STYLE_DESIGNER)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleStyles
 
-'@Ignore ParameterNotUsed
-Public Sub toggleStyles_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleStyles_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_STYLES).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_STYLES).value = TOGGLE_SHOW Then
         StylesSheet.visible = True
@@ -306,16 +283,14 @@ Public Sub toggleStyles_onAction(ByVal control As IRibbonControl, ByVal pressed 
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleStyles_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleStyles_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_STYLES)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleAbout
 
-'@Ignore ParameterNotUsed
-Public Sub toggleAbout_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleAbout_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_ABOUT).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TOOLS_TOGGLE_ABOUT).value = TOGGLE_SHOW Then
         AboutSheet.visible = True
@@ -327,16 +302,14 @@ Public Sub toggleAbout_onAction(ByVal control As IRibbonControl, ByVal pressed A
     RefreshRibbon
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleAbout_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleAbout_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TOOLS_TOGGLE_ABOUT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleExchange
 
-'@Ignore ParameterNotUsed
-Public Sub toggleExchange_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleExchange_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_TABS_TOGGLE_EXCHANGE).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     If SettingsSheet.Range(SETTINGS_TABS_TOGGLE_EXCHANGE).value = TOGGLE_SHOW Then
         Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabExchange"
@@ -344,37 +317,43 @@ Public Sub toggleExchange_onAction(ByVal control As IRibbonControl, ByVal presse
     RefreshRibbon
 End Sub
 
-
-'@Ignore ParameterNotUsed
-Public Sub toggleExchange_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleExchange_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_TABS_TOGGLE_EXCHANGE)
+End Sub
+
+' ===========================================================================
+' Callbacks for toggleGraphviz
+
+Private Sub toggleGraphviz_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    SettingsSheet.Range(SETTINGS_TABS_TOGGLE_GRAPHVIZ).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
+    If SettingsSheet.Range(SETTINGS_TABS_TOGGLE_GRAPHVIZ).value = TOGGLE_SHOW Then
+        Application.OnTime Now + TimeValue(ONE_SECOND_DELAY), "ActivateTabGraphviz"
+    End If
+    RefreshRibbon
+End Sub
+
+Private Sub toggleGraphviz_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = GetSettingBoolean(SETTINGS_TABS_TOGGLE_GRAPHVIZ)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for Help
 
-'@Ignore ParameterNotUsed
-Public Sub worksheetsHelp_onAction(ByVal control As IRibbonControl)
+Private Sub worksheetsHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLWorksheetsTab").value, NewWindow:=True
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub language_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef label As Variant)
-    label = GetLabel(control.id)
-End Sub
-
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub language_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_LANGUAGE).value = replace(controlId, "language", "locale")
     Localize
     RefreshRibbon
 End Sub
 
-Public Sub language_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub language_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = replace(SettingsSheet.Range(SETTINGS_LANGUAGE).value, "locale", "language")
 End Sub
 
-Public Sub language_getVisible(ByVal control As IRibbonControl, ByRef makeVisible As Variant)
+Private Sub language_getVisible(ByVal control As IRibbonControl, ByRef makeVisible As Variant)
     Dim workbookSheet As Variant
     Dim languageCount As Long
     languageCount = 0
@@ -397,29 +376,18 @@ End Sub
 ' ===========================================================================
 ' Callbacks for languageVerbose
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub languageVerbose_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SetVerbose (pressed)
     RefreshRibbon
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub languageVerbose_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = GetVerbose()
 End Sub
 
 ' ===========================================================================
-' Callbacks for Help
-
-'@Ignore ParameterNotUsed
-Public Sub localeHelp_onAction(ByVal control As IRibbonControl)
-    ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLLocaleTab").value, NewWindow:=True
-End Sub
-
-' ===========================================================================
 ' Callbacks for nodeMetric
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeMetric_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         StyleDesignerSheet.Range(DESIGNER_NODE_METRIC).value = TOGGLE_YES
@@ -435,7 +403,6 @@ Private Sub nodeMetric_onAction(ByVal control As IRibbonControl, ByVal pressed A
     InvalidateRibbonControl RIBBON_CTL_CLUSTER_MARGIN_MM
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub nodeMetric_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     If StyleDesignerSheet.Range(DESIGNER_NODE_METRIC).value = vbNullString Then
         returnedVal = False
@@ -447,8 +414,7 @@ End Sub
 ' ===========================================================================
 ' Callbacks for toggleSettings
 
-'@Ignore ParameterNotUsed
-Public Sub translations_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub translations_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     Dim id As String
     id = replace(control.id, "-", "_")  ' Excel won't let you have a hyphen in a cell name
     SettingsSheet.Range(id).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
@@ -460,8 +426,7 @@ Public Sub translations_onAction(ByVal control As IRibbonControl, ByVal pressed 
     End If
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub translations_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub translations_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     Dim id As String
     id = replace(control.id, "-", "_")  ' Excel won't let you have a hyphen in a cell name
     pressed = GetSettingBoolean(id)

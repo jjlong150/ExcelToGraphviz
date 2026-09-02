@@ -85,13 +85,13 @@ End Sub
 '   3. SILENT RECOVERY: Uses a localized error trap to bypass failures
 '      if the Style Designer sheet is protected or invalid.
 ' ==========================================================================
-Private Sub Worksheet_FollowHyperlink(ByVal Target As Hyperlink)
+Private Sub Worksheet_FollowHyperlink(ByVal target As Hyperlink)
     On Error GoTo ErrorHandler
-    SetStyleDesignerColorScheme (Target.TextToDisplay)
+    SetStyleDesignerColorScheme (target.TextToDisplay)
     Exit Sub
 
 ErrorHandler:
-    err.Clear
+    Err.Clear
     Resume Next
 End Sub
 

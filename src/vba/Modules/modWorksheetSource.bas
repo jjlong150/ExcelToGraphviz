@@ -77,9 +77,7 @@ Option Explicit
 ' ==========================================================================
 Public Sub LaunchGVEdit()
     If SearchPathForFile("gvedit.exe") Then
-        '@Ignore VariableNotUsed
         Dim taskId As Variant
-        '@Ignore AssignmentNotUsed
         taskId = Shell("gvedit.exe", 1)
     End If
 End Sub
@@ -182,7 +180,7 @@ Public Sub ClearSourceWorksheet()
     ' Determine the range of the cells which need to be cleared
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -244,7 +242,7 @@ Public Sub SourceWorksheetToFile(ByVal fileName As String)
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells(.Cells.count).row
+        lastRow = .Cells(.Cells.Count).row
     End With
 
     For rowNumber = source.firstRow To lastRow
@@ -271,7 +269,7 @@ Public Sub SourceWorksheetToFile(ByVal fileName As String)
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     For rowNumber = source.firstRow To lastRow
@@ -416,7 +414,7 @@ Public Sub CopySourceCodeToClipboard()
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     Dim i As Long
@@ -482,8 +480,8 @@ Public Sub CreateGraphFromSourceToWorksheet()
     Set graphvizObj = New Graphviz
 
     ' Build file names
-    graphvizObj.OutputDirectory = GetTempDirectory()
-    graphvizObj.FilenameBase = "RelationshipVisualizer"
+    graphvizObj.outputDirectory = GetTempDirectory()
+    graphvizObj.filenameBase = "RelationshipVisualizer"
     graphvizObj.GraphFormat = ini.graph.imageTypeWorksheet
 
     ' Create the '.gv' Graphviz source code file from the source worksheet
@@ -503,10 +501,12 @@ Public Sub CreateGraphFromSourceToWorksheet()
     
     ' Display the image
     If FileExists(graphvizObj.DiagramFilename) Then
-        '@Ignore VariableNotUsed
         Dim shapeObject As shape
-        '@Ignore AssignmentNotUsed
-        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range("B2"), False, True, "Graph image created from source worksheet data.")
+        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, _
+                                        ActiveSheet.Range("B2"), _
+                                        False, _
+                                        True, _
+                                        GetMessage("InsertPictureAltTextSource"))
         Set shapeObject = Nothing
     Else
         EmitMessage GetMessage("msgboxNoGraphCreated")
@@ -568,8 +568,8 @@ Public Sub VisualizeGraph(dotSource As String)
     Set graphvizObj = New Graphviz
 
     ' Build file names
-    graphvizObj.OutputDirectory = GetTempDirectory()
-    graphvizObj.FilenameBase = "RelationshipVisualizer"
+    graphvizObj.outputDirectory = GetTempDirectory()
+    graphvizObj.filenameBase = "RelationshipVisualizer"
     graphvizObj.GraphFormat = ini.graph.imageTypeWorksheet
 
     ' Create the '.gv' Graphviz source code file from the source worksheet
@@ -589,10 +589,12 @@ Public Sub VisualizeGraph(dotSource As String)
     
     ' Display the image
     If FileExists(graphvizObj.DiagramFilename) Then
-        '@Ignore VariableNotUsed
         Dim shapeObject As shape
-        '@Ignore AssignmentNotUsed
-        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, ActiveSheet.Range("B2"), False, True, "Graph image created from source worksheet data.")
+        Set shapeObject = InsertPicture(graphvizObj.DiagramFilename, _
+                                        ActiveSheet.Range("B2"), _
+                                        False, _
+                                        True, _
+                                        GetMessage("InsertPictureAltTextSource"))
         Set shapeObject = Nothing
     Else
         EmitMessage GetMessage("msgboxNoGraphCreated")
@@ -665,8 +667,8 @@ Public Sub CreateGraphFromSourceToFile()
     Set graphvizObj = New Graphviz
 
     ' Create the filenames
-    graphvizObj.OutputDirectory = output.directory
-    graphvizObj.FilenameBase = GetFilenameBase(ini, styleColumn)
+    graphvizObj.outputDirectory = output.directory
+    graphvizObj.filenameBase = GetFilenameBase(ini, styleColumn)
     graphvizObj.GraphFormat = ini.graph.imageTypeFile
     
     ' Create the '.gv' Graphviz source code file from the source worksheet
@@ -683,6 +685,7 @@ Public Sub CreateGraphFromSourceToFile()
     graphvizObj.CommandLineParameters = ini.CommandLine.parameters
     graphvizObj.GraphLayout = ini.graph.engine
     graphvizObj.GraphvizPath = ini.CommandLine.GraphvizPath
+    graphvizObj.Renderer = ini.graph.Renderer
     
     graphvizObj.RenderGraph
     
@@ -737,7 +740,7 @@ Public Sub UpdateSourceWorksheetLineNumbers()
     
     ' Determine the range of the cells which need to be cleared
     With SourceSheet.UsedRange
-        rowLast = .Cells.item(.Cells.count).row
+        rowLast = .Cells.item(.Cells.Count).row
     End With
 
     ' If the worksheet is already empty we do not want to wipe out the heading row
@@ -759,7 +762,7 @@ Public Sub UpdateSourceWorksheetLineNumbers()
     
     Dim lastRow As Long
     With SourceSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     For rowNumber = sourceLayout.firstRow To lastRow
@@ -818,3 +821,81 @@ Public Sub ShowSource(ByVal dotSource As String)
         DisplaySourceInWorksheet dotSource
     End If
 End Sub
+
+Public Sub CreateDotFiles(ByVal firstViewColumn As Long, ByVal lastViewColumn As Long)
+    ' Clear the status bar
+    ClearStatusBar
+    
+    ' Read in the runtime settings
+    Dim ini As settings
+    ini = GetSettings(GetDataWorksheetName())
+
+    If Not WorksheetExists(ini.data.worksheetName) Then
+        EmitMessage GetMessage("msgboxNoDataToGraph")
+        Exit Sub
+    End If
+
+    ' Get file output settings
+    Dim output As FileOutput
+    output = GetSettingsForFileOutput()
+
+    ' Determine output directory, and build file names
+    If output.directory = vbNullString Then
+        output.directory = ActiveWorkbook.path
+    End If
+
+    ' Validate filename info
+    If Not FileLocationProvided(output) Then
+        Exit Sub
+    End If
+
+    Dim dotFilename As String
+    Dim fullDotFilename As String
+    
+    Dim viewColumn As Long
+    Dim viewName As String
+    
+    For viewColumn = firstViewColumn To lastViewColumn
+        ' Get the name of the view
+        viewName = StylesSheet.Cells.item(ini.styles.headingRow, viewColumn).value
+        
+        ' Expose the view name so it can be used as data in the graph
+        SettingsSheet.Range("ViewNameLabel").value = viewName
+        
+        ' View name might be referenced in the graph options, so refresh the value
+        ini.graph.options = Trim$(SettingsSheet.Range(SETTINGS_GRAPH_OPTIONS).value)
+        
+        ' Build the JSON file name
+        dotFilename = SanitizeFilename(GetFilenameBase(ini, viewColumn) & ".gv")
+        
+        If output.directory = vbNullString Then
+            fullDotFilename = dotFilename
+        Else
+            fullDotFilename = output.directory & Application.pathSeparator & dotFilename
+        End If
+        
+        ' Generate the JSON for the current view
+        Dim dotSource As String
+        If ConvertDataWorksheetToGvSource(ini, viewColumn, dotSource) Then
+#If Mac Then
+            ' Write the DOT source to a file
+            WriteTextToFile dotSource, fullDotFilename
+#Else
+            ' Write the DOT source to a file
+            WriteTextToUTF8FileFileWithoutBOM dotSource, fullDotFilename
+#End If
+            ' Display the published graph?
+            If FileExists(fullDotFilename) Then
+                If SettingsSheet.Range("openAfterPublish").value = TOGGLE_YES Then
+                    SafeFollowHyperlink fullDotFilename
+                End If
+                UpdateStatusBarForNSeconds GetLabel("publishDot") & " " & GetMessage("statusbarGraphFilenameIs") & " " & fullDotFilename, 10
+            End If
+        End If
+    Next viewColumn
+
+    ' Sync up settings with dropdown choice
+    SettingsSheet.Range("ViewNameLabel").value = SettingsSheet.Range("ViewName").value
+
+End Sub
+

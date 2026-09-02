@@ -141,7 +141,7 @@ End Sub
 ' FUNCTION: GetSettings
 '
 ' PURPOSE:
-'   Produces a fully-hydrated settings UDT representing the workbook’s
+'   Produces a fully-hydrated settings UDT representing the workbook's
 '   configuration state across all subsystems (Graph, Data, Source, Styles,
 '   CommandLine, Console). Provides a single, authoritative snapshot used by
 '   the rendering pipeline, SQL workflows, diagnostics, and UI logic.
@@ -199,6 +199,10 @@ Public Function GetSettings(ByVal dataWorksheet As String) As settings
     ' "data" worksheet is allowed to have clones, record which clone
     ' is the active one.
     workbookSettings.data.worksheetName = dataWorksheet
+    
+    With ActiveWorkbook.worksheets.[_Default](dataWorksheet).UsedRange
+        workbookSettings.data.lastRow = .Cells(.Cells.Count).row
+    End With
     
     ' If "settings" worksheet has not changed, return the previous values
     If workbookSettingsAreValid Then
@@ -282,19 +286,21 @@ Public Function GetSettingsForStylesWorksheet() As stylesWorksheet
     GetSettingsForStylesWorksheet.lastRow = CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_LAST))
     If GetSettingsForStylesWorksheet.lastRow = 0 Then
         With StylesSheet.UsedRange
-            GetSettingsForStylesWorksheet.lastRow = .Cells.item(.Cells.count).row
+            GetSettingsForStylesWorksheet.lastRow = .Cells.item(.Cells.Count).row
         End With
     End If
     
     GetSettingsForStylesWorksheet.flagColumn = GetSettingColNum(SETTINGS_STYLES_COL_COMMENT)
     GetSettingsForStylesWorksheet.nameColumn = GetSettingColNum(SETTINGS_STYLES_COL_STYLE)
+    GetSettingsForStylesWorksheet.descriptionColumn = GetSettingColNum(SETTINGS_STYLES_COL_DESCRIPTION)
     GetSettingsForStylesWorksheet.formatColumn = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT)
     GetSettingsForStylesWorksheet.typeColumn = GetSettingColNum(SETTINGS_STYLES_COL_OBJECT_TYPE)
     GetSettingsForStylesWorksheet.firstYesNoColumn = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
     GetSettingsForStylesWorksheet.selectedViewColumn = GetSettingColNum(SETTINGS_STYLES_COL_SHOW_STYLE)
     
-    GetSettingsForStylesWorksheet.suffixOpen = SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_OPEN).value
-    GetSettingsForStylesWorksheet.suffixClose = SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_CLOSE).value
+    GetSettingsForStylesWorksheet.concatFormat = SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).value
+    GetSettingsForStylesWorksheet.affixOpen = SettingsSheet.Range(SETTINGS_STYLES_AFFIX_OPEN).value
+    GetSettingsForStylesWorksheet.affixClose = SettingsSheet.Range(SETTINGS_STYLES_AFFIX_CLOSE).value
 End Function
 
 ' ==========================================================================
@@ -354,7 +360,7 @@ Public Function GetSettingsForDataWorksheet(ByVal worksheetName As String) As da
     GetSettingsForDataWorksheet.lastRow = CLng(SettingsSheet.Range(SETTINGS_DATA_ROW_LAST))
     If GetSettingsForDataWorksheet.lastRow = 0 Then
         With ActiveWorkbook.worksheets.[_Default](worksheetName).UsedRange
-            GetSettingsForDataWorksheet.lastRow = .Cells(.Cells.count).row
+            GetSettingsForDataWorksheet.lastRow = .Cells(.Cells.Count).row
         End With
     End If
 
@@ -368,7 +374,7 @@ Public Function GetSettingsForDataWorksheet(ByVal worksheetName As String) As da
     GetSettingsForDataWorksheet.tooltipColumn = GetSettingColNum(SETTINGS_DATA_COL_TOOLTIP)
     GetSettingsForDataWorksheet.isRelatedToItemColumn = GetSettingColNum(SETTINGS_DATA_COL_IS_RELATED_TO)
     GetSettingsForDataWorksheet.extraAttributesColumn = GetSettingColNum(SETTINGS_DATA_COL_EXTRA_ATTRIBUTES)
-    GetSettingsForDataWorksheet.errorMessageColumn = GetSettingColNum(SETTINGS_DATA_COL_ERROR_MESSAGES)
+    GetSettingsForDataWorksheet.propertiesColumn = GetSettingColNum(SETTINGS_DATA_COL_PROPERTIES)
     GetSettingsForDataWorksheet.graphDisplayColumn = GetSettingColNum(SETTINGS_DATA_COL_GRAPH)
     GetSettingsForDataWorksheet.graphDisplayColumnAsAlpha = SettingsSheet.Range(SETTINGS_DATA_COL_GRAPH).value
 End Function
@@ -433,7 +439,7 @@ Public Function GetSettingsForSqlWorksheet() As sqlWorksheet
     GetSettingsForSqlWorksheet.headingRow = CLng(SettingsSheet.Range(SETTINGS_SQL_ROW_HEADING))
     GetSettingsForSqlWorksheet.firstRow = CLng(SettingsSheet.Range(SETTINGS_SQL_ROW_FIRST))
     With SqlSheet.UsedRange
-        GetSettingsForSqlWorksheet.lastRow = .Cells.item(.Cells.count).row
+        GetSettingsForSqlWorksheet.lastRow = .Cells.item(.Cells.Count).row
     End With
     GetSettingsForSqlWorksheet.flagColumn = GetSettingColNum(SETTINGS_SQL_COL_COMMENT)
     GetSettingsForSqlWorksheet.sqlStatementColumn = GetSettingColNum(SETTINGS_SQL_COL_SQL_STATEMENT)
@@ -638,7 +644,7 @@ Public Function GetSettingsForSvgWorksheet() As svgWorksheet
     GetSettingsForSvgWorksheet.headingRow = svgLayoutRow.headingRow
     GetSettingsForSvgWorksheet.firstRow = svgLayoutRow.firstDataRow
     With SvgSheet.UsedRange
-        GetSettingsForSvgWorksheet.lastRow = .Cells.item(.Cells.count).row
+        GetSettingsForSvgWorksheet.lastRow = .Cells.item(.Cells.Count).row
     End With
     GetSettingsForSvgWorksheet.flagColumn = svgLayoutColumn.flagColumn
     GetSettingsForSvgWorksheet.findColumn = svgLayoutColumn.findColumn
@@ -743,29 +749,48 @@ End Function
 ' ==========================================================================
 Public Function GetSettingsForGraph() As graphOptions
     GetSettingsForGraph.addStrict = GetSettingBoolean(SETTINGS_GRAPH_STRICT)
+    
+    GetSettingsForGraph.blankClusterLabels = GetSettingBoolean(SETTINGS_BLANK_CLUSTER_LABEL)
     GetSettingsForGraph.blankEdgeLabels = GetSettingBoolean(SETTINGS_BLANK_EDGE_LABELS)
     GetSettingsForGraph.blankNodeLabels = GetSettingBoolean(SETTINGS_BLANK_NODE_LABELS)
+    
+    GetSettingsForGraph.blankClusterTooltips = GetSettingBoolean("BlankClusterTooltip")
+    GetSettingsForGraph.blankEdgeTooltips = GetSettingBoolean("BlankEdgeTooltip")
+    GetSettingsForGraph.blankNodeTooltips = GetSettingBoolean("BlankNodeTooltip")
+    
     GetSettingsForGraph.center = GetSettingBoolean(SETTINGS_GRAPH_CENTER)
     GetSettingsForGraph.clusterrank = SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value
     GetSettingsForGraph.compound = GetSettingBoolean(SETTINGS_GRAPH_COMPOUND)
     GetSettingsForGraph.concentrate = GetSettingBoolean(SETTINGS_GRAPH_CONCENTRATE)
     GetSettingsForGraph.debug = GetSettingBoolean(SETTINGS_DEBUG)
     GetSettingsForGraph.engine = GetGraphvizEngine()
+    GetSettingsForGraph.Renderer = GetRenderer()
     GetSettingsForGraph.fileDisposition = Trim$(SettingsSheet.Range(SETTINGS_FILE_DISPOSITION))
     GetSettingsForGraph.forceLabels = GetSettingBoolean(SETTINGS_GRAPH_FORCE_LABELS)
     GetSettingsForGraph.imagePath = GetImagePath()
     GetSettingsForGraph.includeGraphImagePath = GetSettingBoolean(SETTINGS_GRAPH_INCLUDE_IMAGE_PATH)
-    GetSettingsForGraph.includeEdgeHeadLabels = GetSettingBoolean(SETTINGS_EDGE_HEAD_LABELS)
+    
+    GetSettingsForGraph.includeClusterLabels = GetSettingBoolean(SETTINGS_CLUSTER_LABELS)
+    GetSettingsForGraph.includeClusterTooltips = GetSettingBoolean(SETTINGS_CLUSTER_TOOLTIPS)
+    
     GetSettingsForGraph.includeEdgeLabels = GetSettingBoolean(SETTINGS_EDGE_LABELS)
-    GetSettingsForGraph.includeEdgePorts = GetSettingBoolean(SETTINGS_EDGE_PORTS)
-    GetSettingsForGraph.includeEdgeTailLabels = GetSettingBoolean(SETTINGS_EDGE_TAIL_LABELS)
     GetSettingsForGraph.includeEdgeXLabels = GetSettingBoolean(SETTINGS_EDGE_XLABELS)
-    GetSettingsForGraph.includeExtraAttributes = GetSettingBoolean(SETTINGS_INCLUDE_EXTRA_ATTRIBUTES)
+    GetSettingsForGraph.includeEdgeTailLabels = GetSettingBoolean(SETTINGS_EDGE_TAIL_LABELS)
+    GetSettingsForGraph.includeEdgeHeadLabels = GetSettingBoolean(SETTINGS_EDGE_HEAD_LABELS)
+    GetSettingsForGraph.includeEdgeTooltips = GetSettingBoolean(SETTINGS_EDGE_TOOLTIPS)
+    
+    GetSettingsForGraph.includeEdgePorts = GetSettingBoolean(SETTINGS_EDGE_PORTS)
+    
     GetSettingsForGraph.includeNodeLabels = GetSettingBoolean(SETTINGS_NODE_LABELS)
     GetSettingsForGraph.includeNodeXLabels = GetSettingBoolean(SETTINGS_NODE_XLABELS)
+    GetSettingsForGraph.includeNodeTooltips = GetSettingBoolean(SETTINGS_NODE_TOOLTIPS)
+    
     GetSettingsForGraph.includeOrphanEdges = GetSettingBoolean(SETTINGS_RELATIONSHIPS_WITHOUT_NODES)
     GetSettingsForGraph.includeOrphanNodes = GetSettingBoolean(SETTINGS_NODES_WITHOUT_RELATIONSHIPS)
+    
     GetSettingsForGraph.includeStyleFormat = GetSettingBoolean(SETTINGS_INCLUDE_STYLE_FORMAT)
+    GetSettingsForGraph.includeExtraAttributes = GetSettingBoolean(SETTINGS_INCLUDE_EXTRA_ATTRIBUTES)
+    
     GetSettingsForGraph.layout = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
     GetSettingsForGraph.layoutDim = SettingsSheet.Range(SETTINGS_GRAPH_DIM).value
     GetSettingsForGraph.layoutDimen = SettingsSheet.Range(SETTINGS_GRAPH_DIMEN).value
@@ -811,15 +836,6 @@ Public Function GetSettingsForGraph() As graphOptions
         GetSettingsForGraph.command = "graph"
         GetSettingsForGraph.edgeOperator = "--"
     End If
-    
-    If LCase$(GetSettingsForGraph.imageTypeWorksheet) = FILETYPE_SVG Then
-        GetSettingsForGraph.includeTooltip = True
-    End If
-    
-    If LCase$(GetSettingsForGraph.imageTypeFile) = FILETYPE_SVG Then
-        GetSettingsForGraph.includeTooltip = True
-    End If
-    
 End Function
 
 ' ==========================================================================
@@ -1004,736 +1020,725 @@ Public Sub DisplayGraphOptions(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range(SETTINGS_IMAGE_PATH).row - 1
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "Graph Options"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_IMAGE_PATH).row
     rowTo = SettingsSheet.Range(SETTINGS_PICTURE_NAME).row + 1
     DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabGraphOptions").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabGraphOptions").visible = Not isVisible
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplayCmdLineOptions
-'
-' PURPOSE:
-'   Toggles the visibility of the "Command Line Options" section and its
-'   associated UI tab indicators on the Settings worksheet.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using the
-'      'SETTINGS_COMMAND_LINE_PARAMETERS' and 'SETTINGS_GV_PATH'
-'      named ranges as anchors (Contract API).
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to expand or collapse
-'      the configuration fields.
-'   3. TAB STATE MANAGEMENT: Toggles the visibility of the "Enabled"
-'      and "Disabled" graphical shapes to reflect the active tab state.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Relies on the Named Range API to identify the target
-'     CLI configuration block.
-' ==========================================================================
 Public Sub DisplayCmdLineOptions(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range(SETTINGS_COMMAND_LINE_PARAMETERS).row - 1
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "Command Line Options"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_COMMAND_LINE_PARAMETERS).row
     rowTo = SettingsSheet.Range(SETTINGS_GV_PATH).row + 1
     DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabCmdLineOptions").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabCmdLineOptions").visible = Not isVisible
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplayStylesOptions
-'
-' PURPOSE:
-'   Toggles the visibility of the "Styles Worksheet" configuration section
-'   and its associated UI tab indicators on the Settings sheet.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using the
-'      'SETTINGS_STYLES_COL_COMMENT' and 'SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW'
-'      named ranges as anchors (Contract API).
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to show or hide the
-'      Style Gallery configuration fields.
-'   3. TAB STATE MANAGEMENT: Swaps the visibility of the "Enabled" and
-'      "Disabled" graphical shapes to provide visual feedback for the
-'      active UI tab.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Relies on the Named Range API to maintain a "tabbed"
-'     interface within a standard worksheet.
-' ==========================================================================
-Public Sub DisplayStylesOptions(ByVal isVisible As Boolean)
+Public Sub DisplayCriticalErrors(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range(SETTINGS_STYLES_COL_COMMENT).row - 1
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "Critical Error Messages"
+    
+    rowFrom = SettingsSheet.Range("ErrorRefreshingTheRibbon").row
+    rowTo = SettingsSheet.Range("ErrorActivatingARibbonTab").row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
+Public Sub DisplayStylesWorksheet(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''styles' Worksheet"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_STYLES_COL_COMMENT).row
     rowTo = SettingsSheet.Range(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW).row + 1
     DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabStylesWorksheet").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabStylesWorksheet").visible = Not isVisible
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplayDataOptions
-'
-' PURPOSE:
-'   Toggles the visibility of the "Data Worksheet" configuration section
-'   and its associated UI tab indicators on the Settings sheet.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using the
-'      'SETTINGS_DATA_COL_COMMENT' and 'SETTINGS_DATA_COL_GRAPH'
-'      named ranges as anchors (Contract API).
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to show or hide the
-'      Data sheet structural configuration fields.
-'   3. TAB STATE MANAGEMENT: Swaps the visibility of the "Enabled" and
-'      "Disabled" graphical shapes to provide visual feedback for the
-'      active UI tab.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Relies on the Named Range API to maintain the decoupling
-'     between worksheet layout and UI logic.
-' ==========================================================================
-Public Sub DisplayDataOptions(ByVal isVisible As Boolean)
+Public Sub DisplayStylesTab(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range(SETTINGS_DATA_COL_COMMENT).row - 1
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Styles' Tab"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).row
+    rowTo = SettingsSheet.Range(SETTINGS_STYLES_AFFIX_CLOSE).row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
+Public Sub DisplayDataWorksheetOptions(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''data' Worksheet"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_DATA_COL_COMMENT).row
     rowTo = SettingsSheet.Range(SETTINGS_DATA_COL_GRAPH).row + 1
     DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabDataWorksheet").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabDataWorksheet").visible = Not isVisible
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplaySourceOptions
-'
-' PURPOSE:
-'   Toggles the visibility of the "Source Worksheet" configuration section
-'   and its associated UI tab indicators on the Settings sheet.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using the
-'      'SETTINGS_SOURCE_ROW_HEADING' and 'SETTINGS_SOURCE_INDENT'
-'      named ranges as anchors (Contract API).
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to show or hide the
-'      Source Viewer configuration fields.
-'   3. TAB STATE MANAGEMENT: Swaps the visibility of the "Enabled" and
-'      "Disabled" graphical shapes to provide visual feedback for the
-'      active UI tab.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Adheres to the Named Range API for UI state management.
-' ==========================================================================
-Public Sub DisplaySourceOptions(ByVal isVisible As Boolean)
+Public Sub DisplayDataTabOptions(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range(SETTINGS_SOURCE_ROW_HEADING).row - 1
-    rowTo = SettingsSheet.Range(SETTINGS_SOURCE_INDENT).row + 1
-    DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabSourceWorksheet").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabSourceWorksheet").visible = Not isVisible
-End Sub
-
-' ==========================================================================
-' PROCEDURE: DisplaySqlOptions
-'
-' PURPOSE:
-'   Toggles the visibility of the "SQL Worksheet" configuration section,
-'   implementing platform-specific restrictions for macOS.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using the
-'      'SETTINGS_SQL_COL_COMMENT' and 'SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR'
-'      named ranges as anchors (Contract API).
-'   2. MAC RESTRICTION (#If Mac): Forces the entire section and its tab
-'      indicators to be hidden, as SQL features (ADO) are Windows-only.
-'   3. WINDOWS EXECUTION (#Else): Invokes 'DisplayTabRows' and toggles the
-'      visibility of the "Enabled"/"Disabled" graphical tab shapes.
-'
-' TECHNICAL NOTES:
-'   - Platform: Windows-Only feature. Explicitly hidden on macOS to prevent
-'     user confusion regarding ADO availability.
-'   - DeepWiki Context: Reflects the "Windows-Only Restriction" noted in
-'     the SQL Data Integration architectural page.
-' ==========================================================================
-Public Sub DisplaySqlOptions(ByVal isVisible As Boolean)
-    Dim rowFrom As Long
-    Dim rowTo As Long
-    
-    rowFrom = SettingsSheet.Range(SETTINGS_SQL_COL_COMMENT).row - 1
-    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR).row + 1
-#If Mac Then
-    DisplayTabRows False, rowFrom, rowTo
-    SettingsSheet.Shapes.Range("enabledTabSqlWorksheet").visible = False
-    SettingsSheet.Shapes.Range("disabledTabSqlWorksheet").visible = False
-#Else
-    DisplayTabRows isVisible, rowFrom, rowTo
-    SettingsSheet.Shapes.Range("enabledTabSqlWorksheet").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabSqlWorksheet").visible = Not isVisible
-#End If
-End Sub
-
-' ==========================================================================
-' PROCEDURE: DisplayGraphvizTab
-'
-' PURPOSE:
-'   Toggles the visibility of the "Graphviz Tab" configuration section
-'   on the Settings worksheet, maintaining the simulated tabbed UI.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using
-'      'SETTINGS_TAB_GRAPHVIZ' as the top anchor and
-'      'SETTINGS_TAB_SOURCE' as the bottom boundary (minus buffer).
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to expand or collapse
-'      the configuration fields.
-'   3. TAB STATE MANAGEMENT: Toggles the visibility of the "Enabled"
-'      and "Disabled" graphical shapes to reflect the active tab state.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Relies on the Named Range API to identify the target
-'     ribbon-tab configuration block.
-' ==========================================================================
-Public Sub DisplayGraphvizTab(ByVal isVisible As Boolean)
-    Dim rowFrom As Long
-    Dim rowTo As Long
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Data' Tab"
     
     rowFrom = SettingsSheet.Range(SETTINGS_TAB_GRAPHVIZ).row
-    rowTo = SettingsSheet.Range(SETTINGS_TAB_SOURCE).row - 1
+    rowTo = SettingsSheet.Range(SETTINGS_FILE_DISPOSITION).row + 1
     DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabGraphvizTab").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabGraphvizTab").visible = Not isVisible
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplaySourceTab
-'
-' PURPOSE:
-'   Toggles the visibility of the configuration rows associated with the
-'   "Source" Ribbon tab interface on the Settings worksheet.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Dynamically calculates the row range using
-'      the 'SETTINGS_TAB_SOURCE' and 'SETTINGS_EXT_TAB_NAME' named ranges
-'      as the vertical anchors.
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to show or hide the
-'      specific Ribbon-state configuration fields.
-'   3. TAB STATE MANAGEMENT: Updates the visibility of the "Enabled" and
-'      "Disabled" UI shapes to provide clear visual state feedback.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Adheres to the Named Range API "Contract" to allow for
-'     flexible worksheet restructuring.
-' ==========================================================================
+Public Sub DisplaySourceWorksheet(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''source' Worksheet"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_SOURCE_COL_LINE_NUMBER).row
+    rowTo = SettingsSheet.Range(SETTINGS_SOURCE_COL_SOURCE).row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
 Public Sub DisplaySourceTab(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range(SETTINGS_TAB_SOURCE).row
-    rowTo = SettingsSheet.Range(SETTINGS_EXT_TAB_NAME).row - 1
-    DisplayTabRows isVisible, rowFrom, rowTo
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Source' Tab"
     
-    SettingsSheet.Shapes.Range("enabledTabSourceTab").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabSourceTab").visible = Not isVisible
+    rowFrom = SettingsSheet.Range(SETTINGS_SOURCE_INDENT).row
+    rowTo = SettingsSheet.Range("SourceWeb6Supertip").row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplayExtensionsTab
-'
-' PURPOSE:
-'   Toggles the visibility of the "Extensions Tab" configuration rows and
-'   associated graphical UI indicators on the Settings worksheet.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the dynamic row range using
-'      'SETTINGS_EXT_TAB_NAME' and 'SETTINGS_TAB_EXCHANGE' as anchors.
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to expand or collapse the
-'      relevant configuration fields.
-'   3. TAB STATE MANAGEMENT: Swaps the visibility of the "Enabled" and
-'      "Disabled" graphical shapes to reflect the active tab selection.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Relies on the Named Range API to maintain the simulated
-'     tabbed interface logic.
-' ==========================================================================
+Public Sub DisplaySqlWorksheet(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''sql' Worksheet"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_SQL_COL_COMMENT).row
+    rowTo = SettingsSheet.Range(SETTINGS_SQL_COL_STATUS).row + 1
+#If Mac Then
+    DisplayTabRows False, rowFrom, rowTo
+#Else
+    DisplayTabRows isVisible, rowFrom, rowTo
+#End If
+End Sub
+
+Public Sub DisplaySqlTab(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''SQL' Tab"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_SQL_COL_FILTER).row - 2
+    rowTo = SettingsSheet.Range(SETTINGS_SQL_MAX_CONNECTION_MINUTES).row + 1
+#If Mac Then
+    DisplayTabRows False, rowFrom, rowTo
+#Else
+    DisplayTabRows isVisible, rowFrom, rowTo
+#End If
+End Sub
+
+Public Sub DisplaySqlKeywords(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "'SQL Keywords"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CLUSTER).row - 1
+    rowTo = SettingsSheet.Range(SETTINGS_SQL_FIELD_NAME_CONCATENATE_SEPARATOR).row + 1
+#If Mac Then
+    DisplayTabRows False, rowFrom, rowTo
+#Else
+    DisplayTabRows isVisible, rowFrom, rowTo
+#End If
+End Sub
+
+Public Sub DisplaySvgTab(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''SVG' Tab"
+    
+    rowFrom = SettingsSheet.Range(SETTINGS_POST_PROCESS_SVG).row
+    rowTo = SettingsSheet.Range(SETTINGS_POST_PROCESS_SVG).row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
+Public Sub DisplayGraphvizTab(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Graphviz' Tab"
+    
+    rowFrom = SettingsSheet.Range("SettingsGraphvizAlgorithm").row
+    rowTo = SettingsSheet.Range("GraphSmoothing").row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
 Public Sub DisplayExtensionsTab(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
   
-    rowFrom = SettingsSheet.Range(SETTINGS_EXT_TAB_NAME).row - 1
-    rowTo = SettingsSheet.Range(SETTINGS_TAB_EXCHANGE).row - 1
-    DisplayTabRows isVisible, rowFrom, rowTo
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Extension' Tab"
     
-    SettingsSheet.Shapes.Range("enabledTabExtensionsTab").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabExtensionsTab").visible = Not isVisible
+    rowFrom = SettingsSheet.Range(SETTINGS_EXT_TAB_NAME).row
+    rowTo = SettingsSheet.Range(SETTINGS_EXT_TAB_GROUP_NAME_WEB).row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
 End Sub
 
-' ==========================================================================
-' PROCEDURE: DisplayExchangeTab
-'
-' PURPOSE:
-'   Toggles the visibility of the "Exchange Tab" (JSON Import/Export)
-'   configuration section and its associated graphical UI indicators.
-'
-' TECHNICAL WORKFLOW:
-'   1. BOUNDARY RESOLUTION: Calculates the row range using the
-'      "SettingsExchangeTab" anchor and the 'SETTINGS_TOOLS_EXCHANGE_WORKSHEET_LAYOUTS'
-'      named range as the vertical boundaries.
-'   2. UI TRANSITION: Invokes 'DisplayTabRows' to expand or collapse the
-'      data exchange configuration fields.
-'   3. TAB STATE MANAGEMENT: Updates the visibility of the "Enabled" and
-'      "Disabled" shapes to provide visual feedback for the active tab.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - DeepWiki Context: Controls the visibility of the configuration engine
-'     for the "Data Exchange (JSON Import/Export)" subsystem.
-' ==========================================================================
+Public Sub DisplayConsoleTab(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Console' Tab"
+    
+    rowFrom = SettingsSheet.Range("SettingsConsoleSwitchesGroup").row
+    rowTo = SettingsSheet.Range("ErrorToStatusBar").row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
 Public Sub DisplayExchangeTab(ByVal isVisible As Boolean)
     Dim rowFrom As Long
     Dim rowTo As Long
     
-    rowFrom = SettingsSheet.Range("SettingsExchangeTab").row - 1
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Exchange' Tab"
+    
+    rowFrom = SettingsSheet.Range("ExchangeDataExportRow").row - 2
     rowTo = SettingsSheet.Range(SETTINGS_TOOLS_EXCHANGE_WORKSHEET_LAYOUTS).row + 1
     DisplayTabRows isVisible, rowFrom, rowTo
-    
-    SettingsSheet.Shapes.Range("enabledTabExchangeTab").visible = isVisible
-    SettingsSheet.Shapes.Range("disabledTabExchangeTab").visible = Not isVisible
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectGraphOptions
-'
-' PURPOSE:
-'   Activates the "Graph Options" view within the Settings worksheet's
-'   simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to hide the bulk row
-'      hiding/unhiding process from the user.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayGraphOptions' to TRUE.
-'      - Explicitly sets all other tab display procedures to FALSE.
-'   3. FOCUS MANAGEMENT: Selects the 'SETTINGS_IMAGE_PATH' range to orient
-'      the user to the start of the configuration block.
-'   4. REFRESH: Re-enables 'ScreenUpdating' to reveal the newly focused tab.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Centralizes the "Exclusive Visibility" logic for the
-'     simulated tab system.
-' ==========================================================================
-Public Sub TabSelectGraphOptions()
-    Application.ScreenUpdating = False
+Public Sub DisplayHelpUrls(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
     
-    DisplayGraphOptions True
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "Help Urls"
+    
+    rowFrom = SettingsSheet.Range("HelpURLConsoleTab").row
+    rowTo = SettingsSheet.Range("HelpURLSvgTab").row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
+Public Sub DisplayLaunchpadTab(ByVal isVisible As Boolean)
+    Dim rowFrom As Long
+    Dim rowTo As Long
+    
+    If isVisible Then SettingsSheet.Range(SETTINGS_HEADING).value = "''Launchpad' Tab"
+    
+    rowFrom = SettingsSheet.Range("SettingsLaunchpadHeading").row
+    rowTo = SettingsSheet.Range(SETTINGS_LANGUAGE).row + 1
+    DisplayTabRows isVisible, rowFrom, rowTo
+End Sub
+
+Public Sub TabSelectGraphOptions()
+    Application.screenUpdating = False
+    
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions True
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_IMAGE_PATH).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectCmdLineOptions
-'
-' PURPOSE:
-'   Activates the "Command Line Options" view within the Settings worksheet's
-'   simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to ensure a smooth visual
-'      transition during bulk row state changes.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayCmdLineOptions' to TRUE.
-'      - Explicitly hides all other configuration blocks by calling their
-'        respective display procedures with FALSE.
-'   3. FOCUS MANAGEMENT: Shifts the selection to 'SETTINGS_COMMAND_LINE_PARAMETERS'
-'      to land the user at the primary input field.
-'   4. REFRESH: Re-enables 'ScreenUpdating' to commit the visual state.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Contract: Adheres to the "Exclusive Visibility" pattern for
-'     simulated tab management.
-' ==========================================================================
 Public Sub TabSelectCmdLineOptions()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions True
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_COMMAND_LINE_PARAMETERS).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectStylesWorksheet
-'
-' PURPOSE:
-'   Activates the "Styles Worksheet" configuration view within the
-'   Settings worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform bulk row
-'      manipulation without visual flickering.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayStylesOptions' to TRUE.
-'      - Forces all other configuration blocks (Graph, SQL, Data, etc.)
-'        to FALSE to maintain exclusive visibility.
-'   3. FOCUS MANAGEMENT: Shifts active selection to 'SETTINGS_STYLES_COL_COMMENT'
-'      to anchor the user's view to the Style Gallery schema settings.
-'   4. REFRESH: Restores 'ScreenUpdating' to finalize the UI transition.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Implements the "Exclusive Tab Selection" pattern for the
-'     Settings UI.
-' ==========================================================================
 Public Sub TabSelectStylesWorksheet()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions True
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet True
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_STYLES_COL_COMMENT).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectDataWorksheet
-'
-' PURPOSE:
-'   Activates the "Data Worksheet" configuration view within the Settings
-'   worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform the multi-row
-'      visibility transition seamlessly.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayDataOptions' to TRUE.
-'      - Invokes all other tab display procedures with FALSE to ensure
-'        exclusive visibility of the Data configuration block.
-'   3. FOCUS MANAGEMENT: Shifts active selection to 'SETTINGS_DATA_COL_COMMENT'
-'      to align the user's view with the Data sheet structural settings.
-'   4. REFRESH: Restores 'ScreenUpdating' to finalize the layout change.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Centralizes the "Exclusive Visibility" logic for managing
-'     complex sheet-based configuration UI.
-' ==========================================================================
-Public Sub TabSelectDataWorksheet()
-    Application.ScreenUpdating = False
+Public Sub TabSelectStylesTab()
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions True
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab True
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+    
+    SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).Select
+    
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectDataTab()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions True
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+    
+    SettingsSheet.Range("RunMode").Select
+    
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectDataWorksheet()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions True
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_DATA_COL_COMMENT).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectSourceWorksheet
-'
-' PURPOSE:
-'   Activates the "Source Worksheet" configuration view within the Settings
-'   worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform the multi-row
-'      visibility transition without visual flicker.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplaySourceOptions' to TRUE.
-'      - Invokes all other configuration display procedures with FALSE to
-'        ensure exclusive visibility of the Source Viewer settings.
-'   3. FOCUS MANAGEMENT: Selects 'SETTINGS_SOURCE_COL_LINE_NUMBER' to
-'      orient the user to the start of the Source sheet structural settings.
-'   4. REFRESH: Restores 'ScreenUpdating' to finalize the UI layout.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Implements the "Exclusive Visibility" pattern for the
-'     simulated tab system on the Settings worksheet.
-' ==========================================================================
 Public Sub TabSelectSourceWorksheet()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions True
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet True
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_SOURCE_COL_LINE_NUMBER).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectSqlWorksheet
-'
-' PURPOSE:
-'   Activates the "SQL Worksheet" configuration view within the Settings
-'   worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform the multi-row
-'      visibility transition without visual flicker.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplaySqlOptions' to TRUE (Note: This procedure includes
-'        internal logic to force FALSE on macOS).
-'      - Invokes all other configuration display procedures with FALSE to
-'        ensure exclusive visibility of the SQL settings.
-'   3. FOCUS MANAGEMENT: Selects 'SETTINGS_SQL_COL_COMMENT' to orient the
-'      user to the start of the SQL-specific configuration block.
-'   4. REFRESH: Restores 'ScreenUpdating' to finalize the UI layout.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Implements the "Exclusive Visibility" pattern while
-'     respecting the Windows-only availability of SQL features.
-' ==========================================================================
 Public Sub TabSelectSqlWorksheet()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions True
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet True
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_SQL_COL_COMMENT).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectGraphvizTab
-'
-' PURPOSE:
-'   Activates the "Graphviz Tab" configuration view within the Settings
-'   worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform the multi-row
-'      visibility transition without visual flicker.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayGraphvizTab' to TRUE to reveal Ribbon-state settings.
-'      - Invokes all other configuration display procedures with FALSE to
-'        ensure exclusive visibility.
-'   3. FOCUS MANAGEMENT: Selects 'SETTINGS_OUTPUT_DIRECTORY' to orient the
-'      user to the primary configuration field for this section.
-'   4. REFRESH: Restores 'ScreenUpdating' to finalize the UI layout.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Part of the "Exclusive Visibility" pattern used to manage
-'     the extensive configuration options on a single worksheet.
-' ==========================================================================
+Public Sub TabSelectSqlTab()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab True
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+    
+    SettingsSheet.Range("SqlColFilter").Select
+    
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectSqlKeywords()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords True
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+    
+    SettingsSheet.Range("SqlFieldNameCluster").Select
+    
+    Application.screenUpdating = True
+End Sub
+
 Public Sub TabSelectGraphvizTab()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
     DisplayGraphvizTab True
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
     DisplaySourceTab False
-    DisplayExtensionsTab False
-    DisplayExchangeTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
-    SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY).Select
+    SettingsSheet.Range("GraphvizEngine").Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectSourceTab
-'
-' PURPOSE:
-'   Activates the "Source Tab" configuration view within the Settings
-'   worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform the multi-row
-'      visibility transition without visual flicker.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplaySourceTab' to TRUE.
-'      - Hides all other configuration blocks by calling their respective
-'        display procedures with FALSE.
-'   3. FOCUS MANAGEMENT: Selects the "SourceWeb1Text" range to anchor
-'      the user's view to the Source Ribbon configuration settings.
-'   4. REFRESH: Restores 'ScreenUpdating' to commit the visual layout.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Implements the "Exclusive Visibility" pattern for
-'     navigating complex Ribbon-state settings on the Settings sheet.
-' ==========================================================================
 Public Sub TabSelectSourceTab()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab True
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab True
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
-    SettingsSheet.Range("SourceWeb1Text").Select
+    SettingsSheet.Range("SourceIndent").Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectExtensionsTab
-'
-' PURPOSE:
-'   Activates the "Extensions Tab" configuration view within the Settings
-'   worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to perform the multi-row
-'      visibility transition without visual flicker.
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayExtensionsTab' to TRUE.
-'      - Hides all other configuration blocks by calling their respective
-'        display procedures with FALSE.
-'   3. FOCUS MANAGEMENT: Selects the 'SETTINGS_EXT_TAB_NAME' range to anchor
-'      the user's view to the Extensions Ribbon configuration settings.
-'   4. REFRESH: Restores 'ScreenUpdating' to commit the visual layout.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Implements the "Exclusive Visibility" pattern for
-'     navigating extension-specific Ribbon settings.
-' ==========================================================================
 Public Sub TabSelectExtensionsTab()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab True
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab False
+    DisplayExtensionsTab True
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_EXT_TAB_NAME).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
-' ==========================================================================
-' PROCEDURE: TabSelectExchangeTab
-'
-' PURPOSE:
-'   Activates the "Exchange Tab" (JSON Import/Export) configuration view
-'   within the Settings worksheet's simulated tabbed interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI STABILIZATION: Disables 'ScreenUpdating' to hide the bulk row
-'      manipulation required to swap "tabs."
-'   2. TAB ORCHESTRATION:
-'      - Sets 'DisplayExchangeTab' to TRUE.
-'      - Invokes all other configuration block display procedures with
-'        FALSE to ensure exclusive visibility.
-'   3. FOCUS MANAGEMENT: Selects 'SETTINGS_TOOLS_EXCHANGE_DATA_WORKSHEET'
-'      to align the user's view with the start of the Exchange configuration.
-'   4. REFRESH: Restores 'ScreenUpdating' to finalize the UI layout.
-'
-' TECHNICAL NOTES:
-'   - Layer: UI / Settings.
-'   - Strategy: Centralizes the "Exclusive Visibility" logic for the
-'     JSON E2GXF data exchange configuration subsystem.
-' ==========================================================================
 Public Sub TabSelectExchangeTab()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     
-    DisplayGraphOptions False
     DisplayCmdLineOptions False
-    DisplayStylesOptions False
-    DisplayDataOptions False
-    DisplaySourceOptions False
-    DisplaySqlOptions False
-    DisplayGraphvizTab False
-    DisplaySourceTab False
-    DisplayExtensionsTab False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
     DisplayExchangeTab True
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
     
     SettingsSheet.Range(SETTINGS_TOOLS_EXCHANGE_DATA_WORKSHEET).Select
     
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectHelpUrls()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls True
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+    
+    SettingsSheet.Range("HelpURLConsoleTab").Select
+    
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectConsoleTab()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab True
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+   
+    SettingsSheet.Range("LogToConsole").Select
+    
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectSVGTab()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab False
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab True
+   
+    SettingsSheet.Range("PostProcessSVG").Select
+    
+    Application.screenUpdating = True
+End Sub
+
+Public Sub TabSelectLaunchpadTab()
+    Application.screenUpdating = False
+    
+    DisplayCmdLineOptions False
+    DisplayConsoleTab False
+    DisplayCriticalErrors False
+    DisplayDataTabOptions False
+    DisplayDataWorksheetOptions False
+    DisplayExchangeTab False
+    DisplayExtensionsTab False
+    DisplayGraphOptions False
+    DisplayGraphvizTab False
+    DisplayHelpUrls False
+    DisplayLaunchpadTab True
+    DisplaySourceTab False
+    DisplaySourceWorksheet False
+    DisplaySqlKeywords False
+    DisplaySqlTab False
+    DisplaySqlWorksheet False
+    DisplayStylesTab False
+    DisplayStylesWorksheet False
+    DisplaySvgTab False
+   
+    SettingsSheet.Range("ToggleStyleDesigner").Select
+    
+    Application.screenUpdating = True
 End Sub
 
 ' ==========================================================================

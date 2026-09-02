@@ -3,35 +3,65 @@ Attribute VB_Name = "modRibbonTabGraphviz"
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modRibbonTabGraphviz
 ' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
-' LAYER:     Excel UI / Ribbon
+' LAYER:     Excel UI / Ribbon Callbacks
 '
 ' ROLE:
-'   Primary callback bridge for the "Graphviz" Ribbon Tab, coordinating layout
-'   engines, graph type, spline routing, workspace operations, and rendering
-'   settings.
+'   Central Ribbon callback module for the Graphviz Tab. Coordinates all
+'   user-driven configuration changes affecting graph layout, graph type,
+'   edge routing, renderer selection, worksheet column visibility, workspace
+'   clearing, and AutoDraw behavior. Acts as the UI bridge between Ribbon
+'   controls and the workbook's Graphviz configuration model.
 '
 ' RESPONSIBILITIES:
-'   - Manage layout engine selection and synchronize Ribbon state.
-'   - Control graph orientation (Directed/Undirected).
-'   - Manage spline routing, rankdir, output order, and engine-specific options.
-'   - Handle workspace operations (Clear Data, Clear Graphs, Clear Messages).
-'   - Manage column visibility for the Data worksheet.
-'   - Trigger AutoDraw for real-time reactivity.
+'   - Manage visibility of data-worksheet columns (Show/Hide controls).
+'   - Handle workspace operations:
+'       o Clear Data
+'       o Clear Worksheet Graphs
+'       o Clear Messages
+'       o Reset DOT source buffers
+'   - Control graph type (Directed / Undirected) and synchronize Ribbon state.
+'   - Manage Graphviz layout engine selection (dot, neato, fdp, sfdp, twopi,
+'     circo, osage, patchwork) with full Ribbon invalidation cascades.
+'   - Manage engine-specific parameters (dim, dimen, smoothing, overlap,
+'     newrank, compound, cluster rank, model, mode).
+'   - Control edge-routing (splines) options and synchronize the Splines group.
+'   - Manage output-order, ordering, rankdir, and related DOT attributes.
+'   - Handle label and tooltip modes (blank/default for nodes, edges, clusters).
+'   - Manage append-options, append-timestamp, and include-image-path toggles.
+'   - Control renderer selection (Cairo, GD, GDI+, Quartz) with exclusivity logic.
+'   - Provide help-link navigation for Graphviz-tab documentation.
+'   - Trigger AutoDraw for real-time reactivity after any configuration change.
+'   - Provide comprehensive Ribbon synchronization:
+'       o getPressed
+'       o getVisible
+'       o getEnabled
+'       o dynamic labels
+'       o group refresh procedures
 '
 ' INTERACTIONS:
-'   - Ribbon XML: CustomUI.xml, CustomUI14.xml.
-'   - Named Ranges: SETTINGS_GRAPHVIZ_ENGINE, SETTINGS_GRAPH_TYPE, SETTINGS_SPLINES, etc.
-'   - Modules: modCreateGraph, modUtilityRibbon, workspace utilities.
+'   - Named Ranges: SETTINGS_GRAPHVIZ_ENGINE, SETTINGS_GRAPH_TYPE,
+'     SETTINGS_SPLINES, SETTINGS_RUN_MODE, SETTINGS_DATA_COL_*,
+'     SETTINGS_APPEND_OPTIONS, SETTINGS_APPEND_TIMESTAMP,
+'     SETTINGS_GRAPH_INCLUDE_IMAGE_PATH, SETTINGS_RENDER_*.
+'   - Modules: modCreateGraph, modCreateDotFiles, modCreateJsonFiles,
+'     modUtilityRibbon, modUtilitySettings, workspace utilities.
+'   - Sheets: SettingsSheet, StylesSheet, Data worksheet.
 '
 ' CROSS-PLATFORM NOTES:
-'   - macOS hides certain controls (clipboard, GVEdit).
+'   - macOS hides clipboard-related and GVEdit controls.
+'   - Renderer availability varies by image type and platform.
 '
 ' ERROR HANDLING:
-'   - Uses OptimizeCode blocks to reduce flicker.
+'   - Uses OptimizeCode_Begin/End to suppress flicker and improve responsiveness
+'     during Ribbon invalidation and workspace operations.
 '
 ' RELATED WIKI PAGES:
 '   - Graphviz Ribbon Tab
-'   - Event-Driven Architecture & AutoDraw
+'   - Layout Engines & Parameters
+'   - Splines (Edge Routing)
+'   - Directed vs. Undirected Graphs
+'   - Workspace Management
+'   - AutoDraw & Event-Driven Architecture
 ' =============================================================================
 
 Option Explicit
@@ -59,8 +89,7 @@ Private Const ZOOM_STEP As Long = 5
 '      hiding/unhiding logic.
 '   4. REACTIVITY: Triggers 'AutoDraw' to refresh the graph layout.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showColumn_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showColumn_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     ClearWorksheetGraphs
     SettingsSheet.Range(control.id).value = Toggle(pressed, TOGGLE_SHOW, TOGGLE_HIDE)
     ShowHideDataColumn (control.id)
@@ -78,8 +107,7 @@ End Sub
 '   1. SYNC: Ensures the worksheet column state matches the stored setting.
 '   2. UI FEEDBACK: Returns TRUE if the associated setting is "Show".
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showColumn_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub showColumn_getPressed(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     ShowHideDataColumn (control.id)
     returnedVal = GetSettingBoolean(control.id)
 End Sub
@@ -105,7 +133,7 @@ End Sub
 '   - Strategy: Centralizes column mapping to ensure the Ribbon can manage
 '     any arbitrary column layout defined in Settings.
 ' ==========================================================================
-Public Sub ShowHideDataColumn(ByVal columnId As String)
+Private Sub ShowHideDataColumn(ByVal columnId As String)
     Dim ShowColumn As Boolean
     Dim columnRange As String
     Dim col As String
@@ -134,8 +162,8 @@ Public Sub ShowHideDataColumn(ByVal columnId As String)
             col = SettingsSheet.Range(SETTINGS_DATA_COL_STYLE).value
         Case RIBBON_CTL_SHOW_EXTRA_STYLE_ATTRIBUTES
             col = SettingsSheet.Range(SETTINGS_DATA_COL_EXTRA_ATTRIBUTES).value
-        Case RIBBON_CTL_SHOW_MESSAGES
-            col = SettingsSheet.Range(SETTINGS_DATA_COL_ERROR_MESSAGES).value
+        Case RIBBON_CTL_SHOW_PROPERTIES
+            col = SettingsSheet.Range(SETTINGS_DATA_COL_PROPERTIES).value
     End Select
     
     ' Activate the "data" worksheet
@@ -179,8 +207,7 @@ End Sub
 '   - Trigger: Ribbon -> Graphviz Tab -> Clear Data button.
 '   - Layer: UI / Workspace Management.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub clearData_onAction(ByVal control As IRibbonControl)
+Private Sub clearData_onAction(ByVal control As IRibbonControl)
     OptimizeCode_Begin
     
     Dim worksheetName As String
@@ -200,65 +227,41 @@ End Sub
 ' ===========================================================================
 ' Callbacks for includeImagePath
 
-'@Ignore ParameterNotUsed
-Public Sub includeImagePath_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub includeImagePath_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_INCLUDE_IMAGE_PATH).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub includeImagePath_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub includeImagePath_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_INCLUDE_IMAGE_PATH)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for addOptions
 
-'@Ignore ParameterNotUsed
-Public Sub addOptions_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub addOptions_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_APPEND_OPTIONS).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub addOptions_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub addOptions_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_APPEND_OPTIONS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for addTimestamp
 
-'@Ignore ParameterNotUsed
-Public Sub addTimestamp_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub addTimestamp_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_APPEND_TIMESTAMP).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub addTimestamp_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub addTimestamp_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_APPEND_TIMESTAMP)
-End Sub
-
-' ===========================================================================
-' Callbacks for blankNodeLabels
-
-'@Ignore ParameterNotUsed
-Public Sub blankNodeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
-    SettingsSheet.Range(SETTINGS_BLANK_NODE_LABELS).value = TOGGLE_BLANK_USE_BLANK
-
-    InvalidateRibbonControl RIBBON_CTL_NODE_LABELS_BLANK
-    InvalidateRibbonControl RIBBON_CTL_NODE_LABELS_DEFAULT
-    AutoDraw
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub blankNodeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = getPressed(SettingsSheet.name, SETTINGS_BLANK_NODE_LABELS, TOGGLE_BLANK_USE_BLANK)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for defaultNodeLabels
 
-'@Ignore ParameterNotUsed
-Public Sub defaultNodeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub defaultNodeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_BLANK_NODE_LABELS).value = TOGGLE_BLANK_USE_DEFAULT
     
     InvalidateRibbonControl RIBBON_CTL_NODE_LABELS_BLANK
@@ -266,16 +269,14 @@ Public Sub defaultNodeLabels_onAction(ByVal control As IRibbonControl, ByVal pre
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub defaultNodeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub defaultNodeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = getPressed(SettingsSheet.name, SETTINGS_BLANK_NODE_LABELS, TOGGLE_BLANK_USE_DEFAULT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for blankEdgeLabels
 
-'@Ignore ParameterNotUsed
-Public Sub blankEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub blankEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_BLANK_EDGE_LABELS).value = TOGGLE_BLANK_USE_BLANK
     
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABELS_BLANK
@@ -283,16 +284,14 @@ Public Sub blankEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal press
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub blankEdgeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub blankEdgeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = getPressed(SettingsSheet.name, SETTINGS_BLANK_EDGE_LABELS, TOGGLE_BLANK_USE_BLANK)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for defaultEdgeLabels
 
-'@Ignore ParameterNotUsed
-Public Sub defaultEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub defaultEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_BLANK_EDGE_LABELS).value = TOGGLE_BLANK_USE_DEFAULT
     
     InvalidateRibbonControl RIBBON_CTL_EDGE_LABELS_BLANK
@@ -300,24 +299,21 @@ Public Sub defaultEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pre
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub defaultEdgeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub defaultEdgeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = getPressed(SettingsSheet.name, SETTINGS_BLANK_EDGE_LABELS, TOGGLE_BLANK_USE_DEFAULT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for clearMessages
 
-'@Ignore ParameterNotUsed
-Public Sub clearMessages_onAction(ByVal control As IRibbonControl)
+Private Sub clearMessages_onAction(ByVal control As IRibbonControl)
     ClearErrors
 End Sub
 
 ' ===========================================================================
 ' Callbacks for clearWorksheetGraphs
 
-'@Ignore ParameterNotUsed
-Public Sub clearWorksheetGraphs_onAction(ByVal control As IRibbonControl)
+Private Sub clearWorksheetGraphs_onAction(ByVal control As IRibbonControl)
     ClearWorksheetGraphs
 End Sub
 
@@ -343,8 +339,7 @@ End Sub
 '   - Trigger: Ribbon -> Graphviz Tab -> Directed Toggle.
 '   - Contract: Updates global Graphviz syntax (-> vs --).
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub directed_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub directed_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         If SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED Then
             SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED
@@ -375,8 +370,7 @@ End Sub
 '   - Strategy: Ensures the visual UI consistently represents the
 '     underlying DOT syntax (digraph vs. graph).
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub directed_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub directed_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED
 End Sub
 
@@ -498,8 +492,7 @@ End Sub
 '   - Trigger: Ribbon -> Graphviz Tab -> Layout Engine Gallery/Buttons.
 '   - Logic: Implements "Exclusive Selection" behavior for engine types.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub layout_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub layout_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LCase$(Mid$(control.id, Len("layout") + 1))
     Else
@@ -541,17 +534,9 @@ End Sub
 '   - Layer: UI / Ribbon State.
 '   - Pattern: Dynamic Property Callback.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub layout_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub layout_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     Dim layout As String
     layout = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
-    
-    ' Backward compatibility. Map layout aliases to buttons provided
-    Select Case layout
-        Case "compound": layout = "polyline"
-        Case "splines": layout = "true"
-        Case "line": layout = "false"
-    End Select
     
     pressed = layout = LCase$(Mid$(control.id, Len("layout") + 1))
 End Sub
@@ -576,8 +561,7 @@ End Sub
 '   - Strategy: Provides at-a-glance confirmation of the rendering
 '     engine without needing to open a menu or gallery.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub layoutOptions_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub layoutOptions_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     label = "layout=" & SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
 End Sub
 
@@ -604,8 +588,7 @@ End Sub
 '   - Trigger: Ribbon -> Graphviz Tab -> Undirected Toggle.
 '   - Syntax Impact: Changes the DOT operator from '->' to '--'.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub undirected_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub undirected_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         If SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED Then
             SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_DIRECTED
@@ -635,8 +618,7 @@ End Sub
 '   - Trigger: Ribbon Invalidation or Tab Activation.
 '   - Strategy: Ensures the UI correctly highlights the active graph type.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub undirected_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub undirected_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = SettingsSheet.Range(SETTINGS_GRAPH_TYPE).value = TOGGLE_UNDIRECTED
 End Sub
 
@@ -659,8 +641,7 @@ End Sub
 '   - UX Strategy: Prevents user confusion by hiding controls that are
 '     incompatible with specific layout algorithms.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub directed_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub directed_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_PATCHWORK
             visible = False
@@ -724,8 +705,7 @@ End Sub
 '   - Trigger: Ribbon -> Graphviz Tab -> Splines Gallery/Buttons.
 '   - Impact: Directly controls the 'splines=' attribute in the DOT source.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub splines_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub splines_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.id, Len("spline") + 1))
     Else
@@ -755,8 +735,7 @@ End Sub
 '   - UX Strategy: Reduces "UI Noise" by hiding specialized routing
 '     parameters when they are functionally irrelevant.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub splines_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub splines_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_PATCHWORK
             visible = False
@@ -773,25 +752,18 @@ End Sub
 '   the Ribbon, with a specific fallback for the "Off" state.
 '
 ' TECHNICAL WORKFLOW:
-'   1. DEFAULT HANDLING: If 'SETTINGS_SPLINES' is empty, it forces the
-'      'splineFalse' button (Off/None) to appear pressed.
-'   2. ID COMPARISON: For all other states, it compares the active setting
-'      against the control's ID (stripping the "spline" prefix).
-'   3. UI FEEDBACK: Returns TRUE if the setting matches the button context,
-'      ensuring a single visual toggle is highlighted.
+'   1. ID COMPARISON: Compares the active setting against the control's ID
+'      (stripping the "spline" prefix).
+'   2. UI FEEDBACK: Returns TRUE if the setting matches the button context,
+'      ensuring at most a single visual toggle is highlighted.
 '
 ' TECHNICAL NOTES:
 '   - Trigger: Ribbon Invalidation or Spline selection.
-'   - Strategy: Normalizes the relationship between a null setting and
-'     the "False/Off" UI representation.
+'   - Strategy: Act like a radio button, with ability to have no button
+'     selected.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub splines_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If SettingsSheet.Range(SETTINGS_SPLINES).value = vbNullString And control.id = "splineFalse" Then
-        pressed = True
-    Else
+Private Sub splines_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
         pressed = SettingsSheet.Range(SETTINGS_SPLINES).value = LCase$(Mid$(control.id, Len("spline") + 1))
-    End If
 End Sub
 
 ' ===========================================================================
@@ -818,8 +790,7 @@ End Sub
 '     system context before the user attempts a batch export.
 '   - Trigger: Ribbon Invalidation or Tab Activation.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub getDir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub getDir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = True
     
     Dim dirName As String
@@ -854,8 +825,7 @@ End Sub
 '   - UX Strategy: Prompts the user for action when the output destination
 '     is not yet established.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub getDir_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub getDir_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     Dim dirName As String
     dirName = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
     If dirName = vbNullString Then
@@ -887,8 +857,7 @@ End Sub
 '   - Trigger: Ribbon Invalidation or Directory selection.
 '   - UX Strategy: Balances information density with UI aesthetics.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub getDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
+Private Sub getDirLabel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
     Dim folder As String
     folder = Trim$(SettingsSheet.Range(SETTINGS_OUTPUT_DIRECTORY))
     label = ShortenToLastTwoFolders(folder)
@@ -958,9 +927,22 @@ End Function
 '   1. STATE PERSISTENCE: Extracts the format string from the 'controlId'
 '      suffix (e.g., "ff_png" becomes "png") and updates 'SETTINGS_FILE_FORMAT'.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub fileFormat_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub fileFormat_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_FILE_FORMAT).value = Mid$(controlId, Len("ff_") + 1)
+
+    SettingsSheet.Range(SETTINGS_RENDER_CAIRO).value = False
+    InvalidateRibbonControl (RIBBON_CTL_RENDER_CAIRO)
+    
+    SettingsSheet.Range(SETTINGS_RENDER_GD).value = False
+    InvalidateRibbonControl (RIBBON_CTL_RENDER_GD)
+    
+    SettingsSheet.Range(SETTINGS_RENDER_GDIPLUS).value = False
+    InvalidateRibbonControl (RIBBON_CTL_RENDER_GDIPLUS)
+    
+    SettingsSheet.Range(SETTINGS_RENDER_QUARTZ).value = False
+    InvalidateRibbonControl (RIBBON_CTL_RENDER_QUARTZ)
+    
+    InvalidateRibbonControl (SETTINGS_PUBLISH_GRAPHVIZ)
 End Sub
 
 ' ==========================================================================
@@ -974,8 +956,7 @@ End Sub
 '   1. UI SYNC: Concatenates "ff_" with the value from 'SETTINGS_FILE_FORMAT'
 '      to highlight the active selection in the gallery.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub fileFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub fileFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "ff_" & SettingsSheet.Range(SETTINGS_FILE_FORMAT).value
 End Sub
 
@@ -992,8 +973,7 @@ End Sub
 '   1. STATE PERSISTENCE: Writes the user-entered 'Text' directly to the
 '      'SETTINGS_FILE_NAME' named range.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub filePrefix_onChange(ByVal control As IRibbonControl, ByVal Text As String)
+Private Sub filePrefix_onChange(ByVal control As IRibbonControl, ByVal Text As String)
     SettingsSheet.Range(SETTINGS_FILE_NAME).value = Text
 End Sub
 
@@ -1007,8 +987,7 @@ End Sub
 '   1. UI INITIALIZATION: Retrieves and trims the value from
 '      'SETTINGS_FILE_NAME' to display in the UI control.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub filePrefix_getText(ByVal control As IRibbonControl, ByRef Text As Variant)
+Private Sub filePrefix_getText(ByVal control As IRibbonControl, ByRef Text As Variant)
     Text = Trim$(SettingsSheet.Range(SETTINGS_FILE_NAME))
 End Sub
 
@@ -1034,234 +1013,9 @@ End Sub
 '   - Strategy: Ensures valid absolute paths are captured via the standard
 '     OS interface rather than manual text entry.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub getDir_onAction(ByVal control As IRibbonControl)
+Private Sub getDir_onAction(ByVal control As IRibbonControl)
     SelectDirectoryToCell SettingsSheet.name, SETTINGS_OUTPUT_DIRECTORY
     RefreshRibbon
-End Sub
-
-' ===========================================================================
-' Callbacks for graphToFile
-
-' ==========================================================================
-' CALLBACK: graphToFile_onAction
-'
-' PURPOSE:
-'   Triggers the "Publish to File" workflow for the currently selected view.
-'
-' TECHNICAL WORKFLOW:
-'   1. COLUMN RESOLUTION: Identifies the active View column using
-'      'GetSettingColNum' to define the render boundaries.
-'   2. UI FEEDBACK: Sets the 'xlWait' cursor and executes 'DoEvents' to
-'      ensure the UI remains responsive during the initial handshake.
-'   3. EXECUTION:
-'      - Wraps the call in 'OptimizeCode_Begin/End' to maximize performance.
-'      - Invokes 'CreateGraphFile' to handle DOT generation and binary execution.
-'   4. STATE RESTORATION: Reverts the cursor to 'xlDefault' once the
-'      file has been successfully written to disk.
-'
-' TECHNICAL NOTES:
-'   - Trigger: Ribbon -> Graphviz Tab -> Graph to File button.
-'   - Layer: UI / Orchestration.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphToFile_onAction(ByVal control As IRibbonControl)
-    Dim firstColumn As Long
-    Dim lastColumn As Long
-    firstColumn = GetSettingColNum(SETTINGS_STYLES_COL_SHOW_STYLE)
-    lastColumn = firstColumn
-    
-    ' Show the hourglass cursor
-    Application.Cursor = xlWait
-    DoEvents
-    
-    OptimizeCode_Begin
-    CreateGraphFile firstColumn, lastColumn
-    OptimizeCode_End
-    
-    ' Reset the cursor back to the default
-    Application.Cursor = xlDefault
-End Sub
-
-' ==========================================================================
-' CALLBACK: graphToFile_getEnabled
-'
-' PURPOSE:
-'   Determines if the "Graph to File" button should be active based on
-'   whether a valid data View has been selected in the Style Gallery.
-'
-' TECHNICAL WORKFLOW:
-'   1. VALIDATION: Invokes 'IsAViewSpecified' to verify that the user has
-'      chosen a specific view (column) for rendering.
-'   2. LOGICAL RETURN: Sets the 'pressed' (Enabled) state to TRUE only if
-'       a view is active.
-'
-' TECHNICAL NOTES:
-'   - Trigger: Ribbon Invalidation or Tab Activation.
-'   - UX Strategy: Prevents execution errors by disabling file export
-'     functionality when no view context exists.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphToFile_getEnabled(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = Not (IsAViewSpecified() = False)
-End Sub
-
-' ===========================================================================
-' Callbacks for graphAllViewsToFile
-
-' ==========================================================================
-' CALLBACK: graphAllViewsToFile_onAction
-'
-' PURPOSE:
-'   The batch-processing entry point. Iterates through all defined "Views"
-'   in the Style Gallery and exports each as a separate file.
-'
-' TECHNICAL WORKFLOW:
-'   1. SCHEMA DISCOVERY: Identifies the 'firstColumn' of the View gallery
-'      using the 'SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW' setting.
-'   2. BOUNDARY CALCULATION: Scans the header row of the 'Styles' sheet
-'      to count non-empty View names, determining the 'lastColumn' index.
-'   3. UI FEEDBACK: Activates the 'xlWait' cursor and executes 'DoEvents'
-'      to maintain responsiveness during the initial calculation.
-'   4. BATCH EXECUTION:
-'      - Invokes 'OptimizeCode_Begin' to suppress UI updates.
-'      - Calls 'CreateGraphFile' with the resolved column range.
-'      - Invokes 'OptimizeCode_End' and restores the default cursor.
-'
-' TECHNICAL NOTES:
-'   - Trigger: Ribbon -> Graphviz Tab -> Publish All Views button.
-'   - Strategy: Automates the production of multiple graph perspectives
-'     (e.g., Logical, Physical, Security) in a single operation.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphAllViewsToFile_onAction(ByVal control As IRibbonControl)
-
-    Dim nonEmptyCellCount As Long
-    Dim row As Long
-    Dim col As Long
-    Dim columnName As String
-    Dim firstColumn As Long
-    Dim lastColumn As Long
-    
-    row = CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_HEADING))
-    nonEmptyCellCount = 0
-    
-    ' Get the configured location of the first view name column
-    firstColumn = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
-    
-    ' Count the non-empty cells beginning at the first view column
-    For col = firstColumn To GetLastColumn(StylesSheet.name, row)
-        columnName = StylesSheet.Cells.item(row, col)
-        If columnName <> vbNullString Then
-            nonEmptyCellCount = nonEmptyCellCount + 1
-        End If
-    Next col
-
-    ' Calaculate the absolute column number of the last view column
-    lastColumn = firstColumn + nonEmptyCellCount - 1
-    
-    ' Show the hourglass cursor
-    Application.Cursor = xlWait
-    DoEvents
-    
-    ' Graph all the views
-    OptimizeCode_Begin
-    CreateGraphFile firstColumn, lastColumn
-    OptimizeCode_End
-    
-    ' Reset the cursor back to the default
-    Application.Cursor = xlDefault
-End Sub
-
-' ===========================================================================
-' Callbacks for graphToWorksheet
-
-' ==========================================================================
-' CALLBACK: graphToWorksheet_onAction
-'
-' PURPOSE:
-'   UI entry point that triggers the standard in-workbook graph rendering
-'   process.
-'
-' TECHNICAL WORKFLOW:
-'   1. REDIRECTION: Hands off execution to 'CreateGraphWorksheetQuickly'.
-'   2. UI CONTEXT: Inherits the performance optimizations and wait-cursor
-'      feedback defined in the target procedure.
-'
-' TECHNICAL NOTES:
-'   - Trigger: Ribbon -> Graphviz Tab -> Render Graph button.
-'   - Strategy: Decouples the Ribbon callback from the core rendering
-'     logic to allow for shared use by hotkeys.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphToWorksheet_onAction(ByVal control As IRibbonControl)
-    CreateGraphWorksheetQuickly
-End Sub
-
-' ==========================================================================
-' CALLBACK: graphToWorksheet_getEnabled
-'
-' PURPOSE:
-'   Controls the availability of the primary "Render Graph" button on the
-'   Ribbon based on the workbook's current configuration state.
-'
-' TECHNICAL WORKFLOW:
-'   1. VALIDATION: Calls 'IsAViewSpecified' to check if a specific view
-'      column in the Style Gallery has been selected from the dropdown list.
-'   2. UI FEEDBACK: Sets 'Enabled' to TRUE only if a view context exists,
-'      preventing the user from attempting a render without a defined style set.
-'
-' TECHNICAL NOTES:
-'   - Trigger: Ribbon Invalidation or Tab Activation.
-'   - UX Strategy: Enforces the "View-First" workflow required for
-'     successful Graphviz source generation.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphToWorksheet_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
-    Enabled = IsAViewSpecified()
-End Sub
-
-' ===========================================================================
-' Callbacks for graphAuto
-
-' ==========================================================================
-' CALLBACK: graphAuto_onAction
-'
-' PURPOSE:
-'   Toggles the global execution mode between 'Auto' (Live Preview) and
-'   'Manual' via the Ribbon interface.
-'
-' TECHNICAL WORKFLOW:
-'   1. STATE PERSISTENCE: Updates the 'SETTINGS_RUN_MODE' named range using
-'      the 'Toggle' helper to map the Ribbon's boolean state to project
-'      constants.
-'   2. REACTIVITY: Immediately invokes 'AutoDraw' so that if the user
-'      enables Auto mode, the graph refreshes to reflect current data.
-'
-' TECHNICAL NOTES:
-'   - Trigger: Ribbon -> Graphviz Tab -> AutoDraw Toggle.
-'   - Impact: Determines if 'Worksheet_Change' events trigger the renderer.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphAuto_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
-    SettingsSheet.Range(SETTINGS_RUN_MODE).value = Toggle(pressed, TOGGLE_AUTO, TOGGLE_MANUAL)
-    AutoDraw
-End Sub
-
-' ==========================================================================
-' CALLBACK: graphAuto_getPressed
-'
-' PURPOSE:
-'   Ensures the Ribbon's 'AutoDraw' toggle visually reflects the current
-'   workbook setting.
-'
-' TECHNICAL WORKFLOW:
-'   1. STATE LOOKUP: Evaluates the 'SETTINGS_RUN_MODE' named range.
-'   2. UI FEEDBACK: Returns TRUE if the setting matches 'TOGGLE_AUTO'.
-' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphAuto_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = SettingsSheet.Range(SETTINGS_RUN_MODE).value = TOGGLE_AUTO
 End Sub
 
 ' ===========================================================================
@@ -1281,8 +1035,7 @@ End Sub
 '   3. REACTIVITY: Invokes 'AutoDraw' to immediately move or re-render
 '      the image to the new destination.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphWorksheet_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub graphWorksheet_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     If index = 0 Then
         SettingsSheet.Range(SETTINGS_IMAGE_WORKSHEET).value = "data"
     Else
@@ -1301,8 +1054,7 @@ End Sub
 '   1. LOCALIZATION: Retrieves language-localized "Data" or "Graph" labels
 '      via the 'GetLabel' helper based on the requested item index.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphWorksheet_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef itemLabel As Variant)
+Private Sub graphWorksheet_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef itemLabel As Variant)
     If index = 0 Then
         itemLabel = GetLabel("worksheetDataName")
     Else
@@ -1319,8 +1071,7 @@ End Sub
 '   for language-localized values in the dropdown list as opposed to static
 '   values if the dropdown were definex in CustomUI.xml.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphWorksheet_getItemCount(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub graphWorksheet_getItemCount(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = 2
 End Sub
 
@@ -1334,8 +1085,7 @@ End Sub
 ' TECHNICAL WORKFLOW:
 '   1. STATE EVALUATION: Returns 0 if the setting is "data", otherwise 1.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphWorksheet_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef itemIndex As Variant)
+Private Sub graphWorksheet_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef itemIndex As Variant)
     If SettingsSheet.Range(SETTINGS_IMAGE_WORKSHEET).value = "data" Then
         itemIndex = 0
     Else
@@ -1364,8 +1114,7 @@ End Sub
 '   - Strategy: Allows users to switch between vector (SVG) and raster
 '     (PNG/JPG) rendering modes instantly.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub imageFormat_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub imageFormat_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value = Mid$(controlId, Len("img_") + 1)
     AutoDraw
 End Sub
@@ -1381,8 +1130,7 @@ End Sub
 '   1. UI SYNC: Concatenates "img_" with the value from 'SETTINGS_IMAGE_TYPE'
 '      to resolve the matching control ID in the Ribbon XML.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub imageFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub imageFormat_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "img_" & SettingsSheet.Range(SETTINGS_IMAGE_TYPE).value
 End Sub
 
@@ -1402,8 +1150,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the diagram, triggering the
 '      connectivity audit in the parsing engine.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub includeOrphanEdges_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub includeOrphanEdges_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_RELATIONSHIPS_WITHOUT_NODES).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
@@ -1419,8 +1166,7 @@ End Sub
 '   1. STATE LOOKUP: Returns the Boolean value of the associated
 '      named range to set the visual 'pressed' state.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub includeOrphanEdges_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub includeOrphanEdges_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_RELATIONSHIPS_WITHOUT_NODES)
 End Sub
 
@@ -1440,8 +1186,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the diagram, which triggers
 '      the orphan detection logic in the core transformation engine.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub includeOrphanNodes_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub includeOrphanNodes_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_NODES_WITHOUT_RELATIONSHIPS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
@@ -1457,8 +1202,7 @@ End Sub
 '   1. STATE LOOKUP: Returns the Boolean value of the associated
 '      named range to set the visual 'pressed' state.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub includeOrphanNodes_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub includeOrphanNodes_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_NODES_WITHOUT_RELATIONSHIPS)
 End Sub
 
@@ -1480,8 +1224,7 @@ End Sub
 '   - Usage: Enabling this is essential for power users who wish to manually
 '     inspect or modify the generated DOT source in an external editor.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub keepGvFile_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub keepGvFile_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_FILE_DISPOSITION).value = Toggle(pressed, TOGGLE_KEEP, TOGGLE_DELETE)
 End Sub
 
@@ -1496,8 +1239,7 @@ End Sub
 '   1. STATE LOOKUP: Returns TRUE if 'SETTINGS_FILE_DISPOSITION' is set
 '      to the 'TOGGLE_KEEP' constant.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub keepGvFile_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub keepGvFile_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = SettingsSheet.Range(SETTINGS_FILE_DISPOSITION).value = TOGGLE_KEEP
 End Sub
 
@@ -1515,8 +1257,7 @@ End Sub
 '   2. ENGINE GATE: Returns TRUE only for the 'DOT' engine, as hierarchical
 '      flow (TB, LR, etc.) is specific to the Sugiyama-style layout.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub rankdir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub rankdir_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     visible = SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value = LAYOUT_DOT
 End Sub
 
@@ -1532,7 +1273,7 @@ End Sub
 '   2. UI SYNC: Invokes 'RefreshRankdirGroup' to update toggle states.
 '   3. REACTIVITY: Triggers 'AutoDraw' for immediate visual feedback.
 ' ==========================================================================
-Public Sub rankdir_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub rankdir_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.id, Len("rankdir") + 1)
     Else
@@ -1549,16 +1290,10 @@ End Sub
 '   Synchronizes the Ribbon's direction toggles with the active setting.
 '
 ' TECHNICAL WORKFLOW:
-'   1. DEFAULT FALLBACK: If the setting is empty, 'rankdirTB' (Top-Bottom)
-'      is forced to the pressed state to reflect the Graphviz default.
-'   2. ID MATCH: Otherwise, compares the control ID suffix to the setting.
+'   1. ID MATCH: Compares the control ID suffix to the setting.
 ' ==========================================================================
-Public Sub rankdir_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If SettingsSheet.Range(SETTINGS_RANKDIR).value = vbNullString And control.id = "rankdirTB" Then
-        pressed = True
-    Else
-        pressed = SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.id, Len("rankdir") + 1)
-    End If
+Private Sub rankdir_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = SettingsSheet.Range(SETTINGS_RANKDIR).value = Mid$(control.id, Len("rankdir") + 1)
 End Sub
 
 ' ==========================================================================
@@ -1597,8 +1332,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to immediately re-generate the DOT
 '      source, determining whether 'label' attributes are emitted for nodes.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showNodeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showNodeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_NODE_LABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
@@ -1614,8 +1348,7 @@ End Sub
 '   1. STATE LOOKUP: Returns the Boolean result of 'GetSettingBoolean' for
 '      the node label visibility range to set the visual 'pressed' state.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showNodeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showNodeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_NODE_LABELS)
 End Sub
 
@@ -1635,8 +1368,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to re-render the graph, determining
 '      if 'xlabel' attributes are included in the DOT output.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showNodeXLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showNodeXLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_NODE_XLABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
@@ -1652,9 +1384,45 @@ End Sub
 '   1. STATE LOOKUP: Returns the Boolean value of the associated
 '      named range to set the visual 'pressed' state.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showNodeXLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showNodeXLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_NODE_XLABELS)
+End Sub
+
+
+' ===========================================================================
+' Callbacks for showNodeTooltips
+
+Private Sub showNodeTooltips_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    SettingsSheet.Range(SETTINGS_NODE_TOOLTIPS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
+    AutoDraw
+End Sub
+
+Private Sub showNodeTooltips_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = GetSettingBoolean(SETTINGS_NODE_TOOLTIPS)
+End Sub
+
+' ===========================================================================
+' Callbacks for showClusterTooltips
+
+Private Sub showClusterTooltips_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    SettingsSheet.Range(SETTINGS_CLUSTER_TOOLTIPS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
+    AutoDraw
+End Sub
+
+Private Sub showClusterTooltips_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = GetSettingBoolean(SETTINGS_CLUSTER_TOOLTIPS)
+End Sub
+
+' ===========================================================================
+' Callbacks for showClusterLabels
+
+Private Sub showClusterLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    SettingsSheet.Range(SETTINGS_CLUSTER_LABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
+    AutoDraw
+End Sub
+
+Private Sub showClusterLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = GetSettingBoolean(SETTINGS_CLUSTER_LABELS)
 End Sub
 
 ' ===========================================================================
@@ -1673,8 +1441,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the diagram, determining
 '      if 'label' attributes are generated for edge relationships.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showEdgeLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_EDGE_LABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
@@ -1689,107 +1456,92 @@ End Sub
 '   1. STATE LOOKUP: Returns the Boolean result of 'GetSettingBoolean' for
 '      the edge label visibility range to set the visual 'pressed' state.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub showEdgeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showEdgeLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_EDGE_LABELS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for showEdgeXLabels
 
-'@Ignore ParameterNotUsed
-Public Sub showEdgeXLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showEdgeXLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_EDGE_XLABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub showEdgeXLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showEdgeXLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_EDGE_XLABELS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for showEdgeHeadLabels
 
-'@Ignore ParameterNotUsed
-Public Sub showEdgeHeadLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showEdgeHeadLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_EDGE_HEAD_LABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub showEdgeHeadLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showEdgeHeadLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_EDGE_HEAD_LABELS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for showEdgeTailLabels
 
-'@Ignore ParameterNotUsed
-Public Sub showEdgeTailLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showEdgeTailLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_EDGE_TAIL_LABELS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub showEdgeTailLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showEdgeTailLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_EDGE_TAIL_LABELS)
+End Sub
+
+' ===========================================================================
+' Callbacks for showEdgeTooltips
+
+Private Sub showEdgeTooltips_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    SettingsSheet.Range(SETTINGS_EDGE_TOOLTIPS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
+    AutoDraw
+End Sub
+
+Private Sub showEdgeTooltips_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = GetSettingBoolean(SETTINGS_EDGE_TOOLTIPS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for showPorts
 
-'@Ignore ParameterNotUsed
-Public Sub showPorts_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub showPorts_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_EDGE_PORTS).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub showPorts_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub showPorts_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_EDGE_PORTS)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for strict
 
-'@Ignore ParameterNotUsed
-Public Sub strict_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub strict_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_STRICT).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub strict_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub strict_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_STRICT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for transparent
 
-'@Ignore ParameterNotUsed
-Public Sub transparent_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub transparent_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_TRANSPARENT).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub transparent_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub transparent_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_TRANSPARENT)
-End Sub
-
-' ===========================================================================
-' Callbacks for center
-
-'@Ignore ParameterNotUsed
-Public Sub center_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
-    SettingsSheet.Range(SETTINGS_GRAPH_CENTER).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
-    AutoDraw
-End Sub
-
-'@Ignore ParameterNotUsed
-Public Sub center_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = GetSettingBoolean(SETTINGS_GRAPH_CENTER)
 End Sub
 
 ' ===========================================================================
@@ -1806,8 +1558,8 @@ End Sub
 '   1. STATE PERSISTENCE: Updates the 'SETTINGS_GRAPH_COMPOUND' named range
 '      using the 'Toggle' helper to map boolean state to 'Yes/No' constants.
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the diagram layout.
-' =========================================================================='@Ignore ParameterNotUsed
-Public Sub compound_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+' ==========================================================================
+Private Sub compound_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_COMPOUND).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
@@ -1821,8 +1573,8 @@ End Sub
 ' TECHNICAL WORKFLOW:
 '   1. STATE LOOKUP: Retrieves the current value via 'GetSettingBoolean'
 '      to set the visual 'pressed' state.
-' =========================================================================='@Ignore ParameterNotUsed
-Public Sub compound_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+' ==========================================================================
+Private Sub compound_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_COMPOUND)
 End Sub
 
@@ -1836,8 +1588,7 @@ End Sub
 '   1. CONTEXT CHECK: Returns TRUE only for the 'DOT' engine, as compound
 '      routing is a specific feature of hierarchical layouts.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub compound_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub compound_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_DOT
             visible = True
@@ -1849,28 +1600,24 @@ End Sub
 ' ===========================================================================
 ' Callbacks for concentrate
 
-'@Ignore ParameterNotUsed
-Public Sub concentrate_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub concentrate_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_CONCENTRATE).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub concentrate_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub concentrate_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_CONCENTRATE)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for forceLabels
 
-'@Ignore ParameterNotUsed
-Public Sub forceLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub forceLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_FORCE_LABELS).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub forceLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub forceLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_FORCE_LABELS)
 End Sub
 
@@ -1889,8 +1636,7 @@ End Sub
 '      'SETTINGS_GRAPH_NEWRANK' named range using the 'Toggle' helper.
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the diagram layout.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub newrank_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub newrank_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_NEWRANK).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
@@ -1905,8 +1651,7 @@ End Sub
 '   1. STATE LOOKUP: Returns the Boolean value of 'SETTINGS_GRAPH_NEWRANK'
 '      to set the visual 'pressed' state.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub newrank_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub newrank_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_NEWRANK)
 End Sub
 
@@ -1921,8 +1666,7 @@ End Sub
 '      'DOT' layout engine, as this attribute is specific to hierarchical
 '      Sugiyama-style rendering.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub newrank_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub newrank_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_DOT
             visible = True
@@ -1934,14 +1678,12 @@ End Sub
 ' ===========================================================================
 ' Callbacks for rotate
 
-'@Ignore ParameterNotUsed
-Public Sub rotate_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub rotate_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPH_ORIENTATION).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub rotate_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub rotate_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPH_ORIENTATION)
 End Sub
 
@@ -1972,8 +1714,7 @@ End Function
 '   - UX Strategy: Reduces "Attribute Bloat" by presenting only parameters
 '     relevant to the active Graphviz algorithm.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub overlap_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub overlap_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_CIRCO
              visible = False
@@ -1996,100 +1737,80 @@ Public Sub overlap_getVisible(ByVal control As IRibbonControl, ByRef visible As 
     End Select
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub overlap_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub overlap_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value = Mid$(controlId, Len("overlap_") + 1)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub overlap_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value = control.id
-End Sub
-
-
-'@Ignore ParameterNotUsed
-Public Sub overlap_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub overlap_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "overlap_" & SettingsSheet.Range(SETTINGS_GRAPH_OVERLAP).value
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleDebugLabels
 
-'@Ignore ParameterNotUsed
-Public Sub toggleDebugLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleDebugLabels_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_DEBUG).value = Toggle(pressed, TOGGLE_ON, TOGGLE_OFF)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleDebugLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleDebugLabels_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_DEBUG)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleLogToConsole
 
-'@Ignore ParameterNotUsed
-Public Sub toggleDebugLogToConsole_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleDebugLogToConsole_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_LOG_TO_CONSOLE).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleDebugLogToConsole_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleDebugLogToConsole_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_LOG_TO_CONSOLE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Public Sub toggleDebugLogToConsole_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub toggleDebugLogToConsole_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = enableConsole()
 End Sub
 
 ' ===========================================================================
 ' Callbacks for toggleGraphvizVerbose
 
-'@Ignore ParameterNotUsed
-Public Sub toggleGraphvizVerbose_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub toggleGraphvizVerbose_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_GRAPHVIZ_VERBOSE).value = Toggle(pressed, TOGGLE_YES, TOGGLE_NO)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub toggleGraphvizVerbose_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub toggleGraphvizVerbose_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_GRAPHVIZ_VERBOSE)
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Public Sub toggleGraphvizVerbose_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub toggleGraphvizVerbose_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = enableConsole()
 End Sub
 
 ' ===========================================================================
 ' Callbacks for useDefinedStyles
 
-'@Ignore ParameterNotUsed
-Public Sub useDefinedStyles_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub useDefinedStyles_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_INCLUDE_STYLE_FORMAT).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub useDefinedStyles_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub useDefinedStyles_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_INCLUDE_STYLE_FORMAT)
 End Sub
 
 ' ===========================================================================
 ' Callbacks for useExtraStyles
 
-'@Ignore ParameterNotUsed
-Public Sub useExtraStyles_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub useExtraStyles_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     SettingsSheet.Range(SETTINGS_INCLUDE_EXTRA_ATTRIBUTES).value = Toggle(pressed, TOGGLE_INCLUDE, TOGGLE_EXCLUDE)
     AutoDraw
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub useExtraStyles_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub useExtraStyles_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = GetSettingBoolean(SETTINGS_INCLUDE_EXTRA_ATTRIBUTES)
 End Sub
 
@@ -2118,8 +1839,7 @@ End Sub
 '   - Trigger: Ribbon -> Styles/Graphviz Tab -> View Selection.
 '   - Layer: UI / Settings Management.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub yesNoView_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub yesNoView_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     Dim columnName As String
     columnName = ConvertColumnNumberToLetters(index + GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW))
     SettingsSheet.Range(SETTINGS_YES_NO_SWITCH_COLUMN).value = columnName
@@ -2148,8 +1868,7 @@ End Sub
 '   - Strategy: Ensures the UI remains synchronized even if the user
 '     manually modifies the 'Styles' worksheet structure.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub yesNoView_getItemCount(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
+Private Sub yesNoView_getItemCount(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
     Dim itemCount As Long
     Dim row As Long
     Dim col As Long
@@ -2194,8 +1913,7 @@ End Sub
 '   3. UI FEEDBACK: Returns the header string (e.g., "Logical", "Security")
 '      to the Ribbon's item label property.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub yesNoView_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef itemLabel As Variant)
+Private Sub yesNoView_getItemLabel(ByVal control As IRibbonControl, ByVal index As Long, ByRef itemLabel As Variant)
     itemLabel = StylesSheet.Cells.item(CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_HEADING)), _
                             index + GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW))
 End Sub
@@ -2213,8 +1931,7 @@ End Sub
 '   2. UI SYNC: Returns the zero-based 'itemIndex', ensuring the correct
 '      View is highlighted in the dropdown.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub yesNoView_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef itemIndex As Variant)
+Private Sub yesNoView_getSelectedItemIndex(ByVal control As IRibbonControl, ByRef itemIndex As Variant)
     Dim indx As Long
     indx = GetSettingColNum(SETTINGS_STYLES_COL_SHOW_STYLE) - GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
     itemIndex = indx
@@ -2259,33 +1976,11 @@ End Function
 '   - DeepWiki Context: Prevents user interaction with the ADO-based SQL
 '     engine on non-supported platforms.
 ' ==========================================================================
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub sql_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
 #If Mac Then
     returnedVal = False
 #Else
     returnedVal = True
-#End If
-End Sub
-
-' ==========================================================================
-' CALLBACK: mac_getVisible
-'
-' PURPOSE:
-'   Controls the visibility of macOS-specific Ribbon elements or alerts.
-'
-' TECHNICAL WORKFLOW:
-'   1. PLATFORM BRANCHING: Uses the '#If Mac' compiler directive.
-'   2. UI INVERSION:
-'      - Returns TRUE on macOS to show platform-specific guidance.
-'      - Returns FALSE on Windows to keep the UI clean.
-' ==========================================================================
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub mac_getVisible(ByVal control As IRibbonControl, ByRef returnedVal As Variant)
-#If Mac Then
-    returnedVal = True
-#Else
-    returnedVal = False
 #End If
 End Sub
 
@@ -2304,8 +1999,7 @@ End Sub
 '   2. ID COMPOSITION: Concatenates the control ID with the zoom value
 '      (e.g., "zoom100") to highlight the correct item in the gallery.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphZoomLevel_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub graphZoomLevel_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = control.id & GetCurrentZoom()
 End Sub
 
@@ -2321,37 +2015,20 @@ End Sub
 '   2. STATE UPDATE: Invokes 'UpdateZoom' to persist the new scale and
 '      immediately trigger a visual resize of the graph.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphZoomLevel_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub graphZoomLevel_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     Dim zoomLevel As String
     zoomLevel = Mid$(controlId, Len(control.id) + 1)
     UpdateZoom CLng(zoomLevel)
 End Sub
 
-' ==========================================================================
-' CALLBACK: graphZoomLevel_getLabel
-'
-' PURPOSE:
-'   Provides live feedback of the current zoom percentage on the Ribbon.
-'
-' TECHNICAL WORKFLOW:
-'   1. UI UPDATE: Returns the value from 'GetCurrentZoom' formatted with
-'      a percentage symbol (e.g., "150%") to the control's label property.
-' ==========================================================================
-Public Sub graphZoomLevel_getLabel(ByVal control As IRibbonControl, ByRef label As Variant)
-    label = GetCurrentZoom() & "%"
-End Sub
-
 ' ===========================================================================
 ' Callbacks for graphZoomOut
 
-'@Ignore ParameterNotUsed
-Public Sub graphZoomOut_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+Private Sub graphZoomOut_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     Enabled = GetCurrentZoom() > MIN_ZOOM
 End Sub
 
-'@Ignore ParameterNotUsed
-Public Sub GraphZoomOut_OnAction(ByVal control As IRibbonControl)
+Private Sub GraphZoomOut_OnAction(ByVal control As IRibbonControl)
     Dim zoom As Long
     zoom = SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value - ZOOM_STEP
     
@@ -2374,8 +2051,7 @@ End Sub
 '   2. UI FEEDBACK: Disables the button if the minimum scale is reached
 '      to prevent invalid scaling values.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphZoomIn_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
+Private Sub graphZoomIn_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     Enabled = GetCurrentZoom() < MAX_ZOOM
 End Sub
 
@@ -2391,7 +2067,7 @@ End Sub
 '   2. STATE UPDATE: Invokes 'UpdateZoom' to apply the new scale and
 '      trigger a refresh of the Ribbon and graph image.
 ' ==========================================================================
-Public Sub GraphZoomIn_OnAction(ByVal control As IRibbonControl)
+Private Sub GraphZoomIn_OnAction(ByVal control As IRibbonControl)
     Dim zoom As Long
     zoom = SettingsSheet.Range(SETTINGS_SCALE_IMAGE).value + ZOOM_STEP
     
@@ -2464,8 +2140,7 @@ End Function
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the rendering engine with
 '      the new dimensionality constraint.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub dim_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub dim_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_DIM).value = Mid$(controlId, Len("dim_") + 1)
     AutoDraw
 End Sub
@@ -2481,8 +2156,7 @@ End Sub
 '   1. UI SYNC: Concatenates the "dim_" prefix with the value from
 '      'SETTINGS_GRAPH_DIM' to highlight the active item in the gallery.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub dim_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub dim_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "dim_" & SettingsSheet.Range(SETTINGS_GRAPH_DIM).value
 End Sub
 
@@ -2497,8 +2171,7 @@ End Sub
 '      force-directed layouts (FDP, NEATO, SFDP) where dimensionality is a
 '      valid layout parameter.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub dim_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub dim_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_FDP
             visible = True
@@ -2526,8 +2199,8 @@ End Sub
 '      suffix (e.g., "dimen_2") and updates 'SETTINGS_GRAPH_DIMEN'.
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the graph with the
 '      updated rendering dimensions.
-' =========================================================================='@Ignore ParameterNotUsed
-Public Sub dimen_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+' ==========================================================================
+Private Sub dimen_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_DIMEN).value = Mid$(controlId, Len("dimen_") + 1)
     AutoDraw
 End Sub
@@ -2543,8 +2216,7 @@ End Sub
 '   1. UI SYNC: Concatenates "dimen_" with the value from
 '      'SETTINGS_GRAPH_DIMEN' to resolve the matching control ID.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub dimen_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub dimen_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "dimen_" & SettingsSheet.Range(SETTINGS_GRAPH_DIMEN).value
 End Sub
 
@@ -2558,8 +2230,7 @@ End Sub
 '   1. CONTEXT CHECK: Returns TRUE only for force-directed engines
 '      (FDP, NEATO, SFDP), hiding it for all other layout algorithms.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub dimen_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub dimen_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_FDP
             visible = True
@@ -2588,8 +2259,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the graph with the new
 '      optimization algorithm.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub mode_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub mode_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_MODE).value = Mid$(controlId, Len("mode_") + 1)
     AutoDraw
 End Sub
@@ -2605,8 +2275,7 @@ End Sub
 '   1. UI SYNC: Concatenates "mode_" with the value from 'SETTINGS_GRAPH_MODE'
 '      to highlight the active item in the Ribbon gallery.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub mode_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub mode_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "mode_" & SettingsSheet.Range(SETTINGS_GRAPH_MODE).value
 End Sub
 
@@ -2621,8 +2290,7 @@ End Sub
 '      mode attribute (e.g., major, KK) is specific to these force-directed
 '      and spring-model algorithms.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub mode_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub mode_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_NEATO
             visible = True
@@ -2649,8 +2317,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the graph using the new
 '      mathematical model for node positioning.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub model_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub model_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_MODEL).value = Mid$(controlId, Len("model_") + 1)
     AutoDraw
 End Sub
@@ -2666,8 +2333,7 @@ End Sub
 '   1. UI SYNC: Concatenates "model_" with the value from 'SETTINGS_GRAPH_MODEL'
 '      to highlight the active item in the gallery.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub model_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub model_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "model_" & SettingsSheet.Range(SETTINGS_GRAPH_MODEL).value
 End Sub
 
@@ -2682,8 +2348,7 @@ End Sub
 '      'NEATO' engine, as this attribute specifically dictates how neato
 '      interprets edge lengths.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub model_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub model_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_NEATO
             visible = True
@@ -2708,8 +2373,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the graph with the
 '      specified layout refinement logic.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub smoothing_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub smoothing_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_SMOOTHING).value = Mid$(controlId, Len("smoothing_") + 1)
     AutoDraw
 End Sub
@@ -2725,8 +2389,7 @@ End Sub
 '   1. UI SYNC: Concatenates "smoothing_" with the value from
 '      'SETTINGS_GRAPH_SMOOTHING' to highlight the active gallery item.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub smoothing_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub smoothing_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "smoothing_" & SettingsSheet.Range(SETTINGS_GRAPH_SMOOTHING).value
 End Sub
 
@@ -2740,8 +2403,7 @@ End Sub
 '   1. ENGINE GATE: Returns TRUE only for the 'SFDP' engine, as smoothing
 '      algorithms are specialized for large-scale force-directed layouts.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub smoothing_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub smoothing_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_SFDP
             visible = True
@@ -2766,8 +2428,7 @@ End Sub
 '   2. REACTIVITY: Invokes 'AutoDraw' to refresh the diagram with the
 '      new cluster ranking logic.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub clusterrank_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
+Private Sub clusterrank_onAction(ByVal control As IRibbonControl, ByVal controlId As String, ByVal index As Long)
     SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value = Mid$(controlId, Len("clusterrank_") + 1)
     AutoDraw
 End Sub
@@ -2783,8 +2444,7 @@ End Sub
 '   1. UI SYNC: Concatenates "clusterrank_" with the value from
 '      'SETTINGS_GRAPH_CLUSTER_RANK' to resolve the matching control ID.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub clusterrank_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
+Private Sub clusterrank_GetSelectedItemID(ByVal control As IRibbonControl, ByRef itemId As Variant)
     itemId = "clusterrank_" & SettingsSheet.Range(SETTINGS_GRAPH_CLUSTER_RANK).value
 End Sub
 
@@ -2799,8 +2459,7 @@ End Sub
 '      'DOT' layout engine, as this attribute dictates hierarchical
 '      nesting logic specific to Sugiyama-style rendering.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub clusterrank_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub clusterrank_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_DOT
             visible = True
@@ -2841,8 +2500,7 @@ End Sub
 '      'DOT' layout engine, as edge port ordering is specific to
 '      hierarchical ranking.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub ordering_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub ordering_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_DOT
             visible = True
@@ -2864,7 +2522,7 @@ End Sub
 '   2. UI SYNC: Invokes 'RefreshOrderingGroup' to update toggle indicators.
 '   3. REACTIVITY: Triggers 'AutoDraw' to refresh the diagram.
 ' ==========================================================================
-Public Sub ordering_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub ordering_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value = LCase$(Mid$(control.id, Len("ordering") + 1))
     Else
@@ -2884,7 +2542,7 @@ End Sub
 '   1. STATE COMPARISON: Compares the normalized value of
 '      'SETTINGS_GRAPH_ORDERING' against the control's ID suffix.
 ' ==========================================================================
-Public Sub ordering_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub ordering_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     If LCase$(SettingsSheet.Range(SETTINGS_GRAPH_ORDERING).value) = LCase$(Mid$(control.id, Len("ordering") + 1)) Then
         pressed = True
     Else
@@ -2911,6 +2569,7 @@ Private Sub RefreshOutputorderGroup()
     InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_NODES_FIRST
     InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_EDGES_FIRST
     InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_BREADTH_FIRST
+    InvalidateRibbonControl RIBBON_CTL_OUTPUTORDER_DEPTH_FIRST
 End Sub
 
 ' ==========================================================================
@@ -2925,13 +2584,8 @@ End Sub
 '   2. STATE MATCH: Returns TRUE if the setting matches the button's
 '      associated value (breadthfirst).
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorderBreadthFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
-    If SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString Then
-        pressed = True
-    Else
+Private Sub outputorderBreadthFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
         pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "breadthfirst"
-    End If
 End Sub
 
 ' ==========================================================================
@@ -2946,10 +2600,47 @@ End Sub
 '   2. UI REFRESH: Invokes 'RefreshOutputorderGroup' to update toggle states.
 '   3. REACTIVITY: Triggers 'AutoDraw' for immediate visual feedback.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorderBreadthFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub outputorderBreadthFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "breadthfirst"
+    Else
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString
+    End If
+    RefreshOutputorderGroup
+    AutoDraw
+End Sub
+
+' ==========================================================================
+' CALLBACK: outputorderDepthFirst_getPressed
+'
+' PURPOSE:
+'   Determines which Output Order button appears active on the Ribbon.
+'
+' TECHNICAL WORKFLOW:
+'   1. DEFAULT STATE: If 'SETTINGS_GRAPH_OUTPUT_ORDER' is empty,
+'      'BreadthFirst' is forced to the pressed state as the Graphviz default.
+'   2. STATE MATCH: Returns TRUE if the setting matches the button's
+'      associated value (breadthfirst).
+' ==========================================================================
+Private Sub outputorderDepthFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+    pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "depthfirst"
+End Sub
+
+' ==========================================================================
+' CALLBACK: outputorderDepthFirst_onAction
+'
+' PURPOSE:
+'   Updates the 'outputorder' Graphviz attribute via the Ribbon.
+'
+' TECHNICAL WORKFLOW:
+'   1. STATE PERSISTENCE: Updates the 'SETTINGS_GRAPH_OUTPUT_ORDER' named
+'      range based on the selected sequence.
+'   2. UI REFRESH: Invokes 'RefreshOutputorderGroup' to update toggle states.
+'   3. REACTIVITY: Triggers 'AutoDraw' for immediate visual feedback.
+' ==========================================================================
+Private Sub outputorderDepthFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+    If pressed Then
+        SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "depthfirst"
     Else
         SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = vbNullString
     End If
@@ -2969,8 +2660,7 @@ End Sub
 '   2. STATE MATCH: Returns TRUE if the setting matches the button's
 '      associated value (edgesfirst).
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorderEdgesFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub outputorderEdgesFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "edgesfirst"
 End Sub
 
@@ -2986,8 +2676,7 @@ End Sub
 '   2. UI REFRESH: Invokes 'RefreshOutputorderGroup' to update toggle states.
 '   3. REACTIVITY: Triggers 'AutoDraw' for immediate visual feedback.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorderEdgesFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub outputorderEdgesFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "edgesfirst"
     Else
@@ -3009,8 +2698,7 @@ End Sub
 '   2. STATE MATCH: Returns TRUE if the setting matches the button's
 '      associated value (nodesfirst).
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorderNodesFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
+Private Sub outputorderNodesFirst_getPressed(ByVal control As IRibbonControl, ByRef pressed As Variant)
     pressed = SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "nodesfirst"
 End Sub
 
@@ -3026,8 +2714,7 @@ End Sub
 '   2. UI REFRESH: Invokes 'RefreshOutputorderGroup' to update toggle states.
 '   3. REACTIVITY: Triggers 'AutoDraw' for immediate visual feedback.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorderNodesFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
+Private Sub outputorderNodesFirst_onAction(ByVal control As IRibbonControl, ByVal pressed As Boolean)
     If pressed Then
         SettingsSheet.Range(SETTINGS_GRAPH_OUTPUT_ORDER).value = "nodesfirst"
     Else
@@ -3049,8 +2736,7 @@ End Sub
 '   2. ENGINE GATE: Returns TRUE for most engines, but forces FALSE for
 '      'PATCHWORK', as rendering order is fixed in treemap layouts.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub outputorder_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub outputorder_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_CIRCO
              visible = True
@@ -3085,8 +2771,7 @@ End Sub
 '   2. CONTEXT: Reserved exclusively for 'DOT' layouts to group relevant
 '      parameters.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub algsep1_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub algsep1_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_CIRCO
              visible = False
@@ -3121,8 +2806,7 @@ End Sub
 '   2. CONTEXT: Appears for 'DOT', 'NEATO', and 'SFDP' to group relevant
 '      parameters.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub algsep2_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
+Private Sub algsep2_getVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     Select Case SettingsSheet.Range(SETTINGS_GRAPHVIZ_ENGINE).value
         Case LAYOUT_CIRCO
              visible = False
@@ -3166,8 +2850,7 @@ End Sub
 '   - Strategy: Centralizes documentation links within the workbook's
 '     Settings sheet to allow for URL updates without code modification.
 ' ==========================================================================
-'@Ignore ParameterNotUsed
-Public Sub graphvizHelp_onAction(ByVal control As IRibbonControl)
+Private Sub graphvizHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLGraphvizTab").value, NewWindow:=True
 End Sub
 

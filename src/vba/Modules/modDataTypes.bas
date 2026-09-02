@@ -63,13 +63,15 @@ Public Type stylesWorksheet
 
     flagColumn As Long                           ' Column number where comment indicator ('#') is located
     nameColumn As Long                           ' Column number where Style name is located
+    descriptionColumn As Long                    ' Column number where the description of the style is located
     formatColumn As Long                         ' Column number where style attributes such as font associated with the style is located
     typeColumn As Long                           ' Column number where Object Type (NODE/EDGE/NATIVE etc) is located
     firstYesNoColumn As Long                     ' Column number where Yes/No switches begin
     selectedViewColumn As Long                   ' Column number where Yes/No switch to include the Style during rendering is kept
     
-    suffixOpen As String                         ' Value to append to subgraph-open style names when created by the Style Designer
-    suffixClose As String                        ' Value to append to subgraph-close style names when created by the Style Designer
+    concatFormat As String                       ' Mask used to concatenate a style name with a suffix
+    affixOpen As String                         ' Value applied to subgraph-open style names when created by the Style Designer
+    affixClose As String                        ' Value applied to subgraph-close style names when created by the Style Designer
 End Type
 
 Public Type dataWorksheet
@@ -89,7 +91,7 @@ Public Type dataWorksheet
     isRelatedToItemColumn As Long                ' Column number where related Item ID is located
     styleNameColumn As Long                      ' Column number where Style name is located
     extraAttributesColumn As Long                ' Column number where line item style attributes are located
-    errorMessageColumn As Long                   ' Column number to write error messages to
+    propertiesColumn As Long                     ' Column number where semantic properties are located
     graphDisplayColumn As Long                   ' Column number where graph can be displayed in the data worksheet
     graphDisplayColumnAsAlpha As String          ' Column letter where graph can be displayed in the data worksheet
 End Type
@@ -98,13 +100,14 @@ Public Type DataWorksheetHeadings
     flag As String                               ' Comment indicator ('#') column heading
     item As String                               ' Item ID column heading
     label As String                              ' Label column heading
-    xLabel As String                             ' External Label column heading
-    tailLabel As String                          ' Edge Tail Label column heading
-    headLabel As String                          ' Edge Head Label column heading
-    Tooltip As String                            ' Tooltip column heading
+    xlabel As String                             ' External Label column heading
+    taillabel As String                          ' Edge Tail Label column heading
+    headlabel As String                          ' Edge Head Label column heading
+    tooltip As String                            ' Tooltip column heading
     isRelatedToItem As String                    ' related Item ID column heading
     styleName As String                          ' Style name column heading
     extraAttributes As String                    ' line item style attributes column heading
+    properties As String                         ' semantic attributes column heading
     errorMessage As String                       ' error messages column heading
 End Type
 
@@ -130,8 +133,8 @@ Public Type svgWorksheet
 End Type
 
 Public Type sourceWorksheet
-    headingRow As Long                           ' "sql" worksheet heading row
-    firstRow As Long                             ' First row of sql data
+    headingRow As Long                           ' "source" worksheet heading row
+    firstRow As Long                             ' First row of DOT source code
 
     lineNumberColumn As Long                     ' Column number where line number is located
     sourceColumn As Long                         ' Column number where Graphviz source code is located
@@ -149,9 +152,17 @@ End Type
 
 Public Type graphOptions
     addStrict As Boolean                         ' Designates if the 'strict' keyword should be applied to the parent graph
+    
+    blankClusterLabels As Boolean                ' How to handle blank cluster labels. = TRUE -> use Graphviz default behavior
+    blankClusterTooltips As Boolean              ' How to handle blank cluster tooltips.
+    
     blankEdgeLabels As Boolean                   ' How to handle blank edge labels. = TRUE -> use Graphviz default behavior
+    blankEdgeTooltips As Boolean                 ' How to handle blank edge tooltips.
+    
     blankNodeLabels As Boolean                   ' How to handle blank node labels. = TRUE -> use Graphviz default behavior
-    center As Boolean
+    blankNodeTooltips As Boolean                 ' How to handle blank node tooltips.
+    
+    center As Boolean                            ' Deprecated
     clusterrank As String
     command As String                            ' Derived from graphType
     compound As Boolean
@@ -159,26 +170,35 @@ Public Type graphOptions
     debug As Boolean                             ' Turn debug tracing on/off
     edgeOperator As String                       ' Derived from graphType
     engine As String                             ' The Graphviz executable which will draw the graph
+    Renderer As String
     fileDisposition As String                    ' What to do with the .gv file after graphing (keep/delete)
     forceLabels As Boolean
     graphType As String                          ' Specifies if graph is directed or undirected
     imagePath As String                          ' Directory paths where images referenced in styles can be found
+    includeGraphImagePath As Boolean             ' On/off switch for graph "imagepath" attribute
     imageTypeFile As String                      ' Type of image to create when "Graph to File" is pressed
     imageTypeWorksheet As String                 ' Type of image to create when "Graph to Worksheet" is pressed
     imageWorksheet As String                     ' Worksheet to display the graph in when "Graph to Worksheet" is pressed
-    includeGraphImagePath As Boolean             ' On/off switch for graph "imagepath" attribute
+    
+    includeClusterLabels As Boolean              ' On/off switch for cluster labels
+    includeClusterTooltips As Boolean            ' On/off switch for cluster labels
+    
+    includeNodeLabels As Boolean                 ' On/off switch for node labels
+    includeNodeXLabels As Boolean                ' On/off switch for node xlabels
+    includeNodeTooltips As Boolean               ' On/off switch for node tooltips
+    
     includeEdgeHeadLabels As Boolean             ' On/off switch for edge head labels
     includeEdgeLabels As Boolean                 ' On/off switch for edge labels
     includeEdgePorts As Boolean                  ' On/off switch for edge ports
     includeEdgeTailLabels As Boolean             ' On/off switch for edge tail labels
     includeEdgeXLabels As Boolean                ' On/off switch for edge xlabels
-    includeExtraAttributes As Boolean            ' On/off switch to include the "data" worksheet "Extra Attributes" column with the style
-    includeNodeLabels As Boolean                 ' On/off switch for node labels
-    includeNodeXLabels As Boolean                ' On/off switch for node xlabels
+    includeEdgeTooltips As Boolean               ' On/off switch for edge tooltips
+    
     includeOrphanEdges As Boolean                ' Switch which allows you to drop relationships without defined nodes
     includeOrphanNodes As Boolean                ' Switch which allows you to drop nodes without relationships
     includeStyleFormat As Boolean                ' On/off switch to include the "styles" worksheet Format information associated with the style
-    includeTooltip As Boolean                    ' If file format is SVG we include tooltips, otherwise they are excluded
+    includeExtraAttributes As Boolean            ' On/off switch to include the "data" worksheet "Extra Attributes" column with the style
+    
     layout As String
     layoutDim As String
     layoutDimen As String
@@ -253,22 +273,25 @@ Public Type dataRow
     item As String
     relatedItem As String
     label As String
-    xLabel As String
-    tailLabel As String
-    headLabel As String
-    Tooltip As String
+    xlabel As String
+    taillabel As String
+    headlabel As String
+    tooltip As String
     styleName As String
     extraAttrs As String
+    properties As String
     errorMessage As String
     styleType As String                          ' Not a column on "data" worksheet. Value is derived from the style associated with the style name.
-    format As String                             ' Not a column on "data" worksheet. Value is derived from the format associated with the style name.
+    Format As String                             ' Not a column on "data" worksheet. Value is derived from the format associated with the style name.
+    row As Long                                  ' The row number this data structure maps to
 End Type
 
-' Working variables for row data on the "stylesheet" worksheet
+' Working variables for row data on the "styles" worksheet
 Public Type StylesRow
     comment As String
     styleName As String
-    format As String
+    Description As String
+    Format As String
     styleType As String
     show As String
 End Type
@@ -339,8 +362,8 @@ End Type
 ' For passing labels to Style Designer functions
 Public Type LabelSet
     label As String
-    xLabel As String
-    headLabel As String
-    tailLabel As String
+    xlabel As String
+    headlabel As String
+    taillabel As String
 End Type
 

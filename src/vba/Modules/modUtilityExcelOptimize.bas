@@ -39,13 +39,13 @@ Option Explicit
 
 ' Public routines to turn code optimizations on and off
 Public Sub OptimizeCode_Begin()
-    Application.ScreenUpdating = False
+    Application.screenUpdating = False
     Application.enableEvents = False
 End Sub
 
 Public Sub OptimizeCode_End()
     Application.enableEvents = True
-    Application.ScreenUpdating = True
+    Application.screenUpdating = True
 End Sub
 
 

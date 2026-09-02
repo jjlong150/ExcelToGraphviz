@@ -3,45 +3,52 @@ Attribute VB_Name = "modRibbonTabStyles"
 ' PROJECT:   Excel to Graphviz
 ' MODULE:    modRibbonTabStyles
 ' COPYRIGHT: Copyright (c) 2015-2026 Jeffrey J. Long. All rights reserved.
-' LAYER:     Excel UI / Ribbon
+' LAYER:     Excel UI / Ribbon Callbacks
 '
 ' ROLE:
-'   Callback bridge for the "Styles" Ribbon Tab, providing worksheet-level
-'   style preview actions, suffix configuration, and integration with the
-'   full Style Designer. Acts as the UI surface for managing and inspecting
-'   style definitions stored on the Styles worksheet.
+'   Ribbon callback module for the Styles Tab. Provides worksheet-level style
+'   previewing, suffix/affix configuration, concatenation formatting, and
+'   integration with the Style Designer. Acts as the UI controller for managing
+'   and inspecting style definitions stored on the Styles worksheet.
 '
 ' RESPONSIBILITIES:
-'   - Dispatch IRibbonControl callbacks for all Styles tab controls.
-'   - Trigger style previews (single row, all rows) and clear preview output.
-'   - Persist style suffix settings (open/close markers) via named ranges.
-'   - Enable "Edit Style" only when the active row represents a valid
-'     style object (Node / Edge / Subgraph).
-'   - Bridge to the Style Designer via RestoreStyleDesigner.
+'   - Trigger style previews:
+'       o PreviewStyleForCurrentRow
+'       o GenerateStylesPreviewAll
+'       o ClearStylesPreview
+'   - Manage style affix (open/close) and concatenation format settings via
+'     named ranges on the Settings worksheet.
+'   - Provide "Edit Style" enablement logic based on the active row's object
+'     type (Node, Edge, Subgraph).
+'   - Launch the Style Designer (RestoreStyleDesigner) from Ribbon actions.
+'   - Navigate to Styles-tab help content using workbook-configured URLs.
+'   - Synchronize Ribbon state through getText/getEnabled callbacks.
 '
 ' INTERACTIONS:
-'   - Ribbon XML: CustomUI.xml, CustomUI14.xml (control IDs -> callbacks).
 '   - Named Ranges:
-'       StylesSuffixOpen, StylesSuffixClose,
-'       SETTINGS_STYLES_COL_OBJECT_TYPE, HelpURLStylesTab.
+'       SETTINGS_STYLES_AFFIX_OPEN,
+'       SETTINGS_STYLES_AFFIX_CLOSE,
+'       SETTINGS_STYLES_CONCAT_FORMAT,
+'       SETTINGS_STYLES_COL_OBJECT_TYPE,
+'       HelpURLStylesTab.
 '   - Worksheets: StylesSheet, SettingsSheet, DataSheet.
 '   - Modules: ClearStylesPreview, PreviewStyleForCurrentRow,
 '              GenerateStylesPreviewAll, RestoreStyleDesigner.
-'   - Global State: internalMyRibbon (via Ribbon invalidation in parent tabs).
 '
 ' CROSS-PLATFORM NOTES:
 '   - Fully supported on Windows and macOS.
 '   - All actions rely on worksheet operations and hyperlink navigation.
 '
 ' ERROR HANDLING:
-'   - Localized checks ensure "Edit Style" is only enabled for valid rows.
-'   - Callback signatures follow IRibbonControl requirements.
+'   - Validates active sheet, selection type, and row count before enabling
+'     "Edit Style."
+'   - All callbacks follow IRibbonControl signature requirements.
 '
 ' RELATED WIKI PAGES:
 '   - Styles & the Style Gallery
 '   - Style Designer Ribbon Tab
-'   - Working with the Data Worksheet
 '   - Worksheet Architecture & Named Ranges
+'   - Working with the Data Worksheet
 ' =============================================================================
 
 Option Explicit
@@ -62,35 +69,41 @@ Private Sub stylesPreviewAll_onAction(ByVal control As IRibbonControl)
 End Sub
 
 ' ===========================================================================
-' Callbacks for stylesSuffixBegin
+' Callbacks for stylesConcat
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
-Private Sub stylesSuffixBegin_onChange(ByVal control As IRibbonControl, ByVal Text As String)
-    SettingsSheet.Range("StylesSuffixOpen").value = Text
+Private Sub stylesConcat_onChange(ByVal control As IRibbonControl, ByVal Text As String)
+    SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).value = Text
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
+Private Sub stylesConcat_getText(ByVal control As IRibbonControl, ByRef Text As Variant)
+    Text = Trim$(SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT))
+End Sub
+
+' ===========================================================================
+' Callbacks for stylesSuffixBegin
+
+Private Sub stylesSuffixBegin_onChange(ByVal control As IRibbonControl, ByVal Text As String)
+    SettingsSheet.Range(SETTINGS_STYLES_AFFIX_OPEN).value = Text
+End Sub
+
 Private Sub stylesSuffixBegin_getText(ByVal control As IRibbonControl, ByRef Text As Variant)
-    Text = Trim$(SettingsSheet.Range("StylesSuffixOpen"))
+    Text = Trim$(SettingsSheet.Range(SETTINGS_STYLES_AFFIX_OPEN))
 End Sub
 
 ' ===========================================================================
 ' Callbacks for stylesSuffixEnd
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub stylesSuffixEnd_onChange(ByVal control As IRibbonControl, ByVal Text As String)
-    SettingsSheet.Range("StylesSuffixClose").value = Text
+    SettingsSheet.Range(SETTINGS_STYLES_AFFIX_CLOSE).value = Text
 End Sub
 
-'@Ignore ProcedureNotUsed, ParameterNotUsed
 Private Sub stylesSuffixEnd_getText(ByVal control As IRibbonControl, ByRef Text As Variant)
-    Text = Trim$(SettingsSheet.Range("StylesSuffixClose"))
+    Text = Trim$(SettingsSheet.Range(SETTINGS_STYLES_AFFIX_CLOSE))
 End Sub
 
 ' ===========================================================================
 ' Callbacks for Help
 
-'@Ignore ParameterNotUsed
 Private Sub stylesHelp_onAction(ByVal control As IRibbonControl)
     ActiveWorkbook.FollowHyperlink Address:=SettingsSheet.Range("HelpURLStylesTab").value, NewWindow:=True
 End Sub
@@ -98,18 +111,16 @@ End Sub
 ' ===========================================================================
 ' Callbacks for stylesEdit
 
-'@Ignore ParameterNotUsed
 Private Sub stylesEdit_onAction(ByVal control As IRibbonControl)
     RestoreStyleDesigner
 End Sub
 
-'@Ignore ParameterNotUsed
 Private Sub stylesEdit_getEnabled(ByVal control As IRibbonControl, ByRef Enabled As Variant)
     Enabled = False
 
     If ActiveSheet.name <> StylesSheet.name Then Exit Sub
     If Not TypeOf Selection Is Range Then Exit Sub
-    If Selection.rows.count <> 1 Then Exit Sub
+    If Selection.rows.Count <> 1 Then Exit Sub
 
     Dim row As Long
     row = Selection.row

@@ -98,7 +98,7 @@ Public Sub CreateOneFloatingButton( _
     On Error GoTo CreateErr
 
     leftPos = cell.Left + cell.Width + cfg.HOffset
-    topPos = cell.top + 1 + cfg.VOffset
+    topPos = cell.Top + 1 + cfg.VOffset
 
     ' Remove any existing button with this name
     On Error Resume Next
@@ -127,24 +127,24 @@ Public Sub CreateOneFloatingButton( _
     Exit Sub
 
 CreateErr:
-    Debug.Print "CreateFloatingButton failed for " & cfg.ButtonName & ": " & err.Description
-    err.Clear
+    Debug.Print "CreateFloatingButton failed for " & cfg.ButtonName & ": " & Err.Description
+    Err.Clear
 End Sub
 
 ' Processes the supplied ButtonConfig array and creates floating buttons
 ' where the selected column matches and any validation passes.
 Public Sub UpdateFloatingButtonsOnSheet( _
     ByVal ws As Worksheet, _
-    ByVal Target As Range, _
+    ByVal target As Range, _
     ByRef configs() As ButtonConfig)
 
     ' Early exits - common safety checks
-    If Target Is Nothing Then Exit Sub
-    If Target.Cells.CountLarge > 1 Or Target.Cells.count = 0 Then Exit Sub
+    If target Is Nothing Then Exit Sub
+    If target.Cells.CountLarge > 1 Or target.Cells.Count = 0 Then Exit Sub
     If ws.ProtectContents Then Exit Sub
 
     Dim rowNum As Long
-    rowNum = Target.row
+    rowNum = target.row
 
     Dim cfg As ButtonConfig
     Dim i As Long
@@ -153,7 +153,7 @@ Public Sub UpdateFloatingButtonsOnSheet( _
         cfg = configs(i)
 
         ' Only consider this config if the selected cell is in the target column
-        If Not Intersect(Target, ws.columns(cfg.ColumnNumber)) Is Nothing Then
+        If Not Intersect(target, ws.columns(cfg.ColumnNumber)) Is Nothing Then
 
             ' Per-button validation (optional)
             Dim showIt As Boolean
@@ -162,18 +162,18 @@ Public Sub UpdateFloatingButtonsOnSheet( _
             If Len(cfg.ValidationFunc) > 0 Then
                 On Error Resume Next
                 showIt = Application.Run(cfg.ValidationFunc, rowNum)
-                If err.number <> 0 Then
+                If Err.number <> 0 Then
                     Debug.Print "Validation function failed: " & cfg.ValidationFunc & _
-                                " - Error: " & err.Description
+                                " - Error: " & Err.Description
                     showIt = False
-                    err.Clear
+                    Err.Clear
                 End If
                 On Error GoTo 0
             End If
 
             ' Create the button if all conditions are met
             If showIt Then
-                CreateOneFloatingButton ws, Target, cfg
+                CreateOneFloatingButton ws, target, cfg
             End If
         End If
     Next i

@@ -121,7 +121,6 @@ End Sub
 ' @param {Range} items A set of cells which should be concatenated and wrapped as a single text string
 ' @param {Long} wrapLength The desired maximum number of characters in a line segment. Line segments may exceed this size under certain circumstances.
 ' @param {String} lineEnding The character(s) to append to each line segment when wrapping the text.
-'@Ignore ProcedureNotUsed
 Public Function WrapText(ByVal itemIds As Range, Optional ByVal wrapLength As Long = 1, Optional ByVal lineEnding As String = "\n") As String
     Dim Text As String
     Text = vbNullString
@@ -264,10 +263,91 @@ Public Function ScrubText(ByVal rawData As String) As String
     If rawData = Chr$(34) & Chr$(34) Then
         ScrubText = vbNullString                 ' "" to blank a label
     Else
-        ScrubText = replace(rawData, Chr$(10), NEWLINE) ' Chr(10) 0x0a LF  Line Feed
-        ScrubText = replace(ScrubText, "\" & Chr$(34), Chr$(34)) ' In case they already escaped the double quote
-        ScrubText = replace(ScrubText, Chr$(34), "\" & Chr$(34)) ' Chr(34)      " Double quotes (or speech marks)
+        ScrubText = replace(rawData, Chr$(10), NEWLINE)             ' Chr(10) 0x0a LF  Line Feed
+        ScrubText = replace(ScrubText, "\" & Chr$(34), Chr$(34))    ' In case they already escaped the double quote
+        ScrubText = replace(ScrubText, Chr$(34), "\" & Chr$(34))    ' Chr(34)      " Double quotes (or speech marks)
     End If
 End Function
 
+'===========================================================
+' Removes a suffix only if it appears at the end of the string
+'===========================================================
+Public Function StripSuffix(ByVal s As String, ByVal suffix As String) As String
+    Dim slen As Long
+    Dim suflen As Long
+
+    suflen = Len(suffix)
+    If suflen = 0 Then
+        StripSuffix = s
+        Exit Function
+    End If
+
+    slen = Len(s)
+    If slen < suflen Then
+        StripSuffix = s
+        Exit Function
+    End If
+
+    If Right$(s, suflen) = suffix Then
+        StripSuffix = Left$(s, slen - suflen)
+    Else
+        StripSuffix = s
+    End If
+End Function
+
+
+'===========================================================
+' Removes a prefix only if it appears at the start of the string
+'===========================================================
+Public Function StripPrefix(ByVal s As String, ByVal prefix As String) As String
+    Dim prelen As Long
+
+    prelen = Len(prefix)
+    If prelen = 0 Then
+        StripPrefix = s
+        Exit Function
+    End If
+
+    If Len(s) < prelen Then
+        StripPrefix = s
+        Exit Function
+    End If
+
+    If Left$(s, prelen) = prefix Then
+        StripPrefix = Mid$(s, prelen + 1)
+    Else
+        StripPrefix = s
+    End If
+End Function
+
+
+'===========================================================
+' Removes both prefix and suffix when present.
+' - If prefix matches -> strip it
+' - If suffix matches -> strip it
+' - Order does not matter
+'===========================================================
+Public Function StripAffix(ByVal s As String, _
+                           ByVal prefix As String, _
+                           ByVal suffix As String) As String
+
+    Dim result As String
+    result = s
+
+    ' Strip prefix first
+    If Len(prefix) > 0 Then
+        If Left$(result, Len(prefix)) = prefix Then
+            result = Mid$(result, Len(prefix) + 1)
+        End If
+    End If
+
+    ' Strip suffix second
+    If Len(suffix) > 0 Then
+        If Right$(result, Len(suffix)) = suffix Then
+            result = Left$(result, Len(result) - Len(suffix))
+        End If
+    End If
+
+    StripAffix = result
+End Function
 

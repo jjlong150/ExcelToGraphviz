@@ -115,7 +115,7 @@ Public Sub LogDiagnostic(ByVal message As String, _
     Set ts = fso.OpenTextFile(logPath, 8, True) ' ForAppending
     
     ts.WriteLine String(80, "-")
-    ts.WriteLine vbCrLf & format$(Now, "yyyy-mm-dd hh:nn:ss") & "   : " & message
+    ts.WriteLine vbCrLf & Format$(Now, "yyyy-mm-dd hh:nn:ss") & "   : " & message
     
     If attempt > 0 Then
         ts.WriteLine "  Attempt Number      : " & attempt
@@ -183,11 +183,11 @@ Private Function GetEnvironmentFingerprint() As String
     
     ' OS
     s = s & "  Locale              : " & Application.International(xlCountrySetting) & vbCrLf
-    s = s & "  Time Zone           : " & format$(Now, "zzz") & vbCrLf
+    s = s & "  Time Zone           : " & Format$(Now, "zzz") & vbCrLf
     
     ' Workbook context
     On Error Resume Next
-    s = s & "  Workbook Path       : " & ThisWorkbook.FullName & vbCrLf
+    s = s & "  Workbook Path       : " & ThisWorkbook.fullName & vbCrLf
     s = s & "  AutoRecover Enabled : " & Application.AutoRecover.Enabled & vbCrLf
     s = s & "  On OneDrive         : " & IsWorkbookOnOneDrive(ThisWorkbook) & vbCrLf
     

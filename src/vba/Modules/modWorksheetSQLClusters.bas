@@ -318,7 +318,7 @@ Private Sub EmitClusterOpen( _
         ProcessClusterProperty ctx, rs, row, levelNumber, _
             absoluteClusterCount, relativeClusterCount, _
             ctx.fields.clusterStyleName, ctx.dataLayout.styleNameColumn, _
-            suffixFromSetting:=SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_OPEN).value
+            affixFromSetting:=SettingsSheet.Range(SETTINGS_STYLES_AFFIX_OPEN).value
 
         ProcessClusterProperty ctx, rs, row, levelNumber, _
             absoluteClusterCount, relativeClusterCount, _
@@ -369,7 +369,7 @@ Private Sub EmitClusterClose( _
         ProcessClusterProperty ctx, rs, row, levelNumber, _
             absoluteClusterCount, relativeClusterCount, _
             ctx.fields.clusterStyleName, ctx.dataLayout.styleNameColumn, _
-            suffixFromSetting:=SafeStr(SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_CLOSE).value)
+            affixFromSetting:=SafeStr(SettingsSheet.Range(SETTINGS_STYLES_AFFIX_CLOSE).value)
     End With
 
     row = row + 1
@@ -404,7 +404,7 @@ Private Sub ProcessClusterProperty( _
     ByVal relCount As Long, _
     ByVal templateField As String, _
     ByVal targetColumn As Long, _
-    Optional ByVal suffixFromSetting As String = vbNullString)
+    Optional ByVal affixFromSetting As String = vbNullString)
 
     Dim clusterPrefix As String
     clusterPrefix = ctx.fields.Cluster & levelNumber
@@ -418,8 +418,14 @@ Private Sub ProcessClusterProperty( _
     value = SafeFieldValue(rs, fieldName)
 
     ' Apply suffix if provided (different for open vs close)
-    If Len(suffixFromSetting) > 0 Then
-        value = value & suffixFromSetting
+    If Len(affixFromSetting) > 0 Then
+        ' Style names are configurable using a naming pattern on the 'Styles'
+        ' ribbon tab allowing for names such as BeginStyleName or StyleNameBegin.
+        Dim namingPattern As String
+        namingPattern = SafeStr(SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).value)
+        
+        value = replace(namingPattern, "{name}", value, , , vbTextCompare)
+        value = replace(value, "{affix}", affixFromSetting, , , vbTextCompare)
     End If
 
     ' Apply placeholders (same logic for all properties)
@@ -473,8 +479,8 @@ Private Sub EmitRows( _
     End If
 
     For i = ctx.loop.startAt To ctx.loop.stopAt Step ctx.loop.stepBy
-        ctx.loop.count = ctx.loop.count + 1
-        If ctx.loop.count > ctx.loop.max Then Exit For
+        ctx.loop.Count = ctx.loop.Count + 1
+        If ctx.loop.Count > ctx.loop.max Then Exit For
         
         EmitOneRow ctx, rs, row, maxLevels, recordCount, levelNumber, absoluteClusterCount, relativeClusterCount, i
         row = row + 1
@@ -543,7 +549,7 @@ Private Sub EmitOneRow( _
                     Case ctx.headings.item
                         .Cells(row, ctx.dataLayout.itemColumn).value = v
                     
-                    Case ctx.headings.label, ctx.headings.xLabel
+                    Case ctx.headings.label, ctx.headings.xlabel
                         targetCol = IIf(LCase$(fld.name) = ctx.headings.label, _
                                         ctx.dataLayout.labelColumn, _
                                         ctx.dataLayout.xLabelColumn)
@@ -559,13 +565,13 @@ Private Sub EmitOneRow( _
                         
                         .Cells(row, targetCol).value = v
                     
-                    Case ctx.headings.tailLabel
+                    Case ctx.headings.taillabel
                         .Cells(row, ctx.dataLayout.tailLabelColumn).value = v
                     
-                    Case ctx.headings.headLabel
+                    Case ctx.headings.headlabel
                         .Cells(row, ctx.dataLayout.headLabelColumn).value = v
                     
-                    Case ctx.headings.Tooltip
+                    Case ctx.headings.tooltip
                         .Cells(row, ctx.dataLayout.tooltipColumn).value = v
                     
                     Case ctx.headings.isRelatedToItem
@@ -577,8 +583,8 @@ Private Sub EmitOneRow( _
                     Case ctx.headings.extraAttributes
                         .Cells(row, ctx.dataLayout.extraAttributesColumn).value = v
                     
-                    Case ctx.headings.errorMessage
-                        .Cells(row, ctx.dataLayout.errorMessageColumn).value = v
+                    Case ctx.headings.properties
+                        .Cells(row, ctx.dataLayout.propertiesColumn).value = v
                     
                     ' Case Else: ignore unknown columns (intentional, general-purpose)
                 End Select

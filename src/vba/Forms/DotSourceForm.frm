@@ -16,9 +16,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 ' Copyright (c) 2015-2024 Jeffrey J. Long. All rights reserved
 
-'@IgnoreModule FunctionReturnValueDiscarded
-'@Folder("Relationship Visualizer.Forms.DotSource")
-
 Option Explicit
 
 Private Sub CopyButton_Click()

@@ -58,8 +58,8 @@ Public Function InsertPicture(ByVal fname As String, ByVal Where As Range, _
                           fname, _
                           LinkToFile, _
                           SaveWithDocument, _
-                          .Left, _
-                          .top, _
+                          .Left + 1, _
+                          .Top + 1, _
                           -1, _
                           -1)
         shapeObject.Placement = xlMove           ' ( xlFreeFloating | xlMove | xlMoveAndSize )
@@ -74,7 +74,6 @@ Public Function InsertPicture(ByVal fname As String, ByVal Where As Range, _
     Set shapeObject = Nothing
 End Function
 
-'@Ignore ProcedureNotUsed
 Public Sub DeletePictures(ByVal targetSheet As String, ByVal targetCells As String)
     ' Removes any pictures located within the specified range of cells
 
@@ -100,7 +99,6 @@ Public Sub DeletePictures(ByVal targetSheet As String, ByVal targetCells As Stri
     
 End Sub
 
-'@Ignore ProcedureNotUsed
 Public Sub DeleteCellPictures(ByVal targetSheet As String, ByVal targetCell As String)
     ' Removes raster and vector images located within the specified cell
     ' Revised in v8.0.01 to include SVG deletion and maintain Atom CPU compatibility

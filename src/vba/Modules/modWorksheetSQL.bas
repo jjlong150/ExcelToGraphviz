@@ -102,6 +102,12 @@ Attribute VB_Name = "modWorksheetSQL"
 '       o Added {label} placeholder for cluster label formatting
 '       o Updated format-string parsing for HTML-like syntax
 '
+'   - v11.0.0 (Aug 15, 2026):
+'       o Added PUBLISH AS KNOWLEDGE GRAPH syntax for automatic knowledge graph
+'         generation.
+'       o Added PUBLISH ALL VIEWS AS KNOWLEDGE GRAPH syntax for automatic knowledge
+'         graph generation of all views.
+'
 ' USAGE:
 '   - Invoke RunSQL to execute all SQL rows or a specific row.
 '   - Use SQL_PUBLISH*, SQL_PREVIEW*, and SQL_SET_* commands to drive
@@ -137,7 +143,7 @@ Private Type EnumerateParameters
     stopAt As Long
     stepBy As Long
     max As Long
-    count As Long
+    Count As Long
 End Type
 
 ''
@@ -331,6 +337,10 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
             Application.StatusBar = sqlStatement
             PublishAllViewsAsUndirectedGraph sqlStatement
 
+        ElseIf StartsWith(sqlUCase, SQL_PUBLISH_ALL_VIEWS_AS_KNOWLEDGE_GRAPH) Then
+            Application.StatusBar = sqlStatement
+            PublishAllViewsAsKnowledgeGraph sqlStatement
+
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_ALL_VIEWS) Then
             Application.StatusBar = sqlStatement
             PublishAllViews sqlStatement, SQL_PUBLISH_ALL_VIEWS
@@ -338,6 +348,10 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_AS_DIRECTED_GRAPH) Then
             Application.StatusBar = sqlStatement
             PublishAsDirectedGraph sqlStatement
+
+        ElseIf StartsWith(sqlUCase, SQL_PUBLISH_AS_KNOWLEDGE_GRAPH) Then
+            Application.StatusBar = sqlStatement
+            PublishAsKnowledgeGraph sqlStatement
 
         ElseIf StartsWith(sqlUCase, SQL_PUBLISH_AS_UNDIRECTED_GRAPH) Then
             Application.StatusBar = sqlStatement
@@ -369,8 +383,8 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
             ' Get connection to data source
             On Error Resume Next
             Set connectionObject = getConnection(filePath, ctx.fields.maxConnectionMinutes)
-            Dim connErrDescription As String: connErrDescription = err.Description
-            Dim connErrNumber As Long: connErrNumber = err.number
+            Dim connErrDescription As String: connErrDescription = Err.Description
+            Dim connErrNumber As Long: connErrNumber = Err.number
             On Error GoTo 0
 
             ' Execute the SQL query
@@ -381,7 +395,7 @@ Public Sub RunSQL(Optional ByVal row As Long = 0)
                 ' Apply placeholder substitutions before executing SQL
                 ApplyPlaceholders sqlStatement, placeholders
                 
-                err.Clear
+                Err.Clear
                 message = executeSQL(ctx, filePath, connectionObject, sqlStatement, dataRow)
             End If
         End If
@@ -445,6 +459,100 @@ End Sub
 Private Sub PublishAsDirectedGraph(ByRef commandStatement As String)
     PublishAs commandStatement, SQL_PUBLISH_AS_DIRECTED_GRAPH, TOGGLE_DIRECTED
 End Sub
+
+' ==========================================================================
+' PROCEDURE: PublishAsKnowledgeGraph
+' PURPOSE:
+'   Orchestrates the "headless" publication of a knowledge graph file.
+'
+' USAGE:
+'   - Called when the SQL engine encounters 'PUBLISH AS KNOWLEDGE GRAPH'.
+'   - Bridges the gap between a SQL script and the physical file export engine.
+' ==========================================================================
+Private Sub PublishAsKnowledgeGraph(sqlStatement As String)
+    Dim viewColumn As Long
+    viewColumn = GetColCurrentView()
+    
+    ' Backup current file prefix values
+    Dim originalPrefix As String
+    originalPrefix = SettingsSheet.Range(SETTINGS_FILE_NAME).value
+    
+    ' Override current values
+    SetPrefix sqlStatement, SQL_PUBLISH_AS_KNOWLEDGE_GRAPH
+    
+    ' Get JSON formatting parameters
+    Dim indent As Long: indent = -1
+    If Not GetSettingBoolean("KnowledgeMinify") Then
+        indent = CLng(SettingsSheet.Range("KnowledgeIndent").value)
+    End If
+    
+    ' Create the Knowledge Graph for the current view
+    CreateJsonFiles viewColumn, viewColumn, indent
+    
+    ' Restore values from backup
+    SettingsSheet.Range(SETTINGS_FILE_NAME).value = originalPrefix
+End Sub
+
+' ==========================================================================
+' PROCEDURE: PublishAllViewsAsKnowledgeGraph
+' PURPOSE:
+'   Orchestrates the "headless" publication of a knowledge graph file for
+'   each view defined in the 'styles' worksheet.
+'
+' USAGE:
+'   - Called when the SQL engine encounters 'PUBLISH ALL VIEWS AS KNOWLEDGE GRAPH'.
+'   - Bridges the gap between a SQL script and the physical file export engine.
+' ==========================================================================
+Private Sub PublishAllViewsAsKnowledgeGraph(sqlStatement As String)
+
+    ' Get the configured location of the first view name column
+    Dim firstColumn As Long
+    firstColumn = GetColFirstView()
+    
+    Dim lastColumn As Long
+    lastColumn = GetColLastView(firstColumn)
+    
+    ' Backup current file prefix values
+    Dim originalPrefix As String
+    originalPrefix = SettingsSheet.Range(SETTINGS_FILE_NAME).value
+    
+    ' Override current values
+    SetPrefix sqlStatement, SQL_PUBLISH_ALL_VIEWS_AS_KNOWLEDGE_GRAPH
+    
+    ' Get JSON formatting options
+    Dim indent As Long: indent = -1
+    If Not GetSettingBoolean("KnowledgeMinify") Then indent = CLng(SettingsSheet.Range("KnowledgeIndent").value)
+    
+    ' Create the knowledge graphs
+    CreateJsonFiles firstColumn, lastColumn, indent
+    
+    ' Restore values from backup
+    SettingsSheet.Range(SETTINGS_FILE_NAME).value = originalPrefix
+End Sub
+
+Private Function GetColCurrentView() As Long
+    GetColCurrentView = GetSettingColNum(SETTINGS_STYLES_COL_SHOW_STYLE)
+End Function
+
+Private Function GetColFirstView() As Long
+    GetColFirstView = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
+End Function
+
+Private Function GetColLastView(firstColumn As Long) As Long
+    Dim row As Long
+    row = CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_HEADING))
+
+    Dim col As Long
+    Dim lastNonEmptyCol As Long
+
+    For col = firstColumn To GetLastColumn(StylesSheet.name, row)
+        If Len(StylesSheet.Cells(row, col).value) > 0 Then
+            lastNonEmptyCol = col
+        End If
+    Next col
+
+    GetColLastView = lastNonEmptyCol
+End Function
 
 ' ==========================================================================
 ' PROCEDURE: PublishAsUndirectedGraph
@@ -633,7 +741,7 @@ End Sub
 ' TECHNICAL WORKFLOW:
 '   1. STARTING POINT: Identifies the first "Yes/No" View column using the
 '      'SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW' named range.
-'   2. DYNAMIC DISCOVERY: Calls 'GetLastViewColumn' to find the end of the
+'   2. DYNAMIC DISCOVERY: Calls 'GetColLastView' to find the end of the
 '      View matrix, allowing the tool to adapt as users add new columns.
 '   3. EXECUTION: Passes the resolved column range to 'PublishViews' to
 '      trigger the multi-file rendering loop.
@@ -648,46 +756,10 @@ Private Sub PublishAllViews(ByRef commandStatement As String, ByRef phrase As St
     firstColumn = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
     
     Dim lastColumn As Long
-    lastColumn = GetLastViewColumn(firstColumn)
+    lastColumn = GetColLastView(firstColumn)
 
     PublishViews commandStatement, phrase, firstColumn, lastColumn
 End Sub
-
-' ==========================================================================
-' FUNCTION: GetLastViewColumn
-' PURPOSE:
-'   Identifies the final column in the Styles worksheet's "View" matrix.
-'
-' TECHNICAL WORKFLOW:
-'   1. HEADING RESOLUTION: Locates the specific row index where View titles
-'      reside (via SETTINGS_STYLES_ROW_HEADING).
-'   2. CONTIGUOUS SCAN: Iterates horizontally from the first View column,
-'      counting non-empty cells to find the edge of the defined Views.
-'   3. COORDINATE CALCULATION: Computes the absolute Excel column index
-'      to provide an accurate "Stop" point for batch rendering loops.
-'
-' USAGE:
-'   - Used by 'PublishAllViews' to define the iteration range for mass
-'     diagram generation.
-'   - Ensures new View columns are automatically detected without code changes.
-' ==========================================================================
-Private Function GetLastViewColumn(ByVal firstColumn As Long) As Long
-    Dim nonEmptyCellCount As Long
-    Dim row As Long
-    Dim col As Long
-    row = CLng(SettingsSheet.Range(SETTINGS_STYLES_ROW_HEADING))
-    
-    ' Count the non-empty cells beginning at the first view column
-    nonEmptyCellCount = 0
-    For col = firstColumn To GetLastColumn(StylesSheet.name, row)
-        If StylesSheet.Cells.item(row, col) <> vbNullString Then
-            nonEmptyCellCount = nonEmptyCellCount + 1
-        End If
-    Next col
-
-    ' Calaculate the absolute column number of the last view column
-    GetLastViewColumn = firstColumn + nonEmptyCellCount - 1
-End Function
 
 ' ==========================================================================
 ' PROCEDURE: SetPrefix
@@ -778,7 +850,7 @@ Private Function GetExcelFilePath(ByVal sqlRow As Long, ByRef sqlLayout As sqlWo
     End If
     
     ' Scenario 4 - Current workbook
-    GetExcelFilePath = ActiveWorkbook.FullName
+    GetExcelFilePath = ActiveWorkbook.fullName
 End Function
 
 ' ==========================================================================
@@ -849,7 +921,7 @@ Public Sub ClearSQLStatus()
     
     Dim lastRow As Long
     With SqlSheet.UsedRange
-        lastRow = .Cells.item(.Cells.count).row
+        lastRow = .Cells.item(.Cells.Count).row
     End With
 
     ' Format the range to clear
@@ -914,7 +986,7 @@ Private Function executeSQL( _
     ' will be running on
     Set rs = CreateObject("ADODB.Recordset")
     
-    err.Clear
+    Err.Clear
     For attempts = 1 To ctx.fields.retryLimit
         On Error Resume Next
         
@@ -922,8 +994,8 @@ Private Function executeSQL( _
         rs.Open source:=sqlStatement, ActiveConnection:=connectionObject, CursorType:=CursorTypeEnum.adOpenStatic, LockType:=LockTypeEnum.adLockReadOnly, options:=CommandTypeEnum.adCmdText
         
         ' Immediately save error state, as processing an error could trigger it being cleared
-        errNumber = err.number
-        errDescription = err.Description
+        errNumber = Err.number
+        errDescription = Err.Description
         
         ' Break from retry loop if query succeeded
         If errNumber = 0 Then Exit For
@@ -934,14 +1006,14 @@ Private Function executeSQL( _
             Exit For
         End If
 
-        LogDiagnostic "executeSQL(): rs.Open - " & errDescription, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(err.Description)
-        err.Clear
+        LogDiagnostic "executeSQL(): rs.Open - " & errDescription, errorNumber:=errNumber, attempt:=attempts, sql:=sqlStatement, errorCategory:=ClassifyError(Err.Description)
+        Err.Clear
         SleepMilliseconds RETRY_DELAY_MS
     Next attempts
     
     ' Reset status bar
     Application.StatusBar = False
-    err.Clear
+    Err.Clear
     
     ' If userError, then the SQL is bad. Stop processing.
     If userError Then GoTo executeSQLError
@@ -950,7 +1022,7 @@ Private Function executeSQL( _
     ' If the recordset failed to open but didn't trigger userError, rs.State might be 0.
     
     If rs Is Nothing Or rs.State <> ObjectStateEnum.adStateOpen Then
-        err.Raise vbObjectError + 513, , "executeSQL(): Recordset failed to open"
+        Err.Raise vbObjectError + 513, , "executeSQL(): Recordset failed to open"
     End If
 
     ' Determine if enumeration values are present
@@ -1013,9 +1085,9 @@ Cleanup:
 
 executeSQLError:
     ' GetMessage will reset the error state, save the message
-    If err.number <> 0 Then
-        errDescription = err.Description
-        errNumber = err.number
+    If Err.number <> 0 Then
+        errDescription = Err.Description
+        errNumber = Err.number
     End If
     
     Dim logMessage As String
@@ -1061,7 +1133,7 @@ Private Sub SafeCloseRecordset(ByRef rs As Object)
         End If
         Set rs = Nothing
     End If
-    err.Clear
+    Err.Clear
 #End If
 End Sub
 
@@ -1118,7 +1190,7 @@ Private Function GetLoopLimits(ByRef ctx As sqlContext, _
     s.startAt = 1                   ' Default single-iteration loop
     s.stopAt = 1
     s.stepBy = 1
-    s.count = 0
+    s.Count = 0
     s.max = LOOP_MAX_STEPS
 
     ' ------------------------------------------------------------
@@ -1298,8 +1370,8 @@ Private Sub ProcessInClassicMode( _
     dataTemplate As String, headerRS As Object, _
     ByRef row As Long, ByRef recordCnt As Long)
 
-    Dim idList As Object: Set idList = CollectUniqueIDs(headerRS)
-    If idList Is Nothing Or idList.count = 0 Then Exit Sub
+    Dim idList As Object: Set idList = CollectUniqueIds(headerRS)
+    If idList Is Nothing Or idList.Count = 0 Then Exit Sub
 
     Dim id As Variant, rsData As Object
     For Each id In idList.keys
@@ -1373,7 +1445,7 @@ End Sub
 '   - Called by 'ProcessInClassicMode' to minimize the number of
 '     database calls during parameterized searches.
 ' ==========================================================================
-Private Function CollectUniqueIDs( _
+Private Function CollectUniqueIds( _
     ByVal headerRS As Object) As Object
 
     If headerRS Is Nothing Then Exit Function
@@ -1392,7 +1464,7 @@ Private Function CollectUniqueIDs( _
         headerRS.MoveNext
     Loop
 
-    Set CollectUniqueIDs = idList
+    Set CollectUniqueIds = idList
 End Function
 
 ' ==========================================================================
@@ -1526,8 +1598,8 @@ Private Function GetHeaderRS( _
     ' Always start at the beginning
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         SafeCloseRecordset rs
         Exit Function
     End If
@@ -1539,8 +1611,8 @@ Private Function GetHeaderRS( _
     
 GetHeaderRSError:
         LogDiagnostic _
-            "GetHeaderRS SQL failed: " & err.Description & vbNewLine, _
-            errorNumber:=err.number, _
+            "GetHeaderRS SQL failed: " & Err.Description & vbNewLine, _
+            errorNumber:=Err.number, _
             sql:=idQuery, _
             errorCategory:="Iteration / SQL"
             
@@ -1637,8 +1709,8 @@ Private Function CreateAugmentedRS( _
 
 ErrHandler:
     LogDiagnostic _
-        "CreateAugmentedRS failed: " & err.Description, _
-        errorNumber:=err.number, _
+        "CreateAugmentedRS failed: " & Err.Description, _
+        errorNumber:=Err.number, _
         errorCategory:="Iteration / Concatenation"
 
     On Error Resume Next
@@ -1751,7 +1823,7 @@ Private Function GetIDList( _
     idFieldIndex = -1
 
     Dim f As Long
-    For f = 0 To rs.fields.count - 1
+    For f = 0 To rs.fields.Count - 1
         If LCase$(SafeStr(rs.fields(f).name)) = "id" Then
             idFieldIndex = f
             Exit For
@@ -1767,8 +1839,8 @@ Private Function GetIDList( _
     ' Always start at the beginning
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         SafeCloseRecordset rs
         Exit Function
     End If
@@ -1798,8 +1870,8 @@ Private Function GetIDList( _
 
 GetIDListError:
     LogDiagnostic _
-        "GetIDList SQL failed: " & err.Description & vbNewLine, _
-        errorNumber:=err.number, _
+        "GetIDList SQL failed: " & Err.Description & vbNewLine, _
+        errorNumber:=Err.number, _
         sql:=idQuery, _
         errorCategory:="Iteration / SQL"
 
@@ -1866,10 +1938,10 @@ Private Function RunParameterizedQuery( _
 
 RunQueryError:
     LogDiagnostic _
-        "RunParameterizedQuery failed: " & err.Description, _
-        errorNumber:=err.number, _
+        "RunParameterizedQuery failed: " & Err.Description, _
+        errorNumber:=Err.number, _
         sql:=sql, _
-        errorCategory:=ClassifyError(err.Description)
+        errorCategory:=ClassifyError(Err.Description)
 
     On Error Resume Next
     SafeCloseRecordset rsData
@@ -2080,7 +2152,7 @@ Private Sub PerformRecursiveSearch( _
         Set recursionRecordSet = CreateObject("ADODB.Recordset")
 
         Dim fieldNumber As Long
-        For fieldNumber = 0 To rs.fields.count - 1
+        For fieldNumber = 0 To rs.fields.Count - 1
             recursionRecordSet.fields.Append _
                 rs.fields(fieldNumber).name, _
                 rs.fields(fieldNumber).Type, _
@@ -2093,8 +2165,8 @@ Private Sub PerformRecursiveSearch( _
     ' Iterate through results
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         SafeCloseRecordset rs
         Exit Sub
     End If
@@ -2104,7 +2176,7 @@ Private Sub PerformRecursiveSearch( _
 
         ' Append row to merged recordset
         recursionRecordSet.AddNew
-        For fieldNumber = 0 To rs.fields.count - 1
+        For fieldNumber = 0 To rs.fields.Count - 1
             recursionRecordSet.fields(fieldNumber).value = _
                 SafeFieldValue(rs, rs.fields(fieldNumber).name)
         Next fieldNumber
@@ -2126,13 +2198,13 @@ Private Sub PerformRecursiveSearch( _
 
 RecursionError:
     LogDiagnostic _
-        "Recursive SQL failed: " & err.Description & vbNewLine & _
+        "Recursive SQL failed: " & Err.Description & vbNewLine & _
         "  Query: " & query & vbNewLine & _
         "  whereValue   = " & whereValue & vbNewLine & _
         "  whereColumn  = " & whereColumn & vbNewLine & _
         "  currentDepth = " & CStr(currentDepth) & vbNewLine & _
         "  maxDepth     = " & CStr(maxDepth) & vbNewLine, _
-        errorNumber:=err.number, _
+        errorNumber:=Err.number, _
         sql:=query, _
         errorCategory:="Recursion / SQL"
 
@@ -2302,7 +2374,7 @@ Private Sub ProcessClusterYesSubclusterYes( _
     ' Collect distinct clusters
     Set clusterList = GetClusterInfo(rs, ctx.fields)
 
-    If clusterList.count > 0 Then
+    If clusterList.Count > 0 Then
         ' Attach subcluster dictionaries to each cluster
         For Each clusterKey In clusterList.keys()
             Set clusterInstance = clusterList.item(clusterKey)
@@ -2322,12 +2394,12 @@ Private Sub ProcessClusterYesSubclusterYes( _
         EmitClusterOpen clusterRecord, ctx.dataLayout, row, _
                         ctx.fields.clusterPlaceholder, clusterCnt
 
-        If clusterRecord.subclusters.count = 0 Then
+        If clusterRecord.subclusters.Count = 0 Then
             ' No subclusters: emit all rows for this cluster
             On Error Resume Next
             rs.MoveFirst
-            If err.number <> 0 Then
-                err.Clear
+            If Err.number <> 0 Then
+                Err.Clear
                 Exit For
             End If
             On Error GoTo 0
@@ -2349,8 +2421,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
                 On Error Resume Next
                 rs.MoveFirst
-                If err.number <> 0 Then
-                    err.Clear
+                If Err.number <> 0 Then
+                    Err.Clear
                     Exit For
                 End If
                 On Error GoTo 0
@@ -2374,8 +2446,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
                 ' Emit rows in this cluster with NULL subcluster
                 On Error Resume Next
                 rs.MoveFirst
-                If err.number <> 0 Then
-                    err.Clear
+                If Err.number <> 0 Then
+                    Err.Clear
                     Exit For
                 End If
                 On Error GoTo 0
@@ -2398,8 +2470,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
     ' Handle case where cluster has no data, but subcluster does
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2413,8 +2485,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
 
         On Error Resume Next
         rs.MoveFirst
-        If err.number <> 0 Then
-            err.Clear
+        If Err.number <> 0 Then
+            Err.Clear
             Exit For
         End If
         On Error GoTo 0
@@ -2439,8 +2511,8 @@ Private Sub ProcessClusterYesSubclusterYes( _
     ' Handle rows where both cluster and subcluster are NULL
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2504,8 +2576,8 @@ Private Sub ProcessClusterYesSubclusterNo( _
         ' Safe MoveFirst
         On Error Resume Next
         rs.MoveFirst
-        If err.number <> 0 Then
-            err.Clear
+        If Err.number <> 0 Then
+            Err.Clear
             Exit For
         End If
         On Error GoTo 0
@@ -2525,8 +2597,8 @@ Private Sub ProcessClusterYesSubclusterNo( _
     ' Emit orphan rows (cluster column is Null)
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2590,8 +2662,8 @@ Private Sub ProcessClusterNoSubclusterYes( _
         ' Safe MoveFirst
         On Error Resume Next
         rs.MoveFirst
-        If err.number <> 0 Then
-            err.Clear
+        If Err.number <> 0 Then
+            Err.Clear
             Exit For
         End If
         On Error GoTo 0
@@ -2611,8 +2683,8 @@ Private Sub ProcessClusterNoSubclusterYes( _
     ' Emit orphan rows (subcluster column is Null)
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2658,8 +2730,8 @@ Private Sub ProcessClusterNoSubclusterNo( _
     ' Always start at the beginning
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2709,8 +2781,8 @@ Private Sub CreateEdges( _
     ' Safe MoveFirst
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2731,8 +2803,8 @@ Private Sub CreateEdges( _
         Dim i As Long
         For i = ctx.loop.startAt To stopValue Step ctx.loop.stepBy
 
-            ctx.loop.count = ctx.loop.count + 1
-            If ctx.loop.count > ctx.loop.max Then Exit For
+            ctx.loop.Count = ctx.loop.Count + 1
+            If ctx.loop.Count > ctx.loop.max Then Exit For
 
             EmitOneRow ctx, rs, row, recordCnt, i
 
@@ -2753,8 +2825,8 @@ Private Sub CreateEdges( _
         ' Safe MoveNext (skip first row)
         On Error Resume Next
         rs.MoveNext
-        If err.number <> 0 Then
-            err.Clear
+        If Err.number <> 0 Then
+            Err.Clear
             Exit Sub
         End If
         On Error GoTo 0
@@ -2816,8 +2888,8 @@ Private Sub CreateRank( _
     ' Safe MoveFirst
     On Error Resume Next
     rs.MoveFirst
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         Exit Sub
     End If
     On Error GoTo 0
@@ -2947,7 +3019,7 @@ Private Function GetClusterInfo(ByVal rs As Object, _
                 clusterObject.label = clusterLabel
                 clusterObject.styleName = clusterStyleName
                 clusterObject.attributes = clusterAttributes
-                clusterObject.Tooltip = clusterTooltip
+                clusterObject.tooltip = clusterTooltip
 
                 clusters.Add clusterId, clusterObject
             End If
@@ -3066,7 +3138,7 @@ Private Function GetSubclusterInfo( _
                 clusterObject.label = subLabel
                 clusterObject.styleName = subStyle
                 clusterObject.attributes = subAttr
-                clusterObject.Tooltip = subTooltip
+                clusterObject.tooltip = subTooltip
 
                 subclusters.Add subId, clusterObject
             End If
@@ -3186,7 +3258,7 @@ Private Function GetSubClusterInfoForCluster( _
                     clusterObject.label = subLabel
                     clusterObject.styleName = subStyle
                     clusterObject.attributes = subAttr
-                    clusterObject.Tooltip = subTooltip
+                    clusterObject.tooltip = subTooltip
 
                     subclusters.Add subId, clusterObject
                 End If
@@ -3311,7 +3383,7 @@ Private Function GetOrphanSubClusterInfo( _
                     clusterObject.label = subLabel
                     clusterObject.styleName = subStyle
                     clusterObject.attributes = subAttr
-                    clusterObject.Tooltip = subTooltip
+                    clusterObject.tooltip = subTooltip
 
                     subclusters.Add subId, clusterObject
                 End If
@@ -3354,27 +3426,42 @@ Private Sub EmitClusterOpen( _
     ByVal findStr As String, _
     ByRef replaceLong As Long)
 
-    Dim newStyle As String
-    Dim suffix As String
-
-    ' Null-safe suffix retrieval
-    suffix = SafeStr(SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_OPEN).value)
-
+    
     With DataSheet
+        ' Item
         .Cells(row, dataLayout.itemColumn).value = OPEN_BRACE
+        
+        ' Label
         .Cells(row, dataLayout.labelColumn).value = SafeStr(clusterRecord.label)
 
+        ' Attributes
         .Cells(row, dataLayout.extraAttributesColumn).value = _
             replace(SafeStr(clusterRecord.attributes), _
                     findStr, SafeStr(replaceLong), , , vbTextCompare)
 
-        .Cells(row, dataLayout.tooltipColumn).value = SafeStr(clusterRecord.Tooltip)
+        ' Tooltip
+        .Cells(row, dataLayout.tooltipColumn).value = SafeStr(clusterRecord.tooltip)
 
+        ' Style Name
         If Len(SafeStr(clusterRecord.styleName)) > 0 Then
-            newStyle = replace(SafeStr(clusterRecord.styleName), _
-                               findStr, SafeStr(replaceLong), , , vbTextCompare) _
-                       & suffix
+            ' Token substitution of counters
+            Dim name As String
+            name = replace(SafeStr(clusterRecord.styleName), findStr, SafeStr(replaceLong), , , vbTextCompare)
+            
+            ' Null-safe affix retrieval
+            Dim affix As String
+            affix = SafeStr(SettingsSheet.Range(SETTINGS_STYLES_AFFIX_OPEN).value)
 
+            ' Style names are configurable using a naming pattern on the 'Styles'
+            ' ribbon tab allowing for names such as BeginStyleName or StyleNameBegin.
+            Dim namingPattern As String
+            namingPattern = SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).value
+            
+            Dim newStyle As String
+            newStyle = replace(namingPattern, "{name}", name, 1, -1, vbTextCompare)
+            newStyle = replace(newStyle, "{affix}", affix, 1, -1, vbTextCompare)
+            
+            ' Emit the final style name
             .Cells(row, dataLayout.styleNameColumn).value = newStyle
         End If
     End With
@@ -3410,22 +3497,30 @@ Private Sub EmitClusterClose( _
     ByVal findStr As String, _
     ByRef replaceLong As Long)
 
-    Dim suffix As String
-    Dim newStyle As String
-
-    ' Null-safe suffix retrieval
-    suffix = SafeStr(SettingsSheet.Range(SETTINGS_STYLES_SUFFIX_CLOSE).value)
-
     With DataSheet
+        ' Item
         .Cells(row, dataLayout.itemColumn).value = CLOSE_BRACE
 
-        ' Only emit style if non-empty
+        ' Style Name. Only emit style name if non-empty
         If Len(SafeStr(clusterRecord.styleName)) > 0 Then
-            newStyle = replace( _
-                SafeStr(clusterRecord.styleName), _
-                findStr, SafeStr(replaceLong), , , vbTextCompare _
-            ) & suffix
+            ' Token substitution of counters
+            Dim name As String
+            name = replace(SafeStr(clusterRecord.styleName), findStr, SafeStr(replaceLong), , , vbTextCompare)
 
+            ' Null-safe suffix retrieval
+            Dim affix As String
+            affix = SafeStr(SettingsSheet.Range(SETTINGS_STYLES_AFFIX_CLOSE).value)
+            
+            ' Style names are configurable using a naming pattern on the 'Styles'
+            ' ribbon tab allowing for names such as EndStyleName or StyleNameEnd.
+            Dim namingPattern As String
+            namingPattern = SettingsSheet.Range(SETTINGS_STYLES_CONCAT_FORMAT).value
+            
+            Dim newStyle As String
+            newStyle = replace(namingPattern, "{name}", name, 1, -1, vbTextCompare)
+            newStyle = replace(newStyle, "{affix}", affix, 1, -1, vbTextCompare)
+            
+            ' Emit the final style name
             .Cells(row, dataLayout.styleNameColumn).value = newStyle
         End If
     End With
@@ -3469,8 +3564,8 @@ Private Sub EmitRows( _
     End If
 
     For i = ctx.loop.startAt To ctx.loop.stopAt Step ctx.loop.stepBy
-        ctx.loop.count = ctx.loop.count + 1
-        If ctx.loop.count > ctx.loop.max Then Exit For
+        ctx.loop.Count = ctx.loop.Count + 1
+        If ctx.loop.Count > ctx.loop.max Then Exit For
 
         EmitOneRow ctx, rs, row, position, i
         row = row + 1
@@ -3533,7 +3628,7 @@ Private Sub EmitOneRow( _
                 Case ctx.headings.item
                     .Cells(row, ctx.dataLayout.itemColumn).value = v
 
-                Case ctx.headings.label, ctx.headings.xLabel
+                Case ctx.headings.label, ctx.headings.xlabel
                     targetCol = IIf(LCase$(fld.name) = ctx.headings.label, _
                                     ctx.dataLayout.labelColumn, _
                                     ctx.dataLayout.xLabelColumn)
@@ -3549,13 +3644,13 @@ Private Sub EmitOneRow( _
 
                     .Cells(row, targetCol).value = v
 
-                Case ctx.headings.tailLabel
+                Case ctx.headings.taillabel
                     .Cells(row, ctx.dataLayout.tailLabelColumn).value = v
 
-                Case ctx.headings.headLabel
+                Case ctx.headings.headlabel
                     .Cells(row, ctx.dataLayout.headLabelColumn).value = v
 
-                Case ctx.headings.Tooltip
+                Case ctx.headings.tooltip
                     .Cells(row, ctx.dataLayout.tooltipColumn).value = v
 
                 Case ctx.headings.isRelatedToItem
@@ -3567,8 +3662,8 @@ Private Sub EmitOneRow( _
                 Case ctx.headings.extraAttributes
                     .Cells(row, ctx.dataLayout.extraAttributesColumn).value = v
 
-                Case ctx.headings.errorMessage
-                    .Cells(row, ctx.dataLayout.errorMessageColumn).value = v
+                Case ctx.headings.properties
+                    .Cells(row, ctx.dataLayout.propertiesColumn).value = v
 
                 ' Case Else: ignore unknown columns (intentional, general-purpose)
             End Select
@@ -3607,14 +3702,14 @@ Private Function GetSQLWorksheetHeadings(ByRef dataLayout As dataWorksheet) As D
         .flag = NormalizeHeading(rowValues(1, dataLayout.flagColumn))
         .item = NormalizeHeading(rowValues(1, dataLayout.itemColumn))
         .label = NormalizeHeading(rowValues(1, dataLayout.labelColumn))
-        .xLabel = NormalizeHeading(rowValues(1, dataLayout.xLabelColumn))
-        .tailLabel = NormalizeHeading(rowValues(1, dataLayout.tailLabelColumn))
-        .headLabel = NormalizeHeading(rowValues(1, dataLayout.headLabelColumn))
-        .Tooltip = NormalizeHeading(rowValues(1, dataLayout.tooltipColumn))
+        .xlabel = NormalizeHeading(rowValues(1, dataLayout.xLabelColumn))
+        .taillabel = NormalizeHeading(rowValues(1, dataLayout.tailLabelColumn))
+        .headlabel = NormalizeHeading(rowValues(1, dataLayout.headLabelColumn))
+        .tooltip = NormalizeHeading(rowValues(1, dataLayout.tooltipColumn))
         .isRelatedToItem = NormalizeHeading(rowValues(1, dataLayout.isRelatedToItemColumn))
         .styleName = NormalizeHeading(rowValues(1, dataLayout.styleNameColumn))
         .extraAttributes = NormalizeHeading(rowValues(1, dataLayout.extraAttributesColumn))
-        .errorMessage = NormalizeHeading(rowValues(1, dataLayout.errorMessageColumn))
+        .properties = NormalizeHeading(rowValues(1, dataLayout.propertiesColumn))
     End With
 End Function
 
@@ -3891,8 +3986,8 @@ Public Function SafeFieldValue(ByVal rs As Object, ByVal fieldName As String) As
     Dim fld As Object
     On Error Resume Next
     Set fld = rs.fields(fieldName)
-    If err.number <> 0 Then
-        err.Clear
+    If Err.number <> 0 Then
+        Err.Clear
         SafeFieldValue = ""
         Exit Function
     End If
@@ -4009,8 +4104,8 @@ Public Sub RunSQLAsExtension(Optional ByVal rowNumber As Long = 0)
 
     ' Disable screen updating
     Dim originalScreenUpdating As Boolean
-    originalScreenUpdating = Application.ScreenUpdating
-    Application.ScreenUpdating = False
+    originalScreenUpdating = Application.screenUpdating
+    Application.screenUpdating = False
     
     ' Disable events
     Dim originalEnableEvents As Boolean
@@ -4025,7 +4120,7 @@ Public Sub RunSQLAsExtension(Optional ByVal rowNumber As Long = 0)
     
     ' Restore prior states
     Application.enableEvents = originalEnableEvents
-    Application.ScreenUpdating = originalScreenUpdating
+    Application.screenUpdating = originalScreenUpdating
     Application.AutoRecover.Enabled = originalAutoRecover
     Application.Calculation = originalCalculation
     Application.Cursor = originalCursorType
@@ -4056,13 +4151,13 @@ Private Function GetLastRowInColumn( _
     ' Returns the last row that contains any value in the specified column
     ' Returns 0 if the column is completely empty
 
-    If colNum < 1 Or colNum > ws.columns.count Then
+    If colNum < 1 Or colNum > ws.columns.Count Then
         GetLastRowInColumn = 0
         Exit Function
     End If
 
     Dim last As Long
-    last = ws.Cells(ws.rows.count, colNum).End(xlUp).row
+    last = ws.Cells(ws.rows.Count, colNum).End(xlUp).row
 
     ' If .End(xlUp) lands on row 1 and that cell is empty -> column is empty
     If last = 1 And IsEmpty(ws.Cells(1, colNum).value) Then
@@ -4206,7 +4301,7 @@ Private Sub ApplyPlaceholders(ByRef sqlText As String, ByRef placeholders As Dic
     Dim token As String
 
     If placeholders Is Nothing Then Exit Sub
-    If placeholders.count = 0 Then Exit Sub
+    If placeholders.Count = 0 Then Exit Sub
 
     For Each key In placeholders.keys
         token = "{" & CStr(key) & "}"
