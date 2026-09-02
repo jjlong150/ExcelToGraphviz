@@ -1,5 +1,5 @@
 {
-  "cache_buster": "2026-06-09-T0000-STRUCTURE‑CHANGE",
+  "cache_buster": "2026-08-19-T0000-V11-KNOWLEDGE-GRAPH-SVG-VIEWER",
   "exclusions": [
     "**/MicrosoftExcelObjects/**",
     "**/ClassModules/Dictionary.cls",
@@ -11,14 +11,14 @@
     { "content": "The project is an Excel-based wrapper for Graphviz. Every documentation page must respect the distinction between Excel (the UI and Data layer) and Graphviz (the rendering engine)." },
     { "content": "Technical Consistency: Always refer to the primary data entry points as 'Items' and 'Related Items' rather than 'From' and 'To' to match the worksheet headers." },
     { "content": "Cross-Platform Logic: When documenting any code that triggers a shell command or file input output, mention the conditional logic for Windows (Windows Shell via CreatePipe) vs. macOS (AppleScript bridge)." },
-    { "content": "Module Mapping: Every functional feature should be linked to its corresponding VBA module (e.g., modRibbonTab*.bas for UI, modCreateGraph.bas for parsing, Graphviz.cls for execution)." },
+    { "content": "Module Mapping: Every functional feature should be linked to its corresponding VBA module (e.g., modRibbonTab*.bas for UI, modCreateGraph.bas for parsing, Graphviz.cls for execution, modCreateJson.bas and modCreateCommon.bas for the Knowledge Graph JSON pipeline, modJsonGraphLauncher.bas for the browser-based viewer, and modUtilityPropertyParse.bas for typed property parsing)." },
     { "content": "State Management: Remind that the tool relies on a 'Settings' worksheet for persistent state and a global 'internalMyRibbon' variable for UI state." },
     { "content": "Error Handling Philosophy: Emphasize that the tool uses 'ValidateData' and local error handling to prevent VBA global state loss, which would break the Ribbon reference." },
     { "content": "Graphviz Syntax: When discussing attributes (color, shape, etc.), ensure they align with the official DOT language specifications." },
     { "content": "Community Feedback: Mention that community feedback and feature requests are captured via GitHub issues, and via Giscus-powered comments on the official website blog pages." },
-    { "content": "Version Awareness: Reference v8.0+ enhancements including Style Designer galleries, Graphviz.cls refactor, SQL connection pooling, unlimited CLUSTERn, SVG editor form, silent mode, and new ribbon tabs (Info, Console, Diagnostics, Styles)." },
+    { "content": "Version Awareness: Reference v8.0+ enhancements including Style Designer galleries, Graphviz.cls refactor, SQL connection pooling, unlimited CLUSTERn, SVG editor form, silent mode, and new ribbon tabs (Info, Console, Diagnostics, Styles). v11.0 adds the Knowledge Graph JSON export pipeline, an interactive SVG diagram viewer (fixed toolbar, pan/zoom, filter/highlight), and a ribbon reorganization introducing the Data and Settings tabs." },
     { "content": "Common Pitfalls and Best Practices: Include Graphviz node ID rules (must start with letter or underscore, quote digits), layout reproducibility tips (start=regular), SVG image embedding via base64 in post-processor, and named-range contract for safe sheet modifications." },
-    { "content": "Project structure: All VBA source files are organized in CamelCase directories (ClassModules, MicrosoftExcelObjects, Modules, Forms). Exclusions intentionally drop the analysis-noise: the MicrosoftExcelObjects worksheet code-behind (including the per-locale data sheets), the vendored JsonConverter.bas (third-party VBA-JSON library), and the generic Dictionary.cls/Stopwatch.cls helpers. The architecturally significant classes (Graphviz.cls execution wrapper, Cluster.cls, Style.cls) remain indexed." }
+    { "content": "Project structure: All VBA source files are organized in CamelCase directories (ClassModules, MicrosoftExcelObjects, Modules, Forms). Exclusions intentionally drop the analysis-noise: the MicrosoftExcelObjects worksheet code-behind (including the per-locale data sheets), the vendored JsonConverter.bas (third-party VBA-JSON library), and the generic Dictionary.cls/Stopwatch.cls helpers. The architecturally significant classes (Graphviz.cls execution wrapper, Cluster.cls, Style.cls) remain indexed, as do the new v11.0 modules (modCreateJson.bas, modCreateCommon.bas, modJsonGraphLauncher.bas, modUtilityPropertyParse.bas)." }
   ],
   "pages": [
     {
@@ -27,7 +27,8 @@
       "page_notes": [
         { "content": "Core Mission: Transforms structured Excel data (Items and Related Items) into professional Graphviz-rendered diagrams with zero DOT coding required." },
         { "content": "Key Capabilities: Ribbon-based Style Designer, SQL-driven graph generation, dynamic AutoDraw reactivity, and multi-format publishing." },
-        { "content": "Architectural Flow: Data Entry (Worksheet) → Parsing (modCreateGraph.bas) → DOT generation → Graphviz rendering → Image display in Excel." }
+        { "content": "Architectural Flow: Data Entry (Worksheet) → Parsing (modCreateGraph.bas) → DOT generation → Graphviz rendering → Image display in Excel." },
+        { "content": "v11.0 Headline Features: Knowledge Graph JSON export (an AI-ready alternative to diagram rendering) and an interactive SVG diagram viewer with pan, zoom, filtering, and highlighting are the two major additions in the current release." }
       ]
     },
     {
@@ -76,6 +77,18 @@
       ]
     },
     {
+      "title": "Knowledge Graph Export and JSON Pipeline",
+      "purpose": "How worksheet data is transformed into a structured JSON Knowledge Graph, in parallel with the DOT/Graphviz pipeline (new in v11.0).",
+      "parent": "Architecture and Data Flow",
+      "page_notes": [
+        { "content": "Parallel Output Format: modCreateJson.bas builds a JSON 'Knowledge Graph' (format id RV-KGF) from the same worksheet data as the DOT pipeline, sharing label/tooltip/style resolution logic with modCreateGraph.bas via a common module, modCreateCommon.bas, so the DOT and JSON outputs never disagree." },
+        { "content": "Attribute Resolution: Both pipelines resolve labels, tooltips, and styles through a single Dictionary-based precedence order — row-level overrides, then style templates, then worksheet data — replacing the older string-concatenation approach where Graphviz itself picked whichever value it saw last." },
+        { "content": "Typed Properties: A worksheet 'Properties' column holds free-form key=value pairs, parsed into typed Boolean/Long/Double/String values by modUtilityPropertyParse.bas (independent of Graphviz/DOT syntax) and attached to each node's and edge's JSON 'properties' object, following the same graph → node/edge → row inheritance used for labels and tooltips." },
+        { "content": "Viewing the Graph: Since Excel cannot render JSON natively, modJsonGraphLauncher.bas opens the export in the user's default browser via a viewer embedded as a hidden worksheet inside the workbook — either a shared, auto-refreshing tab or a new tab per generation — so there is no companion file to lose track of." },
+        { "content": "Fidelity Notes: Rows using native DOT passthrough syntax are flagged with an explicit warning rather than silently dropped, since that syntax has no JSON representation; a built-in token estimator helps gauge LLM context cost before pasting the export elsewhere." }
+      ]
+    },
+    {
       "title": "Graphviz Class and Process Execution",
       "purpose": "Low-level execution logic for communicating with Graphviz binaries.",
       "parent": "Architecture and Data Flow",
@@ -99,7 +112,8 @@
       "parent": "Architecture and Data Flow",
       "page_notes": [
         { "content": "Constant Prefixes: SETTINGS_ and DESIGNER_ map directly to named ranges." },
-        { "content": "Utilities: String helpers, picture management, OptimizeCode_Begin, OptimizeCode_End, and ADO connection pooling." }
+        { "content": "Utilities: String helpers, picture management, OptimizeCode_Begin, OptimizeCode_End, and ADO connection pooling." },
+        { "content": "Typed Property Parsing: modUtilityPropertyParse.bas (v11.0) parses generic key=value property text into typed Boolean/Long/Double/String values (ISO-8601 dates are deliberately kept as validated strings to avoid UTC-offset date-shift bugs in the JSON serializer), independent of Graphviz/DOT syntax — see Knowledge Graph Export and JSON Pipeline." }
       ]
     },
     {
@@ -107,7 +121,7 @@
       "purpose": "Overview of custom Ribbon architecture and callback system.",
       "page_notes": [
         { "content": "Callback Model: Dedicated modules (e.g., modRibbonTabGraphviz.bas) bridge UI to logic." },
-        { "content": "State Management: Global internalMyRibbon + InvalidateRibbonControl pattern. Includes newer tabs: Info, Console, Diagnostics, Styles." }
+        { "content": "State Management: Global internalMyRibbon + InvalidateRibbonControl pattern. Includes newer tabs: Info, Console, Diagnostics, Styles, and, as of v11.0, Data and Settings." }
       ]
     },
     {
@@ -116,7 +130,19 @@
       "parent": "User Interface Ribbon Tabs",
       "page_notes": [
         { "content": "Layout Engines: dot, neato, fdp, sfdp, twopi, circo, osage, patchwork." },
-        { "content": "Publish Group: graphToWorksheet, graphToFile, graphAllViewsToFile." }
+        { "content": "Publish Group: graphToWorksheet, graphToFile, graphAllViewsToFile." },
+        { "content": "v11.0 Scope Narrowing: Publishing and generation controls moved to the new Data Ribbon Tab; this tab is now scoped to layout engine, splines, direction, and output order. Previously-disabled Compound/Line/Spline edge-routing controls were restored." }
+      ]
+    },
+    {
+      "title": "Data Ribbon Tab",
+      "purpose": "The v11.0 tab that owns graph generation and publishing, split out of the original Graphviz tab.",
+      "parent": "User Interface Ribbon Tabs",
+      "page_notes": [
+        { "content": "Origin: Introduced in v11.0 by splitting generation/publishing controls out of the Graphviz tab, which is now scoped to layout-engine-specific options only (see Graphviz Ribbon Tab)." },
+        { "content": "Publishing: A Publish split button exposes per-format checkboxes (Graph, DOT, Knowledge Graph) and an 'Open after publishing' option, feeding the same graphAllViewsToFile-style batch logic used elsewhere." },
+        { "content": "Render Engine Selection: A new group lets the user pick the underlying Graphviz renderer (Cairo, GD, GDI+ on Windows, Quartz on macOS)." },
+        { "content": "Data Worksheet Controls: Hosts the Show Columns menu (including a new Show Properties toggle) and the Node/Edge/Cluster label and tooltip option menus, migrated here from the old Graphviz tab." }
       ]
     },
     {
@@ -141,6 +167,16 @@
       ]
     },
     {
+      "title": "Settings Ribbon Tab",
+      "purpose": "Centralized v11.0 tab for showing or hiding worksheets and ribbon tabs.",
+      "parent": "User Interface Ribbon Tabs",
+      "page_notes": [
+        { "content": "Purpose: A single Settings tab, new in v11.0, replaces scattered visibility toggles with grouped show/hide controls for individual worksheets and ribbon tabs (Console, Exchange, SQL, Styles, SVG, and more)." },
+        { "content": "Worksheet Mirror: The Settings worksheet itself was redesigned to mirror the ribbon's grouping, with each row group showing or hiding based on which button is pressed." },
+        { "content": "State Model: Follows the same internalMyRibbon / InvalidateRibbonControl pattern used by the rest of the ribbon (see User Interface Ribbon Tabs)." }
+      ]
+    },
+    {
       "title": "Working with the Data Worksheet",
       "purpose": "Guide to data entry and event-driven behavior.",
       "page_notes": [
@@ -153,7 +189,8 @@
       "purpose": "Node and Edge data models with advanced syntax.",
       "parent": "Working with the Data Worksheet",
       "page_notes": [
-        { "content": "Advanced Support: Port syntax (node:port), HTML-like labels in angle brackets, and GetDataRow structure." }
+        { "content": "Advanced Support: Port syntax (node:port), HTML-like labels in angle brackets, and GetDataRow structure." },
+        { "content": "Properties Column (v11.0): A worksheet Properties column carries free-form key=value metadata per node/edge, parsed into typed JSON values for the Knowledge Graph export (see Knowledge Graph Export and JSON Pipeline)." }
       ]
     },
     {
@@ -170,7 +207,8 @@
       "purpose": "Style object model, caching, and preview lifecycle.",
       "parent": "Working with the Data Worksheet",
       "page_notes": [
-        { "content": "Preview Mechanics: WIA for sizing on Windows; gallery-based previews with auto-refresh." }
+        { "content": "Preview Mechanics: WIA for sizing on Windows; gallery-based previews with auto-refresh." },
+        { "content": "Configurable Cluster Naming (v11.0): Cluster style names are now built from a Naming Pattern (default {name} {affix}) instead of a fixed suffix, applied consistently whether the cluster came from the Style Designer or a SQL PUBLISH command." }
       ]
     },
     {
@@ -205,7 +243,8 @@
       "parent": "SQL Data Integration",
       "page_notes": [
         { "content": "RecursiveSearch: Anchor and recursive member pattern for tree traversal." },
-        { "content": "Enhancements: Placeholders, concatenation, iterative queries, enumeration queries, CREATE EDGES, CREATE RANK, and multi-level CLUSTERn." }
+        { "content": "Enhancements: Placeholders, concatenation, iterative queries, enumeration queries, CREATE EDGES, CREATE RANK, and multi-level CLUSTERn." },
+        { "content": "Knowledge Graph Publishing (v11.0): PUBLISH AS KNOWLEDGE GRAPH and PUBLISH ALL VIEWS AS KNOWLEDGE GRAPH route SQL query results through the same JSON pipeline used by worksheet-driven graphs (see Knowledge Graph Export and JSON Pipeline)." }
       ]
     },
     {
@@ -213,7 +252,9 @@
       "purpose": "Rendering, publishing, and SVG manipulation.",
       "page_notes": [
         { "content": "SVG Post-Processor: XML find and replace for JS injection for interactivity and base64 image embedding (Excel reliability)." },
-        { "content": "Formats: EMF for Office integration; SVG editor form available for manual tweaks." }
+        { "content": "Formats: EMF for Office integration; SVG editor form available for manual tweaks." },
+        { "content": "Interactive SVG Viewer (v11.0): Post-processing injects a fixed-position toolbar, live hover labels, scroll-to-zoom/drag-to-pan navigation, Fit Width/Fit Height/100% controls, and click-to-highlight connection filtering directly into exported SVG files, so a large diagram is navigable with no external viewer, plugin, or install step." },
+        { "content": "Trust Boundary: Because postprocessing injects JavaScript that runs automatically whenever the SVG is opened in a browser, it ships disabled by default in v11.0 and now requires an explicit risk-acknowledgment prompt to enable; shared or imported postprocessing configurations should be treated with the same scrutiny as a macro-enabled workbook." }
       ]
     },
     {
@@ -246,7 +287,9 @@
       "purpose": "E2GXF format for portability and version control.",
       "page_notes": [
         { "content": "Use Cases: Git-friendly templates and sharing via text files." },
-        { "content": "Implementation: modExchangeImport.bas handles carriage-return kludge for multi-line cells." }
+        { "content": "Implementation: modExchangeImport.bas handles carriage-return kludge for multi-line cells." },
+        { "content": "v11.0 Coverage: Export/import now round-trips all new v11.0 settings — Knowledge Graph and publishing options, render engine choice, Cluster settings, node/edge tooltip settings, and the style Naming Pattern/Affix fields (with backward-compatible reading of older Suffix-based export files)." },
+        { "content": "Column-Shift Guard: Import defensively skips restoring a stale View-column reference when the importing workbook's Styles sheet has columns (e.g., the new style Description column) that shifted the View range relative to the exported file." }
       ]
     },
     {
