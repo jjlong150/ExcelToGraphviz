@@ -31,7 +31,7 @@ Here is an illustration of the same node published with each renderer. The chang
 
 | Cairo | GD    | GDI+  | Quartz |
 | :---: | :---: | :---: | :---: |
-| ![Node rendered with Cairo.](../images/renderer-cairo.png) | ![Node rendered with GD](../images/renderer-gd.png) | ![Node rendered with GDI+](../images/renderer-gdiplus.png) | appearing soon |
+| ![Node rendered with Cairo.](../images/renderer-cairo.png) | ![Node rendered with GD](../images/renderer-gd.png) | ![Node rendered with GDI+](../images/renderer-gdiplus.png) | ![Node rendered with Quartz](../images/renderer-quartz.png) |
 
 If you've never changed this setting, you don't need to start now, Cairo is a good default. But if you ever run into odd font spacing, missing characters, or rendering artifacts on a particular machine, this is something I'd try switching.
 
