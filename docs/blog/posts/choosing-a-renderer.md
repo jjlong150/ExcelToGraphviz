@@ -2,10 +2,10 @@
 blogPost: true
 title: Choosing a Graphviz Renderer
 description: Cairo, GD, GDI+, and Quartz all draw your diagram — here's how the four render engines in v11.0 actually differ, and when to pick each one.
-date: 2026-09-05
+date: 2026-09-07
 author: jjlong150
 tags: ['rendering', 'tips', 'v11.0']
-published: false
+published: true
 readingTime: true
 sidebar: false
 ---
