@@ -6,7 +6,7 @@
 <!-- Title: Relationship Visualizer Pages: 1 -->
 <svg width="742pt" height="1087pt"
  viewBox="0.00 0.00 742.00 1087.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" onload="addInteractivity(evt)">
-  <!-- NOTE: The graphviz-generated content in this file has been modified by Excel to Graphviz Version: 10.3.00 (Win + macOS) -->
+  <!-- NOTE: The graphviz-generated content in this file has been modified by Excel to Graphviz Version: 11.0.00 (Win + macOS) -->
 
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1083)">
 <title>Relationship Visualizer</title>
@@ -451,7 +451,6 @@
 <!-- Spot Instance 3&#45;&gt;VPC1 -->
 <!-- Spot Instance 3&#45;&gt;VPC2 -->
 </g>
-
 <!-- Excel to Graphviz - Begin -->
 <style>
 .edge text{
@@ -473,7 +472,7 @@
 .edge-highlight path{
     opacity: 1;
     stroke-width: 5;
-}	
+}
 .edge-highlight polygon{
     opacity: 1;
     stroke-width: 5;
@@ -485,17 +484,17 @@
 .node-highlight polygon{
     opacity: 1;
     stroke-width: 5;
-    z-index:99999;	
+    z-index:99999;
 }
 .node-highlight ellipse{
     opacity: 1;
     stroke-width: 5;
-    z-index:99999;	
+    z-index:99999;
 }
 .node-highlight path{
     opacity: 1;
     stroke-width: 5;
-    z-index:99999;	
+    z-index:99999;
 }
 .compass {
     fill: #fff;
@@ -516,606 +515,1481 @@
     stroke-miterlimit:6;
     stroke-linecap: round;
 }
-.button:hover {
-    stroke-width: 1;
-}
 .plus-minus {
     fill: #fff;
     pointer-events: none;
+}
+
+/* ---- Smooth, hover-friendly transitions on the base shapes ---- */
+.node polygon, .node ellipse, .node path,
+.edge path, .edge polyline, .edge polygon {
+    transition: opacity 0.2s ease, stroke-width 0.2s ease;
+}
+.node {
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.15s ease;
+}
+.node:hover {
+    transform: scale(1.03);
 }
 .node:hover polygon, .node:hover ellipse, .node:hover path {
     stroke-width: 5;
     opacity: 0.8;
 }
+.edge {
+    cursor: pointer;
+}
 .edge:hover path, .edge:hover polyline, .edge:hover polygon {
     stroke-width: 5;
     opacity: 0.8;
 }
+
+/* ---- Selected-node emphasis: a subtle stroke-width pulse, no color added ---- */
+.node-highlight polygon, .node-highlight ellipse, .node-highlight path {
+    animation: node-pulse 1.6s ease-in-out infinite;
+}
+@keyframes node-pulse {
+    0%, 100% { stroke-width: 5; }
+    50% { stroke-width: 7; }
+}
+
+/* ---- Zoom button micro-interactions ---- */
+.button-plus, .button-minus {
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+.button-plus:hover, .button-minus:hover {
+    transform: scale(1.2);
+    filter: brightness(1.1);
+}
+.button-plus:active, .button-minus:active {
+    transform: scale(0.95);
+}
+
+/* ---- Toolbar: single-row control bar above the diagram ---- */
+.toolbar-bg {
+    fill: #fafafa;
+    stroke: #e0e0e0;
+    stroke-width: 1;
+}
+.toolbar-label {
+    fill: #666;
+    font-weight: 600;
+}
+.toolbar-zoom-readout {
+    fill: #007bbf;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.toolbar-checkbox {
+    cursor: pointer;
+}
+.checkbox-box {
+    fill: #ffffff;
+    stroke: #999;
+    stroke-width: 1.5;
+    transition: fill 0.15s ease, stroke 0.15s ease;
+}
+.checkbox-box.checked {
+    fill: #007bbf;
+    stroke: #007bbf;
+}
+.checkbox-check {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: opacity 0.1s ease;
+    pointer-events: none;
+}
+.checkbox-label {
+    fill: #333;
+    pointer-events: none;
+}
+.toolbar-checkbox:hover .checkbox-box {
+    stroke: #007bbf;
+}
+
+.toolbar-pill-btn {
+    cursor: pointer;
+}
+.toolbar-pill-btn rect {
+    fill: #007bbf;
+    stroke: none;
+    transition: fill 0.15s ease;
+}
+.toolbar-pill-btn text {
+    fill: #ffffff;
+    pointer-events: none;
+}
+.toolbar-pill-btn:hover rect {
+    fill: #0691e0;
+}
+.toolbar-pill-btn:active rect {
+    fill: #00669e;
+}
+
+.toolbar-divider {
+    stroke: #ddd;
+    stroke-width: 1;
+}
+
+.toolbar-radio {
+    cursor: pointer;
+}
+.radio-outer {
+    fill: #ffffff;
+    stroke: #999;
+    stroke-width: 1.5;
+    transition: stroke 0.15s ease;
+}
+.radio-outer.active {
+    stroke: #007bbf;
+}
+.radio-inner {
+    fill: #007bbf;
+    transition: opacity 0.15s ease;
+}
+.radio-label {
+    fill: #333;
+    pointer-events: none;
+}
+.toolbar-radio:hover .radio-outer {
+    stroke: #007bbf;
+}
+
+/* ---- Hover-label field, part of the toolbar row itself ---- */
+.toolbar-hover-text {
+    fill: #333;
+}
+
+/* ---- Respect the user's OS-level motion preference ---- */
+@media (prefers-reduced-motion: reduce) {
+    .node, .cluster, .button-plus, .button-minus,
+    .toolbar-checkbox, .toolbar-pill-btn,
+    .node-highlight polygon, .node-highlight ellipse, .node-highlight path,
+    .zoom-hint {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ---- Self-dismissing "scroll to zoom / drag to pan" hint ---- */
+.zoom-hint {
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+.zoom-hint.zoom-hint-fade {
+    opacity: 0;
+}
+.zoom-hint-bg {
+    fill: #1f2430;
+    fill-opacity: 0.85;
+}
+.zoom-hint-text {
+    fill: #fff;
+}
+
+/* Note: the SVG's physical size is now set directly via width/height
+   attributes in JS (matched to the browser viewport), not via CSS, since
+   percentage-based sizing has no well-defined containing block to resolve
+   against when the file is opened as its own standalone document rather
+   than embedded in an HTML page. No CSS sizing rule is needed here. */
 </style>
 <script>
 <![CDATA[
-function addInteractivity(evt) {
-    
-    var addZoomButtons = 1;
-    var svg = evt.target;
-    var edges = document.getElementsByClassName('edge');
-    var nodes = document.getElementsByClassName('node');
-    var clusters = document.getElementsByClassName('cluster');
-    var selectedElement, offset, transform, nodrag, origmousepos;
+(function () {
+    'use strict';
 
-    svg.addEventListener('mousedown',   startDrag );
-    svg.addEventListener('mousemove',   drag      );
-    svg.addEventListener('mouseup',     endDrag   );
-    svg.addEventListener('mouseleave',  endDrag   );
-    svg.addEventListener('touchstart',  startDrag );
-    svg.addEventListener('touchmove',   drag      );
-    svg.addEventListener('touchend',    endDrag   );
-    svg.addEventListener('touchleave',  endDrag   );
-    svg.addEventListener('touchcancel', endDrag   );
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+    var diagramState = new WeakMap();
 
-    for (var i = 0; i < edges.length; i++) {
-        edges[i].addEventListener('click', clickEdge);
+    function reducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
 
-    for (var i = 0; i < nodes.length; i++) {
-        nodes[i].addEventListener('click', clickNode);
-    } 
-    
-    addToggleButtons(evt);
-    
-    if (addZoomButtons) {
-        for (var i = 0; i < clusters.length; i++) {
-            addzoomers(clusters[i]);
+    // ---- Entry point (called via <svg onload="addInteractivity(evt)">) ----
+    window.addInteractivity = function addInteractivity(evt) {
+        var svg = evt.target;
+        var state = {
+            svg: svg,
+            edges: svg.getElementsByClassName('edge'),
+            nodes: svg.getElementsByClassName('node'),
+            clusters: svg.getElementsByClassName('cluster'),
+            // The diagram title has no class of its own (Graphviz just draws it
+            // as a plain <text>), but it's structurally distinct: it's the only
+            // <text> that's a direct child of the outer graph group, while every
+            // node/edge/cluster label lives one level deeper inside its own
+            // .node/.edge/.cluster group. That lets us find it reliably.
+            titleEl: svg.querySelector('g.graph > text'),
+            classArray: [],
+            allShown: true,
+            selectedElement: null,
+            dragMode: null,
+            panScale: null,
+            panScreenStart: null,
+            panViewBoxStart: null,
+            offset: null,
+            transform: null,
+            nodrag: true,
+            origmousepos: null,
+            hoverText: null,
+            layerCheckboxes: null,
+            layerVisible: null,
+            flowRadios: null,
+            flowMode: 'both', // 'out' | 'in' | 'both'
+            selectedNodes: new Set(),
+            labelCache: new WeakMap(),   // element -> its original <title> text, read once
+            nodePatterns: new WeakMap(), // node element -> {outbound, inbound, undirected} RegExps
+            hudFixedItems: [],  // { group, screenX, screenY } - stay pinned to a fixed viewport position (toolbar)
+            hudScaledItems: [], // { group, worldX, worldY } - stay anchored to content but constant screen size (per-cluster zoom buttons)
+            zoomLabel: null,
+            graphOffset: null,
+            fullContentBBoxCache: null,
+            initialViewBox: null
+        };
+        diagramState.set(svg, state);
+
+        svg.addEventListener('mousedown', function (e) { startDrag(e, state); });
+        svg.addEventListener('mousemove', function (e) { drag(e, state); });
+        svg.addEventListener('mouseup', function (e) { endDrag(e, state); });
+        svg.addEventListener('mouseleave', function (e) { endDrag(e, state); });
+        svg.addEventListener('touchstart', function (e) { startDrag(e, state); }, { passive: true });
+        svg.addEventListener('touchmove', function (e) { drag(e, state); });
+        svg.addEventListener('touchend', function (e) { endDrag(e, state); });
+        svg.addEventListener('touchcancel', function (e) { endDrag(e, state); });
+        // { passive: false } because this needs preventDefault() to stop the
+        // page from also scrolling/zooming natively on the same wheel event -
+        // see wheelZoom() for why native browser zoom is deliberately not
+        // relied on for this.
+        svg.addEventListener('wheel', function (e) { wheelZoom(e, state); }, { passive: false });
+
+        // Read every label exactly once, up front, before anything (like the
+        // tooltip) has a chance to temporarily blank out a <title> element.
+        for (var i = 0; i < state.edges.length; i++) {
+            cacheLabel(state.edges[i], state);
         }
+        for (var j = 0; j < state.nodes.length; j++) {
+            var label = cacheLabel(state.nodes[j], state);
+            state.nodePatterns.set(state.nodes[j], buildNodePatterns(label));
+        }
+
+        for (var k = 0; k < state.edges.length; k++) {
+            state.edges[k].addEventListener('click', function () { clickEdge(this, state); });
+            attachTooltip(state.edges[k], state);
+        }
+        for (var m = 0; m < state.nodes.length; m++) {
+            state.nodes[m].addEventListener('click', function () { clickNode(this, state); });
+            attachTooltip(state.nodes[m], state);
+        }
+
+        applyInitialFit(state);
+        buildToolbar(state);
+        for (var n = 0; n < state.clusters.length; n++) {
+            addZoomButtons(state.clusters[n], state);
+        }
+        addZoomHint(state);
+        syncHud(state);
+
+        revealOnLoad(state);
+    };
+
+    function cacheLabel(el, state) {
+        var titleEl = el.querySelector('title');
+        var text = titleEl ? titleEl.textContent : '';
+        state.labelCache.set(el, text);
+        return text;
     }
-    
-    function getMousePosition(evt) {
-        var CTM = svg.getScreenCTM();
-        if (evt.touches) { evt = evt.touches[0]; }
-            return {
-                x: (evt.clientX - CTM.e) / CTM.a,
-                y: (evt.clientY - CTM.f) / CTM.d
+
+    function buildNodePatterns(nodeName) {
+        var escaped = nodeName.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, '\\$&');
+        return {
+            outbound: new RegExp('^' + escaped + '->'),
+            inbound: new RegExp('->' + escaped + '$'),
+            undirected: new RegExp('^' + escaped + '--|--' + escaped + '$')
         };
     }
 
-    function startDrag(evt) {
-        origmousepos = getMousePosition(evt);
-        nodrag=true;
-        selectedElement = evt.target.parentElement;
-        if (selectedElement){
-            offset = getMousePosition(evt);
+    // ---- Dragging ----
+    function getMousePosition(state, evt) {
+        var CTM = state.svg.getScreenCTM();
+        if (evt.touches) evt = evt.touches[0];
+        return {
+            x: (evt.clientX - CTM.e) / CTM.a,
+            y: (evt.clientY - CTM.f) / CTM.d
+        };
+    }
 
-            // Make sure the first transform on the element is a translate transform
-            var transforms = selectedElement.transform.baseVal;
+    function eventPoint(evt) {
+        return evt.touches ? evt.touches[0] : evt;
+    }
 
+    function startDrag(evt, state) {
+        state.origmousepos = getMousePosition(state, evt);
+        state.nodrag = true;
+
+        // Use closest(), not evt.target.parentElement, to find the node/edge/
+        // cluster a click landed in. A plain shape (e.g. this file's plain
+        // <ellipse> nodes) is one level below its .node group, but an
+        // <a xlink:title="..."> tooltip-wrapped icon (e.g. this file's image
+        // nodes) is two levels below - checking only the immediate parent
+        // finds the <a> tag instead of the node, misses the match entirely,
+        // and (in the old code) would end up dragging just the icon's own
+        // transform while its text labels - siblings of the wrapper, not
+        // descendants - stay behind. closest() finds the right ancestor
+        // regardless of how many wrapper elements sit in between.
+        var group = evt.target.closest ? evt.target.closest('.node, .edge, .cluster') : null;
+
+        if (group) {
+            // Dragging an actual node/edge/cluster is a temporary "preview" -
+            // see endDrag, it springs back on release.
+            state.dragMode = 'element';
+            state.selectedElement = group;
+
+            state.offset = getMousePosition(state, evt);
+            var transforms = group.transform.baseVal;
             if (transforms.length === 0 || transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {
-                // Create an transform that translates by (0, 0)
-                var translate = svg.createSVGTransform();
+                var translate = state.svg.createSVGTransform();
                 translate.setTranslate(0, 0);
-                selectedElement.transform.baseVal.insertItemBefore(translate, 0);
+                group.transform.baseVal.insertItemBefore(translate, 0);
             }
-
-            // Get initial translation
-            transform = transforms.getItem(0);
-            offset.x -= transform.matrix.e;
-            offset.y -= transform.matrix.f;
-        }
-    }
-
-    function drag(evt) {
-        if (selectedElement) {
-            evt.preventDefault();
-            var coord = getMousePosition(evt);
-            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);
-        }
-    }
-
-function endDrag(evt) {
-    // If you want dragged items to stay in place instead of snapping back,
-    // comment out the line: transform.setTranslate(0, 0);
-    if (selectedElement) {
-        if (selectedElement.classList.contains('header')) {
-            selectedElement = null; // don't reset the header when dragging it
+            state.transform = transforms.getItem(0);
+            state.offset.x -= state.transform.matrix.e;
+            state.offset.y -= state.transform.matrix.f;
         } else {
-            transform.setTranslate(0, 0); // snap back to original position
-            selectedElement = null;
+            // Dragging empty canvas background pans the view instead, and
+            // that pan persists after release - the way a map or canvas app
+            // works. Screen-pixel deltas are used (not getMousePosition's
+            // viewBox-space coordinates) because viewBox.x/y are what we're
+            // actively changing as the drag proceeds; re-deriving position
+            // from a coordinate system that's itself shifting each frame
+            // would create a feedback loop and make the pan feel erratic.
+            // clientX/clientY and a scale factor captured once at drag-start
+            // avoid that entirely.
+            state.dragMode = 'pan';
+            state.selectedElement = null;
+            var rect = state.svg.getBoundingClientRect();
+            var vb = state.svg.viewBox.baseVal;
+            state.panScale = rect.width > 0 ? vb.width / rect.width : 1;
+            var pt = eventPoint(evt);
+            state.panScreenStart = { x: pt.clientX, y: pt.clientY };
+            state.panViewBoxStart = { x: vb.x, y: vb.y };
         }
     }
 
-    var currentmousepos = getMousePosition(evt);
-    if (currentmousepos.x === origmousepos.x || currentmousepos.y === origmousepos.y) {
-        nodrag = true;
-    } else {
-        nodrag = false;
-    }
-}
-
-    function clickEdge() {
-        if (nodrag) {
-            if (this.classList.contains("edge-highlight")){
-                this.classList.remove("edge-highlight");
-                this.classList.remove("text-highlight-edges");
-            }
-            else {
-                this.classList.add("edge-highlight");
-                this.classList.add("text-highlight-edges");
-                animateEdge(this);
-            }
-        }	
-    }
-
-    function clickNode() {
-        if (nodrag) {
-            var nodeName = this.childNodes[1].textContent;
-            // Escape special characters in the node name
-            var nodeNameEscaped = nodeName.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, '\\$&');
-
-            var patroon = new RegExp('^' + nodeNameEscaped + '->|->' + nodeNameEscaped + '$|' + nodeNameEscaped + '--|--' + nodeNameEscaped + '$')
-
-            if (this.classList.contains("node-highlight")) {
-                this.classList.remove("node-highlight");
-                this.classList.remove("text-highlight-nodes");
-                var edges = document.getElementsByClassName('edge');
-                for (var i = 0; i < edges.length; i++) {
-                    if (patroon.test(edges[i].childNodes[1].textContent)) {
-                        edges[i].classList.remove("edge-highlight");
-                        edges[i].classList.remove("text-highlight-edges");
-                    } 
-                }  
-            } else {
-                this.classList.add("node-highlight");
-                this.classList.add("text-highlight-nodes");
-                var edges = document.getElementsByClassName('edge');
-                for (var i = 0; i < edges.length; i++) {
-                    if (patroon.test(edges[i].childNodes[1].textContent)) {
-                        edges[i].classList.add("edge-highlight");
-                        edges[i].classList.add("text-highlight-edges");
-                        animateEdge(edges[i]);
-                    }
-                }
-            } 
+    function drag(evt, state) {
+        if (state.dragMode === 'element' && state.selectedElement) {
+            evt.preventDefault();
+            var coord = getMousePosition(state, evt);
+            state.transform.setTranslate(coord.x - state.offset.x, coord.y - state.offset.y);
+        } else if (state.dragMode === 'pan') {
+            evt.preventDefault();
+            var pt = eventPoint(evt);
+            var dxScreen = pt.clientX - state.panScreenStart.x;
+            var dyScreen = pt.clientY - state.panScreenStart.y;
+            var viewBox = state.svg.viewBox.baseVal;
+            viewBox.x = state.panViewBoxStart.x - dxScreen * state.panScale;
+            viewBox.y = state.panViewBoxStart.y - dyScreen * state.panScale;
+            syncHud(state);
         }
     }
 
-function animateEdge(edge) {
-    var path = edge.querySelector('path');
-    var polylines = edge.querySelectorAll('polyline');
-    var polygon = edge.querySelector('polygon');
-
-    if (path) {
-        var length = path.getTotalLength();
-        
-        path.style.transition = path.style.WebkitTransition = 'none';
-        if (polygon) polygon.style.transition = polygon.style.WebkitTransition = 'none';
-
-        path.style.strokeDasharray = length + ' ' + length;
-        path.style.strokeDashoffset = length;
-        if (polygon) polygon.style.opacity = '0';
-
-        path.getBoundingClientRect();
-
-        path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1)';
-        if (polygon) polygon.style.transition = polygon.style.WebkitTransition = 'opacity 0.8s ease-out 1s';  // starts at 1s, fades over 0.8s
-
-        path.style.strokeDashoffset = '0';
-        if (polygon) setTimeout(function() { polygon.style.opacity = '1'; }, 1000);  // matches the 1s delay above
+    function endDrag(evt, state) {
+        if (state.dragMode === 'element' && state.selectedElement) {
+            if (!state.selectedElement.classList.contains('header')) {
+                state.transform.setTranslate(0, 0);
+            }
+            var current = getMousePosition(state, evt);
+            state.nodrag = (current.x === state.origmousepos.x || current.y === state.origmousepos.y);
+        } else {
+            // Panning (or a click that never engaged either mode) never
+            // suppresses the separate click-to-highlight handlers.
+            state.nodrag = true;
+        }
+        state.selectedElement = null;
+        state.dragMode = null;
     }
-    else if (polylines.length > 0) {
-        polylines.forEach(function(pl) {
-            var length = pl.getTotalLength();
 
-            pl.style.transition = pl.style.WebkitTransition = 'none';
-            if (polygon) polygon.style.transition = polygon.style.WebkitTransition = 'none';
+    // ---- Click-to-highlight ----
+    function toggleEdgeHighlight(edgeEl, forceOn) {
+        var isOn = edgeEl.classList.contains('edge-highlight');
+        var turnOn = forceOn !== undefined ? forceOn : !isOn;
+        if (turnOn) {
+            edgeEl.classList.add('edge-highlight', 'text-highlight-edges');
+        } else {
+            edgeEl.classList.remove('edge-highlight', 'text-highlight-edges');
+        }
+        return turnOn;
+    }
 
-            pl.style.strokeDasharray = length + ' ' + length;
-            pl.style.strokeDashoffset = length;
-            if (polygon) polygon.style.opacity = '0';
+    function clickEdge(el, state) {
+        if (!state.nodrag) return;
+        var turnedOn = toggleEdgeHighlight(el);
+        if (turnedOn) animateEdge(el, state);
+    }
 
-            pl.getBoundingClientRect();
+    function clickNode(el, state) {
+        if (!state.nodrag) return;
 
-            pl.style.transition = pl.style.WebkitTransition = 'stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1)';
-            if (polygon) polygon.style.transition = polygon.style.WebkitTransition = 'opacity 0.8s ease-out 1s';  // starts at 1s
+        var turningOn = !state.selectedNodes.has(el);
+        if (turningOn) {
+            state.selectedNodes.add(el);
+            el.classList.add('node-highlight', 'text-highlight-nodes');
+        } else {
+            state.selectedNodes.delete(el);
+            el.classList.remove('node-highlight', 'text-highlight-nodes');
+        }
+        refreshEdgeHighlights(state);
+    }
 
-            pl.style.strokeDashoffset = '0';
-            if (polygon) setTimeout(function() { polygon.style.opacity = '1'; }, 1000);  // matches the 1s delay
+    // Recomputes, from scratch, which edges should be highlighted given the
+    // current set of selected nodes and the current flow-direction mode.
+    function requiredEdges(state) {
+        var required = new Set();
+        state.selectedNodes.forEach(function (node) {
+            var patterns = state.nodePatterns.get(node);
+            if (!patterns) return;
+            for (var i = 0; i < state.edges.length; i++) {
+                var edge = state.edges[i];
+                var label = state.labelCache.get(edge) || '';
+                if (patterns.undirected.test(label)) { required.add(edge); continue; }
+                if ((state.flowMode === 'out' || state.flowMode === 'both') && patterns.outbound.test(label)) { required.add(edge); continue; }
+                if ((state.flowMode === 'in' || state.flowMode === 'both') && patterns.inbound.test(label)) { required.add(edge); continue; }
+            }
+        });
+        return required;
+    }
+
+    function refreshEdgeHighlights(state) {
+        var required = requiredEdges(state);
+        for (var i = 0; i < state.edges.length; i++) {
+            var edge = state.edges[i];
+            var shouldHighlight = required.has(edge);
+            var isHighlighted = edge.classList.contains('edge-highlight');
+            if (shouldHighlight && !isHighlighted) {
+                toggleEdgeHighlight(edge, true);
+                animateEdge(edge, state);
+            } else if (!shouldHighlight && isHighlighted) {
+                toggleEdgeHighlight(edge, false);
+            }
+        }
+    }
+
+    // ---- Edge draw-in animation ----
+    // Splits an edge's draw-in into two steps so it can be hidden well before
+    // its actual reveal fires (see revealOnLoad for why this separation matters
+    // at load time). `prepareEdgeHidden` sets the "about to be drawn" dash
+    // state and returns everything `startEdgeReveal` needs to finish the job.
+    function prepareEdgeHidden(edgeEl) {
+        var path = edgeEl.querySelector('path');
+        var polylines = edgeEl.querySelectorAll('polyline');
+        var polygon = edgeEl.querySelector('polygon');
+        var segments = path ? [path] : Array.prototype.slice.call(polylines);
+        if (!segments.length) return null;
+
+        segments.forEach(function (seg) {
+            var length = seg.getTotalLength();
+            seg.style.transition = 'none';
+            seg.style.strokeDasharray = length + ' ' + length;
+            seg.style.strokeDashoffset = String(length);
+        });
+        if (polygon) {
+            polygon.style.transition = 'none';
+            polygon.style.opacity = '0';
+        }
+        return { segments: segments, polygon: polygon };
+    }
+
+    function startEdgeReveal(prepared) {
+        if (!prepared) return;
+        prepared.segments.forEach(function (seg) {
+            seg.style.transition = 'stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            seg.style.strokeDashoffset = '0';
+        });
+        if (prepared.polygon) {
+            prepared.polygon.style.transition = 'opacity 0.8s ease-out 1s';
+            setTimeout(function () { prepared.polygon.style.opacity = '1'; }, 1000);
+        }
+
+        // Hand the dash properties back to plain CSS once the draw-in finishes,
+        // so the edge just looks like a normal solid highlighted line at rest.
+        setTimeout(function () {
+            prepared.segments.forEach(function (seg) {
+                seg.style.transition = '';
+                seg.style.strokeDasharray = '';
+                seg.style.strokeDashoffset = '';
+            });
+        }, 2550);
+    }
+
+    // Single-edge draw-in used for the click-to-highlight interaction, where
+    // the edge is already visible (as a plain, un-highlighted line) up until
+    // the moment the user clicks - hide-then-redraw right then reads as
+    // deliberate "flow" feedback for the one edge they're looking at, so this
+    // combines both steps with the forced-reflow trick that makes them land
+    // in the same frame as separate paint events.
+    function animateEdge(edgeEl, state) {
+        if (reducedMotion()) {
+            var path = edgeEl.querySelector('path');
+            var polylines = edgeEl.querySelectorAll('polyline');
+            var polygon = edgeEl.querySelector('polygon');
+            var segments = path ? [path] : Array.prototype.slice.call(polylines);
+            segments.forEach(function (seg) {
+                seg.style.strokeDasharray = '';
+                seg.style.strokeDashoffset = '';
+            });
+            if (polygon) polygon.style.opacity = '1';
+            return;
+        }
+
+        var prepared = prepareEdgeHidden(edgeEl);
+        if (!prepared) return;
+
+        // Force layout so the browser commits the "start" state before animating.
+        void edgeEl.getBoundingClientRect();
+
+        startEdgeReveal(prepared);
+    }
+
+    // ---- Load-in reveal ----
+    function revealOnLoad(state) {
+        if (reducedMotion()) return;
+        var items = [];
+        for (var i = 0; i < state.clusters.length; i++) items.push(state.clusters[i]);
+        for (var j = 0; j < state.nodes.length; j++) items.push(state.nodes[j]);
+        if (!items.length && !state.edges.length) return;
+
+        // Stagger delays are capped to a fixed total time BUDGET rather than a
+        // fixed per-item delay. A flat 45ms/150ms per item looks great with a
+        // handful of nodes but scales linearly with graph size - on a few
+        // hundred nodes/edges it turns into a reveal that visibly trickles in
+        // over tens of seconds. Capping the total means the reveal takes
+        // roughly the same wall-clock time whether the graph has 5 nodes or 500.
+        var NODE_STAGGER_BUDGET = 500; // ms, total spread across all node/cluster reveals
+        var nodeStep = items.length > 1 ? Math.min(45, NODE_STAGGER_BUDGET / (items.length - 1)) : 0;
+
+        items.forEach(function (el, idx) {
+            var delay = idx * nodeStep;
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(6px)';
+            el.style.transition = 'opacity 0.45s ease ' + delay + 'ms, transform 0.45s ease ' + delay + 'ms';
+        });
+
+        void state.svg.getBoundingClientRect();
+
+        requestAnimationFrame(function () {
+            items.forEach(function (el) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        });
+
+        var cleanupDelay = (items.length - 1) * nodeStep + 500;
+        setTimeout(function () {
+            items.forEach(function (el) {
+                el.style.transition = '';
+                el.style.transform = '';
+                el.style.opacity = '';
+            });
+        }, cleanupDelay);
+
+        // Every edge is switched to its hidden, "about to be drawn" state right
+        // now - synchronously, in this same tick, before the browser ever paints
+        // a frame - exactly like the nodes/clusters above. Only the *reveal*
+        // (the transition back to fully drawn) is staggered. If the hide step
+        // itself were staggered too, the first paint would show every edge
+        // already fully drawn (that's just the raw SVG), and the staggered wave
+        // of hides-then-redraws afterward reads as a jarring burst rather than
+        // a build-up.
+        var preparedEdges = [];
+        for (var e = 0; e < state.edges.length; e++) {
+            preparedEdges.push(prepareEdgeHidden(state.edges[e]));
+        }
+
+        var EDGE_STAGGER_BUDGET = 900; // ms, total spread across all edge draw-ins
+        var EDGE_START_DELAY = 300;    // ms, base delay before the first edge starts
+        var edgeStep = state.edges.length > 1 ? Math.min(150, EDGE_STAGGER_BUDGET / (state.edges.length - 1)) : 0;
+
+        for (var k = 0; k < state.edges.length; k++) {
+            (function (prepared, delay) {
+                setTimeout(function () { startEdgeReveal(prepared); }, delay);
+            })(preparedEdges[k], EDGE_START_DELAY + k * edgeStep);
+        }
+    }
+
+    // ---- Tooltips ----
+    // Writes into the toolbar's own hover-label field instead of a floating
+    // tooltip that follows the cursor: predictable, always-in-view position,
+    // and the text is always the toolbar's true font size regardless of
+    // diagram zoom, since it's built as part of the toolbar row itself.
+    function attachTooltip(el, state) {
+        var titleEl = el.querySelector('title');
+        if (!titleEl) return;
+        var labelText = state.labelCache.get(el) || titleEl.textContent;
+        var displayText = labelText.length > 48 ? labelText.slice(0, 47) + '\u2026' : labelText;
+
+        el.addEventListener('mouseenter', function () {
+            titleEl.textContent = ''; // suppress the native browser tooltip only
+            if (state.hoverText) state.hoverText.textContent = displayText;
+        });
+        el.addEventListener('mouseleave', function () {
+            titleEl.textContent = labelText; // restore for accessibility / no-JS fallback
+            if (state.hoverText) state.hoverText.textContent = '';
         });
     }
-}
 
-    function addzoomers(cluster){
-
-        var bb = cluster.getBBox();
-        var clusterx =  bb.x + 15;
-        var clustery =  bb.y + 15;
-		
-        addzoomer(cluster, clusterx, clustery, cluster.id)
-        return;
+    // ---- Zoom ----
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
     }
 
-    function addzoomer(cluster, posx, posy, name){
-		
-        titleOut = document.createElementNS('http://www.w3.org/2000/svg', "title"); 
-        titleOut.textContent = "Zoom Out";
-        
-        var element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        var zoomoutname = name + 'zoomout';
-        element.setAttributeNS(null, 'id', zoomoutname);
-        element.setAttributeNS(null, 'class', 'button-minus');
-        element.setAttributeNS(null, 'cx', posx);
-        element.setAttributeNS(null, 'cy', posy);
-        element.setAttributeNS(null, 'r', 10);
-        element.appendChild(titleOut);
-        
-        var fctname = 'zoomOut()';
-        element.setAttributeNS(null, 'onclick', fctname );
-        cluster.appendChild(element);
-		
-        titleIn = document.createElementNS('http://www.w3.org/2000/svg', "title"); 
-        titleIn.textContent = "Zoom In";
-        
-        var element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        var zoominname = name + 'zoomin';
-        element.setAttributeNS(null, 'id', zoominname);
-        element.setAttributeNS(null, 'class', 'button-plus');
-        element.setAttributeNS(null, 'cx', posx +25);
-        element.setAttributeNS(null, 'cy', posy);
-        element.setAttributeNS(null, 'r', 10);
-        element.appendChild(titleIn);
+    function animateViewBox(state, targetBox, duration) {
+        // Never commit an invalid viewBox - NaN, zero, or negative width/height
+        // renders as a blank SVG. Whatever the caller computed, refuse it here
+        // as a last line of defense rather than let the diagram go blank.
+        var isSane = isFinite(targetBox.x) && isFinite(targetBox.y) &&
+            isFinite(targetBox.width) && isFinite(targetBox.height) &&
+            targetBox.width > 0 && targetBox.height > 0;
+        if (!isSane) return;
 
-        var fctname = 'zoomIn(\''+name+'\')';
-        element.setAttributeNS(null, 'onclick', fctname );
-        cluster.appendChild(element);
-		
-        var element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        element.setAttributeNS(null, 'class', 'plus-minus');
-        element.setAttributeNS(null, 'x', posx -4);
-        element.setAttributeNS(null, 'y', posy-1);
-        element.setAttributeNS(null, 'width', 8);
-        element.setAttributeNS(null, 'height', 2);
-        cluster.appendChild(element);
-		
-        var element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        element.setAttributeNS(null, 'class', 'plus-minus');
-        element.setAttributeNS(null, 'x', posx +25-4);
-        element.setAttributeNS(null, 'y', posy-1);
-        element.setAttributeNS(null, 'width', 8);
-        element.setAttributeNS(null, 'height', 2);
-        cluster.appendChild(element);
-		
-        var element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        element.setAttributeNS(null, 'class', 'plus-minus');
-        element.setAttributeNS(null, 'x', posx +25-1);
-        element.setAttributeNS(null, 'y', posy-4);
-        element.setAttributeNS(null, 'width', 2);
-        element.setAttributeNS(null, 'height', 8);
-        cluster.appendChild(element);
+        var viewBox = state.svg.viewBox.baseVal;
 
-        return;
-    }
-}
-
-var svg = document.querySelector('svg');
-var viewBox = svg.viewBox.baseVal;
-allShown=true;
-
-function zoomIn(cluster) {
-    svg.setAttributeNS(null, 'preserveAspectRatio', 'xMinYMin meet');
-    var clusterelem = document.getElementById(cluster);
-    var r = clusterelem.getBoundingClientRect();
-    var r2 = clusterelem.getBBox();
-    var pt = svg.createSVGPoint();
-    pt.x = r.x;
-    pt.y = r.y;
-    pt = pt.matrixTransform(svg.getScreenCTM().inverse());
-
-    var startViewBox = {
-        x: viewBox.x,
-        y: viewBox.y,
-        width: viewBox.width,
-        height: viewBox.height
-    };
-
-    var targetViewBox = {
-        x: pt.x - 10,
-        y: pt.y - 10,
-        width: r2.width + 20,
-        height: r2.height + 20
-    };
-
-    var animationDuration = 1500; // Adjust the duration as needed
-    var startTime = performance.now();
-
-    function animateZoom(timestamp) {
-        var elapsed = timestamp - startTime;
-        var progress = elapsed / animationDuration;
-
-        if (progress >= 1) {
-            viewBox.x = targetViewBox.x;
-            viewBox.y = targetViewBox.y;
-            viewBox.width = targetViewBox.width;
-            viewBox.height = targetViewBox.height;
-            svg.scrollTop = 0;
-        } else {
-            var easeProgress = 1 - Math.pow(1 - progress, 3); // Apply easing for smoother animation
-
-            viewBox.x = startViewBox.x + (targetViewBox.x - startViewBox.x) * easeProgress;
-            viewBox.y = startViewBox.y + (targetViewBox.y - startViewBox.y) * easeProgress;
-            viewBox.width = startViewBox.width + (targetViewBox.width - startViewBox.width) * easeProgress;
-            viewBox.height = startViewBox.height + (targetViewBox.height - startViewBox.height) * easeProgress;
-            svg.scrollTop = svg.scrollTop -(svg.scrollTop * (easeProgress/10));
-
-            requestAnimationFrame(animateZoom);
+        if (reducedMotion()) {
+            viewBox.x = targetBox.x;
+            viewBox.y = targetBox.y;
+            viewBox.width = targetBox.width;
+            viewBox.height = targetBox.height;
+            syncHud(state);
+            return;
         }
-    }
 
-    requestAnimationFrame(animateZoom);
-}
+        var startBox = { x: viewBox.x, y: viewBox.y, width: viewBox.width, height: viewBox.height };
+        var startTime = performance.now();
 
-function zoomOut(){
-    var svgrect = svg.getBBox();
-	
-    var startViewBox = {
-        x: viewBox.x,
-        y: viewBox.y,
-        width: viewBox.width,
-        height: viewBox.height
-    };
-
-    var targetViewBox = {
-        x: 0,
-        y: -60,
-        width: svgrect.width,
-        height: svgrect.height+60
-    };
-
-    var animationDuration = 1500; // Adjust the duration as needed
-    var startTime = performance.now();
-
-    function animateZoom(timestamp) {
-        var elapsed = timestamp - startTime;
-        var progress = elapsed / animationDuration;
-
-        if (progress >= 1) {
-            viewBox.x = targetViewBox.x;
-            viewBox.y = targetViewBox.y;
-            viewBox.width = targetViewBox.width;
-            viewBox.height = targetViewBox.height;
-            svg.scrollTop = 0;
-        } else {
-            var easeProgress = 1 - Math.pow(1 - progress, 3); // Apply easing for smoother animation
-
-            viewBox.x = startViewBox.x + (targetViewBox.x - startViewBox.x) * easeProgress;
-            viewBox.y = startViewBox.y + (targetViewBox.y - startViewBox.y) * easeProgress;
-            viewBox.width = startViewBox.width + (targetViewBox.width - startViewBox.width) * easeProgress;
-            viewBox.height = startViewBox.height + (targetViewBox.height - startViewBox.height) * easeProgress;
-
-            requestAnimationFrame(animateZoom);
-        }
-    }
-
-    requestAnimationFrame(animateZoom);
-}
-
-function addToggleButtons(evt) {
-    var svg = evt.target;
-    classArray = [];
-    currentClassIndex = 0;
-  
-    var uniqueClasses = new Set();
-    var elements = document.getElementsByTagName("g");
-
-    for (var i = 0; i < elements.length; i++) {
-        var allclasses = elements[i].getAttribute("class");
-        if (allclasses) {
-            var classes = allclasses.split(" ");
-            for (var j = 0; j < classes.length; j++) {
-                var currentClass = classes[j];
-		  if (currentClass !== "graph" && !uniqueClasses.has(currentClass)) {
-                    uniqueClasses.add(currentClass);
-                    classArray.push(currentClass);
-                }
-            }
-        }
-    }
-    classArray.sort();
-  
-    var buttonContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    buttonContainer.setAttribute("transform", "translate(10, -30)");
-    buttonContainer.setAttributeNS(null, 'class', 'header');
-
-    // Toggle Visibility label
-    var header = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    header.setAttribute("x", 40);
-    header.setAttribute("y", -10);
-    header.setAttribute("text-anchor", "middle");
-    header.setAttribute("font-size", "12px");
-    header.setAttribute("fill", "black");
-    header.setAttribute("font-family", "Arial");
-    header.textContent = "Toggle Visibility:";
-  
-    // Previous button
-    var prevButton = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    prevButton.setAttribute("x", 0);
-    prevButton.setAttribute("y", 0);
-    prevButton.setAttribute("rx", 5);
-    prevButton.setAttribute("width", 20);
-    prevButton.setAttribute("height", 25);
-    prevButton.setAttribute("fill", "lightgray");
-    prevButton.setAttribute("stroke", "black");
-    prevButton.setAttribute("onclick", "prevClass()");
-
-    // Previous button text 
-    var prevButtonText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    prevButtonText.setAttribute("id", "prevButtonText");
-    prevButtonText.setAttribute("x", 10);
-    prevButtonText.setAttribute("y", 18);
-    prevButtonText.setAttribute("text-anchor", "middle");
-    prevButtonText.setAttribute("font-size", "12px");
-    prevButtonText.setAttribute("fill", "black");
-    prevButtonText.setAttribute("onclick", "prevClass()");
-    prevButtonText.setAttribute("font-family", "Arial");
-    prevButtonText.textContent = "<";
-
-    // Next button
-    var nextButton = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    nextButton.setAttribute("x", 100);
-    nextButton.setAttribute("y", 0);
-    nextButton.setAttribute("rx", 5);
-    nextButton.setAttribute("width", 20);
-    nextButton.setAttribute("height", 25);
-    nextButton.setAttribute("fill", "lightgray");
-    nextButton.setAttribute("stroke", "black");
-    nextButton.setAttribute("onclick", "nextClass()");
-  
-    // Next button text 
-    var nextButtonText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    nextButtonText.setAttribute("id", "nextButtonText");
-    nextButtonText.setAttribute("x", 110);
-    nextButtonText.setAttribute("y", 18);
-    nextButtonText.setAttribute("text-anchor", "middle");
-    nextButtonText.setAttribute("font-size", "12px");
-    nextButtonText.setAttribute("fill", "black");
-    nextButtonText.setAttribute("onclick", "nextClass()");
-    nextButtonText.setAttribute("font-family", "Arial");
-    nextButtonText.textContent = ">";
-
-    // Toggle button
-    var toggleButton = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    toggleButton.setAttribute("id", "toggleButton");
-    toggleButton.setAttribute("x", 30);
-    toggleButton.setAttribute("y", 0);
-    toggleButton.setAttribute("rx", 5);
-    toggleButton.setAttribute("width", 60);
-    toggleButton.setAttribute("height", 25);
-    toggleButton.setAttribute("fill", "#007bbf");
-    toggleButton.setAttribute("stroke", "black");
-    toggleButton.setAttribute("onclick", "toggleVisibility(classArray[currentClassIndex])");
-  
-    // Toggle button text
-    var toggleButtonText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    toggleButtonText.setAttribute("id", "toggleButtonText");
-    toggleButtonText.setAttribute("x", 60);
-    toggleButtonText.setAttribute("y", 18);
-    toggleButtonText.setAttribute("text-anchor", "middle");
-    toggleButtonText.setAttribute("font-size", "12px");
-    toggleButtonText.setAttribute("fill", "black");
-    toggleButtonText.setAttribute("onclick", "toggleVisibility(classArray[currentClassIndex])");
-    toggleButtonText.setAttribute("font-family", "Arial");
-    toggleButtonText.textContent = classArray[currentClassIndex];
-
-    // Hide/Show All button
-    var allButton = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    allButton.setAttribute("id", "allButton");
-    allButton.setAttribute("x", 150);
-    allButton.setAttribute("y", 0);
-    allButton.setAttribute("rx", 5);
-    allButton.setAttribute("width", 100);
-    allButton.setAttribute("height", 25);
-    allButton.setAttribute("fill", "#007bbf");
-    allButton.setAttribute("stroke", "black");
-    allButton.setAttribute("onclick", "toggleAll()");
-
-    // Hide/Show All button text  
-    var allButtonText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    allButtonText.setAttribute("id", "allButtonText");
-    allButtonText.setAttribute("x", 200);
-    allButtonText.setAttribute("y", 18);
-    allButtonText.setAttribute("text-anchor", "middle");
-    allButtonText.setAttribute("font-size", "12px");
-    allButtonText.setAttribute("fill", "black");
-    allButtonText.setAttribute("onclick", "toggleAll()");
-    allButtonText.setAttribute("font-family", "Arial");
-    allButtonText.textContent = "Hide/Show All";
-
-    // Append all the buttons to the container
-    buttonContainer.appendChild(header);
-    buttonContainer.appendChild(prevButton);
-    buttonContainer.appendChild(prevButtonText);
-    buttonContainer.appendChild(nextButton);
-    buttonContainer.appendChild(nextButtonText);
-    buttonContainer.appendChild(toggleButton);
-    buttonContainer.appendChild(toggleButtonText);
-    buttonContainer.appendChild(allButton);
-    buttonContainer.appendChild(allButtonText);
-    adjustViewBox(svg);
-    svg.appendChild(buttonContainer);
-    updateButton();
-}
-
-function nextClass() {
-    currentClassIndex = (currentClassIndex + 1) % classArray.length;
-    updateButton();
-}
-
-function prevClass() {
-    currentClassIndex = (currentClassIndex - 1 + classArray.length) % classArray.length;
-    updateButton();
-}
-
-function updateButton() { 
-    var buttonText = document.getElementById("toggleButtonText");
-    var button = document.getElementById("toggleButton");
-    buttonText.textContent = classArray[currentClassIndex];
-    elements=document.getElementsByClassName(classArray[currentClassIndex]);
-  
-    if (elements[0].style.visibility === "hidden"){
-        button.setAttribute("fill", "lightblue");
-    } else {
-        button.setAttribute("fill", "#007bbf");
-    };
-}
-
-function toggleVisibility(className) {
-    var elements = document.getElementsByClassName(className);
-
-    for (var i = 0; i < elements.length; i++) {
-        if (elements[i].style.visibility === "hidden") {
-            elements[i].style.visibility = "visible";
-        } else {
-            elements[i].style.visibility = "hidden";
-        }
-    }
-    updateButton();
-}
-
-function toggleAll(){
-    for (var i = 0; i < classArray.length; i++) {
-        var elements = document.getElementsByClassName(classArray[i]);
-        for (var j = 0; j < elements.length; j++) {
-            if (allShown) {
-                elements[j].style.visibility = "hidden";
+        function step(timestamp) {
+            var progress = Math.min(1, (timestamp - startTime) / duration);
+            // A plain, monotonic ease-out - no overshoot. A "back" easing that
+            // bounces past the target looks nice on a small graph, but on a
+            // large zoom delta (a small cluster inside a huge graph) it swings
+            // through some very extreme intermediate viewBox sizes before
+            // settling. If a frame gets dropped during that swing on a heavy
+            // graph, the last frame the browser actually painted can be one of
+            // those overshot, way-too-tight ones - which looks exactly like a
+            // stuck, excessive zoom, even though the underlying animation
+            // would have corrected itself given one more frame.
+            var eased = easeOutCubic(progress);
+            viewBox.x = startBox.x + (targetBox.x - startBox.x) * eased;
+            viewBox.y = startBox.y + (targetBox.y - startBox.y) * eased;
+            viewBox.width = startBox.width + (targetBox.width - startBox.width) * eased;
+            viewBox.height = startBox.height + (targetBox.height - startBox.height) * eased;
+            syncHud(state);
+            if (progress < 1) {
+                requestAnimationFrame(step);
             } else {
-                elements[j].style.visibility = "visible";
+                viewBox.x = targetBox.x;
+                viewBox.y = targetBox.y;
+                viewBox.width = targetBox.width;
+                viewBox.height = targetBox.height;
+                syncHud(state);
             }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Graphviz always emits exactly one relevant transform in the whole
+    // document: on the top-level "graph" group, always of the form
+    // "scale(sx sy) rotate(0) translate(tx ty)". Individual clusters, nodes,
+    // and edges are never transformed themselves. Parsing that one attribute
+    // directly - rather than composing CTMs through the browser's rendering
+    // pipeline - sidesteps any ambiguity around getCTM()/getScreenCTM()
+    // semantics or the outer <svg>'s width/height-to-viewBox scaling, and the
+    // arithmetic can be checked by hand against the raw coordinates in the
+    // file, unlike a browser-computed matrix.
+    function getGraphTransformOffset(state) {
+        if (state.graphOffset) return state.graphOffset;
+        var offset = { tx: 0, ty: 0, scale: 1 };
+        var graphGroup = state.svg.querySelector('g.graph');
+        if (graphGroup) {
+            var t = graphGroup.getAttribute('transform') || '';
+            var scaleMatch = /scale\(\s*([\d.\-]+)/.exec(t);
+            var translateMatch = /translate\(\s*([\d.\-]+)[ ,]+([\d.\-]+)/.exec(t);
+            if (scaleMatch) offset.scale = parseFloat(scaleMatch[1]);
+            if (translateMatch) {
+                offset.tx = parseFloat(translateMatch[1]);
+                offset.ty = parseFloat(translateMatch[2]);
+            }
+        }
+        state.graphOffset = offset;
+        return offset;
+    }
+
+    // The full diagram's extent (all nodes/edges/clusters/title), in outer-
+    // <svg> viewBox space. Deliberately reads from g.graph rather than the
+    // <svg> root: the HUD elements (toolbar, per-cluster zoom buttons) are
+    // now direct children of the <svg> too, so svg.getBBox() would include
+    // their current (dynamically transformed) position and corrupt this -
+    // g.graph contains only the actual diagram content. Cached because the
+    // underlying content geometry never changes after load, and this gets
+    // called on every wheel-zoom tick.
+    function getFullContentBBox(state) {
+        if (state.fullContentBBoxCache) return state.fullContentBBoxCache;
+        var graphGroup = state.svg.querySelector('g.graph');
+        var bb = graphGroup ? graphGroup.getBBox() : state.svg.getBBox();
+        var offset = getGraphTransformOffset(state);
+        var result = {
+            x: bb.x * offset.scale + offset.tx,
+            y: bb.y * offset.scale + offset.ty,
+            width: bb.width * offset.scale,
+            height: bb.height * offset.scale
+        };
+        state.fullContentBBoxCache = result;
+        return result;
+    }
+
+    function zoomIn(state, cluster) {
+        var box = cluster.getBBox();
+        var offset = getGraphTransformOffset(state);
+
+        var centerX = (box.x + box.width / 2) * offset.scale + offset.tx;
+        var centerY = (box.y + box.height / 2) * offset.scale + offset.ty;
+        var scaledWidth = box.width * offset.scale;
+        var scaledHeight = box.height * offset.scale;
+
+        // Never zoom in tighter than a fixed fraction of the full graph's own
+        // extent, regardless of how small the cluster itself is. Without this,
+        // a cluster that's only a few percent of a large graph gets magnified
+        // by a correspondingly huge factor, which reads as "excessive zoom"
+        // even when the math is technically correct - a human still wants
+        // some surrounding context, not the cluster blown up to fill the
+        // entire viewport.
+        var MIN_ZOOM_FRACTION = 0.12;
+        var fullBox = getFullContentBBox(state);
+        var padding = 20;
+        var targetWidth = Math.max(scaledWidth + padding * 2, fullBox.width * MIN_ZOOM_FRACTION);
+        var targetHeight = Math.max(scaledHeight + padding * 2, fullBox.height * MIN_ZOOM_FRACTION);
+
+        var target = {
+            x: centerX - targetWidth / 2,
+            y: centerY - targetHeight / 2,
+            width: targetWidth,
+            height: targetHeight
+        };
+
+        // Guard against ever committing an invalid viewBox (NaN, zero, or
+        // negative dimensions render as a blank SVG). If anything upstream
+        // produced a bad value, do nothing rather than break the diagram.
+        var isSane = isFinite(target.x) && isFinite(target.y) &&
+            isFinite(target.width) && isFinite(target.height) &&
+            target.width > 0 && target.height > 0;
+        if (!isSane) return;
+
+        animateViewBox(state, target, 700);
+    }
+
+    function zoomOut(state) {
+        var full = getFullContentBBox(state);
+        var padding = Math.max(full.width, full.height) * 0.03;
+        animateViewBox(state, {
+            x: full.x - padding,
+            y: full.y - padding,
+            width: full.width + padding * 2,
+            height: full.height + padding * 2
+        }, 900);
+    }
+
+    // Zoom entirely via our own viewBox math, independent of the browser's
+    // native page zoom. This is deliberate: native zoom (Ctrl+Plus, pinch)
+    // works by resizing the effective CSS-pixel viewport, and combining that
+    // with our own viewBox-based zoom produced a scroll range that only
+    // covered the currently-zoomed region instead of the whole diagram - a
+    // specific browser layout interaction for standalone SVG documents that
+    // isn't fully understood here. Giving the wheel its own self-contained
+    // zoom means native zoom and our zoom are never both in play on the same
+    // view at once.
+    function wheelZoom(evt, state) {
+        evt.preventDefault();
+        var viewBox = state.svg.viewBox.baseVal;
+        var mouse = getMousePosition(state, evt);
+
+        var ZOOM_IN_FACTOR = 0.88;
+        var ZOOM_OUT_FACTOR = 1.14;
+        var scaleApplied = evt.deltaY < 0 ? ZOOM_IN_FACTOR : ZOOM_OUT_FACTOR;
+
+        var fullBox = getFullContentBBox(state);
+        var minWidth = Math.max(20, fullBox.width * 0.01);
+        // The zoom-out ceiling must never be tighter than the padded starting
+        // view itself (see applyInitialFit): a small graph's starting viewBox
+        // is deliberately wider than its own content, to center it in the
+        // viewport rather than shrinking the element down to content size.
+        // Without this, the very first zoom-in tick computes a normal step
+        // but that step still lands past a ceiling based on content size
+        // alone, so it gets clamped all the way down to that ceiling in one
+        // jump - and zooming back out has nowhere to go but that same ceiling.
+        var referenceWidth = Math.max(fullBox.width, state.initialViewBox ? state.initialViewBox.width : 0);
+        var maxWidth = referenceWidth * 1.05; // small margin beyond that extent
+
+        var newWidth = Math.min(Math.max(viewBox.width * scaleApplied, minWidth), maxWidth);
+        var actualScale = newWidth / viewBox.width;
+        var newHeight = viewBox.height * actualScale;
+
+        // Keep whatever point is currently under the cursor fixed in place as
+        // the viewBox scales around it - the standard "zoom toward cursor" feel.
+        var newX = mouse.x - (mouse.x - viewBox.x) * actualScale;
+        var newY = mouse.y - (mouse.y - viewBox.y) * actualScale;
+
+        var target = { x: newX, y: newY, width: newWidth, height: newHeight };
+        var isSane = isFinite(target.x) && isFinite(target.y) &&
+            isFinite(target.width) && isFinite(target.height) &&
+            target.width > 0 && target.height > 0;
+        if (!isSane) return;
+
+        // Applied directly, not through animateViewBox's eased animation -
+        // wheel events fire in a rapid stream, so each tick should land
+        // immediately for a smooth, continuous feel rather than stacking
+        // animations.
+        viewBox.x = target.x;
+        viewBox.y = target.y;
+        viewBox.width = target.width;
+        viewBox.height = target.height;
+        syncHud(state);
+    }
+
+    // ================= HUD layer (viewport-fixed toolbar, constant-size
+    // per-cluster zoom buttons) =================
+    //
+    // Plain SVG has no equivalent of CSS "position: fixed" - everything lives
+    // in the same coordinate system that viewBox maps to the screen. So a
+    // "fixed to the viewport" element is faked by continuously computing the
+    // inverse of the current viewBox mapping and applying it as that
+    // element's own transform: as the viewBox changes, this transform changes
+    // to exactly cancel it out, and the element visually stays put. The same
+    // math, anchored to a point in the diagram instead of a screen corner,
+    // keeps an element's on-screen SIZE constant while its position still
+    // tracks the content (used for the per-cluster zoom buttons, so they
+    // don't shrink to invisibility when zoomed out or balloon when zoomed in).
+
+    function computeScreenTransform(state) {
+        var vb = state.svg.viewBox.baseVal;
+        // Measured via getBoundingClientRect(), not the width/height
+        // attribute values - deliberately matching how getMousePosition()
+        // already (reliably) derives screen geometry via getScreenCTM(),
+        // rather than trusting the attributes to equal the true rendered
+        // size. If the browser applies any scaling of its own on top of what
+        // we requested (plausible for a standalone SVG document, given
+        // everything else this session has turned up about that mode), this
+        // stays correct where reading the attributes directly would not.
+        var rect = state.svg.getBoundingClientRect();
+        var svgW = rect.width;
+        var svgH = rect.height;
+        var s = Math.min(svgW / vb.width, svgH / vb.height); // the scale preserveAspectRatio="meet" is actually applying
+        var offsetX = (svgW - vb.width * s) / 2;  // xMidYMid centers any leftover letterboxed space
+        var offsetY = (svgH - vb.height * s) / 2;
+        return { s: s, offsetX: offsetX, offsetY: offsetY, vb: vb };
+    }
+
+    function screenToUserPoint(t, screenX, screenY) {
+        return {
+            x: t.vb.x + (screenX - t.offsetX) / t.s,
+            y: t.vb.y + (screenY - t.offsetY) / t.s
+        };
+    }
+
+    // Must be called after every viewBox change - each animateViewBox frame,
+    // each wheel-zoom tick, each pan-drag update - so the HUD stays correctly
+    // positioned/scaled for whatever the viewBox currently is.
+    function syncHud(state) {
+        var t = computeScreenTransform(state);
+        if (!isFinite(t.s) || t.s <= 0) return;
+        var invScale = 1 / t.s;
+
+        state.hudFixedItems.forEach(function (item) {
+            var origin = screenToUserPoint(t, item.screenX, item.screenY);
+            item.group.setAttribute('transform', 'translate(' + origin.x + ',' + origin.y + ') scale(' + invScale + ')');
+        });
+        state.hudScaledItems.forEach(function (item) {
+            item.group.setAttribute('transform', 'translate(' + item.worldX + ',' + item.worldY + ') scale(' + invScale + ')');
+        });
+
+        if (state.zoomLabel) {
+            state.zoomLabel.textContent = Math.round(t.s * 100) + '%';
         }
     }
 
-    updateButton();
-
-    //update showall button
-    var button = document.getElementById("allButton");
-    if (allShown) { 
-        button.setAttribute("fill", "lightblue");
-    } else {
-        button.setAttribute("fill", "#007bbf");
+    // The true rendered physical size, for the same reason
+    // computeScreenTransform() uses getBoundingClientRect() rather than the
+    // width/height attribute values.
+    function getRenderedSize(state) {
+        var rect = state.svg.getBoundingClientRect();
+        return { width: rect.width, height: rect.height };
     }
 
-    allShown = !allShown;
-}
+    // Sets the view to show the full diagram's width edge-to-edge, letting
+    // height crop/letterbox as needed to match the viewport's aspect ratio.
+    function fitWidth(state) {
+        var full = getFullContentBBox(state);
+        var size = getRenderedSize(state);
+        var width = full.width;
+        var height = width * (size.height / size.width);
+        var centerY = full.y + full.height / 2;
+        animateViewBox(state, { x: full.x, y: centerY - height / 2, width: width, height: height }, 500);
+    }
 
-function adjustViewBox(svg) {
-    var viewBoxParts = svg.getAttribute("viewBox").split(" ");
-    var newYMin = parseFloat(viewBoxParts[1]) - 60; // Adjust this value as needed
-    var newYMax = parseFloat(viewBoxParts[3]) + 60; // Adjust this value as needed
-    var newXMax = Math.max(parseFloat(viewBoxParts[2]),240);
-    var newViewBox = viewBoxParts[0] + " " + newYMin + " " + newXMax + " " + newYMax;
-    svg.setAttribute("viewBox", newViewBox);
-}
+    // Same idea, for height.
+    function fitHeight(state) {
+        var full = getFullContentBBox(state);
+        var size = getRenderedSize(state);
+        var height = full.height;
+        var width = height * (size.width / size.height);
+        var centerX = full.x + full.width / 2;
+        animateViewBox(state, { x: centerX - width / 2, y: full.y, width: width, height: height }, 500);
+    }
+
+    // True 1:1 (one viewBox unit = one screen pixel), centered on wherever
+    // the view currently is rather than jumping to the graph's overall center.
+    function fitActualSize(state) {
+        var size = getRenderedSize(state);
+        var vb = state.svg.viewBox.baseVal;
+        var centerX = vb.x + vb.width / 2;
+        var centerY = vb.y + vb.height / 2;
+        animateViewBox(state, { x: centerX - size.width / 2, y: centerY - size.height / 2, width: size.width, height: size.height }, 500);
+    }
+
+    function addZoomButtons(cluster, state) {
+        var bb = cluster.getBBox();
+        var offset = getGraphTransformOffset(state);
+        // Anchor in outer-<svg> viewBox space (not the cluster's own local
+        // space) - this group is appended to the <svg> root below, outside
+        // g.graph's own transform, so its position needs to already be in
+        // that same space, matching how the HUD math elsewhere works.
+        var anchorX = bb.x * offset.scale + offset.tx;
+        var anchorY = bb.y * offset.scale + offset.ty;
+
+        // A direct child of the <svg>, not the cluster: constant on-screen
+        // size (via hudScaledItems + syncHud) only works cleanly outside
+        // g.graph's own transform chain. One minor, accepted side effect:
+        // these buttons no longer participate in that cluster's load-in fade,
+        // since they're no longer a descendant of it.
+        var wrap = document.createElementNS(SVG_NS, 'g');
+        wrap.setAttribute('class', 'zoom-controls');
+        wrap.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+        wrap.addEventListener('wheel', function (e) { e.stopPropagation(); }, { passive: true });
+        state.svg.appendChild(wrap);
+        state.hudScaledItems.push({ group: wrap, worldX: anchorX, worldY: anchorY });
+
+        var cx = 15, cy = 15; // constant screen-pixel offsets within the wrap group
+
+        var zoomOutBtn = makeZoomCircle(cx, cy, 'button-minus', 'Zoom Out');
+        zoomOutBtn.addEventListener('click', function () { zoomOut(state); });
+        wrap.appendChild(zoomOutBtn);
+        wrap.appendChild(makeGlyph(cx - 4, cy - 1, 8, 2));
+
+        var zoomInBtn = makeZoomCircle(cx + 25, cy, 'button-plus', 'Zoom In');
+        zoomInBtn.addEventListener('click', function () { zoomIn(state, cluster); });
+        wrap.appendChild(zoomInBtn);
+        wrap.appendChild(makeGlyph(cx + 25 - 4, cy - 1, 8, 2));
+        wrap.appendChild(makeGlyph(cx + 25 - 1, cy - 4, 2, 8));
+    }
+
+    // A small, self-dismissing hint pointing out that scroll-to-zoom and
+    // drag-to-pan exist - both are otherwise fairly undiscoverable, since
+    // nothing else in the diagram hints at them. Anchored to the bottom-left
+    // of the viewport via the same HUD mechanism as the toolbar. Dismisses
+    // itself on a timeout, or immediately on the first wheel/drag/touch, so
+    // it never lingers in the way once its job is done.
+    function addZoomHint(state) {
+        var message = 'Scroll to zoom \u2022 Drag to pan';
+        var g = document.createElementNS(SVG_NS, 'g');
+        g.setAttribute('class', 'zoom-hint');
+        state.svg.appendChild(g);
+
+        var textW = measureTextWidth(g, message, '12px');
+        var padX = 12, height = 26;
+        var bg = document.createElementNS(SVG_NS, 'rect');
+        bg.setAttribute('x', -padX);
+        bg.setAttribute('y', -height + 5);
+        bg.setAttribute('width', textW + padX * 2);
+        bg.setAttribute('height', height);
+        bg.setAttribute('rx', 6);
+        bg.setAttribute('class', 'zoom-hint-bg');
+        var text = document.createElementNS(SVG_NS, 'text');
+        text.setAttribute('x', 0);
+        text.setAttribute('y', 0);
+        text.setAttribute('font-size', '12px');
+        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.setAttribute('class', 'zoom-hint-text');
+        text.textContent = message;
+        g.appendChild(bg);
+        g.appendChild(text);
+
+        var size = getRenderedSize(state);
+        state.hudFixedItems.push({ group: g, screenX: 16, screenY: size.height - 16 });
+
+        var dismissed = false;
+        function dismiss() {
+            if (dismissed) return;
+            dismissed = true;
+            g.classList.add('zoom-hint-fade');
+            state.hudFixedItems = state.hudFixedItems.filter(function (item) { return item.group !== g; });
+            setTimeout(function () {
+                if (g.parentNode) g.parentNode.removeChild(g);
+            }, 700);
+        }
+
+        setTimeout(dismiss, 5000);
+        state.svg.addEventListener('wheel', dismiss, { once: true });
+        state.svg.addEventListener('mousedown', dismiss, { once: true });
+        state.svg.addEventListener('touchstart', dismiss, { once: true, passive: true });
+    }
+
+    function makeZoomCircle(cx, cy, cls, titleText) {
+        var el = document.createElementNS(SVG_NS, 'circle');
+        el.setAttribute('class', cls);
+        el.setAttribute('cx', cx);
+        el.setAttribute('cy', cy);
+        el.setAttribute('r', 10);
+        var title = document.createElementNS(SVG_NS, 'title');
+        title.textContent = titleText;
+        el.appendChild(title);
+        return el;
+    }
+
+    function makeGlyph(x, y, w, h) {
+        var el = document.createElementNS(SVG_NS, 'rect');
+        el.setAttribute('class', 'plus-minus');
+        el.setAttribute('x', x);
+        el.setAttribute('y', y);
+        el.setAttribute('width', w);
+        el.setAttribute('height', h);
+        return el;
+    }
+    // ================= Toolbar (single row, self-measuring) =================
+
+    function measureTextWidth(parent, content, fontSize) {
+        var t = document.createElementNS(SVG_NS, 'text');
+        t.setAttribute('font-size', fontSize || '11px');
+        t.setAttribute('font-family', 'Arial, sans-serif');
+        t.style.visibility = 'hidden';
+        t.textContent = content;
+        parent.appendChild(t);
+        var w = t.getBBox().width;
+        parent.removeChild(t);
+        return w;
+    }
+
+    function buildToolbar(state) {
+        // Gather the toggleable classes present in this diagram.
+        var uniqueClasses = new Set();
+        var groups = state.svg.getElementsByTagName('g');
+        for (var i = 0; i < groups.length; i++) {
+            var allClasses = groups[i].getAttribute('class');
+            if (!allClasses) continue;
+            allClasses.split(' ').forEach(function (c) {
+                if (c && c !== 'graph' && !uniqueClasses.has(c)) {
+                    uniqueClasses.add(c);
+                    state.classArray.push(c);
+                }
+            });
+        }
+        state.classArray.sort();
+        state.layerVisible = {};
+        state.layerCheckboxes = {};
+
+        var ROW_H = 24;
+
+        var container = document.createElementNS(SVG_NS, 'g');
+        container.setAttribute('class', 'header toolbar');
+        // The toolbar has its own click targets (buttons, radios, checkboxes).
+        // None of them should ever be picked up by the node/edge drag system,
+        // which grabs mousedown/touchstart at the <svg> level. Stopping
+        // propagation here means it doesn't matter how many nested <g>
+        // wrappers a control has, or whether it carries the 'header' class
+        // the drag code otherwise special-cases.
+        container.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+        container.addEventListener('touchstart', function (e) { e.stopPropagation(); }, { passive: true });
+        container.addEventListener('wheel', function (e) { e.stopPropagation(); }, { passive: true });
+        state.svg.appendChild(container);
+
+        var cursorX = 14;
+
+        if (state.classArray.length) {
+            var layersLabel = makeToolbarLabel('Layers');
+            layersLabel.setAttribute('x', cursorX);
+            layersLabel.setAttribute('y', 16);
+            container.appendChild(layersLabel);
+            cursorX += layersLabel.getBBox().width + 10;
+
+            state.classArray.forEach(function (className) {
+                state.layerVisible[className] = true;
+                var cb = makeCheckbox(titleCase(className));
+                positionGroup(cb.group, cursorX, 0);
+                container.appendChild(cb.group);
+                var w = cb.group.getBBox().width;
+                cursorX += w + 16;
+                state.layerCheckboxes[className] = cb;
+                updateCheckboxUI(state, className); // paint the initial checked state
+                cb.group.addEventListener('click', function () { toggleLayer(state, className); });
+            });
+
+            // A dedicated checkbox for the zoom +/- controls themselves, kept
+            // deliberately separate from classArray/Hide All: on small clusters
+            // the zoom buttons can sit right on top of the cluster label, so
+            // this is a quick way to peek underneath them without touching
+            // the visibility of the diagram's actual layers.
+            if (state.clusters.length) {
+                state.layerVisible['zoom-controls'] = true;
+                var zoomCb = makeCheckbox('Zoom Controls');
+                positionGroup(zoomCb.group, cursorX, 0);
+                container.appendChild(zoomCb.group);
+                var zw = zoomCb.group.getBBox().width;
+                cursorX += zw + 16;
+                state.layerCheckboxes['zoom-controls'] = zoomCb;
+                updateCheckboxUI(state, 'zoom-controls');
+                zoomCb.group.addEventListener('click', function () { toggleLayer(state, 'zoom-controls'); });
+            }
+
+            cursorX += 4;
+
+            var allBtnWidth = measureTextWidth(container, 'Show All') + 24; // fixed: both labels are equal length
+            var allBtn = makePillButton(allBtnWidth, ROW_H, state.allShown ? 'Hide All' : 'Show All');
+            positionGroup(allBtn.group, cursorX, 0);
+            container.appendChild(allBtn.group);
+            cursorX += allBtnWidth;
+
+            state.allBtn = allBtn;
+            allBtn.group.addEventListener('click', function () { toggleAll(state); });
+
+            cursorX += 16;
+
+            var divider = document.createElementNS(SVG_NS, 'line');
+            divider.setAttribute('x1', cursorX);
+            divider.setAttribute('x2', cursorX);
+            divider.setAttribute('y1', 2);
+            divider.setAttribute('y2', ROW_H - 2);
+            divider.setAttribute('class', 'toolbar-divider');
+            container.appendChild(divider);
+
+            cursorX += 16;
+        }
+
+        var hlLabel = makeToolbarLabel('Highlight');
+        hlLabel.setAttribute('x', cursorX);
+        hlLabel.setAttribute('y', 16);
+        container.appendChild(hlLabel);
+        cursorX += hlLabel.getBBox().width + 10;
+
+        var radios = {};
+        [['out', 'Out'], ['in', 'In'], ['both', 'Both']].forEach(function (entry) {
+            var mode = entry[0];
+            var radio = makeRadioOption(entry[1]);
+            positionGroup(radio.group, cursorX, 0);
+            container.appendChild(radio.group);
+            var w = radio.group.getBBox().width;
+            cursorX += w + 14;
+            radios[mode] = radio;
+            radio.group.addEventListener('click', function () { setFlowMode(state, mode); });
+        });
+        state.flowRadios = radios;
+        setFlowMode(state, state.flowMode);
+
+        cursorX += 2;
+
+        var divider2 = document.createElementNS(SVG_NS, 'line');
+        divider2.setAttribute('x1', cursorX);
+        divider2.setAttribute('x2', cursorX);
+        divider2.setAttribute('y1', 2);
+        divider2.setAttribute('y2', ROW_H - 2);
+        divider2.setAttribute('class', 'toolbar-divider');
+        container.appendChild(divider2);
+        cursorX += 16;
+
+        var viewLabel = makeToolbarLabel('View');
+        viewLabel.setAttribute('x', cursorX);
+        viewLabel.setAttribute('y', 16);
+        container.appendChild(viewLabel);
+        cursorX += viewLabel.getBBox().width + 10;
+
+        var fitWWidth = measureTextWidth(container, 'Fit Width') + 20;
+        var fitWBtn = makePillButton(fitWWidth, ROW_H, 'Fit Width');
+        positionGroup(fitWBtn.group, cursorX, 0);
+        container.appendChild(fitWBtn.group);
+        cursorX += fitWWidth + 6;
+        fitWBtn.group.addEventListener('click', function () { fitWidth(state); });
+
+        var fitHWidth = measureTextWidth(container, 'Fit Height') + 20;
+        var fitHBtn = makePillButton(fitHWidth, ROW_H, 'Fit Height');
+        positionGroup(fitHBtn.group, cursorX, 0);
+        container.appendChild(fitHBtn.group);
+        cursorX += fitHWidth + 6;
+        fitHBtn.group.addEventListener('click', function () { fitHeight(state); });
+
+        var oneToOneWidth = measureTextWidth(container, '100%') + 20;
+        var oneToOneBtn = makePillButton(oneToOneWidth, ROW_H, '100%');
+        positionGroup(oneToOneBtn.group, cursorX, 0);
+        container.appendChild(oneToOneBtn.group);
+        cursorX += oneToOneWidth + 12;
+        oneToOneBtn.group.addEventListener('click', function () { fitActualSize(state); });
+
+        var zoomLabel = makeToolbarLabel('100%');
+        zoomLabel.setAttribute('class', 'toolbar-zoom-readout');
+        zoomLabel.setAttribute('x', cursorX);
+        zoomLabel.setAttribute('y', 16);
+        container.appendChild(zoomLabel);
+        state.zoomLabel = zoomLabel;
+        cursorX += 40; // fixed width reserved so the row doesn't jiggle as the digit count changes (e.g. "45%" vs "100%")
+
+        cursorX += 6;
+        var hoverDivider = document.createElementNS(SVG_NS, 'line');
+        hoverDivider.setAttribute('x1', cursorX);
+        hoverDivider.setAttribute('x2', cursorX);
+        hoverDivider.setAttribute('y1', 2);
+        hoverDivider.setAttribute('y2', ROW_H - 2);
+        hoverDivider.setAttribute('class', 'toolbar-divider');
+        container.appendChild(hoverDivider);
+        cursorX += 16;
+
+        var hoverText = document.createElementNS(SVG_NS, 'text');
+        hoverText.setAttribute('x', cursorX);
+        hoverText.setAttribute('y', 16);
+        hoverText.setAttribute('font-size', '11px');
+        hoverText.setAttribute('font-family', 'Arial, sans-serif');
+        hoverText.setAttribute('class', 'toolbar-hover-text');
+        hoverText.textContent = '';
+        container.appendChild(hoverText);
+        state.hoverText = hoverText;
+        // Fixed reserved width, same reasoning as the zoom-% readout above:
+        // this is INSIDE the toolbar row now, sized once via buildToolbar's
+        // own cursorX/backdrop math - not repositioned per mousemove, so its
+        // location is always predictable and its text is always the true,
+        // constant toolbar font size, regardless of diagram zoom level.
+        cursorX += 260;
+
+        var totalWidth = cursorX;
+        var totalHeight = ROW_H;
+
+        var backdrop = document.createElementNS(SVG_NS, 'rect');
+        backdrop.setAttribute('x', -8);
+        backdrop.setAttribute('y', -6);
+        backdrop.setAttribute('width', totalWidth + 8);
+        backdrop.setAttribute('height', totalHeight + 12);
+        backdrop.setAttribute('rx', 8);
+        backdrop.setAttribute('class', 'toolbar-bg');
+        container.insertBefore(backdrop, container.firstChild);
+
+        // Anchored to a fixed point near the top-left of the viewport;
+        // syncHud() keeps it pinned there regardless of zoom/pan by
+        // continuously counter-transforming this group against whatever the
+        // current viewBox happens to be, rather than baking its position into
+        // the diagram's own viewBox as earlier versions did (which is why the
+        // toolbar used to be visible only at the full, zoomed-out view).
+        state.hudFixedItems.push({ group: container, screenX: 10, screenY: 10 });
+    }
+
+    function positionGroup(el, x, y) {
+        el.setAttribute('transform', 'translate(' + x + ',' + y + ')');
+    }
+
+    function titleCase(str) {
+        return str.replace(/[_-]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    }
+
+    function makeToolbarLabel(content) {
+        var t = document.createElementNS(SVG_NS, 'text');
+        t.setAttribute('font-size', '11px');
+        t.setAttribute('font-family', 'Arial, sans-serif');
+        t.setAttribute('class', 'toolbar-label');
+        t.textContent = content;
+        return t;
+    }
+
+    function makeCheckbox(labelText) {
+        var group = document.createElementNS(SVG_NS, 'g');
+        group.setAttribute('class', 'toolbar-checkbox');
+        var box = document.createElementNS(SVG_NS, 'rect');
+        box.setAttribute('x', 0);
+        box.setAttribute('y', 5);
+        box.setAttribute('width', 14);
+        box.setAttribute('height', 14);
+        box.setAttribute('rx', 3);
+        box.setAttribute('class', 'checkbox-box');
+        var check = document.createElementNS(SVG_NS, 'path');
+        check.setAttribute('d', 'M3,12.5 L6.2,15.5 L11.5,7.5');
+        check.setAttribute('class', 'checkbox-check');
+        var text = document.createElementNS(SVG_NS, 'text');
+        text.setAttribute('x', 21);
+        text.setAttribute('y', 16);
+        text.setAttribute('font-size', '11px');
+        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.setAttribute('class', 'checkbox-label');
+        text.textContent = labelText;
+        group.appendChild(box);
+        group.appendChild(check);
+        group.appendChild(text);
+        return { group: group, box: box, check: check, text: text };
+    }
+
+    function makePillButton(width, height, content) {
+        var group = document.createElementNS(SVG_NS, 'g');
+        group.setAttribute('class', 'toolbar-pill-btn');
+        var rect = document.createElementNS(SVG_NS, 'rect');
+        rect.setAttribute('x', 0);
+        rect.setAttribute('y', 0);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', height);
+        rect.setAttribute('rx', height / 2);
+        var text = document.createElementNS(SVG_NS, 'text');
+        text.setAttribute('x', width / 2);
+        text.setAttribute('y', height - 8);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('font-size', '11px');
+        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.textContent = content;
+        group.appendChild(rect);
+        group.appendChild(text);
+        return { group: group, rect: rect, text: text };
+    }
+
+    function makeRadioOption(labelText) {
+        var group = document.createElementNS(SVG_NS, 'g');
+        group.setAttribute('class', 'toolbar-radio');
+        var outer = document.createElementNS(SVG_NS, 'circle');
+        outer.setAttribute('cx', 7);
+        outer.setAttribute('cy', 12);
+        outer.setAttribute('r', 7);
+        outer.setAttribute('class', 'radio-outer');
+        var inner = document.createElementNS(SVG_NS, 'circle');
+        inner.setAttribute('cx', 7);
+        inner.setAttribute('cy', 12);
+        inner.setAttribute('r', 3);
+        inner.setAttribute('class', 'radio-inner');
+        var text = document.createElementNS(SVG_NS, 'text');
+        text.setAttribute('x', 20);
+        text.setAttribute('y', 16);
+        text.setAttribute('font-size', '11px');
+        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.setAttribute('class', 'radio-label');
+        text.textContent = labelText;
+        group.appendChild(outer);
+        group.appendChild(inner);
+        group.appendChild(text);
+        return { group: group, outer: outer, inner: inner, text: text };
+    }
+
+    function setFlowMode(state, mode) {
+        state.flowMode = mode;
+        ['out', 'in', 'both'].forEach(function (key) {
+            var radio = state.flowRadios[key];
+            var active = key === mode;
+            radio.inner.setAttribute('opacity', active ? '1' : '0');
+            radio.outer.setAttribute('class', 'radio-outer' + (active ? ' active' : ''));
+        });
+        refreshEdgeHighlights(state);
+    }
+
+    function toggleLayer(state, className) {
+        var visible = !state.layerVisible[className];
+        state.layerVisible[className] = visible;
+        var elements = state.svg.getElementsByClassName(className);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.visibility = visible ? 'visible' : 'hidden';
+        }
+        updateCheckboxUI(state, className);
+    }
+
+    function updateCheckboxUI(state, className) {
+        var cb = state.layerCheckboxes[className];
+        var visible = state.layerVisible[className];
+        cb.check.setAttribute('opacity', visible ? '1' : '0');
+        cb.box.setAttribute('class', 'checkbox-box' + (visible ? ' checked' : ''));
+    }
+
+    function toggleAll(state) {
+        var makeVisible = !state.allShown;
+        state.classArray.forEach(function (className) {
+            state.layerVisible[className] = makeVisible;
+            var elements = state.svg.getElementsByClassName(className);
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.visibility = makeVisible ? 'visible' : 'hidden';
+            }
+            updateCheckboxUI(state, className);
+        });
+        if (state.titleEl) {
+            state.titleEl.style.visibility = makeVisible ? 'visible' : 'hidden';
+        }
+        state.allShown = makeVisible;
+        state.allBtn.text.textContent = state.allShown ? 'Hide All' : 'Show All';
+    }
+
+    // Sets up the SVG's physical width/height, preserveAspectRatio, and the
+    // STARTING viewBox, exactly once at load.
+    //
+    // The physical size always matches the browser viewport - this matters
+    // for zoom: if it didn't, zooming into a graph that started out smaller
+    // than the viewport would stay trapped inside that original small
+    // physical box instead of actually using the available screen space as
+    // you zoom in (the content would appear to magnify but the element's own
+    // on-page footprint - and the visible portion of it - would never grow
+    // past its starting size).
+    //
+    // What changes for a small graph is the STARTING VIEWBOX instead: it's
+    // padded out to be viewport-sized (in the same 1-unit-per-pixel terms),
+    // with the actual graph content centered inside that padding, rather
+    // than shrinking the physical element down to the content's own small
+    // size. That still shows a small graph at native 1:1 scale rather than
+    // stretched up to fill the window - just via viewBox padding instead of
+    // a smaller physical box, so zooming in afterward still has the full
+    // viewport to expand into. One visible side effect: the graph now
+    // appears centered with padding on every side, rather than anchored to
+    // the top-left with padding only right/bottom as a plain undersized
+    // physical element would default to.
+    //
+    // Measured exactly once, deliberately with no resize listener: the
+    // browser's own zoom (Ctrl+Plus, pinch-zoom) works by shrinking the
+    // effective CSS-pixel viewport, and that also fires a 'resize' event. A
+    // listener here would "correct" for that by shrinking width/height to
+    // match, which cancels out the zoom the instant it happens - the page
+    // would fight the very feature being used to make things bigger. Leaving
+    // it as a one-time measurement means native browser zoom works normally
+    // for the cases it's still useful for, at the cost of not re-fitting if
+    // the window itself (not zoom level) is later resized.
+    function applyInitialFit(state) {
+        var vb = state.svg.viewBox.baseVal; // raw, as-authored graph viewBox
+        var margin = 24; // room for browser scrollbars/chrome so a second, page-level scrollbar isn't forced
+        var viewportW = Math.max(200, (window.innerWidth || 1200) - margin);
+        var viewportH = Math.max(200, (window.innerHeight || 800) - margin);
+
+        state.svg.setAttribute('width', viewportW.toFixed(2));
+        state.svg.setAttribute('height', viewportH.toFixed(2));
+        // "meet" fits the current viewBox within the element's physical box
+        // without cropping, letterboxing evenly on whichever axis the shown
+        // region's aspect ratio doesn't match - true at load and through
+        // every subsequent zoom, since this is set once, up front.
+        state.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+        var naturalScale = Math.min(viewportW / vb.width, viewportH / vb.height);
+        var scale = Math.min(naturalScale, 1); // never enlarge past native size
+        var startWidth = viewportW / scale;
+        var startHeight = viewportH / scale;
+        var startX = vb.x - (startWidth - vb.width) / 2;
+        var startY = vb.y - (startHeight - vb.height) / 2;
+
+        state.svg.setAttribute('viewBox', startX + ' ' + startY + ' ' + startWidth + ' ' + startHeight);
+
+        // Remembered so wheelZoom's zoom-out ceiling can never be tighter
+        // than where the user started - see the comment in wheelZoom for why.
+        state.initialViewBox = { width: startWidth, height: startHeight };
+    }
+
+}());
 
 ]]>
 </script>
 <!-- Excel to Graphviz - End -->
-
 </svg>
-
 

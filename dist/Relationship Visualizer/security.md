@@ -44,7 +44,6 @@ When deciding to trust a macro-enabled Excel workbook (e.g., `.xlsm` files) down
 
       This removes the security restriction, allowing the program to run. If you don’t see the "Unblock" option, the file may not be blocked, or you might need to adjust other security settings, like running as administrator or checking antivirus restrictions.
 
-
 4. **Excel Security Settings**:
    - Ensure Excel's macro settings are configured to **disable macros by default** with a prompt to enable them (found in Trust Center > Macro Settings). This prevents macros from running automatically.
    - Avoid enabling macros unless you've thoroughly vetted the file. If prompted to enable macros upon opening, proceed cautiously.
@@ -90,4 +89,45 @@ When deciding to trust a macro-enabled Excel workbook (e.g., `.xlsm` files) down
 - Poorly rated or unverified repository with minimal activity.
 - Warnings from antivirus software or community reports.
 
-By combining these considerations-verifying the source, inspecting code, using secure environments, and staying cautious-you can make an informed decision about trusting a macro-enabled Excel workbook from SourceForge/GitHub. If in doubt, consult a cybersecurity expert or avoid enabling macros altogether.
+## Generated SVG File Security
+
+The *Excel to Graphviz Relationship Visualizer* workbook can optionally postprocess the SVG diagrams it generates, injecting interactive controls (zoom, pan, layer filtering, and connection highlighting) directly into the exported file. This is a **separate security surface** from the macro‑enabled workbook itself: it concerns the diagrams the workbook *produces*, not the workbook you download and open.
+
+### How SVG Postprocessing Works
+
+Postprocessing applies find/replace rules to the raw SVG text that Graphviz produces, inserting a `<style>` block and a `<script>` block that add  interactive toolbar and navigation features.
+
+Because this works by inserting text into the file, it is, by design, a mechanism for injecting arbitrary JavaScript.
+
+### What This Means
+
+- **The injected script executes automatically** whenever the resulting SVG is opened in a context that runs scripts. For example, a direct browser tab, an `<object>` or `<iframe>` embed, or an SVG inlined into an HTML page.
+- **It does not execute** when the SVG is referenced via an `<img>` tag, since browsers disable scripting in that context.
+- **It runs with the privileges of whatever is hosting it.** If the SVG is inlined into a web page, the script has the same DOM and cookie access as the rest of that page.
+
+Most people don't expect an `.svg` file to run code the way a `.js` or `.html` file can. Treat any SVG exported with postprocessing enabled accordingly. The file is functionally closer to a small web page than to a static image.
+
+::: warning Postprocessing rules are trusted code, not a style preference
+Whoever controls the find/replace rules controls what code runs in every diagram the workbook produces. If a postprocessing configuration is ever shared, exported, or imported between users, treat it with the same scrutiny you'd apply to a macro‑enabled workbook because functionally, it is one.
+:::
+
+### Mitigations
+
+- **Off by default.** Postprocessing must be explicitly enabled before any script is injected.
+- **Explicit confirmation required.** Enabling postprocessing shows a confirmation dialog stating plainly that it injects JavaScript which runs automatically when the SVG is opened, and requires the user to confirm they understand this before proceeding.
+- **No dynamic attribute‑string injection in the built‑in controls.** The default interactive toolbar binds every event handler with `addEventListener` rather than building `onclick="..."` attributes from concatenated strings, thus closing off a classic injection‑prone pattern.
+- **Native OS and Office prompts still apply.** Opening a file saved from Excel VBA, or double‑clicking a downloaded SVG, still triggers Windows' and Microsoft Office's own security prompts, independent of anything the workbook does.
+
+::: tip If you only use the default export
+If you never enable SVG postprocessing, none of this applies. Your diagrams are static images with no embedded script, the same as any Graphviz output.
+:::
+
+### Recommendations
+
+- Don't enable postprocessing on a shared or multi‑user workbook unless everyone who might generate diagrams from it should be trusted to control what code runs in the output.
+- Don't import postprocessing rule sets from a source you wouldn't trust to hand you a `.js` file directly.
+- If you distribute SVGs generated with postprocessing enabled, let recipients know the file contains executable script; particularly if they're used to treating `.svg` as a plain image format.
+
+## Conclusion
+
+By combining these practices - verifying the source, reviewing documentation, inspecting code, understanding what generated files can do, using secure environments, and staying cautious - you can make an informed decision about trusting a macro‑enabled Excel workbook from SourceForge or GitHub. When in doubt, seek guidance from a cybersecurity professional or avoid enabling macros altogether.

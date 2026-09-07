@@ -1,0 +1,4631 @@
+{
+  "metadata": {
+    "name": "E2GXF",
+    "type": "Excel to Graphviz Exchange Format",
+    "version": "1.0",
+    "user": "Jeffrey Long",
+    "date": "2026-09-02",
+    "time": "13:42:53",
+    "os": "Windows (64-bit) NT 10.00",
+    "excel": "16.0",
+    "filename": "Relationship Visualizer using MS Access.xlsm"
+  },
+  "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "item": "graph",
+        "label": "2022 - 2029 Roadmap",
+        "styleName": "Page Title"
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "item": "2022",
+        "relatedItem": "2023",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "item": "2023",
+        "relatedItem": "2024",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "item": "2024",
+        "relatedItem": "2025",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "item": "2025",
+        "relatedItem": "2026",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "item": "2026",
+        "relatedItem": "2027",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "item": "2027",
+        "relatedItem": "2028",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "item": "2028",
+        "relatedItem": "2029",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "item": "2029",
+        "relatedItem": "2030",
+        "styleName": "Transparent Edge"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "item": "2022",
+        "label": "2022",
+        "styleName": "Year"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "item": "2023",
+        "label": "2023",
+        "styleName": "Year"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "item": "2024",
+        "label": "2024",
+        "styleName": "Year"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "item": "2025",
+        "label": "2025",
+        "styleName": "Year"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "item": "2026",
+        "label": "2026",
+        "styleName": "Year"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "item": "2027",
+        "label": "2027",
+        "styleName": "Year"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "item": "2028",
+        "label": "2028",
+        "styleName": "Year"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "item": "2029",
+        "label": "2029",
+        "styleName": "Year"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "item": "2030",
+        "label": "2030",
+        "styleName": "Year"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 30,
+        "item": "E020_Start",
+        "label": "E020 - Fusion 1.x\\nPatch Cycle",
+        "relatedItem": "E020_End",
+        "styleName": "Planned"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 30,
+        "item": "E018_Start",
+        "label": "E018 - Fusion\\nPlatform R&D",
+        "relatedItem": "E018_End",
+        "styleName": "Planned"
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 30,
+        "item": "E017_Start",
+        "label": "E017 - Echo 1.x\\nSupport",
+        "relatedItem": "E017_End",
+        "styleName": "Planned"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 30,
+        "item": "E014_Start",
+        "label": "E014 - DeltaCloud\\n2.0 Upgrade",
+        "relatedItem": "E014_End",
+        "styleName": "Planned"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 30,
+        "item": "E009_Start",
+        "label": "E009 - Beacon 1.x\\nEnhancements",
+        "relatedItem": "E009_End",
+        "styleName": "Planned"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 30,
+        "item": "E015_Start",
+        "label": "E015 - Echo Services\\nPilot",
+        "relatedItem": "E015_End",
+        "styleName": "On Schedule"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 30,
+        "item": "E004_Start",
+        "label": "E004 - Atlas 2.0\\nDevelopment",
+        "relatedItem": "E004_End",
+        "styleName": "On Schedule"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 30,
+        "item": "E003_Start",
+        "label": "E003 - Atlas 1.x\\nSupport",
+        "relatedItem": "E003_End",
+        "styleName": "On Schedule"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 45,
+        "item": "E013_Start",
+        "label": "E013 - DeltaCloud\\nIntegration",
+        "relatedItem": "E013_End",
+        "styleName": "Behind Schedule"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 30,
+        "item": "E007_Start",
+        "label": "E007 - Beacon 1.0\\nDevelopment",
+        "relatedItem": "E007_End",
+        "styleName": "On Schedule"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 30,
+        "item": "E012_Start",
+        "label": "E012 - Cipher 1.x\\nOptimization",
+        "relatedItem": "E012_End",
+        "styleName": "Completed"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 30,
+        "item": "E006_Start",
+        "label": "E006 - Beacon UI\\nPrototype",
+        "relatedItem": "E006_End",
+        "styleName": "Completed"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 30,
+        "item": "E001_Start",
+        "label": "E001 - Atlas Core\\nR&D",
+        "relatedItem": "E001_End",
+        "styleName": "Completed"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 30,
+        "item": "E010_Start",
+        "label": "E010 - Cipher Engine\\nResearch",
+        "relatedItem": "E010_End",
+        "styleName": "Completed"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 30,
+        "item": "E011_Start",
+        "label": "E011 - Cipher Engine\\n1.0 Release",
+        "relatedItem": "E011_Start",
+        "styleName": "Completed"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 30,
+        "item": "E002_Start",
+        "label": "E002 - Atlas 1.0\\nRelease",
+        "relatedItem": "E002_Start",
+        "styleName": "Completed"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 30,
+        "item": "E008_Start",
+        "label": "E008 - Beacon 1.0\\nRelease",
+        "relatedItem": "E008_Start",
+        "styleName": "Planned"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 30,
+        "item": "E016_Start",
+        "label": "E016 - Echo 1.0\\nRelease",
+        "relatedItem": "E016_Start",
+        "styleName": "Planned"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 30,
+        "item": "E005_Start",
+        "label": "E005 - Atlas 2.0\\nRelease",
+        "relatedItem": "E005_Start",
+        "styleName": "Planned"
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 30,
+        "item": "E019_Start",
+        "label": "E019 - Fusion 1.0\\nRelease",
+        "relatedItem": "E019_Start",
+        "styleName": "Planned"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "item": "E004_End",
+        "label": "dependency",
+        "relatedItem": "E009_Start",
+        "styleName": "Dependency"
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15,
+        "item": "E004_End",
+        "label": "dependency",
+        "relatedItem": "E005_Start",
+        "styleName": "Dependency"
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "item": "E016_Start",
+        "label": "dependency",
+        "relatedItem": "E003_Start",
+        "styleName": "Dependency"
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 30,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2022\"; \"E010_Start\"; }"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 30,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2023\"; \"E001_Start\"; }"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 90,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2024\"; \"E006_End\"; \"E006_Start\"; \"E010_End\"; \"E011_Start\"; \"E012_Start\"; }"
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 105,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2025\"; \"E001_End\"; \"E002_Start\"; \"E003_Start\"; \"E007_Start\"; \"E012_End\"; \"E013_Start\"; }"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 120,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2026\"; \"E004_Start\"; \"E007_End\"; \"E008_Start\"; \"E009_Start\"; \"E013_End\"; \"E015_End\"; \"E015_Start\"; }"
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 120,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2027\"; \"E003_End\"; \"E004_End\"; \"E009_End\"; \"E014_Start\"; \"E016_Start\"; \"E017_Start\"; \"E018_Start\"; }"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 60,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2028\"; \"E005_Start\"; \"E014_End\"; \"E017_End\"; }"
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 60,
+        "item": ">",
+        "label": "{ rank=\"same\"; \"2029\"; \"E018_End\"; \"E019_Start\"; \"E020_Start\"; }"
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "item": "E001_Start",
+        "label": "2023\\nQ1",
+        "styleName": "Start"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "item": "E003_Start",
+        "label": "2025\\nQ4",
+        "styleName": "Start"
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "item": "E004_Start",
+        "label": "2026\\nQ1",
+        "styleName": "Start"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "item": "E006_Start",
+        "label": "2024\\nQ2",
+        "styleName": "Start"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "item": "E007_Start",
+        "label": "2025\\nQ1",
+        "styleName": "Start"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "item": "E009_Start",
+        "label": "2026\\nQ4",
+        "styleName": "Start"
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "item": "E010_Start",
+        "label": "2022\\nQ3",
+        "styleName": "Start"
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "E012_Start",
+        "label": "2024\\nQ3",
+        "styleName": "Start"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "item": "E013_Start",
+        "label": "2025\\nQ2",
+        "styleName": "Start"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "item": "E014_Start",
+        "label": "2027\\nQ1",
+        "styleName": "Start"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "item": "E015_Start",
+        "label": "2026\\nQ1",
+        "styleName": "Start"
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "item": "E017_Start",
+        "label": "2027\\nQ2",
+        "styleName": "Start"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "item": "E018_Start",
+        "label": "2027\\nQ3",
+        "styleName": "Start"
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "item": "E020_Start",
+        "label": "2029\\nQ4",
+        "styleName": "Start"
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "E001_End",
+        "label": "2025\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "item": "E003_End",
+        "label": "2027\\nQ2",
+        "styleName": "Finish"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "item": "E004_End",
+        "label": "2027\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "item": "E006_End",
+        "label": "2024\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "item": "E007_End",
+        "label": "2026\\nQ2",
+        "styleName": "Finish"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "item": "E009_End",
+        "label": "2027\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "item": "E010_End",
+        "label": "2024\\nQ1",
+        "styleName": "Finish"
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "item": "E012_End",
+        "label": "2025\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "item": "E013_End",
+        "label": "2026\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "item": "E014_End",
+        "label": "2028\\nQ2",
+        "styleName": "Finish"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "item": "E015_End",
+        "label": "2026\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "item": "E017_End",
+        "label": "2028\\nQ4",
+        "styleName": "Finish"
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "item": "E018_End",
+        "label": "2029\\nQ2",
+        "styleName": "Finish"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "E020_End",
+        "label": "2030\\nQ2",
+        "styleName": "Finish"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "item": "E002_Start",
+        "label": "2025\\nQ3",
+        "styleName": "Same"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "item": "E005_Start",
+        "label": "2028\\nQ1",
+        "styleName": "Same"
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "item": "E008_Start",
+        "label": "2026\\nQ3",
+        "styleName": "Same"
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "item": "E011_Start",
+        "label": "2024\\nQ2",
+        "styleName": "Same"
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "item": "E016_Start",
+        "label": "2027\\nQ1",
+        "styleName": "Same"
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "item": "E019_Start",
+        "label": "2029\\nQ3",
+        "styleName": "Same"
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 95,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 96,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 97,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 98,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 99,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 100,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 101,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 102,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 103,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 104,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 105,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 106,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 107,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 108,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 109,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 110,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 111,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 112,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 113,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 114,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 115,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 116,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 117,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 118,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 119,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 120,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 121,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 122,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 123,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 124,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 125,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 126,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 127,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 128,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 129,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 130,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 131,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 132,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 133,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 134,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 135,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 136,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 137,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 138,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 139,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 140,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 141,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 142,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 143,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 144,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 145,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 146,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 147,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 148,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 149,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 150,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 151,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 152,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 153,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 154,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 155,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 156,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 157,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 158,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 159,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 160,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 161,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 162,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 163,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 164,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 165,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 166,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 167,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 168,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 169,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 170,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 171,
+        "hidden": false,
+        "height": 15
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 43.5,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 25.5,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 100.5,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Year",
+        "type": "node",
+        "format": {
+          "shape": "rect",
+          "height": "0.25",
+          "width": "0.75",
+          "fixedsize": "True",
+          "fillcolor": "#D3FDD3",
+          "color": "Green4",
+          "penwidth": "2",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "fontcolor": "Black",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 60,
+        "name": "Start",
+        "type": "node",
+        "format": {
+          "shape": "circle",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "True",
+          "fillcolor": "white",
+          "color": "DodgerBlue",
+          "penwidth": "2",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "fontcolor": "Black",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 60,
+        "name": "Finish",
+        "type": "node",
+        "format": {
+          "shape": "square",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "True",
+          "fillcolor": "white",
+          "color": "DodgerBlue",
+          "penwidth": "2",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "fontcolor": "Black",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 60,
+        "name": "Same",
+        "type": "node",
+        "format": {
+          "shape": "hexagon",
+          "height": "0.375",
+          "width": "0.375",
+          "fixedsize": "True",
+          "fillcolor": "white",
+          "color": "DodgerBlue",
+          "penwidth": "2",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "fontcolor": "Black",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 45,
+        "name": "Planned",
+        "type": "edge",
+        "format": {
+          "color": "DodgerBlue",
+          "penwidth": "2",
+          "radius": "9",
+          "labelangle": "90",
+          "labeldistance": "1.5",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "labelfontsize": "8",
+          "labelfontcolor": "Red"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 45,
+        "name": "Completed",
+        "type": "edge",
+        "format": {
+          "color": "DarkGreen",
+          "penwidth": "2",
+          "radius": "9",
+          "labelangle": "90",
+          "labeldistance": "1.5",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "labelfontsize": "8",
+          "labelfontcolor": "Red"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 45,
+        "name": "On Schedule",
+        "type": "edge",
+        "format": {
+          "color": "DarkOrchid",
+          "penwidth": "2",
+          "radius": "9",
+          "labelangle": "90",
+          "labeldistance": "1.5",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "labelfontsize": "8",
+          "labelfontcolor": "Red"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 45,
+        "name": "Behind Schedule",
+        "type": "edge",
+        "format": {
+          "color": "Red",
+          "penwidth": "2",
+          "radius": "9",
+          "labelangle": "90",
+          "labeldistance": "1.5",
+          "arrowsize": "0.25",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "labelfontsize": "8",
+          "labelfontcolor": "Red"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 60,
+        "name": "Dependency",
+        "type": "edge",
+        "format": {
+          "style": "dashed",
+          "color": "#FC6F1B",
+          "penwidth": "2",
+          "radius": "9",
+          "labelangle": "90",
+          "labeldistance": "1.5",
+          "arrowsize": "0.25",
+          "fontname": "Verdana Italic",
+          "fontsize": "8",
+          "fontcolor": "#FC6F1B",
+          "labelfontsize": "8",
+          "labelfontcolor": "Red"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 21,
+        "name": "Transparent Edge",
+        "type": "edge",
+        "format": {
+          "color": "Transparent",
+          "fontsize": "10",
+          "fontcolor": "Transparent"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 30,
+        "name": "Page Title",
+        "type": "freetext",
+        "format": {
+          "labelloc": "top",
+          "fontname": "Verdana Bold",
+          "fontsize": "16",
+          "fontcolor": "Black"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      }
+    ],
+    "sql": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clear the 'data' worksheet",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "RESET",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the workbook containing the data",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "SET DATA FILE",
+        "excelFile": "timeline.accdb",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Log errors to a file",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "ENABLE LOGGING",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Give the graph a title",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 54,
+        "sqlStatement": "SELECT 'graph'                                                              AS [Item], \u000A       CStr(MIN([StartYear])) & ' - ' & CStr(MAX([StartYear])) & ' Roadmap' AS [Label], \u000A       'Page Title'                                                         AS [Style Name] \u000AFROM   timeline",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 27,
+        "enabled": false,
+        "sqlStatement": "Creates a chain of edges from year to year. We use ENUMERATE syntax to fill in any potential years which may not have any events in them.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 67.5,
+        "sqlStatement": "SELECT TRUE AS [ENUMERATE], MIN(CLng([StartYear])) AS [START AT], MAX(CLng([EndYear])) AS [STOP AT], 1 AS [STEP BY], \u000A       '{step}' AS [Item], 'Transparent Edge' AS [Style Name],\u000A       TRUE AS [CREATE EDGES]\u000AFROM   timeline\u000AWHERE  IsNumeric([StartYear])",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Add styling to all the year nodes created in the chain above",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 81,
+        "sqlStatement": "SELECT TRUE AS [ENUMERATE], MIN(CLng([StartYear])) AS [START AT], MAX(CLng([EndYear])) AS [STOP AT], 1 AS [STEP BY], \u000A       '{step}' AS [Item], \u000A       '{step}' AS [Label], \u000A       'Year'   AS [Style Name]\u000AFROM   timeline\u000AWHERE  IsNumeric([StartYear])",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges between the start and finish of an event which spans multiple quarters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 148.5,
+        "sqlStatement": "SELECT [EventID] & '_Start'                  AS [Item], \u000A       [EventID] & '_End'                    AS [Related Item],\u000A       [EventID] & ' - ' & [EventName]       AS [Label] , \u000A       [Status]                              AS [Style Name], \u000A       20                                    AS [SPLIT LENGTH]\u000AFROM   timeline\u000AWHERE  [StartYear] IS NOT NULL \u000AAND    [EndYear]   IS NOT NULL\u000AAND    [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]\u000AORDER BY [StartYear]    DESC, \u000A         [StartQuarter] DESC",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges between events that start and finish in the same year and quarter",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 148.5,
+        "sqlStatement": "SELECT [EventID] & '_Start'            AS [Item], \u000A       [EventID] & '_Start'            AS [Related Item],\u000A       [EventID] & ' - ' & [EventName] AS [Label] , \u000A       [Status]                        AS [Style Name], \u000A       20                              AS [SPLIT LENGTH]\u000AFROM   timeline\u000AWHERE  [StartYear] IS NOT NULL \u000AAND    [EndYear]   IS NOT NULL\u000AAND    [StartYear] & [StartQuarter] = [EndYear] & [EndQuarter]\u000AORDER BY [StartYear]    ASC, \u000A         [StartQuarter] ASC",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges that highlight any Event dependencies",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 229.5,
+        "sqlStatement": "SELECT \u000A    'dependency' AS [Label],\u000A    SWITCH(\u000A        t.[StartYear] & t.[StartQuarter] = t.[EndYear] & t.[EndQuarter],\u000A            d.[Must Complete] & '_Start',\u000A        True,\u000A            d.[Must Complete] & '_End'\u000A    ) AS [Item],\u000A    d.[Before the Start Of] & '_Start' AS [Related Item],\u000A    'Dependency' AS [Style Name]\u000AFROM \u000A    dependencies        AS d\u000A    INNER JOIN timeline AS t\u000A        ON t.[EventID] = d.[Must Complete]\u000AWHERE\u000A    d.[Must Complete]       IS NOT NULL\u000AAND d.[Before the Start Of] IS NOT NULL;",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "Place all the events of a given year on the same rank by placing the nodes in subgroups with CREATE RANK. \u000AWe use ITERATE to create a subgroup per year, as a normal query would put the results into one giant subgroup.\u000ANodes must be grouped before the styling is applied. \u000ANOTE: 2 single quotes are required on each side of text (e.g. ''same'') as it is a string within a string (the whole SQL).",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 270,
+        "sqlStatement": "SELECT TRUE AS [ITERATE],\u000A  'SELECT DISTINCT [StartYear] AS [ID] FROM timeline' \u000A  AS [SQL FOR ID],\u000A\u000A  'SELECT TRUE AS [CREATE RANK], ''same'' AS [RANK], [StartYear]            AS [ITEM] FROM timeline \u000A   WHERE [StartYear] = {ID} AND [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]\u000A      UNION\u000A   SELECT TRUE AS [CREATE RANK], ''same'' AS [RANK], [EventID] & ''_Start'' AS [ITEM] FROM timeline \u000A   WHERE [StartYear] = {ID} AND [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]\u000A      UNION\u000A   SELECT TRUE AS [CREATE RANK], ''same'' AS [RANK], [EventID] & ''_Start''  AS [ITEM] FROM timeline \u000A   WHERE [StartYear] = {ID} AND [StartYear] & [StartQuarter] = [EndYear] & [EndQuarter]\u000A      UNION\u000A   SELECT TRUE AS [CREATE RANK], ''same'' AS [RANK], [EndYear]              AS [ITEM] FROM timeline \u000A   WHERE [EndYear]   = {ID} AND [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]\u000A      UNION\u000A   SELECT TRUE AS [CREATE RANK], ''same'' AS [RANK], [EventID] & ''_End''   AS [ITEM] FROM timeline \u000A   WHERE [EndYear] = {ID} AND  [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]\u000A  '\u000A  AS [SQL FOR DATA]",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Apply styling to the event nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 67.5,
+        "sqlStatement": "SELECT [EventID] & '_Start'                AS [Item], \u000A       [StartYear] & '\\n' & [StartQuarter] AS [Label], \u000A       'Start'                             AS [Style Name] \u000AFROM   timeline\u000AWHERE  [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 67.5,
+        "sqlStatement": "SELECT [EventID] & '_End'                AS [Item], \u000A       [EndYear] & '\\n' & [EndQuarter]   AS [Label], \u000A       'Finish'                          AS [Style Name] \u000AFROM   timeline \u000AWHERE  [StartYear] & [StartQuarter] <> [EndYear] & [EndQuarter]",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 67.5,
+        "sqlStatement": "SELECT [EventID] & '_Start'                AS [Item], \u000A       [StartYear] & '\\n' & [StartQuarter] AS [Label],  \u000A       'Same'                              AS [Style Name] \u000AFROM   timeline\u000AWHERE  [StartYear] & [StartQuarter] = [EndYear] & [EndQuarter]",
+        "status": "SUCCESS",
+        "filters": [
+          "Timeline",
+          "Dependency",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "#####################################################################################################",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Quick Help",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "#####################################################################################################",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Excel SQL Syntax",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "https://exceltographviz.com/sql/syntax/",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clear the 'data' worksheet",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "RESET",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Turn on/off logging of errors to file 'Relationship Visualizer ADO Log.txt'",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "ENABLE LOGGING",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "DISABLE LOGGING",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Write environment diagonostic information to file 'Relationship Visualizer ADO Log.txt'",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "LOG ENVIRONMENT",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the workbook containing the data",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "SET DATA FILE",
+        "excelFile": "Put file name here",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "SELECT [From Column] AS [Item], \u000A       [To Column]   AS [Related Item] \u000AFROM   [Worksheet Name$] \u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column]    AS [Item],\u000A       [Node Label Column] AS [Label],\u000A       [Node Style Column] AS [Style Name]\u000AFROM   [Worksheet Name$] \u000AWHERE  ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create edges which chain a set of nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column] AS [ITEM], \u000A       TRUE             AS [CREATE EDGES]\u000AFROM   [Worksheet Name$]\u000AWHERE  ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create a subgraph, with constraints set to rank specified as either 'same' | 'min' | 'source' | 'max' | 'sink'.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "Rank constraints on the nodes in a subgraph. If rank=\"same\", all nodes are placed on the same rank. If rank=\"min\", all nodes are placed on the minimum rank. If rank=\"source\", all nodes are placed on the minimum rank, and the only nodes on the minimum rank belong to some subgraph whose rank attribute is \"source\" or \"min\". Analogous criteria hold for rank=\"max\" and rank=\"sink\". (Note: the minimum rank is topmost or leftmost, and the maximum rank is bottommost or rightmost.)",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column] AS [ITEM], \r\u000A       TRUE             AS [CREATE RANK],\r\u000A       'same'           AS [RANK]\r\u000AFROM   [Worksheet Name$]\r\u000AWHERE  ...\r\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Split text for labels at first blank after 10 characters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "SELECT [Label Column] AS [Label],\u000A       10             AS [SPLIT LENGTH],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the line ending (\\l, \\n, \\r, | etc.) to use when splitting a label",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Label Column] AS [Label],\u000A       10             AS [SPLIT LENGTH],\u000A       '\\r'           AS [LINE ENDING],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Group nodes into a cluster",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 135,
+        "enabled": false,
+        "sqlStatement": "SELECT [Cluster Id Column]         AS [CLUSTER],\u000A       [Cluster Label Column]      AS [CLUSTER LABEL],\u000A       [Cluster Style Name Column] AS [CLUSTER STYLE NAME],\u000A       [Cluster Attributes]        AS [CLUSTER ATTRIBUTES],\u000A       [Cluster Tooltip Column]    AS [CLUSTER TOOLTIP],\u000A       [Node Id Column]            AS [Item],\u000A       [Node Label Column]         AS [Label],\u000A       [Node Style Name Column]    AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Group nodes into two level clusters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 229.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Outer Cluster Id Column]         AS [CLUSTER],\u000A       [Outer Cluster Label Column]      AS [CLUSTER LABEL],\u000A       [Outer Cluster Style Name Column] AS [CLUSTER STYLE NAME],\u000A       [Outer Cluster Attributes]        AS [CLUSTER ATTRIBUTES],\u000A       [Outer Cluster Tooltip Column]    AS [CLUSTER TOOLTIP],\u000A\u000A       [Inner Cluster Id Column]         AS [SUBCLUSTER],\u000A       [Inner Cluster Label Column]      AS [SUBCLUSTER LABEL],\u000A       [Inner Cluster Style Name Column] AS [SUBCLUSTER STYLE NAME],\u000A       [Inner Cluster Attributes]        AS [SUBCLUSTER ATTRIBUTES],\u000A       [Inner Cluster Tooltip Column]    AS [SUBCLUSTER TOOLTIP],\u000A\u000A       [Node Id Column]                  AS [Item],\u000A       [Node Label Column]               AS [Label],\u000A       [Node Style Name Column]          AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "Loop count substitution strings (useful in sortv= attributes, style names, and labels). \u000A  %clc% = Cluster count\u000A  %scc% = Subcluster count\u000A  %rsc% = Record set count\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 148.5,
+        "enabled": false,
+        "sqlStatement": "SELECT 'sortv=%clc%'    AS [CLUSTER ATTRIBUTES],\u000A       'Border %clc% '  AS [CLUSTER STYLE NAME],\u000A       'sortv=%scc%'    AS [SUBCLUSTER ATTRIBUTES],\u000A       'sortv=%rsc%'    AS [Attributes],\u000A       ...\u000AFROM   [Worksheet Name$] \u000AWHERE  ...\u000AORDER BY [Outer Cluster Label Column] ASC,\u000A         [Inner Cluster Label Column] ASC,\u000A         [Node Label Column]          ASC\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Show the graph immediately after all SQL statements processed",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PREVIEW [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] ",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Publish graphs as files",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PUBLISH [ ALL VIEWS ] [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] [ file prefix ]",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "data": {
+      "graphToWorksheet": {
+        "runMode": "auto",
+        "imageType": "svg",
+        "imageWorksheet": "graph",
+        "scaleImage": 100
+      },
+      "graphToFile": {
+        "directory": "C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\18 - Using SQL - Timeline",
+        "fileNamePrefix": "Graph -",
+        "imageType": "png",
+        "appendOptions": false,
+        "appendTimeStamp": false
+      },
+      "layout": {
+        "engine": "dot",
+        "direction": "left to right",
+        "rankdir": "LR",
+        "splines": "true"
+      },
+      "options": {
+        "graph": {
+          "center": false,
+          "clusterRank": "",
+          "compound": false,
+          "dim": "",
+          "dimen": "",
+          "forceLabels": false,
+          "graphType": "directed",
+          "mode": "",
+          "model": "",
+          "newrank": false,
+          "ordering": "",
+          "orientation": false,
+          "outputOrder": "",
+          "overlap": "",
+          "smoothing": "",
+          "transparentBackground": false,
+          "includeImagePath": false
+        },
+        "nodes": {
+          "includeOrphanNodes": true,
+          "includeNodeLabels": true,
+          "includeNodeXLabels": true,
+          "blankNodeLabels": "default"
+        },
+        "edges": {
+          "addStrict": true,
+          "concentrate": false,
+          "includeOrphanEdges": true,
+          "includeEdgeHeadLabels": true,
+          "includeEdgeLabels": true,
+          "includeEdgeXLabels": true,
+          "includeEdgeTailLabels": true,
+          "includeEdgePorts": true,
+          "blankEdgeLabels": "blank"
+        }
+      },
+      "styles": {
+        "selectedViewColumn": "E",
+        "includeStyleFormat": true,
+        "includeExtraAttributes": true,
+        "suffixOpen": "Begin",
+        "suffixClose": "End"
+      },
+      "debug": {
+        "debug": "off",
+        "fileDisposition": "delete"
+      },
+      "columns": {
+        "flag": "show",
+        "item": "show",
+        "label": "show",
+        "outsideLabel": "hide",
+        "tailLabel": "hide",
+        "headLabel": "hide",
+        "relatedItem": "show",
+        "styleName": "show",
+        "extraAttributes": "show",
+        "message": "show"
+      },
+      "language": {
+        "language": "locale_en-US"
+      },
+      "console": {
+        "logToConsole": false,
+        "appendConsole": false,
+        "graphvizVerbose": false,
+        "errorToConsole": false,
+        "errorToMessageBox": true,
+        "errorToStatusBar": false
+      },
+      "worksheets": {
+        "about": "show",
+        "attributes": "hide",
+        "colors": "hide",
+        "console": "show",
+        "diagnostics": "hide",
+        "exchange": "show",
+        "lists": "hide",
+        "locale_de-DE": "hide",
+        "locale_en-GB": "hide",
+        "locale_en-US": "hide",
+        "locale_fr-FR": "hide",
+        "locale_it-IT": "hide",
+        "locale_pl-PL": "hide",
+        "settings": "hide",
+        "shapes": "hide",
+        "source": "hide",
+        "sql": "show",
+        "styleDesigner": "show",
+        "styles": "show",
+        "svg": "hide"
+      }
+    },
+    "graph": {
+      "zoom": 100
+    },
+    "settings": {
+      "graphvizPath": "",
+      "imagePath": "C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\18 - Using SQL - Timeline",
+      "additionalGraphOptions": "ranksep=\"0.25\" nodesep=\"0.25\"",
+      "pictureName": "",
+      "additionalCmdParameters": ""
+    },
+    "source": {
+      "indent": 4,
+      "buttons": [
+        {
+          "id": "SourceWeb1",
+          "buttonText": "Graphviz Attributes",
+          "url": "https://graphviz.org/doc/info/attrs.html",
+          "screenTip": "Describes the attributes used by various Graphviz tools",
+          "superTip": "The table gives the name of the attribute, the graph components (node, edge, etc.) which use the attribute and the type of the attribute (strings representing legal values of that type). Where applicable, the table also gives a default value for the attribute, a minimum allowed setting for numeric attributes, and certain restrictions on the use of the attribute.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb2",
+          "buttonText": "Pocket Reference",
+          "url": "http://graphs.grevian.org/graph",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb3",
+          "buttonText": "Graphviz Online",
+          "url": "http://dreampuf.github.io/GraphvizOnline/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Online Graphviz editor with syntax higlighting.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb4",
+          "buttonText": "Sketchviz",
+          "url": "https://sketchviz.com/new",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Renders Graphviz diagrams as if sketched by hand.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb5",
+          "buttonText": "Graphviz Fiddle",
+          "url": "http://stamm-wilbrandt.de/GraphvizFiddle/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "GraphvizFiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb6",
+          "buttonText": "Dot to Ascii",
+          "url": "https://dot-to-ascii.ggerganov.com/",
+          "screenTip": "Renders Graphviz diagrams as ascii art.",
+          "superTip": "Renders Graphviz diagrams as ascii art.",
+          "visible": "show"
+        }
+      ]
+    },
+    "sql": {
+      "cluster": "CLUSTER",
+      "clusterLabel": "CLUSTER LABEL",
+      "clusterStyleName": "CLUSTER STYLE NAME",
+      "clusterAttributes": "CLUSTER ATTRIBUTES",
+      "clusterTooltip": "CLUSTER TOOLTIP",
+      "clusterPlaceholder": "{clc}",
+      "subcluster": "SUBCLUSTER",
+      "subclusterLabel": "SUBCLUSTER LABEL",
+      "subclusterStyleName": "SUBCLUSTER STYLE NAME",
+      "subclusterAttributes": "SUBCLUSTER ATTRIBUTES",
+      "subclusterTooltip": "SUBCLUSTER TOOLTIP",
+      "subclusterPlaceholder": "{scc}",
+      "recordsetPlaceholder": "{rsc}",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "iterateSwitch": "ITERATE",
+      "iterateQueryId": "SQL FOR ID",
+      "iterateQueryData": "SQL FOR DATA",
+      "iteratePlaceholder": "{id}",
+      "enumerateSwitch": "ENUMERATE",
+      "enumerateStartAt": "START AT",
+      "enumerateStopAt": "STOP AT",
+      "enumerateStepBy": "STEP BY",
+      "enumeratePlaceholder": "{step}",
+      "enumerateMax": "MAX CYCLES",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
+      "filterColumn": "",
+      "filterValue": "",
+      "closeConnections": true,
+      "retryLimit": 3,
+      "maxConnectionMinutes": 15
+    },
+    "extensions": {
+      "tabName": "Extensions",
+      "customCode": {
+        "groupName": "Custom Code",
+        "buttons": [
+          {
+            "id": "ExtCode1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode6",
+            "visible": "hide"
+          }
+        ]
+      },
+      "webResources": {
+        "groupName": "Web Resources",
+        "buttons": [
+          {
+            "id": "ExtWeb1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb6",
+            "visible": "hide"
+          }
+        ]
+      }
+    }
+  },
+  "layouts": {
+    "data": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "item",
+          "column": 2,
+          "heading": "Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "label",
+          "column": 4,
+          "heading": "Label",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "outsideLabel",
+          "column": 5,
+          "heading": "External Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tailLabel",
+          "column": 3,
+          "heading": "Tail Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "headLabel",
+          "column": 6,
+          "heading": "Head Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tooltip",
+          "column": 7,
+          "heading": "Tooltip",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "relatedItem",
+          "column": 8,
+          "heading": "Related Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "styleName",
+          "column": 9,
+          "heading": "Style Name",
+          "width": 26.57,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "extraAttributes",
+          "column": 10,
+          "heading": "Attributes",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "message",
+          "column": 11,
+          "heading": "Messages",
+          "width": 0,
+          "hidden": true,
+          "wrapText": false
+        },
+        {
+          "id": "graphDisplayColumn",
+          "column": 12,
+          "heading": "",
+          "width": 8.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "styles": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 101.25,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 43.5,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "name",
+          "column": 2,
+          "heading": "Style Name",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 3,
+          "heading": "Format",
+          "width": 52.43,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "type",
+          "column": 4,
+          "heading": "Style Type",
+          "width": 13.86,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view0",
+          "column": 5,
+          "heading": "All Styles",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view1",
+          "column": 6,
+          "heading": "No Clusters",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 7,
+          "heading": "No Edges",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        }
+      ],
+      "ranges": [
+        {
+        }
+      ]
+    },
+    "sql": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "sqlStatement",
+          "column": 2,
+          "heading": "SQL SELECT Statement",
+          "width": 148.86,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "excelFile",
+          "column": 3,
+          "heading": "Data File",
+          "width": 16.86,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "status",
+          "column": 4,
+          "heading": "Status",
+          "width": 23.29,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 50.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 149.29,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    },
+    "source": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 22.5,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "lineNumber",
+          "column": 1,
+          "heading": "Line",
+          "width": 6.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "source",
+          "column": 2,
+          "heading": "Graphviz Source",
+          "width": 254,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    }
+  }
+}

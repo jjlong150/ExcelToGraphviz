@@ -1,5 +1,166 @@
 # Change Log
 
+## Version 11.0.0 - September 1, 2026
+
+Version 11.0 is the biggest release in **Relationship Visualizer**'s history, built around two headline features: exporting your data as an AI-ready Knowledge Graph, and a dramatically more capable SVG diagram viewer with pan, zoom, filtering, and highlighting built right in. Alongside those, the ribbon has been reorganized from top to bottom, SQL and Workbook Exchange both gained new capabilities, and a handful of long-standing rough edges were smoothed out. A short list of breaking changes, all low-impact, is included at the end, in case you want to check them before upgrading.
+
+### Knowledge Graphs: A New Way to Export Your Data
+
+Alongside the diagrams you already generate, Relationship Visualizer can now export your worksheet data as a Knowledge Graph — a structured JSON document designed to be pasted straight into an AI tool, rather than rendered as a picture. It's a second, parallel output format that runs alongside the existing Graphviz diagram pipeline, built from the same worksheet data and following the same rules for labels, styles, and inheritance, so the two outputs never disagree with each other.
+
+Each export includes:
+
+- Helpful metadata: format and version, whether the graph is directed, the source workbook and view name, and an export timestamp.
+- A trimmed "styles" section that lists only the styles actually in use, and only for node, edge, and cluster types — keeping the file smaller and easier for an AI tool to work with.
+- The same label and tooltip inheritance you already use in your diagrams: set a default at the `node[]`, `edge[]`, or `graph[]` level, or within a cluster, and individual rows only need to specify what's different.
+- Automatic fan-out for edges: a single row with a comma-separated list of sources or targets expands into multiple discrete edges.
+- Automatic placeholders for nodes referenced before they're formally defined, filled in once the real definition is reached.
+- A clear warning, instead of silent data loss, for rows using native DOT passthrough, since that syntax isn't representable in JSON.
+- A built-in token estimator, so you can gauge roughly how many LLM tokens your exported JSON will consume before you paste it somewhere.
+
+**Typed, arbitrary properties.** Beyond the built-in label, tooltip, and style fields, every node and edge can now carry its own free-form properties. That is,  arbitrary key/value pairs read straight from your worksheet's new Properties column. Write them the same way you'd write extra Graphviz attributes: space-, comma-, or semicolon-separated `key=value` pairs, with quotes around any value that contains spaces or punctuation. `weight=200 domestic=true opened=2019-03-14` comes out as a real number, a real boolean, and a real date without everything being flattened to text. (Dates are deliberately kept as text rather than true date values: converting them through the JSON export's time-zone handling could otherwise shift a date-only value back a day for anyone west of Greenwich.) Properties follow the same graph → node/edge → row inheritance as labels and tooltips, so you can set a default once at the `node[]` or `edge[]` level and override it only where it needs to differ.
+
+**Under the hood.** Making all of this possible required rebuilding how the add-in resolves conflicting label, tooltip, and style information for a given row. Previously, a label could come from the data worksheet, a shared style, or a row-level override, and the code simply concatenated whichever pieces applied into one Graphviz attribute string. If more than one source supplied the same attribute, Graphviz itself decided the winner by taking whichever occurrence came last. In v11.0, a single, well-defined precedence resolves each field before anything is written out. Row-level overrides win, then style templates, then the worksheet data, producing cleaner Graphviz source and guaranteeing the diagram and the Knowledge Graph agree on every label and tooltip. One visible side effect of this change is called out under Breaking Changes below.
+
+#### Viewing Your Knowledge Graph
+
+Excel has no native way to display JSON, so rather than dumping raw text into a worksheet cell the way Graphviz source is shown today, the Knowledge Graph opens in your default browser instead. The viewer's HTML lives inside the workbook itself, as a hidden worksheet. There's no companion file to lose track of, the workbook stays a single self-contained file, and it works identically on Windows and Mac (including trickier sandboxed folder permissions on macOS) with no ActiveX, UserForms, or Trust Center prompts involved. The viewer's own interface is fully localized, in all six supported languages.
+
+A new split button on the Data tab sends the current view to the viewer. Two mutually exclusive modes control how it behaves: display it in a shared tab that quietly refreshes each time you regenerate the graph (handy if you keep flipping between Excel and the browser) or open a fresh tab every time. If you're using the shared-tab mode and accidentally close the browser tab, a "reopen" option in the same dropdown brings it back without regenerating anything.
+
+### A Diagram Viewer Built for Big Graphs
+
+Large diagrams present a real viewing challenge. Zoom out far enough to see the whole thing, and every label is unreadable. Zoom in far enough to read anything, and you've lost all sense of where you are. Version 11.0 adds a set of enhancements to SVG post-processing aimed squarely at that problem, and it's the second headline feature of this release. Everything gets built directly into the SVG files Relationship Visualizer exports, with no separate viewer, plugin, or install step. Open the SVG in a browser and it's already there.
+
+> **A note on trust.** Postprocessing rules are trusted code, not a style preference. Whoever controls the find/replace rules controls what code runs in every diagram the workbook produces. If a postprocessing configuration is ever shared, exported, or imported between users, treat it with the same scrutiny you'd apply to a macro-enabled workbook because functionally, it is one.
+>
+> This feature ships turned off. If you've obtained the spreadsheet from anywhere other than the official download site, proceed very cautiously before turning it on.
+
+Turning it on now requires explicit confirmation. A status indicator shows whether postprocessing is currently on or off, and a matching pair of On/Off buttons replaces the old single toggle. What used to be a single click is now a deliberate two-step. Clicking `On` pops this warning before anything happens:
+
+> Post-processing injects JavaScript into exported SVGs. This JavaScript runs automatically whenever the SVG file is opened in a browser, with full access to that page.
+>
+> Only enable this feature if you trust the find/replace rules being used.
+>
+> Continue?
+
+Turning it `Off` remains a single click. This same risk is also documented on the [Security](https://exceltographviz.com/security/) page.
+
+#### A Toolbar That Doesn't Get Lost
+
+The core idea is simple: controls that stay where you put them, at a size you can actually use, no matter how far you've zoomed into the diagram itself. Sounds obvious. Getting there was less obvious. SVG has no built-in concept of "stay fixed on screen while everything else zooms," so the toolbar, the zoom-percentage readout, and the small zoom buttons on each cluster all had to be taught to counteract the diagram's own zoom in real time. The payoff is that a 500-node diagram and a 5-node diagram now feel like the same tool, just at different scales.
+
+#### Finding Your Way Around a Huge Diagram
+
+A few things came out of that same foundation:
+
+- **Scroll to zoom, drag to pan**, the way you'd expect from a map or a design tool, centered on wherever your cursor is.
+- **A live hover label** built into the toolbar. Sweep your mouse across a dense cluster of tiny nodes and read off their names one by one, without needing to zoom in first just to see what you're looking at.
+- **Fit Width / Fit Height / 100%** buttons, plus a zoom-percentage readout, so you always know exactly how zoomed in you are and can snap back to a sane view in one click.
+- **Per-cluster zoom buttons** that stay a comfortable, constant size whether the whole diagram is zoomed way out or you're already zoomed halfway in. They are easy to find when you need them, unobtrusive when you don't.
+
+#### Filter and Highlight Without Losing Your Place
+
+Beyond navigation, the toolbar also lets you toggle entire categories of elements on and off. Hide every edge and just look at nodes, say, or isolate one cluster. Click any node to highlight its connections, choosing whether you want to see what feeds *into* it, what flows *out of* it, or both.
+
+### Ribbon Reorganization
+
+Version 11.0 brings a significant ribbon expansion: a new Settings tab for controlling worksheet and tab visibility, generation and publishing tooling split out of the Graphviz tab into a new Data tab, and a round of smaller refinements across several other tabs.
+
+#### New: Settings Tab
+
+A brand-new Settings tab gives you one central place to show or hide individual worksheets and ribbon tabs, with dedicated groups for Command/Graph Options, Data (worksheet and tabs), Console, Exchange, Extensions, Help URLs, Launchpad, Source, SQL (Windows only), Styles, and SVG.
+
+The Settings worksheet itself was redesigned to match: the old faux tabbed-folder styling is gone in favor of a simple black-and-white scheme, settings are grouped to mirror their new ribbon locations, and each group of rows shows or hides based on which button you press on the new Settings tab.
+
+#### New: Data Tab
+
+The old, single Graphviz tab has been split in two. A new Data tab now owns everything related to generating and publishing output, while the Graphviz tab itself is scoped down to Graphviz-specific layout and style options (see below).
+
+**Visualize.** "Refresh Graph" is now a split button, with Automatic Refresh moved into its dropdown. The zoom-level dropdown now lists percentages high to low (150% → 5%) instead of low to high. The new Knowledge Graph button lives here too. See the Knowledge Graphs section above.
+
+**Publish.** "Publish" is now a split button with a new "Open after publishing" option in its dropdown, plus three new checkboxes 1) Graph, 2) DOT, and 3) Knowledge that let you choose exactly which output files get created each time you publish.
+
+**File Output.** A new render-engine group lets you pick which Graphviz renderer to use: Cairo, GD, GDI+ (Windows only), or Quartz (Mac only).
+
+**Styling.** A new group collects style-related switches in one place: Apply Styles and Apply Attributes moved here (now checkboxes rather than toggle buttons), alongside Add Image Path, Transparent Background, and Rotate 90° CCW, which used to live inside a dropdown menu.
+
+**Options.** The Node, Edge, and Graph menus moved here from the old Graphviz tab. Node and Edge each gained tooltip-inclusion controls plus options for what to show when the tooltip cell is blank. In addition their blank/default label submenus were flattened for easier access. "Force xlabel Placement" moved here from the old Graph menu, which itself has been removed along with its "Center Drawing" option (it didn't do anything). Taking its place is an entirely new Cluster menu, with the same label and tooltip controls now available for clusters too.
+
+**Data Worksheet.** The Show Columns menu is now organized into labeled sections (comment, item, label, style, knowledge), with a new Show Properties toggle and the old Show Messages toggle removed. The Delete All Data button icon is now red, to better signal that it's destructive.
+
+#### Graphviz Tab, Trimmed Down
+
+Adding Knowledge Graph publishing meant the original Graphviz tab simply ran out of room. It's now scoped to genuine Graphviz-only options such as layout engine, splines, direction, and the like. A new toggle on the Launchpad tab lets you hide it entirely if you're focused purely on Knowledge Graphs.
+
+A few specific changes:
+
+- **Splines**: the Compound, Line, and Spline edge-routing options are back as live, selectable controls, after being disabled for some time due to ribbon space constraints.
+- **Output Order**: a new Depth option joins the existing Breadth option, with updated icons for both.
+- Three option groups that behave like radio buttons - splines, direction, and output order - no longer force a default selection when the underlying setting is blank. An unset value now shows no button pressed, rather than visually defaulting to a choice you never made.
+
+#### Launchpad: Hide the Graphviz Tab
+
+A new Graphviz toggle joins the existing Source and Console toggles on the Launchpad tab, letting you show or hide the Graphviz ribbon tab.
+
+#### Styles Tab: Configurable Cluster Naming
+
+Cluster style names, the names written onto a cluster's opening and closing brace rows, can now be built from a configurable Naming Pattern instead of a fixed suffix. The old Suffix (Begin)/Suffix (End) fields are renamed 'subgraph-open' Affix / 'subgraph-close' Affix, and a new Naming Pattern field controls where that value is inserted, using `{name}` and `{affix}` placeholders. The default is `{name} {affix}`, but you can just as easily make the affix a prefix instead of a suffix. All three fields were also widened to fit longer patterns. This applies consistently whether the cluster came from the Style Designer or from a SQL `PUBLISH` command (see SQL Enhancements below).
+
+#### SVG Tab
+
+The old single Postprocess toggle became the clearer on/off pair with status indicators and a risk-acknowledgment prompt described in the diagram viewer section above.
+
+### SQL Enhancements
+
+Two new commands let a SQL query publish straight to a Knowledge Graph instead of only a Graphviz diagram:
+
+- **`PUBLISH AS KNOWLEDGE GRAPH`** publishes the current view as JSON, honoring your minify/indent preferences.
+- **`PUBLISH ALL VIEWS AS KNOWLEDGE GRAPH`** does the same for every view, producing one JSON file per view.
+
+View-column detection used by `PUBLISH ALL VIEWS` and its Knowledge Graph counterparts is now more reliable. It correctly finds the true last View column even when there's a gap between columns, instead of undercounting and stopping short.
+
+Cluster style naming follows the same configurable Naming Pattern described under Styles Tab above, whether the cluster came from the Style Designer or a SQL `PUBLISH` command.
+
+The worksheet's old `ErrorMessage` output-column mapping for SQL results (which only ever fired if a query happened to return a field literally named `ErrorMessage`) has been replaced with a `Properties` mapping, feeding directly into the typed Properties feature described under Knowledge Graphs above.
+
+### Workbook Exchange (Import & Export)
+
+Exchange, the lightweight way to share or version-control a workbook's styles, settings, SQL connections, and configuration as an external file, was updated to keep pace with everything above:
+
+- Every new v11.0 setting now round-trips through export and import: Knowledge Graph and publishing options, the render-engine picker, the new Clusters settings, node/edge tooltip settings, the Naming Pattern and Affix fields (older Suffix-based export files are still read correctly), the new style Description column, and the new Properties column.
+- One deliberate behavior change: the publish output directory is no longer restored from an imported file. Restoring it used to risk silently pointing the workbook at a folder that doesn't exist, or isn't accessible, on the importing machine, so it's now simply left blank.
+- Importing styles now scrolls the Styles sheet into view first, so you're watching the top of the sheet, not wherever it happened to be scrolled to, as preview images regenerate. As each preview image is created and inserted, the view scrolls to keep it centered on screen, giving you clear visual feedback that the import is progressing. Screen updating is also suspended for the duration, which speeds up the import and avoids triggering other worksheet events partway through.
+- If you import an older export file into a workbook whose Styles sheet has the new Description column, the importer now recognizes that the View columns have shifted and skips restoring a stale column reference, rather than pointing at the wrong column.
+- The Yes/No View-switch columns now get green/red conditional formatting applied automatically after import, instead of importing as unstyled cells.
+
+### Startup Improvements
+
+Two small changes when you open the workbook:
+
+- A temporary folder for HTML/JSON output is now created at startup, right alongside the existing color/font image cache folders, so it's ready before the Knowledge Graph viewer needs it rather than being created on first use.
+- A version check keeps the Style Designer's color and font preview galleries in sync with the running workbook. Each cache folder gets a small marker file recording which version last built it; if that marker is missing, the cache is treated as stale and rebuilt automatically. Practically, this means anyone upgrading from v10.5 or earlier will see their Style Designer previews silently refresh the first time they use a color or font control in v11.0, rather than risking a mismatched, stale preview.
+
+### Other Small Refinements
+
+A few smaller changes that don't fit neatly under any one heading above:
+
+- You can now force a Graphviz label to be explicitly blank, rather than omitted, by entering an empty pair of quotes.
+- Debug labels (enabled via the Debug switch on the Graphviz tab) now respect the Include Edge Ports setting, and can attach to more attribute types than just node and edge labels.
+- Alt text for inserted diagram images is now localizable rather than fixed in English.
+
+### ⚠️ Breaking Changes & Upgrade Notes
+
+The changes below are technically breaking, but real-world impact should be minimal for almost everyone. They're included here for completeness, and so you know what to check if something looks different after upgrading.
+
+- **Automatic `shape=plaintext` for HTML-like node labels has been intentionally removed.** In v10.5 and earlier, any node with an HTML-like label and no other style attributes automatically got `shape=plaintext`. That implicit override has been dropped in v11.0 in favor of a truer, unopinionated Graphviz experience. Graphviz's own default shape now applies unless a style specifies otherwise. Nodes that relied on this implicit behavior will now render with Graphviz's default shape instead of `plaintext`. This is expected to affect very few users; anyone who needs the old appearance back can add `shape=plaintext` explicitly, either as a style attribute or as a row-level extra attribute.
+
+- **Error reporting moved off the data worksheet.** Row-validation errors used to be written into a dedicated "error message" worksheet column, which was shown and hidden around each generation run. Version 11.0 instead builds a localized message and routes it through a message/log channel, where it appears in the console or a message box according to your preference; the worksheet error-message column and its show/hide behavior have been removed entirely. The `!` indicator in column 1 has been retained to flag rows where an error was detected.
+
+- **Internal code cleanup, with no visible effect.** Ribbon callback functions were tightened from public to private scope so they no longer clutter Excel's Assign Macro dialog, and leftover RubberduckVBA lint-suppression comments were removed now that AI-assisted code review has taken over that role. Neither change affects how the ribbon or any feature behaves.
+
+- **Progress bar code removed.** The progress bar shown for long-running operations in older versions of the spreadsheet was turned off back in v10.3 and left dormant. In v11.0, the unused code has finally been removed.
+
 ## Version 10.5.0
 
 This release focuses on usability enhancements, performance improvements, and important bug fixes.

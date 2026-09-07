@@ -5,57 +5,48 @@ description: macOS installation guide for Relationship Visualizer. Homebrew Grap
 
 # macOS Installation Instructions
 
-## Brief Instructions
+## Quick Install (Recommended)
 
-Perform these steps to install **Relationship Visualizer** on **macOS**
+**Relationship Visualizer** ships with an `install.sh` script that automates the Graphviz detection and AppleScript sandbox setup described below. Perform these steps to install on **macOS**:
 
-1.  Use [Homebrew](https://formulae.brew.sh/formula/graphviz) to download and install **Graphviz** using the Install command:
+1.  Use [Homebrew](https://formulae.brew.sh/formula/graphviz) to download and install **Graphviz**:
 
     `brew install Graphviz`
 
-2.  Open a terminal window.
-3.  Run the command:
+2.  Open a terminal window and run the command:
 
     `sudo dot -c`
 
     to register the Graphviz plugins.
 
-4.  Confirm Graphviz is working. Run the command `dot -V` to emit the version of Graphviz
+3.  Confirm Graphviz is working. Run the command `dot -V` to emit the version of Graphviz.
 
-5.  Download file `RelationshipVisualizer.zip` from [SourceForge](https://sourceforge.net/projects/relationship-visualizer/)
-   
-6.  Unzip file `RelationshipVisualizer.zip`
+4.  Download file `Relationship Visualizer.zip` from [SourceForge](https://sourceforge.net/projects/relationship-visualizer/) and unzip it.
 
-7.  Determine where the `dot` command is installed. Issue the command:
-   
-    `which dot`
+5.  In the terminal window, `cd` into the unzipped folder and run the installer:
 
-8.  If `dot` is installed in `/usr/local/bin/dot`, then proceed with the next step, otherwise, edit the file
+    `cd path/to/Relationship\ Visualizer`
 
-    `ExcelToGraphviz.applescript`
+    `bash install.sh`
 
-    and update the path
+    Review and accept the MIT License when prompted, then choose whether to install the sample workbooks. The installer finds your `dot` command automatically, updates `ExcelToGraphviz.applescript` to use it, and copies the script into the sandbox folder Excel requires — see [Manual Installation](#manual-installation) below for what it's doing under the hood.
 
-    `/usr/local/bin/dot`
+    ::: tip Why run it this way?
+    Running the installer from an already-open terminal (`bash install.sh`) avoids the macOS Gatekeeper "unidentified developer" warning that double-clicking an unsigned script would trigger — Gatekeeper only checks apps launched from Finder, not scripts run from a shell you already opened.
+    :::
 
-    at the top of the script to the match the path emitted by the `which dot` command. 
-
-9.  Copy the file
-
-    `ExcelToGraphviz.applescript`
-
-    to folder
-
-    `\~/Library/Application Scripts/com.microsoft.Excel`
-
-10. Start **Excel**, and open the file
+6.  Start **Excel**, and open the file
 
     `Relationship Visualizer.xlsm`
 
-11. Enable macros, and grant permissions when prompted
-12. Save the file as a template for creating future spreadsheets.
+7.  Enable macros, and grant permissions when prompted.
+8.  Save the file as a template for creating future spreadsheets.
 
-## Detailed Instructions
+If you'd rather perform the Graphviz detection and AppleScript setup by hand, or need to troubleshoot, follow the [Manual Installation](#manual-installation) steps below instead of running `install.sh`.
+
+## Manual Installation
+
+The steps below explain, in detail, everything the `install.sh` script from [Quick Install](#quick-install-recommended) does automatically. Use this section if you prefer to perform each step yourself, or if you need to troubleshoot a failed install.
 
 ### Install Graphviz
 
@@ -113,7 +104,7 @@ The screen will appear as follows:
 
 ### Unzip file `RelationshipVisualizer.zip` 
 
-The contents of “RelationshipVisualizer.zip” may be stored in any location. The zip file contains the macro-enabled spreadsheet “Relationship Visualizer.xlsm”, the corresponding Apple Script file ExcelToGraphviz.applescript, user documentation, samples, and license files.
+The contents of “RelationshipVisualizer.zip” may be stored in any location. The zip file contains the macro-enabled spreadsheet “Relationship Visualizer.xlsm”, the corresponding Apple Script file ExcelToGraphviz.applescript, the `install.sh` installer script, user documentation, samples, and license files.
 
 The file ExcelToGraphviz.applescript must be installed in a specific location per Microsoft’s sandbox rules. This location is explained in future steps.
 

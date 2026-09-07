@@ -1,0 +1,5297 @@
+{
+  "metadata": {
+    "name": "E2GXF",
+    "type": "Excel to Graphviz Exchange Format",
+    "version": "1.0",
+    "user": "Jeffrey Long",
+    "date": "2026-09-02",
+    "time": "14:01:04",
+    "os": "Windows (64-bit) NT 10.00",
+    "excel": "16.0",
+    "filename": "Relationship Visualizer.xlsm"
+  },
+  "content": {
+    "data": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "item": "Clients",
+        "label": "Clients",
+        "styleName": "Clients"
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "AWS Cloud",
+        "styleName": "Cloud Begin"
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "item": "Amazon Route 53",
+        "label": "Amazon\\nRoute\\n53",
+        "styleName": "Amazon Route 53"
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "eu-west-1",
+        "styleName": "Data Center Begin"
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 30,
+        "item": "ALB2",
+        "label": "Application\\nLoad\\nBalancer",
+        "styleName": "Application Load Balancer"
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "item": "Amazon ECR 2",
+        "label": "Amazon\\nECR",
+        "styleName": "Amazon ECR"
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "item": "AWS KMS 2",
+        "label": "AWS\\nKMS",
+        "styleName": "AWS KMS"
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 30,
+        "item": "DynamoDB 2",
+        "label": "DynamoDB\\nGlobal\\nTable",
+        "styleName": "DynamoDB Global Table"
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 15,
+        "item": "S3 Bucket 2",
+        "label": "S3\\nBucket",
+        "styleName": "S3 Bucket"
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "VPC",
+        "styleName": "VPC Begin"
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC3",
+        "label": "VPC\\nEndpoint",
+        "styleName": "VPC Endpoint"
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC4",
+        "label": "VPC\\nEndpoint",
+        "styleName": "VPC Endpoint"
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Multi-AZ ECS Cluster",
+        "styleName": "AZ Cluster Begin"
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Availability Zone",
+        "styleName": "Availability zone Begin"
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 4",
+        "label": "ECS\\nService",
+        "styleName": "ECS Service"
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 4",
+        "label": "Spot\\nInstance",
+        "styleName": "Spot Instance"
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Availability zone End"
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Availability Zone",
+        "styleName": "Availability zone Begin"
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 5",
+        "label": "ECS\\nService",
+        "styleName": "ECS Service"
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 5",
+        "label": "Spot\\nInstance",
+        "styleName": "Spot Instance"
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Availability zone End"
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Availability Zone",
+        "styleName": "Availability zone Begin"
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 6",
+        "label": "ECS\\nService",
+        "styleName": "ECS Service"
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 6",
+        "label": "Spot\\nInstance",
+        "styleName": "Spot Instance"
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Availability zone End"
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "AZ Cluster End"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "VPC End"
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Data Center End"
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "us-east-1",
+        "styleName": "Data Center Begin"
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 30,
+        "item": "ALB1",
+        "label": "Application\\nLoad\\nBalancer",
+        "styleName": "Application Load Balancer"
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "item": "Amazon ECR 1",
+        "label": "Amazon\\nECR",
+        "styleName": "Amazon ECR"
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "item": "AWS KMS 1",
+        "label": "AWS\\nKMS",
+        "styleName": "AWS KMS"
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 30,
+        "item": "DynamoDB 1",
+        "label": "DynamoDB\\nGlobal\\nTable",
+        "styleName": "DynamoDB Global Table"
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15,
+        "item": "S3 Bucket 1",
+        "label": "S3\\nBucket",
+        "styleName": "S3 Bucket"
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "VPC",
+        "styleName": "VPC Begin"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC1",
+        "label": "VPC\\nEndpoint",
+        "styleName": "VPC Endpoint"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC2",
+        "label": "VPC\\nEndpoint",
+        "styleName": "VPC Endpoint"
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Multi-AZ ECS Cluster",
+        "styleName": "AZ Cluster Begin"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Availability Zone",
+        "styleName": "Availability zone Begin"
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 1",
+        "label": "ECS\\nService",
+        "styleName": "ECS Service"
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 1",
+        "label": "Spot\\nInstance",
+        "styleName": "Spot Instance"
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Availability zone End"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Availability Zone",
+        "styleName": "Availability zone Begin"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 2",
+        "label": "ECS\\nService",
+        "styleName": "ECS Service"
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 2",
+        "label": "Spot\\nInstance",
+        "styleName": "Spot Instance"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Availability zone End"
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "item": "{",
+        "label": "Availability Zone",
+        "styleName": "Availability zone Begin"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 3",
+        "label": "ECS\\nService",
+        "styleName": "ECS Service"
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 3",
+        "label": "Spot\\nInstance",
+        "styleName": "Spot Instance"
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Cloud End"
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Data Center End"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "VPC End"
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "AZ Cluster End"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Availability zone End"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 1",
+        "relatedItem": "Spot Instance 1",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 2",
+        "relatedItem": "Spot Instance 2",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 3",
+        "relatedItem": "Spot Instance 3",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 4",
+        "relatedItem": "Spot Instance 4",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 5",
+        "relatedItem": "Spot Instance 5",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "item": "ECS Service 6",
+        "relatedItem": "Spot Instance 6",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "item": "S3 Bucket 1",
+        "label": "CRR",
+        "relatedItem": "S3 Bucket 2",
+        "styleName": "Flow - Both"
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 1",
+        "relatedItem": "VPC1,VPC2",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 2",
+        "relatedItem": "VPC1,VPC2",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 3",
+        "relatedItem": "VPC1,VPC2",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 4",
+        "relatedItem": "VPC3,VPC4",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 5",
+        "relatedItem": "VPC3,VPC4",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "item": "Spot Instance 6",
+        "relatedItem": "VPC3,VPC4",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "item": "ALB1",
+        "relatedItem": "ECS Service 1",
+        "styleName": "Flow"
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "item": "ALB1",
+        "relatedItem": "ECS Service 2",
+        "styleName": "Flow"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "item": "ALB1",
+        "relatedItem": "ECS Service 3",
+        "styleName": "Flow"
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "item": "ALB2",
+        "relatedItem": "ECS Service 4",
+        "styleName": "Flow"
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "item": "ALB2",
+        "relatedItem": "ECS Service 5",
+        "styleName": "Flow"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "item": "ALB2",
+        "relatedItem": "ECS Service 6",
+        "styleName": "Flow"
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "item": "Amazon ECR 1",
+        "label": "CRR",
+        "relatedItem": "Amazon ECR 2",
+        "styleName": "Flow - Both"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "item": "Amazon Route 53",
+        "relatedItem": "ALB1,ALB2",
+        "styleName": "Flow"
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "item": "AWS KMS 1",
+        "relatedItem": "Amazon ECR 1",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 30,
+        "item": "AWS KMS 1",
+        "label": "Multi-region\\nreplica\\nKey",
+        "relatedItem": "AWS KMS 2",
+        "styleName": "Flow - Both"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "AWS KMS 2",
+        "relatedItem": "Amazon ECR 2",
+        "styleName": "Invisible Edge"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "item": "Clients",
+        "relatedItem": "Amazon Route 53",
+        "styleName": "Flow"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 30,
+        "item": "DynamoDB 1",
+        "label": "Global\\nTable\\nReplication",
+        "relatedItem": "DynamoDB 2",
+        "styleName": "Flow - Both"
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC1",
+        "relatedItem": "DynamoDB 1",
+        "styleName": "Flow"
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC2",
+        "relatedItem": "S3 Bucket 1",
+        "styleName": "Flow"
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC3",
+        "relatedItem": "DynamoDB 2",
+        "styleName": "Flow"
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "item": "VPC4",
+        "relatedItem": "S3 Bucket 2",
+        "styleName": "Flow"
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 95,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 96,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 97,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 98,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 99,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 100,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 101,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 102,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 103,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 104,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 105,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 106,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 107,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 108,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 109,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 110,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 111,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 112,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 113,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 114,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 115,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 116,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 117,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 118,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 119,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 120,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 121,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 122,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 123,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 124,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 125,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 126,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 127,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 128,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 129,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 130,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 131,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 132,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 133,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 134,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 135,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 136,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 137,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 138,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 139,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 140,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 141,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 142,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 143,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 144,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 145,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 146,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 147,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 148,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 149,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 150,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 151,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 152,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 153,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 154,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 155,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 156,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 157,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 158,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 159,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 160,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 161,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 162,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 163,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 164,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 165,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 166,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 167,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 168,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 169,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 170,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 171,
+        "hidden": false,
+        "height": 15
+      },
+      {
+        "row": 172,
+        "hidden": false,
+        "height": 15
+      }
+    ],
+    "styles": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 43.5,
+        "name": "node",
+        "type": "node",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 25.5,
+        "name": "edge",
+        "type": "edge",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 100.5,
+        "name": "subgraph-open",
+        "type": "subgraph-open",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "name": "subgraph-close",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "name": "keyword",
+        "type": "keyword",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "name": "native",
+        "type": "native",
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 19.5,
+        "name": "Flow",
+        "type": "edge",
+        "format": {
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "radius": "9"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 19.5,
+        "name": "Flow - Both",
+        "type": "edge",
+        "format": {
+          "dir": "both",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Dashed",
+        "type": "edge",
+        "format": {
+          "style": "dashed",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Dotted",
+        "type": "edge",
+        "format": {
+          "style": "dotted",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "8"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Negative",
+        "type": "edge",
+        "format": {
+          "color": "red",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "fontcolor": "red"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 30,
+        "name": "Flow - Positive",
+        "type": "edge",
+        "format": {
+          "color": "darkgreen",
+          "arrowsize": "0.5",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "fontcolor": "darkgreen"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 25.5,
+        "name": "Invisible Edge",
+        "type": "edge",
+        "format": {
+          "style": "invis",
+          "color": "Invis"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 114,
+        "name": "Cloud Begin",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "fillcolor": "White",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "style": "filled",
+          "label": "<<table border=\"0\" cellborder=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td><img src=\"images\\AWS-Cloud-logo_16.png\" /></td><td>&nbsp;&nbsp;{label}</td></tr></table>>"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "name": "Cloud End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 114,
+        "name": "Data Center Begin",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "labelloc": "top",
+          "pencolor": "#13A5A6",
+          "fillcolor": "White",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "fontcolor": "#13A5A6",
+          "style": "dashed,filled",
+          "label": "<<table border=\"0\" cellborder=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td><img src=\"images\\Region_16.png\" /></td><td>&nbsp;&nbsp;{label}</td></tr></table>>"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "name": "Data Center End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 105,
+        "name": "VPC Begin",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "labelloc": "top",
+          "pencolor": "#8C4FFF",
+          "fillcolor": "White",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "fontcolor": "Black",
+          "style": "filled",
+          "label": "<<table border=\"0\" cellborder=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td><img src=\"images\\Arch_Amazon-Virtual-Private-Cloud_16.png\" /></td><td>&nbsp;&nbsp;{label}</td></tr></table>>"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "name": "VPC End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 120,
+        "name": "AZ Cluster Begin",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "labelloc": "top",
+          "pencolor": "#F3843D",
+          "fillcolor": "White",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "fontcolor": "#F3843D",
+          "style": "dashed,filled",
+          "label": "<<table border=\"0\" cellborder=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td><img src=\"images\\Arch_Amazon-EC2-Auto-Scaling_16.png\" /></td><td>&nbsp;&nbsp;{label}</td></tr></table>>"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "name": "AZ Cluster End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 120,
+        "name": "Availability zone Begin",
+        "type": "subgraph-open",
+        "format": {
+          "labeljust": "left",
+          "labelloc": "top",
+          "pencolor": "#333333",
+          "fillcolor": "White",
+          "fontname": "Verdana",
+          "fontsize": "10",
+          "fontcolor": "#333333",
+          "style": "dashed,filled",
+          "label": "<<table border=\"0\" cellborder=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td><img src=\"images\\Arch_AWS-Local-Zones_16.png\" /></td><td>&nbsp;&nbsp;{label}</td></tr></table>>"
+        },
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "name": "Availability zone End",
+        "type": "subgraph-close",
+        "viewSwitches": [
+          "yes",
+          "no",
+          "yes"
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 90,
+        "name": "Amazon ECR",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "0.8125",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "Transparent",
+          "color": "#ED7100",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Arch_Amazon-Elastic-Container-Registry_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 90,
+        "name": "Application Load Balancer",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "1",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "color": "#8C4FFF",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Res_Elastic-Load-Balancing_Application-Load-Balancer_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 90,
+        "name": "AWS KMS",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "0.8125",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "Transparent",
+          "color": "#DD344C",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Arch_AWS-Key-Management-Service_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 79.5,
+        "name": "DynamoDB Global Table",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "1",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "Transparent",
+          "color": "#C925D1",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Arch_Amazon-DynamoDB_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 66.75,
+        "name": "ECS Service",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "0.8125",
+          "width": "0.5",
+          "fixedsize": "True",
+          "color": "#ED7100",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Arch_AWS-Fargate_48.png",
+          "imagescale": "True",
+          "imagepos": "tc"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 90,
+        "name": "S3 Bucket",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "0.8125",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "Transparent",
+          "color": "#82A725",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Res_Amazon-Simple-Storage-Service_Bucket_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 75,
+        "name": "Spot Instance",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "0.8125",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "color": "#F3843D",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Res_Amazon-EC2_Spot-Instance_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 75,
+        "name": "VPC Endpoint",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "0.8125",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "color": "#8C4FFF",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Res_Amazon-VPC_Endpoints_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 79.5,
+        "name": "Amazon Route 53",
+        "type": "node",
+        "format": {
+          "labelloc": "bottom",
+          "shape": "box",
+          "height": "1",
+          "width": "0.5",
+          "fixedsize": "True",
+          "fillcolor": "Transparent",
+          "color": "#8C4FFF",
+          "penwidth": "0",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "image": "images\\Arch_Amazon-Route-53_48.png",
+          "imagescale": "True",
+          "imagepos": "tc",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 61.5,
+        "name": "Clients",
+        "type": "node",
+        "format": {
+          "shape": "square",
+          "height": "0.75",
+          "width": "0.75",
+          "fixedsize": "True",
+          "fillcolor": "White",
+          "fontname": "Verdana",
+          "fontsize": "8",
+          "fontcolor": "#333333",
+          "style": "filled"
+        },
+        "viewSwitches": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      }
+    ],
+    "sql": [
+      {
+        "row": 2,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the workbook containing the data",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "SET DATA FILE",
+        "excelFile": "AWS BOM.xlsx",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Optional statement to reduce the amount of nesting without having to modify the Cluster SQL statement",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "SET CLUSTER LEVEL LIMIT = 5",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the clusters and nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "hidden": false,
+        "height": 364.5,
+        "sqlStatement": "SELECT [Cloud]              AS [CLUSTER1], \u000A       'AWS Cloud'          AS [CLUSTER1 LABEL],\u000A       'Cloud'              AS [CLUSTER1 STYLE NAME],\u000A\u000A       [Data Center]        AS [CLUSTER2], \u000A       [Data Center]        AS [CLUSTER2 LABEL], \u000A       'Data Center'        AS [CLUSTER2 STYLE NAME],\u000A \u000A       [VPC]                AS [CLUSTER3],\u000A       'VPC'                AS [CLUSTER3 LABEL], \u000A       'VPC'                AS [CLUSTER3 STYLE NAME],\u000A\u000A       [AZ Cluster]         AS [CLUSTER4],\u000A       [AZ Cluster]         AS [CLUSTER4 LABEL], \u000A       'AZ Cluster'         AS [CLUSTER4 STYLE NAME],\u000A \u000A       [AZ Id]              AS [CLUSTER5],\u000A       'Availability Zone'  AS [CLUSTER5 LABEL], \u000A       'Availability zone'  AS [CLUSTER5 STYLE NAME],\u000A \u000A       [Node]               AS [Item],\u000A       [Node Type]          AS [Label],     \u000A       [Node Type]          AS [Style Name],\u000A       1                    AS [Split Length] \u000AFROM [ComponentList$]\u000AWHERE [Node] IS NOT NULL\u000A",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 11,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "hidden": false,
+        "height": 108,
+        "sqlStatement": "SELECT [Node From]       AS [Item], \u000A       [Node To]         AS [Related Item], \u000A       [Caption]         AS [Label], \u000A       [Connection Type] AS [Style Name] \u000AFROM   [ComponentList$]\u000AWHERE  [Node From] IS NOT NULL\u000AAND    [Node To]   IS NOT NULL\u000A",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Preview / Publish the graphs",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PREVIEW",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "hidden": false,
+        "height": 15,
+        "sqlStatement": "PUBLISH",
+        "status": "SUCCESS",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "#####################################################################################################",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Quick Help",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "#####################################################################################################",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Excel SQL Syntax",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "https://exceltographviz.com/sql/syntax/",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Clear the 'data' worksheet",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "RESET",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Turn on/off logging of errors to file 'Relationship Visualizer ADO Log.txt'",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 29,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "ENABLE LOGGING",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 30,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "DISABLE LOGGING",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 31,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 32,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Write environment diagonostic information to file 'Relationship Visualizer ADO Log.txt'",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 33,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "LOG ENVIRONMENT",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 35,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the workbook containing the data",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "SET DATA FILE",
+        "excelFile": "Put file name here",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Set placeholder values for substitution into SQL. Wrap placeholder name in braces in the SQL.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 39,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "SET PLACEHOLDER placeholder_name = value",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 27,
+        "enabled": false,
+        "sqlStatement": "For example, to query for records matching the value \"Metropolitan\", assign Metropolitan to a placeholder, \u000Athen use the placeholder name wrapped in braces in the SQL as static text in WHERE comparisons, label, or tooltip text.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "SET PLACEHOLDER subway_line = Metropolitan",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 40.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [station_from] AS [Item], [station_to] AS [Related Item], '{subway_line} Line' AS [Label], \u000AFROM   [london_underground$]\u000AWHERE  [tube_route] = '{subway_line}'",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the edges",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "SELECT [From Column] AS [Item], \u000A       [To Column]   AS [Related Item] \u000AFROM   [Worksheet Name$] \u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create the nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column]    AS [Item],\u000A       [Node Label Column] AS [Label],\u000A       [Node Style Column] AS [Style Name]\u000AFROM   [Worksheet Name$] \u000AWHERE  ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create edges which chain a set of nodes",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column] AS [ITEM], \u000A       TRUE             AS [CREATE EDGES]\u000AFROM   [Worksheet Name$]\u000AWHERE  ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Create a subgraph, with rank= constraint specified as either 'same' | 'min' | 'source' | 'max' | 'sink'.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "The rank attribute tells Graphviz how to line up the nodes inside a subgraph:\u000A- rank=same   - all nodes sit on the same horizontal (or vertical) level.\u000A- rank=min    - all nodes are pushed to the top (or left) of the graph.\u000A- rank=source - same as min, but Graphviz also ensures that only subgraphs marked source or min share that top/left rank.\u000A- rank=max    - all nodes are pushed to the bottom (or right) of the graph.\u000A- rank=sink   - same as max, but restricted to subgraphs marked sink or max.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "NOTE: Graphviz treats the minimum rank as the top/left edge of the layout and the maximum rank as the bottom/right edge.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT [Node Id Column] AS [ITEM], \r\u000A       TRUE             AS [CREATE RANK],\r\u000A       'same'           AS [RANK]\r\u000AFROM   [Worksheet Name$]\r\u000AWHERE  ...\r\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Split text for labels at first blank after 10 characters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 54,
+        "enabled": false,
+        "sqlStatement": "SELECT [Label Column] AS [Label],\u000A       10             AS [SPLIT LENGTH],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specify the line ending (\\l, \\n, \\r, | etc.) to use when splitting a label",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Label Column] AS [Label],\u000A       10             AS [SPLIT LENGTH],\u000A       '\\r'           AS [LINE ENDING],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Multi-level - Group nodes into nested clusters. \"n\" levels of nesting supported, within max level limit on settings sheet",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 229.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Cluster 1 Id Column]         AS [CLUSTER1],\u000A       [Cluster 1 Label Column]      AS [CLUSTER1 LABEL],\u000A       [Cluster 1 Style Name Column] AS [CLUSTER1 STYLE NAME],\u000A       [Cluster 1 Attributes]        AS [CLUSTER1 ATTRIBUTES],\u000A       [Cluster 1 Tooltip Column]    AS [CLUSTER1 TOOLTIP],\u000A\u000A       [Cluster 2 Id Column]         AS [CLUSTER2],\u000A       [Cluster 2 Label Column]      AS [CLUSTER2 LABEL],\u000A       [Cluster 2 Style Name Column] AS [CLUSTER2 STYLE NAME],\u000A       [Cluster 2 Attributes]        AS [CLUSTER2 ATTRIBUTES],\u000A       [Cluster 2 Tooltip Column]    AS [CLUSTER2 TOOLTIP],\u000A\u000A       [Node Id Column]              AS [Item],\u000A       [Node Label Column]           AS [Label],\u000A       [Node Style Name Column]      AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Specifies the number of cluster nestings permitted. Useful for folding clusters together without modifying the Cluster SQL statement.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "SET CLUSTER LEVEL LIMIT = 10",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "LEGACY - Group nodes into a cluster",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 135,
+        "enabled": false,
+        "sqlStatement": "SELECT [Cluster Id Column]         AS [CLUSTER],\u000A       [Cluster Label Column]      AS [CLUSTER LABEL],\u000A       [Cluster Style Name Column] AS [CLUSTER STYLE NAME],\u000A       [Cluster Attributes]        AS [CLUSTER ATTRIBUTES],\u000A       [Cluster Tooltip Column]    AS [CLUSTER TOOLTIP],\u000A       [Node Id Column]            AS [Item],\u000A       [Node Label Column]         AS [Label],\u000A       [Node Style Name Column]    AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "LEGACY - Group nodes into two level clusters",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 229.5,
+        "enabled": false,
+        "sqlStatement": "SELECT [Outer Cluster Id Column]         AS [CLUSTER],\u000A       [Outer Cluster Label Column]      AS [CLUSTER LABEL],\u000A       [Outer Cluster Style Name Column] AS [CLUSTER STYLE NAME],\u000A       [Outer Cluster Attributes]        AS [CLUSTER ATTRIBUTES],\u000A       [Outer Cluster Tooltip Column]    AS [CLUSTER TOOLTIP],\u000A\u000A       [Inner Cluster Id Column]         AS [SUBCLUSTER],\u000A       [Inner Cluster Label Column]      AS [SUBCLUSTER LABEL],\u000A       [Inner Cluster Style Name Column] AS [SUBCLUSTER STYLE NAME],\u000A       [Inner Cluster Attributes]        AS [SUBCLUSTER ATTRIBUTES],\u000A       [Inner Cluster Tooltip Column]    AS [SUBCLUSTER TOOLTIP],\u000A\u000A       [Node Id Column]                  AS [Item],\u000A       [Node Label Column]               AS [Label],\u000A       [Node Style Name Column]          AS [Style Name],\u000A       ...\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "Loop count substitution strings (useful in sortv= attributes, style names, and labels). \u000A  {clc}   = Cluster count     / Absolute cluster number\u000A  {scc}   = Subcluster count  / Relative cluster number within the parent cluster\u000A  {rsc}   = Record set count\u000A  {level} = Level/depth of cluster nesting (Multi-level clustering only; not available in LEGACY clustering).\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 148.5,
+        "enabled": false,
+        "sqlStatement": "SELECT 'sortv={clc}'    AS [CLUSTER ATTRIBUTES],\u000A       'Border {clc} '  AS [CLUSTER STYLE NAME],\u000A       'sortv={scc}'    AS [SUBCLUSTER ATTRIBUTES],\u000A       'sortv={rsc}'    AS [Attributes],\u000A       ...\u000AFROM   [Worksheet Name$] \u000AWHERE  ...\u000AORDER BY [Outer Cluster Label Column] ASC,\u000A         [Inner Cluster Label Column] ASC,\u000A         [Node Label Column]          ASC\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Enumerate a range to create nodes (e.g. For 1 to 5 by 1).",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 135,
+        "enabled": false,
+        "sqlStatement": "SELECT TRUE AS [ENUMERATE],\u000A       MIN(CLng([some-column])) AS [START AT],\u000A       MAX(CLng([some-column])) AS [STOP AT],\u000A       1                        AS [STEP BY],\u000A       '{step}'                 AS [Item],\u000A       '{step}'                 AS [Label],\u000A       'some-style'             AS [Style Name]\u000AFROM [some-table$]\u000AWHERE IsNumeric([some-column])\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Enumerate a range to create a chain of edges (e.g. For 1 to 5 by 1). See \"CREATE EDGES\" above.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 121.5,
+        "enabled": false,
+        "sqlStatement": "SELECT TRUE AS [CREATE EDGES],\u000A       TRUE AS [ENUMERATE],\u000A       MIN(CLng([some-column])) AS [START AT],\u000A       MAX(CLng([some-column])) AS [STOP AT],\u000A       1                        AS [STEP BY],\u000A       '{step}'                 AS [Item]\u000AFROM [some-table$]\u000AWHERE IsNumeric([some-column])\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 40.5,
+        "enabled": false,
+        "sqlStatement": "ITERATE - For Header-Detail situations. Run a SQL statement to generate the ID values of the header records. For each ID value in the header, run a SQL statement. Generally used in situations where you need to process the data in chunks such as creating subgroups, or combining the values of multiple records into a single string.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 67.5,
+        "enabled": false,
+        "sqlStatement": "SELECT \u000A  'SELECT [some-column] AS [ID] FROM [some-table$]' AS [SQL FOR ID],\u000A  'SELECT [another-column] AS [ITEM], FROM [another-table$] WHERE [some-other-column] = ''{ID}'' ' AS [SQL FOR DATA],\u000A  TRUE AS [ITERATE]\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "ITERATE with CREATE RANK - Create subgraphs for each ID returned in the SQL FOR ID query. See \"CREATE RANK\" above.",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 81,
+        "enabled": false,
+        "sqlStatement": "SELECT \u000A  'SELECT [some-column] AS [ID] FROM [some-table$]' AS [SQL FOR ID],\u000A  'SELECT [some-column] AS [ITEM], TRUE AS [CREATE RANK], ''same'' AS [RANK] FROM [another-table$] WHERE [some-other-column] = ''{ID}'' ' AS [SQL FOR DATA],\u000A  TRUE AS [ITERATE]\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 40.5,
+        "enabled": false,
+        "sqlStatement": "ITERATE with CONCATENATE - Build nodes, where each node lists all the matching records on separate lines within the label of a rectangle (due to \\n separator). The fields emitted to the data worksheet are specified in the first SQL statement [SQL FOR ID]. (NOTE:The SQL passed as parameters has been kept to one line to reduce confusion).",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 189,
+        "enabled": false,
+        "sqlStatement": "SELECT \u000A  TRUE       AS [ITERATE],\u000A  'SELECT DISTINCT [some-column] AS [ID], [some-column] AS [Item], [another-column] AS [Label], ''shape=rectangle'' AS [Attributes] FROM [some-table$]' \u000A             AS [SQL FOR ID],\u000A  'SELECT [another-column] AS [Label] FROM [some-table$] WHERE [some-column] = ''{ID}'' AND [some-column] IS NOT NULL'                                 \u000A             AS [SQL FOR DATA],\u000A  TRUE       AS [CONCATENATE],\u000A  'Label'    AS [FIELD],\u000A  'Label'    AS [ASSIGN TO], \u000A  ''         AS [PREFIX], \u000A  ''         AS [SUFFIX], \u000A  '\\n'       AS [SEPARATOR]\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 40.5,
+        "enabled": false,
+        "sqlStatement": "ITERATE with CONCATENATE - Build nodes, where each node lists all the matching records on separate cells within the label of a record (due to | separator). The fields emitted to the data worksheet are specified in the first SQL statement [SQL FOR ID]. (NOTE:The SQL passed as parameters has been kept to one line to reduce confusion).",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 189,
+        "enabled": false,
+        "sqlStatement": "SELECT \u000A  TRUE       AS [ITERATE],\u000A  'SELECT DISTINCT [some-column] AS [ID], [some-column] AS [Item], [another-column] AS [Label], ''shape=record'' AS [Attributes] FROM [some-table$]' \u000A             AS [SQL FOR ID],\u000A  'SELECT [another-column] AS [Label] FROM [some-table$] WHERE [some-column] = ''{ID}'' AND [some-column] IS NOT NULL'                                 \u000A             AS [SQL FOR DATA],\u000A  TRUE       AS [CONCATENATE],\u000A  'Label'    AS [FIELD],\u000A  'Label'    AS [ASSIGN TO], \u000A  '{'        AS [PREFIX], \u000A  '}'        AS [SUFFIX], \u000A  '|'        AS [SEPARATOR]\u000A",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Show the graph immediately after all SQL statements processed",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PREVIEW [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] ",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "Publish graphs as files",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "sqlStatement": "PUBLISH [ ALL VIEWS ] [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] [ file prefix ]",
+        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15,
+        "enabled": false,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "data": {
+      "graphToWorksheet": {
+        "jsonViewer": "new",
+        "runMode": "auto",
+        "imageType": "png",
+        "imageWorksheet": "graph",
+        "scaleImage": 100
+      },
+      "graphToFile": {
+        "openAfterPublish": false,
+        "publishGraphvizGraph": true,
+        "publishDot": false,
+        "publishKnowledgeGraph": false,
+        "minifyJson": false,
+        "indentJson": 2,
+        "directory": "C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering",
+        "fileNamePrefix": "Graph -",
+        "imageType": "svg",
+        "appendOptions": false,
+        "appendTimeStamp": false,
+        "renderCairo": false,
+        "renderGD": false,
+        "renderGDIPlus": false,
+        "renderQuartz": false
+      },
+      "layout": {
+        "engine": "dot",
+        "direction": "left to right",
+        "rankdir": "LR",
+        "splines": ""
+      },
+      "options": {
+        "graph": {
+          "center": false,
+          "clusterRank": "",
+          "compound": false,
+          "dim": "",
+          "dimen": "",
+          "forceLabels": false,
+          "graphType": "directed",
+          "mode": "",
+          "model": "",
+          "newrank": false,
+          "ordering": "",
+          "orientation": false,
+          "outputOrder": "breadthfirst",
+          "overlap": "",
+          "smoothing": "",
+          "transparentBackground": false,
+          "includeImagePath": true
+        },
+        "nodes": {
+          "includeOrphanNodes": true,
+          "includeNodeLabels": true,
+          "includeNodeXLabels": true,
+          "includeNodeTooltips": true,
+          "blankNodeLabels": "default",
+          "blankNodeTooltips": "default"
+        },
+        "edges": {
+          "addStrict": true,
+          "concentrate": false,
+          "includeOrphanEdges": true,
+          "includeEdgeHeadLabels": true,
+          "includeEdgeLabels": true,
+          "includeEdgeTooltips": true,
+          "includeEdgeXLabels": true,
+          "includeEdgeTailLabels": true,
+          "includeEdgePorts": true,
+          "blankEdgeLabels": "blank",
+          "blankEdgeTooltips": "default"
+        },
+        "clusters": {
+          "includeClusterLabels": true,
+          "includeClusterTooltips": true,
+          "blankClusterLabels": "default",
+          "blankClusterTooltips": "default"
+        }
+      },
+      "styles": {
+        "selectedViewColumn": "F",
+        "includeStyleFormat": true,
+        "includeExtraAttributes": true,
+        "affixOpen": "Begin",
+        "affixClose": "End",
+        "concatFormat": "{name} {affix}"
+      },
+      "debug": {
+        "debug": "off",
+        "fileDisposition": "delete"
+      },
+      "columns": {
+        "flag": "show",
+        "item": "show",
+        "label": "show",
+        "outsideLabel": "hide",
+        "tailLabel": "hide",
+        "headLabel": "hide",
+        "relatedItem": "show",
+        "styleName": "show",
+        "extraAttributes": "show"
+      },
+      "language": {
+        "language": "locale_en-US"
+      },
+      "console": {
+        "logToConsole": false,
+        "appendConsole": false,
+        "graphvizVerbose": false,
+        "errorToConsole": false,
+        "errorToMessageBox": true,
+        "errorToStatusBar": false
+      },
+      "worksheets": {
+        "about": "show",
+        "attributes": "hide",
+        "colors": "hide",
+        "console": "show",
+        "diagnostics": "hide",
+        "exchange": "show",
+        "lists": "hide",
+        "locale_de-DE": "hide",
+        "locale_en-GB": "hide",
+        "locale_en-US": "hide",
+        "locale_fr-FR": "hide",
+        "locale_it-IT": "hide",
+        "locale_pl-PL": "hide",
+        "settings": "hide",
+        "shapes": "hide",
+        "source": "show",
+        "sql": "show",
+        "styleDesigner": "show",
+        "styles": "show",
+        "svg": "show"
+      }
+    },
+    "graph": {
+      "zoom": 100
+    },
+    "settings": {
+      "graphvizPath": "",
+      "imagePath": "C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering;C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering",
+      "additionalGraphOptions": "",
+      "pictureName": "",
+      "additionalCmdParameters": ""
+    },
+    "source": {
+      "indent": 4,
+      "buttons": [
+        {
+          "id": "SourceWeb1",
+          "buttonText": "Graphviz Attributes",
+          "url": "https://graphviz.org/doc/info/attrs.html",
+          "screenTip": "Describes the attributes used by various Graphviz tools",
+          "superTip": "The table gives the name of the attribute, the graph components (node, edge, etc.) which use the attribute and the type of the attribute (strings representing legal values of that type). Where applicable, the table also gives a default value for the attribute, a minimum allowed setting for numeric attributes, and certain restrictions on the use of the attribute.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb2",
+          "buttonText": "Pocket Reference",
+          "url": "http://graphs.grevian.org/graph",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "An on-line code editor for Graphviz written by Josh Hayes-Sheen for Computer Science students.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb3",
+          "buttonText": "Graphviz Online",
+          "url": "http://dreampuf.github.io/GraphvizOnline/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Online Graphviz editor with syntax higlighting.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb4",
+          "buttonText": "Sketchviz",
+          "url": "https://sketchviz.com/new",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "Renders Graphviz diagrams as if sketched by hand.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb5",
+          "buttonText": "Graphviz Fiddle",
+          "url": "http://stamm-wilbrandt.de/GraphvizFiddle/",
+          "screenTip": "On-line code editor for Graphviz",
+          "superTip": "GraphvizFiddle draws DOT language [directed] graphs. It is a dual-view Graphviz editor and playground for Graphviz written by Hermann Stamm-Wilbrandt.",
+          "visible": "show"
+        },
+        {
+          "id": "SourceWeb6",
+          "buttonText": "Dot to Ascii",
+          "url": "https://dot-to-ascii.ggerganov.com/",
+          "screenTip": "Renders Graphviz diagrams as ascii art.",
+          "superTip": "Renders Graphviz diagrams as ascii art.",
+          "visible": "show"
+        }
+      ]
+    },
+    "sql": {
+      "cluster": "CLUSTER",
+      "clusterLabel": "CLUSTER LABEL",
+      "clusterStyleName": "CLUSTER STYLE NAME",
+      "clusterAttributes": "CLUSTER ATTRIBUTES",
+      "clusterTooltip": "CLUSTER TOOLTIP",
+      "clusterPlaceholder": "{clc}",
+      "clusterLevelPlaceholder": "{level}",
+      "clusterMaxLevels": 25,
+      "subcluster": "SUBCLUSTER",
+      "subclusterLabel": "SUBCLUSTER LABEL",
+      "subclusterStyleName": "SUBCLUSTER STYLE NAME",
+      "subclusterAttributes": "SUBCLUSTER ATTRIBUTES",
+      "subclusterTooltip": "SUBCLUSTER TOOLTIP",
+      "subclusterPlaceholder": "{scc}",
+      "recordsetPlaceholder": "{rsc}",
+      "splitLength": "SPLIT LENGTH",
+      "lineEnding": "LINE ENDING",
+      "treeQuery": "TREE QUERY",
+      "whereColumn": "WHERE COLUMN",
+      "whereValue": "WHERE VALUE",
+      "maxDepth": "MAX DEPTH",
+      "iterateSwitch": "ITERATE",
+      "iterateQueryId": "SQL FOR ID",
+      "iterateQueryData": "SQL FOR DATA",
+      "iteratePlaceholder": "{id}",
+      "enumerateSwitch": "ENUMERATE",
+      "enumerateStartAt": "START AT",
+      "enumerateStopAt": "STOP AT",
+      "enumerateStepBy": "STEP BY",
+      "enumeratePlaceholder": "{step}",
+      "enumerateMax": "MAX CYCLES",
+      "concatenateSwitch": "CONCATENATE",
+      "concatenateField": "FIELD",
+      "concatenateMapTo": "ASSIGN TO",
+      "concatenatePrefix": "PREFIX",
+      "concatenateSuffix": "SUFFIX",
+      "concatenateSeparator": "SEPARATOR",
+      "createEdges": "CREATE EDGES",
+      "createRank": "CREATE RANK",
+      "filterColumn": "",
+      "filterValue": "",
+      "closeConnections": true,
+      "retryLimit": 3,
+      "maxConnectionMinutes": 15
+    },
+    "extensions": {
+      "tabName": "Extensions",
+      "customCode": {
+        "groupName": "Custom Code",
+        "buttons": [
+          {
+            "id": "ExtCode1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtCode6",
+            "visible": "hide"
+          }
+        ]
+      },
+      "webResources": {
+        "groupName": "Web Resources",
+        "buttons": [
+          {
+            "id": "ExtWeb1",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb2",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb3",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb4",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb5",
+            "visible": "hide"
+          },
+          {
+            "id": "ExtWeb6",
+            "visible": "hide"
+          }
+        ]
+      }
+    }
+  },
+  "layouts": {
+    "data": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 15,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "item",
+          "column": 2,
+          "heading": "Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "label",
+          "column": 4,
+          "heading": "Label",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "outsideLabel",
+          "column": 5,
+          "heading": "External Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tailLabel",
+          "column": 3,
+          "heading": "Tail Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "headLabel",
+          "column": 6,
+          "heading": "Head Label",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "tooltip",
+          "column": 7,
+          "heading": "Tooltip",
+          "width": 0,
+          "hidden": true,
+          "wrapText": true
+        },
+        {
+          "id": "relatedItem",
+          "column": 8,
+          "heading": "Related Item",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "styleName",
+          "column": 9,
+          "heading": "Style Name",
+          "width": 26.57,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "extraAttributes",
+          "column": 10,
+          "heading": "Attributes",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "properties",
+          "column": 11,
+          "heading": "Properties",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "graphDisplayColumn",
+          "column": 12,
+          "heading": "",
+          "width": 8.43,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "styles": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 58.5,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 43.5,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "name",
+          "column": 2,
+          "heading": "Style Name",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "description",
+          "column": 3,
+          "heading": "Description",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 4,
+          "heading": "Format",
+          "width": 52.43,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "type",
+          "column": 5,
+          "heading": "Style Type",
+          "width": 13.86,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view0",
+          "column": 6,
+          "heading": "All Styles",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view1",
+          "column": 7,
+          "heading": "No Clusters",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "view2",
+          "column": 8,
+          "heading": "No Edges",
+          "width": 5,
+          "hidden": false,
+          "wrapText": null
+        }
+      ],
+      "ranges": [
+        {
+        }
+      ]
+    },
+    "sql": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "sqlStatement",
+          "column": 2,
+          "heading": "SQL SELECT Statement",
+          "width": 158,
+          "hidden": false,
+          "wrapText": null
+        },
+        {
+          "id": "excelFile",
+          "column": 3,
+          "heading": "Data File",
+          "width": 27,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "status",
+          "column": 4,
+          "heading": "Status",
+          "width": 23.29,
+          "hidden": false,
+          "wrapText": true
+        }
+      ]
+    },
+    "svg": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 12.75,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 12,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "flag",
+          "column": 1,
+          "heading": "",
+          "width": 1.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "find",
+          "column": 2,
+          "heading": "Find",
+          "width": 50.43,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "replace",
+          "column": 3,
+          "heading": "Replace",
+          "width": 149.29,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    },
+    "source": {
+      "rows": [
+        {
+          "id": "heading",
+          "row": 1,
+          "height": 22.5,
+          "hidden": false
+        },
+        {
+          "id": "first",
+          "row": 2,
+          "height": 15,
+          "hidden": false
+        }
+      ],
+      "columns": [
+        {
+          "id": "lineNumber",
+          "column": 1,
+          "heading": "Line",
+          "width": 6.71,
+          "hidden": false,
+          "wrapText": false
+        },
+        {
+          "id": "source",
+          "column": 2,
+          "heading": "Graphviz Source",
+          "width": 254,
+          "hidden": false,
+          "wrapText": null
+        }
+      ]
+    }
+  }
+}
