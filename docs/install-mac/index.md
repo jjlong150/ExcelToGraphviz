@@ -21,7 +21,7 @@ description: macOS installation guide for Relationship Visualizer. Homebrew Grap
 
 3.  Confirm Graphviz is working. Run the command `dot -V` to emit the version of Graphviz.
 
-4.  Download file `Relationship Visualizer.zip` from [SourceForge](https://sourceforge.net/projects/relationship-visualizer/) and unzip it.
+4.  Download file [`Relationship Visualizer.zip`](https://sourceforge.net/projects/relationship-visualizer/files/Relationship%20Visualizer.zip/download) from SourceForge and unzip it.
 
 5.  In the terminal window, `cd` into the unzipped folder and run the installer:
 

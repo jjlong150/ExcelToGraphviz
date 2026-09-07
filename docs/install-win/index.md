@@ -1,40 +1,33 @@
 ---
 title: Install Relationship Visualizer on Windows
-description: Install Relationship Visualizer on Windows with Graphviz setup, PATH configuration, plugin registration, file unblocking, and secure Excel macro enabling.
+description: Install Relationship Visualizer on Windows using the guided installer or manually, with Graphviz setup, PATH configuration, plugin registration, file unblocking, and secure Excel macro enabling.
 ---
 
 # Microsoft Windows Installation Instructions
 
-## Brief Instructions
+## Quick Install (Recommended)
 
-Steps to Install **Relationship Visualizer** on Microsoft Windows
+**Relationship Visualizer** offers a guided Windows installer, `RelationshipVisualizerSetup.exe`, that automates most of the manual setup below. Perform these steps to install on **Windows**:
 
-1. [Download and Install *Graphviz*](./#download-and-install-graphviz) 
+1. [Download and Install *Graphviz*](./#download-and-install-graphviz)
    - Choose and run either the 32-bit or 64-bit [Graphviz EXE Installer](https://graphviz.org/download/).
-   - Ensure the Graphviz `bin` directory is on the `PATH`
+   - The default installer options are fine, including "Add Graphviz to the system PATH" — useful since Graphviz is a command-line program.
 
-2. [Open Command Prompt](./#open-command-prompt) using the `Run as Administrator` option.
+2. Download [`RelationshipVisualizerSetup.exe`](https://sourceforge.net/projects/relationship-visualizer/files/RelationshipVisualizerSetup.exe/download) from SourceForge and run it.
 
-   - *Register the Plugins:* Run the command `dot -c` to register Graphviz plugins.
-   - *Confirm the Installation:* Run the command `dot -V` to verify the Graphviz version.
+3. Follow the wizard: accept the MIT License, choose where to install (it defaults to a `Relationship Visualizer` folder under **My Documents**, since you'll likely want to browse to and copy the workbook the same way you would any other document), and choose whether to include the sample workbooks (they use extra disk space, so this is unchecked by default). Click **Install**.
 
-3. [Download the Relationship Visualizer assets](./#download-the-relationship-visualizer-assets) 
-   - Obtain `RelationshipVisualizer.zip` from [SourceForge](https://sourceforge.net/projects/relationship-visualizer/).
-   - *Optional:* Validate SHA1 and/or MD5 checksums available [here](https://sourceforge.net/projects/relationship-visualizer/files/) against the file downloaded.
+   ::: tip What the installer does for you
+   It detects Graphviz's `dot.exe` automatically, registers its plugins (equivalent to running `dot -c`), and marks the install folder as an Excel "Trusted Location" for your account — so opening the workbook shows no macro-security prompt. Unlike a manually unzipped download, installer-placed files also don't carry Windows' "unblock this file" flag, so there's no separate Unblock step either.
+   :::
 
-4. [Extract the files from the Zip file](./#extract-files-from-zip-file) 
-   - Extract all files to a local directory.
-  
-5. [Unblock the spreadsheet file](./#unblock-the-spreadsheet-file)
-     - Right-click (or `Alt+Enter`) on `Relationship Visualizer.xlsm` and select `Properties`.
-     - Check `Unblock` at the bottom of the Properties dialog, then click OK.
+4. Open **Relationship Visualizer.xlsm** from the Start Menu shortcut the installer created, and save it as a workbook template if you'd like a clean copy to start new diagrams from.
 
-6. [Open Microsoft Excel](./#open-microsoft-excel)
-   - Enable Macros in Microsoft Excel's `Trust Center` options.
-   - Open the `Relationship Visualizer.xlsm` workbook, and grant permissions if prompted.
-   - Save the file as a workbook template
+If you'd rather install by hand from the plain zip download, or need to troubleshoot, follow the [Manual Installation](#manual-installation) steps below instead.
 
-## Detailed Instructions
+## Manual Installation
+
+The steps below explain, in detail, everything the Windows installer from [Quick Install](#quick-install-recommended) does automatically (apart from installing Graphviz itself, which either path requires). Use this section if you prefer the plain zip download, want full control over each step, or need to troubleshoot a failed install.
 
 ### Download and Install Graphviz
 
