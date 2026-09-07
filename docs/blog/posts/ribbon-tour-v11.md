@@ -1,11 +1,11 @@
 ---
 blogPost: true
 title: A Tour of the Redesigned Ribbon
-description: Version 11.0 splits the ribbon into a new Settings tab, a new Data tab, and a trimmed-down Graphviz tab. Here's a guided tour of what moved where.
-date: 2026-09-01
+description: Version 11.0 adds new Data and Settings tabs, and a streamlined Graphviz tab. Here's a quick guided tour of what moved where.
+date: 2026-09-08
 author: jjlong150
 tags: ['ribbon', 'how-to', 'v11.0']
-published: false
+published: true
 readingTime: true
 sidebar: false
 ---
@@ -31,13 +31,19 @@ The old, single Graphviz tab is now two tabs. The new Data tab owns everything r
 - **Options** - the Node, Edge, Graph, and new Cluster menus, with new tooltip-inclusion controls.
 - **'data' Worksheet** - the Show Columns menu is now organized into labeled sections, with a new Show Properties toggle.
 
-![Screen capture of the Data ribbon tab](../images/data-tab.png)
+|     |
+| :-: |
+| ![Screen capture of the Data ribbon tab](../images/data-tab.png) |
+|     |
 
 ## Graphviz tab, trimmed down
 
 With generation and publishing moved out, the Graphviz tab is now scoped to genuine Graphviz-only options — layout engine, splines, direction, output order, and per-layout settings. 
 
-![Screen capture of the Graphviz ribbon tab](../images/graphviz-tab.png)
+|     |
+| :-: |
+| ![Screen capture of the Graphviz ribbon tab](../images/graphviz-tab.png) |
+|     |
 
 Splines controls (Compound, Line, Spline) are back as live, selectable buttons after being disabled for a while due to space constraints, and a new Depth option joins the existing Breadth option for output order. 
 
@@ -47,6 +53,9 @@ If you're focused purely on Knowledge Graphs, a new toggle on the Launchpad tab 
 
 Cluster style names, written onto a cluster's opening and closing brace rows, can now be built from a configurable Naming Pattern instead of a fixed suffix. The old Suffix (Begin)/Suffix (End) fields are renamed Affix fields, and a new Naming Pattern field controls where that value is inserted, using `{name}` and `{affix}` placeholders. The default is `{name} {affix}`, but you can just as easily make the affix a prefix instead.
 
-![Screen capture of the Styles ribbon tab](../images/styles-tab.png)
+|     |
+| :-: |
+| ![Screen capture of the Styles ribbon tab](../images/styles-tab.png) |
+|     |
 
 That's the tour. See the [full changelog](/changelog/) for the complete list of ribbon changes, including the SVG tab's new on/off controls.
