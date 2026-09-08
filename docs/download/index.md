@@ -7,6 +7,15 @@ description: Download Relationship Visualizer from SourceForge — a guided Wind
 
 The **Relationship Visualizer** is hosted on [SourceForge](https://sourceforge.net/projects/relationship-visualizer/). SourceForge is utilized for its reliable virus scanning and the availability of checksums, ensuring the downloaded files are secure and free from tampering.
 
+<div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:16px 0; flex-wrap:wrap;">
+  <a href="https://sourceforge.net/projects/relationship-visualizer/" target="_blank" rel="noopener">
+    <img src="/sourceforge-community-choice.png" alt="SourceForge Community Choice Award" width="70">
+  </a>
+  <span style="font-size:0.95em; color:#555;">
+    ★★★★★ 5.0 on <a href="https://sourceforge.net/projects/relationship-visualizer/reviews/" target="_blank" rel="noopener">SourceForge</a> · 10,000+ downloads
+  </span>
+</div>
+
 ## Windows
 
 Two download options are available for Windows:

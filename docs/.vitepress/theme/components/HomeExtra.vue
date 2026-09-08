@@ -32,7 +32,9 @@ const html = `
   </table>
 
   <center>
-    <img src="sourceforge-community-choice.png" alt="SourceForge Community Choice Award" width="90" style="margin-top: 8px;">
+    <a href="https://sourceforge.net/projects/relationship-visualizer/" target="_blank" rel="noopener">
+      <img src="sourceforge-community-choice.png" alt="SourceForge Community Choice Award" width="90" style="margin-top: 8px;">
+    </a>
   </center>
 `
 </script>
