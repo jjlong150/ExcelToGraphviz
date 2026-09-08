@@ -1,0 +1,13 @@
+diff --git a/node_modules/vitepress-plugin-blog/dist/plugin.js b/node_modules/vitepress-plugin-blog/dist/plugin.js
+index 55cf987..6eeb79a 100644
+--- a/node_modules/vitepress-plugin-blog/dist/plugin.js
++++ b/node_modules/vitepress-plugin-blog/dist/plugin.js
+@@ -41,7 +41,7 @@ function b(u, c, p) {
+         try {
+           const s = D.readFileSync(t, "utf-8"), { data: l, content: h } = R(s);
+           if (l.published === !1) continue;
+-          const m = y.relative(u, t), g = "/" + m.replace(/\\/g, "/").replace(/\.md$/, "").replace(/\/index$/, "/"), f = h.trim().split(/\s+/).filter(Boolean).length, I = Math.max(1, Math.round(f / p)), v = l.description ?? "", S = typeof v == "string" ? v.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "", M = l.slug ?? ((a = g.replace(/\/$/, "").split("/").pop()) == null ? void 0 : a.replace(/\.html$/, "")) ?? "";
++          const m = y.relative(u, t), g0 = "/" + m.replace(/\\/g, "/").replace(/\.md$/, "").replace(/\/index$/, "/"), g = g0.endsWith("/") ? g0 : g0 + ".html", f = h.trim().split(/\s+/).filter(Boolean).length, I = Math.max(1, Math.round(f / p)), v = l.description ?? "", S = typeof v == "string" ? v.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "", M = l.slug ?? ((a = g.replace(/\/$/, "").split("/").pop()) == null ? void 0 : a.replace(/\.html$/, "")) ?? "";
+           n.push({
+             title: l.title ?? "Untitled post",
+             description: S,
