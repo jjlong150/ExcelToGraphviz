@@ -1,6 +1,6 @@
 ---
 title: Configure Relationship Visualizer Settings
-description: Learn how to adjust global settings, preferences, and behavior for the Relationship Visualizer.
+description: Learn how to adjust global settings, preferences, directories, and command-line parameters that control how Relationship Visualizer builds your diagrams.
 ---
 
 # Changing Master Settings

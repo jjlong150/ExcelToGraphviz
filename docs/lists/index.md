@@ -1,6 +1,6 @@
 ---
 title: View Internal Relationship Visualizer Lists
-description: Explore internal configuration lists used by Relationship Visualizer, such as excluded fonts.
+description: Explore the internal configuration lists used by Relationship Visualizer, such as excluded fonts, styles, and dropdown values on the settings worksheet.
 ---
 
 # Lists Worksheet

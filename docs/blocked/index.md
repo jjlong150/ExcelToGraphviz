@@ -1,6 +1,6 @@
 ---
 title: Fix Edge Blocking the Graphviz Download
-description: Step‑by‑step instructions for fixing Microsoft Edge blocking the Graphviz installer download.
+description: Step-by-step instructions for fixing the Microsoft Edge warning that blocks the Graphviz installer download, so you can install it and continue setup.
 prev:
   text: 'Download Graphviz Media'
   link: '/install-win/#step-1-download-graphviz-media'

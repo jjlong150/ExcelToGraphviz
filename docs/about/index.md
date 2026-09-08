@@ -1,6 +1,6 @@
 ---
 title: About Relationship Visualizer
-description: Learn about the copyright, author contact information, and repositories of Relationship Visualizer.
+description: Learn about Relationship Visualizer's copyright, author contact information, and GitHub repositories for the free Excel-to-Graphviz diagramming tool.
 ---
 # Relationship Visualizer
 

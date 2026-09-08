@@ -1,6 +1,6 @@
 ---
 title: Run Diagnostics to Troubleshoot Issues
-description: Use built-in diagnostic tools to identify configuration problems, and manage image caches.
+description: Use the built-in diagnostics worksheet to identify configuration problems, review environment details, and manage image caches in Relationship Visualizer.
 ---
 
 # Diagnostics Worksheet

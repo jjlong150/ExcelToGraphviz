@@ -1,6 +1,6 @@
 ---
 title: Enumerate Values for Node Labels
-description: Use SQL enumeration to generate numbered labels or ordered node sequences in your diagrams.
+description: Use SQL enumeration in Relationship Visualizer to generate numbered labels or ordered node sequences, filling gaps and building sequences in diagrams.
 ---
 
 # Enumerate Values

@@ -1,6 +1,6 @@
 ---
 title: SQL Syntax Reference
-description: A complete reference for SQL syntax supported by Relationship Visualizer, including functions, operators, and extensions.
+description: A complete reference for the SQL syntax supported by Relationship Visualizer's Excel-based SQL dialect, including functions, operators, and extensions.
 ---
 
 # SQL Syntax Reference

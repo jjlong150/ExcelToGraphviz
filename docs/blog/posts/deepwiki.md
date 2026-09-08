@@ -1,7 +1,7 @@
 ---
 blogPost: true
 title: Excel to Graphviz Gains DeepWiki
-description: I've created complete, wiki-style documentation using DeepWiki AI. Check it out!
+description: Excel to Graphviz now has AI-generated, wiki-style documentation built with DeepWiki, covering architecture overviews, module summaries, and code maps.
 date: 2026-04-15
 author: jjlong150
 tags: ['documentation', 'deepwiki', 'ai']

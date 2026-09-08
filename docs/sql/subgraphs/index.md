@@ -1,6 +1,6 @@
 ---
 title: Align Nodes Using Subgraphs
-description: Use SQL extensions to align nodes horizontally or vertically by generating structured subgraphs.
+description: Use SQL extensions in Relationship Visualizer to align nodes horizontally or vertically, grouping peers, stages, and layers into structured Graphviz subgraphs.
 ---
 
 # Align Nodes on the Same Level
