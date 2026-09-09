@@ -313,8 +313,8 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
         "@context": "https://schema.org",
         "@type": "HowTo",
         "name": "Install Relationship Visualizer on Windows",
-        "description": "Step-by-step instructions for installing Graphviz, configuring command-line tools, downloading the Relationship Visualizer assets, unblocking the spreadsheet, and enabling macros in Excel.",
-        "totalTime": "PT15M",
+        "description": "Step-by-step instructions for installing Graphviz and using the guided Windows installer to set up Relationship Visualizer, including automatic Graphviz plugin registration and Excel Trusted Location configuration.",
+        "totalTime": "PT10M",
         "tool": [
           { "@type": "HowToTool", "name": "Microsoft Excel" },
           { "@type": "HowToTool", "name": "Graphviz" }
@@ -323,32 +323,22 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
           {
             "@type": "HowToStep",
             "name": "Download and install Graphviz",
-            "text": "Download the 32-bit or 64-bit Graphviz EXE installer and ensure the Graphviz bin directory is added to the PATH."
+            "text": "Download and run the 32-bit or 64-bit Graphviz EXE installer using its default options."
           },
           {
             "@type": "HowToStep",
-            "name": "Open Command Prompt as Administrator",
-            "text": "Run Command Prompt using 'Run as Administrator', then execute 'dot -c' to register plugins and 'dot -V' to confirm the installation."
+            "name": "Download and run the Relationship Visualizer installer",
+            "text": "Download RelationshipVisualizerSetup.exe from SourceForge and run it."
           },
           {
             "@type": "HowToStep",
-            "name": "Download the Relationship Visualizer assets",
-            "text": "Download RelationshipVisualizer.zip from SourceForge and optionally validate SHA1 or MD5 checksums."
+            "name": "Follow the installer wizard",
+            "text": "Accept the MIT License, choose an install location, choose whether to include the sample workbooks, and click Install. The installer detects Graphviz automatically, registers its plugins, and marks the install folder as a trusted Excel location."
           },
           {
             "@type": "HowToStep",
-            "name": "Extract the files",
-            "text": "Extract all files from the ZIP archive to a local directory."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Unblock the spreadsheet file",
-            "text": "Right-click Relationship Visualizer.xlsm, open Properties, and check the Unblock box before clicking OK."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Enable macros and open Excel",
-            "text": "Enable VBA macros in Excel’s Trust Center, then open Relationship Visualizer.xlsm and allow macros when prompted."
+            "name": "Open the workbook",
+            "text": "Open Relationship Visualizer.xlsm from the Start Menu shortcut the installer created, and save it as a workbook template if desired."
           }
         ]
       }
@@ -365,8 +355,8 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
         "@context": "https://schema.org",
         "@type": "HowTo",
         "name": "Install Relationship Visualizer on macOS",
-        "description": "Step-by-step instructions for installing Graphviz using Homebrew, configuring plugins, preparing the AppleScript file, and enabling macros in Excel on macOS.",
-        "totalTime": "PT15M",
+        "description": "Step-by-step instructions for installing Graphviz with Homebrew and running the bundled install.sh script, which configures Relationship Visualizer's Graphviz detection and AppleScript sandbox setup on macOS.",
+        "totalTime": "PT10M",
         "tool": [
           { "@type": "HowToTool", "name": "Microsoft Excel" },
           { "@type": "HowToTool", "name": "Graphviz" },
@@ -390,28 +380,13 @@ if (['download/index.md', 'pricing/index.md'].includes(pageData.relativePath)) {
           },
           {
             "@type": "HowToStep",
-            "name": "Download RelationshipVisualizer.zip",
-            "text": "Download the RelationshipVisualizer.zip file from SourceForge, which contains the spreadsheet, AppleScript file, documentation, and samples."
+            "name": "Download and unzip the Relationship Visualizer assets",
+            "text": "Download RelationshipVisualizer.zip from SourceForge and unzip it."
           },
           {
             "@type": "HowToStep",
-            "name": "Unzip the downloaded file",
-            "text": "Extract the contents of RelationshipVisualizer.zip to any local directory."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Determine the path to the dot command",
-            "text": "Run 'which dot' in Terminal to determine the installation path of the Graphviz dot command."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Edit ExcelToGraphviz.applescript if needed",
-            "text": "If the dot command is not located at /usr/local/bin/dot, edit ExcelToGraphviz.applescript and update the path on line 2 to match the output of 'which dot'."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Copy the AppleScript file to the Excel sandbox folder",
-            "text": "Copy ExcelToGraphviz.applescript to ~/Library/Application Scripts/com.microsoft.Excel to comply with macOS sandboxing rules."
+            "name": "Run the install.sh script",
+            "text": "In Terminal, cd into the unzipped folder and run 'bash install.sh'. It accepts the MIT License, detects the dot command automatically, updates and installs ExcelToGraphviz.applescript into Excel's sandbox folder, and offers to install the sample workbooks."
           },
           {
             "@type": "HowToStep",
