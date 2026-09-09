@@ -212,7 +212,12 @@ export default defineConfig({
     // below; this just also exposes it as plain OG article properties.
     // article:author must be a profile URL (per the Open Graph article
     // spec) - LinkedIn's Post Inspector silently ignores a bare name.
+    // The plain name="author" tag's value also appears to need to match
+    // an actual LinkedIn identity (the profile's vanity slug) rather than
+    // an arbitrary handle - "jjlong150" (the GitHub id, used elsewhere as
+    // the visible blog byline) didn't satisfy LinkedIn's author check.
     const AUTHOR_PROFILE_URL = 'https://www.linkedin.com/in/jeffreyjlong/'
+    const AUTHOR_META_NAME = 'jeffreyjlong'
 
     if (isBlogPost) {
       const author = pageData.frontmatter.author
@@ -222,7 +227,7 @@ export default defineConfig({
 
       pageData.frontmatter.head.push(
         ...(author ? [
-          ['meta', { name: 'author', content: author }] as [string, Record<string, string>],
+          ['meta', { name: 'author', content: AUTHOR_META_NAME }] as [string, Record<string, string>],
           ['meta', { property: 'article:author', content: AUTHOR_PROFILE_URL }] as [string, Record<string, string>]
         ] : []),
         ...(publishedTime ? [
