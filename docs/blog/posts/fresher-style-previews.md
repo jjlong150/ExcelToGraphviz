@@ -2,10 +2,10 @@
 blogPost: true
 title: Fresher Style Previews After Upgrading
 description: Upgrading to v11.0 automatically refreshes your Style Designer's color and font preview galleries. Here's why, and what changes to expect.
-date: 2026-09-11
+date: 2026-09-09
 author: jjlong150
 tags: ['style-designer', 'v11.0']
-published: false
+published: true
 readingTime: true
 sidebar: false
 ---
