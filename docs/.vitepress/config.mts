@@ -210,6 +210,10 @@ export default defineConfig({
     // look for these companion properties to show an author/date on the
     // share card. The data already exists in frontmatter for JSON-LD
     // below; this just also exposes it as plain OG article properties.
+    // article:author must be a profile URL (per the Open Graph article
+    // spec) - LinkedIn's Post Inspector silently ignores a bare name.
+    const AUTHOR_PROFILE_URL = 'https://www.linkedin.com/in/jeffreyjlong/'
+
     if (isBlogPost) {
       const author = pageData.frontmatter.author
       const publishedTime = pageData.frontmatter.date
@@ -219,7 +223,7 @@ export default defineConfig({
       pageData.frontmatter.head.push(
         ...(author ? [
           ['meta', { name: 'author', content: author }] as [string, Record<string, string>],
-          ['meta', { property: 'article:author', content: author }] as [string, Record<string, string>]
+          ['meta', { property: 'article:author', content: AUTHOR_PROFILE_URL }] as [string, Record<string, string>]
         ] : []),
         ...(publishedTime ? [
           ['meta', { property: 'article:published_time', content: publishedTime }] as [string, Record<string, string>]
