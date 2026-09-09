@@ -67,12 +67,12 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Blog', link: '/blog/' },
       { text: "Resources",
             items: [
               { text: 'About', link: '/about/' },
-              { text: 'Pricing', link: '/pricing/' },
               { text: 'License', link: '/license/' },
+              { text: 'Pricing', link: '/pricing/' },
+              { text: 'Blog', link: '/blog/' },
               { text: 'Privacy', link: '/privacy/' },
               { text: 'Security', link: '/security/' },
               { text: 'Credits', link: '/acknowledge/' },

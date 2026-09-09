@@ -21,6 +21,9 @@ hero:
     - theme: alt
       text: How it Works
       link: /overview/
+    - theme: alt
+      text: Blog
+      link: /blog/
 
 features:
   - icon:
