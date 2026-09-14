@@ -71,8 +71,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 The `Format` group controls facilitate editing the style format.
 
+| |
+|-|
 | ![Format group icons.](./styles-format-edit.png) |
-| -------------------------------------------------- |
+| |
 
 | Label       | Control Type  | Description    |
 | ----------- | :----------: | -------------- |
@@ -80,8 +82,10 @@ The `Format` group controls facilitate editing the style format.
 
 ### Previews
 
+| |
+|-|
 | ![Previews group icons.](./styles-ribbon-tab-previews.png) |
-| -------------------------------------------------- |
+| |
 
 The **Previews** group provides the action buttons used to manage the style preview images on the `Styles` worksheet.
 
@@ -91,18 +95,18 @@ The **Previews** group provides the action buttons used to manage the style prev
 | Refresh All | Button        | Deletes all preview images on the `styles` worksheet and generates a completely new set. This is useful when you make a bulk change to *all* style definitions, such as updating a font name or size. |
 | Clear All   | Button        | Deletes all the images on the `styles` worksheet. |
 
-### Style Naming
+### Cluster Style Naming
 
+| |
+|-|
 | ![Style naming group icons.](./styles-ribbon-tab-style-naming.png) |
-| -------------------------------------------------- |
+| |
 
-Two rows are created when you use the [`style designer`](../designer/) to define a style for a cluster. These settings allow you to specify the suffix appended to the style name to indicate where the cluster begins and ends.
+Two rows are created when you use the [`style designer`](../designer/) to define a style for a cluster. These settings allow you to specify the affix appended to the style name to indicate where the cluster begins and ends.
 
-The default suffixes are **" Begin"** and **" End"**, but you may choose alternatives such as **" Start"/" Stop"** or **" Open"/" Close"**.
+The Naming Pattern defines how the style name should be constructed. It contains 2 placeholders `{name}` and `{affix}` which are replaced when the styles are saved. The default naming pattern is `{name} {affix}` (suffix style). You are free to change the naming pattern to values such as `{name} {affix}` (no blank between values), `{name}_{affix}` (slugified format), or `{affix} {name}` (prefix style). 
 
-These values are also used by the `sql` worksheet when emitting rows when `CLUSTER` and `SUBCLUSTER` clauses are used in the `SQL` statement. See the [sql](../sql/) topic for more information.
-
-Two rows are created when you use the [`style designer`](../designer/) to define a style for a cluster. These settings specify the suffix appended to the style name to indicate where the cluster begins and ends. The default suffixes are **"Begin"** and **"End"**, but you may choose alternatives such as **"Start"/"Stop"** or **"Open"/"Close"**.
+The default affixes are **"Begin"** and **"End"**, but you may choose alternatives such as **"Start"/"Stop"** or **"Open"/"Close"**.
 
 These suffix values are also used by the `sql` worksheet when generating rows for `CLUSTER` and `SUBCLUSTER` clauses in an `SQL` statement. For more details on how SQL-driven clustering works, see the [Grouping Data into Clusters and Subclusters](../sql/extensions/#grouping-data-into-clusters-and-subclusters) topic.
 
@@ -113,8 +117,10 @@ These suffix values are also used by the `sql` worksheet when generating rows fo
 
 ### Help
 
+| |
+|-|
 | ![Help group icons.](./styles-ribbon-tab-help.png) |
-| -------------------------------------------------- |
+| |
 
 Provides a link to the `Help` content for the `Info` worksheet (i.e. this web page).
 
