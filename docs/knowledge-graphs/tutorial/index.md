@@ -25,11 +25,16 @@ The **Relationship Visualizer** can help with that!
 
 ## Overview
 
-This package is two tutorials in one, because it turns out they're the same tutorial. The first half shows how to graph connections between musicians and rock bands using the Relationship Visualizer with SQL-driven queries, producing a large, styled Graphviz diagram. The second half takes that exact same SQL-driven data and publishes it as a **Knowledge Graph** — a structured JSON document built for handing to an AI, not for rendering as a picture.
+This package is two tutorials in one, because it turns out they're the same tutorial. The first half shows how to graph connections between musicians and rock bands using the Relationship Visualizer with SQL-driven queries, producing a large, styled Graphviz diagram. The second half takes that exact same SQL-driven data and publishes it as a **Knowledge Graph**, i.e. a structured JSON document built for handing to an AI, not for rendering as a picture.
 
-Both outputs come from one worksheet, one set of SQL queries, and one set of style definitions. The diagram is how you — a human — verify the shape of the graph is right. The Knowledge Graph is how you hand that same, now-verified structure to an AI and ask it something you don't already know the answer to. I do exactly that later in this tutorial, using the cartoon above as the test case.
+Both outputs come from one worksheet, one set of SQL queries, and one set of style definitions. The diagram is how you, as a human, verify the shape of the graph is right. The Knowledge Graph is how you hand that same, now-verified structure to an AI and ask it something you don't already know the answer to. I do exactly that later in this tutorial, using the cartoon above as the test case.
 
-There's a third piece connecting the two: this diagram is large, having 574 nodes, and 627 edges, which is exactly the scenario v11.0's interactive SVG viewer was built for. Publish it as SVG with postprocessing turned on, and the same sprawling diagram that used to be unreadable at any single zoom level becomes navigable: a toolbar that stays put, hover labels for dense clusters, and click-to-highlight filtering. So this one dataset ends up demonstrating all three of v11.0's headline capabilities at once — a diagram you can actually explore, a Knowledge Graph you can hand to an AI, and the same underlying relationships driving both.
+There's a third piece connecting the two: this diagram is large, having 574 nodes, and 627 edges, which is exactly the scenario v11.0's interactive SVG viewer was built for. Publish it as SVG with postprocessing turned on, and the same sprawling diagram that used to be unreadable at any single zoom level becomes navigable: a toolbar that stays put, hover labels for dense clusters, and click-to-highlight filtering. 
+
+This one dataset ends up demonstrating all three of v11.0's headline capabilities at once:
+1. A diagram you can actually explore
+2. A Knowledge Graph you can hand to an AI, and 
+3. The same underlying relationships driving both representations.
 
 The included workbook, `musicians.xlsx`, provides a representative dataset containing 443 real musicians and 131 real bands, suitable for large-scale force-directed diagram layout and, as it turns out, for genuinely interesting graph analysis.
 
@@ -55,9 +60,9 @@ Once you've got the workbook open:
 
 ## Quick Start: Explore the Diagram Interactively
 
-At 574 nodes and 627 edges, this diagram is big enough that the old choice — zoomed out and unreadable, or zoomed in and lost — was a real problem. Version 11.0's interactive SVG viewer was built for graphs exactly this size, and this dataset is a good excuse to try it.
+At 574 nodes and 627 edges, this diagram is big enough that the old choice, zoomed out and unreadable, or zoomed in and lost was a real problem. Version 11.0's interactive SVG viewer was built for graphs exactly this size, and this dataset is a good excuse to try it.
 
-1. On the **Settings** or **SVG** tab, turn on SVG postprocessing. It ships off by default and asks for a one-time confirmation, since it works by injecting JavaScript into the exported file — see the [Security](/security/) page for why.
+1. On the **Settings** or **SVG** tab, turn on SVG postprocessing. It ships off by default and asks for a one-time confirmation, since it works by injecting JavaScript into the exported file. See the [Security](/security/) page for why.
 2. Publish the diagram as SVG (or check **Graph**, **DOT**, and **Knowledge Graph** together for a matched set, as covered next).
 3. Open the exported SVG in a browser. To make it even easier, beneath the "Publish" button is an option to check "Open after publishing". When checked, the files are opened after publishing in whatever tool you have associated with the `json`, `gv`, and `svg` file extensions..
 
@@ -65,9 +70,9 @@ At 574 nodes and 627 edges, this diagram is big enough that the old choice — z
 | -------------------------------------------------------------------- |
 | ![Screen print of the interactive SVG file viewer](./svg-viewer.gif) |
 
-You get a toolbar that stays a fixed, readable size no matter how far you're zoomed in, scroll-to-zoom and drag-to-pan, hover labels for reading node names in a dense genre cluster without zooming in first, and click-to-highlight filtering — click any musician to see just their bands, or any band to see just its members. Full details are in [Exploring diagrams just got easier](/blog/posts/interactive-diagrams).
+You get a toolbar that stays a fixed, readable size no matter how far you're zoomed in, scroll-to-zoom and drag-to-pan, hover labels for reading node names in a dense genre cluster without zooming in first, and click-to-highlight filtering. Click any musician to see just their bands, or any band to see just its members. Full details are in [Exploring diagrams just got easier](/blog/posts/interactive-diagrams).
 
-It's also a good way to sanity-check the graph's shape before publishing it as a Knowledge Graph — which is where we're headed next.
+It's also a good way to sanity-check the graph's shape before publishing it as a Knowledge Graph, which is where we're headed next.
 
 ## Quick Start: Create the Knowledge Graph
 
@@ -75,9 +80,10 @@ Once you've run the SQL above, the same data is one click away from becoming a K
 
 ### Visualize the Knowledge Graph
 
-
-![](./visualize-group.png)
-
+| |
+| ----- |
+| ![Screen capture of the Visualize group on the Data ribbon tab.](./visualize-group.png) |
+| |
 
 On the **Data** tab, press the **Knowledge Graph** button dropdown. The JSON export opens automatically in your default browser, using the viewer built into the workbook. 
 
@@ -85,19 +91,22 @@ Raw JSON text is the default view.
 
 | Knowledge Graph JSON Viewer - Raw Text View                          |
 | -------------------------------------------------------------------- |
-| ![](./json-viewer-pretty.png)                                        |
+| ![Screen capture of the JSON Knowledge Graph viewer displaying the text view.](./json-viewer-pretty.png)                                        |
 
 You can also toggle the viewer to show the Knowledge Graph in a tree view, with the ability to collapse and expand levels in the tree.
 
 | Knowledge Graph JSON Viewer - Tree View                              |
 | -------------------------------------------------------------------- |
-| ![](./json-viewer-tree.png)                                          |
+| ![Screen capture of the JSON Knowledge Graph viewer displaying the object tree view.](./json-viewer-tree.png)                                          |
 
 Controls in the viewer support activities such as text search, copy to clipboard, and saving to files.
 
 ### Publish the Knowledge Graph
 
-![](./publish-group.png)
+| |
+| ----- |
+| ![Screen capture of the Publish group on the Data ribbon tab.](./publish-group.png) |
+| |
 
 When the visual representations meet your expectations, its time to publish the artifacts.
 
@@ -113,7 +122,7 @@ The **Publish all views** button can actually generate the selected files for ea
 
 To build any graph using Graphviz or as a Knowledge Graph you data must get to the 'data' worksheet. The next sections shows how SQL was used to pull the information from an Excel workbook named `musicians.xlsx`
 
-### Data Dictionary — musicians.xlsx
+### Data Dictionary - musicians.xlsx
 
 The `musicians.xlsx` workbook contains four related tables used to model musicians, bands, genres, and their relationships. The structure is designed for use with the Relationship Visualizer and supports SQL-driven graph modeling.
 
@@ -240,11 +249,11 @@ This musician to band demonstration uses the following techniques:
 - Meaningful tooltips for graphs rendered as SVG
 - SQL `IIF` conditional logic
 - Data-driven node and edge style names
-- Typed Properties — the same facts that go into the human-readable tooltip, also emitted as structured `key=value` pairs for the Knowledge Graph (see below)
+- Typed Properties. The same facts that go into the human-readable tooltip, also emitted as structured `key=value` pairs for the Knowledge Graph (see below)
 
 ## How the SQL Builds the Musician to Band Chart
 
-The SQL behind this example follows a clear, staged process that mirrors how the Relationship Visualizer assembles the final output — diagram, DOT, or Knowledge Graph, all from the same rows. It begins by creating a legend node, then builds the connections between bands and musicians, followed by generating the musician and band nodes themselves, each carrying both a human-readable tooltip and a typed Properties string. Finally, it applies additional styling for Rock & Roll Hall of Fame inductees.
+The SQL behind this example follows a clear, staged process that mirrors how the Relationship Visualizer assembles the final diagram, DOT, or Knowledge Graph output all from the same rows. It begins by creating a legend node, then builds the connections between bands and musicians, followed by generating the musician and band nodes themselves, each carrying both a human-readable tooltip and a typed Properties string. Finally, it applies additional styling for Rock & Roll Hall of Fame inductees.
 
 The Relationship Visualizer constructs the chart using this five-step process:
 
@@ -323,7 +332,7 @@ The `Tooltip` portion of the SQL SELECT statement is:
     AS [Tooltip],
 ```
 
-The `Properties` column's SQL builds the same fields into `instrument="guitar" role="guitarist" ...` — and the add-in parses that into the typed JSON object above, `hall_of_fame` coming out as a real boolean rather than the string `"Yes"`. An AI reading the Properties object doesn't have to parse a sentence to know Clapton plays guitar; it's just there, as data.
+The `Properties` column's SQL builds the same fields into `instrument="guitar" role="guitarist" ...` and the add-in parses that into the typed JSON object above, `hall_of_fame` coming out as a real boolean rather than the string `"Yes"`. An AI reading the Properties object doesn't have to parse a sentence to know Clapton plays guitar; it's just there, as data.
 
 The `Properties` portion of the SQL SELECT statement is:
 
@@ -336,7 +345,7 @@ The `Properties` portion of the SQL SELECT statement is:
     AS [Properties]
 ```
 
-If you want to add your own supplemental columns — different data, a different domain entirely — the pattern is the same one used in `musician$` and `band$` in the SQL worksheet: build an `IIF()`-guarded `key="value"` fragment per column you want exposed, concatenate them, and alias the result `AS [Properties]`.
+If you want to add your own supplemental columns (different data, or a different domain entirely) the pattern is the same one used in `musician$` and `band$` in the SQL worksheet: build an `IIF()`-guarded `key="value"` fragment per column you want exposed, concatenate them, and alias the result `AS [Properties]`.
 
 ## Ask an AI About the Graph
 
@@ -352,13 +361,13 @@ I also asked it to check the cartoon's claim directly against the graph, edge by
 
 It confirmed every link, named the shared musician behind each one, and caught a detail the cartoon's caption glossed over: the Blind Faith → Ginger Baker's Air Force link is actually carried by three shared musicians, not one.
 
-The full write-up, with the complete responses from two different AI models, is here: **[I Let an AI Read My Knowledge Graph](/blog/posts/ai-reads-my-knowledge-graph)**. The short version: a graph built from typed, structured relationships lets an AI trace connections instead of guessing at them from prose — and gives you an answer you can go back and check edge by edge, which is the entire point of asking in the first place.
+The full write-up, with the complete responses from two different AI models, is here: **[I Let an AI Read My Knowledge Graph](/blog/posts/ai-reads-my-knowledge-graph)**. The short version: a graph built from typed, structured relationships lets an AI trace connections instead of guessing at them from prose, and gives you an answer you can go back and check edge by edge, which is the entire point of asking in the first place.
 
 ## Lessons Learned: Scaling Tips for Large Graphs and AI Analysis
 
 This dataset with 574 nodes, and 627 edges is a reasonable stress test, and it exposed a real limit worth planning around: one AI tool I tried truncated the file and couldn't complete the edge-by-edge verification above, even after I eliminated tooltips and using properties-only got the export under 220 KB (with no hand editing of the JSON file). A few things that help:
 
-- **Keep style names short.** Every node and edge references its style by name, and that name repeats once per element that uses it — `relationship_member_of` costs more, at scale, than `member_of`. This dataset had verbose data elements. 
+- **Keep style names short.** Every node and edge references its style by name, and that name repeats once per element that uses it. For example, `relationship_member_of` costs more, at scale, than `member_of`. This dataset had verbose data elements. 
  
   I chose not to alter the data, or alias the values in the SQL statements.
 - **Filter before you export, not after.** Use a `WHERE` clause to scope the SQL to the slice of the graph you actually want analyzed, rather than exporting everything and hoping the AI's context window can hold it. 
