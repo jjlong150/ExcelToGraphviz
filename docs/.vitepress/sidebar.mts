@@ -137,7 +137,7 @@ const docsSidebar = [
     text: 'Graphviz',
     items: [
       { text: 'DOT Source Code', link: '/source/' },
-      { text: 'DOT Message Console', link: '/console/' }
+      { text: 'Message Console', link: '/console/' }
     ],
   },
   {
