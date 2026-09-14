@@ -15,7 +15,9 @@ The following sections provide a brief description of the settings:
 
 ## Graph Options
 
-![Screenshot of the Graph Options section of the settings worksheet.](../media/727383a7d791a8f9fa78ae4fda5a81ce.png)
+| |
+|-|
+|![Screenshot of the Graph Options section of the settings worksheet.](../media/727383a7d791a8f9fa78ae4fda5a81ce.png)|
 
 These settings control the graph options used to produce the diagrams.
 
@@ -29,12 +31,14 @@ These settings control the graph options used to produce the diagrams.
 
 The `Command Options` settings allow you to pass parameters to the Graphviz command line programs.
 
-![Screenshot of the Command Options section of the settings worksheet.](../media/47412336bbc28afb3aa71193924f8b1d.png)
+
+| |
+|-|
+|![Screenshot of the Command Options section of the settings worksheet.](../media/47412336bbc28afb3aa71193924f8b1d.png)|
 
 | Setting                                         | Description                                                                                                                                                                                                                                                                                     |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Additional CMD Parameters                       | A means to pass additional command line parameters to the layout engine program. For example: -Efontsize="8" -Efontname="Arial" would override the default edge format. Setting the font size to 8 points, and the font to Arial for all edges which do not have explicit style specifications. |
-| Cancel graphing if not complete in \_\_ seconds | The maximum number of seconds the graphing engine can run. If set to 0, no time limit exists.                                                                                                                                                                                                   |
 | Path to dot.exe                                 | The path to the dot executable if Graphviz is not installed/not available via the PATH environment variable.                                                                                                                                                                                    |
 
 ## Worksheet Settings
@@ -43,7 +47,10 @@ The `Command Options` settings allow you to pass parameters to the Graphviz comm
 
 These settings allow you to rearrange the column layout of the [data](../create/#data-worksheet) worksheet, and restrict which rows get processed.
 
-![Screenshot of the data‑worksheet settings section showing column‑layout and row‑filtering options.](../media/1d87aef288f339f397a286783b157f6b.png)
+
+| |
+|-|
+|![Screenshot of the data‑worksheet settings section showing column‑layout and row‑filtering options.](../media/1d87aef288f339f397a286783b157f6b.png) |
 
 | Setting                     | Description                                                                                                                                                                                                                                                                                                                                                                                      |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -65,7 +72,10 @@ These settings allow you to rearrange the column layout of the [data](../create/
 
 These settings allow you to rearrange the column layout of the [source](../source/) worksheet.
 
-![Screenshot of the source‑worksheet settings section showing column‑layout configuration options.](../media/81d584bfd7b5c3ef312eef447ca3f056.png)
+
+| |
+|-|
+|![Screenshot of the source‑worksheet settings section showing column‑layout configuration options.](../media/81d584bfd7b5c3ef312eef447ca3f056.png) |
 
 | Setting                  | Description                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------- |
@@ -79,7 +89,10 @@ These settings allow you to rearrange the column layout of the [source](../sourc
 
 These settings allow you to rearrange the column layout of the [sql](../sql/) worksheet, and restrict which rows get processed.
 
-![Screenshot of the sql‑worksheet settings section showing column‑layout and row‑processing options.](../media/8c7b6632b19e94c8fccfc6bc7bf00861.png)
+
+| |
+|-|
+|![Screenshot of the sql‑worksheet settings section showing column‑layout and row‑processing options.](../media/8c7b6632b19e94c8fccfc6bc7bf00861.png)|
 
 | Setting                     | Description                                                                                                                                                                       |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -93,7 +106,10 @@ These settings allow you to rearrange the column layout of the [sql](../sql/) wo
 
 The 'styles' Worksheet' settings allow you to rearrange the column layout of the [styles](../styles/) worksheet, and specify the range of rows to be included in the style collection at run-time.
 
-![Screenshot of the styles‑worksheet settings section showing column‑layout and row‑range configuration options.](../media/e531a6c22e0d737b153e8ded9b23af29.png)
+
+| |
+|-|
+|![Screenshot of the styles‑worksheet settings section showing column‑layout and row‑range configuration options.](../media/e531a6c22e0d737b153e8ded9b23af29.png)|
 
 | Setting                    | Description                                                                                                                                                           |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,7 +127,9 @@ The 'styles' Worksheet' settings allow you to rearrange the column layout of the
 
 This worksheet stores the selected values from the [Graphviz](../create/#the-graphviz-ribbon-tab) ribbon tab. By saving these settings in a worksheet, the Relationship Visualizer can retain your choices across sessions, ensuring that your preferred layout, styling, and rendering options persist each time you reopen the workbook.
 
-![Screenshot of the settings worksheet showing stored Graphviz ribbon tab options.](./settings-graphviz-tab.png)
+| |
+|-|
+|![Screenshot of the settings worksheet showing stored Graphviz ribbon tab options.](./settings-graphviz-tab.png)|
 
 ### 'Source' Tab
 
@@ -119,7 +137,9 @@ This worksheet stores the six web resources that appear as clickable links on th
 
 Typical substitutions include links to DOT language references, Graphviz attribute documentation, example galleries, internal documentation pages, or any external resources you find helpful while reviewing or editing the generated source code.
 
-![Screenshot of the settings worksheet showing stored Source ribbon tab URLs.](./settings-source-tab.png)
+| |
+|-|
+|![Screenshot of the settings worksheet showing stored Source ribbon tab URLs.](./settings-source-tab.png)|
 
 ### 'Extensions' Tab
 
@@ -127,13 +147,17 @@ The `Extensions` worksheet is a seldom‑used but powerful feature designed for 
 
 A sample workbook demonstrating how to configure and use Extensions is included in the directory of examples.
 
-![Screenshot of the settings worksheet showing Extensions tab configuration options.](./settings-extensions-tab.png)
+| |
+|-|
+| ![Screenshot of the settings worksheet showing Extensions tab configuration options.](./settings-extensions-tab.png) |
 
 ### 'Exchange' Tab
 
 This worksheet stores the selected values from the [Exchange](../exchange/#the-exchange-ribbon-tab) ribbon tab. By saving these settings in a worksheet, the Relationship Visualizer can retain your choices across sessions, ensuring that your preferred export, import, and workbook options persist each time you reopen the workbook.
 
-![Screenshot of the settings worksheet showing stored Exchange ribbon tab options.](./settings-exchange-tab.png)
+| |
+|-|
+| ![Screenshot of the settings worksheet showing stored Exchange ribbon tab options.](./settings-exchange-tab.png) |
 
 ## Help Button URLs
 
@@ -141,4 +165,6 @@ The `Help Button URLs` worksheet defines the links used by the **Help** buttons 
 
 This worksheet allows you to manage all Help destinations in one place. Updating a URL here ensures that the corresponding Help button on the Ribbon will always direct users to the correct documentation page, tutorial, or reference material.
 
-![Screenshot of the settings worksheet showing Help Button URL mappings.](./settings-help-buttons.png)
+| |
+|-|
+| ![Screenshot of the settings worksheet showing Help Button URL mappings.](./settings-help-buttons.png) |
