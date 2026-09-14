@@ -25,8 +25,10 @@ Generating and publishing a Knowledge Graph is handled from the `Data` ribbon ta
 
 ### Visualize the Knowledge Graph
 
-| ![Visualize group on the Data ribbon tab, showing the Knowledge Graph button.](./tutorial/visualize-group.png) |
+| |
 | --------------------------------------- |
+| ![Visualize group on the Data ribbon tab, showing the Knowledge Graph button.](./tutorial/visualize-group.png) |
+| |
 
 Press the **Knowledge Graph** button dropdown to build the current view as JSON and open it in the built-in viewer.
 
@@ -41,8 +43,10 @@ If you're using the shared-tab mode and accidentally close the browser tab, a "r
 
 ### Publish the Knowledge Graph
 
-| ![Publish group on the Data ribbon tab, with Graph, DOT, and Knowledge checkboxes.](./tutorial/publish-group.png) |
+| |
 | --------------------------------------- |
+| ![Publish group on the Data ribbon tab, with Graph, DOT, and Knowledge checkboxes.](./tutorial/publish-group.png) |
+| |
 
 The `Publish` split button includes three checkboxes: **Graph**, **DOT**, and **Knowledge**. Check any combination and a single click of `Publish` (or `Publish all views`) writes a matched set of output files from the same run which can include:
 1. A rendered diagram to eyeball.
@@ -55,9 +59,9 @@ Open the split button's dropdown (the small `v` arrow) to enable "Open after pub
 
 The built-in viewer supports two ways of reading the export:
 
-| Raw Text View                                                         |
+| Text View                                                         |
 | ---------------------------------------------------------------------- | 
-| ![Knowledge Graph JSON viewer showing the raw text view.](./tutorial/json-viewer-pretty.png) |
+| ![Knowledge Graph JSON viewer showing the text view.](./tutorial/json-viewer-pretty.png) |
 
 | Tree View                                                            |
 | ---------------------------------------------------------------------- |
@@ -68,6 +72,10 @@ Raw text is the default. Toggle to the tree view to collapse and expand levels o
 ::: tip Check the Size Before You Paste
 The status bar shows a live character count and estimated LLM token count for the current export, so you know roughly what it will cost before pasting it into an AI tool with a limited context window.
 :::
+
+## The RV-KGF Schema
+
+The **Relationship Visualizer - Knowledge Graph Format (RV-KGF)** schema is fully documented independent of this website. The full specification may be viewed at: **[github.com/jjlong150/rv-kgf](https://github.com/jjlong150/rv-kgf)**.
 
 ## What's in the Export
 
