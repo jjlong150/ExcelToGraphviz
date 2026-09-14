@@ -7,8 +7,10 @@ description: Guides you through defining node dimensions, measurement units, and
 
 In Graphviz, you can control the **height** and **width** of node shapes to adjust their overall size. These attributes ensure that shapes are scaled consistently and remain readable in your diagram.
 
+| |
+|-|
 | ![Screenshot of the Style Designer dimensions controls showing height and width settings for node sizing.](./dimensions.png) |
-| --- |
+| |
 
 ## Shape Height and Width
 

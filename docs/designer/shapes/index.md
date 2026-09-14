@@ -16,8 +16,10 @@ For example, rectangles may represent processes, ellipses may represent entities
 
 Click on the `Shape` drop‑down button. 
 
+| |
+|-|
 | ![Screenshot of the Shape drop‑down button used to open the gallery of Graphviz-supported node shapes.](./shape_button.png) |
-| --- |
+| |
 
 A gallery of shapes supported by Graphviz is presented showing a sample image of the shape. 
 
@@ -37,13 +39,17 @@ Polygon shapes are unique from other shapes in Graphviz and have extra attribute
 
 If you select `polygon` as the shape the ribbon will change dynamically to present additional choices as shown below:
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing the polygon shape selected, prompting additional polygon‑specific options.](./polygon_choose.png) |
-| --- |
+| |
 
 Selecting `polygon` changes the ribbon to appear as:
 
+| |
+|-|
 | ![Screenshot of the polygon options panel, showing controls for sides, skew, distortion, rotation, and peripheries.](./polygon_options.png) |
-| --- |
+| |
 
 ## Polygon Skew
 
@@ -51,8 +57,10 @@ Positive values skew top of polygon to right; negative values skew the top of th
 
 ### Positive Skew
 
+| |
+|-|
 | ![Screenshot of a polygon node rendered with positive skew, showing the top edge slanted to the right.](./polygon_skew_positive.png) |
-| --- | 
+| | 
 
 ![Graphviz-rendered polygon with skew=1, showing a right‑leaning top edge.](./dc4cfbe9033894c44f26b7011d5ccdc4.png)
 
@@ -60,8 +68,10 @@ Positive values skew top of polygon to right; negative values skew the top of th
 
 ### Negative Skew
 
+| |
+|-|
 | ![Screenshot of a polygon node rendered with negative skew, showing the top edge slanted to the left.](./polygon_skew_negative.png) |
-| --- | 
+| | 
 
 ![Graphviz-rendered polygon with skew=-1, showing a left‑leaning top edge.](./1bc5be00cf87ddb3b4899d29550a465e.png)
 
@@ -73,8 +83,10 @@ Positive values cause top part of the polygon to be larger than bottom; negative
 
 ### Positive Distortion
 
+| |
+|-|
 | ![Screenshot of a polygon node rendered with positive distortion, showing a wider top and narrower bottom.](./polygon_distortion_positive.png) |
-| --- | 
+| | 
 
 ![Graphviz-rendered polygon with distortion=1 and regular=No, producing a top‑heavy shape.](./d3a16d0b5a88e15e39c7af65c7b96df1.png)
 
@@ -82,13 +94,14 @@ Positive values cause top part of the polygon to be larger than bottom; negative
 
 ### Negative Distortion
 
+| |
+|-|
 | ![Screenshot of a polygon node rendered with negative distortion, showing a narrower top and wider bottom.](./polygon_distortion_negative.png) |
-| --- | 
+| | 
 
 ![Graphviz-rendered polygon with distortion=-1 and regular=No, producing a bottom‑heavy shape.](./6b48aeeda4f98ec38d07b5c4f4ff5f15.png)
 
 `shape="polygon" distortion="-1" regular="No"`
-
 
 ## Combining Skew with Distortion
 
@@ -104,8 +117,10 @@ Positive values cause top part of the polygon to be larger than bottom; negative
 
 If true, forces the polygon to be regular, i.e., the vertices of the polygon will lie on a circle whose center is the center of the node.
 
+| |
+|-|
 | ![Screenshot of a regular polygon node, showing evenly spaced vertices positioned on a circular boundary.](./polygon_regular.png) |
-| --- |
+| |
 
 `shape="polygon" regular="Yes"`
 
@@ -127,8 +142,10 @@ When you set **sides**, the chosen value is displayed in the **Style Designer** 
 
 ### sides=8
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing an 8‑sided polygon selected, with the preview panel displaying an octagonal node.](./polygon_sides_8.png) | 
-| --- | 
+| | 
 
 ![Graphviz-rendered polygon with sides=8 and regular=yes, producing a symmetric octagon.](./3f571210fe7626b7f0ab1375cf89e992.png) 
 
@@ -136,8 +153,10 @@ When you set **sides**, the chosen value is displayed in the **Style Designer** 
 
 Ellipses/circles can also be skewed and distorted to create unique shapes.
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing sides=1 selected, which produces an ellipse or circle depending on regular mode.](./polygon_sides_1.png) | 
-| --- | 
+| | 
 
 ### sides=1, with skew and distortion
 

@@ -87,8 +87,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### SVG
 
+| |
+|-|
 | ![SVG group icons.](./svg-ribbon-tab-svg.png) |
-|-------------------------------|
+| |
 
 Controls when post-processing is performed.
 
@@ -98,8 +100,10 @@ Controls when post-processing is performed.
 
 ### Edit
 
+| |
+|-|
 | ![Edit group icons.](./svg-ribbon-tab-edit.png) |
-| -------------------------------------------------- |
+| |
 
 Provides tools to help get around Excel's inability to display large amounts of cell text.
 
@@ -110,8 +114,10 @@ Provides tools to help get around Excel's inability to display large amounts of 
 
 ### Publish
 
+| |
+|-|
 | ![Publish group icons.](./svg-ribbon-tab-publish.png) |
-| -------------------------------------------------- |
+| |
 
 Provides convenience buttons to invoke the [publishing buttons](../publish/#graph-to-file-all-views-to-file) which reside on the `Graphviz` ribbon tab. As you tune your post-processing code, having these buttons eliminates the need to bounce back and forth to the `Graphviz` ribbon tab.
 
@@ -122,8 +128,10 @@ Provides convenience buttons to invoke the [publishing buttons](../publish/#grap
 
 ### Help
 
+| |
+|-|
 | ![Help group icons.](./svg-ribbon-tab-help.png) |
-| -------------------------------------------------- |
+| |
 
 Provides a link to the `Help` content for the `svg` worksheet (i.e. this web page).
 

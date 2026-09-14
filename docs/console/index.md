@@ -1,9 +1,9 @@
 ---
-title: Use the DOT Message Console
+title: Use the Message Console
 description: Review the Graphviz dot command's warnings, errors, and diagnostic messages in the console worksheet to troubleshoot and fix diagram rendering issues.
 ---
 
-# DOT Message Console
+# Message Console
 
 The `console` worksheet shows the messages emitted by the `dot` command when Graphviz runs.
 
@@ -41,8 +41,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Console Switches
 
-| ![Console Switches group icons.](./console-ribbon-tab-console-switches.png) |
+| |
 | -------------------------------------------------- |
+| ![Console Switches group icons.](./console-ribbon-tab-console-switches.png) |
+| |
 
 | Label       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -52,8 +54,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Console Text
 
-| ![Console Text group icons.](./console-ribbon-tab-console-text.png) |
+| |
 | -------------------------------------------------- |
+| ![Console Text group icons.](./console-ribbon-tab-console-text.png) |
+| |
 
 | Name       | Control Type  | Description                                                                                                                                                                                                                        |
 | ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,8 +67,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Critical Messages
 
-| ![Critical Messages group icons.](./console-ribbon-tab-critical-messages.png) |
+| |
 | -------------------------------------------------- |
+| ![Critical Messages group icons.](./console-ribbon-tab-critical-messages.png) |
+| |
 
 | Name                         | Control Type | Description                                                                                           |
 | ----------------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
@@ -76,8 +82,10 @@ These buttons operate independently. You can deselect all of them to run silentl
 
 ### Help
 
-| ![Help group icon.](./console-ribbon-tab-help.png) |
+| |
 | -------------------------------------------------- |
+| ![Help group icon.](./console-ribbon-tab-help.png) |
+| |
 
 Provides a link to the `Help` content for the `console` worksheet (i.e. this web page).
 

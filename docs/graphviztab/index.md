@@ -37,8 +37,10 @@ It contains the following groups, each explained below. You may jump directly to
 
 ### Visualize
 
+| |
+| -------------------------------------------------- |
 | ![Visualize group on the Data ribbon tab.](./data_tab_visualize.png) |
-|----------------------------------------------------------------------|
+| |
 
 | Label | Control Type | Description |
 | ------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -56,8 +58,10 @@ Apply Styles and Apply Attributes used to live in this group as toggle buttons; 
 
 A tutorial on how to use these ribbon options is contained in [Publishing Graphs](/publish/).
 
+| |
+| -------------------------------------------------- |
 | ![Publish group on the Data ribbon tab, with the Graph, DOT, and Knowledge checkboxes.](./data_tab_publish.png) |
-|-----------------------------------------------------------------------------------------------------------------|
+| |
 
 | Label | Control Type | Description |
 | ------------------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,8 +77,10 @@ Check any combination of Graph/DOT/Knowledge to produce exactly the output files
 
 **New in v11.0:** this group gathers everything about where and how output files are written — the directory, filename, and format controls that used to live in the old Graphviz tab's Publish group, now joined by a render-engine picker.
 
+| |
+| -------------------------------------------------- |
 | ![File Output group on the Data ribbon tab, with the render-engine checkboxes.](./data_tab_file_output.png) |
-|-------------------------------------------------------------------------------------------------------------|
+| |
 
 | Label | Control Type | Description |
 | -------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -88,8 +94,10 @@ Check any combination of Graph/DOT/Knowledge to produce exactly the output files
 
 **New in v11.0.** This group collects style-related switches in one place — `Apply Styles` and `Apply Attributes` moved here from the old Visualize group (now checkboxes instead of toggle buttons), alongside `Add Image Path`, `Transparent Background`, and `Rotate 90° CCW`, which used to live inside the old Graph options dropdown menu.
 
+| |
+| -------------------------------------------------- |
 | ![Styling group on the Data ribbon tab.](./data_tab_styling.png) |
-|----------------------------------------------------------------------|
+| |
 
 | Label | Control Type | Description |
 | ----------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -101,8 +109,10 @@ Check any combination of Graph/DOT/Knowledge to produce exactly the output files
 
 ### Options
 
+| |
+| -- |
 | ![Options group on the Data ribbon tab.](./data_tab_options.png) |
-|-------------------------------------------------------------------------------------------------------------|
+| |
 
 Menus that control which nodes, edges, and clusters are included in the Graphviz source, and how their labels and tooltips are represented. The Node and Edge menus moved here from the old Graphviz tab; the old Graph menu has been removed entirely (its one working option, `Force xlabel Placement`, moved here as a standalone checkbox — its `Center Drawing` option was dropped, since it didn't do anything). Taking the old Graph menu's place is an entirely new **Cluster** menu.
 
@@ -171,8 +181,10 @@ Choices which control how edges should be specified in the Graphviz source, and 
 
 ### Debug
 
+| |
+| -- |
 | ![Screenshot of the Debug group controls.](./graphviz_tab_debug.png) |
-| ------- |
+| |
 
 | Label | Control Type | Description |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -182,8 +194,10 @@ Choices which control how edges should be specified in the Graphviz source, and 
 
 ### Help
 
+| |
+| -- |
 | ![Screenshot of the Help group control.](./graphviz_tab_help.png) |
-| ------- |
+| |
 
 Provides the `Help` content for the `data` worksheet.
 
@@ -210,15 +224,19 @@ It contains the following groups, which are each explained in the content that f
 
 The **Graph Layout** section provides a set of toggle buttons that control which Graphviz layout engine is applied to your diagram. These toggles function like radio buttons, ensuring that only one layout is active at a time. This approach gives you a quick, intuitive way to explore how different layout algorithms organize your graph.
 
+| |
+| -- |
 | ![Screenshot of Graph Layout group ribbon controls](./graphviz_tab_graph_layout.png) |
-| ------------------------------------------ |
+| |
 
 ### Splines
 
 The **Splines** section provides a set of toggle buttons that control how edges are routed in your diagram. These toggles function like radio buttons, ensuring that only one spline style is active at a time.
 
+| |
+| -- |
 | ![Screenshot of Splines group ribbon controls](./graphviz_tab_splines.png) |
-| ------------------------------------------ |
+| |
 
 | Button | Description |
 |-----------|-------------|
@@ -237,8 +255,10 @@ The `Compound`, `Line`, and `Spline` edge-routing controls are back as live, sel
 
 The **Graph Type** section provides a set of toggle buttons that determine whether your diagram is treated as a directed or undirected graph. These toggles function like radio buttons, ensuring that only one graph type is active at a time.
 
+| |
+| -- |
 | ![Screenshot of Graph Type group ribbon controls](./graphviz_tab_graph_type.png) |
-| ------------------------------------------ |
+| |
 
 | Button | Description |
 |----------------|-------------|
@@ -249,8 +269,10 @@ The **Graph Type** section provides a set of toggle buttons that determine wheth
 
 The **Output Order** controls determine the sequence in which Graphviz draws nodes and edges during rendering. These options are presented as toggle buttons that behave like radio buttons, ensuring that only one drawing order is active at a time.
 
+| |
+| -- |
 | ![Screenshot of Drawn First group ribbon controls](./graphviz_tab_drawn_first.png) |
-| ------------------------------------------ |
+| |
 
 Output Order Values
 
@@ -279,8 +301,10 @@ There are no additional dynamic options for `layout=circo`.
 
 #### layout=dot
 
+| |
+| -- |
 | ![Screenshot of layout=dot group ribbon controls](./graphviz_tab_layout_dot.png) |
-| ---------------------------------------- |
+| |
 
 The buttons `[tb]`, `[bt]`, `[lr]`, `[rl]` determine the **Rank Direction** flow of the graph—whether nodes are arranged top‑to‑bottom, bottom‑to‑top, left‑to‑right, or right‑to‑left. These options are presented as toggle buttons that behave like radio buttons, ensuring that only one direction is active at a time.
 
@@ -321,8 +345,10 @@ The **Cluster Rank** control determines how Graphviz ranks clusters relative to 
 
 #### layout=fdp
 
+| |
+| -- |
 | ![Screenshot of layout=fdp group ribbon controls](./graphviz_tab_layout_fdp.png) |
-| ---------------------------------------- |
+| |
 
 The **Overlap** control is presented as a dropdown list that lets you choose how Graphviz handles node collisions during layout.
 
@@ -342,8 +368,10 @@ The **Rendering Dimensions** control (`dimen=` attribute) specifies how many dim
 
 #### layout=neato
 
+| |
+| -- |
 | ![Screenshot of layout=neato group ribbon controls](./graphviz_tab_layout_neato.png) |
-| ------------------------------------------ |
+| |
 
 The **Overlap** control is the same as described under `layout=fdp` above.
 
@@ -378,8 +406,10 @@ There are no additional dynamic options for `layout=patchwork`.
 
 #### layout=sfdp
 
+| |
+| -- |
 | ![Screenshot of layout=sfdp group ribbon controls](./graphviz_tab_layout_sfdp.png) |
-| ----------------------------------------- |
+| |
 
 The **Overlap** and **Mode** controls are the same as described under `layout=fdp` and `layout=neato` above.
 
@@ -404,6 +434,11 @@ The **Layout Dimensions** and **Rendering Dimensions** controls are the same as 
 There are no additional dynamic options for `layout=twopi`.
 
 ### Help
+
+| |
+| -- |
+| ![Screenshot of the Help group control.](./graphviz_tab_help.png) |
+| |
 
 Provides the `Help` content for the `Graphviz` ribbon tab.
 

@@ -52,8 +52,10 @@ The **Style Designer** ribbon provides a large **Color Scheme** button and color
 
 Clicking the **Color Scheme** button opens a gallery where you can choose a scheme:
 
-| ![Screenshot of the Color Scheme gallery button used to open the list of available Graphviz color schemes.](./color_scheme_button.png) |
+| |
 |-|
+| ![Screenshot of the Color Scheme gallery button used to open the list of available Graphviz color schemes.](./color_scheme_button.png) |
+| |
 
 When you select a scheme, all color‑related drop‑down lists are refreshed to display the colors for that scheme.
 

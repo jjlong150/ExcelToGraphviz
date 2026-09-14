@@ -43,15 +43,19 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Legal
 
+| |
+|-|
 | ![Legal group icons.](./info-ribbon-tab-legal.png) |
-| -------------------------------------------------- |
+| |
 
 The `Legal` section provides a quick overall summary of the tool's name, copyright, and Open Source license.
 
 ### Repositories
 
+| |
+|-|
 | ![Repositories group icons.](./info-ribbon-tab-repositories.png) |
-| -------------------------------------------------- |
+| |
 
 The `Repositories` section provides web links to the **official** web pages and repositories for the Relationship Visualizer tool.
 
@@ -69,8 +73,10 @@ At this time, there are **no** author‑sanctioned clones of these repositories.
 
 ### Author
 
+| |
+|-|
 | ![Author group icons.](./info-ribbon-tab-author.png) |
-| -------------------------------------------------- |
+| |
 
 If you would like to learn more about the author of this tool and website you may visit his LinkedIn profile. You can also reach him by email.
 
@@ -81,8 +87,10 @@ If you would like to learn more about the author of this tool and website you ma
 
 ### Donate
 
+| |
+|-|
 | ![Donate group icons.](./info-ribbon-tab-donate.png) |
-| -------------------------------------------------- |
+| |
 
 Relationship Visualizer is **free** software. However, it does cost the author personal money and time to provide this software for free.
 
@@ -96,8 +104,10 @@ FYI - 10 years, 10,000+ downloads, and a grand total of 2 coffees donated 😔
 
 ### Help
 
+| |
+|-|
 | ![Help group icons.](./info-ribbon-tab-help.png) |
-| -------------------------------------------------- |
+| |
 
 Provides a link to the `Help` content for the `Info` worksheet (i.e. this web page).
 

@@ -46,8 +46,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Diagnostics
 
+| |
+|-|
 | ![Diagnostics ribbon tab showing the Diagnostics command button used to refresh environment information.](./diagnostics-ribbon-tab-diagnostics.png) |
-| -------------------------------------------------- |
+| |
 
 Refreshes the diagnostics values displayed. Useful if you have changed something on your system such as installing a different version of Graphviz, and you want to confirm what is being used.
 
@@ -57,8 +59,10 @@ Refreshes the diagnostics values displayed. Useful if you have changed something
 
 ### Image Cache
 
+| |
+|-|
 | ![Diagnostics ribbon tab showing the Image Cache controls, including Delete Colors and Delete Fonts buttons.](./diagnostics-ribbon-tab-image-cache.png) |
-| -------------------------------------------------- |
+| |
 
 Provides an easy way to delete the images created by the **Style Designer** which are preview thumbnails for fonts and colors.
 
@@ -71,8 +75,10 @@ Note that image files are cached in memory if you visit the *Style Designer* wor
 
 ### Help
 
+| |
+|-|
 | ![Diagnostics ribbon tab showing the Help button, which opens the diagnostics worksheet help content.](./diagnostics-ribbon-tab-help.png) |
-| -------------------------------------------------- |
+| |
 
 Provides a link to the `Help` content for the `diagnostics` worksheet (i.e. this web page).
 

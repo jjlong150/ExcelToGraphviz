@@ -7,15 +7,19 @@
 
 These controls provide assistance in defining the head and tail attributes for an edge.
 
-| ![Screenshot of the Style Designer showing head and tail configuration controls for edge labels and endpoint styling.](./192ac17604bd3f022781b2a3f0cc9d30.png) |
+| |
 |-|
+| ![Screenshot of the Style Designer showing head and tail configuration controls for edge labels and endpoint styling.](./192ac17604bd3f022781b2a3f0cc9d30.png) |
+| |
 
 ## Label Font Color - Label Font Name - Label Font Size
 
 These attributes provide a way to differentiate the text at the end of the edges where they meet the node.
 
-| ![Screenshot of the Style Designer ribbon showing controls for labelfontname, labelfontsize, and labelfontcolor.](./c1a002afde1e098c2d4bba08205953d2.png) |
+| |
 |-|
+| ![Screenshot of the Style Designer ribbon showing controls for labelfontname, labelfontsize, and labelfontcolor.](./c1a002afde1e098c2d4bba08205953d2.png) |
+| |
 
 Appears as:
 
@@ -39,8 +43,10 @@ By changing the angle, you choose which “side” of the node the label appears
 
 For example, setting the label angle to 90 degrees:
 
-| ![Screenshot of the Style Designer showing labelangle set to 90 degrees with corresponding font controls.](./ca5ea6312ec3189666321a1ff2d628fa.png) |
+| |
 |-|
+| ![Screenshot of the Style Designer showing labelangle set to 90 degrees with corresponding font controls.](./ca5ea6312ec3189666321a1ff2d628fa.png) |
+| |
 
 Appears as:
 
@@ -82,8 +88,10 @@ Used together, `labelangle` and `labeldistance` let you control both **where** a
 
 This example depicts when `labelangle=` and `labeldistance=` attributes are used together.
 
-| ![Screenshot of the Style Designer showing labelangle and labeldistance set together, with font options visible.](./876f4b9d1dbfa27bfbfab33744b07bfb.png) |
+| |
 |-|
+| ![Screenshot of the Style Designer showing labelangle and labeldistance set together, with font options visible.](./876f4b9d1dbfa27bfbfab33744b07bfb.png) |
+| |
 
 Appears as:
 

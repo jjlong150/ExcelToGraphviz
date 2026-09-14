@@ -27,8 +27,10 @@ For example:
 
 Notice that the ribbon dynamically changes once a `Fill Color` is specified to display a new choice for `Gradient Fill Color`.
 
+| |
+|-|
 | ![Screenshot of the Style Designer ribbon showing the newly revealed Gradient Fill Color dropdown after a primary fill color is selected.](./ac5bcee724d834ed7725b6e3a1db389f.png) |
-| --- |
+| |
 
 A `Gradient Fill Color` allows you to select a second color which the Fill Color will gradually transition to. If you select `HotPink` as the `Gradient Fill Color` the preview image changes to look like:
 
@@ -91,8 +93,9 @@ For example, specifying a gradient weight of 20% for the fill color is specified
 
 and the image appears as:
 
+| |
+|-|
 | ![Graphviz-rendered node showing a linear gradient where DodgerBlue dominates at 20% weight before transitioning to HotPink.](./gradient_filled_weight20.png) |
-| :--: |
 
 By adjusting the gradient weight, you can highlight one color more strongly, create subtle shading effects, or achieve balanced transitions between multiple colors.
 

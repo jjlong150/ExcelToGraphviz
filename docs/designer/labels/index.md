@@ -14,8 +14,10 @@ You can design styles which format label text using the following controls:
 - Italic  
 - Label Location
 
+| |
+|-|
 | ![Screenshot of the label appearance controls in the Style Designer, showing options for font, size, color, bold, italic, and label placement.](./label_appearance.png) |
-| -- |
+| |
 
 ## Label Fonts
 
@@ -51,8 +53,10 @@ For example:
 
 Text can be aligned relative to the borders of a shape or cluster. Alignment is available as follows via the alignment buttons:
 
+| |
+|-|
 | ![Screenshot of label alignment controls showing options for top, middle, bottom, left, center, and right alignment.](./text_alignment.png) |
-| --- |
+| |
 
 | Position| Node |  Cluster |
 | --- | :--: |  :---: |

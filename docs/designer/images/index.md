@@ -54,8 +54,10 @@ Image name is an option on the `style designer` worksheet that is useful when yo
 
 **Step 2** – Look to the far right side of the Ribbon to find the image controls.
 
+| |
+|-|
 | ![Screenshot of the Style Designer ribbon showing the image controls section, including the Choose Image button.](./image_controls.png) |
-| :--: |
+| |
 
 Press the `Choose Image` button.
 
@@ -65,13 +67,14 @@ Navigate to the directory containing the images and choose an image. A small ima
 
 The image by default is placed in the center of the node. For example:
 
-| ![Graphviz preview showing the selected image centered inside a rectangular node.](./image_center.png) |
-| :--: |
+![Graphviz preview showing the selected image centered inside a rectangular node.](./image_center.png)
 
 With the image selected, the Ribbon adapts to display additional options which can be used to scale the image, or position the image within the shape.
 
+| |
+|-|
 | ![Screenshot of the Style Designer ribbon showing additional image scaling and positioning controls after an image is selected.](./image_scal_and_position.png) |
-| :--: |
+| |
 
 ## Scale the Image
 

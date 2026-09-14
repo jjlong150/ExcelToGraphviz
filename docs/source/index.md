@@ -5,7 +5,7 @@ description: Inspect the DOT source code behind your diagram to understand struc
 
 # Viewing DOT Source Code
 
-The Relationship Visualizer is designed to let you create Graphviz graphs without needing to learn the [DOT Language](https://graphviz.org/doc/info/lang.html). However, it can also serve as an effective learning tool for DOT itself. This topic explains how to access the DOT source code generated from the Excel worksheets and passed to the Graphviz layout engine. These capabilities allow you to build relationship graphs and then examine the underlying code that produces them.
+**Relationship Visualizer** is designed to let you create Graphviz graphs without needing to learn the [DOT Language](https://graphviz.org/doc/info/lang.html). However, it can also serve as an effective learning tool for DOT itself. This topic explains how to access the DOT source code generated from the Excel worksheets and passed to the Graphviz layout engine. These capabilities allow you to build relationship graphs and then examine the underlying code that produces them.
 
 ::: tip Why is this useful?
 Understanding how the Relationship Visualizer transforms worksheet data into DOT source code can help you:
@@ -49,7 +49,7 @@ The diagram below shows the flow from your worksheet data to the final Graphviz 
 
 ## The `source` Worksheet
 
-The Relationship Visualizer includes a worksheet named `source`, which displays the DOT source code generated each time a graphing button is pressed.
+Relationship Visualizer includes a worksheet named `source`, which displays the DOT source code generated each time a graphing button is pressed.
 
 The `source` worksheet is hidden by default. To reveal it, select the **source** button in the **Graphviz dot** section of the `Launchpad` tab.
 
@@ -99,8 +99,10 @@ It contains the following groups, each of which is explained in the sections tha
 
 ### Source
 
+| |
+|-|
 | ![Source group icons.](./group_source.png) |
-| -------------------------------------------------- |
+| |
 
 Controls for viewing and saving `DOT` source code.
 
@@ -120,8 +122,10 @@ The form is primarily read-only, however you can enlarge or shrink the font size
 
 ### Clipboard
 
+| |
+|-|
 | ![Clipboard group icons.](./group_clipboard.png) |
-| -------------------------------------------------- |
+| |
 
 Controls for copying the `DOT` source to the clipboard. This capability is only present on Windows, as the Windows API code it relies on is not present on macOS.
 
@@ -136,8 +140,10 @@ Controls for copying the `DOT` source to the clipboard. This capability is only 
 
 Utilility to visualize the source code as a Graphvis graph. T
 
+| |
+|-|
 | ![Graphviz group icons.](./group_graphviz.png) |
-| -------------------------------------------------- |
+| |
 
 | Label                 | Control Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | --------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -154,8 +160,10 @@ Changes to the DOT source code are not reflected on the `data` worksheet. Any ch
 
 ### Web Resources
 
+| |
+|-|
 | ![Web Resources group icons.](./group_web_resources.png) |
-| -------------------------------------------------- |
+| |
 
 The `Web Resources` group dynamically supports six buttons which can launch the user's default browser and display a web page. Button text, tool tips, and the URL are specified in the `settings` worksheet. The worksheet as distributed contains links to Graphviz documentation and online Graphviz rendering tools.
 
@@ -176,8 +184,10 @@ The values associated with these buttons can be changed to suit your own prefere
 
 ### Help
 
+| |
+|-|
 | ![Help group icons.](./group_help.png) |
-| -------------------------------------------------- |
+| |
 
 Provides a link to the `Help` content for the `Source` worksheet (i.e. this web page).
 

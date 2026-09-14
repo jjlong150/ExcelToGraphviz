@@ -30,8 +30,10 @@ The style designer worksheet appearance changes to look as follows:
 
 Labels for edges are specified in the same way as labels for nodes, with the same styling options (e.g., font, color, size).  
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing edge label controls, including font, color, and toggle options for decorate and float.](./edge_labels.png) |
-| :--: |
+| |
 
 However, edge labels include two additional toggle attributes:
 
@@ -102,8 +104,10 @@ The Graphviz **dir** attribute controls the arrowheads drawn on an edge.
 
 In the **Style Designer** worksheet, this is managed through four toggle buttons in the **Direction** group that act in radio button fashion. Selecting one option automatically clears the previous choice.
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing the Direction group with radio‑style buttons for forward, back, both, and none.](./edge_direction.png) |
-| :--: |
+| |
 
 Supported values are:
 

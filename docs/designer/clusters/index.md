@@ -55,8 +55,10 @@ Fill colors and gradient fills for a cluster’s rectangle are defined the same 
 
 If the layout on the Graphviz ribbon tab is set to the [osage](../../create/#graph-layout) layout, an additional **Packing** group of controls will appear, as shown in the example below:
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing the cluster packing controls available when using the osage layout.](./cluster_packing.png) |
-| :--: |
+| |
 
 These controls let you adjust how nodes within clusters, or clusters within clusters, are arranged relative to one another in the final layout.
 
@@ -70,8 +72,10 @@ Two options are provided:
   
   When **array** is selected, the Packing group expands to provide additional controls, as shown below:
 
+    | |
+    |-|
     | ![Screenshot of the Style Designer showing expanded array‑mode packing controls, including component count, alignment, sorting, and column‑major options.](./cluster_packing_array.png) |
-    | :--: |
+    | |
 
 Additional choices include:
 - **No. of components** - How many components (nodes or clusters) to place before starting a new row or column.
@@ -86,8 +90,10 @@ Additional choices include:
 
 `packmode` array flags can be combined to apply multiple effects at once. For example, the selections shown below:
 
+| |
+|-|
 | ![Screenshot of the Style Designer showing multiple array‑mode packing flags selected, including column‑major, top alignment, left alignment, sortv, and a component count of 4.](./cluster_packing_example.png) |
-| :--: |
+| |
 
   produce the Format String `pack=9 packmode=array_ctlu4` which breaks down as follows:
 - **`pack=9`** - Sets the margin around the nodes to 1/8".
