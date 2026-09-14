@@ -39,24 +39,29 @@ Pattern: `PREVIEW [ AS ( DIRECTED | UNDIRECTED ) GRAPH ]`
 - `PREVIEW`
 - `PREVIEW AS DIRECTED GRAPH` 
 - `PREVIEW AS UNDIRECTED GRAPH` 
+- `PREVIEW AS KNOWLEDGE GRAPH` 
 
 ## Publish the graphs as files
-Pattern: `PUBLISH [ ALL VIEWS ] [ AS ( DIRECTED | UNDIRECTED ) GRAPH ] [ file prefix ]`
+Pattern: `PUBLISH [ ALL VIEWS ] [ AS ( DIRECTED | UNDIRECTED | KNOWLEDGE ) GRAPH ] [ file prefix ]`
 
 - `PUBLISH`
 - `PUBLISH AS DIRECTED GRAPH`
 - `PUBLISH AS UNDIRECTED GRAPH`
+- `PUBLISH AS KNOWLEDGE GRAPH`
 - `PUBLISH ALL VIEWS`
 - `PUBLISH ALL VIEWS AS DIRECTED GRAPH`
 - `PUBLISH ALL VIEWS AS UNDIRECTED GRAPH`
+- `PUBLISH ALL VIEWS AS KNOWLEDGE GRAPH`
   
 You can specify a value to use for the File Name Prefix as the last value of the directive. for example, if the desired prefix is `foobar`, the directives are:
 - `PUBLISH foobar`
 - `PUBLISH AS DIRECTED GRAPH foobar`
 - `PUBLISH AS UNDIRECTED GRAPH foobar`
+- `PUBLISH AS KNOWLEDGE GRAPH foobar`
 - `PUBLISH ALL VIEWS foobar`
 - `PUBLISH ALL VIEWS AS DIRECTED GRAPH foobar`
 - `PUBLISH ALL VIEWS AS UNDIRECTED GRAPH foobar`
+- `PUBLISH ALL VIEWS AS KNOWLEDGE GRAPH foobar`
 
 ## Logging
 Turn on/off logging of errors to file `Relationship Visualizer ADO Log.txt`
