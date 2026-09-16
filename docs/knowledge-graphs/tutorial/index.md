@@ -120,6 +120,8 @@ The **Publish all views** button can actually generate the selected files for ea
 
 ## Deep Dive: Importing Your Data From a Workbook
 
+The files for the example which follows are available for download from GitHub at [github.com/jjlong150/excel-to-graphviz-examples/tree/main/neato/rock-band-musician-connections](https://github.com/jjlong150/excel-to-graphviz-examples/tree/main/neato/rock-band-musician-connections).
+
 To build any graph using Graphviz or as a Knowledge Graph you data must get to the 'data' worksheet. The next sections shows how SQL was used to pull the information from an Excel workbook named `musicians.xlsx`
 
 ### Data Dictionary - musicians.xlsx
@@ -297,22 +299,28 @@ The Tooltip and Properties columns carry the same underlying facts, but they're 
 Here's Eric Clapton's node, as it actually appears in this workbook's Knowledge Graph export:
 
 ```json
-{
-  "id": "Eric Clapton",
-  "style": "hall_of_famer",
-  "xlabel": { "value": "Eric Clapton", "type": "text" },
-  "tooltip": {
-    "value": "Eric Clapton | guitarist 1945- UK  In the Rock & Roll Hall of Fame with The Yardbirds (1992), Cream (1993), & as a solo artist (2000).",
-    "type": "text"
-  },
-  "properties": {
-    "instrument": "guitar",
-    "role": "guitarist",
-    "years_active": "1960s–present",
-    "country": "UK",
-    "hall_of_fame": true
-  }
-}
+    {
+      "id": "Eric Clapton",
+      "style": "hall_of_famer",
+      "xlabel": {
+        "value": "Eric Clapton",
+        "type": "text"
+      },
+      "tooltip": {
+        "value": "Eric Clapton | guitarist 1945- UK  In the Rock & Roll Hall of Fame with The Yardbirds (1992), Cream (1993), & as a solo artist (2000).",
+        "type": "text"
+      },
+      "properties": {
+        "born": 1945,
+        "instrument": "guitar",
+        "role": "guitarist",
+        "years_active": "1960s-present",
+        "country": "UK",
+        "hall_of_fame": true,
+        "hall_of_fame_with": "The Yardbirds (1992), Cream (1993), & as a solo artist (2000)."
+      }
+    },
+
 ```
 
 Both come from the same `musician` worksheet row. The `Tooltip`'s SQL concatenates those fields into a sentence with `Chr(10)` line breaks, meant to be read. 
@@ -337,11 +345,19 @@ The `Properties` column's SQL builds the same fields into `instrument="guitar" r
 The `Properties` portion of the SQL SELECT statement is:
 
 ```sql
-    IIF([PrimaryInstrument] IS NULL, '', 'instrument="'   & [PrimaryInstrument] & '" ') &
-    IIF([Role]              IS NULL, '', 'role="'         & [Role] & '" ')      &
-    IIF([YearsActive]       IS NULL, '', 'years_active="' & [YearsActive]       & '" ') &
-    IIF([Country]           IS NULL, '', 'country="'      & [Country]           & '" ') &
-    'hall_of_fame=' & IIF([InRnRHallOfFame]='Yes','true','false')   
+    IIf([BirthYear] IS NULL   OR 
+        [BirthYear]='Unknown' OR 
+        NOT IsNumeric([BirthYear]),    '', 'born='               & [BirthYear]           & ' ' ) &
+    IIf([DeathYear] IS NULL   OR 
+        [DeathYear]='Unknown' OR 
+        NOT IsNumeric([DeathYear]),    '', 'died='               & [DeathYear]           & ' ' ) &
+    IIF([AKA]                 IS NULL, '', 'aka="'      &  Replace([AKA], """", """""")  & '" ') &
+    IIF([PrimaryInstrument]   IS NULL, '', 'instrument="'        & [PrimaryInstrument]   & '" ') &
+    IIF([Role]                IS NULL, '', 'role="'              & [Role]                & '" ') &
+    IIF([YearsActive]         IS NULL, '', 'years_active="'      & [YearsActive]         & '" ') &
+    IIF([Country]             IS NULL, '', 'country="'           & [Country]             & '" ') &
+    'hall_of_fame=' & IIF([InRnRHallOfFame]='Yes','true','false')                        & ' '   &
+    IIF([InRnRHallOfFameWith] IS NULL, '', 'hall_of_fame_with="' & [InRnRHallOfFameWith] & '" ') 
     AS [Properties]
 ```
 
@@ -376,10 +392,20 @@ This dataset with 574 nodes, and 627 edges is a reasonable stress test, and it e
 - **Check the token estimator before you paste.** The Knowledge Graph viewer includes one specifically so you know the cost up front. Character counts and token estimates are displayed in the status bar with each Knowledge Graph visualization.
 - **Prefer tools with larger context windows for large graphs.** Not every AI tool handles the same file size equally well. If one truncates your content, that's a signal to shrink the export, and its not necessarily a dead end.
 
-::: tip Tip: Including/Excluding Graph Content
+::: tip TIP 1: Don't Publish Redundant Data
+The example above uses `xlabel`, `tooltip`, and `properties` elements. `xlabel` and `tooltip` are intended primarily for the visual presentation of the graph, but they can also be used for Knowledge Graph analysis when a `properties` object isn't present. `properties`, on the other hand, is used exclusively by the Knowledge Graph.
 
-The **Data** tab has a options group with dropdown menus for nodes, edges, and clusters. Here you can toggle the inclusion of labels and tooltips on or off with the click of a mouse.
+There is a single underlying model for the graph, but its output can be tailored uniquely, yet consistently, for each representation using the ribbon options. One set of choices can drive the visual graph while another drives the Knowledge Graph.
 
+To keep your Knowledge Graph as small as possible, output `properties` whenever it's available. Otherwise, output the label elements (`label`, `xlabel`, `taillabel`, `headlabel`) and/or `tooltip`. **Avoid outputting all of these elements at once if their data overlaps** as this only adds redundant bulk to the graph.
+
+You can easily exclude labels and tooltips using the checkmarks on the `Node`, `Edge`, and `Cluster` dropdown lists in the `Data` ribbon tab.
+:::
+
+::: tip TIP 2: Minify Your Knowledge Graph
+Beyond trimming which elements you output, you can further reduce your Knowledge Graph's size by minifying it.
+
+You can minify the Knowledge Graph in one of two ways: save the raw content directly from the Knowledge Graph viewer, or set the `Minify` publishing option to `true` on the settings worksheet before pressing **Publish**.
 :::
 
 ## Try It on Your Own Data
