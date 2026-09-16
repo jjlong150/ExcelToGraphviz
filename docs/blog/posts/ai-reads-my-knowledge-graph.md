@@ -53,7 +53,7 @@ Neither of those was the answer I expected, and that's exactly why it's a better
 
 ## But does the cartoon's chain actually hold up?
 
-I still wanted to see the receipts on the original claim, so in a second clean conversation I gave Claude the cartoon's exact sentence and asked it to verify it edge by edge against the graph using nothing but the JSON, no outside knowledge of rock history allowed. It came back not just confirming the claim, but auditing it:
+I still wanted to see the receipts on the original claim, so in a second clean conversation I gave Claude the cartoon's exact sentence and asked it to verify it edge by edge against the graph, using only the JSON and no outside knowledge of rock history. It didn't just confirm the claim, it audited it:
 
 | Second Prompt |
 | -------------- |
@@ -61,24 +61,19 @@ I still wanted to see the receipts on the original claim, so in a second clean c
 | Claude's response  |
 | **Yardbirds → Cream — Confirmed.** Shared musician: Eric Clapton — the sole connecting thread.<br/><br> **Spencer Davis Group → Traffic — Confirmed.** Shared musician: Steve Winwood.<br/><br>**Cream and Traffic → Blind Faith — Confirmed, and stronger than the claim implies.** From Cream: Eric Clapton and Ginger Baker carried over. Notably, Jack Bruce (Cream's bassist) is *not* connected to Blind Faith in the graph — he did not make this jump, consistent with real history. From Traffic: Steve Winwood carried over.<br/><br> **Blind Faith → Ginger Baker's Air Force — Confirmed, and richer than stated.** Shared musicians: Ginger Baker, Rick Grech, and Steve Winwood — three overlapping members, not just the band's namesake. A bonus link visible in the graph but not part of the original claim: Chris Wood also bridges Traffic and Air Force directly.|
 
-That's not a model parroting the sentence I fed it back to me. It is tracing actual shared-membership edges, catching a detail that makes the claim *more* accurate than stated (three shared members, not one), and correctly noting where a plausible-sounding connection (Jack Bruce, Rick Grech via Cream/Traffic) isn't actually supported by the data.
+That isn't a model just echoing the sentence it was given. It's actually following the shared‑membership edges in the data, spotting a detail that makes the claim *more* accurate than the original wording (three shared members instead of one) and correctly flagging where a seemingly plausible connection (Jack Bruce and Rick Grech via Cream/Traffic) doesn’t hold up once you check the actual graph.
 
 ## A second AI, for good measure
 
-I ran the first prompt on Grok too, cold, same JSON. It independently converged on the Yardbirds → Cream → Blind Faith chain as its top pick, named Clapton as the most-connected musician, and used almost the same language Claude did to describe the graph's shape: a "small-world / hub-and-spoke" network where a handful of restless musicians bridge otherwise-separate scenes. It even flagged the same runner-up clusters — the Seattle grunge tree, and The Clash splitting into Big Audio Dynamite — without being told either one mattered.
+I ran the first prompt on Grok too, cold, using the same JSON. It independently converged on the Yardbirds → Cream → Blind Faith chain as its top pick, named Clapton as the most‑connected musician, and used almost the same language Claude did to describe the graph’s shape: a "small‑world / hub‑and‑spoke" network where a handful of restless musicians bridge otherwise separate scenes. It even pointed to the same runner‑up clusters, like the Seattle grunge tree and The Clash splitting into Big Audio Dynamite, without being told either one mattered.
 
-Two different models, no shared context, converging on the same structural read of the graph. That's a decent signal the pattern is really in the data, not an artifact of one model's imagination.
+Two different models, working with no shared context, still landed on the same structural interpretation of the graph. That's a pretty good sign the pattern is actually in the data rather than something one model hallucinated.
 
-Grok did hit a real limitation on the second prompt, though: the export file got truncated and it couldn't complete the edge-by-edge verification. Worth being upfront about, and worth planning around.
+Grok did run into a real limitation on the second prompt, however. The JSON file was truncated, so it couldn't finish the edge‑by‑edge verification. Graph file size boundaries are worth calling out directly, and worth planning around.
 
 ## Best practices if you're trying this yourself
 
-A few things I'd do differently, or recommend, based on running this end to end:
-
-- **Keep style names short.** Every node references its style by name, and long, descriptive style names such as `relationship_founding_member_of` instead of `founder` get repeated once per node or edge that uses them, and that adds up rapidly in a large graph.
-- **Filter before you export, not after.** If you only care about one slice of the data such as one genre, one decade, one degree of connection then apply that in the SQL or the View rather than exporting everything and hoping the AI's context window can hold it.
-- **Use the token estimator.** The Knowledge Graph visualizer includes one specifically so you can check the cost before you paste something in. Use it, especially before handing a file to a tool with a smaller context window.
-- **Scope to a View when the whole graph is too much.** A focused, few-hundred-edge export of exactly the lineage you want to explore will get better, faster, more reliable answers than a monolithic dump every time.
+Running this end to end taught me a few things about keeping a Knowledge Graph export lean enough for an AI to actually ingest, especially once file size starts pushing against a tool’s context window. I’ve written those lessons up in more detail in [Scaling Tips for Large Graphs and AI Analysis](/blog/posts/scaling-tips-for-large-knowledge-graphs.md).
 
 ## Try it on your own data
 

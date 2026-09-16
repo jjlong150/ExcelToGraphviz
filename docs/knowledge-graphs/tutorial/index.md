@@ -120,7 +120,7 @@ The **Publish all views** button can actually generate the selected files for ea
 
 ## Deep Dive: Importing Your Data From a Workbook
 
-The files for the example which follows are available for download from GitHub at [github.com/jjlong150/excel-to-graphviz-examples/tree/main/neato/rock-band-musician-connections](https://github.com/jjlong150/excel-to-graphviz-examples/tree/main/neato/rock-band-musician-connections).
+As noted above, the files for the following example can be downloaded from the example’s [GitHub repository](https://github.com/jjlong150/excel-to-graphviz-examples/tree/main/neato/rock-band-musician-connections).
 
 To build any graph using Graphviz or as a Knowledge Graph you data must get to the 'data' worksheet. The next sections shows how SQL was used to pull the information from an Excel workbook named `musicians.xlsx`
 
@@ -320,7 +320,6 @@ Here's Eric Clapton's node, as it actually appears in this workbook's Knowledge 
         "hall_of_fame_with": "The Yardbirds (1992), Cream (1993), & as a solo artist (2000)."
       }
     },
-
 ```
 
 Both come from the same `musician` worksheet row. The `Tooltip`'s SQL concatenates those fields into a sentence with `Chr(10)` line breaks, meant to be read. 
@@ -377,36 +376,9 @@ I also asked it to check the cartoon's claim directly against the graph, edge by
 
 It confirmed every link, named the shared musician behind each one, and caught a detail the cartoon's caption glossed over: the Blind Faith → Ginger Baker's Air Force link is actually carried by three shared musicians, not one.
 
-The full write-up, with the complete responses from two different AI models, is here: **[I Let an AI Read My Knowledge Graph](/blog/posts/ai-reads-my-knowledge-graph)**. The short version: a graph built from typed, structured relationships lets an AI trace connections instead of guessing at them from prose, and gives you an answer you can go back and check edge by edge, which is the entire point of asking in the first place.
+The full write-up, with the complete responses from two different AI models, is here: [I Let an AI Read My Knowledge Graph](/blog/posts/ai-reads-my-knowledge-graph). The short version: a graph built from typed, structured relationships lets an AI trace connections instead of guessing at them from prose, and gives you an answer you can go back and check edge by edge, which is the entire point of asking in the first place.
 
-## Lessons Learned: Scaling Tips for Large Graphs and AI Analysis
-
-This dataset with 574 nodes, and 627 edges is a reasonable stress test, and it exposed a real limit worth planning around: one AI tool I tried truncated the file and couldn't complete the edge-by-edge verification above, even after I eliminated tooltips and using properties-only got the export under 220 KB (with no hand editing of the JSON file). A few things that help:
-
-- **Keep style names short.** Every node and edge references its style by name, and that name repeats once per element that uses it. For example, `relationship_member_of` costs more, at scale, than `member_of`. This dataset had verbose data elements. 
- 
-  I chose not to alter the data, or alias the values in the SQL statements.
-- **Filter before you export, not after.** Use a `WHERE` clause to scope the SQL to the slice of the graph you actually want analyzed, rather than exporting everything and hoping the AI's context window can hold it. 
-
-  You can also take advantage of Relationship Visualizer's [View](/views/) capability to filter out styles. For example, we could have created a view which filtered out music genres such as "Punk Rock", "Psychedelic Rock", etc. to shrink the overall graph.
-- **Check the token estimator before you paste.** The Knowledge Graph viewer includes one specifically so you know the cost up front. Character counts and token estimates are displayed in the status bar with each Knowledge Graph visualization.
-- **Prefer tools with larger context windows for large graphs.** Not every AI tool handles the same file size equally well. If one truncates your content, that's a signal to shrink the export, and its not necessarily a dead end.
-
-::: tip TIP 1: Don't Publish Redundant Data
-The example above uses `xlabel`, `tooltip`, and `properties` elements. `xlabel` and `tooltip` are intended primarily for the visual presentation of the graph, but they can also be used for Knowledge Graph analysis when a `properties` object isn't present. `properties`, on the other hand, is used exclusively by the Knowledge Graph.
-
-There is a single underlying model for the graph, but its output can be tailored uniquely, yet consistently, for each representation using the ribbon options. One set of choices can drive the visual graph while another drives the Knowledge Graph.
-
-To keep your Knowledge Graph as small as possible, output `properties` whenever it's available. Otherwise, output the label elements (`label`, `xlabel`, `taillabel`, `headlabel`) and/or `tooltip`. **Avoid outputting all of these elements at once if their data overlaps** as this only adds redundant bulk to the graph.
-
-You can easily exclude labels and tooltips using the checkmarks on the `Node`, `Edge`, and `Cluster` dropdown lists in the `Data` ribbon tab.
-:::
-
-::: tip TIP 2: Minify Your Knowledge Graph
-Beyond trimming which elements you output, you can further reduce your Knowledge Graph's size by minifying it.
-
-You can minify the Knowledge Graph in one of two ways: save the raw content directly from the Knowledge Graph viewer, or set the `Minify` publishing option to `true` on the settings worksheet before pressing **Publish**.
-:::
+That same dataset was also a reasonable stress test for file size. So large in fact, that one AI tool truncated it before I trimmed the export down. If you're working with a Knowledge Graph of similar scale, [Scaling Tips for Large Graphs and AI Analysis](/blog/posts/scaling-tips-for-large-knowledge-graphs.md) covers the techniques I used to shrink the file without losing the edge-by-edge fidelity that made the analysis worth trusting in the first place.
 
 ## Try It on Your Own Data
 
