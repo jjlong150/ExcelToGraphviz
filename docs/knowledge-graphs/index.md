@@ -118,24 +118,28 @@ Properties follow the same graph → node/edge → row inheritance as labels and
 Here's what a single node looks like in an actual export. The Tooltip built for a human, and the Properties built for a machine, both drawn from the same worksheet row:
 
 ```json
-{
-  "id": "Eric Clapton",
-  "style": "hall_of_famer",
-  "xlabel": { "value": "Eric Clapton", "type": "text" },
-  "tooltip": {
-    "value": "Eric Clapton | guitarist 1945- UK  In the Rock & Roll Hall of Fame with The Yardbirds (1992), Cream (1993), & as a solo artist (2000).",
-    "type": "text"
-  },
-  "properties": {
-    "instrument": "guitar",
-    "role": "guitarist",
-    "years_active": "1960s–present",
-    "country": "UK",
-    "hall_of_fame": true
-  }
-}
+    {
+      "id": "Eric Clapton",
+      "style": "hall_of_famer",
+      "xlabel": {
+        "value": "Eric Clapton",
+        "type": "text"
+      },
+      "tooltip": {
+        "value": "Eric Clapton | guitarist 1945- UK  In the Rock & Roll Hall of Fame with The Yardbirds (1992), Cream (1993), & as a solo artist (2000).",
+        "type": "text"
+      },
+      "properties": {
+        "born": 1945,
+        "instrument": "guitar",
+        "role": "guitarist",
+        "years_active": "1960s-present",
+        "country": "UK",
+        "hall_of_fame": true,
+        "hall_of_fame_with": "The Yardbirds (1992), Cream (1993), & as a solo artist (2000)."
+      }
+    },
 ```
-
 ## Publishing from SQL
 
 If you drive graph generation with [SQL queries](/sql/), two `PUBLISH` directives route query results straight to a Knowledge Graph instead of a diagram:
