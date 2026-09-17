@@ -114,14 +114,13 @@ Since `properties` already covers everything `xlabel` and `tooltip` provide, the
     },
 ```
 
-You can easily exclude labels and tooltips using the checkmarks on the `Node`, `Edge`, and `Cluster` dropdown lists in `Options` group on the `Data` ribbon tab. The example below shows the choices for Nodes.
+You can easily exclude labels and tooltips using the checkmarks on the `Node`, `Edge`, and `Cluster` dropdown lists in `Options` group on the `Data` ribbon tab. 
 
+For example, the images below show the `Node` dropdown menu in the Options group, and the menu item toggle choices for including or excluding labels from Nodes.
 
-| Options| Node Options |
+| Options Group| Node Options Menu |
 | :-: | :-: |
 | ![Options group on the Data ribbon tab.](../images/data_tab_options.png)| ![Options group on the Data ribbon tab.](../images/node-options.png)|
-| | |
-
 
 ## Minify your Knowledge Graph
 
