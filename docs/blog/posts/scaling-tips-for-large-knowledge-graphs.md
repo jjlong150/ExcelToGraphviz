@@ -184,3 +184,5 @@ FROM
 ## What's your tip?
 
 These are the techniques that got my export under the wire, but I doubt they're the only ones out there. If you've found other ways to keep a Knowledge Graph lean without losing fidelity, I'd like to hear about them. What tips would you add?
+
+<Comments />

@@ -36,3 +36,5 @@ Here is an illustration of the same node published with each renderer. The chang
 If you've never changed this setting, you don't need to start now, Cairo is a good default. But if you ever run into odd font spacing, missing characters, or rendering artifacts on a particular machine, this is something I'd try switching.
 
 See the [full changelog](/changelog/) for everything else new in v11.0.
+
+<Comments />

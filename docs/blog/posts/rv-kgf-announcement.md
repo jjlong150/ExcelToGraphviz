@@ -53,3 +53,5 @@ The full comparison, format by format, is in the [industry-comparison doc](https
 As always, this is a **free** tool built and maintained by **one person in his spare time**. If this tool accelerates your AI journey, consider [buying me a coffee](https://www.buymeacoffee.com/exceltographviz). Eleven years and 10,000+ downloads in, we're still only at three. 😔
 
 If a coffee is not in the budget, [leaving a 5-star review on SourceForge](https://sourceforge.net/projects/relationship-visualizer/reviews/new) costs nothing but a minute of your time, and helps more than coffee does. As search shifts from links toward AI-generated answers, reviews like these are becoming one of the few signals that still help people actually find a tool like this one.
+
+<Comments />

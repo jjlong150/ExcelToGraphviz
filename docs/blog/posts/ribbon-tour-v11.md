@@ -59,3 +59,5 @@ Cluster style names, written onto a cluster's opening and closing brace rows, ca
 |     |
 
 That's the tour. See the [full changelog](/changelog/) for the complete list of ribbon changes, including the SVG tab's new on/off controls.
+
+<Comments />

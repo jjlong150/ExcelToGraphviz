@@ -80,3 +80,5 @@ Running this end to end taught me a few things about keeping a Knowledge Graph e
 The interesting part isn't that an AI can read JSON. It is that a graph shaped like this lets it *traverse* relationships instead of just summarizing text, and gives you an answer you can go back and check edge by edge. If you've got relationship data of your own sitting in a spreadsheet, the [Musician to Band Connections tutorial](/knowledge-graphs/tutorial/) is a good template to start from, and the [Knowledge Graph export post](/blog/posts/knowledge-graph-export) covers how to turn it on.
 
 I'd genuinely like to see what other people's data tells an AI that they didn't already know.
+
+<Comments />

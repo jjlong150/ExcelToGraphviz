@@ -43,3 +43,6 @@ A couple of smaller notes worth a quick read if you're curious: **[Fresher Style
 ---
 
 Grab the update and check the [full changelog](/changelog/) for every detail, big and small. As always, I'd love to hear what you think.
+
+<Comments />
+

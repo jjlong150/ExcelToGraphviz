@@ -43,3 +43,5 @@ If you use the workbook Exchange feature to version-control styles and settings,
 ---
 
 That's the whole list. See the [full changelog](/changelog/) for the complete picture of what's new, and open a [GitHub issue](https://github.com/jjlong150/ExcelToGraphviz/issues) if anything here catches you by surprise.
+
+<Comments />

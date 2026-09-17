@@ -29,3 +29,5 @@ The Style Designer caches its color and font preview swatches as images so the g
 You don't need to clear anything or click a button. The galleries are built the first time you need it, and after that first rebuild your galleries will display responsively.
 
 See the [full changelog](/changelog/) for everything else new in v11.0.
+
+<Comments />

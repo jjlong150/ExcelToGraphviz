@@ -88,3 +88,5 @@ If you drive graph generation with SQL queries, two new `PUBLISH` commands publi
 A lot of relationship data will never make it into a formal graph database. Not because it isn’t valuable, but because the organizational lift or financial commitment required to get it there is too high. This tool is free, and it lets you start small. Once you’ve built your worksheet and queries, the new feature makes publishing easy: the same rows that produce a diagram today can also produce a portable, typed, AI‑ready Knowledge Graph, all generated together from a single export.
 
 Try it on a worksheet you already have. Check the [full changelog](/changelog/) for every detail of this release, and let me know what you'd want to see next.
+
+<Comments />

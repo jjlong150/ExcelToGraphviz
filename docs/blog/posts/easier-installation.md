@@ -40,3 +40,5 @@ Neither of these replaces the plain zip download. It is still available for down
 ## Get it
 
 Head to the [download page](/download/) for both platforms, or jump straight to the [Windows](/install-win/) or [macOS](/install-mac/) install guide for the details.
+
+<Comments />

@@ -45,3 +45,5 @@ All of this comes from an optional feature called **SVG postprocessing**, which 
 If you're already using Relationship Visualizer, turn on postprocessing in on the `SVG` tab, then publish an SVG diagram; the new toolbar will be there automatically. Full details are in the [Post-Process SVG Files](/svg/) guide.
 
 I'd like to hear what you think, especially if you're working with diagrams in the hundreds-of-nodes range as that's exactly the case this was built for.
+
+<Comments />
