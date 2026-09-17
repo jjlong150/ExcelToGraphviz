@@ -557,6 +557,7 @@ Private Function GetStyles(ByRef ini As settings, viewStyles As Dictionary) As D
             Dim name As String: name = Trim$(.styleName)
             Dim desc As String: desc = Trim$(.styleDescription)
             Dim typ As String:  typ = Trim$(.styleType)
+            Dim prop As String: prop = Trim$(.styleProperties)
 
             If typ = "subgraph-open" Then
                 typ = "cluster"
@@ -564,6 +565,13 @@ Private Function GetStyles(ByRef ini As settings, viewStyles As Dictionary) As D
             End If
             If desc <> vbNullString Then dictObj.Add JSON_STYLES_DESCRIPTION, desc
             If typ <> vbNullString Then dictObj.Add JSON_STYLES_TYPE, typ
+            If prop <> vbNullString Then
+                ' Convert raw text to Dictionary
+                Dim propertiesDict As Dictionary
+                Set propertiesDict = ParsePropertyString(prop)
+                ' Add to dictionary if parsing succeeded
+                If propertiesDict.Count > 0 Then dictObj.Add JSON_STYLES_PROPERTIES, propertiesDict
+            End If
         End With
 
         If dictObj.Count > 0 Then
@@ -621,7 +629,7 @@ End Function
 ' ==========================================================================
 Private Sub ProcessMetadata(ini As settings, viewName As String, ByRef body As Dictionary)
     body.Add "format", "RV-KGF" ' Relationship Visualizer - Knowledge Graph Format
-    body.Add "version", "1.0"
+    body.Add "version", "1.1"
     body.Add "directed", IIf(ini.graph.graphType = "directed", True, False)
     body.Add "source_workbook", ThisWorkbook.name
     body.Add "view", viewName

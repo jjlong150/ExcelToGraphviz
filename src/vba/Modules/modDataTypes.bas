@@ -65,6 +65,7 @@ Public Type stylesWorksheet
     nameColumn As Long                           ' Column number where Style name is located
     descriptionColumn As Long                    ' Column number where the description of the style is located
     formatColumn As Long                         ' Column number where style attributes such as font associated with the style is located
+    propertiesColumn As Long                     ' Column number where Knowledge Graph properties are located
     typeColumn As Long                           ' Column number where Object Type (NODE/EDGE/NATIVE etc) is located
     firstYesNoColumn As Long                     ' Column number where Yes/No switches begin
     selectedViewColumn As Long                   ' Column number where Yes/No switch to include the Style during rendering is kept
@@ -292,6 +293,7 @@ Public Type StylesRow
     styleName As String
     Description As String
     Format As String
+    properties As String
     styleType As String
     show As String
 End Type

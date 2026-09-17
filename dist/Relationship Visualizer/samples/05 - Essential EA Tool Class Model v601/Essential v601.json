@@ -4,11 +4,11 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2026-01-10",
-    "time": "15:42:46",
+    "date": "2026-09-17",
+    "time": "16:00:39",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "Essential v601.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
     "data": [
@@ -29227,7 +29227,7 @@
       {
         "row": 9,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":AFA-RELATION",
         "type": "node",
         "format": {
@@ -29267,7 +29267,7 @@
       {
         "row": 10,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":AFIA-RELATION",
         "type": "node",
         "format": {
@@ -29307,7 +29307,7 @@
       {
         "row": 11,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":APA-STATIC-RELATION",
         "type": "node",
         "format": {
@@ -29347,7 +29347,7 @@
       {
         "row": 12,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":Application_Relationship",
         "type": "node",
         "format": {
@@ -30307,7 +30307,7 @@
       {
         "row": 36,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":CLASS",
         "type": "node",
         "format": {
@@ -30347,7 +30347,7 @@
       {
         "row": 37,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":DIRECTED-BINARY-RELATION",
         "type": "node",
         "format": {
@@ -30387,7 +30387,7 @@
       {
         "row": 38,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":EA_Graph_Relation",
         "type": "node",
         "format": {
@@ -30427,7 +30427,7 @@
       {
         "row": 39,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":EA_Support_Relationship",
         "type": "node",
         "format": {
@@ -30467,7 +30467,7 @@
       {
         "row": 40,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":Lifecycle-Model-Relation",
         "type": "node",
         "format": {
@@ -30507,7 +30507,7 @@
       {
         "row": 41,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":Roadmap-Model-Relation",
         "type": "node",
         "format": {
@@ -30547,7 +30547,7 @@
       {
         "row": 42,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":STANDARD-CLASS",
         "type": "node",
         "format": {
@@ -30587,7 +30587,7 @@
       {
         "row": 43,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":STANDARD-SLOT",
         "type": "node",
         "format": {
@@ -30627,7 +30627,7 @@
       {
         "row": 44,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":SYSTEM-CLASS",
         "type": "node",
         "format": {
@@ -30667,7 +30667,7 @@
       {
         "row": 45,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":BA-DIAGRAM-RELATION",
         "type": "node",
         "format": {
@@ -30707,7 +30707,7 @@
       {
         "row": 46,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":BP-DIAGRAM-RELATION",
         "type": "node",
         "format": {
@@ -30747,7 +30747,7 @@
       {
         "row": 47,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":Business_Relationship",
         "type": "node",
         "format": {
@@ -30787,7 +30787,7 @@
       {
         "row": 48,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":PROD-DIAGRAM-RELATION",
         "type": "node",
         "format": {
@@ -30827,7 +30827,7 @@
       {
         "row": 49,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":PT-DIAGRAM-RELATION",
         "type": "node",
         "format": {
@@ -32347,7 +32347,7 @@
       {
         "row": 87,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":PTM-RELATION",
         "type": "node",
         "format": {
@@ -32387,7 +32387,7 @@
       {
         "row": 88,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":TCA-RELATION",
         "type": "node",
         "format": {
@@ -32427,7 +32427,7 @@
       {
         "row": 89,
         "hidden": false,
-        "height": 30,
+        "height": 43.5,
         "name": ":Technology_Relationship",
         "type": "node",
         "format": {
@@ -32467,7 +32467,7 @@
       {
         "row": 90,
         "hidden": false,
-        "height": 15,
+        "height": 43.5,
         "name": ":TPA-RELATION",
         "type": "node",
         "format": {
@@ -36922,23 +36922,63 @@
           null,
           null
         ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ]
   },
   "settings": {
     "data": {
       "graphToWorksheet": {
+        "jsonViewer": "new",
         "runMode": "manual",
         "imageType": "svg",
         "imageWorksheet": "graph",
         "scaleImage": 50
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v9.1.01\\Relationship Visualizer\\samples\\05 - Essential EA Tool Class Model v601",
+        "openAfterPublish": false,
+        "publishGraphvizGraph": true,
+        "publishDot": true,
+        "publishKnowledgeGraph": true,
+        "minifyJson": false,
+        "indentJson": 2,
+        "directory": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\05 - Essential EA Tool Class Model v601",
         "fileNamePrefix": "%V View",
         "imageType": "pdf",
         "appendOptions": false,
-        "appendTimeStamp": false
+        "appendTimeStamp": false,
+        "renderCairo": false,
+        "renderGD": false,
+        "renderGDIPlus": false,
+        "renderQuartz": false
       },
       "layout": {
         "engine": "sfdp",
@@ -36969,7 +37009,9 @@
           "includeOrphanNodes": false,
           "includeNodeLabels": true,
           "includeNodeXLabels": true,
-          "blankNodeLabels": "default"
+          "includeNodeTooltips": true,
+          "blankNodeLabels": "default",
+          "blankNodeTooltips": "default"
         },
         "edges": {
           "addStrict": true,
@@ -36977,18 +37019,27 @@
           "includeOrphanEdges": false,
           "includeEdgeHeadLabels": true,
           "includeEdgeLabels": true,
+          "includeEdgeTooltips": true,
           "includeEdgeXLabels": true,
           "includeEdgeTailLabels": true,
           "includeEdgePorts": true,
-          "blankEdgeLabels": "blank"
+          "blankEdgeLabels": "blank",
+          "blankEdgeTooltips": "default"
+        },
+        "clusters": {
+          "includeClusterLabels": true,
+          "includeClusterTooltips": true,
+          "blankClusterLabels": "default",
+          "blankClusterTooltips": "default"
         }
       },
       "styles": {
         "selectedViewColumn": "AA",
         "includeStyleFormat": true,
         "includeExtraAttributes": true,
-        "suffixOpen": "Begin",
-        "suffixClose": "End"
+        "affixOpen": "Begin",
+        "affixClose": "End",
+        "concatFormat": "{name} {affix}"
       },
       "debug": {
         "debug": "off",
@@ -37003,8 +37054,7 @@
         "headLabel": "hide",
         "relatedItem": "show",
         "styleName": "show",
-        "extraAttributes": "show",
-        "message": "hide"
+        "extraAttributes": "show"
       },
       "language": {
         "language": "locale_en-US"
@@ -37033,7 +37083,7 @@
         "locale_pl-PL": "hide",
         "settings": "hide",
         "shapes": "hide",
-        "source": "show",
+        "source": "hide",
         "sql": "hide",
         "styleDesigner": "show",
         "styles": "show",
@@ -37045,7 +37095,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v9.1.01\\Relationship Visualizer\\samples\\05 - Essential EA Tool Class Model v601",
+      "imagePath": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\05 - Essential EA Tool Class Model v601;C:\\data\\local\\rv\\v9.1.01\\Relationship Visualizer\\samples\\05 - Essential EA Tool Class Model v601",
       "additionalGraphOptions": "sep=\"+72,72\" ranksep=\"2.0\"",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -37098,6 +37148,8 @@
       "clusterAttributes": "cluster attributes",
       "clusterTooltip": "cluster tooltip",
       "clusterPlaceholder": "%clc%",
+      "clusterLevelPlaceholder": "{level}",
+      "clusterMaxLevels": 25,
       "subcluster": "subcluster",
       "subclusterLabel": "",
       "subclusterStyleName": "subcluster style name",
@@ -37111,11 +37163,29 @@
       "whereColumn": "WHERE COLUMN",
       "whereValue": "WHERE VALUE",
       "maxDepth": "MAX DEPTH",
+      "iterateSwitch": "ITERATE",
+      "iterateQueryId": "SQL FOR ID",
+      "iterateQueryData": "SQL FOR DATA",
+      "iteratePlaceholder": "{id}",
+      "enumerateSwitch": "ENUMERATE",
+      "enumerateStartAt": "START AT",
+      "enumerateStopAt": "STOP AT",
+      "enumerateStepBy": "STEP BY",
+      "enumeratePlaceholder": "{step}",
+      "enumerateMax": "MAX CYCLES",
+      "concatenateSwitch": "CONCATENATE",
+      "concatenateField": "FIELD",
+      "concatenateMapTo": "ASSIGN TO",
+      "concatenatePrefix": "PREFIX",
+      "concatenateSuffix": "SUFFIX",
+      "concatenateSeparator": "SEPARATOR",
       "createEdges": "CREATE EDGES",
       "createRank": "CREATE RANK",
       "filterColumn": "E",
       "filterValue": "EXAMPLE 01",
-      "closeConnections": true
+      "closeConnections": true,
+      "retryLimit": 3,
+      "maxConnectionMinutes": 15
     },
     "extensions": {
       "tabName": "Extensions",
@@ -37277,12 +37347,12 @@
           "wrapText": true
         },
         {
-          "id": "message",
+          "id": "properties",
           "column": 11,
-          "heading": "Messages",
-          "width": 0,
-          "hidden": true,
-          "wrapText": false
+          "heading": "Properties",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
         },
         {
           "id": "graphDisplayColumn",
@@ -37327,8 +37397,16 @@
           "wrapText": true
         },
         {
-          "id": "format",
+          "id": "description",
           "column": 3,
+          "heading": "Description",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 4,
           "heading": "Format",
           "width": 50.86,
           "hidden": false,
@@ -37336,7 +37414,7 @@
         },
         {
           "id": "type",
-          "column": 4,
+          "column": 5,
           "heading": "Style Type",
           "width": 16.57,
           "hidden": false,
@@ -37344,7 +37422,7 @@
         },
         {
           "id": "view0",
-          "column": 5,
+          "column": 6,
           "heading": "Application",
           "width": 7.29,
           "hidden": false,
@@ -37352,7 +37430,7 @@
         },
         {
           "id": "view1",
-          "column": 6,
+          "column": 7,
           "heading": "Application Conceptual",
           "width": 7.29,
           "hidden": false,
@@ -37360,7 +37438,7 @@
         },
         {
           "id": "view2",
-          "column": 7,
+          "column": 8,
           "heading": "Application Logical",
           "width": 7.29,
           "hidden": false,
@@ -37368,7 +37446,7 @@
         },
         {
           "id": "view3",
-          "column": 8,
+          "column": 9,
           "heading": "Application Physical",
           "width": 7.29,
           "hidden": false,
@@ -37376,7 +37454,7 @@
         },
         {
           "id": "view4",
-          "column": 9,
+          "column": 10,
           "heading": "Business",
           "width": 7.29,
           "hidden": false,
@@ -37384,7 +37462,7 @@
         },
         {
           "id": "view5",
-          "column": 10,
+          "column": 11,
           "heading": "Business Conceptual",
           "width": 7.29,
           "hidden": false,
@@ -37392,7 +37470,7 @@
         },
         {
           "id": "view6",
-          "column": 11,
+          "column": 12,
           "heading": "Business Logical",
           "width": 7.29,
           "hidden": false,
@@ -37400,7 +37478,7 @@
         },
         {
           "id": "view7",
-          "column": 12,
+          "column": 13,
           "heading": "Business Physical",
           "width": 7.29,
           "hidden": false,
@@ -37408,7 +37486,7 @@
         },
         {
           "id": "view8",
-          "column": 13,
+          "column": 14,
           "heading": "Information",
           "width": 7.29,
           "hidden": false,
@@ -37416,7 +37494,7 @@
         },
         {
           "id": "view9",
-          "column": 14,
+          "column": 15,
           "heading": "Information Conceptual",
           "width": 7.29,
           "hidden": false,
@@ -37424,7 +37502,7 @@
         },
         {
           "id": "view10",
-          "column": 15,
+          "column": 16,
           "heading": "Information Logical",
           "width": 7.29,
           "hidden": false,
@@ -37432,7 +37510,7 @@
         },
         {
           "id": "view11",
-          "column": 16,
+          "column": 17,
           "heading": "Information Physical",
           "width": 7.29,
           "hidden": false,
@@ -37440,7 +37518,7 @@
         },
         {
           "id": "view12",
-          "column": 17,
+          "column": 18,
           "heading": "Technology",
           "width": 7.29,
           "hidden": false,
@@ -37448,7 +37526,7 @@
         },
         {
           "id": "view13",
-          "column": 18,
+          "column": 19,
           "heading": "Technology Conceptual",
           "width": 7.29,
           "hidden": false,
@@ -37456,7 +37534,7 @@
         },
         {
           "id": "view14",
-          "column": 19,
+          "column": 20,
           "heading": "Technology Logical",
           "width": 7.29,
           "hidden": false,
@@ -37464,7 +37542,7 @@
         },
         {
           "id": "view15",
-          "column": 20,
+          "column": 21,
           "heading": "Technology Physical",
           "width": 7.29,
           "hidden": false,
@@ -37472,7 +37550,7 @@
         },
         {
           "id": "view16",
-          "column": 21,
+          "column": 22,
           "heading": "Strategy",
           "width": 7.29,
           "hidden": false,
@@ -37480,7 +37558,7 @@
         },
         {
           "id": "view17",
-          "column": 22,
+          "column": 23,
           "heading": "Support",
           "width": 7.29,
           "hidden": false,
@@ -37488,7 +37566,7 @@
         },
         {
           "id": "view18",
-          "column": 23,
+          "column": 24,
           "heading": "System",
           "width": 7.29,
           "hidden": false,
@@ -37496,7 +37574,7 @@
         },
         {
           "id": "view19",
-          "column": 24,
+          "column": 25,
           "heading": "Application to Business",
           "width": 7.29,
           "hidden": false,
@@ -37504,7 +37582,7 @@
         },
         {
           "id": "view20",
-          "column": 25,
+          "column": 26,
           "heading": "Application to Information",
           "width": 7.29,
           "hidden": false,
@@ -37512,7 +37590,7 @@
         },
         {
           "id": "view21",
-          "column": 26,
+          "column": 27,
           "heading": "Application to Technology",
           "width": 7.29,
           "hidden": false,
@@ -37520,7 +37598,7 @@
         },
         {
           "id": "view22",
-          "column": 27,
+          "column": 28,
           "heading": "Technology to Support",
           "width": 7.29,
           "hidden": false,
@@ -37528,7 +37606,7 @@
         },
         {
           "id": "view23",
-          "column": 28,
+          "column": 29,
           "heading": "Business to Information",
           "width": 7.29,
           "hidden": false,
@@ -37536,7 +37614,7 @@
         },
         {
           "id": "view24",
-          "column": 29,
+          "column": 30,
           "heading": "Conceptual",
           "width": 7.29,
           "hidden": false,
@@ -37544,7 +37622,7 @@
         },
         {
           "id": "view25",
-          "column": 30,
+          "column": 31,
           "heading": "Logical",
           "width": 7.29,
           "hidden": false,
@@ -37552,7 +37630,7 @@
         },
         {
           "id": "view26",
-          "column": 31,
+          "column": 32,
           "heading": "Physical",
           "width": 7.29,
           "hidden": false,
@@ -37560,7 +37638,7 @@
         },
         {
           "id": "view27",
-          "column": 32,
+          "column": 33,
           "heading": "All Objects and Relationships",
           "width": 7.29,
           "hidden": false,

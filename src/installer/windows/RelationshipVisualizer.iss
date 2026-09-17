@@ -23,7 +23,7 @@
 ;      full PDF export of it (both live at exceltographviz.com, not
 ;      bundled), instead of shipping the old standalone user-manual PDF.
 
-#define AppVersion "11.0.0"
+#define AppVersion "11.1.0"
 #define DistDir "..\..\..\dist\Relationship Visualizer"
 #define OutputDir "..\..\..\dist"
 

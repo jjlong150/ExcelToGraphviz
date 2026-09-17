@@ -133,7 +133,7 @@ End Enum
 ' "visible=false" to prevent the user from attempting to use it.
 Private scriptVersion As Long
 
-Private Sub SetScriptVersion(ByVal version As Long)
+Public Sub SetScriptVersion(ByVal version As Long)
     scriptVersion = version
 End Sub
 
@@ -2238,6 +2238,7 @@ Public Sub ClearStyleRibbonFields()
     ClearStyleDesignerLabels
     ClearStyleDesignerStyleName
     ClearStyleDesignerStyleDescription
+    ClearStyleDesignerStyleProperties
     CheckRelativePathCheckbox
     OptimizeCode_End
     RenderPreview
@@ -2254,6 +2255,7 @@ Public Sub ClearStyleDesignerRanges()
     StyleDesignerSheet.Range("EdgePenWidth,NodeImageName,NodeImageScale,NodeImagePosition,EdgeHeadClip,EdgeTailClip,EdgeLabelFontName,EdgeLabelFontSize,EdgeLabelFontColor").ClearContents
     StyleDesignerSheet.Range("FontBold,FontItalic").ClearContents
     StyleDesignerSheet.Range("ClusterMargin,ClusterPackmode,ClusterArrayMajor,ClusterArrayAlign,ClusterArrayJustify,ClusterArraySplit,ClusterArraySort").ClearContents
+    StyleDesignerSheet.Range("StylePropertiesIndicator").ClearContents
 End Sub
 
 Public Sub ClearStyleDesignerLabels()
@@ -2276,6 +2278,10 @@ End Sub
 
 Public Sub ClearStyleDesignerStyleDescription()
     StyleDesignerSheet.Range(DESIGNER_STYLE_DESCRIPTION).Value2 = vbNullString  ' Can't use ClearContents on merged cells
+End Sub
+
+Public Sub ClearStyleDesignerStyleProperties()
+    StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES).Value2 = vbNullString  ' Can't use ClearContents on merged cells
 End Sub
 
 Public Sub CheckRelativePathCheckbox()

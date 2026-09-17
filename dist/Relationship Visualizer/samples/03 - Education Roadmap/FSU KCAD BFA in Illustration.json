@@ -4,11 +4,11 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2025-12-10",
-    "time": "14:25:29",
+    "date": "2026-09-17",
+    "time": "15:57:53",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
-    "filename": "FSU KCAD BFA in Illustration.xlsm"
+    "filename": "Relationship Visualizer.xlsm"
   },
   "content": {
     "data": [
@@ -2238,23 +2238,63 @@
           null,
           null
         ]
+      },
+      {
+        "row": 34,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ]
   },
   "settings": {
     "data": {
       "graphToWorksheet": {
+        "jsonViewer": "new",
         "runMode": "auto",
         "imageType": "svg",
         "imageWorksheet": "graph",
         "scaleImage": 100
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v9.0.00\\Relationship Visualizer\\samples\\03 - Education Roadmap",
+        "openAfterPublish": false,
+        "publishGraphvizGraph": true,
+        "publishDot": true,
+        "publishKnowledgeGraph": true,
+        "minifyJson": false,
+        "indentJson": 2,
+        "directory": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\03 - Education Roadmap",
         "fileNamePrefix": "Graph",
         "imageType": "pdf",
         "appendOptions": false,
-        "appendTimeStamp": false
+        "appendTimeStamp": false,
+        "renderCairo": false,
+        "renderGD": false,
+        "renderGDIPlus": false,
+        "renderQuartz": false
       },
       "layout": {
         "engine": "dot",
@@ -2286,7 +2326,9 @@
           "includeOrphanNodes": true,
           "includeNodeLabels": true,
           "includeNodeXLabels": true,
-          "blankNodeLabels": "default"
+          "includeNodeTooltips": true,
+          "blankNodeLabels": "default",
+          "blankNodeTooltips": "default"
         },
         "edges": {
           "addStrict": true,
@@ -2294,18 +2336,27 @@
           "includeOrphanEdges": true,
           "includeEdgeHeadLabels": true,
           "includeEdgeLabels": true,
+          "includeEdgeTooltips": true,
           "includeEdgeXLabels": true,
           "includeEdgeTailLabels": true,
           "includeEdgePorts": true,
-          "blankEdgeLabels": "blank"
+          "blankEdgeLabels": "blank",
+          "blankEdgeTooltips": "default"
+        },
+        "clusters": {
+          "includeClusterLabels": true,
+          "includeClusterTooltips": true,
+          "blankClusterLabels": "default",
+          "blankClusterTooltips": "default"
         }
       },
       "styles": {
-        "selectedViewColumn": "E",
+        "selectedViewColumn": "F",
         "includeStyleFormat": true,
         "includeExtraAttributes": true,
-        "suffixOpen": "Begin",
-        "suffixClose": "End"
+        "affixOpen": "Begin",
+        "affixClose": "End",
+        "concatFormat": "{name} {affix}"
       },
       "debug": {
         "debug": "off",
@@ -2320,8 +2371,7 @@
         "headLabel": "hide",
         "relatedItem": "show",
         "styleName": "show",
-        "extraAttributes": "show",
-        "message": "hide"
+        "extraAttributes": "show"
       },
       "language": {
         "language": "locale_en-US"
@@ -2362,7 +2412,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v9.0.00\\Relationship Visualizer\\samples\\03 - Education Roadmap",
+      "imagePath": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\03 - Education Roadmap;C:\\data\\local\\rv\\v9.0.00\\Relationship Visualizer\\samples\\03 - Education Roadmap",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -2415,6 +2465,8 @@
       "clusterAttributes": "cluster attributes",
       "clusterTooltip": "cluster tooltip",
       "clusterPlaceholder": "%clc%",
+      "clusterLevelPlaceholder": "{level}",
+      "clusterMaxLevels": 25,
       "subcluster": "subcluster",
       "subclusterLabel": "",
       "subclusterStyleName": "subcluster style name",
@@ -2428,11 +2480,29 @@
       "whereColumn": "WHERE COLUMN",
       "whereValue": "WHERE VALUE",
       "maxDepth": "MAX DEPTH",
+      "iterateSwitch": "ITERATE",
+      "iterateQueryId": "SQL FOR ID",
+      "iterateQueryData": "SQL FOR DATA",
+      "iteratePlaceholder": "{id}",
+      "enumerateSwitch": "ENUMERATE",
+      "enumerateStartAt": "START AT",
+      "enumerateStopAt": "STOP AT",
+      "enumerateStepBy": "STEP BY",
+      "enumeratePlaceholder": "{step}",
+      "enumerateMax": "MAX CYCLES",
+      "concatenateSwitch": "CONCATENATE",
+      "concatenateField": "FIELD",
+      "concatenateMapTo": "ASSIGN TO",
+      "concatenatePrefix": "PREFIX",
+      "concatenateSuffix": "SUFFIX",
+      "concatenateSeparator": "SEPARATOR",
       "createEdges": "CREATE EDGES",
       "createRank": "CREATE RANK",
       "filterColumn": "E",
       "filterValue": "EXAMPLE 01",
-      "closeConnections": true
+      "closeConnections": true,
+      "retryLimit": 3,
+      "maxConnectionMinutes": 15
     },
     "extensions": {
       "tabName": "Extensions",
@@ -2594,12 +2664,12 @@
           "wrapText": true
         },
         {
-          "id": "message",
+          "id": "properties",
           "column": 11,
-          "heading": "Messages",
-          "width": 0,
-          "hidden": true,
-          "wrapText": false
+          "heading": "Properties",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
         },
         {
           "id": "graphDisplayColumn",
@@ -2644,8 +2714,16 @@
           "wrapText": true
         },
         {
-          "id": "format",
+          "id": "description",
           "column": 3,
+          "heading": "Description",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 4,
           "heading": "Style Format",
           "width": 50.86,
           "hidden": false,
@@ -2653,7 +2731,7 @@
         },
         {
           "id": "type",
-          "column": 4,
+          "column": 5,
           "heading": "Style Type",
           "width": 16.57,
           "hidden": false,
@@ -2661,7 +2739,7 @@
         },
         {
           "id": "view0",
-          "column": 5,
+          "column": 6,
           "heading": "All Styles",
           "width": 7.29,
           "hidden": false,
@@ -2669,7 +2747,7 @@
         },
         {
           "id": "view1",
-          "column": 6,
+          "column": 7,
           "heading": "No Clusters",
           "width": 7.43,
           "hidden": false,
@@ -2677,7 +2755,7 @@
         },
         {
           "id": "view2",
-          "column": 7,
+          "column": 8,
           "heading": "No Edges",
           "width": 7.43,
           "hidden": false,

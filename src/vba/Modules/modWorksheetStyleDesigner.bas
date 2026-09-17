@@ -1449,6 +1449,7 @@ Public Sub SaveToStylesWorksheet()
     ' Save format + description (always)
     StylesSheet.Cells(row, styles.formatColumn).value = StyleDesignerSheet.Range(DESIGNER_FORMAT_STRING).value
     StylesSheet.Cells(row, styles.descriptionColumn).value = StyleDesignerSheet.Range(DESIGNER_STYLE_DESCRIPTION).value
+    StylesSheet.Cells(row, styles.propertiesColumn).value = StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES).value
     
     rowFocus = row
     

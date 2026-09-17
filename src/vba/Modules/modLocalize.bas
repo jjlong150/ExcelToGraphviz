@@ -481,6 +481,7 @@ Private Sub LocalizeWorksheetStyleDesigner()
     StyleDesignerSheet.Range("TitleStyleDesignerHeadLabelText").value = GetLabel("worksheetStyleDesignerHeadLabelText")
     StyleDesignerSheet.Range("TitleStyleDesignerStyleNameText").value = GetLabel("worksheetStyleDesignerStyleNameText")
     StyleDesignerSheet.Range("TitleStyleDesignerDescriptionText").value = GetLabel("worksheetStyleDesignerDescriptionText")
+    StyleDesignerSheet.Range("TitleStyleDesignerPropertiesText").value = GetLabel("worksheetStyleDesignerPropertiesText")
     StyleDesignerSheet.Range("TitleStyleDesignerFormatString").value = GetLabel("worksheetStyleDesignerFormatString")
     StyleDesignerSheet.buttons("StyleDesignerSaveButton").caption = GetLabel("worksheetStyleDesignerSaveButtonText")
 End Sub
@@ -505,7 +506,9 @@ End Sub
 Public Sub LocalizeWorksheetStyles()
     StylesSheet.name = GetLabel("worksheetStylesName")
     StylesSheet.Range("TitleStylesStyleName").value = GetLabel("worksheetStylesStyleName")
+    StylesSheet.Range("TitleStylesDescription").value = GetLabel("worksheetStylesDescription")
     StylesSheet.Range("TitleStylesFormat").value = GetLabel("worksheetStylesFormat")
+    StylesSheet.Range("TitleStylesProperties").value = GetLabel("worksheetStylesProperties")
     StylesSheet.Range("TitleStylesStyleType").value = GetLabel("worksheetStylesStyleType")
 End Sub
 

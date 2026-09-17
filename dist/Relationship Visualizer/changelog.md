@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 11.1.0 - September 17, 2026
+
+Version 11.1.0 enhances the Knowledge Graph output. This update adds a new Properties column to the Styles worksheet integrated with the Style Designer, letting users attach custom Knowledge Graph attributes (like `encrypted=true`) to any style. These properties now flow through the whole system — saving and loading styles, exporting/importing style data, and generating the Knowledge Graph JSON output (which also got a version bump to reflect the new field).
+
+A couple of smaller, unrelated housekeeping fixes came along with it: the "Auto Draw" graph feature now correctly checks whether auto-mode is actually turned on before redrawing, and an old "center" graph setting that was no longer needed was removed from the generated output.
+
 ## Version 11.0.0 - September 1, 2026
 
 Version 11.0 is the biggest release in **Relationship Visualizer**'s history, built around two headline features: exporting your data as an AI-ready Knowledge Graph, and a dramatically more capable SVG diagram viewer with pan, zoom, filtering, and highlighting built right in. Alongside those, the ribbon has been reorganized from top to bottom, SQL and Workbook Exchange both gained new capabilities, and a handful of long-standing rough edges were smoothed out. A short list of breaking changes, all low-impact, is included at the end, in case you want to check them before upgrading.

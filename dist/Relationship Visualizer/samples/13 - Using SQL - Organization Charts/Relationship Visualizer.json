@@ -4,8 +4,8 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2025-12-10",
-    "time": "13:55:34",
+    "date": "2026-09-17",
+    "time": "16:05:26",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
     "filename": "Relationship Visualizer.xlsm"
@@ -577,69 +577,74 @@
       {
         "row": 80,
         "hidden": false,
-        "height": 60,
-        "item": "1",
-        "label": "<<b>Joseph Biden</b><BR/><BR/>President of the United<BR/>States>",
-        "styleName": "Department"
+        "height": 60
       },
       {
         "row": 81,
         "hidden": false,
         "height": 75,
-        "item": "2",
-        "label": "<<b>Kamala Harris</b><BR/><BR/>Vice President of the<BR/>United States>",
+        "item": "1",
+        "label": "<<b>Joseph Biden</b><BR/><BR/>President of the United<BR/>States>",
         "styleName": "Department"
       },
       {
         "row": 82,
         "hidden": false,
         "height": 45,
-        "item": "3",
-        "label": "<<b>Antony Blinken</b><BR/><BR/>Secretary of State>",
+        "item": "2",
+        "label": "<<b>Kamala Harris</b><BR/><BR/>Vice President of the<BR/>United States>",
         "styleName": "Department"
       },
       {
         "row": 83,
         "hidden": false,
         "height": 60,
-        "item": "4",
-        "label": "<<b>Wendy Sherman</b><BR/><BR/>Deputy Secretary of<BR/>State>",
+        "item": "3",
+        "label": "<<b>Antony Blinken</b><BR/><BR/>Secretary of State>",
         "styleName": "Department"
       },
       {
         "row": 84,
         "hidden": false,
         "height": 90,
-        "item": "5",
-        "label": "<<b>Brian McKeon</b><BR/><BR/>Deputy Secretary of State<BR/>for Management and<BR/>Resources>",
+        "item": "4",
+        "label": "<<b>Wendy Sherman</b><BR/><BR/>Deputy Secretary of<BR/>State>",
         "styleName": "Department"
       },
       {
         "row": 85,
         "hidden": false,
         "height": 45,
-        "item": "6",
-        "label": "<<b>Lloyd Austin</b><BR/><BR/>Secretary of Defense>",
+        "item": "5",
+        "label": "<<b>Brian McKeon</b><BR/><BR/>Deputy Secretary of State<BR/>for Management and<BR/>Resources>",
         "styleName": "Department"
       },
       {
         "row": 86,
         "hidden": false,
         "height": 60,
-        "item": "7",
-        "label": "<<b>Kathleen Hicks</b><BR/><BR/>Deputy Secretary of<BR/>Defense>",
+        "item": "6",
+        "label": "<<b>Lloyd Austin</b><BR/><BR/>Secretary of Defense>",
         "styleName": "Department"
       },
       {
         "row": 87,
         "hidden": false,
         "height": 75,
+        "item": "7",
+        "label": "<<b>Kathleen Hicks</b><BR/><BR/>Deputy Secretary of<BR/>Defense>",
+        "styleName": "Department"
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 60,
         "item": "8",
         "label": "<<b>David Norquist</b><BR/><BR/>Under Secretary of<BR/>Defense (Comptroller)>",
         "styleName": "Department"
       },
       {
-        "row": 88,
+        "row": 89,
         "hidden": false,
         "height": 60,
         "item": "9",
@@ -647,47 +652,47 @@
         "styleName": "Department"
       },
       {
-        "row": 89,
-        "hidden": false,
-        "height": 60,
-        "item": "10",
-        "label": "<<b>Wally Adeyemo</b><BR/><BR/>Deputy Secretary of the<BR/>Treasury>",
-        "styleName": "Department"
-      },
-      {
         "row": 90,
         "hidden": false,
         "height": 90,
-        "item": "11",
-        "label": "<<b>Andy Baukol</b><BR/><BR/>Under Secretary of the<BR/>Treasury for<BR/>International Affairs>",
+        "item": "10",
+        "label": "<<b>Wally Adeyemo</b><BR/><BR/>Deputy Secretary of the<BR/>Treasury>",
         "styleName": "Department"
       },
       {
         "row": 91,
         "hidden": false,
         "height": 45,
-        "item": "12",
-        "label": "<<b>Merrick Garland</b><BR/><BR/>Attorney General>",
+        "item": "11",
+        "label": "<<b>Andy Baukol</b><BR/><BR/>Under Secretary of the<BR/>Treasury for<BR/>International Affairs>",
         "styleName": "Department"
       },
       {
         "row": 92,
         "hidden": false,
         "height": 60,
-        "item": "13",
-        "label": "<<b>Lisa Monaco</b><BR/><BR/>Deputy Attorney General>",
+        "item": "12",
+        "label": "<<b>Merrick Garland</b><BR/><BR/>Attorney General>",
         "styleName": "Department"
       },
       {
         "row": 93,
         "hidden": false,
         "height": 75,
+        "item": "13",
+        "label": "<<b>Lisa Monaco</b><BR/><BR/>Deputy Attorney General>",
+        "styleName": "Department"
+      },
+      {
+        "row": 94,
+        "hidden": false,
+        "height": 60,
         "item": "14",
         "label": "<<b>Vanita Gupta</b><BR/><BR/>Associate Attorney<BR/>General>",
         "styleName": "Department"
       },
       {
-        "row": 94,
+        "row": 95,
         "hidden": false,
         "height": 60,
         "item": "15",
@@ -695,23 +700,23 @@
         "styleName": "Department"
       },
       {
-        "row": 95,
+        "row": 96,
         "hidden": false,
-        "height": 60,
+        "height": 90,
         "item": "16",
         "label": "<<b>Tommy Beaudreau</b><BR/><BR/>Deputy Secretary of the<BR/>Interior>",
         "styleName": "Department"
       },
       {
-        "row": 96,
+        "row": 97,
         "hidden": false,
-        "height": 90,
+        "height": 60,
         "item": "17",
         "label": "<<b>Shannon Estenoz</b><BR/><BR/>Assistant Secretary for<BR/>Fish and Wildlife and<BR/>Parks>",
         "styleName": "Department"
       },
       {
-        "row": 97,
+        "row": 98,
         "hidden": false,
         "height": 60,
         "item": "18",
@@ -719,23 +724,23 @@
         "styleName": "Department"
       },
       {
-        "row": 98,
+        "row": 99,
         "hidden": false,
-        "height": 60,
+        "height": 90,
         "item": "19",
         "label": "<<b>Jewel Bronaugh</b><BR/><BR/>Deputy Secretary of<BR/>Agriculture>",
         "styleName": "Department"
       },
       {
-        "row": 99,
+        "row": 100,
         "hidden": false,
-        "height": 90,
+        "height": 60,
         "item": "20",
         "label": "<<b>Robert Bonnie</b><BR/><BR/>Under Secretary for Farm<BR/>Production and<BR/>Conservation>",
         "styleName": "Department"
       },
       {
-        "row": 100,
+        "row": 101,
         "hidden": false,
         "height": 60,
         "item": "21",
@@ -743,47 +748,47 @@
         "styleName": "Department"
       },
       {
-        "row": 101,
-        "hidden": false,
-        "height": 60,
-        "item": "22",
-        "label": "<<b>Don Graves</b><BR/><BR/>Deputy Secretary of<BR/>Commerce>",
-        "styleName": "Department"
-      },
-      {
         "row": 102,
         "hidden": false,
         "height": 90,
-        "item": "23",
-        "label": "<<b>Karen Dunn Kelley</b><BR/><BR/>Under Secretary of<BR/>Commerce for Economic<BR/>Affairs>",
+        "item": "22",
+        "label": "<<b>Don Graves</b><BR/><BR/>Deputy Secretary of<BR/>Commerce>",
         "styleName": "Department"
       },
       {
         "row": 103,
         "hidden": false,
         "height": 45,
-        "item": "24",
-        "label": "<<b>Marty Walsh</b><BR/><BR/>Secretary of Labor>",
+        "item": "23",
+        "label": "<<b>Karen Dunn Kelley</b><BR/><BR/>Under Secretary of<BR/>Commerce for Economic<BR/>Affairs>",
         "styleName": "Department"
       },
       {
         "row": 104,
         "hidden": false,
         "height": 60,
-        "item": "25",
-        "label": "<<b>Julie Su</b><BR/><BR/>Deputy Secretary of<BR/>Labor>",
+        "item": "24",
+        "label": "<<b>Marty Walsh</b><BR/><BR/>Secretary of Labor>",
         "styleName": "Department"
       },
       {
         "row": 105,
         "hidden": false,
         "height": 135,
+        "item": "25",
+        "label": "<<b>Julie Su</b><BR/><BR/>Deputy Secretary of<BR/>Labor>",
+        "styleName": "Department"
+      },
+      {
+        "row": 106,
+        "hidden": false,
+        "height": 75,
         "item": "26",
         "label": "<<b>Al Stewart</b><BR/><BR/>Acting Assistant<BR/>Secretary for<BR/>Administration and<BR/>Management>",
         "styleName": "Department"
       },
       {
-        "row": 106,
+        "row": 107,
         "hidden": false,
         "height": 75,
         "item": "27",
@@ -791,71 +796,71 @@
         "styleName": "Department"
       },
       {
-        "row": 107,
-        "hidden": false,
-        "height": 75,
-        "item": "28",
-        "label": "<<b>Andrea Palm</b><BR/><BR/>Deputy Secretary of<BR/>Health and Human<BR/>Services>",
-        "styleName": "Department"
-      },
-      {
         "row": 108,
         "hidden": false,
         "height": 120,
-        "item": "29",
-        "label": "<<b>Chiquita<BR/>Brooks-LaSure</b><BR/><BR/>Administrator of the<BR/>Centers for Medicare and<BR/>Medicaid Services>",
+        "item": "28",
+        "label": "<<b>Andrea Palm</b><BR/><BR/>Deputy Secretary of<BR/>Health and Human<BR/>Services>",
         "styleName": "Department"
       },
       {
         "row": 109,
         "hidden": false,
         "height": 75,
-        "item": "30",
-        "label": "<<b>Marcia Fudge</b><BR/><BR/>Secretary of Housing and<BR/>Urban Development>",
+        "item": "29",
+        "label": "<<b>Chiquita<BR/>Brooks-LaSure</b><BR/><BR/>Administrator of the<BR/>Centers for Medicare and<BR/>Medicaid Services>",
         "styleName": "Department"
       },
       {
         "row": 110,
         "hidden": false,
         "height": 90,
-        "item": "31",
-        "label": "<<b>Adrianne Todman</b><BR/><BR/>Deputy Secretary of<BR/>Housing and Urban<BR/>Development>",
+        "item": "30",
+        "label": "<<b>Marcia Fudge</b><BR/><BR/>Secretary of Housing and<BR/>Urban Development>",
         "styleName": "Department"
       },
       {
         "row": 111,
         "hidden": false,
         "height": 135,
-        "item": "32",
-        "label": "<<b>Arthur Jemison</b><BR/><BR/>Principal Deputy<BR/>Assistant Secretary for<BR/>Community Planning and<BR/>Development>",
+        "item": "31",
+        "label": "<<b>Adrianne Todman</b><BR/><BR/>Deputy Secretary of<BR/>Housing and Urban<BR/>Development>",
         "styleName": "Department"
       },
       {
         "row": 112,
         "hidden": false,
         "height": 75,
-        "item": "33",
-        "label": "<<b>Pete Buttigieg</b><BR/><BR/>Secretary of<BR/>Transportation>",
+        "item": "32",
+        "label": "<<b>Arthur Jemison</b><BR/><BR/>Principal Deputy<BR/>Assistant Secretary for<BR/>Community Planning and<BR/>Development>",
         "styleName": "Department"
       },
       {
         "row": 113,
         "hidden": false,
         "height": 90,
-        "item": "34",
-        "label": "<<b>Polly Trottenberg</b><BR/><BR/>Deputy Secretary of<BR/>Transportation>",
+        "item": "33",
+        "label": "<<b>Pete Buttigieg</b><BR/><BR/>Secretary of<BR/>Transportation>",
         "styleName": "Department"
       },
       {
         "row": 114,
         "hidden": false,
         "height": 105,
+        "item": "34",
+        "label": "<<b>Polly Trottenberg</b><BR/><BR/>Deputy Secretary of<BR/>Transportation>",
+        "styleName": "Department"
+      },
+      {
+        "row": 115,
+        "hidden": false,
+        "height": 60,
         "item": "35",
         "label": "<<b>Meera Joshi</b><BR/><BR/>Deputy Administrator of<BR/>the Federal Motor Carrier<BR/>Safety Administration>",
         "styleName": "Department"
       },
       {
-        "row": 115,
+        "row": 116,
         "hidden": false,
         "height": 60,
         "item": "36",
@@ -863,23 +868,23 @@
         "styleName": "Department"
       },
       {
-        "row": 116,
+        "row": 117,
         "hidden": false,
-        "height": 60,
+        "height": 75,
         "item": "37",
         "label": "<<b>David Turk</b><BR/><BR/>Deputy Secretary of<BR/>Energy>",
         "styleName": "Department"
       },
       {
-        "row": 117,
+        "row": 118,
         "hidden": false,
-        "height": 75,
+        "height": 60,
         "item": "38",
         "label": "<<b>Kathleen Hogan</b><BR/><BR/>Under Secretary for<BR/>Infrastructure>",
         "styleName": "Department"
       },
       {
-        "row": 118,
+        "row": 119,
         "hidden": false,
         "height": 60,
         "item": "39",
@@ -887,7 +892,7 @@
         "styleName": "Department"
       },
       {
-        "row": 119,
+        "row": 120,
         "hidden": false,
         "height": 60,
         "item": "40",
@@ -895,7 +900,7 @@
         "styleName": "Department"
       },
       {
-        "row": 120,
+        "row": 121,
         "hidden": false,
         "height": 60,
         "item": "41",
@@ -903,15 +908,15 @@
         "styleName": "Department"
       },
       {
-        "row": 121,
+        "row": 122,
         "hidden": false,
-        "height": 60,
+        "height": 75,
         "item": "42",
         "label": "<<b>Denis McDonough</b><BR/><BR/>Secretary of Veterans<BR/>Affairs>",
         "styleName": "Department"
       },
       {
-        "row": 122,
+        "row": 123,
         "hidden": false,
         "height": 75,
         "item": "43",
@@ -919,7 +924,7 @@
         "styleName": "Department"
       },
       {
-        "row": 123,
+        "row": 124,
         "hidden": false,
         "height": 75,
         "item": "44",
@@ -927,7 +932,7 @@
         "styleName": "Department"
       },
       {
-        "row": 124,
+        "row": 125,
         "hidden": false,
         "height": 75,
         "item": "45",
@@ -935,7 +940,7 @@
         "styleName": "Department"
       },
       {
-        "row": 125,
+        "row": 126,
         "hidden": false,
         "height": 75,
         "item": "46",
@@ -943,7 +948,7 @@
         "styleName": "Department"
       },
       {
-        "row": 126,
+        "row": 127,
         "hidden": false,
         "height": 75,
         "item": "47",
@@ -979,7 +984,7 @@
       {
         "row": 4,
         "hidden": false,
-        "height": 99.75,
+        "height": 100.5,
         "name": "subgraph-open",
         "type": "subgraph-open",
         "viewSwitches": [
@@ -1027,7 +1032,7 @@
       {
         "row": 8,
         "hidden": false,
-        "height": 100.5,
+        "height": 99.75,
         "name": "Border 0 Begin",
         "type": "subgraph-open",
         "format": {
@@ -1213,7 +1218,7 @@
           null,
           null,
           "{Max Depth}",
-          0,
+          3,
           null,
           null,
           null,
@@ -1334,7 +1339,7 @@
         "row": 8,
         "hidden": false,
         "height": 40.5,
-        "sqlStatement": "SELECT [Reports To ID] AS [ITEM],    [ID]        AS [RELATED ITEM], \u000A       [Department]    AS [CLUSTER], 'Border 2 ' AS [CLUSTER STYLE NAME]\u000AFROM   [US Executive Branch$]",
+        "sqlStatement": "SELECT [Reports To ID] AS [ITEM],    \r\u000A       [ID]            AS [RELATED ITEM], \r\u000A       [Department]    AS [CLUSTER], \r\u000A       [Department]    AS [CLUSTER LABEL], \r\u000A       'Border 2 ' AS [CLUSTER STYLE NAME]\r\u000AFROM   [US Executive Branch$]",
         "excelFile": "Example Data.xlsx",
         "status": "FILTERED OUT",
         "filters": [
@@ -1490,7 +1495,7 @@
         "hidden": false,
         "height": 108,
         "enabled": false,
-        "sqlStatement": "SELECT \u000A  'SELECT [ID], [Reports To ID] AS [ITEM],    [ID] AS [RELATED ITEM], \u000A                [Department]    AS [CLUSTER], ''Border 2 '' AS [CLUSTER STYLE NAME]\u000A          FROM [US Executive Branch$] WHERE [Reports To ID] = ''{WHERE VALUE}''' \u000A       AS [TREE QUERY], \u000A  '{ID Number}'  AS [WHERE VALUE], \u000A  'ID' AS [WHERE COLUMN],\u000A  {Max Depth}    AS [MAX DEPTH]",
+        "sqlStatement": "SELECT \r\u000A  'SELECT [ID], [Reports To ID] AS [ITEM],    [ID]         AS [RELATED ITEM], \r\u000A                [Department]    AS [CLUSTER], [Department] AS [CLUSTER LABEL], \r\u000A                ''Border 2 '' AS [CLUSTER STYLE NAME]\r\u000A          FROM [US Executive Branch$] WHERE [Reports To ID] = ''{WHERE VALUE}''' \r\u000A       AS [TREE QUERY], \r\u000A  '{ID Number}'  AS [WHERE VALUE], \r\u000A  'ID' AS [WHERE COLUMN],\r\u000A  {Max Depth}    AS [MAX DEPTH]",
         "status": "SKIPPED",
         "filters": [
           null,
@@ -1582,7 +1587,7 @@
         "row": 16,
         "hidden": false,
         "height": 108,
-        "sqlStatement": "SELECT \u000A  'SELECT [ID], [Reports To ID] AS [ITEM],    [ID] AS [RELATED ITEM], \u000A                [Department]    AS [CLUSTER], ''Border 2 '' AS [CLUSTER STYLE NAME]\u000A          FROM [US Executive Branch$] WHERE [Reports To ID] = ''{WHERE VALUE}''' \u000A       AS [TREE QUERY], \u000A  '1'  AS [WHERE VALUE], \u000A  'ID' AS [WHERE COLUMN],\u000A  0    AS [MAX DEPTH]",
+        "sqlStatement": "SELECT \r\u000A  'SELECT [ID], [Reports To ID] AS [ITEM],    [ID]         AS [RELATED ITEM], \r\u000A                [Department]    AS [CLUSTER], [Department] AS [CLUSTER LABEL], \r\u000A                ''Border 2 '' AS [CLUSTER STYLE NAME]\r\u000A          FROM [US Executive Branch$] WHERE [Reports To ID] = ''{WHERE VALUE}''' \r\u000A       AS [TREE QUERY], \r\u000A  '1'  AS [WHERE VALUE], \r\u000A  'ID' AS [WHERE COLUMN],\r\u000A  3    AS [MAX DEPTH]",
         "excelFile": "Example Data.xlsx",
         "status": "SUCCESS",
         "filters": [
@@ -1955,7 +1960,7 @@
         "row": 28,
         "hidden": false,
         "height": 283.5,
-        "sqlStatement": "SELECT \u000A      'SELECT [ID] AS [ID], \u000A              [ID] AS [ITEM], \u000A              ''<<b>'' & [Name] & ''</b><br/><br/>'' & [Title] & ''>'' AS [LABEL], \u000A              ''25''         AS [SPLIT LENGTH],\u000A              ''<BR/>''      AS [LINE ENDING],\u000A              ''Department'' AS [STYLE NAME]\u000A       FROM   [US Executive Branch$] \u000A       WHERE  [Reports To ID] = ''{WHERE VALUE}''' \u000A                    AS [TREE QUERY], \u000A      '1'  AS [WHERE VALUE], \u000A      'ID' AS [WHERE COLUMN],\u000A      0 AS [MAX DEPTH],\u000A\u000A      [ID] AS [ITEM], \u000A      '<<b>' & [Name] & '</b><br/><br/>' & [Title] & '>' AS [LABEL], \u000A      '25'         AS [SPLIT LENGTH],\u000A      '<BR/>'      AS [LINE ENDING],\u000A      'Department' AS [STYLE NAME]\u000AFROM  [US Executive Branch$] \u000AWHERE [ID] = '1' ",
+        "sqlStatement": "SELECT \u000A      'SELECT [ID] AS [ID], \u000A              [ID] AS [ITEM], \u000A              ''<<b>'' & [Name] & ''</b><br/><br/>'' & [Title] & ''>'' AS [LABEL], \u000A              ''25''         AS [SPLIT LENGTH],\u000A              ''<BR/>''      AS [LINE ENDING],\u000A              ''Department'' AS [STYLE NAME]\u000A       FROM   [US Executive Branch$] \u000A       WHERE  [Reports To ID] = ''{WHERE VALUE}''' \u000A                    AS [TREE QUERY], \u000A      '1'  AS [WHERE VALUE], \u000A      'ID' AS [WHERE COLUMN],\u000A      3 AS [MAX DEPTH],\u000A\u000A      [ID] AS [ITEM], \u000A      '<<b>' & [Name] & '</b><br/><br/>' & [Title] & '>' AS [LABEL], \u000A      '25'         AS [SPLIT LENGTH],\u000A      '<BR/>'      AS [LINE ENDING],\u000A      'Department' AS [STYLE NAME]\u000AFROM  [US Executive Branch$] \u000AWHERE [ID] = '1' ",
         "excelFile": "Example Data.xlsx",
         "status": "SUCCESS",
         "filters": [
@@ -3518,7 +3523,441 @@
         "hidden": false,
         "height": 15,
         "enabled": false,
-        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15,
         "filters": [
           null,
           null,
@@ -3549,17 +3988,28 @@
   "settings": {
     "data": {
       "graphToWorksheet": {
+        "jsonViewer": "new",
         "runMode": "manual",
         "imageType": "svg",
         "imageWorksheet": "graph",
         "scaleImage": 100
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts",
+        "openAfterPublish": false,
+        "publishGraphvizGraph": true,
+        "publishDot": true,
+        "publishKnowledgeGraph": true,
+        "minifyJson": false,
+        "indentJson": 2,
+        "directory": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts",
         "fileNamePrefix": "Graph -",
         "imageType": "png",
         "appendOptions": false,
-        "appendTimeStamp": false
+        "appendTimeStamp": false,
+        "renderCairo": false,
+        "renderGD": false,
+        "renderGDIPlus": false,
+        "renderQuartz": false
       },
       "layout": {
         "engine": "dot",
@@ -3590,7 +4040,9 @@
           "includeOrphanNodes": true,
           "includeNodeLabels": true,
           "includeNodeXLabels": true,
-          "blankNodeLabels": "default"
+          "includeNodeTooltips": true,
+          "blankNodeLabels": "default",
+          "blankNodeTooltips": "default"
         },
         "edges": {
           "addStrict": true,
@@ -3598,18 +4050,27 @@
           "includeOrphanEdges": true,
           "includeEdgeHeadLabels": true,
           "includeEdgeLabels": true,
+          "includeEdgeTooltips": true,
           "includeEdgeXLabels": true,
           "includeEdgeTailLabels": true,
           "includeEdgePorts": true,
-          "blankEdgeLabels": "blank"
+          "blankEdgeLabels": "blank",
+          "blankEdgeTooltips": "default"
+        },
+        "clusters": {
+          "includeClusterLabels": true,
+          "includeClusterTooltips": true,
+          "blankClusterLabels": "default",
+          "blankClusterTooltips": "default"
         }
       },
       "styles": {
-        "selectedViewColumn": "E",
+        "selectedViewColumn": "F",
         "includeStyleFormat": true,
         "includeExtraAttributes": true,
-        "suffixOpen": "Begin",
-        "suffixClose": "End"
+        "affixOpen": "Begin",
+        "affixClose": "End",
+        "concatFormat": "{name}{affix}"
       },
       "debug": {
         "debug": "off",
@@ -3624,8 +4085,7 @@
         "headLabel": "hide",
         "relatedItem": "show",
         "styleName": "show",
-        "extraAttributes": "show",
-        "message": "hide"
+        "extraAttributes": "show"
       },
       "language": {
         "language": "locale_en-US"
@@ -3633,7 +4093,10 @@
       "console": {
         "logToConsole": false,
         "appendConsole": false,
-        "graphvizVerbose": false
+        "graphvizVerbose": false,
+        "errorToConsole": true,
+        "errorToMessageBox": true,
+        "errorToStatusBar": false
       },
       "worksheets": {
         "about": "show",
@@ -3663,7 +4126,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v8.0.01\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts;C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts",
+      "imagePath": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts;C:\\data\\local\\rv\\v8.0.01\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts;C:\\data\\local\\rv\\v8.0.00\\Relationship Visualizer\\samples\\13 - Using SQL - Organization Charts",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -3728,6 +4191,8 @@
       "clusterAttributes": "cluster attributes",
       "clusterTooltip": "cluster tooltip",
       "clusterPlaceholder": "%clc%",
+      "clusterLevelPlaceholder": "{level}",
+      "clusterMaxLevels": 25,
       "subcluster": "subcluster",
       "subclusterLabel": "subcluster label",
       "subclusterStyleName": "subcluster style name",
@@ -3741,11 +4206,29 @@
       "whereColumn": "WHERE COLUMN",
       "whereValue": "WHERE VALUE",
       "maxDepth": "MAX DEPTH",
+      "iterateSwitch": "ITERATE",
+      "iterateQueryId": "SQL FOR ID",
+      "iterateQueryData": "SQL FOR DATA",
+      "iteratePlaceholder": "{id}",
+      "enumerateSwitch": "ENUMERATE",
+      "enumerateStartAt": "START AT",
+      "enumerateStopAt": "STOP AT",
+      "enumerateStepBy": "STEP BY",
+      "enumeratePlaceholder": "{step}",
+      "enumerateMax": "MAX CYCLES",
+      "concatenateSwitch": "CONCATENATE",
+      "concatenateField": "FIELD",
+      "concatenateMapTo": "ASSIGN TO",
+      "concatenatePrefix": "PREFIX",
+      "concatenateSuffix": "SUFFIX",
+      "concatenateSeparator": "SEPARATOR",
       "createEdges": "CREATE EDGES",
       "createRank": "CREATE RANK",
       "filterColumn": "F",
       "filterValue": "Example04",
-      "closeConnections": true
+      "closeConnections": true,
+      "retryLimit": 3,
+      "maxConnectionMinutes": 15
     },
     "extensions": {
       "tabName": "Extensions",
@@ -3888,7 +4371,7 @@
           "heading": "Related Item",
           "width": 20.71,
           "hidden": false,
-          "wrapText": null
+          "wrapText": true
         },
         {
           "id": "styleName",
@@ -3907,12 +4390,12 @@
           "wrapText": true
         },
         {
-          "id": "message",
+          "id": "properties",
           "column": 11,
-          "heading": "Messages",
-          "width": 0,
-          "hidden": true,
-          "wrapText": false
+          "heading": "Properties",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
         },
         {
           "id": "graphDisplayColumn",
@@ -3929,7 +4412,7 @@
         {
           "id": "heading",
           "row": 1,
-          "height": 73.5,
+          "height": 58.5,
           "hidden": false
         },
         {
@@ -3957,8 +4440,16 @@
           "wrapText": true
         },
         {
-          "id": "format",
+          "id": "description",
           "column": 3,
+          "heading": "Description",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 4,
           "heading": "Format",
           "width": 50.71,
           "hidden": false,
@@ -3966,7 +4457,7 @@
         },
         {
           "id": "type",
-          "column": 4,
+          "column": 5,
           "heading": "Style Type",
           "width": 13.86,
           "hidden": false,
@@ -3974,7 +4465,7 @@
         },
         {
           "id": "view0",
-          "column": 5,
+          "column": 6,
           "heading": "All Styles",
           "width": 5,
           "hidden": false,
@@ -3982,7 +4473,7 @@
         },
         {
           "id": "view1",
-          "column": 6,
+          "column": 7,
           "heading": "No Clusters",
           "width": 5,
           "hidden": false,
@@ -3990,7 +4481,7 @@
         },
         {
           "id": "view2",
-          "column": 7,
+          "column": 8,
           "heading": "No Edges",
           "width": 5,
           "hidden": false,

@@ -4,8 +4,8 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2026-01-20",
-    "time": "13:56:20",
+    "date": "2026-09-17",
+    "time": "16:01:46",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
     "filename": "Relationship Visualizer.xlsm"
@@ -17,12 +17,12 @@
         "hidden": false,
         "height": 30,
         "item": "{",
-        "label": "Capability Map",
-        "tooltip": "Capability Map",
+        "label": "Deployment Overview",
+        "tooltip": "Deployment Overview",
         "styleName": "Border 0 Begin",
         "extraAttributes": {
           "pack": "12",
-          "packmode": "array_ut2"
+          "packmode": "array_ut1"
         }
       },
       {
@@ -30,232 +30,296 @@
         "hidden": false,
         "height": 15,
         "item": "{",
-        "label": "explore",
-        "styleName": "Border 2 Begin"
+        "label": "Internet",
+        "tooltip": "Internet",
+        "styleName": "Border 1 Begin",
+        "extraAttributes": {
+          "sortv": "1",
+          "pack": "12",
+          "packmode": "array_ut4"
+        }
       },
       {
         "row": 4,
         "hidden": false,
         "height": 15,
         "item": "{",
-        "styleName": "Border 4 Begin"
+        "label": "Internet_internet",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "1",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
       },
       {
         "row": 5,
         "hidden": false,
         "height": 60,
-        "item": "Public communicationPublic website",
-        "label": "Public website",
-        "tooltip": "Communicatin material provided by our company available to the general public"
+        "item": "{",
+        "label": "End user laptop",
+        "tooltip": "End user laptop",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
       },
       {
         "row": 6,
         "hidden": false,
         "height": 15,
-        "item": "}",
-        "styleName": "Border 4 End"
+        "item": "InternetEnd user laptopCustomer browser",
+        "label": "Customer browser"
       },
       {
         "row": 7,
         "hidden": false,
         "height": 15,
         "item": "}",
-        "styleName": "Border 2 End"
+        "styleName": "Border 4 End"
       },
       {
         "row": 8,
         "hidden": false,
         "height": 15,
-        "item": "{",
-        "label": "onboard",
-        "styleName": "Border 2 Begin"
+        "item": "}",
+        "styleName": "Border 2 End"
       },
       {
         "row": 9,
         "hidden": false,
         "height": 15,
-        "item": "{",
-        "styleName": "Border 4 Begin"
+        "item": "}",
+        "styleName": "Border 1 End"
       },
       {
         "row": 10,
         "hidden": false,
         "height": 45,
-        "item": "Customer Activationorder activation system",
-        "label": "order activation system",
-        "tooltip": "Process of identifying and activating a new customer"
+        "item": "{",
+        "label": "On Premise",
+        "tooltip": "On Premise",
+        "styleName": "Border 1 Begin",
+        "extraAttributes": {
+          "sortv": "2",
+          "pack": "12",
+          "packmode": "array_ut4"
+        }
       },
       {
         "row": 11,
         "hidden": false,
         "height": 45,
-        "item": "Customer Activationsoftware downloader",
-        "label": "software downloader",
-        "tooltip": "Process of identifying and activating a new customer"
+        "item": "{",
+        "label": "BE_Datacentre 1",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "1",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
       },
       {
         "row": 12,
         "hidden": false,
         "height": 15,
-        "item": "}",
-        "styleName": "Border 4 End"
+        "item": "{",
+        "label": "firewall 1",
+        "tooltip": "firewall 1",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
       },
       {
         "row": 13,
         "hidden": false,
         "height": 15,
-        "item": "{",
-        "styleName": "Border 4 Begin"
+        "item": "BEfirewall 1firewall",
+        "label": "firewall",
+        "tooltip": "firewall 1"
       },
       {
         "row": 14,
         "hidden": false,
         "height": 45,
-        "item": "Customer Agreement managementorder management system",
-        "label": "order management system",
-        "tooltip": "Process of managing contracts with customers"
+        "item": "}",
+        "styleName": "Border 4 End"
       },
       {
         "row": 15,
         "hidden": false,
         "height": 45,
-        "item": "Customer Agreement managementorder approval",
-        "label": "order approval",
-        "tooltip": "Process of managing contracts with customers"
+        "item": "{",
+        "label": "host01",
+        "tooltip": "host01 Linux",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
       },
       {
         "row": 16,
         "hidden": false,
         "height": 45,
-        "item": "Customer Agreement managementordering portal",
-        "label": "ordering portal",
-        "tooltip": "Process of managing contracts with customers"
+        "item": "BEhost01order activation system",
+        "label": "order activation system",
+        "tooltip": "host01 Linux"
       },
       {
         "row": 17,
         "hidden": false,
         "height": 45,
-        "item": "Customer Agreement managementSalesforce CRM module",
-        "label": "Salesforce CRM module",
-        "tooltip": "Process of managing contracts with customers"
+        "item": "BEhost01order approval",
+        "label": "order approval",
+        "tooltip": "host01 Linux"
       },
       {
         "row": 18,
         "hidden": false,
         "height": 15,
-        "item": "}",
-        "styleName": "Border 4 End"
+        "item": "BEhost01order management system",
+        "label": "order management system",
+        "tooltip": "host01 Linux"
       },
       {
         "row": 19,
         "hidden": false,
         "height": 15,
-        "item": "{",
-        "styleName": "Border 4 Begin"
+        "item": "BEhost01order workflow",
+        "label": "order workflow",
+        "tooltip": "host01 Linux"
       },
       {
         "row": 20,
         "hidden": false,
         "height": 75,
-        "item": "Sales and Relationship managementSalesforce CRM module",
-        "label": "Salesforce CRM module",
-        "tooltip": "The capability to offer products and services to customers, follow up the customer succes and usage."
+        "item": "}",
+        "styleName": "Border 4 End"
       },
       {
         "row": 21,
         "hidden": false,
         "height": 15,
-        "item": "}",
-        "styleName": "Border 4 End"
+        "item": "{",
+        "label": "Load balancer 1",
+        "tooltip": "Load balancer 1",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
       },
       {
         "row": 22,
         "hidden": false,
         "height": 15,
-        "item": "}",
-        "styleName": "Border 2 End"
+        "item": "BELoad balancer 1Load balancer",
+        "label": "Load balancer",
+        "tooltip": "Load balancer 1"
       },
       {
         "row": 23,
-        "hidden": false,
-        "height": 15,
-        "item": "{",
-        "label": "supporting",
-        "styleName": "Border 2 Begin"
-      },
-      {
-        "row": 24,
-        "hidden": false,
-        "height": 15,
-        "item": "{",
-        "styleName": "Border 4 Begin"
-      },
-      {
-        "row": 25,
-        "hidden": false,
-        "height": 60,
-        "item": "Busines process managementorder workflow",
-        "label": "order workflow",
-        "tooltip": "Supporting function running multiple types of business processes"
-      },
-      {
-        "row": 26,
         "hidden": false,
         "height": 15,
         "item": "}",
         "styleName": "Border 4 End"
       },
       {
-        "row": 27,
+        "row": 24,
         "hidden": false,
         "height": 15,
         "item": "}",
         "styleName": "Border 2 End"
       },
       {
-        "row": 28,
+        "row": 25,
+        "hidden": false,
+        "height": 60,
+        "item": "{",
+        "label": "BE_Datacentre 2",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "2",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 26,
         "hidden": false,
         "height": 15,
         "item": "{",
-        "label": "usage",
-        "styleName": "Border 2 Begin"
+        "label": "firewall 2",
+        "tooltip": "firewall 2",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 27,
+        "hidden": false,
+        "height": 15,
+        "item": "BEfirewall 2firewall",
+        "label": "firewall",
+        "tooltip": "firewall 2"
+      },
+      {
+        "row": 28,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
       },
       {
         "row": 29,
         "hidden": false,
         "height": 15,
         "item": "{",
-        "styleName": "Border 4 Begin"
+        "label": "host02",
+        "tooltip": "host02 Linux",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
       },
       {
         "row": 30,
         "hidden": false,
         "height": 105,
-        "item": "Customer communicationnotification center",
-        "label": "notification center",
-        "tooltip": "The communication made avalable on our products and services in all phases of onboarding, ordering, activation and usage to specific customers."
+        "item": "BEhost02order activation system",
+        "label": "order activation system",
+        "tooltip": "host02 Linux"
       },
       {
         "row": 31,
         "hidden": false,
         "height": 15,
-        "item": "}",
-        "styleName": "Border 4 End"
+        "item": "BEhost02order approval",
+        "label": "order approval",
+        "tooltip": "host02 Linux"
       },
       {
         "row": 32,
         "hidden": false,
         "height": 15,
-        "item": "{",
-        "styleName": "Border 4 Begin"
+        "item": "BEhost02order management system",
+        "label": "order management system",
+        "tooltip": "host02 Linux"
       },
       {
         "row": 33,
         "hidden": false,
         "height": 30,
-        "item": "Customer Training & SupportCase Handler",
-        "label": "Case Handler",
-        "tooltip": "Training and support provided to customers"
+        "item": "BEhost02order workflow",
+        "label": "order workflow",
+        "tooltip": "host02 Linux"
       },
       {
         "row": 34,
@@ -268,11 +332,443 @@
         "row": 35,
         "hidden": false,
         "height": 15,
+        "item": "{",
+        "label": "Load balancer 2",
+        "tooltip": "Load balancer 2",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 36,
+        "hidden": false,
+        "height": 15,
+        "item": "BELoad balancer 2Load balancer",
+        "label": "Load balancer",
+        "tooltip": "Load balancer 2"
+      },
+      {
+        "row": 37,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 38,
+        "hidden": false,
+        "height": 15,
         "item": "}",
         "styleName": "Border 2 End"
       },
       {
-        "row": 36,
+        "row": 39,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 1 End"
+      },
+      {
+        "row": 40,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Cloud",
+        "tooltip": "Cloud",
+        "styleName": "Border 1 Begin",
+        "extraAttributes": {
+          "sortv": "3",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 41,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "BE_metro1",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "1",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 42,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Cloud firewall 1",
+        "tooltip": "Cloud firewall 1",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 43,
+        "hidden": false,
+        "height": 15,
+        "item": "BECloud firewall 1firewall",
+        "label": "firewall",
+        "tooltip": "Cloud firewall 1"
+      },
+      {
+        "row": 44,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 45,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Cloud Load balancer 1",
+        "tooltip": "Cloud Load balancer 1",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 46,
+        "hidden": false,
+        "height": 15,
+        "item": "BECloud Load balancer 1Load balancer",
+        "label": "Load balancer",
+        "tooltip": "Cloud Load balancer 1"
+      },
+      {
+        "row": 47,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 48,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 49,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "BE_metro2",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "2",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 50,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Cloud firewall 2",
+        "tooltip": "Cloud firewall 2",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 51,
+        "hidden": false,
+        "height": 15,
+        "item": "BECloud firewall 2firewall",
+        "label": "firewall",
+        "tooltip": "Cloud firewall 2"
+      },
+      {
+        "row": 52,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 53,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "Cloud Load balancer 2",
+        "tooltip": "Cloud Load balancer 2",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 54,
+        "hidden": false,
+        "height": 15,
+        "item": "BECloud Load balancer 2Load balancer",
+        "label": "Load balancer",
+        "tooltip": "Cloud Load balancer 2"
+      },
+      {
+        "row": 55,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 56,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 57,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "DE Frankfurt_AZ 1",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "3",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 58,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "host03",
+        "tooltip": "host03 AWS Linux",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 59,
+        "hidden": false,
+        "height": 15,
+        "item": "DE Frankfurthost03Customer portal",
+        "label": "Customer portal",
+        "tooltip": "host03 AWS Linux"
+      },
+      {
+        "row": 60,
+        "hidden": false,
+        "height": 15,
+        "item": "DE Frankfurthost03notification center",
+        "label": "notification center",
+        "tooltip": "host03 AWS Linux"
+      },
+      {
+        "row": 61,
+        "hidden": false,
+        "height": 15,
+        "item": "DE Frankfurthost03software downloader",
+        "label": "software downloader",
+        "tooltip": "host03 AWS Linux"
+      },
+      {
+        "row": 62,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 63,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 64,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "DE Frankfurt_AZ 2",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "4",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 65,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "host04",
+        "tooltip": "host04 AWS Linux",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 66,
+        "hidden": false,
+        "height": 15,
+        "item": "DE Frankfurthost04notification center",
+        "label": "notification center",
+        "tooltip": "host04 AWS Linux"
+      },
+      {
+        "row": 67,
+        "hidden": false,
+        "height": 15,
+        "item": "DE Frankfurthost04Public website",
+        "label": "Public website",
+        "tooltip": "host04 AWS Linux"
+      },
+      {
+        "row": 68,
+        "hidden": false,
+        "height": 15,
+        "item": "DE Frankfurthost04software downloader",
+        "label": "software downloader",
+        "tooltip": "host04 AWS Linux"
+      },
+      {
+        "row": 69,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 70,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "IR_Dublin1",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "5",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 45,
+        "item": "{",
+        "label": "SAAS Salesforce 1",
+        "tooltip": "Salesofrce SAAS environment hosted EU",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 45,
+        "item": "IRSAAS Salesforce 1Salesforce CRM module",
+        "label": "Salesforce CRM module",
+        "tooltip": "Salesofrce SAAS environment hosted EU"
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 30,
+        "item": "{",
+        "label": "IR_Dublin2",
+        "styleName": "Border 2 Begin",
+        "extraAttributes": {
+          "sortv": "6",
+          "pack": "12",
+          "packmode": "array_ut2"
+        }
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 45,
+        "item": "{",
+        "label": "SAAS Salesforce 2",
+        "tooltip": "Salesofrce SAAS environment hosted EU",
+        "styleName": "Border 4 Begin",
+        "extraAttributes": {
+          "pack": "12",
+          "packmode": "array_ut1"
+        }
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 45,
+        "item": "IRSAAS Salesforce 2Salesforce CRM module",
+        "label": "Salesforce CRM module",
+        "tooltip": "Salesofrce SAAS environment hosted EU"
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 4 End"
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 2 End"
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "item": "}",
+        "styleName": "Border 1 End"
+      },
+      {
+        "row": 82,
         "hidden": false,
         "height": 15,
         "item": "}",
@@ -1373,7 +1869,7 @@
         "hidden": false,
         "height": 81,
         "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Capability Map'               as [Label], \u000A  'Capability Map'               as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut2' as [attributes]",
-        "status": "SUCCESS",
+        "status": "FILTERED OUT",
         "filters": [
           "Capability Map",
           "Capability Map",
@@ -1466,7 +1962,7 @@
         "height": 189,
         "sqlStatement": "SELECT\u000A  [1.Capability] & [2.Component] as [Item],\u000A  [2.Component]                  as [Label],\u000A  [1.Description]                as [Tooltip],\u000A  [1.Domain]                     as [cluster],\u000A  [1.Domain]                     as [cluster label],\u000A  'Border 2 '                    as [cluster style name],\u000A  [1.Capability]                 as [subcluster],\u000A  'Border 4 '                    as [subcluster style name]      \u000AFROM \u000A  [Capabilities$] AS 1,[Capability Mapping$] AS 2\u000AWHERE\u000A  [1.Capability] = [2.Capability]\u000AORDER BY [1.Domain],[1.Capability]\u000A",
         "excelFile": "Archdata.xlsx",
-        "status": "SUCCESS",
+        "status": "FILTERED OUT",
         "filters": [
           "Capability Map",
           "Capability Map",
@@ -1558,7 +2054,7 @@
         "hidden": false,
         "height": 40.5,
         "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 0 End' as [style name]",
-        "status": "SUCCESS",
+        "status": "FILTERED OUT",
         "filters": [
           "Capability Map",
           "Capability Map",
@@ -1650,7 +2146,7 @@
         "hidden": false,
         "height": 15,
         "sqlStatement": "PREVIEW",
-        "status": "SUCCESS",
+        "status": "FILTERED OUT",
         "filters": [
           "Capability Map",
           null,
@@ -2302,7 +2798,7 @@
         "hidden": false,
         "height": 15,
         "sqlStatement": "RESET",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2333,7 +2829,7 @@
         "hidden": false,
         "height": 81,
         "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Deployment Overview'          as [Label], \u000A  'Deployment Overview'          as [Tooltip], \u000A  'Border 0 Begin'               as [style name], \u000A  'pack=\"12\" packmode=array_ut1' as [attributes]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2364,7 +2860,7 @@
         "hidden": false,
         "height": 81,
         "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Internet'     as [Label], \u000A  'Internet'     as [Tooltip], \u000A  'Border 1 Begin'               as [style name], \u000A  'sortv=1 pack=\"12\" packmode=array_ut4' as [attributes]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2428,7 +2924,7 @@
         "height": 256.5,
         "sqlStatement": "SELECT DISTINCT\r\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\r\u000A  [2.Component]                                         as [Label],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster label],\r\u000A  'Border 2 '                                           as [cluster style name],\r\u000A  'sortv={clc} pack=\"12\" packmode=array_ut2'            as [cluster attributes], \r\u000A  [1.Node]                                              as [subcluster],\r\u000A  [1.Node]                                              as [subcluster label],\r\u000A  [1.Description]                                       as [subcluster Tooltip],\r\u000A  'Border 4 '                                           as [subcluster style name],\r\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\r\u000AFROM \r\u000A  [Nodes$] AS 1,[Deployment$] AS 2\r\u000AWHERE\r\u000A  [1.Node] = [2.Node] AND\r\u000A  [1.Layer]='Internet'\r\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\r\u000A",
         "excelFile": "Archdata.xlsx",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2459,7 +2955,7 @@
         "hidden": false,
         "height": 40.5,
         "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 1 End' as [style name]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2490,7 +2986,7 @@
         "hidden": false,
         "height": 81,
         "sqlStatement": "SELECT \u000A  '{'              as [Item], \u000A  'On Premise'     as [Label], \u000A  'On Premise'     as [Tooltip], \u000A  'Border 1 Begin'               as [style name], \u000A  'sortv=2 pack=\"12\" packmode=array_ut4' as [attributes]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2554,7 +3050,7 @@
         "height": 270,
         "sqlStatement": "SELECT DISTINCT\r\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\r\u000A  [2.Component]                                         as [Label],\r\u000A  [1.Description]                                       as [Tooltip],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster label],\r\u000A  'Border 2 '                                           as [cluster style name],\r\u000A  'sortv={clc} pack=\"12\" packmode=array_ut2'            as [cluster attributes], \r\u000A  [1.Node]                                              as [subcluster],\r\u000A  [1.Node]                                              as [subcluster label],\r\u000A  [1.Description]                                       as [subcluster Tooltip],\r\u000A  'Border 4 '                                           as [subcluster style name],\r\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\r\u000AFROM \r\u000A  [Nodes$] AS 1,[Deployment$] AS 2\r\u000AWHERE\r\u000A  [1.Node] = [2.Node] AND\r\u000A  [1.Layer]='On premise'\r\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\r\u000A",
         "excelFile": "Archdata.xlsx",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2585,7 +3081,7 @@
         "hidden": false,
         "height": 40.5,
         "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 1 End' as [style name]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2648,7 +3144,7 @@
         "hidden": false,
         "height": 81,
         "sqlStatement": "SELECT \u000A  '{'                            as [Item], \u000A  'Cloud'     as [Label], \u000A  'Cloud'     as [Tooltip], \u000A  'Border 1 Begin'               as [style name], \u000A  'sortv=3 pack=\"12\" packmode=array_ut2' as [attributes]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2712,7 +3208,7 @@
         "height": 270,
         "sqlStatement": "SELECT DISTINCT\r\u000A  [1.Region/DataCentre]&[1.Node]&[2.Component]          as [Item],\r\u000A  [2.Component]                                         as [Label],\r\u000A  [1.Description]                                       as [Tooltip],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster],\r\u000A  [1.Region/DataCentre] & \"_\" & [1.Availability Zone]   as [cluster label],\r\u000A  'Border 2 '                                           as [cluster style name],\r\u000A  'sortv={clc} pack=\"12\" packmode=array_ut2'            as [cluster attributes], \r\u000A  [1.Node]                                              as [subcluster],\r\u000A  [1.Node]                                              as [subcluster label],\r\u000A  [1.Description]                                       as [subcluster Tooltip],\r\u000A  'Border 4 '                                           as [subcluster style name],\r\u000A  'pack=\"12\" packmode=array_ut1'                        as [subcluster attributes]\r\u000AFROM \r\u000A  [Nodes$] AS 1,[Deployment$] AS 2\r\u000AWHERE\r\u000A  [1.Node] = [2.Node] AND\r\u000A  [1.Layer]='Cloud'\r\u000AORDER BY [1.Region/DataCentre] & \"_\" & [1.Availability Zone], [1.Node]\r\u000A",
         "excelFile": "Archdata.xlsx",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2743,7 +3239,7 @@
         "hidden": false,
         "height": 40.5,
         "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 1 End' as [style name]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2772,9 +3268,9 @@
       {
         "row": 50,
         "hidden": false,
-        "height": 15,
+        "height": 40.5,
         "sqlStatement": "SELECT \u000A  '}'            as [Item], \u000A  'Border 0 End' as [style name]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           "Deployment Overview",
@@ -2837,7 +3333,7 @@
         "hidden": false,
         "height": 15,
         "sqlStatement": "PREVIEW",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "Deployment Overview",
           null,
@@ -2901,7 +3397,7 @@
         "sqlStatement": "RESET",
         "status": "FILTERED OUT",
         "filters": [
-          "Deployment Overview",
+          null,
           "Deployment Overview",
           "All",
           null,
@@ -3388,23 +3884,701 @@
           null,
           null
         ]
+      },
+      {
+        "row": 71,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 72,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 73,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 74,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 75,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 76,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ]
   },
   "settings": {
     "data": {
       "graphToWorksheet": {
+        "jsonViewer": "new",
         "runMode": "manual",
         "imageType": "png",
         "imageWorksheet": "graph",
         "scaleImage": 100
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
+        "openAfterPublish": false,
+        "publishGraphvizGraph": true,
+        "publishDot": true,
+        "publishKnowledgeGraph": true,
+        "minifyJson": false,
+        "indentJson": 2,
+        "directory": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
         "fileNamePrefix": "graph",
         "imageType": "svg",
         "appendOptions": false,
-        "appendTimeStamp": false
+        "appendTimeStamp": false,
+        "renderCairo": false,
+        "renderGD": false,
+        "renderGDIPlus": false,
+        "renderQuartz": false
       },
       "layout": {
         "engine": "osage",
@@ -3435,7 +4609,9 @@
           "includeOrphanNodes": true,
           "includeNodeLabels": true,
           "includeNodeXLabels": false,
-          "blankNodeLabels": "default"
+          "includeNodeTooltips": true,
+          "blankNodeLabels": "default",
+          "blankNodeTooltips": "default"
         },
         "edges": {
           "addStrict": true,
@@ -3443,18 +4619,27 @@
           "includeOrphanEdges": true,
           "includeEdgeHeadLabels": true,
           "includeEdgeLabels": true,
+          "includeEdgeTooltips": true,
           "includeEdgeXLabels": true,
           "includeEdgeTailLabels": true,
           "includeEdgePorts": true,
-          "blankEdgeLabels": "blank"
+          "blankEdgeLabels": "blank",
+          "blankEdgeTooltips": "default"
+        },
+        "clusters": {
+          "includeClusterLabels": true,
+          "includeClusterTooltips": true,
+          "blankClusterLabels": "default",
+          "blankClusterTooltips": "default"
         }
       },
       "styles": {
-        "selectedViewColumn": "E",
+        "selectedViewColumn": "F",
         "includeStyleFormat": true,
         "includeExtraAttributes": true,
-        "suffixOpen": "Begin",
-        "suffixClose": "End"
+        "affixOpen": "Begin",
+        "affixClose": "End",
+        "concatFormat": "{name}{affix}"
       },
       "debug": {
         "debug": "off",
@@ -3469,8 +4654,7 @@
         "headLabel": "hide",
         "relatedItem": "show",
         "styleName": "show",
-        "extraAttributes": "show",
-        "message": "hide"
+        "extraAttributes": "show"
       },
       "language": {
         "language": "locale_en-US"
@@ -3502,7 +4686,7 @@
         "source": "hide",
         "sql": "show",
         "styleDesigner": "hide",
-        "styles": "hide",
+        "styles": "show",
         "svg": "show"
       }
     },
@@ -3511,7 +4695,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
+      "imagePath": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture;C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\07 - Using SQL - Enterprise Architecture",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -3576,6 +4760,8 @@
       "clusterAttributes": "CLUSTER ATTRIBUTES",
       "clusterTooltip": "CLUSTER TOOLTIP",
       "clusterPlaceholder": "{clc}",
+      "clusterLevelPlaceholder": "{level}",
+      "clusterMaxLevels": 25,
       "subcluster": "subcluster",
       "subclusterLabel": "subcluster label",
       "subclusterStyleName": "SUBCLUSTER STYLE NAME",
@@ -3599,10 +4785,16 @@
       "enumerateStepBy": "STEP BY",
       "enumeratePlaceholder": "{step}",
       "enumerateMax": "MAX CYCLES",
+      "concatenateSwitch": "CONCATENATE",
+      "concatenateField": "FIELD",
+      "concatenateMapTo": "ASSIGN TO",
+      "concatenatePrefix": "PREFIX",
+      "concatenateSuffix": "SUFFIX",
+      "concatenateSeparator": "SEPARATOR",
       "createEdges": "CREATE EDGES",
       "createRank": "CREATE RANK",
       "filterColumn": "E",
-      "filterValue": "Capability Map",
+      "filterValue": "Deployment Overview",
       "closeConnections": true,
       "retryLimit": 3,
       "maxConnectionMinutes": 15
@@ -3767,12 +4959,12 @@
           "wrapText": true
         },
         {
-          "id": "message",
+          "id": "properties",
           "column": 11,
-          "heading": "Messages",
-          "width": 0,
-          "hidden": true,
-          "wrapText": false
+          "heading": "Properties",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
         },
         {
           "id": "graphDisplayColumn",
@@ -3817,8 +5009,16 @@
           "wrapText": true
         },
         {
-          "id": "format",
+          "id": "description",
           "column": 3,
+          "heading": "Description",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 4,
           "heading": "Format",
           "width": 50.71,
           "hidden": false,
@@ -3826,7 +5026,7 @@
         },
         {
           "id": "type",
-          "column": 4,
+          "column": 5,
           "heading": "Style Type",
           "width": 16.71,
           "hidden": false,
@@ -3834,7 +5034,7 @@
         },
         {
           "id": "view0",
-          "column": 5,
+          "column": 6,
           "heading": "All Styles",
           "width": 7.43,
           "hidden": false,
@@ -3842,7 +5042,7 @@
         },
         {
           "id": "view1",
-          "column": 6,
+          "column": 7,
           "heading": "No Clusters",
           "width": 7.43,
           "hidden": false,
@@ -3850,7 +5050,7 @@
         },
         {
           "id": "view2",
-          "column": 7,
+          "column": 8,
           "heading": "No Edges",
           "width": 7.43,
           "hidden": false,

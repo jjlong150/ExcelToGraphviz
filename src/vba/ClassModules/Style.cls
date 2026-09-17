@@ -46,5 +46,11 @@ Public styleFormat As String
 '
 Public styleDescription As String
 
+''
+' The raw Knowledge Graph attribute string. (e.g. "encrypted=true method="post").
+' Typically used when generating JSON for consumption by AI.
+'
+Public styleProperties As String
+
 
 

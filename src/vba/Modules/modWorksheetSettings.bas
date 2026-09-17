@@ -294,6 +294,7 @@ Public Function GetSettingsForStylesWorksheet() As stylesWorksheet
     GetSettingsForStylesWorksheet.nameColumn = GetSettingColNum(SETTINGS_STYLES_COL_STYLE)
     GetSettingsForStylesWorksheet.descriptionColumn = GetSettingColNum(SETTINGS_STYLES_COL_DESCRIPTION)
     GetSettingsForStylesWorksheet.formatColumn = GetSettingColNum(SETTINGS_STYLES_COL_FORMAT)
+    GetSettingsForStylesWorksheet.propertiesColumn = GetSettingColNum(SETTINGS_STYLES_COL_PROPERTIES)
     GetSettingsForStylesWorksheet.typeColumn = GetSettingColNum(SETTINGS_STYLES_COL_OBJECT_TYPE)
     GetSettingsForStylesWorksheet.firstYesNoColumn = GetSettingColNum(SETTINGS_STYLES_COL_FIRST_YES_NO_VIEW)
     GetSettingsForStylesWorksheet.selectedViewColumn = GetSettingColNum(SETTINGS_STYLES_COL_SHOW_STYLE)

@@ -990,6 +990,12 @@ Private Sub ImportLayoutsStyles(ByVal dictionaryObj As Dictionary)
                 StylesSheet.columns.item(styles.formatColumn).Hidden = columns.item(i)(JSON_HIDDEN)
                 StylesSheet.columns.item(styles.formatColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
             
+            Case JSON_STYLES_PROPERTIES
+                StylesSheet.Cells.item(styles.headingRow, styles.propertiesColumn).value = columns.item(i)(JSON_HEADING)
+                StylesSheet.columns.item(styles.propertiesColumn).ColumnWidth = columns.item(i)(JSON_WIDTH)
+                StylesSheet.columns.item(styles.propertiesColumn).Hidden = columns.item(i)(JSON_HIDDEN)
+                StylesSheet.columns.item(styles.propertiesColumn).WrapText = columns.item(i)(JSON_WRAP_TEXT)
+            
             Case JSON_STYLES_TYPE
                 StylesSheet.Cells.item(styles.headingRow, styles.typeColumn).value = columns.item(i)(JSON_HEADING)
                 StylesSheet.columns.item(styles.typeColumn).ColumnWidth = columns.item(i)(JSON_WIDTH)
@@ -1551,6 +1557,7 @@ Private Sub ImportContentStyles(ByRef ini As settings, ByRef exchange As Exchang
     Dim switches As Collection
     Dim dictionaryObj As Dictionary
     Dim Format As String
+    Dim properties As String
     Dim maxSwitchColumns As Long
     maxSwitchColumns = 0
 
@@ -1601,6 +1608,11 @@ Private Sub ImportContentStyles(ByRef ini As settings, ByRef exchange As Exchang
                     Set dictionaryObj = rows.item(rowIndex)(key)
                     Format = DictionaryToAttributes(dictionaryObj)
                     StylesSheet.Cells.item(row, ini.styles.formatColumn).value = Format
+                    
+                Case JSON_STYLES_PROPERTIES
+                    Set dictionaryObj = rows.item(rowIndex)(key)
+                    properties = SerializePropertyString(dictionaryObj)
+                    StylesSheet.Cells.item(row, ini.styles.propertiesColumn).value = properties
                     
                 Case JSON_STYLES_TYPE
                     StylesSheet.Cells.item(row, ini.styles.typeColumn).value = rows.item(rowIndex)(key)

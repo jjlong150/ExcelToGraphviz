@@ -108,6 +108,11 @@ Option Explicit
 '     AutoDraw reactivity model described in the Data Worksheet documentation.
 ' ==========================================================================
 Public Sub AutoDraw()
+    If SettingsSheet.Range(SETTINGS_RUN_MODE).value <> TOGGLE_AUTO Then
+        Application.StatusBar = GetLabel("graphAuto") & " = false"
+        Exit Sub
+    End If
+    Application.StatusBar = False
     Application.screenUpdating = False
     Application.enableEvents = False
     CreateGraphWorksheet
@@ -1198,10 +1203,6 @@ Private Sub ProcessGraphOptions(ByRef graphvizSource As String, ByRef ini As set
         AddAttributeLine graphvizSource, spaces, GRAPHVIZ_BGCOLOR, "transparent"
     End If
     
-    If ini.graph.center Then
-        AddAttributeLine graphvizSource, spaces, GRAPHVIZ_CENTER, TOGGLE_TRUE
-    End If
-       
     If ini.graph.concentrate Then
         AddAttributeLine graphvizSource, spaces, GRAPHVIZ_CONCENTRATE, TOGGLE_TRUE
     End If

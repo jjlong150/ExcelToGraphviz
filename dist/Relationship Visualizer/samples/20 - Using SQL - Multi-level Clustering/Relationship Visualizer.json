@@ -4,8 +4,8 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2026-09-02",
-    "time": "14:01:04",
+    "date": "2026-09-17",
+    "time": "16:11:10",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
     "filename": "Relationship Visualizer.xlsm"
@@ -4674,7 +4674,7 @@
         "publishKnowledgeGraph": false,
         "minifyJson": false,
         "indentJson": 2,
-        "directory": "C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering",
+        "directory": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering",
         "fileNamePrefix": "Graph -",
         "imageType": "svg",
         "appendOptions": false,
@@ -4788,11 +4788,11 @@
         "locale_pl-PL": "hide",
         "settings": "hide",
         "shapes": "hide",
-        "source": "show",
+        "source": "hide",
         "sql": "show",
         "styleDesigner": "show",
         "styles": "show",
-        "svg": "show"
+        "svg": "hide"
       }
     },
     "graph": {
@@ -4800,7 +4800,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering;C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering",
+      "imagePath": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering;C:\\data\\local\\rv\\v11.0.0\\Relationship Visualizer\\samples\\20 - Using SQL - Multi-level Clustering",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""

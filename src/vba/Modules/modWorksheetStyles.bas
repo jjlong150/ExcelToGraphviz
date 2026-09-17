@@ -485,9 +485,14 @@ Public Sub RestoreStyleDesigner()
     Dim styleDescription As String
     styleDescription = StylesSheet.Cells(row, GetSettingColNum(SETTINGS_STYLES_COL_DESCRIPTION)).value
     
-    ' Restore the Style Name and Description
+    ' Get the Style Properties
+    Dim styleProperties As String
+    styleProperties = StylesSheet.Cells(row, GetSettingColNum(SETTINGS_STYLES_COL_PROPERTIES)).value
+    
+    ' Restore the Style Name, Description, and Properties
     StyleDesignerSheet.Range(DESIGNER_STYLE_NAME_TEXT).value = styleName
     StyleDesignerSheet.Range(DESIGNER_STYLE_DESCRIPTION).value = styleDescription
+    StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES).value = styleProperties
 
     ' Reset all the Style Designer ribbon settings
     ClearStyleDesignerRanges

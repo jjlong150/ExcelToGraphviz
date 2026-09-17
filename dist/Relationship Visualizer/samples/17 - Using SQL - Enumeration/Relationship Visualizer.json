@@ -4,8 +4,8 @@
     "type": "Excel to Graphviz Exchange Format",
     "version": "1.0",
     "user": "Jeffrey Long",
-    "date": "2026-01-20",
-    "time": "15:50:25",
+    "date": "2026-09-17",
+    "time": "16:08:21",
     "os": "Windows (64-bit) NT 10.00",
     "excel": "16.0",
     "filename": "Relationship Visualizer.xlsm"
@@ -16,214 +16,274 @@
         "row": 2,
         "hidden": false,
         "height": 15,
-        "item": "1972_id",
-        "relatedItem": "1976_id"
+        "item": "node",
+        "styleName": "Year"
       },
       {
         "row": 3,
         "hidden": false,
         "height": 15,
-        "item": "1976_id",
-        "relatedItem": "1978_id"
+        "item": "edge",
+        "styleName": "Flow"
       },
       {
         "row": 4,
         "hidden": false,
         "height": 15,
-        "item": "1978_id",
-        "relatedItem": "1980_id"
+        "item": "1972",
+        "label": "1972"
       },
       {
         "row": 5,
         "hidden": false,
         "height": 15,
-        "item": "1980_id",
-        "relatedItem": "1982_id"
+        "item": "1973",
+        "label": "1973"
       },
       {
         "row": 6,
         "hidden": false,
         "height": 15,
-        "item": "1982_id",
-        "relatedItem": "1984_id"
+        "item": "1974",
+        "label": "1974"
       },
       {
         "row": 7,
         "hidden": false,
         "height": 15,
-        "item": "1984_id",
-        "relatedItem": "1986_id"
+        "item": "1975",
+        "label": "1975"
       },
       {
         "row": 8,
         "hidden": false,
         "height": 15,
-        "item": "1986_id",
-        "relatedItem": "1988_id"
+        "item": "1976",
+        "label": "1976"
       },
       {
         "row": 9,
         "hidden": false,
         "height": 15,
-        "item": "1988_id",
-        "relatedItem": "1990_id"
+        "item": "1977",
+        "label": "1977"
       },
       {
         "row": 10,
         "hidden": false,
         "height": 15,
-        "item": "1990_id",
-        "relatedItem": "future_id"
+        "item": "1978",
+        "label": "1978"
       },
       {
         "row": 11,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1979",
+        "label": "1979"
       },
       {
         "row": 12,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1980",
+        "label": "1980"
       },
       {
         "row": 13,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1981",
+        "label": "1981"
       },
       {
         "row": 14,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1982",
+        "label": "1982"
       },
       {
         "row": 15,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1983",
+        "label": "1983"
       },
       {
         "row": 16,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1984",
+        "label": "1984"
       },
       {
         "row": 17,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1985",
+        "label": "1985"
       },
       {
         "row": 18,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1986",
+        "label": "1986"
       },
       {
         "row": 19,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1987",
+        "label": "1987"
       },
       {
         "row": 20,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1988",
+        "label": "1988"
       },
       {
         "row": 21,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1989",
+        "label": "1989"
       },
       {
         "row": 22,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1990",
+        "label": "1990"
       },
       {
         "row": 23,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1972",
+        "relatedItem": "1973"
       },
       {
         "row": 24,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1973",
+        "relatedItem": "1974"
       },
       {
         "row": 25,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1974",
+        "relatedItem": "1975"
       },
       {
         "row": 26,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1975",
+        "relatedItem": "1976"
       },
       {
         "row": 27,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1976",
+        "relatedItem": "1977"
       },
       {
         "row": 28,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1977",
+        "relatedItem": "1978"
       },
       {
         "row": 29,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1978",
+        "relatedItem": "1979"
       },
       {
         "row": 30,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1979",
+        "relatedItem": "1980"
       },
       {
         "row": 31,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1980",
+        "relatedItem": "1981"
       },
       {
         "row": 32,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1981",
+        "relatedItem": "1982"
       },
       {
         "row": 33,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1982",
+        "relatedItem": "1983"
       },
       {
         "row": 34,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1983",
+        "relatedItem": "1984"
       },
       {
         "row": 35,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1984",
+        "relatedItem": "1985"
       },
       {
         "row": 36,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1985",
+        "relatedItem": "1986"
       },
       {
         "row": 37,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1986",
+        "relatedItem": "1987"
       },
       {
         "row": 38,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1987",
+        "relatedItem": "1988"
       },
       {
         "row": 39,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1988",
+        "relatedItem": "1989"
       },
       {
         "row": 40,
         "hidden": false,
-        "height": 15
+        "height": 15,
+        "item": "1989",
+        "relatedItem": "1990"
       },
       {
         "row": 41,
@@ -700,7 +760,7 @@
         "hidden": false,
         "height": 15,
         "sqlStatement": "SELECT 'node' as [ITEM], 'Year' as [Style Name]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "RUN",
           "RUN",
@@ -731,7 +791,7 @@
         "hidden": false,
         "height": 15,
         "sqlStatement": "SELECT 'edge' as [ITEM], 'Flow' as [Style Name]",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           "RUN",
           "RUN",
@@ -1007,7 +1067,7 @@
         "hidden": false,
         "height": 94.5,
         "sqlStatement": "SELECT TRUE AS [ENUMERATE],\u000A       MIN(CLng([Year])) AS [START AT],\u000A       MAX(CLng([Year])) AS [STOP AT],\u000A       1 AS [STEP BY],\u000A       '{step}' AS [Item],\u000A       '{step}' AS [Label]FROM [shells$]\u000AWHERE IsNumeric([Year])",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           null,
           "RUN",
@@ -1099,7 +1159,7 @@
         "hidden": false,
         "height": 108,
         "sqlStatement": "SELECT TRUE AS [CREATE EDGES],\u000A       TRUE AS [ENUMERATE],\u000A       MIN(CLng([Year])) AS [START AT],\u000A       MAX(CLng([Year])) AS [STOP AT],\u000A       1 AS [STEP BY],\u000A       '{step}' AS [Item]\u000AFROM [shells$]\u000AWHERE IsNumeric([Year])",
-        "status": "FILTERED OUT",
+        "status": "SUCCESS",
         "filters": [
           null,
           "RUN",
@@ -1191,7 +1251,7 @@
         "hidden": false,
         "height": 94.5,
         "sqlStatement": "SELECT DISTINCT \u000A       ([Year] & '_id') AS [ITEM],\u000A       TRUE AS [CREATE EDGES],\u000A       [Year]\u000AFROM [Shells$]\u000AWHERE [Year] IS NOT NULL\u000AORDER BY [Year] ASC",
-        "status": "SUCCESS",
+        "status": "FILTERED OUT",
         "filters": [
           null,
           null,
@@ -2684,7 +2744,499 @@
         "hidden": false,
         "height": 15,
         "enabled": false,
-        "status": "SKIPPED",
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 77,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 78,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 79,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 80,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 81,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 82,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 83,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 84,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 85,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 86,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 87,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 88,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 89,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 90,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 91,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 92,
+        "hidden": false,
+        "height": 15,
+        "filters": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 93,
+        "hidden": false,
+        "height": 15,
         "filters": [
           null,
           null,
@@ -2715,17 +3267,28 @@
   "settings": {
     "data": {
       "graphToWorksheet": {
+        "jsonViewer": "new",
         "runMode": "auto",
         "imageType": "svg",
         "imageWorksheet": "graph",
         "scaleImage": 100
       },
       "graphToFile": {
-        "directory": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\17 - Using SQL - Enumeration",
+        "openAfterPublish": false,
+        "publishGraphvizGraph": true,
+        "publishDot": true,
+        "publishKnowledgeGraph": true,
+        "minifyJson": false,
+        "indentJson": 2,
+        "directory": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\17 - Using SQL - Enumeration",
         "fileNamePrefix": "Graph -",
         "imageType": "png",
         "appendOptions": false,
-        "appendTimeStamp": false
+        "appendTimeStamp": false,
+        "renderCairo": false,
+        "renderGD": false,
+        "renderGDIPlus": false,
+        "renderQuartz": false
       },
       "layout": {
         "engine": "dot",
@@ -2757,7 +3320,9 @@
           "includeOrphanNodes": true,
           "includeNodeLabels": true,
           "includeNodeXLabels": true,
-          "blankNodeLabels": "default"
+          "includeNodeTooltips": true,
+          "blankNodeLabels": "default",
+          "blankNodeTooltips": "default"
         },
         "edges": {
           "addStrict": true,
@@ -2765,18 +3330,27 @@
           "includeOrphanEdges": true,
           "includeEdgeHeadLabels": true,
           "includeEdgeLabels": true,
+          "includeEdgeTooltips": true,
           "includeEdgeXLabels": true,
           "includeEdgeTailLabels": true,
           "includeEdgePorts": true,
-          "blankEdgeLabels": "blank"
+          "blankEdgeLabels": "blank",
+          "blankEdgeTooltips": "default"
+        },
+        "clusters": {
+          "includeClusterLabels": true,
+          "includeClusterTooltips": true,
+          "blankClusterLabels": "default",
+          "blankClusterTooltips": "default"
         }
       },
       "styles": {
-        "selectedViewColumn": "E",
+        "selectedViewColumn": "F",
         "includeStyleFormat": true,
         "includeExtraAttributes": true,
-        "suffixOpen": "Begin",
-        "suffixClose": "End"
+        "affixOpen": "Begin",
+        "affixClose": "End",
+        "concatFormat": "{name} {affix}"
       },
       "debug": {
         "debug": "off",
@@ -2791,8 +3365,7 @@
         "headLabel": "hide",
         "relatedItem": "show",
         "styleName": "show",
-        "extraAttributes": "show",
-        "message": "show"
+        "extraAttributes": "show"
       },
       "language": {
         "language": "locale_en-US"
@@ -2833,7 +3406,7 @@
     },
     "settings": {
       "graphvizPath": "",
-      "imagePath": "C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\17 - Using SQL - Enumeration",
+      "imagePath": "C:\\data\\local\\rv\\v11.1.0\\Relationship Visualizer\\samples\\17 - Using SQL - Enumeration;C:\\data\\local\\rv\\v10.0.00\\Relationship Visualizer\\samples\\17 - Using SQL - Enumeration",
       "additionalGraphOptions": "",
       "pictureName": "",
       "additionalCmdParameters": ""
@@ -2898,6 +3471,8 @@
       "clusterAttributes": "cluster attributes",
       "clusterTooltip": "cluster tooltip",
       "clusterPlaceholder": "{clc}",
+      "clusterLevelPlaceholder": "{level}",
+      "clusterMaxLevels": 25,
       "subcluster": "subcluster",
       "subclusterLabel": "subcluster label",
       "subclusterStyleName": "subcluster style name",
@@ -2921,9 +3496,15 @@
       "enumerateStepBy": "STEP BY",
       "enumeratePlaceholder": "{step}",
       "enumerateMax": "MAX CYCLES",
+      "concatenateSwitch": "CONCATENATE",
+      "concatenateField": "FIELD",
+      "concatenateMapTo": "ASSIGN TO",
+      "concatenatePrefix": "PREFIX",
+      "concatenateSuffix": "SUFFIX",
+      "concatenateSeparator": "SEPARATOR",
       "createEdges": "CREATE EDGES",
       "createRank": "CREATE RANK",
-      "filterColumn": "G",
+      "filterColumn": "F",
       "filterValue": "RUN",
       "closeConnections": true,
       "retryLimit": 3,
@@ -3089,12 +3670,12 @@
           "wrapText": true
         },
         {
-          "id": "message",
+          "id": "properties",
           "column": 11,
-          "heading": "Messages",
-          "width": 0,
-          "hidden": true,
-          "wrapText": false
+          "heading": "Properties",
+          "width": 20.71,
+          "hidden": false,
+          "wrapText": true
         },
         {
           "id": "graphDisplayColumn",
@@ -3139,8 +3720,16 @@
           "wrapText": true
         },
         {
-          "id": "format",
+          "id": "description",
           "column": 3,
+          "heading": "Description",
+          "width": 42.29,
+          "hidden": false,
+          "wrapText": true
+        },
+        {
+          "id": "format",
+          "column": 4,
           "heading": "Format",
           "width": 52.43,
           "hidden": false,
@@ -3148,7 +3737,7 @@
         },
         {
           "id": "type",
-          "column": 4,
+          "column": 5,
           "heading": "Style Type",
           "width": 13.86,
           "hidden": false,
@@ -3156,7 +3745,7 @@
         },
         {
           "id": "view0",
-          "column": 5,
+          "column": 6,
           "heading": "All Styles",
           "width": 5,
           "hidden": false,
@@ -3164,7 +3753,7 @@
         },
         {
           "id": "view1",
-          "column": 6,
+          "column": 7,
           "heading": "No Clusters",
           "width": 5,
           "hidden": false,
@@ -3172,7 +3761,7 @@
         },
         {
           "id": "view2",
-          "column": 7,
+          "column": 8,
           "heading": "No Edges",
           "width": 5,
           "hidden": false,

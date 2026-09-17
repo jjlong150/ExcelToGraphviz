@@ -714,7 +714,8 @@ Public Function CacheEnabledStyles(ByRef ini As settings, ByVal showStyleColumn 
                     Set dictionaryObj.item(styleName) = GetStyle(StylesSheet.Cells.item(row, ini.styles.nameColumn), _
                                                                  StylesSheet.Cells.item(row, ini.styles.typeColumn), _
                                                                  StylesSheet.Cells.item(row, ini.styles.formatColumn), _
-                                                                 StylesSheet.Cells.item(row, ini.styles.descriptionColumn))
+                                                                 StylesSheet.Cells.item(row, ini.styles.descriptionColumn), _
+                                                                 StylesSheet.Cells.item(row, ini.styles.propertiesColumn))
                 End If
             End If
         End If
@@ -744,6 +745,7 @@ End Function
 '             o styleType        - category (node, edge, cluster, etc.)
 '             o styleFormat      - Graphviz format string or template
 '             o styleDescription - human-readable description
+'             o styleProperties  - Knowledge Graph attributes
 '
 '   3. OUTPUT:
 '        - Returns the fully initialized style object to the caller.
@@ -755,7 +757,11 @@ End Function
 '   - DeepWiki Context: Supports the style-construction rules described in the
 '     "Styles", "Formatting", and "Serialization" sections.
 ' ==========================================================================
-Private Function GetStyle(ByVal styleName As String, ByVal styleType As String, ByVal styleFormat As String, ByVal styleDescription) As style
+Private Function GetStyle(ByVal styleName As String, _
+                          ByVal styleType As String, _
+                          ByVal styleFormat As String, _
+                          ByVal styleDescription, _
+                          ByVal styleProperties As String) As style
 
     Dim value As style
     Set value = New style
@@ -764,6 +770,7 @@ Private Function GetStyle(ByVal styleName As String, ByVal styleType As String, 
     value.styleType = styleType
     value.styleFormat = styleFormat
     value.styleDescription = styleDescription
+    value.styleProperties = styleProperties
     
     Set GetStyle = value
 

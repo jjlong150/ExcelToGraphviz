@@ -350,6 +350,7 @@ Private Function GetLayoutStyles(ByRef ini As settings) As Dictionary
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_NAME, ini.styles.headingRow, ini.styles.nameColumn)
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_DESCRIPTION, ini.styles.headingRow, ini.styles.descriptionColumn)
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_FORMAT, ini.styles.headingRow, ini.styles.formatColumn)
+    columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_PROPERTIES, ini.styles.headingRow, ini.styles.propertiesColumn)
     columnItems.Add GetLayoutColumnData(StylesSheet.name, JSON_STYLES_TYPE, ini.styles.headingRow, ini.styles.typeColumn)
     
     Dim i As Long
@@ -997,6 +998,10 @@ Private Function ConvertStylesRowToDictionary(ByRef exchange As ExchangeOptions,
         dictionaryObj.Add JSON_STYLES_FORMAT, ParseAttributeString(style.Format)
     End If
     
+    If style.properties <> vbNullString Then
+        dictionaryObj.Add JSON_STYLES_PROPERTIES, ParsePropertyString(style.properties)
+    End If
+    
     Dim switchCollection As Collection
     Set switchCollection = New Collection
     
@@ -1099,6 +1104,7 @@ Public Function GetStylesRow(ByRef ini As settings, ByVal row As Long) As Styles
     GetStylesRow.styleName = StylesSheet.Cells.item(row, ini.styles.nameColumn).value
     GetStylesRow.Description = StylesSheet.Cells.item(row, ini.styles.descriptionColumn).value
     GetStylesRow.Format = StylesSheet.Cells.item(row, ini.styles.formatColumn).value
+    GetStylesRow.properties = StylesSheet.Cells.item(row, ini.styles.propertiesColumn).value
     GetStylesRow.styleType = StylesSheet.Cells.item(row, ini.styles.typeColumn).value
 
 End Function

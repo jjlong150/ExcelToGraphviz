@@ -129,6 +129,23 @@ Private Sub Worksheet_Change(ByVal target As Range)
         Application.enableEvents = False
         RenderPreview
 
+    ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES)) Is Nothing Then
+        ' Ensures attribute pairs can be parsed
+        StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES_INDICATOR) = vbNullString
+        Dim prop As String
+        prop = Trim$(StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES))
+        
+        If Len(prop) > 0 Then   ' Text has been entered
+            Dim propDict As Dictionary
+            Set propDict = ParsePropertyString(prop)
+            
+            If propDict.Count = 0 Then  ' No dictionary after parsing implies parsing failed
+                StyleDesignerSheet.Range(DESIGNER_STYLE_PROPERTIES_INDICATOR) = "!"
+            End If
+            Set propDict = Nothing
+        End If
+        Application.enableEvents = False
+
     ElseIf Not Intersect(target, StyleDesignerSheet.Range(DESIGNER_NODE_IMAGE_NAME)) Is Nothing Then
         Application.enableEvents = False
         RefreshControlsImageScale
