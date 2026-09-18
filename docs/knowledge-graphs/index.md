@@ -75,7 +75,8 @@ The status bar shows a live character count and estimated LLM token count for th
 
 ## The RV-KGF Schema
 
-The **Relationship Visualizer - Knowledge Graph Format (RV-KGF)** schema is fully documented independent of this website. The full specification may be viewed at: **[github.com/jjlong150/rv-kgf](https://github.com/jjlong150/rv-kgf)**.
+The **Relationship Visualizer – Knowledge Graph Format (RV‑KGF)** schema is fully documented independent of this website. The complete specification is available at: [github.com/jjlong150/rv-kgf](https://github.com/jjlong150/rv-kgf).
+
 
 ## What's in the Export
 
@@ -155,6 +156,8 @@ A few things help when a graph gets large enough that context-window limits star
 - **Filter before you export, not after.** Use a `WHERE` clause, or a [View](/views/) that filters out styles you don't need, to scope the export to the slice of the graph you actually want analyzed.
 - **Check the token estimator before you paste.** The viewer's status bar shows a running character count and token estimate.
 - **Prefer AI tools with larger context windows** for very large graphs, if one truncates your export, that's a signal to shrink it, not necessarily a dead end.
+
+These tips are explained in greater detail in the blog post [Scaling Tips for Large Knowledge Graphs and AI Analysis](/blog/posts/scaling-tips-for-large-knowledge-graphs.md).
 
 ## Try the Tutorial
 

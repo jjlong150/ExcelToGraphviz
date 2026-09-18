@@ -5,9 +5,15 @@ description: Review version history, new features, improvements, and bug fixes a
 
 # Changelog
 
+## Version 11.1.0 - September 17, 2026
+
+**Relationship Visualizer** Version 11.1.0 delivers a meaningful upgrade to the Knowledge Graph output. This release adds a new **Properties** column to the **Styles** worksheet, fully integrated with the **Style Designer**, allowing users to attach custom Knowledge Graph attributes (such as `encrypted=true`) to any style. These properties now flow through the entire system — saving and loading styles, exporting and importing style data, and generating the Knowledge Graph JSON output. The RV‑KGF schema has been updated in parallel (now at version 1.1) to reflect the new field and is available on GitHub at: [https://github.com/jjlong150/rv-kgf](https://github.com/jjlong150/rv-kgf)
+
+A pair of smaller, unrelated housekeeping fixes are included as well. The **Automatic Refresh** graph visualization feature now correctly checks whether auto‑mode is enabled in all scenarios (ribbon‑tab changes as well as cell changes) before redrawing, and the obsolete **center** graph setting — dropped as an option in V11.0 — has been removed from the generated DOT output.
+
 ## Version 11.0.0 - September 1, 2026
 
-Version 11.0 is the biggest release in **Relationship Visualizer**'s history, built around two headline features: exporting your data as an AI-ready Knowledge Graph, and a dramatically more capable SVG diagram viewer with pan, zoom, filtering, and highlighting built right in. Alongside those, the ribbon has been reorganized from top to bottom, SQL and Workbook Exchange both gained new capabilities, and a handful of long-standing rough edges were smoothed out. A short list of breaking changes, all low-impact, is included at the end, in case you want to check them before upgrading.
+Version 11.0 is the biggest release in Relationship Visualizer's history, built around two headline features: exporting your data as an AI-ready Knowledge Graph, and a dramatically more capable SVG diagram viewer with pan, zoom, filtering, and highlighting built right in. Alongside those, the ribbon has been reorganized from top to bottom, SQL and Workbook Exchange both gained new capabilities, and a handful of long-standing rough edges were smoothed out. A short list of breaking changes, all low-impact, is included at the end, in case you want to check them before upgrading.
 
 ### Knowledge Graphs: A New Way to Export Your Data
 

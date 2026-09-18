@@ -19,9 +19,9 @@ The default `styles` worksheet appears as follows:
 
 The `data` Worksheet has the following columns:
 
-| A | B | C | D | E (and beyond) | Last switch column + 2 |
-|---|---|---|---|---|---|
-| [Indicator](./#a-indicator) | [Style](./#b-style) | [Format](./#c-format) |[Style Type](./#d-style-type) | [View Switches](./#e-view-switches) | [Preview Image](./#i-preview-image) |
+| A | B | C | D | E | F | G (and beyond) | Last switch column + 2 |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| [Indicator](./#a-indicator) | [Style](./#b-style) | [Description](./#c-description) | [Format](./#d-format) | [Properties](./#e-properties) | [Style Type](./#f-style-type) | [View Switches](./#g-view-switches) | [Preview Image](./#k-preview-image) |
 
 The columns are as follows:
 
@@ -31,18 +31,24 @@ Allows you to place a `#` character to denote a comment. This can be used to com
 ### (B) Style
 Specifies the style name.
 
-### (C) Format
+### (C) Description
+Specifies a text description that explains the purpose of the style. The description is carried forward as data in the [Knowledge Graph](/knowledge-graphs/index.md) output.
+
+### (D) Format
 Contains the style definition pasted from the `style designer` worksheet. This definition determines the visual appearance of any graph elements associated with this style in the `data` worksheet.
 
-### (D) Style Type  
+### (E) Properties
+Defines name/value pairs that extend the meaning of a style. For example, an edge style connecting two applications over HTTP might include [typed, arbitrary properties](/knowledge-graphs/#typed-arbitrary-properties) such as `protocol="http"`, `encryption=false`, or `approval="disallowed"`. All properties are carried forward as data in the Knowledge Graph output.
+
+### (F) Style Type  
 Must contain one of the following values: `node`, `edge`, `subgraph-open`, `subgraph-close`, `keyword`, or `native`. This value tells the Relationship Visualizer macros how to interpret the row and convert it into the appropriate DOT language commands.
 
-### (E) View Switches 
+### (G) View Switches 
 Used for creating different views of the data. Each column must contain `Yes` or `No` to indicate whether the style should be included in the graph. These columns are described further in [Creating Views](../views/).
 
-All spreadsheets created from the Relationship Visualizer Excel template include a default Column E labeled **All Styles**, with all style switches set to `Yes`. When this column controls the view, every style is included in the graph.
+All spreadsheets created from the Relationship Visualizer Excel template include a default Column **G** labeled **All Styles**, with all style switches set to `Yes`. When this column controls the view, every style is included in the graph.
 
-### (I) Preview Image
+### (K) Preview Image
 A preview image of the style can be placed after the last view column. These preview images are generated using the [Styles](./#the-styles-ribbon-tab) ribbon tab.
 
 ## The `Styles` Ribbon Tab

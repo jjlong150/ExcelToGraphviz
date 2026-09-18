@@ -225,6 +225,12 @@ This cell contains either:
 - The name you want to assign to a **new** style definition.
 - The **existing** name of the style definition on the `styles` worksheet which is being modified.
 
+## Description
+
+Specifies a text description that explains the purpose of the style. The description is carried forward as data in the [Knowledge Graph](/knowledge-graphs/index.md) output.
+
+![Screenshot of the Description field.](./description.png)
+
 ## Format String
 
 As you make selections the **Format String** cell builds a list of Graphviz style attributes and writes them to the large cell below:
@@ -240,6 +246,12 @@ For example:
 ⚠️ **Important Notes**
 - Any change made in the **Ribbon** will overwrite hand‑made edits in the Format String, since ribbon changes rebuild the specification.  
 - Conversely, deleting **all** the contents of the **Format String** cell will reset the Ribbon settings back to their default values.
+
+## Properties
+
+Used to optionally specify name/value pairs that extend the meaning of a style. For example, an edge style connecting two applications over HTTP might include properties such as `protocol="http"`, `encryption=false`, or `approval="disallowed"`. All properties are carried forward as data in the [Knowledge Graph](/knowledge-graphs/index.md) output.
+
+![Screenshot of the Properties field.](./properties.png)
 
 ## Save Button
 
