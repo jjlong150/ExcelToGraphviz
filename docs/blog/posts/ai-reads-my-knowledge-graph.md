@@ -77,7 +77,11 @@ Running this end to end taught me a few things about keeping a Knowledge Graph e
 
 ## Try it on your own data
 
-The interesting part isn't that an AI can read JSON. It is that a graph shaped like this lets it *traverse* relationships instead of just summarizing text, and gives you an answer you can go back and check edge by edge. If you've got relationship data of your own sitting in a spreadsheet, the [Musician to Band Connections tutorial](/knowledge-graphs/tutorial/) is a good template to start from, and the [Knowledge Graph export post](/blog/posts/knowledge-graph-export) covers how to turn it on.
+The interesting part isn't that an AI can read JSON. It is that a graph shaped like this lets it *traverse* relationships instead of just summarizing text, and gives you an answer you can go back and check edge by edge. 
+
+If you've got relationship data of your own sitting in a spreadsheet, the [Musician to Band Connections tutorial](/knowledge-graphs/tutorial/) is a good template to start from, and the [Knowledge Graph export post](/blog/posts/knowledge-graph-export) covers how to turn it on. 
+
+*Update: 30-Sep-2026* - For a governed, rule-driven use of a knowledge graph export, see [How Excel Powers an Ontology, Semantic Model, and Knowledge Graph for IT Architecture Review](./excel-powers-architecture-review.md).
 
 I'd genuinely like to see what other people's data tells an AI that they didn't already know.
 

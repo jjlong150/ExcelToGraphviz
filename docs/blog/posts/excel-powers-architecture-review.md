@@ -1,7 +1,7 @@
 ---
 blogPost: true
 title: How Excel Powers an Ontology, Semantic Model, and Knowledge Graph for IT Architecture Review
-description: Announcing a free Relationship Visualizer toolkit that converts spreadsheet data into a Graphviz context diagram and a JSON knowledge graph. Combine that knowledge graph with an AI prompt, and it produces a full architecture assessment grounded entirely in your data.
+description: Announcing a free Relationship Visualizer toolkit that converts spreadsheet data into a Graphviz-rendered context diagram and a JSON knowledge graph. Combine that knowledge graph with an AI prompt, and it produces a full architecture assessment grounded entirely in your data.
 date: 2026-09-30
 author: jjlong150
 tags: ['knowledge-graph', 'ontology', 'semantic model','ai', 'case-study', 'v11.1', 'context-diagram' ]
@@ -27,7 +27,7 @@ You describe a system in an Excel workbook:
 
 Relationship Visualizer then produces two things from the same data:
 
-- **A context diagram**, where every connection is colored by its governance status. Green means approved, amber means conditional or deprecated, and red means prohibited. A dashed line means a better alternative exists. Shapes and icons are standardized and repeatable.
+- **A context diagram**, where every connection is colored by its governance status. Green means approved, amber means conditional or deprecated, and red means prohibited. A dashed line means a better alternative exists. Actor, Application, and Data Store shapes and icons are standardized and repeatable. Clusters denote boundaries and trust zones.
 - **An [RV-KGF](rv-kgf-announcement.md) knowledge graph in JSON**, containing every entity, every relationship and every fact.
 
 Hand that JSON, together with the included review prompt, to the AI of your choice. You get back an architecture assessment report:
@@ -63,7 +63,7 @@ While building this toolkit I realized the toolkit had quietly ended up with the
 
 ### Ontology
 
-The **ontology** is the `styles` worksheet. It defines the shared vocabulary: what kinds of things exist (people, bots, homegrown and cloud applications, databases, queues) and what kinds of relationships can connect them. It defines more than a hundred connection types, from REST through an API gateway to SFTP to Kafka. Each one has a plain-language definition and typed properties, such as whether the protocol encrypts in transit and whether the pattern is approved, deprecated or prohibited.
+The lightweight **ontology** resides in the `styles` worksheet. It defines the shared vocabulary: what kinds of things exist (people, bots, homegrown and cloud applications, databases, queues) and what kinds of relationships can connect them. It defines more than a hundred connection types, from REST through an API gateway to SFTP to Kafka. Each one has a plain-language definition and typed properties, such as whether the protocol encrypts in transit and whether the pattern is approved, deprecated or prohibited.
 
 | ![The styles worksheet holding the context diagram ontology](../images/context-diagram-styles.png) |
 | :---: |
@@ -110,7 +110,11 @@ Everything is free and MIT licensed. The toolkit needs Relationship Visualizer 1
 
 ## Two opposite uses of the same export capability
 
-This toolkit is the governed end of what a knowledge graph export can do. The AI works within a defined ontology and applies explicit rules, and every finding traces back to a property you can check. For the opposite end, see [I Let an AI Read My Knowledge Graph](https://exceltographviz.com/blog/posts/ai-reads-my-knowledge-graph.html). There, I handed a rock-band graph to two AIs with no hints and no rules, and one of them found a story in my own data that I didn't know was there. The same export supports both. Which one you get depends on how much meaning you define up front, and what you ask.
+This toolkit is the governed end of what a knowledge graph export can do. The AI works within a defined ontology and applies explicit rules, and every finding traces back to a property you can check. 
+
+For the opposite end, see [I Let an AI Read My Knowledge Graph](https://exceltographviz.com/blog/posts/ai-reads-my-knowledge-graph.html). There, I handed a rock-band graph to two AIs with no hints and no rules, and one of them found a story in my own data that I didn't know was there. 
+
+The same export supports both styles of analysis. Which one you get depends on how much meaning you define up front, and what you ask.
 
 ## Get the toolkit
 
