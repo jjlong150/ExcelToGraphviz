@@ -160,7 +160,7 @@ In the Relationship Visualizer, you can set command-line options such as `-Gdpi=
 Here's how I quickly built the modern diagram in the Relationship Visualizer spreadsheet. Each row of the data worksheet becomes a line of DOT. Rows 3–5 set the graph, node and edge defaults, and the rows below them add the clusters, nodes and edges.
 
 ![Relationship Visualizer data worksheet showing the construction of the modern diagram](../images/modern-graphviz.png)
-[Full-size](../images/modern-graphviz.png)
+<a href="/blog/images/modern-graphviz.png" target="_blank">View full size</a>
 
 And here's the DOT source that Relationship Visualizer generated from those rows. The three attribute lines at the top come from rows 3-5. Because they set the defaults for the whole graph, every node and edge picks up the new look without any per-item styling.
 
@@ -213,12 +213,12 @@ To convert the example, I moved the attributes out of each data row and into sty
 Here are the new styles definitions on the `styles` worksheet:
 
 ![Style definitions for the modern diagram on the Styles worksheet](../images/modern-styles.png)
-[Full-size](../images/modern-styles.png)
+<a href="/blog/images/modern-styles.png" target="_blank">View full size</a>
 
 Next I cleared the Attributes column, and assigned the style name in the Style Name column. With the styles applied, the data worksheet is much simpler:
 
 ![Relationship Visualizer data worksheet with styles applied instead of per-row attributes](../images/modern-graphviz-properly.png)
-[Full-size](../images/modern-graphviz-properly.png)
+<a href="/blog/images/modern-graphviz-properly.png" target="_blank">View full size</a>
 
 Three things to note. The first shows the style approach at work; the other two are exceptions I left in on purpose.
 
