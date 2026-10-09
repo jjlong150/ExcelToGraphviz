@@ -32,19 +32,21 @@ Graphviz's defaults date from a world of 72-96 dpi monitors, and a handful of at
 
 Graphviz has been laying out graphs since the early 1990s, and its free layout engines are still among the best available. What has aged is the styling. The defaults pair `Times-Roman` text with solid black ellipses, black lines and large filled arrowheads. That look was normal for technical diagrams thirty years ago. Today it reads as heavy and old-fashioned.
 
-Part of the problem is screen resolution. Graphviz measures sizes in points, a unit borrowed from printing. It's the same unit Excel and Word use for font sizes: one point is 1/72 of an inch, or about a third of a millimeter. The default line width (`penwidth`) is 1 point. The monitors of the 1990s had about 3 to 4 pixels per millimeter, so a 1-point line came out about one pixel wide. Today's high-resolution screens pack in two or three times as many pixels, so the same line now covers 2 to 3 pixels. The lines didn't change; the screens did.
+Part of the problem is screen resolution. Graphviz measures sizes in points, a unit borrowed from printing. It's the same unit Excel and Word use for font sizes: one point is 1/72 of an inch, or about a third of a millimeter. The default line width ([`penwidth`](https://graphviz.org/docs/attrs/penwidth/)) is 1 point. The monitors of the 1990s had about 3 to 4 pixels per millimeter, so a 1-point line came out about one pixel wide. Today's high-resolution screens pack in two or three times as many pixels, so the same line now covers 2 to 3 pixels. The lines didn't change; the screens did.
 
 The other part is taste. Modern interface design uses light grays, soft fills and generous white space, and lets color rather than outlines separate the elements. Graphviz can do all of that. It just won't unless you ask.
 
 ## Same graph, different attributes
 
-The two diagrams below come from the same DOT file with the same nodes, edges and clusters. Graphviz computed an identical layout for each. The only differences are the styling attributes.
+The two diagrams below come from DOT files with the same nodes, edges and clusters. Graphviz computed an identical layout for each. The only differences are the styling attributes added in the second iteration.
 
-![A service diagram rendered with Graphviz's default styling](../images/before.png)
+| *A service diagram rendered with Graphviz's default styling.*                       |
+|:-----------------------------------------------------------------------------------:|
+| ![A service diagram rendered with Graphviz's default styling](../images/before.png) |
 
----
-
-![The same service diagram rendered with modern styling](../images/after.png)
+| *The same service diagram rendered with modern styling.*                            |
+|:-----------------------------------------------------------------------------------:|
+| ![The same service diagram rendered with modern styling](../images/after.png)       |
 
 The top image depicts what Graphviz produces out of the box: `Times-Roman` text, black ellipses and heavy arrowheads. The bottom image uses the settings described in the rest of this post.
 
@@ -56,8 +58,6 @@ These are listed roughly in order of impact. The first three do most of the work
 
 `Times-Roman` does more to date a diagram than anything else. Switch `fontname` to a sans-serif and drop `fontsize` to 10 or 11. On Windows, `Segoe UI` is the natural choice. It's the font Windows itself uses, and it's installed on every Windows machine. `Calibri` and `Arial` also work well. On a Mac, use `Helvetica Neue` instead.
 
-One caution: Graphviz measures text using the fonts installed on the machine that runs the layout. If that machine lacks your font, Graphviz sizes the boxes for a substitute, and the labels may overflow when the diagram is viewed elsewhere. Make sure the font is installed wherever your graphs are rendered.
-
 ::: tip
 Not sure which fonts Graphviz can use on your computer? Open the font gallery in the Relationship Visualizer's Style Designer. Every preview image in it is rendered by Graphviz itself, so it lists only the fonts Graphviz can find on your system and shows exactly how each one will look in your diagrams.
 
@@ -66,14 +66,18 @@ Not sure which fonts Graphviz can use on your computer? Open the font gallery in
 
 ### 2. Lighten the lines and arrowheads
 
-- Set edge [`penwidth`](https://graphviz.org/docs/attrs/penwidth/) to about 0.6–0.8.
+- Set edge [`penwidth`](https://graphviz.org/docs/attrs/penwidth/) to about `0.6` - `0.8`.
 - Use a medium gray such as `#9ca3af` for edges instead of black.
 - Shrink arrowheads with [`arrowsize=0.5`](https://graphviz.org/docs/attrs/arrowsize/) to `0.7`. The defaults are oversized.
 - Try [`arrowhead=vee`](https://graphviz.org/docs/attr-types/arrowType/) or `onormal`. Both look lighter than the filled triangle.
 
 ### 3. Use soft, rounded nodes
 
-Set [`shape=box`](https://graphviz.org/doc/info/shapes.html) and [`style="rounded,filled"`](https://graphviz.org/docs/attrs/style/), and give nodes a pale fill. For the outline, either remove it ([`penwidth=0`](https://graphviz.org/docs/attrs/penwidth/)) or use a slightly darker shade of the fill color. Avoid black outlines, double borders ([`peripheries`](https://graphviz.org/docs/attrs/peripheries/)) and the old X11 color names. Hex colors work everywhere and can include transparency, for example `#4f7cff33`.
+Set [`shape=box`](https://graphviz.org/doc/info/shapes.html) and [`style="rounded,filled"`](https://graphviz.org/docs/attrs/style/), and give nodes a pale fill. 
+
+Avoid black outlines. For the outline, either remove it ([`penwidth=0`](https://graphviz.org/docs/attrs/penwidth/)) or use a slightly darker shade of the fill color. Use double borders sparingly (i.e. [`peripheries`](https://graphviz.org/docs/attrs/peripheries/)). Limit their use to one node to focus attention on a starting point.
+
+Move past the old X11 color names. Hex colors work everywhere and can include transparency, for example `#4f7cff33`.
 
 Picking colors that work together is the hard part, so here are twelve fill and border pairs I like. Each pair uses a very pale tint for the fill and a slightly stronger shade of the same color for the border. All of them work with dark gray text such as `#1f2937`.
 
@@ -96,13 +100,15 @@ Picking colors that work together is the hard part, so here are twelve fill and 
 
 *Colors based on the Tailwind CSS palette.*
 
+::: tip TIP
 For a diagram, choose three or four colors that are far apart on the list, such as indigo, emerald, orange and gray, and give each one a meaning. Neighbors like blue and indigo are too similar to tell apart at a glance.
+:::
 
 ### 4. Give it room
 
-The default spacing is cramped. Raise [`nodesep`](https://graphviz.org/docs/attrs/nodesep/) to about 0.5 and [`ranksep`](https://graphviz.org/docs/attrs/ranksep/) to about 0.6, and add a little padding inside nodes with [`margin="0.18,0.08"`](https://graphviz.org/docs/attrs/margin/). 
+The default spacing is cramped. Raise [`nodesep`](https://graphviz.org/docs/attrs/nodesep/) to about `0.5` and [`ranksep`](https://graphviz.org/docs/attrs/ranksep/) to about `0.6`, and add a little padding inside nodes with [`margin="0.18,0.08"`](https://graphviz.org/docs/attrs/margin/). 
 
-For processes and pipelines, [`rankdir=LR`](https://graphviz.org/docs/attrs/rankdir/) often reads more naturally than top to bottom.
+For processes and pipelines, left to right flow ([`rankdir=LR`](https://graphviz.org/docs/attrs/rankdir/)) often reads more naturally than top to bottom.
 
 ### 5. Quiet the clusters
 
