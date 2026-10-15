@@ -31,7 +31,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          # Node 20 is end-of-life and npm crashes resolving this project's
+          # dependencies on it; current vite/vitepress packages need Node 22+.
+          node-version: 22
           cache: 'npm'
           cache-dependency-path: docs/package-lock.json
 
