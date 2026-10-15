@@ -36,9 +36,14 @@ jobs:
           cache-dependency-path: docs/package-lock.json
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Install dependencies
+        env:
+          # The site build never uses Chrome; it's only needed for the local
+          # `npm run export-pdf` script. Skipping the download keeps a failed
+          # Chrome fetch from breaking the install.
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
         run: |
           cd docs
           rm -rf node_modules package-lock.json
