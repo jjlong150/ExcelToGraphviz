@@ -67,10 +67,12 @@ jobs:
         run: touch docs/.vitepress/dist/.nojekyll
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           name: github-pages
           path: docs/.vitepress/dist
+          # Keep dotfiles such as .nojekyll (newer versions drop them by default)
+          include-hidden-files: true
 
   deploy:
     environment:
@@ -80,11 +82,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-
+      # deploy-pages fetches the "github-pages" artifact itself,
+      # so no separate download step is needed.
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
