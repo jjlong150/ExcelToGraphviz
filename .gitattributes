@@ -3,9 +3,9 @@
 # Don't perform any line ending conversions by default
 
 # VBA extensions - Prevent LF normalization (bas, cls, frm, vba, doccls)
-*.[bB][aA][sS]              -text diff
-*.[cC][lL][sS]              -text diff
-*.[fF][rR][mM]              -text diff
+*.[bB][aA][sS]              -text diff linguist-language=VBA
+*.[cC][lL][sS]              -text diff linguist-language=VBA
+*.[fF][rR][mM]              -text diff linguist-language=VBA
 *.[vV][bB][aA]              -text diff
 *.[dD][oO][cC][cC][lL][sS]  -text diff
 
@@ -24,7 +24,7 @@
 *.[dD][sS][rR]              -text diff
 *.[dD][oO][bB]              -text diff
 *.[pP][aA][gG]              -text diff
-*.[vV][bB][gB]              -text diff
+*.[vV][bB][gG]              -text diff
 *.[vV][bB][lL]              -text diff
 *.[vV][bB][pP]              -text diff
 *.[vV][bB][rR]              -text diff
@@ -68,13 +68,15 @@
 # VBA packages from XVBA (https://marketplace.visualstudio.com/items?itemName=local-smart.excel-live-server)
 **/xvba_modules/**          linguist-vendored=true
 
-# Excel documents (xla, xlam, xls, xlsb, xlsm and xlsx)
+# Excel documents (xla, xlam, xls, xlsb, xlsm, xlsx, xltm and xltx)
 *.[xX][lL][aA]              binary
 *.[xX][lL][aA][mM]          binary
 *.[xX][lL][sS]              binary
 *.[xX][lL][sS][bB]          binary
 *.[xX][lL][sS][mM]          binary
 *.[xX][lL][sS][xX]          binary
+*.[xX][lL][tT][mM]          binary
+*.[xX][lL][tT][xX]          binary
 
 # Word documents (rtf, doc and docx)
 *.[rR][tT][fF]              diff=astextplain
