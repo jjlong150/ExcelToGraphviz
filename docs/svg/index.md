@@ -32,7 +32,7 @@ Post‑processing is **disabled by default** and must be explicitly enabled by c
 
 When enabling post-processing you will be asked to provide explicit permission via the dialog box shown below:
 
-![](./accept-risk.png)
+![A screen capture of the dialog asking for permission to enable post-processing.](./accept-risk.png)
 
 ## The `svg` Worksheet
 
