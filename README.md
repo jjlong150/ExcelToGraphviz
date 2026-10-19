@@ -17,7 +17,7 @@ Supports Windows and macOS, with a multilingual tabbed ribbon interface.
 - 🌐 **Website & Full Documentation**: [exceltographviz.com](https://exceltographviz.com/) — tutorials, overviews, and guides
 - 📥 **Latest Release (v11.1.0 - 17 Sep 2026)**: [GitHub Releases](https://github.com/jjlong150/ExcelToGraphviz/releases/latest) — release notes & assets
 - ⬇️ **Download Relationship Visualizer**: [SourceForge ZIP (~105 MB)](https://sourceforge.net/projects/relationship-visualizer/files/latest/download) — free & virus-scanned
-- 📜 **Changelog**: [exceltographviz.com/changelog](https://exceltographviz.com/changelog) — version history
+- 📜 **Changelog**: [exceltographviz.com/changelog](https://exceltographviz.com/changelog/) — version history
 - 🔧 **Examples Repository**: [github.com/jjlong150/excel-to-graphviz-examples](https://github.com/jjlong150/excel-to-graphviz-examples) — ready-to-use workbooks & patterns
 - 🧩 **Project Architecture**: [deepwiki.com/jjlong150/ExcelToGraphviz](https://deepwiki.com/jjlong150/ExcelToGraphviz) — insights into the tool's internal mechanisms
 - ☕ **Support the Project**: [Buy Me a Coffee](https://www.buymeacoffee.com/exceltographviz) — optional thanks for ongoing development!
