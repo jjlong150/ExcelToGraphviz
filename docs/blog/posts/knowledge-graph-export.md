@@ -43,7 +43,7 @@ Version 11 even upgrades the viewing experience with a new SVG viewer that suppo
 
 | Version 11.0 SVG Animated Graph Viewer |
 | -------------------------------------- |
-| ![Animated GIF showing the new SVG graph viewer.](../images/svg-viewer.gif)          |
+| <video autoplay loop muted playsinline preload="metadata" width="1084" height="734" poster="/video/svg-viewer-poster.jpg" aria-label="Animation showing the new SVG graph viewer." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video> |
 
 The ability to *see* the graph matters more than it might sound, because JSON is genuinely hard to eyeball. A missing edge, a node that slipped into the wrong cluster, a typo that quietly created a duplicate instead of matching an existing node — all of that is easy to miss when you’re scrolling through a few thousand lines of JSON. But it’s instantly obvious in a rendered diagram. And let's be honest: nobody wants to stare at JSON in a PowerPoint deck.
 
