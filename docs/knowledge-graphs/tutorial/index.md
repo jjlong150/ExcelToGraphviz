@@ -68,7 +68,7 @@ At 574 nodes and 627 edges, this diagram is big enough that the old choice, zoom
 
 | Interactive SVG                                                      |
 | -------------------------------------------------------------------- |
-| <video autoplay loop muted playsinline preload="metadata" width="1084" height="734" poster="/video/svg-viewer-poster.jpg" aria-label="Screen recording of the interactive SVG file viewer." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video> |
+| <video autoplay loop muted playsinline preload="metadata" width="1088" height="736" poster="/video/svg-viewer-poster.jpg" aria-label="Screen recording of the interactive SVG file viewer." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video> |
 
 You get a toolbar that stays a fixed, readable size no matter how far you're zoomed in, scroll-to-zoom and drag-to-pan, hover labels for reading node names in a dense genre cluster without zooming in first, and click-to-highlight filtering. Click any musician to see just their bands, or any band to see just its members. Full details are in [Exploring diagrams just got easier](/blog/posts/interactive-diagrams).
 

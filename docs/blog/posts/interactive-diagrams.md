@@ -16,7 +16,7 @@ If you've ever generated a Graphviz diagram from a big Excel dataset with a few 
 
 | New SVG Viewer |
 |------------------|
-| <video autoplay loop muted playsinline preload="metadata" width="1084" height="734" poster="/video/svg-viewer-poster.jpg" aria-label="Animation showing the new SVG viewer." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video> |
+| <video autoplay loop muted playsinline preload="metadata" width="1088" height="736" poster="/video/svg-viewer-poster.jpg" aria-label="Animation showing the new SVG viewer." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video> |
 
 ## A toolbar that doesn't get lost
 

@@ -20,7 +20,7 @@ Post‑processing refers to the transformations applied to an SVG *after* Graphv
 
 The animation below shows a Graphviz‑generated SVG with post‑processing applied to add animation.
 
-<video autoplay loop muted playsinline preload="metadata" width="1084" height="734" poster="/video/svg-viewer-poster.jpg" aria-label="Animation demonstrating an SVG with post‑processing animation applied." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video>
+<video autoplay loop muted playsinline preload="metadata" width="1088" height="736" poster="/video/svg-viewer-poster.jpg" aria-label="Animation demonstrating an SVG with post‑processing animation applied." style="max-width:100%;height:auto"><source src="/video/svg-viewer.webm" type="video/webm"><source src="/video/svg-viewer.mp4" type="video/mp4"></video>
 
 Post‑processing allows you to apply additional styling to nodes, edges, polygons, and polylines. It also enables the insertion of JavaScript for interactive behaviors such as click‑event animations and zooming. In short, post‑processing turns a technically valid SVG into a polished, presentation‑ready graphic.
 
