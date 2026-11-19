@@ -24,12 +24,16 @@ export default {
   extends: blogTheme,   // Use 'extends' – this is the most compatible way with the blog plugin
 
   Layout() {
-    return h(blogTheme.Layout!, null, {
-      // Only inject extra content on the home page (after the 6 features)
-      'home-features-after': () => h(HomeExtra),
-      // Simple Analytics free plan: badge must be visible in the footer of every page
-      'layout-bottom': () => h(SimpleAnalyticsBadge)
-    })
+    return [
+      h(blogTheme.Layout!, null, {
+        // Only inject extra content on the home page (after the 6 features)
+        'home-features-after': () => h(HomeExtra)
+      }),
+      // Simple Analytics free plan: the badge must be visible in the footer of every page.
+      // It is rendered after the whole layout rather than in the 'layout-bottom' slot,
+      // because the blog post layout does not pass that slot through.
+      h(SimpleAnalyticsBadge)
+    ]
   },
 
   enhanceApp(ctx) {
