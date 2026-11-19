@@ -31,7 +31,7 @@ const html = `
     <tr><td><strong>Show Your Support</strong></td><td><a href="https://www.buymeacoffee.com/exceltographviz" target="_blank" rel="noopener">Buy Me a Coffee</a></td></tr>
   </table>
 
-  <p>Looking for a standalone application instead of a workbook? <a href="https://graphmodeler.com/" target="_blank" rel="noopener">Graph Modeler</a> grows out of this tool and runs on Windows, macOS and Linux. It is free for personal use, and a beta can be downloaded now.</p>
+  <p>Looking for a standalone application instead of a workbook? <a href="https://graphmodeler.com/" target="_blank" rel="noopener">Graph Modeler</a> grows out of this tool and runs on Windows, macOS and Linux. It is free for personal use, and is where new development happens. Relationship Visualizer is not going away. See the <a href="./download/">Download page</a> for both.</p>
  
   <center>
     <a href="https://sourceforge.net/projects/relationship-visualizer/" target="_blank" rel="noopener">
