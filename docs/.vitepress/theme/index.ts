@@ -7,6 +7,7 @@ import { h } from 'vue'
 import Comments from './components/Comments.vue'
 import HomeExtra from './components/HomeExtra.vue'
 import YouTube from './components/YouTube.vue'
+import SimpleAnalyticsBadge from './components/SimpleAnalyticsBadge.vue'
 
 // Import the blog plugin styles
 import 'vitepress-plugin-blog/style.css'
@@ -25,7 +26,9 @@ export default {
   Layout() {
     return h(blogTheme.Layout!, null, {
       // Only inject extra content on the home page (after the 6 features)
-      'home-features-after': () => h(HomeExtra)
+      'home-features-after': () => h(HomeExtra),
+      // Simple Analytics free plan: badge must be visible in the footer of every page
+      'layout-bottom': () => h(SimpleAnalyticsBadge)
     })
   },
 
