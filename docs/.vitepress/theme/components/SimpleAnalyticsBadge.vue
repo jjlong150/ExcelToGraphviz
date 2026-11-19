@@ -6,15 +6,11 @@
     Embed code from https://www.simpleanalytics.com/badges
   -->
   <div class="sa-badge">
-    <a
-      href="https://www.simpleanalytics.com?utm_source=exceltographviz.com&utm_content=badge"
-      referrerpolicy="origin"
-      target="_blank"
-    >
+    <a href="https://www.simpleanalytics.com?utm_source=exceltographviz.com&utm_content=badge" referrerpolicy="origin" target="_blank">
       <img
-        src="https://simpleanalyticsbadges.com/exceltographviz.com?background=edf3f4&text=677779&logo=ff4f64&radius=3&counter=false"
-        width="210"
-        height="50"
+        src="https://simpleanalyticsbadges.com/exceltographviz.com?background=transparent&text=677779&logo=ff4f64&radius=3&counter=false"
+        width="168"
+        height="40"
         alt="Simple Analytics"
         loading="lazy"
         referrerpolicy="no-referrer"
