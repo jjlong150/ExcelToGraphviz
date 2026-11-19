@@ -5,6 +5,24 @@ description: Download Relationship Visualizer from SourceForge — a guided Wind
 
 # Download
 
+<div style="border:2px solid #4A90E2; border-radius:8px; padding:16px 20px; margin:16px 0 24px; background:var(--vp-c-bg-soft);">
+  <p style="margin:0 0 8px; font-size:1.15em;"><strong>New: Graph Modeler, the next step beyond this workbook</strong></p>
+  <p style="margin:0 0 8px;">
+    <a href="https://graphmodeler.com/" target="_blank" rel="noopener">Graph Modeler</a> is a standalone desktop application for <strong>Windows, macOS and Linux</strong> that grew out of Relationship Visualizer. It has no workbook, no Excel and no macros. It adds undo and redo, light and dark themes, more query sources (CSV, LibreOffice and SQLite files), and a guided way to turn a spreadsheet into a graph. New development happens there.
+  </p>
+  <p style="margin:0 0 12px;">
+    <strong>Relationship Visualizer is not going away.</strong> It stays free, open source and maintained. Graph Modeler is free for personal, educational and research use; using it for work needs a commercial license.
+  </p>
+  <a href="https://graphmodeler.com/download/" target="_blank" rel="noopener"
+     style="display:inline-block; margin:0 8px 8px 0; padding:10px 18px; background:#4A90E2; color:white; border-radius:6px; text-decoration:none; font-weight:600;">
+    Download Graph Modeler
+  </a>
+  <a href="https://graphmodeler.com/docs/from-excel/" target="_blank" rel="noopener"
+     style="display:inline-block; margin:0 0 8px; padding:9px 17px; border:1px solid #4A90E2; color:#4A90E2; border-radius:6px; text-decoration:none; font-weight:600;">
+    Coming from the Excel tool
+  </a>
+</div>
+
 The **Relationship Visualizer** is hosted on [SourceForge](https://sourceforge.net/projects/relationship-visualizer/). SourceForge is utilized for its reliable virus scanning and the availability of checksums, ensuring the downloaded files are secure and free from tampering.
 
 <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:16px 0; flex-wrap:wrap;">
